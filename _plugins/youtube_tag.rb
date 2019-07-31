@@ -10,7 +10,7 @@ module Jekyll
       def render(context)
         %(<p>
             <div class="embed-video-container">
-                <iframe width="710" height="399" src="http://www.youtube.com/embed/#{@id}" allowfullscreen></iframe>
+                <iframe width="710" height="399" src="https://www.youtube.com/embed/#{@id}" allowfullscreen></iframe>
             </div>
         </p>)
       end
