@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 18 Aug 2019 14:02:22 +0200</pubDate>
-    <lastBuildDate>Sun, 18 Aug 2019 14:02:22 +0200</lastBuildDate>
+    <pubDate>Thu, 22 Aug 2019 17:03:25 +0200</pubDate>
+    <lastBuildDate>Thu, 22 Aug 2019 17:03:25 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -561,7 +561,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 &lt;p&gt;&lt;a href=&quot;https://dev.to/deepu105/why-i-m-moving-away-from-medium-13ki &quot;&gt;https://dev.to/deepu105/why-i-m-moving-away-from-medium-13ki &lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;A lot of people suggested in the comments to set up my own blog and cross-post to Dev.to instead of relying only on one platform and I completely agree with them. I was procrastinating setting up my own blog for quite some time now. Finally, I decided to do it and set up my own blog at &lt;a href=&quot;https://deepu.js.org/blogs/&quot;&gt;https://deepu.js.org/blogs/&lt;/a&gt; in the process I also updated my personal website to use the same platform.&lt;/p&gt;
+&lt;p&gt;A lot of people suggested in the comments to set up my own blog and cross-post to Dev.to instead of relying only on one platform and I completely agree with them. I was procrastinating setting up my own blog for quite some time now. Finally, I decided to do it and set up my own blog at &lt;a href=&quot;https://deepu.tech/blogs/&quot;&gt;https://deepu.tech/blogs/&lt;/a&gt; in the process I also updated my personal website to use the same platform.&lt;/p&gt;
 
 &lt;p&gt;So when I decided to do this finally I had to choose a blogging platform and there were few requirements I was keen about which influenced my decision.&lt;/p&gt;
 
@@ -626,7 +626,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 &lt;p&gt;&lt;strong&gt;Pros&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;Built with VueJS and me have good experience with JavaScript and quite familiar with Vue&lt;/li&gt;
+  &lt;li&gt;Built with VueJS and I have good experience with JavaScript and quite familiar with Vue&lt;/li&gt;
   &lt;li&gt;Supports Markdown and Front Matter&lt;/li&gt;
   &lt;li&gt;Supports custom pages, themes, SEO, search and is statically generated&lt;/li&gt;
   &lt;li&gt;Is OSS and has a vibrant community&lt;/li&gt;
@@ -869,7 +869,7 @@ published: false
 description: Static Site Generators comparison
 tags: [showdev, ruby, Jekyll, blogging]
 cover_image:
-canonical_url: https://deepu.js.org/setting-up-a-blog-with-jekyll/
+canonical_url: https://deepu.tech/setting-up-a-blog-with-jekyll/
 ---
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -2756,7 +2756,7 @@ These problems are similar to the issues with dependency range in Node package m
     
       <item>
         <title>Configure a beautiful terminal on Unix with Zsh</title>
-        <description>&lt;p&gt;I was a long time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I’m not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup &lt;a href=&quot;https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+        <description>&lt;p&gt;I was a long-time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I’m not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup &lt;a href=&quot;https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;As a senior developer and open source community lead, I spent a lot of time on the terminal and a terminal with a nice developer experience instantly makes you happier and more productive. The default bash terminal is good for beginners but if you really want a powerful terminal you need something more than bash.&lt;/p&gt;
 
