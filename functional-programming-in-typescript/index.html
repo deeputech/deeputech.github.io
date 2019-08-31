@@ -207,7 +207,7 @@
                                 <time class="post-date" datetime="2019-08-14">14 Aug 2019</time>
                                 
                             </small> |
-                            <small>18 mins read</small>
+                            <small>19 mins read</small>
                         </span>
                     </div>
                 </div>
@@ -754,7 +754,7 @@ executing multiply
   <p>Functional programs do not have assignment statements, that is, the value of a variable in a functional program never changes once defined. This eliminates any chances of side effects because any variable can be replaced with its actual value at any point of execution. So, functional programs are referentially transparent.</p>
 </blockquote>
 
-<p>Unfortunately, there are not many ways to strictly limit data mutation in TypeScript, however by using pure functions and by explicitly avoiding data mutations and reassignment using other concepts we saw earlier this can be achieved. TypeScript by default passes primitive variables by value and objects by reference so we need to take care not to mutate data inside functions. Libraries like <a href="https://github.com/immutable-js/immutable-js">Immutable JS</a> could also be considered. Use <code class="highlighter-rouge">const</code> as much as possible to avoid reassignments.</p>
+<p>Unfortunately, there are not many ways to strictly limit data mutation in JavaScript, however by using pure functions and by explicitly avoiding data mutations and reassignment using other concepts we saw earlier this can be achieved. JavaScript by default passes primitive variables by value and objects by reference so we need to take care not to mutate data inside functions. Libraries like <a href="https://github.com/immutable-js/immutable-js">Immutable JS</a> could also be considered. Use <code class="highlighter-rouge">const</code> as much as possible to avoid reassignments.</p>
 
 <p>For example, the below will produce an error</p>
 
@@ -774,13 +774,33 @@ executing multiply
 4
 </pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Apple</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Orange</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Banana</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Grape</span><span class="dl">"</span><span class="p">];</span>
 
-<span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">"</span><span class="s2">Earth</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">"</span><span class="s2">Saturn</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">"</span><span class="s2">Earth</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// will mutate the list</span>
+<span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">"</span><span class="s2">Saturn</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// will mutate the list</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p><code class="highlighter-rouge">const</code> keyword allows the internal state of referenced variables to be mutated and hence from a functional programming perspective <code class="highlighter-rouge">const</code> keyword is useful only for primitive constants and to catch reassignments.</p>
 
-<p>Other techniques to follow are using built-in methods like map, reduce, filter and so on as they do not mutate the data. We can also use <a href="https://github.com/jfmengels/eslint-plugin-fp">this ESlint plugin</a> to restrict mutations.</p>
+<p>However, with TypeScript, we can use special mapped types to make objects read-only and hence avoiding accidental data mutations which are caught during compile time. Thanks to @stereobooster and @juliang for pointing it out. Read my post about mapped and conditional types <a href="https://dev.to/deepu105/react-components-done-right-with-typescript-mapped-and-conditional-types-420l">here</a> to learn more.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">list</span><span class="p">:</span> <span class="nx">Readonly</span><span class="o">&lt;</span><span class="nx">string</span><span class="p">[]</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Apple</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Orange</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Banana</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Grape</span><span class="dl">"</span><span class="p">];</span>
+
+<span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">"</span><span class="s2">Earth</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// will cause compilation error</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>or</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="kd">const</span> <span class="nx">list</span><span class="p">:</span> <span class="nx">ReadonlyArray</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Apple</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Orange</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Banana</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Grape</span><span class="dl">"</span><span class="p">];</span>
+
+<span class="nx">list</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="dl">"</span><span class="s2">Earth</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// will cause compilation error</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Other techniques to follow are using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze">Object.freeze</a> or built-in methods like map, reduce, filter and so on as they do not mutate the data. We can also use <a href="https://github.com/jfmengels/eslint-plugin-fp">this ESlint plugin</a> to restrict mutations.</p>
 
 <h3 id="data-structures"><a href="https://en.wikipedia.org/wiki/Purely_functional_data_structure">Data structures</a></h3>
 
