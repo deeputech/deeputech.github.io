@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 31 Aug 2019 15:32:42 +0200</pubDate>
-    <lastBuildDate>Sat, 31 Aug 2019 15:32:42 +0200</lastBuildDate>
+    <pubDate>Fri, 13 Sep 2019 12:23:43 +0200</pubDate>
+    <lastBuildDate>Fri, 13 Sep 2019 12:23:43 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -522,7 +522,7 @@ executing multiply
 
 &lt;h3 id=&quot;data-structures&quot;&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Purely_functional_data_structure&quot;&gt;Data structures&lt;/a&gt;&lt;/h3&gt;
 
-&lt;p&gt;When using functional programming techniques it is encouraged to use functional data types such as Stacks, Maps and Queues.
+&lt;p&gt;When using functional programming techniques it is encouraged to use data types such as Stacks, Maps and Queues which have functional implementations as well.
 Hence maps are better than arrays or hash sets in functional programming as data stores.&lt;/p&gt;
 
 &lt;hr /&gt;
@@ -2109,7 +2109,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
     
       <item>
         <title>How to set up Java microservices with Istio service mesh on Kubernetes</title>
-        <description>&lt;p&gt;Originally published at &lt;a href=&quot;https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3&quot;&gt;Medium&lt;/a&gt; on 17-Nov-2018. This post has been updated since to work with the latest version of JHipster and Istio.&lt;/p&gt;
+        <description>&lt;p&gt;Originally published at &lt;a href=&quot;https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3&quot;&gt;Medium&lt;/a&gt; on 17-Nov-2018. This post has been updated since to work with the latest version of JHipster(6.3.0) and Istio(1.3.0).&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -2158,7 +2158,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 &lt;h2 id=&quot;preparing-the-kubernetes-cluster&quot;&gt;Preparing the Kubernetes cluster&lt;/h2&gt;
 
-&lt;p&gt;First, let us prepare a Kubernetes cluster to deploy Istio and our application containers. Follow the instructions for anyone of the platforms you prefer.&lt;/p&gt;
+&lt;p&gt;First, let us prepare a Kubernetes cluster to deploy Istio and our application containers. Follow the instructions for any one of the platforms you prefer.&lt;/p&gt;
 
 &lt;h3 id=&quot;prerequisites&quot;&gt;Prerequisites&lt;/h3&gt;
 
@@ -2288,7 +2288,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
 9
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/
 
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ISTIO_VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1.2.2
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ISTIO_VERSION&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;1.3
 
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; https://git.io/getLatestIstio | sh -
 
@@ -2327,7 +2327,11 @@ Hence maps are better than arrays or hash sets in functional programming as data
 8
 9
 10
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Install the Istio CRDs&lt;/span&gt;
+11
+12
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~/istio-&lt;span class=&quot;nv&quot;&gt;$ISTIO_VERSION&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Install the Istio CRDs&lt;/span&gt;
 &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;helm template &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;/kubernetes/helm/istio-init &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; istio-init &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; istio-system | kubectl apply &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; -
 
 &lt;span class=&quot;c&quot;&gt;# Run this to verify all CRDs are installed. It should output 23 for this version of Istio.&lt;/span&gt;
@@ -2457,25 +2461,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 &lt;h3 id=&quot;interim-issues-with-generated-code&quot;&gt;Interim issues with generated code&lt;/h3&gt;
 
-&lt;p&gt;There is a &lt;a href=&quot;https://github.com/jhipster/generator-jhipster/issues/10135&quot;&gt;bug&lt;/a&gt; in the latest JHipster version which creates some incorrect URLs for Istio, let us correct those here until &lt;a href=&quot;https://github.com/jhipster/generator-jhipster/pull/10138&quot;&gt;my PR&lt;/a&gt; for the issue is merged. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;INGRESS_IP&lt;/code&gt; with the EXTERNAL-IP obtained earlier from &lt;code class=&quot;highlighter-rouge&quot;&gt;kubectl get svc istio-ingressgateway -n istio-system&lt;/code&gt; in below commands.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;In &lt;em&gt;kubernetes/store/store-gateway.yml&lt;/em&gt;,
-    &lt;ol&gt;
-      &lt;li&gt;Change all occurrence of the URL &lt;code class=&quot;highlighter-rouge&quot;&gt;store.jhipster&amp;lt;INGRESS_IP&amp;gt;.nip.io&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;store.jhipster&amp;lt;INGRESS_IP&amp;gt;.nip.io&lt;/code&gt;.&lt;/li&gt;
-      &lt;li&gt;Change &lt;code class=&quot;highlighter-rouge&quot;&gt;prefix: /invoice/&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;prefix: /services/invoice/&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;Change &lt;code class=&quot;highlighter-rouge&quot;&gt;prefix: /product/&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;prefix: /services/product/&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;Change &lt;code class=&quot;highlighter-rouge&quot;&gt;prefix: /notification/&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;prefix: /services/notification/&lt;/code&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;In &lt;em&gt;kubernetes/invoice/invoice-deployment.yml&lt;/em&gt;, &lt;em&gt;kubernetes/product/product-deployment.yml&lt;/em&gt;, and &lt;em&gt;kubernetes/notification/notification-deployment.yml&lt;/em&gt;, change the &lt;code class=&quot;highlighter-rouge&quot;&gt;readinessProbe&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;livenessProbe&lt;/code&gt; URLs from &lt;code class=&quot;highlighter-rouge&quot;&gt;/&amp;lt;microservice name&amp;gt;/management/health&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;/services/&amp;lt;microservice name&amp;gt;/management/health&lt;/code&gt;. Replace &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;microservice name&amp;gt;&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;invoice&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;product&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;notification&lt;/code&gt; respectively.&lt;/li&gt;
-  &lt;li&gt;In &lt;em&gt;kubernetes/istio/gateway/grafana-gateway.yml&lt;/em&gt;, change host URL occurrences from &lt;code class=&quot;highlighter-rouge&quot;&gt;grafana.istio-system&amp;lt;INGRESS_IP&amp;gt;.nip.io&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;grafana.&amp;lt;INGRESS_IP&amp;gt;.nip.io&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;In &lt;em&gt;kubernetes/istio/gateway/jaeger-gateway.yml&lt;/em&gt;, change host URL occurrences from &lt;code class=&quot;highlighter-rouge&quot;&gt;jaeger.istio-system&amp;lt;INGRESS_IP&amp;gt;.nip.io&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;jaeger.&amp;lt;INGRESS_IP&amp;gt;.nip.io&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;In &lt;em&gt;kubernetes/istio/gateway/kiali-gateway.yml&lt;/em&gt;, change host URL occurrences from &lt;code class=&quot;highlighter-rouge&quot;&gt;kiali.istio-system&amp;lt;INGRESS_IP&amp;gt;.nip.io&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;kiali.&amp;lt;INGRESS_IP&amp;gt;.nip.io&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;Update the URLs in &lt;code class=&quot;highlighter-rouge&quot;&gt;logSummary&lt;/code&gt; function in &lt;em&gt;kubernetes/kubectl-apply.sh&lt;/em&gt; to reflect the above.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;That is it. This won’t be required after the next release of jhipster.&lt;/p&gt;
+&lt;p&gt;There was a &lt;a href=&quot;https://github.com/jhipster/generator-jhipster/issues/10135&quot;&gt;bug&lt;/a&gt; in the latest JHipster version which creates some incorrect URLs for Istio, it has been fixed as of JHipster version 6.3.0 &lt;a href=&quot;https://github.com/jhipster/generator-jhipster/pull/10138&quot;&gt;here is the PR&lt;/a&gt; for the issue.&lt;/p&gt;
 
 &lt;h2 id=&quot;deploy-to-kubernetes-cluster-using-kubectl&quot;&gt;Deploy to Kubernetes cluster using Kubectl&lt;/h2&gt;
 
@@ -2521,7 +2507,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 &lt;h3 id=&quot;application-gateway&quot;&gt;Application gateway&lt;/h3&gt;
 
-&lt;p&gt;The store gateway application is the entry point for our microservices. Get the URL for the store app by running &lt;code class=&quot;highlighter-rouge&quot;&gt;echo store.$INGRESS_IP.nip.io&lt;/code&gt;, we already stored the &lt;code class=&quot;highlighter-rouge&quot;&gt;INGRESS_IP&lt;/code&gt; to environment variables while creating the Istio setup. Visit the URL in your favorite browser and explore the application. Try creating some entities for the microservices:&lt;/p&gt;
+&lt;p&gt;The store gateway application is the entry point for our microservices. Get the URL for the store app by running &lt;code class=&quot;highlighter-rouge&quot;&gt;echo store.jhipster.$INGRESS_IP.nip.io&lt;/code&gt;, we already stored the &lt;code class=&quot;highlighter-rouge&quot;&gt;INGRESS_IP&lt;/code&gt; to environment variables while creating the Istio setup. The URLs are also printed on console by the &lt;code class=&quot;highlighter-rouge&quot;&gt;kubectl-apply.sh&lt;/code&gt; script. Visit the URL in your favorite browser and explore the application. Try creating some entities for the microservices:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/cyd7foljtf7qkm6amgjj.png&quot; alt=&quot;Store gateway application&quot; /&gt;&lt;em&gt;Store gateway application&lt;/em&gt;&lt;/p&gt;
 
@@ -2529,7 +2515,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 &lt;p&gt;Istio setup includes Grafana and Prometheus configured to collect and show metrics from our containers. Let’s take a look.&lt;/p&gt;
 
-&lt;p&gt;Let us look at Grafana by visiting the provided URL. Get it by running &lt;code class=&quot;highlighter-rouge&quot;&gt;echo grafana.$INGRESS_IP.nip.io&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Let us look at Grafana by visiting the provided URL. Get it by running &lt;code class=&quot;highlighter-rouge&quot;&gt;echo grafana.istio-system.$INGRESS_IP.nip.io&lt;/code&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/x7ck1zidvch5m75tqimp.png&quot; alt=&quot;Grafana dashboard for the Store application&quot; /&gt;&lt;em&gt;Grafana dashboard for the Store application&lt;/em&gt;&lt;/p&gt;
 
@@ -2549,13 +2535,13 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 &lt;p&gt;Istio configures Jaeger for distributed tracing and Kiali for service observability. Let us take a look at them.&lt;/p&gt;
 
-&lt;p&gt;Get the Jaeger URL by running &lt;code class=&quot;highlighter-rouge&quot;&gt;echo jaeger.$INGRESS_IP.nip.io&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;Get the Jaeger URL by running &lt;code class=&quot;highlighter-rouge&quot;&gt;echo jaeger.istio-system.$INGRESS_IP.nip.io&lt;/code&gt;:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/jifcfkspq5ojpein913w.png&quot; alt=&quot;Jaeger tracing dashboard&quot; /&gt;&lt;em&gt;Jaeger tracing dashboard&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;You can make some requests in the application and find it in the tracing dashboard by querying for the service. Click on any request to see tracing details.&lt;/p&gt;
 
-&lt;p&gt;Let us now look at Kiali. Get the URL by running &lt;code class=&quot;highlighter-rouge&quot;&gt;echo kiali.$INGRESS_IP.nip.io&lt;/code&gt;, use the credentials user: &lt;em&gt;admin&lt;/em&gt;, password: &lt;em&gt;admin&lt;/em&gt; to log in:&lt;/p&gt;
+&lt;p&gt;Let us now look at Kiali. Get the URL by running &lt;code class=&quot;highlighter-rouge&quot;&gt;echo kiali.istio-system.$INGRESS_IP.nip.io&lt;/code&gt;, use the credentials user: &lt;em&gt;admin&lt;/em&gt;, password: &lt;em&gt;admin&lt;/em&gt; to log in:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/w9r30s3q4rmctjzejdwp.png&quot; alt=&quot;Kiali service graph&quot; /&gt;&lt;em&gt;Kiali service graph&lt;/em&gt;&lt;/p&gt;
 

@@ -293,7 +293,7 @@
                 <!-- Toc if any -->
                 
                 <!-- End Toc -->
-                <p>Originally published at <a href="https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3">Medium</a> on 17-Nov-2018. This post has been updated since to work with the latest version of JHipster and Istio.</p>
+                <p>Originally published at <a href="https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3">Medium</a> on 17-Nov-2018. This post has been updated since to work with the latest version of JHipster(6.3.0) and Istio(1.3.0).</p>
 
 <hr />
 
@@ -342,7 +342,7 @@
 
 <h2 id="preparing-the-kubernetes-cluster">Preparing the Kubernetes cluster</h2>
 
-<p>First, let us prepare a Kubernetes cluster to deploy Istio and our application containers. Follow the instructions for anyone of the platforms you prefer.</p>
+<p>First, let us prepare a Kubernetes cluster to deploy Istio and our application containers. Follow the instructions for any one of the platforms you prefer.</p>
 
 <h3 id="prerequisites">Prerequisites</h3>
 
@@ -472,7 +472,7 @@
 9
 </pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cd</span> ~/
 
-<span class="nv">$ </span><span class="nb">export </span><span class="nv">ISTIO_VERSION</span><span class="o">=</span>1.2.2
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">ISTIO_VERSION</span><span class="o">=</span>1.3
 
 <span class="nv">$ </span>curl <span class="nt">-L</span> https://git.io/getLatestIstio | sh -
 
@@ -511,7 +511,11 @@
 8
 9
 10
-</pre></td><td class="rouge-code"><pre><span class="c"># Install the Istio CRDs</span>
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cd</span> ~/istio-<span class="nv">$ISTIO_VERSION</span>
+
+<span class="c"># Install the Istio CRDs</span>
 <span class="nv">$ </span>helm template <span class="nb">install</span>/kubernetes/helm/istio-init <span class="nt">--name</span> istio-init <span class="nt">--namespace</span> istio-system | kubectl apply <span class="nt">-f</span> -
 
 <span class="c"># Run this to verify all CRDs are installed. It should output 23 for this version of Istio.</span>
@@ -641,25 +645,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 <h3 id="interim-issues-with-generated-code">Interim issues with generated code</h3>
 
-<p>There is a <a href="https://github.com/jhipster/generator-jhipster/issues/10135">bug</a> in the latest JHipster version which creates some incorrect URLs for Istio, let us correct those here until <a href="https://github.com/jhipster/generator-jhipster/pull/10138">my PR</a> for the issue is merged. Replace <code class="highlighter-rouge">INGRESS_IP</code> with the EXTERNAL-IP obtained earlier from <code class="highlighter-rouge">kubectl get svc istio-ingressgateway -n istio-system</code> in below commands.</p>
-
-<ol>
-  <li>In <em>kubernetes/store/store-gateway.yml</em>,
-    <ol>
-      <li>Change all occurrence of the URL <code class="highlighter-rouge">store.jhipster&lt;INGRESS_IP&gt;.nip.io</code> to <code class="highlighter-rouge">store.jhipster&lt;INGRESS_IP&gt;.nip.io</code>.</li>
-      <li>Change <code class="highlighter-rouge">prefix: /invoice/</code> to <code class="highlighter-rouge">prefix: /services/invoice/</code></li>
-      <li>Change <code class="highlighter-rouge">prefix: /product/</code> to <code class="highlighter-rouge">prefix: /services/product/</code></li>
-      <li>Change <code class="highlighter-rouge">prefix: /notification/</code> to <code class="highlighter-rouge">prefix: /services/notification/</code></li>
-    </ol>
-  </li>
-  <li>In <em>kubernetes/invoice/invoice-deployment.yml</em>, <em>kubernetes/product/product-deployment.yml</em>, and <em>kubernetes/notification/notification-deployment.yml</em>, change the <code class="highlighter-rouge">readinessProbe</code> and <code class="highlighter-rouge">livenessProbe</code> URLs from <code class="highlighter-rouge">/&lt;microservice name&gt;/management/health</code> to <code class="highlighter-rouge">/services/&lt;microservice name&gt;/management/health</code>. Replace <code class="highlighter-rouge">&lt;microservice name&gt;</code> with <code class="highlighter-rouge">invoice</code>, <code class="highlighter-rouge">product</code> and <code class="highlighter-rouge">notification</code> respectively.</li>
-  <li>In <em>kubernetes/istio/gateway/grafana-gateway.yml</em>, change host URL occurrences from <code class="highlighter-rouge">grafana.istio-system&lt;INGRESS_IP&gt;.nip.io</code> to <code class="highlighter-rouge">grafana.&lt;INGRESS_IP&gt;.nip.io</code>.</li>
-  <li>In <em>kubernetes/istio/gateway/jaeger-gateway.yml</em>, change host URL occurrences from <code class="highlighter-rouge">jaeger.istio-system&lt;INGRESS_IP&gt;.nip.io</code> to <code class="highlighter-rouge">jaeger.&lt;INGRESS_IP&gt;.nip.io</code>.</li>
-  <li>In <em>kubernetes/istio/gateway/kiali-gateway.yml</em>, change host URL occurrences from <code class="highlighter-rouge">kiali.istio-system&lt;INGRESS_IP&gt;.nip.io</code> to <code class="highlighter-rouge">kiali.&lt;INGRESS_IP&gt;.nip.io</code>.</li>
-  <li>Update the URLs in <code class="highlighter-rouge">logSummary</code> function in <em>kubernetes/kubectl-apply.sh</em> to reflect the above.</li>
-</ol>
-
-<p>That is it. This won’t be required after the next release of jhipster.</p>
+<p>There was a <a href="https://github.com/jhipster/generator-jhipster/issues/10135">bug</a> in the latest JHipster version which creates some incorrect URLs for Istio, it has been fixed as of JHipster version 6.3.0 <a href="https://github.com/jhipster/generator-jhipster/pull/10138">here is the PR</a> for the issue.</p>
 
 <h2 id="deploy-to-kubernetes-cluster-using-kubectl">Deploy to Kubernetes cluster using Kubectl</h2>
 
@@ -705,7 +691,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 <h3 id="application-gateway">Application gateway</h3>
 
-<p>The store gateway application is the entry point for our microservices. Get the URL for the store app by running <code class="highlighter-rouge">echo store.$INGRESS_IP.nip.io</code>, we already stored the <code class="highlighter-rouge">INGRESS_IP</code> to environment variables while creating the Istio setup. Visit the URL in your favorite browser and explore the application. Try creating some entities for the microservices:</p>
+<p>The store gateway application is the entry point for our microservices. Get the URL for the store app by running <code class="highlighter-rouge">echo store.jhipster.$INGRESS_IP.nip.io</code>, we already stored the <code class="highlighter-rouge">INGRESS_IP</code> to environment variables while creating the Istio setup. The URLs are also printed on console by the <code class="highlighter-rouge">kubectl-apply.sh</code> script. Visit the URL in your favorite browser and explore the application. Try creating some entities for the microservices:</p>
 
 <p><img src="https://thepracticaldev.s3.amazonaws.com/i/cyd7foljtf7qkm6amgjj.png" alt="Store gateway application" /><em>Store gateway application</em></p>
 
@@ -713,7 +699,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 <p>Istio setup includes Grafana and Prometheus configured to collect and show metrics from our containers. Let’s take a look.</p>
 
-<p>Let us look at Grafana by visiting the provided URL. Get it by running <code class="highlighter-rouge">echo grafana.$INGRESS_IP.nip.io</code>:</p>
+<p>Let us look at Grafana by visiting the provided URL. Get it by running <code class="highlighter-rouge">echo grafana.istio-system.$INGRESS_IP.nip.io</code>:</p>
 
 <p><img src="https://thepracticaldev.s3.amazonaws.com/i/x7ck1zidvch5m75tqimp.png" alt="Grafana dashboard for the Store application" /><em>Grafana dashboard for the Store application</em></p>
 
@@ -733,13 +719,13 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 <p>Istio configures Jaeger for distributed tracing and Kiali for service observability. Let us take a look at them.</p>
 
-<p>Get the Jaeger URL by running <code class="highlighter-rouge">echo jaeger.$INGRESS_IP.nip.io</code>:</p>
+<p>Get the Jaeger URL by running <code class="highlighter-rouge">echo jaeger.istio-system.$INGRESS_IP.nip.io</code>:</p>
 
 <p><img src="https://thepracticaldev.s3.amazonaws.com/i/jifcfkspq5ojpein913w.png" alt="Jaeger tracing dashboard" /><em>Jaeger tracing dashboard</em></p>
 
 <p>You can make some requests in the application and find it in the tracing dashboard by querying for the service. Click on any request to see tracing details.</p>
 
-<p>Let us now look at Kiali. Get the URL by running <code class="highlighter-rouge">echo kiali.$INGRESS_IP.nip.io</code>, use the credentials user: <em>admin</em>, password: <em>admin</em> to log in:</p>
+<p>Let us now look at Kiali. Get the URL by running <code class="highlighter-rouge">echo kiali.istio-system.$INGRESS_IP.nip.io</code>, use the credentials user: <em>admin</em>, password: <em>admin</em> to log in:</p>
 
 <p><img src="https://thepracticaldev.s3.amazonaws.com/i/w9r30s3q4rmctjzejdwp.png" alt="Kiali service graph" /><em>Kiali service graph</em></p>
 
