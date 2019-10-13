@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 19 Sep 2019 15:47:07 -0700</pubDate>
-    <lastBuildDate>Thu, 19 Sep 2019 15:47:07 -0700</lastBuildDate>
+    <pubDate>Sun, 13 Oct 2019 15:37:19 +0200</pubDate>
+    <lastBuildDate>Sun, 13 Oct 2019 15:37:19 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -539,7 +539,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 14 Aug 2019 00:00:00 -0700</pubDate>
+        <pubDate>Wed, 14 Aug 2019 00:00:00 +0200</pubDate>
         <link>/functional-programming-in-typescript/</link>
         <guid isPermaLink="true">/functional-programming-in-typescript/</guid>
         
@@ -1085,7 +1085,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 14 Aug 2019 00:00:00 -0700</pubDate>
+        <pubDate>Wed, 14 Aug 2019 00:00:00 +0200</pubDate>
         <link>/functional-programming-in-go/</link>
         <guid isPermaLink="true">/functional-programming-in-go/</guid>
         
@@ -1443,7 +1443,7 @@ canonical_url: https://deepu.tech/setting-up-a-blog-with-jekyll/
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@patrickian4?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Patrick Fore&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/search/photos/typewriter?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 01 Aug 2019 00:00:00 -0700</pubDate>
+        <pubDate>Thu, 01 Aug 2019 00:00:00 +0200</pubDate>
         <link>/static-site-generators-rundown-how-i-set-up-my-own-blog-with-jekyll/</link>
         <guid isPermaLink="true">/static-site-generators-rundown-how-i-set-up-my-own-blog-with-jekyll/</guid>
         
@@ -2092,7 +2092,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 30 Jul 2019 00:00:00 -0700</pubDate>
+        <pubDate>Tue, 30 Jul 2019 00:00:00 +0200</pubDate>
         <link>/functional-programming-in-java-for-beginners/</link>
         <guid isPermaLink="true">/functional-programming-in-java-for-beginners/</guid>
         
@@ -2612,7 +2612,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 23 Jul 2019 00:00:00 -0700</pubDate>
+        <pubDate>Tue, 23 Jul 2019 00:00:00 +0200</pubDate>
         <link>/jhipster-microservices-with-istio-service-mesh-on-kubernetes/</link>
         <guid isPermaLink="true">/jhipster-microservices-with-istio-service-mesh-on-kubernetes/</guid>
         
@@ -2950,7 +2950,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Wed, 17 Jul 2019 00:00:00 -0700</pubDate>
+        <pubDate>Wed, 17 Jul 2019 00:00:00 +0200</pubDate>
         <link>/make-the-most-out-of-vscode/</link>
         <guid isPermaLink="true">/make-the-most-out-of-vscode/</guid>
         
@@ -3270,7 +3270,7 @@ These problems are similar to the issues with dependency range in Node package m
 
 &lt;p&gt;Cover image credit: Image from &lt;a href=&quot;https://gophercises.com/&quot;&gt;Gophercises&lt;/a&gt; created by @joncalhoun, Marcus Olsson (@marcusolsson), and Jon Calhoun.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 12 Jul 2019 00:00:00 -0700</pubDate>
+        <pubDate>Fri, 12 Jul 2019 00:00:00 +0200</pubDate>
         <link>/reflection-on-golang/</link>
         <guid isPermaLink="true">/reflection-on-golang/</guid>
         
@@ -3691,7 +3691,7 @@ Install autojump for your OS following instructions &lt;a href=&quot;https://git
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 01 Jul 2019 00:00:00 -0700</pubDate>
+        <pubDate>Mon, 01 Jul 2019 00:00:00 +0200</pubDate>
         <link>/configure-a-beautiful-terminal-on-unix/</link>
         <guid isPermaLink="true">/configure-a-beautiful-terminal-on-unix/</guid>
         
@@ -3771,7 +3771,7 @@ Install autojump for your OS following instructions &lt;a href=&quot;https://git
 
 &lt;p&gt;Cover image photo by &lt;a href=&quot;https://unsplash.com/@brisch27?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Brigitta Schneiter&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/search/photos/gnome?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Mon, 24 Jun 2019 00:00:00 -0700</pubDate>
+        <pubDate>Mon, 24 Jun 2019 00:00:00 +0200</pubDate>
         <link>/must-have-gnome-plugins/</link>
         <guid isPermaLink="true">/must-have-gnome-plugins/</guid>
         
@@ -3918,7 +3918,7 @@ Install autojump for your OS following instructions &lt;a href=&quot;https://git
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 16 Jun 2019 00:00:00 -0700</pubDate>
+        <pubDate>Sun, 16 Jun 2019 00:00:00 +0200</pubDate>
         <link>/my-beautiful-linux-development-environment/</link>
         <guid isPermaLink="true">/my-beautiful-linux-development-environment/</guid>
         
