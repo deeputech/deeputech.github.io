@@ -5,9 +5,206 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 29 Oct 2019 16:07:33 +0100</pubDate>
-    <lastBuildDate>Tue, 29 Oct 2019 16:07:33 +0100</lastBuildDate>
+    <pubDate>Tue, 29 Oct 2019 16:08:00 +0100</pubDate>
+    <lastBuildDate>Tue, 29 Oct 2019 16:08:00 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
+    
+      <item>
+        <title>Microservices - the good, bad, and the ugly</title>
+        <description>&lt;p&gt;So you are attending this awesome conference where speaker after speaker talks about how awesome microservices are. You hear a speaker from a Tech giant presenting how they scaled up and solved their issues using microservices running on containers or something, and you wonder shouldn’t we do the same as well?&lt;/p&gt;
+
+&lt;p&gt;The reality is that there is no silver bullet in software engineering. Microservices doesn’t magically solve every scaling issues, some times they introduce more problems then they solve.&lt;/p&gt;
+
+&lt;p&gt;Well, this is not a microservice bashing post, as someone who likes microservice architectures(sometimes for their sheer complexity and sometimes for the ingenuity), I think it’s important to know the cost of doing microservice architectures in real-world use cases. I talked briefly about this in my &lt;a href=&quot;https://www.packtpub.com/application-development/full-stack-development-jhipster&quot;&gt;book&lt;/a&gt; as well.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&quot;microservice-architectures&quot;&gt;Microservice architectures&lt;/h1&gt;
+
+&lt;p&gt;In a microservice architecture, you generally split your domain model into individual loosely coupled services that can be deployed and scaled individually.
+Each of the services is in itself a small application with its own architecture and even runtime sometimes.&lt;/p&gt;
+
+&lt;p&gt;The services might offer REST endpoints that can be aggregated by an application acting as a gateway or the services could be communicating with each other using a messaging system. Some services might have  Web GUI some are headless services offering just an API.&lt;/p&gt;
+
+&lt;p&gt;In microservice architectures, each service is responsible for handling its data and ideally do not share database schema with other services. 
+Such architectures make it easy to provide different clients for Mobile and Desktop experience which can be scaled independently based on demand.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/8qgu7ue5togsslflganb.jpg&quot; alt=&quot;Monolith vs Microservice architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are different architecture patterns for building microservices. The patterns used also decides the way services communicate and the way they are aggregated.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://microservices.io/patterns/microservices.html&quot;&gt;This&lt;/a&gt; article details some of these patterns quite nicely.&lt;/p&gt;
+
+&lt;p&gt;So let’s break down the benefits and issues of microservice architecture and see when it makes sense to adopt one and when to avoid one.&lt;/p&gt;
+
+&lt;h1 id=&quot;general-benefits-of-microservice-architectures&quot;&gt;General benefits of Microservice architectures&lt;/h1&gt;
+
+&lt;p&gt;In general, Microservices provide(As it depends on how you actually implement it) or at least promise the below benefits, which can be grouped into three major categories&lt;/p&gt;
+
+&lt;h3 id=&quot;loose-coupling&quot;&gt;Loose coupling&lt;/h3&gt;
+
+&lt;p&gt;Microservice components are more loosely coupled than traditional architectures. 
+Such systems employ event-driven or message-driven architectures to achieve communication between loosely coupled components.
+This results in better isolation of components and makes it easy to unit test them and faster to startup.&lt;/p&gt;
+
+&lt;p&gt;Such systems also provide other benefits like, for example, a memory leak in one of the services, are isolated and hence will not bring down the entire application. Hence overall single point of failures are reduced&lt;/p&gt;
+
+&lt;p&gt;Loosely coupled individual components will start up much faster than a big monolith making it possible to parallelize and improve overall start-up for large systems.&lt;/p&gt;
+
+&lt;p&gt;It also makes it easy to refactor existing features as you can gradually refactor things rather than having to refactor an entire system in one go.&lt;/p&gt;
+
+&lt;p&gt;Because of such loose coupling, each service can choose to use a database/datastore that is more appropriate whereas in a monolith you might compromise with a single database type.
+For example, a service dealing with a lot of unstructured data can choose a NoSQL database while a service that is handling transactions or structured data can opt for a SQL database.&lt;/p&gt;
+
+&lt;h3 id=&quot;faster-development--release-cycle&quot;&gt;Faster development &amp;amp; release cycle&lt;/h3&gt;
+
+&lt;p&gt;In a well-implemented microservice architecture, development turnaround is faster and hence you get a better time to market for new features and easier refactoring of existing features.&lt;/p&gt;
+
+&lt;p&gt;A complex problem domain can be easily tackled by splitting it into separately manageable services making it easier to understand and maintain in the long run.&lt;/p&gt;
+
+&lt;p&gt;Technology adoption is easier, components can be independently upgraded in incremental migration making it possible to have a different stack for each component.&lt;/p&gt;
+
+&lt;p&gt;It is also possible to have different microservices in a system use different implementation languages and just communicate using a common messaging format like gRPC or a message queue or pub/sub, 
+thus making it possible to have teams with different language skills hence less dependency on a single language or stack.&lt;/p&gt;
+
+&lt;p&gt;Teams will be less dependent on each other as communication between systems is governed by a public API or contract letting you change internals without having to worry about breaking someone else’s code.&lt;/p&gt;
+
+&lt;p&gt;Best suited for agile teams. Such teams can have better focus as they only need to worry about a single service.&lt;/p&gt;
+
+&lt;h3 id=&quot;fine-grained-scaling&quot;&gt;Fine-grained scaling&lt;/h3&gt;
+
+&lt;p&gt;One of the most important benefits of a microservice architecture is the ability to scale individual components based on load. 
+If implemented properly this will result in ideal load distribution and reduced overall infrastructure cost. 
+Services with more demand can be scaled up while the ones with less demand can be scaled down utilizing infrastructure more efficiently.&lt;/p&gt;
+
+&lt;p&gt;Deploying services independently also makes the application more reliable and makes patching easier as you do not have to upgrade the entire application to fix an issue in a single service.&lt;/p&gt;
+
+&lt;p&gt;More complex and efficient scaling models can be established. Critical services can be scaled more effectively. Infrastructure is used more efficiently.&lt;/p&gt;
+
+&lt;p&gt;Continuous delivery of such complex applications also would be easier than its equivalent monolith as components are smaller and any issue in deployment can be investigated easily and rectified on a per-component basis&lt;/p&gt;
+
+&lt;h1 id=&quot;general-issues-with-microservice-architectures&quot;&gt;General issues with microservice architectures&lt;/h1&gt;
+
+&lt;p&gt;Well with any architectures, there are disadvantages of Microservice architectures as well.&lt;/p&gt;
+
+&lt;h3 id=&quot;complexity&quot;&gt;Complexity&lt;/h3&gt;
+
+&lt;p&gt;Complexity is one of the biggest side effects of this architecture. While microservices can reduce the domain complexity by breaking the problem into smaller services,
+there could be complexities of a distributed system in terms of;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Overall stack as different components might have different technology stacks forcing the team to invest more time in keeping up with them.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Scaling is more efficient but it would require advanced features such as service discovery, DNS routing, and so on.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Communication between components might require a messaging system(Queue, PubSub, Event store).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Business transactions on a distributed system might involve updating multiple databases making rollbacks more complex and error-prone.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The entire application is more complex to deploy as there are complexities with containers, orchestration, and virtualization involved.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Requires a complex infrastructure. Most often will require containers (Docker), Orchestration(Kubernetes) and multiple JVM or app containers to run on.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;integration-testing&quot;&gt;Integration testing&lt;/h3&gt;
+
+&lt;p&gt;End-to-end tests and integration tests become harder to perform there are more moving parts in the stack and more complex communication between components.
+The testing infrastructure required also becomes more difficult to set up and maintain.&lt;/p&gt;
+
+&lt;h3 id=&quot;team-size-and-experience&quot;&gt;Team size and experience&lt;/h3&gt;
+
+&lt;p&gt;The technical stack for microservices is more complex and most of the time harder to learn and hence it would demand a more experienced team with more senior-level skillset than that would be required for a similar monolithic application.&lt;/p&gt;
+
+&lt;p&gt;It will also require a bigger team to maintain the application as there are more components and more technologies involved.&lt;/p&gt;
+
+&lt;p&gt;Implementing requirements that span multiple services would require more upfront time to agree on contracts and APIs.&lt;/p&gt;
+
+&lt;p&gt;Team members share varying skill sets based on the component they work on but might not be having a birds-eye view of the entire application making business requirements harder to visualize and cross-cutting issues harder to fix.&lt;/p&gt;
+
+&lt;h3 id=&quot;overhead&quot;&gt;Overhead&lt;/h3&gt;
+&lt;p&gt;Complex microservices will have the additional overhead of running monitoring setup, messaging services, orchestration, service registry and so on.&lt;/p&gt;
+
+&lt;p&gt;Initial development time will be higher due to the complexity making time to market slower.&lt;/p&gt;
+
+&lt;p&gt;The overall cost of the initial infrastructure might be much higher than that of a similar monolith.&lt;/p&gt;
+
+&lt;p&gt;In microservice architectures, there is always code duplication between services which also can be considered overhead.&lt;/p&gt;
+
+&lt;h1 id=&quot;when-you-should-not-be-considering-microservice-architectures&quot;&gt;When you should not be considering Microservice architectures&lt;/h1&gt;
+
+&lt;p&gt;You should not be using microservice architecture unless you absolutely have to, remember not every application has the same scale requirements as Netflix, Google, Amazon or Spotify. 
+Many of the benefits that microservices provide to these kinds of applications are due to their sheer scale which might not be applicable to you. 
+So here are some reasons not to choose microservices and maybe stick to monoliths.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;When your application’s scope is small and you know that it’s not going to grow and turn into something like Facebook. For well defined simple usecases a monolith is always the best fit. Examples are
+    &lt;ul&gt;
+      &lt;li&gt;A CRUD application for an internal use case in a company.&lt;/li&gt;
+      &lt;li&gt;A small application with a very niche user base. Like a shopping site for some specialty items.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;When the time to market is critical for a new application. The initial time to market would be higher for microservices.&lt;/li&gt;
+  &lt;li&gt;When the size of your team is small or the average experience of the team is less. Its best to start with a monolith when you are a small or inexperienced team.&lt;/li&gt;
+  &lt;li&gt;When your infrastructure budget is limited. Though on long-run microservice might help to save money, in the beginning, it is going to cost you more.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Most importantly do not choose microservices because it is the hype or because it is used by a popular company or because it was suggested by a popular person. For most use cases monoliths are still a great solution and even if you start with a monolith you can always split away into microservices if required.&lt;/p&gt;
+
+&lt;h1 id=&quot;when-you-could-consider-microservice-architectures&quot;&gt;When you could consider Microservice architectures&lt;/h1&gt;
+
+&lt;p&gt;In general, Microservices tend to be beneficial if you have one of the below scenarios.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;When your use case domain is complex, you have a large team with experience and splitting it up would make it easier to implement.&lt;/li&gt;
+  &lt;li&gt;When you are expecting to become the next Facebook, Netflix or Twitter in terms of user load. So ideally when you are expecting an exponential user base.&lt;/li&gt;
+  &lt;li&gt;If your application is going to be an API provider for other applications with a large userbase. Like a payment gateway or inventory service that will be used by a social media application&lt;/li&gt;
+  &lt;li&gt;When you have a popular e-commerce application with a large userbase with an uneven load on different services in the application. Its time to split them into microservices.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;So in conclusion, don’t choose an architecture pattern because it works for someone else, choose a pattern that is appropriate for your use case, scale and requirements. 
+Not everyone needs to handle millions of concurrent users or stream terabytes of data.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;If you do decide to build microservices checkout JHipster and my below articles don’t forget to give it a star on &lt;a href=&quot;https://github.com/jhipster/generator-jhipster&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;Create full Microservice stack using JHipster Domain Language under 30 minutes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d&quot;&gt;Deploying JHipster Microservices on Azure Kubernetes Service (AKS)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d&quot;&gt;JHipster microservices with Istio service mesh on Kubernetes&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Photo by Sergei Akulich on Unsplash&lt;/p&gt;
+
+&lt;p&gt;Cover image photo by &lt;a href=&quot;https://unsplash.com/@sakulich?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Sergei Akulich&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/hFBFC5YmIck&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Tue, 29 Oct 2019 00:00:00 +0100</pubDate>
+        <link>/microservices-the-good-bad-and-the-ugly/</link>
+        <guid isPermaLink="true">/microservices-the-good-bad-and-the-ugly/</guid>
+        
+        <category>microservices</category>
+        
+        <category>architecture</category>
+        
+        <category>devops</category>
+        
+        <category>distributedsystems</category>
+        
+        
+      </item>
     
       <item>
         <title>Easy functional programming techniques in TypeScript for everyone</title>
@@ -3782,153 +3979,6 @@ Install autojump for your OS following instructions &lt;a href=&quot;https://git
         <category>fedora</category>
         
         <category>desktop</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>My beautiful Linux development environment</title>
-        <description>&lt;p&gt;One of the questions that I get quite often after a conference talk is weirdly not about what I presented but about my Linux desktop environment. People are more curious about that beautiful distro rather than the awesome presentation I just did 😂&lt;/p&gt;
-
-&lt;p&gt;Not that I’m complaining, I love my desktop setup. I love it so much that I was afraid of getting a new PC when I was due for one. I was afraid that I would mess things up(I have done that many times in the past, I think Linux users can relate to me)&lt;/p&gt;
-
-&lt;p&gt;So I decided to capture the most important aspects of my distro for anyone interested in using Linux as their primary OS for development.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/3zajm5va5xplo9mg7804.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is not just my work laptop, it’s my primary machine which I use for all of the below&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Java, JS, TS, Go, Python &amp;amp; web development&lt;/li&gt;
-  &lt;li&gt;JHipster development&lt;/li&gt;
-  &lt;li&gt;Running multiple web applications locally&lt;/li&gt;
-  &lt;li&gt;Running Docker containers&lt;/li&gt;
-  &lt;li&gt;VirtualBox for Windows testing &amp;amp; other VM stuff&lt;/li&gt;
-  &lt;li&gt;Kubernetes, Terraform, CloudFormation development and deployments&lt;/li&gt;
-  &lt;li&gt;Azure, AWS &amp;amp; GCP deployments using required CLI tools&lt;/li&gt;
-  &lt;li&gt;Heavy browser usage&lt;/li&gt;
-  &lt;li&gt;Email, chat &amp;amp; video conferencing&lt;/li&gt;
-  &lt;li&gt;Plex media server&lt;/li&gt;
-  &lt;li&gt;Blogging&lt;/li&gt;
-  &lt;li&gt;Youtube &amp;amp; Social media&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;machine-configuration&quot;&gt;Machine configuration&lt;/h2&gt;
-
-&lt;p&gt;The configuration of the machine is also quite important for any development setup. So my laptop is a Dell Precision 5530 Mobile Workstation. I had the exact same setup with my old Dell 5510 as well, which is quite a similar configuration to 5530. I still have it as a backup Laptop, its 2 years old now but can still give most of the top end laptops today a run for its money.&lt;/p&gt;
-
-&lt;p&gt;I used the &lt;a href=&quot;https://www.dell.com/nl-nl/work/shop/isv-gecertificeerd-en-geoptimaliseerd-workstation/precision-5530/spd/precision-15-5530-laptop/xctop5530emea?selectionState=eyJGUHJpY2UiOjMwODcuNDUsIklVUHJpY2UiOjMwODcuNDUsIk9DIjoieGN0b3A1NTMwZW1lYSIsIlF0eSI6MSwiUHJTdCI6IiIsIk1vZHMiOlt7IklkIjoxNDYsIk9wdHMiOlt7IklkIjoiR0NCV1pVMiJ9XX0seyJJZCI6MTEsIk9wdHMiOlt7IklkIjoiR1JFUEZVMiJ9XX0seyJJZCI6MTQ5LCJPcHRzIjpbeyJJZCI6Ikc1R0FJQzgifV19LHsiSWQiOjYsIk9wdHMiOlt7IklkIjoiRzBTTVk1OSJ9XX0seyJJZCI6MywiT3B0cyI6W3siSWQiOiJHSk1TVDRLIn1dfSx7IklkIjo4LCJPcHRzIjpbeyJJZCI6IkdSMlNHSkgifV19LHsiSWQiOjM3MiwiT3B0cyI6W3siSWQiOiJHM1c1QzZIIn1dfSx7IklkIjoxMDAyLCJPcHRzIjpbeyJJZCI6IkdFODBUOVcifV19LHsiSWQiOjc0OSwiT3B0cyI6W3siSWQiOiJHOEJYV1lJIn1dfSx7IklkIjo1NSwiT3B0cyI6W3siSWQiOiJHSkVWUDNYIn1dfSx7IklkIjoxMTIsIk9wdHMiOlt7IklkIjoiR1c5SUs3RiJ9XX0seyJJZCI6MTAwMywiT3B0cyI6W3siSWQiOiJHNlE1WFo0In1dfSx7IklkIjoyMDAwNzYsIk9wdHMiOlt7IklkIjoiR1cyRVNBNyJ9XX0seyJJZCI6MzAsIk9wdHMiOlt7IklkIjoiODI3ODc1In1dfV19&amp;amp;cartItemId=c4d9c6f5-9956-4c6f-87ac-d0472018ad78&quot;&gt;custom configuration&lt;/a&gt; option from Dell to get the best possible setup at that time. it’s not cheap but my company, &lt;a href=&quot;https://xebialabs.com/&quot;&gt;XebiaLabs&lt;/a&gt;, provided a handsome budget and I think it is worth every penny. This, in my opinion, is one of the best Laptop for developers. So here is what I have.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Processor&lt;/strong&gt;: Intel® Core™ i9-8950HK CPU @ 2.90GHz × 12&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Memory&lt;/strong&gt;: 32GB, DDR4-2666MHz SDRAM, 2 DIMMS, Non-ECC&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;HDD&lt;/strong&gt;: M.2 1TB NVMe PCIe SED class 40 SSD&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Graphics&lt;/strong&gt;: NVIDIA Quadro P2000 with 4 GB GDDR5 memory &amp;amp; Intel® UHD Graphics 630 (Coffeelake 3x8 GT2)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Wireless&lt;/strong&gt;: Intel Wifi Link 9260 2x2 802.11AC + BT 4.2 vPro wireless card&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Keyboard&lt;/strong&gt;: English QWERTY US, backlit&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Display&lt;/strong&gt;: 15.6” FHD 1920x1080 Anti-Glare LED-backlit Non-touch IPS UltraSharp™&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Battery&lt;/strong&gt;: 6-cell (97Wh) Lithium Ion battery with ExpressCharge™&lt;/p&gt;
-
-&lt;h2 id=&quot;operating-system-and-desktop-environment&quot;&gt;Operating system and desktop environment&lt;/h2&gt;
-
-&lt;p&gt;The most important of course is the operating system, I’m running &lt;a href=&quot;https://getfedora.org/&quot;&gt;Fedora 30&lt;/a&gt; at the moment with &lt;a href=&quot;https://www.gnome.org/&quot;&gt;GNOME 3.32.2&lt;/a&gt; as the Desktop and I’m very happy with it. I find Fedora more suitable for development machines than other distros as it has a short release cycle and is fairly stable so you get latest &amp;amp; stable software all the time.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/it61sd8sldm00nipfiy4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;What good is a desktop without a nice theme right? GNOME is great when it comes to themes and I went with &lt;a href=&quot;https://github.com/andreisergiu98/arc-flatabulous-theme&quot;&gt;Arc-Flatabulous&lt;/a&gt; theme and never looked back. For icons, I use &lt;a href=&quot;https://github.com/snwh/paper-icon-theme&quot;&gt;Paper&lt;/a&gt; as I like the material icon theme.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/h6w1qmxd2mvs88bl0ki7.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Of course, it won’t be complete without some nice GNOME plugins. Below are the plugins that I use.&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/307/dash-to-dock/&quot;&gt;Dash to Dock&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/503/always-zoom-workspaces/&quot;&gt;Always Zoom Workspaces&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/16/auto-move-windows/&quot;&gt;Auto Move Windows&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/18/native-window-placement/&quot;&gt;Native Window Placement&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/600/launch-new-instance/&quot;&gt;Launch new instance&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/234/steal-my-focus/&quot;&gt;Steal My Focus&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/15/alternatetab/&quot;&gt;AlternateTab&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/602/window-list/&quot;&gt;Window List&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/6/applications-menu/&quot;&gt;Applications Menu&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/517/caffeine/&quot;&gt;Caffeine&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/779/clipboard-indicator/&quot;&gt;Clipboard Indicator&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/917/gistnotes/&quot;&gt;Gistnotes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/750/openweather/&quot;&gt;OpenWeather&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/8/places-status-indicator/&quot;&gt;Places Status Indicator&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/120/system-monitor/&quot;&gt;System-monitor&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/570/todotxt/&quot;&gt;Todo.txt&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/1031/topicons/&quot;&gt;TopIcons Plus&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://extensions.gnome.org/extension/19/user-themes/&quot;&gt;User Themes&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;development-tools&quot;&gt;Development tools&lt;/h2&gt;
-
-&lt;p&gt;Now, these are mostly objective choices and really doesn’t matter as long as you are comfortable with the tools you choose. Below are my choices for some of the important categories for development. I’m not including obvious things like Vim, Git, NodeJS, Docker, Kubernetes, etc.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Shell&lt;/strong&gt;: This is one of the most important for a developer. I use &lt;a href=&quot;https://www.zsh.org/&quot;&gt;ZSH&lt;/a&gt; along with the awesome &lt;a href=&quot;https://ohmyz.sh/&quot;&gt;Oh My ZSH&lt;/a&gt; as my shell. Now, this won’t be complete without some nice plugins and theme. I use &lt;a href=&quot;https://github.com/bhilburn/powerlevel9k&quot;&gt;powerlevel9k&lt;/a&gt; theme with some customizations. I also use &lt;a href=&quot;https://github.com/zsh-users/zsh-autosuggestions&quot;&gt;zsh-autosuggestions&lt;/a&gt;, git, docker, docker-compose, autojump, &lt;a href=&quot;https://github.com/zsh-users/zsh-syntax-highlighting&quot;&gt;zsh-syntax-highlighting&lt;/a&gt;, dnf, and npm plugins for Oh My ZSH. Here is my &lt;a href=&quot;https://gist.github.com/deepu105/9723cb70032eca98ff09d110369af67a&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.zshrc&lt;/code&gt;&lt;/a&gt; with all the customizations. &lt;strong&gt;Update&lt;/strong&gt;: A &lt;a href=&quot;https://dev.to/java4africa/comment/c319&quot;&gt;comment&lt;/a&gt; on this post suggested &lt;a href=&quot;https://github.com/romkatv/powerlevel10k&quot;&gt;powerlevel10k&lt;/a&gt; as an alternative theme and I tried it and turns out it is really way faster than &lt;code class=&quot;highlighter-rouge&quot;&gt;powerlevel9k&lt;/code&gt;. So I think I’m gonna use &lt;code class=&quot;highlighter-rouge&quot;&gt;powerlevel10k&lt;/code&gt; as my shell theme.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Terminal&lt;/strong&gt;: What good is a nice shell without a good terminal. Fortunately, we have &lt;a href=&quot;https://gnunn1.github.io/tilix-web/&quot;&gt;Tilix&lt;/a&gt; one of the best terminal application out there. It has workspaces, tabs, split windows, Quake mode and so on.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/flq8pew1hr6l1hwj6egw.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Integrated development environment(IDE)&lt;/strong&gt;: &lt;a href=&quot;https://www.jetbrains.com/idea/&quot;&gt;IntelliJ IDEA ultimate&lt;/a&gt; - I use this only for Java &amp;amp; other JVM language Development&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Code Editors&lt;/strong&gt;: &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt; - My go-to editor. I love it. I use VSCode for web development, Go, Python, JS development, DevOps and everything other than JVM languages. A VSCode setup is never complete without some good plugins. &lt;a href=&quot;https://gist.github.com/deepu105/4599d3b381218b9d1a63119fbf9ca537&quot;&gt;Here&lt;/a&gt; are the plugins that I’m using. You can run the script to install those.&lt;/p&gt;
-
-&lt;p&gt;Other notable development tools I use are &lt;a href=&quot;https://www.gitkraken.com/&quot;&gt;GitKraken&lt;/a&gt; for Git repo management, &lt;a href=&quot;https://www.scootersoftware.com&quot;&gt;Beyond Compare&lt;/a&gt; for code comparisons, &lt;a href=&quot;https://www.virtualbox.org/&quot;&gt;VirtualBox&lt;/a&gt;, &lt;a href=&quot;https://github.com/nvm-sh/nvm&quot;&gt;NVM&lt;/a&gt; for NodeJS version management and &lt;a href=&quot;https://sdkman.io&quot;&gt;SDKMan&lt;/a&gt; for JDK version management.&lt;/p&gt;
-
-&lt;h2 id=&quot;productivity-tools&quot;&gt;Productivity tools&lt;/h2&gt;
-
-&lt;p&gt;Productivity tools are also quite important and below are my choices.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Browser&lt;/strong&gt;: Google Chrome is my primary browser. I also use Firefox &amp;amp; Opera sometimes. I do love Opera in terms of its UX, I would love to use it as my primary browser but I miss everything I have synchronized with my Google account in Chrome.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Email&lt;/strong&gt;: I use &lt;a href=&quot;https://getmailspring.com/&quot;&gt;Mailspring&lt;/a&gt; as my e-mail client. Its a fairly decent mail client with nice themes and a simple UI.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Office suite&lt;/strong&gt;: I mostly use Google Docs &amp;amp; Microsoft office online but when I have to work on something on my Desktop I use &lt;a href=&quot;https://www.libreoffice.org/&quot;&gt;LibreOffice&lt;/a&gt; which is a good office suite and even handles Microsoft Office &amp;amp; Keynote formats.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Communication&lt;/strong&gt;: Of course I use &lt;a href=&quot;https://slack.com&quot;&gt;Slack&lt;/a&gt; and for video conference I use &lt;a href=&quot;https://www.bluejeans.com/&quot;&gt;BlueJeans&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Screen capture&lt;/strong&gt;: I use this nifty tool called &lt;a href=&quot;https://github.com/phw/peek&quot;&gt;Peek&lt;/a&gt; for screen recording and &lt;a href=&quot;https://launchpad.net/shutter&quot;&gt;Shutter&lt;/a&gt; for screenshots.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;There are many other small and nifty utilities that I use, most are command line utilities. There are some notable mentions like &lt;a href=&quot;https://github.com/teejee2008/timeshift&quot;&gt;Timeshift&lt;/a&gt; which is nice for backing up your machine.&lt;/p&gt;
-
-&lt;p&gt;Of course, not everything is perfect in the Linux world, but it is the same with every OS. I was a long time Windows user before switching to Linux. So like every Linux users I have from time to time messed things up(With great power comes great responsibility, Peter). There are many quirks in the Linux world but there is nothing that bothers me much. Some of the most annoying issues I had in the past are below and for now, I don’t have any noticeable issues.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Scroll position jumping when switching apps - Fixed after upgrading to Fedora 30&lt;/li&gt;
-  &lt;li&gt;Hibernation was broken - Fixed after upgrading to Fedora 30&lt;/li&gt;
-  &lt;li&gt;Audio output selection was broken when plugging in headphones- Fixed after Fedora 28 for me&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;This has been a good day, upgraded to &lt;a href=&quot;https://twitter.com/hashtag/Fedora?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Fedora&lt;/a&gt; 30 and hibernate started to work again. Sweet. I was putting off tinkering that for a long time. &lt;a href=&quot;https://twitter.com/hashtag/Linux?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Linux&lt;/a&gt;&lt;/p&gt;&amp;mdash; Deepu K Sasidharan ( ദീപു, தீபு, दीपू ) (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1139602081935966210?ref_src=twsrc%5Etfw&quot;&gt;June 14, 2019&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;p&gt;I hope you find this useful. If you have any question or if you think I missed something please add a comment.&lt;/p&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 16 Jun 2019 00:00:00 +0200</pubDate>
-        <link>/my-beautiful-linux-development-environment/</link>
-        <guid isPermaLink="true">/my-beautiful-linux-development-environment/</guid>
-        
-        <category>linux</category>
-        
-        <category>fedora</category>
-        
-        <category>development</category>
-        
-        <category>gnome</category>
         
         
       </item>
