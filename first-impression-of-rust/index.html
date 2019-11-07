@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="/assets/images/logo.png">
+
+    <title>My first impressions of Rust | Technorage</title>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>My first impressions of Rust | Technorage</title>
+<meta name="generator" content="Jekyll v2.0.0" />
+<meta property="og:title" content="My first impressions of Rust" />
+<meta name="author" content="deepu" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is what I thought about Rust while learning it. From a pragmatic perspective." />
+<meta property="og:description" content="This is what I thought about Rust while learning it. From a pragmatic perspective." />
+<meta property="og:site_name" content="Technorage" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-11-07T00:00:00+01:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"This is what I thought about Rust while learning it. From a pragmatic perspective.","@type":"BlogPosting","headline":"My first impressions of Rust","dateModified":"2019-11-07T00:00:00+01:00","datePublished":"2019-11-07T00:00:00+01:00","url":"https://deepu.tech/first-impression-of-rust/","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/first-impression-of-rust/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link href="/assets/css/screen.css" rel="stylesheet">
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- change your GA id in _config.yml -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74370272-6"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-74370272-6');
+    </script>
+</head>
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down pr-md-0 pl-md-0">
+
+    <div class="container">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+        <h2>Deepu K Sasidharan</h2>
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                    <a class="nav-link" href="/">About</a>
+                </li>
+
+                
+                <li class="nav-item active">
+                
+                    <a class="nav-link" href="/blogs/"><i class="fas fa-blog"></i> Blog</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.packtpub.com/eu/application-development/full-stack-development-jhipster"><i class="fas fa-book"></i> Book</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK"><i class="fab fa-youtube"></i> Videos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://speakerdeck.com/deepu105"><i class="fab fa-speaker-deck"></i> Presentations</a>
+                </li>
+
+                <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Technorage</h1>
+    <p class="lead">
+        Where I rage about technology and stuff!
+    </p>
+</div>
+<!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=My first impressions of Rust&url=https://deepu.js.org//first-impression-of-rust/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://deepu.js.org//first-impression-of-rust/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://deepu.js.org//first-impression-of-rust/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=250&d=mm&r=x" alt="Deepu K Sasidharan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.deepu.tech">Deepu K Sasidharan</a><a target="_blank" href="https://twitter.com/deepu105" class="btn follow">Follow</a>
+                        <span class="author-description">JHipster co-lead, Java, JS, Cloud Native Advocate, Dev @ XebiaLabs, Author, Speaker, Software craftsman. Loves simple & beautiful code. bit.ly/JHIPSTER-BOOK</span>
+                        <!-- Post Date -->
+                        <span class="author-description">
+                            <small>
+                                <time class="post-date" datetime="2019-11-07">07 Nov 2019</time>
+                                
+                            </small> |
+                            <small>21 mins read</small>
+                        </span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">My first impressions of Rust</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+                
+                    <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://thepracticaldev.s3.amazonaws.com/i/cxs080wnnykflkmsfo9p.png" alt="My first impressions of Rust">
+                
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post series -->
+            
+            <!-- End series -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>So I started learning Rust a while ago and since my post about what <a href="https://dev.to/deepu105/my-reflections-on-golang-38jk">I thought of Go</a> was popular, I decided to write about what my first impressions of Rust were as well.</p>
+
+<p>But unlike Go, I actually didn’t build any real-world application in Rust, so my opinions here are purely personal and some might not be accurate as I might have misunderstood something. So do give me the consideration of a Rust newbie. If you find something I said here is inaccurate please do let me know. Also, my impressions might actually change once I start using the language more. If it does, I’ll make sure to update the post.</p>
+
+<p>As I have said in some of my other posts, I consider myself to be more pragmatic than my younger self now. Some of the opinions are also from that pragmatic perspective(or at least I think so). 
+I have weighed practicality, readability, and simplicity over fancy features, syntax sugars, and complexity. Also, some things which I didn’t like but found not such a big deal are put under nitpicks rather than the dislike section as I thought it was fairer that way.</p>
+
+<p>One thing that sets Rust apart from languages like Go is that Rust is not garbage collected, and I understand that many of the language features/choices where designed with that in mind.</p>
+
+<p>Rust is primarily geared towards procedural/imperative style of programming but it also lets you do a little bit of functional and object-oriented style of programming as well. And that is my favorite kind of mix.</p>
+
+<p>So, without any further ado, let’s get into it.</p>
+
+<hr />
+
+<h1 id="what-i-like-about-rust">What I like about Rust</h1>
+
+<p>Things that I really liked, in no particular order.</p>
+
+<h2 id="no-garbage-collection">No Garbage collection</h2>
+
+<p>One of the first things you would notice in Rust, especially if you are coming from garbage collected languages like Java or Golang is the lack of garbage collection. Yes, there is no GC in Rust, then how does it ensure my program runs efficiently in the given memory and how does it prevent out of memory errors?</p>
+
+<p>Rust has something called <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">ownership</a>, so basically any value in Rust must have a variable as its owner(and only one owner at a time) when the owner goes out of scope the value will be dropped freeing the memory regardless of it being in stack or heap memory. For example, in the below example the value of <code class="highlighter-rouge">foo</code> is dropped as soon as the method execution completes and the value of <code class="highlighter-rouge">bar</code> is dropped right after the block execution.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="s">"value"</span><span class="p">;</span> <span class="c">// owner is foo and is valid within this method</span>
+
+    <span class="p">{</span>
+        <span class="k">let</span> <span class="n">bar</span> <span class="o">=</span> <span class="s">"bar value"</span><span class="p">;</span> <span class="c">// owner is bar and is valid within this block scope</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"value of bar is {}"</span><span class="p">,</span> <span class="n">bar</span><span class="p">);</span> <span class="c">// bar is valid here</span>
+    <span class="p">}</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"value of foo is {}"</span><span class="p">,</span> <span class="n">foo</span><span class="p">);</span> <span class="c">// foo is valid here</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"value of bar is {}"</span><span class="p">,</span> <span class="n">bar</span><span class="p">);</span> <span class="c">// bar is not valid here as its out of scope</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>So by scoping variables carefully, we can make sure the memory usage is optimized and that is also why Rust lets you use block scopes almost everywhere.</p>
+
+<p>Also, the Rust compiler helps you in dealing with duplicate pointer references and so on. The below is invalid in Rust since <code class="highlighter-rouge">foo</code> is now using heap memory rather than stack and assigning a reference to a variable is considered a move. If deep copying(expensive) is required it has to be performed using the <code class="highlighter-rouge">clone</code> function which performs a copy instead of move.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre>
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"hello"</span><span class="p">);</span> <span class="c">// owner is foo and is valid within this method</span>
+
+    <span class="p">{</span>
+        <span class="k">let</span> <span class="n">bar</span> <span class="o">=</span> <span class="n">foo</span><span class="p">;</span> <span class="c">// owner is bar and is valid within this block scope, foo in invalidated now</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"value of bar is {}"</span><span class="p">,</span> <span class="n">bar</span><span class="p">);</span> <span class="c">// bar is valid here</span>
+    <span class="p">}</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"value of foo is {}"</span><span class="p">,</span> <span class="n">foo</span><span class="p">);</span> <span class="c">// foo is invalid here as it has moved</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>The ownership concept can be a bit weird to get used to, especially since passing a variable to a method will also move it(if its not a literal or reference), but given that it saves us from GC I think its worth it and the compiler takes care of helping us when we make mistakes.</p>
+
+<h2 id="immutable-by-default">Immutable by default</h2>
+
+<p>Variables are immutable by default. If you want to mutate a variable you have to specifically mark it using the <code class="highlighter-rouge">mut</code> keyword.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="s">"hello"</span> <span class="c">// immutable</span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">bar</span> <span class="o">=</span> <span class="s">"hello"</span> <span class="c">// mutable </span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Variables are by default passed by value, in order to pass a reference we would have to use the <code class="highlighter-rouge">&amp;</code> symbol. Quite similar to Golang.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">world</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"world"</span><span class="p">);</span>
+    
+    <span class="nf">hello_ref</span><span class="p">(</span><span class="o">&amp;</span><span class="n">world</span><span class="p">);</span> <span class="c">// pass by reference. Keeps ownership</span>
+    <span class="c">// prints: Hello world</span>
+    <span class="nf">hello_val</span><span class="p">(</span><span class="n">world</span><span class="p">);</span> <span class="c">// pass by value and hence transfer ownership</span>
+    <span class="c">// prints: Hello world</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">hello_val</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Hello {}"</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">hello_ref</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Hello {}"</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>When you pass a reference it is still immutable so we would have to explicitly mark that mutable as well as below. This makes accidental mutations very difficult. The compiler also ensures that we can only have one mutable reference in a scope.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">world</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"world"</span><span class="p">);</span>
+    
+    <span class="nf">hello_ref</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">world</span><span class="p">);</span> <span class="c">// pass by mutable reference. Keeps ownership</span>
+    <span class="c">// prints: Hello world!</span>
+    <span class="nf">hello_val</span><span class="p">(</span><span class="n">world</span><span class="p">);</span> <span class="c">// pass by value and hence transfer ownership</span>
+    <span class="c">// prints: Hello world!</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">hello_val</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Hello {}"</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">hello_ref</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="o">&amp;</span><span class="k">mut</span> <span class="nb">String</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">msg</span><span class="nf">.push_str</span><span class="p">(</span><span class="s">"!"</span><span class="p">);</span> <span class="c">// mutate string</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Hello {}"</span><span class="p">,</span> <span class="n">msg</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="pattern-matching">Pattern matching</h2>
+
+<p>Rust has first-class support for pattern matching and this can be used for control flow, error handling, variable assignment and so on. pattern matching can also be used in <code class="highlighter-rouge">if</code>, <code class="highlighter-rouge">while</code> statements, <code class="highlighter-rouge">for</code> loops and function parameters.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"200"</span><span class="p">);</span>
+
+    <span class="k">let</span> <span class="n">num</span><span class="p">:</span> <span class="nb">u32</span> <span class="o">=</span> <span class="k">match</span> <span class="n">foo</span><span class="nf">.parse</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nf">Ok</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">num</span><span class="p">,</span>
+        <span class="nf">Err</span><span class="p">(</span><span class="mi">_</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+            <span class="nd">panic!</span><span class="p">(</span><span class="s">"Cannot parse!"</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="k">match</span> <span class="n">num</span> <span class="p">{</span>
+        <span class="mi">200</span> <span class="k">=&gt;</span> <span class="nd">println!</span><span class="p">(</span><span class="s">"two hundred"</span><span class="p">),</span>
+        <span class="mi">_</span> <span class="k">=&gt;</span> <span class="p">(),</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="generics">Generics</h2>
+
+<p>One thing I love in Java and TypeScript is the generics. It makes static typing more practical and DRY. Strongly typed languages(Looking at you Golang) without generics are annoying to work with. Fortunately, Rust has great support for generics. It can be used in types, functions, structs, and enums. The icing on the cake is that Rust converts the Generic code using specific code during compile time thus there is no performance penalty in using them.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="rouge-code"><pre><span class="k">struct</span> <span class="n">Point</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>
+    <span class="n">y</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="n">hello</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="n">T</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">val</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="nf">hello</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="nf">hello</span><span class="p">(</span><span class="s">"5"</span><span class="p">);</span>
+
+    <span class="k">let</span> <span class="n">integer</span> <span class="o">=</span> <span class="n">Point</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mi">10</span> <span class="p">};</span>
+    <span class="k">let</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">Point</span> <span class="p">{</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="mf">4.0</span> <span class="p">};</span>
+<span class="p">}</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="static-types-and-advanced-type-declarations">Static types and advanced type declarations</h2>
+
+<p>Rust is a strictly typed language with a static type system. It also has great type inference which means we don’t have to define types manually for everything. Rust also allows for complex type definitions.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre><span class="k">type</span> <span class="n">Kilometers</span> <span class="o">=</span> <span class="nb">i32</span><span class="p">;</span>
+
+<span class="k">type</span> <span class="n">Thunk</span> <span class="o">=</span> <span class="nb">Box</span><span class="o">&lt;</span><span class="n">dyn</span> <span class="nf">Fn</span><span class="p">()</span> <span class="o">+</span> <span class="nb">Send</span> <span class="o">+</span> <span class="nv">'static</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">type</span> <span class="n">Result</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nn">std</span><span class="p">::</span><span class="nn">result</span><span class="p">::</span><span class="n">Result</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="nn">std</span><span class="p">::</span><span class="nn">io</span><span class="p">::</span><span class="n">Error</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="nice-and-simple-error-handling">Nice and simple error handling</h2>
+
+<p>Error handling in Rust is quite nice, there are recoverable and unrecoverable errors. For recoverable errors, you can handle them using pattern matching on the <code class="highlighter-rouge">Result</code> enum or using the simple expect syntax. There is even a shorthand operator to propagate errors from a function. Take that Go.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre></td><td class="rouge-code"><pre><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">fs</span><span class="p">::</span><span class="n">File</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="s">"hello.txt"</span><span class="p">)</span><span class="nf">.expect</span><span class="p">(</span><span class="s">"Failed to open hello.txt"</span><span class="p">);</span>
+    
+    <span class="c">// or</span>
+    
+    <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">match</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="s">"hello.txt"</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nf">Ok</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">file</span><span class="p">,</span>
+        <span class="nf">Err</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
+            <span class="nd">panic!</span><span class="p">(</span><span class="s">"Problem opening the file: {:?}"</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+        <span class="p">},</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="tuples">Tuples</h2>
+
+<p>Rust has built-in support for tuples, and this is highly helpful when you have to return multiple values from a function or when you want to unwrap a value and so on.</p>
+
+<h2 id="block-expressions">Block expressions</h2>
+
+<p>In Rust, you can have block expressions with their own scope almost anywhere. It also lets you assign a variable value from block expressions, if statement, loops and so on.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"Assigning foo"</span><span class="p">);</span>
+        <span class="mi">5</span>
+    <span class="p">};</span>
+
+    <span class="k">let</span> <span class="n">bar</span> <span class="o">=</span> <span class="k">if</span> <span class="n">foo</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="p">{</span> <span class="mi">6</span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="mi">10</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="beautiful-compiler-output">Beautiful compiler output</h2>
+
+<p>Rust simply has the best error output during compilation that I have seen. It can’t get better than this I think. It is so helpful.</p>
+
+<p><img src="https://thepracticaldev.s3.amazonaws.com/i/3a6kh5lvp8nqx34xh00c.png" alt="Alt Text" /></p>
+
+<h2 id="built-in-tooling">Built-in tooling</h2>
+
+<p>Like many modern programming languages, Rust also provides a lot of build-in standard tooling and honestly, I think this is one of the best that I have come across. Rust has <a href="https://doc.rust-lang.org/book/ch01-03-hello-cargo.html">Cargo</a> which is the built-in package manager and build system. It is an excellent tool. It takes care of all common project needs like compiling, building, testing and so on. It can even create new projects with a skeleton and manage packages globally and locally for the project. That means you don’t have to worry about setting up any tooling to get started in Rust. I love this, it saves so much time and effort. Every programming language should have this.</p>
+
+<p>Rust also provides built-in utilities and asserts to write tests which then can be executed using Cargo.</p>
+
+<p>In Rust, related functionality is grouped into modules, modules are grouped together into something called crates and crates are grouped into packages. We can refer to items defined in one module from another module. Packages are managed by cargo. You can specify external packages in the <code class="highlighter-rouge">Cargo.toml</code> file. Reusable public packages can be published to the <a href="https://crates.io/">crates.io</a> registry.</p>
+
+<h2 id="concurrency">Concurrency</h2>
+
+<p>Rust has first-class support for memory safe concurrent programming. Rust uses threads for concurrency and has 1:1 threading implementation. i.e, 1 green thread per operating system thread. Rust compiler guarantees memory safety while using the threads. It provides features like waiting for all threads to finish, sharing data with <code class="highlighter-rouge">move</code> closures or channels(similar to Go). It also lets you use shared state and sync threads.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="rouge-code"><pre><span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="n">thread</span><span class="p">;</span>
+<span class="k">use</span> <span class="nn">std</span><span class="p">::</span><span class="nn">time</span><span class="p">::</span><span class="n">Duration</span><span class="p">;</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nn">thread</span><span class="p">::</span><span class="nf">spawn</span><span class="p">(||</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="n">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">10</span> <span class="p">{</span>
+            <span class="nd">println!</span><span class="p">(</span><span class="s">"hi number {} from the spawned thread!"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="nn">thread</span><span class="p">::</span><span class="nf">sleep</span><span class="p">(</span><span class="nn">Duration</span><span class="p">::</span><span class="nf">from_millis</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="n">in</span> <span class="mi">1</span><span class="o">..</span><span class="mi">5</span> <span class="p">{</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"hi number {} from the main thread!"</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+        <span class="nn">thread</span><span class="p">::</span><span class="nf">sleep</span><span class="p">(</span><span class="nn">Duration</span><span class="p">::</span><span class="nf">from_millis</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="macros-and-meta-programming">Macros and meta-programming</h2>
+
+<p>While I don’t like all aspects of macros in Rust, there are more things to like here than dislike. The annotation macros, for example, are quite handy. Not a fan of the procedure macros though. For advanced users you can write your own macro rules and do metaprogramming.</p>
+
+<h2 id="traits">Traits</h2>
+
+<p>Traits are synonymous to interfaces in Java, it is used to define shared behaviors that can be implemented on structs. Traits can even specify default methods. The only thing I dislike here is the indirect implementation.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="rouge-code"><pre><span class="k">pub</span> <span class="k">trait</span> <span class="n">Summary</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">summarize_author</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span><span class="p">;</span>
+
+    <span class="k">fn</span> <span class="nf">summarize</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+        <span class="nd">format!</span><span class="p">(</span><span class="s">"(Read more from {}...)"</span><span class="p">,</span> <span class="k">self</span><span class="nf">.summarize_author</span><span class="p">())</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">pub</span> <span class="k">struct</span> <span class="n">NewsArticle</span> <span class="p">{</span>
+    <span class="k">pub</span> <span class="n">author</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="k">pub</span> <span class="n">content</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">impl</span> <span class="n">Summary</span> <span class="k">for</span> <span class="n">NewsArticle</span> <span class="p">{</span>
+    <span class="k">fn</span> <span class="nf">summarize_author</span><span class="p">(</span><span class="o">&amp;</span><span class="k">self</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">String</span> <span class="p">{</span>
+        <span class="nd">format!</span><span class="p">(</span><span class="s">"@{}"</span><span class="p">,</span> <span class="k">self</span><span class="py">.author</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">article</span> <span class="o">=</span> <span class="n">NewsArticle</span> <span class="p">{</span>
+        <span class="n">author</span><span class="p">:</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"Iceburgh"</span><span class="p">),</span>
+        <span class="n">content</span><span class="p">:</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span>
+            <span class="s">"The Pittsburgh Penguins once again are the best hockey team in the NHL."</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">};</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"New article available! {}"</span><span class="p">,</span> <span class="n">article</span><span class="nf">.summarize</span><span class="p">());</span>
+<span class="p">}</span>
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="ability-to-use-unsafe-features-if-required">Ability to use unsafe features if required</h2>
+
+<ul>
+  <li>Useful in advanced use-cases where you know what you are doing. A necessary evil IMO. I like it since its doable only within an <code class="highlighter-rouge">unsafe { }</code> block making it very explicit. I would have moved this to the dislike section if that was not the case.</li>
+  <li>When you use these, the Rust compiler cannot guarantee memory and runtime safety and you are on your own to get this right. So definitely for advanced and experienced users.</li>
+</ul>
+
+<hr />
+
+<h1 id="what-i-dont-like-about-rust">What I don’t like about Rust</h1>
+
+<p>Things that I didn’t like very much, in no particular order.</p>
+
+<h2 id="complexity">Complexity</h2>
+
+<p>I don’t like it when a language offers multiples ways to do the same things. This is one think Golang does pretty well, there are no two ways to do the same thing and hence it is easier for people to work on larger codebases and to review code. Also, you don’t have to always think of the best possible way to do something. Unfortunately, Rust does this and I’m not a fan of it. IMO it makes the language more complex.</p>
+
+<ul>
+  <li>Too many ways for iterations -&gt; loops, while, for, iterators.</li>
+  <li>Too many ways for creating procedures -&gt; Functions, closures, macros</li>
+</ul>
+
+<h2 id="shadowing-of-variables-in-the-same-context">Shadowing of variables in the same context</h2>
+
+<p>So Rust lets you do this</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre><span class="p">{</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">foo</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">foo</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<ul>
+  <li>Kind of beats being immutable by default(I understand the reasoning of being able to perform transformations on an immutable variable, especially when passing references to a function and getting it back)</li>
+  <li>IMO lets people practice bad practices unintentionally, I would have rather marked the variable mutable as I consider the above mutation as well.</li>
+  <li>You can as easily accidentally shadow a variable as you would accidentally mutate one in Languages like JavaScript</li>
+  <li>Gives people a gun to shoot in the foot</li>
+</ul>
+
+<h2 id="complex-string-data-type">Complex string data type</h2>
+
+<p>Given strings are the most used data types, it would have been nice to have a simpler way of working with strings(like in Golang) rather than working with the Vector types for mutable strings or slice types for immutable string literals. This makes code more verbose than it needs to be. This is more likely a compromise due to the fact that Rust is not garbage collected and has a concept of ownership to manage memory.</p>
+
+<p>https://doc.rust-lang.org/rust-by-example/std/str.html</p>
+
+<h2 id="functions-are-not-first-class-citizens">Functions are not first-class citizens</h2>
+
+<p>While it is possible to pass a function to another they are not exactly first-class citizens like in JavaScript or Golang. You cannot create closures from functions and you cannot assign functions to variables. Closures are separate from functions in Rust, they are quite similar to Java lambdas from what I see. While closures would be sufficient to perform some of the functional style programming patterns it would have been much nicer if it was possible using just functions thus making language a bit more simple.</p>
+
+<h2 id="implicit-implementation-of-traits">Implicit implementation of traits</h2>
+
+<p>I’m not a fan of implicit stuff as its easier to abuse this and harder to read. You could define a struct in one file and you could implement a trait for that struct in another file which makes it less obvious. I prefer when the implementation is done by intent like in Java which makes it more obvious and easier to follow. While the way in Rust is not ideal, it is definitely better than Golang which is even more indirect.</p>
+
+<hr />
+
+<h1 id="nitpicks">Nitpicks</h1>
+
+<p>Finally some stuff I still don’t like but I don’t consider them a big deal.</p>
+
+<ul>
+  <li>I don’t see the point of having the <code class="highlighter-rouge">const</code> keyword when <code class="highlighter-rouge">let</code> is immutable by default. It seems more like syntax sugar for the old school constants concept.</li>
+  <li>The block expression and implicit return style are a bit error-prone and confusing to get used to, I would have preferred explicit return.</li>
+  <li>If you have read my other post about Go, you might know that I’m not a fan of structs. Structs in Rust is very similar to structs in Golang. So like in Go, it would be easy to achieve unreadable struct structures. But fortunately, the structs in Rust seem much nicer than Go as you have functions, can use spread operator, shorthand syntax and so on here. Also, you can make structs which are Tuples. The structs in Rust are more like Java POJOs. I would have moved this to the liked section if having optional fields in structs where easier. Currently, you would have to wrap stuff in an <code class="highlighter-rouge">Optional</code> enum to do this.</li>
+</ul>
+
+<hr />
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>I like programming languages that focus more on simplicity rather than fancy syntax sugars and complex features. In my post <a href="https://dev.to/deepu105/my-reflections-on-golang-38jk">“My reflections on Golang”</a>, I explain why I consider Golang to be too simple for my taste. Rust, on the other hand, is leaning towards the other side of the spectrum. While it is not as complex as Scala it is not as simple as Go as well. So its somewhere in between, not exactly the sweet spot but almost near that quite close to where JavaScript is maybe.</p>
+
+<p>So overall I can say that there are more things in Rust for me to like than to dislike which is what I would expect from a nice programming language.</p>
+
+<p>So far I can say that I like Rust more than Golang even without implementing a real project with it and might choose Rust over Go for similar use cases.</p>
+
+<hr />
+
+<p>If you like this article, please leave a like or a comment.</p>
+
+<p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
+
+<p>Cover image credit: Image from <a href="https://hacks.mozilla.org/2018/12/rust-2018-is-here/">Link Clark, The Rust team</a> under <a href="https://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution Share-Alike License v3.0</a>.</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#languages">#languages</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#programming">#programming</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#rust">#rust</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#thepragmaticprogrammer">#thepragmaticprogrammer</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="/microservices-the-good-bad-and-the-ugly/"> &laquo; Microservices - the good, bad, and the ugly</a>
+            
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'deepu-tech'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first:
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+
+</div>
+
+
+
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/tags#jhipster">jhipster (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#java">java (4)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#microservices">microservices (4)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#docker">docker (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#azure">azure (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#kubernetes">kubernetes (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#typescript">typescript (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#react">react (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#javascript">javascript (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#webdev">webdev (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terraform">terraform (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#writing">writing (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#medium">medium (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#development">development (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#linux">linux (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#fedora">fedora (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#gnome">gnome (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terminal">terminal (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#oh-my-zsh">oh-my-zsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#zsh">zsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#go">go (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#programming">programming (4)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#languages">languages (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#vscode">vscode (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#ide">ide (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#istio">istio (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#functional">functional (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#showdev">showdev (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#ruby">ruby (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#Jekyll">Jekyll (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#blogging">blogging (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#architecture">architecture (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#devops">devops (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#distributedsystems">distributedsystems (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#rust">rust (1)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2019 Deepu K Sasidharan
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net |
+                Domain by
+                <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
+                    <img src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo">
+                </a> |
+                Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/assets/js/mediumish.js"></script>
+
+
+<script src="/assets/js/lazyload.js"></script>
+
+
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+<script id="dsq-count-scr" src="//deepu-tech.disqus.com/count.js"></script>
+
+
+<script src="https://assets.digitalclimatestrike.net/widget.js" async></script>
+</body>
+</html>
