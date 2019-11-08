@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 08 Nov 2019 10:02:36 +0100</pubDate>
-    <lastBuildDate>Fri, 08 Nov 2019 10:02:36 +0100</lastBuildDate>
+    <pubDate>Fri, 08 Nov 2019 10:12:09 +0100</pubDate>
+    <lastBuildDate>Fri, 08 Nov 2019 10:12:09 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -339,6 +339,8 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 &lt;p&gt;Rust also provides built-in utilities and asserts to write tests which then can be executed using Cargo.&lt;/p&gt;
 
 &lt;p&gt;In Rust, related functionality is grouped into modules, modules are grouped together into something called crates and crates are grouped into packages. We can refer to items defined in one module from another module. Packages are managed by cargo. You can specify external packages in the &lt;code class=&quot;highlighter-rouge&quot;&gt;Cargo.toml&lt;/code&gt; file. Reusable public packages can be published to the &lt;a href=&quot;https://crates.io/&quot;&gt;crates.io&lt;/a&gt; registry.&lt;/p&gt;
+
+&lt;p&gt;There are even offline built-in docs that you can get by running &lt;code class=&quot;highlighter-rouge&quot;&gt;rustup docs&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;rustup docs --book&lt;/code&gt; which is amazing. Thanks to Mohamed ELIDRISSI for &lt;a href=&quot;https://dev.to/mohamedelidrissi_98/comment/hf85&quot;&gt;pointing it&lt;/a&gt; out to me.&lt;/p&gt;
 
 &lt;h2 id=&quot;concurrency&quot;&gt;Concurrency&lt;/h2&gt;
 

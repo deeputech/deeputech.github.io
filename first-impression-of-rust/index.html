@@ -577,6 +577,8 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 
 <p>In Rust, related functionality is grouped into modules, modules are grouped together into something called crates and crates are grouped into packages. We can refer to items defined in one module from another module. Packages are managed by cargo. You can specify external packages in the <code class="highlighter-rouge">Cargo.toml</code> file. Reusable public packages can be published to the <a href="https://crates.io/">crates.io</a> registry.</p>
 
+<p>There are even offline built-in docs that you can get by running <code class="highlighter-rouge">rustup docs</code> and <code class="highlighter-rouge">rustup docs --book</code> which is amazing. Thanks to Mohamed ELIDRISSI for <a href="https://dev.to/mohamedelidrissi_98/comment/hf85">pointing it</a> out to me.</p>
+
 <h2 id="concurrency">Concurrency</h2>
 
 <p>Rust has first-class support for memory safe concurrent programming. Rust uses threads for concurrency and has 1:1 threading implementation. i.e, 1 green thread per operating system thread. Rust compiler guarantees memory safety while using the threads. It provides features like waiting for all threads to finish, sharing data with <code class="highlighter-rouge">move</code> closures or channels(similar to Go). It also lets you use shared state and sync threads.</p>
