@@ -731,12 +731,6 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
   <li>Gives people a gun to shoot in the foot</li>
 </ul>
 
-<h2 id="complex-string-data-type">Complex string data type</h2>
-
-<p>Given strings are the most used data types, it would have been nice to have a simpler way of working with strings(like in Golang) rather than working with the Vector types for mutable strings or slice types for immutable string literals. This makes code more verbose than it needs to be. This is more likely a compromise due to the fact that Rust is not garbage collected and has a concept of ownership to manage memory.</p>
-
-<p>https://doc.rust-lang.org/rust-by-example/std/str.html</p>
-
 <h2 id="functions-are-not-first-class-citizens">Functions are not first-class citizens</h2>
 
 <p>While it is possible to pass a function to another they are not exactly first-class citizens like in JavaScript or Golang. You cannot create closures from functions and you cannot assign functions to variables. Closures are separate from functions in Rust, they are quite similar to Java lambdas from what I see. While closures would be sufficient to perform some of the functional style programming patterns it would have been much nicer if it was possible using just functions thus making language a bit more simple.</p>
@@ -752,9 +746,10 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 <p>Finally some stuff I still don’t like but I don’t consider them a big deal.</p>
 
 <ul>
-  <li>I don’t see the point of having the <code class="highlighter-rouge">const</code> keyword when <code class="highlighter-rouge">let</code> is immutable by default. It seems more like syntax sugar for the old school constants concept.</li>
+  <li><del>I don’t see the point of having the <code class="highlighter-rouge">const</code> keyword when <code class="highlighter-rouge">let</code> is immutable by default. It seems more like syntax sugar for the old school constants concept.</del> <a href="https://dev.to/artemis">Diane</a> <a href="https://dev.to/artemis/comment/hf2c">pointed out</a> the difference <code class="highlighter-rouge">const</code> provides and that makes sense.</li>
   <li>The block expression and implicit return style are a bit error-prone and confusing to get used to, I would have preferred explicit return.</li>
   <li>If you have read my other post about Go, you might know that I’m not a fan of structs. Structs in Rust is very similar to structs in Golang. So like in Go, it would be easy to achieve unreadable struct structures. But fortunately, the structs in Rust seem much nicer than Go as you have functions, can use spread operator, shorthand syntax and so on here. Also, you can make structs which are Tuples. The structs in Rust are more like Java POJOs. I would have moved this to the liked section if having optional fields in structs where easier. Currently, you would have to wrap stuff in an <code class="highlighter-rouge">Optional</code> enum to do this.</li>
+  <li>Given strings are the most used data types, it would have been nice to have a simpler way of working with strings(like in Golang) rather than working with the Vector types for mutable strings or slice types for immutable string literals. This makes code more verbose than it needs to be. This is more likely a compromise due to the fact that Rust is not garbage collected and has a concept of ownership to manage memory. https://doc.rust-lang.org/rust-by-example/std/str.html - <strong>Edit</strong>: <em>I have moved this point to nitpicks rather than dislikes after a <a href="https://dev.to/robertorojasr/comment/hf27">discussion</a> on the comments with <a href="https://dev.to/robertorojasr">robertorojasr</a></em></li>
 </ul>
 
 <hr />
