@@ -28,10 +28,10 @@ if [ -z "$(git status --porcelain)" ]; then
     git commit -am "Updated site on $now" || exit
     git push origin master --force || exit
 
-    echo "$now: Published changes to GitHub"
+    echo ">> $now: Published changes to GitHub"
 
     git checkout site_src
 else
-    echo "Working directory is not clean. Commit changes!"
+    echo ">> Working directory is not clean. Commit changes!"
     exit
 fi
