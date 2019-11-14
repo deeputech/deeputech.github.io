@@ -20,7 +20,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2019-11-07T00:00:00+01:00" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"This is what I thought about Rust while learning it. From a pragmatic perspective.","@type":"BlogPosting","headline":"My first impressions of Rust","dateModified":"2019-11-07T00:00:00+01:00","datePublished":"2019-11-07T00:00:00+01:00","url":"https://deepu.tech/first-impression-of-rust/","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/first-impression-of-rust/"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"deepu"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"description":"This is what I thought about Rust while learning it. From a pragmatic perspective.","@type":"BlogPosting","headline":"My first impressions of Rust","dateModified":"2019-11-07T00:00:00+01:00","url":"https://deepu.tech/first-impression-of-rust/","datePublished":"2019-11-07T00:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/first-impression-of-rust/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -214,7 +214,7 @@
                                 <time class="post-date" datetime="2019-11-07">07 Nov 2019</time>
                                 
                             </small> |
-                            <small>21 mins read</small>
+                            <small>24 mins read</small>
                         </span>
                     </div>
                 </div>
@@ -619,7 +619,7 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 
 <h2 id="macros-and-meta-programming">Macros and meta-programming</h2>
 
-<p>While I don’t like all aspects of macros in Rust, there are more things to like here than dislike. The annotation macros, for example, are quite handy. Not a fan of the procedure macros though. For advanced users you can write your own macro rules and do metaprogramming.</p>
+<p>While I don’t like all aspects of macros in Rust, there are more things to like here than dislike. The annotation macros, for example, are quite handy. Not a fan of the procedure macros though. For advanced users, you can write your own macro rules and do metaprogramming.</p>
 
 <h2 id="traits">Traits</h2>
 
@@ -709,6 +709,8 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
   <li>Too many ways for creating procedures -&gt; Functions, closures, macros</li>
 </ul>
 
+<p><strong>Edit:</strong> Based on discussions here and on <a href="https://www.reddit.com/r/rust/comments/dua0qv/my_first_impressions_of_rust/">Reddit</a>, I say my perception of complexity only have increased. It seems like once you get past all the niceties there are a lot of things that would take some time to wrap your head around. I’m pretty sure if you are experienced in Rust, it would be a cakewalk for you but the language indeed is quite complex, especially the ways functions and closures behave in different contexts, lifetimes in structs and stuff.</p>
+
 <h2 id="shadowing-of-variables-in-the-same-context">Shadowing of variables in the same context</h2>
 
 <p>So Rust lets you do this</p>
@@ -722,7 +724,7 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 </pre></td><td class="rouge-code"><pre><span class="p">{</span>
     <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="s">"hello"</span><span class="p">;</span>
     <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">foo</span><span class="p">);</span>
-    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="s">"world"</span><span class="p">;</span>
     <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">foo</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
@@ -733,9 +735,13 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
   <li>Gives people a gun to shoot in the foot</li>
 </ul>
 
+<p><strong>Edit:</strong> I saw a lot of comments here and on <a href="https://www.reddit.com/r/rust/comments/dua0qv/my_first_impressions_of_rust/">Reddit</a> explaining why this is good. While I agree that it is useful in many scenarios, so is the ability of mutation. I think it would have been perfectly fine not to have this and people would have still loved Rust and all of them would have defended the decision not have this. So my opinion on this hasn’t changed.</p>
+
 <h2 id="functions-are-not-first-class-citizens">Functions are not first-class citizens</h2>
 
-<p>While it is possible to pass a function to another they are not exactly first-class citizens like in JavaScript or Golang. You cannot create closures from functions and you cannot assign functions to variables. Closures are separate from functions in Rust, they are quite similar to Java lambdas from what I see. While closures would be sufficient to perform some of the functional style programming patterns it would have been much nicer if it was possible using just functions thus making language a bit more simple.</p>
+<p>While it is possible to pass a function to another they are not exactly first-class citizens like in JavaScript or Golang. <del>You cannot create closures from functions and you cannot assign functions to variables</del>. Closures are separate from functions in Rust, they are quite similar to Java lambdas from what I see. While closures would be sufficient to perform some of the functional style programming patterns it would have been much nicer if it was possible using just functions thus making language a bit more simple.</p>
+
+<p><strong>Edit:</strong> Oh by! this opinion triggered a lot of discussions here and on <a href="https://www.reddit.com/r/rust/comments/dua0qv/my_first_impressions_of_rust/">Reddit</a>. So seems like Functions and closures are similar and different based on context, It also seems like Functions are almost like first-class citizens, but if you are used to languages like Go or JavaScript where functions are much more straight forward then you are in for a crazy ride. Functions in Rust seems much much more complex. A lot of people who commented seemed to miss the fact that my primary complaint was that having two constructs(closures and functions) that look and act quite similar in most of the scenarios makes things more complex. At least in Java and JS where there are multiple constructs(arrow functions, lambdas) those where due to the fact that they were added much later to the language and those are still something I don’t like in those languages. The best <a href="https://dev.to/louy2/comment/hjeo">explanation</a> was from <a href="https://dev.to/louy2">Yufan Lou</a> and <a href="https://www.reddit.com/r/rust/comments/dua0qv/my_first_impressions_of_rust/f77w23i/">another</a> from <a href="https://www.reddit.com/user/zesterer/">zesterer</a>. I’m not gonna remove this from stuff I don’t like since I still don’t like the complexity here.</p>
 
 <h2 id="implicit-implementation-of-traits">Implicit implementation of traits</h2>
 
@@ -749,8 +755,8 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 
 <ul>
   <li><del>I don’t see the point of having the <code class="highlighter-rouge">const</code> keyword when <code class="highlighter-rouge">let</code> is immutable by default. It seems more like syntax sugar for the old school constants concept.</del> <a href="https://dev.to/artemis">Diane</a> <a href="https://dev.to/artemis/comment/hf2c">pointed out</a> the difference <code class="highlighter-rouge">const</code> provides and that makes sense.</li>
-  <li>The block expression and implicit return style are a bit error-prone and confusing to get used to, I would have preferred explicit return.</li>
-  <li>If you have read my other post about Go, you might know that I’m not a fan of structs. Structs in Rust is very similar to structs in Golang. So like in Go, it would be easy to achieve unreadable struct structures. But fortunately, the structs in Rust seem much nicer than Go as you have functions, can use spread operator, shorthand syntax and so on here. Also, you can make structs which are Tuples. The structs in Rust are more like Java POJOs. I would have moved this to the liked section if having optional fields in structs where easier. Currently, you would have to wrap stuff in an <code class="highlighter-rouge">Optional</code> enum to do this.</li>
+  <li>The block expression and implicit return style are a bit error-prone and confusing to get used to, I would have preferred explicit return. Also, it’s not that readable IMO.</li>
+  <li>If you have read my other post about Go, you might know that I’m not a fan of structs. Structs in Rust is very similar to structs in Golang. So like in Go, it would be easy to achieve unreadable struct structures. But fortunately, the structs in Rust seem much nicer than Go as you have functions, can use spread operator, shorthand syntax and so on here. Also, you can make structs which are Tuples. The structs in Rust are more like Java POJOs. I would have moved this to the liked section if having optional fields in structs where easier. Currently, you would have to wrap stuff in an <code class="highlighter-rouge">Optional</code> enum to do this. Also lifetimes :(</li>
   <li>Given strings are the most used data types, it would have been nice to have a simpler way of working with strings(like in Golang) rather than working with the Vector types for mutable strings or slice types for immutable string literals. This makes code more verbose than it needs to be. This is more likely a compromise due to the fact that Rust is not garbage collected and has a concept of ownership to manage memory. https://doc.rust-lang.org/rust-by-example/std/str.html - <strong>Edit</strong>: <em>I have moved this point to nitpicks rather than dislikes after a <a href="https://dev.to/robertorojasr/comment/hf27">discussion</a> on the comments with <a href="https://dev.to/robertorojasr">robertorojasr</a></em></li>
 </ul>
 
@@ -760,9 +766,11 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 
 <p>I like programming languages that focus more on simplicity rather than fancy syntax sugars and complex features. In my post <a href="https://dev.to/deepu105/my-reflections-on-golang-38jk">“My reflections on Golang”</a>, I explain why I consider Golang to be too simple for my taste. Rust, on the other hand, is leaning towards the other side of the spectrum. While it is not as complex as Scala it is not as simple as Go as well. So its somewhere in between, not exactly the sweet spot but almost near that quite close to where JavaScript is maybe.</p>
 
-<p>So overall I can say that there are more things in Rust for me to like than to dislike which is what I would expect from a nice programming language.</p>
+<p>So overall I can say that there are more things in Rust for me to like than to dislike which is what I would expect from a nice programming language. Also, bear in mind that I’m not saying Rust should do anything differently or that there are better ways to do things that I complained about. I’m just saying that I don’t like those things but I can live with it given the overall advantages. Also, I fully understand why some of those concepts are the way they are, those are mostly tradeoffs to focus on memory safety and performance.</p>
 
-<p>So far I can say that I like Rust more than Golang even without implementing a real project with it and might choose Rust over Go for similar use cases.</p>
+<p>But don’t be fooled by what you see over the hood, Rust is definitely not something you should start with as your first programming language IMO, as it has a quite a lot of complex concepts and constructs underneath but if you are already familiar with programming then it shouldn’t be an issue after banging your head on the doors a few times :P</p>
+
+<p>So far I can say that I like Rust more than Golang even without implementing a real project with it and might choose Rust over Go for system programming use cases and for high-performance requirements.</p>
 
 <hr />
 
