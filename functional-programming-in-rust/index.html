@@ -439,8 +439,6 @@ In Rust, this is quite easy to do with closures, it might look a bit verbose but
 17
 18
 19
-20
-21
 </pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">let</span> <span class="n">list</span> <span class="o">=</span> <span class="nd">vec!</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">];</span>
     <span class="c">// we are passing the array and a closure as arguments to map_for_each method.</span>
@@ -460,8 +458,6 @@ In Rust, this is quite easy to do with closures, it might look a bit verbose but
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">new_array</span><span class="p">;</span>
 <span class="p">}</span>
-
-
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>But then we could also simply do it this way using built-in functional methods like map, fold(reduce) and so on which is much less verbose. Rust provides a lot of useful functional style methods for working on collections like <code class="highlighter-rouge">map</code>, <code class="highlighter-rouge">fold</code>, <code class="highlighter-rouge">for_each</code>, <code class="highlighter-rouge">filter</code> and so on.</p>
@@ -998,8 +994,7 @@ executing multiply
 
 <h3 id="data-structures"><a href="https://en.wikipedia.org/wiki/Purely_functional_data_structure">Data structures</a></h3>
 
-<p>When using functional programming techniques it is encouraged to use data types such as Stacks, Maps and Queues which have functional implementations as well.
-Hence Hashmaps are better than arrays or hash sets in functional programming as data stores and Rust provides such data types.</p>
+<p>When using functional programming techniques it is encouraged to use data types such as Stacks, Maps, and Queues as they also have functional implementations. Hence Hashmaps are better than arrays or hash sets as data stores in functional programming. Rust provides such data types and is hence conforms to the functional specifications regarding data structures.</p>
 
 <hr />
 
