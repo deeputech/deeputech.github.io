@@ -241,6 +241,60 @@
 
             <!-- Post series -->
             
+            <div class="panel series-wrapper">
+                <p>
+                    <strong>Part of "languages" series</strong>
+                </p>
+                <div class="article-collection">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    <a href="/reflection-on-golang/" title="Part 1: My reflections on Golang" class="current-article"></a>
+                    </a>
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    <a href="/first-impression-of-rust/" title="Part 2: My love-hate relationship with JavaScript" ></a>
+                    </a>
+                
+                
+                
+                
+                </div>
+            </div>
+            
             <!-- End series -->
 
             <!-- Post Content -->
@@ -248,7 +302,11 @@
                 <!-- Toc if any -->
                 
                 <!-- End Toc -->
-                <p>Do I like <a href="https://golang.org/">Go</a>? Yes. Would I use it for every use case I have? Definitely not.</p>
+                <p>Please follow me on <a href="https://twitter.com/deepu105">Twitter</a> for updates.</p>
+
+<hr />
+
+<p>Do I like <a href="https://golang.org/">Go</a>? Yes. Would I use it for every use case I have? Definitely not.</p>
 
 <div class="jekyll-twitter-plugin"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Having worked on most of these said languages I won&#39;t choose Go for general purpose atleast not current version of Go, may be 2.0 has more potential.</p>&mdash; Deepu K Sasidharan ( ദീപു, தீபு, दीपू ) (@deepu105) <a href="https://twitter.com/deepu105/status/1103546225851277313?ref_src=twsrc%5Etfw">March 7, 2019</a></blockquote>
 <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -256,7 +314,7 @@
 
 <p>Don’t get me wrong, I like <strong>Go</strong> for what it is but like every other programming language, it is always a love-hate relationship. No programming language is perfect and all of them have their own merits and use cases. I hate it when I see people overusing something and I see that pattern with Go these days. To be fair, I have done my fair share of overusing in my career as well (mostly with JavaScript) and I can see why people do it. This is not gonna be a blog bashing Go or praising Go, it is just what I think of it after using it for over 9 months. Before I start a rant on the good and bad of Go, here is some background.</p>
 
-<p>After being in the tech industry for over 10 years, I would like to think of myself as a pragmatic programmer or at least as someone getting closer to that - that should be a programmer’s <a href="https://www.britannica.com/topic/nirvana-religion">Nirvana</a>. I didn’t even plan to be a programmer, if you ask the 18-year-old self of me, he would say that he wanted to be an astrophysicist or a robotics engineer(Yes building space robots was my dream). Like most teenage dreams, it didn’t happen and I ended up in tech instead.</p>
+<p>After being in the tech industry for over 10 years, I would like to think of myself as a pragmatic programmer or at least as someone getting closer to that - that should be a programmer’s <a href="https://www.britannica.com/topic/nirvana-religion">Nirvana</a>. I didn’t even plan to be a programmer, if you ask the 18-year-old self of me, he would say that he wanted to be an astrophysicist or a robotics engineer(Yes building space robots were my dream). Like most teenage dreams, it didn’t happen and I ended up in tech instead.</p>
 
 <p>Though landing an IT Job was an accident, programming wasn’t alien to me. I did learn some C/C++ when I was in high school to help my girlfriend with her project and did dabble in some PHP, JavaScript, HTML and Flash(ActionScript) during my early college years for personal projects and blogs. So when I got a real IT job without having an IT background, I did what many in that situation did, I started learning the language that I stumbled upon first based on the task I was given, which happened to be Java. Being a quick learner and having some idea of programming concepts from C/C++ Java wasn’t that hard to learn and I was a pretty decent Java programmer in a few months. Then I was tasked with building some Web UI and I dived deep into the world of HTML, CSS, and JavaScript and honestly fell in love with JavaScript due to its flexibility and ease. I mastered JQuery and soon become the go-to guy for front end stuff in the office.</p>
 
@@ -274,15 +332,15 @@
 
 <h3 id="simplicity">Simplicity</h3>
 
-<p>I like the fact that Go is a simple language(Going through the entire language features on the <a href="https://tour.golang.org">tour</a> page literally takes 15 minutes unless you do the exercises) and unlike Scala, Rust or even JavaScript Go doesn’t have many ways of doing the same thing which is extremely valuable for people working in teams and companies wanting to write maintainable code where even a newly joined employee can read and understand the code without needing much help. I think this is one of the biggest reason that is driving Go adoption. If you have worked on large scale projects you know how difficult it is when the code is unreadable and every new team member have to spend so much time trying to understand what a piece of code does. So I was really happy when I saw that Go doesn’t have features that rely heavily on implicit and such. The language features and concepts are easy to grasp and you can start being productive in Go quite soon. The only concepts that might seem bit complex are the concurrency part and even that is simpler compared to other languages.</p>
+<p>I like the fact that Go is a simple language(Going through the entire language features on the <a href="https://tour.golang.org">tour</a> page literally takes 15 minutes unless you do the exercises) and unlike Scala, Rust or even JavaScript Go doesn’t have many ways of doing the same thing which is extremely valuable for people working in teams and companies wanting to write maintainable code where even a newly joined employee can read and understand the code without needing much help. I think this is one of the biggest reasons that is driving Go adoption. If you have worked on large scale projects you know how difficult it is when the code is unreadable and every new team member has to spend so much time trying to understand what a piece of code does. So I was really happy when I saw that Go doesn’t have features that rely heavily on implicit and such. The language features and concepts are easy to grasp and you can start being productive in Go quite soon. The only concepts that might seem bit complex are the concurrency part and even that is simpler compared to other languages.</p>
 
 <h3 id="language-provided-code-style-and-vetting">Language provided code style and vetting</h3>
 
-<p>This is such a time saver. IMO every language should just do this so that you don’t waste time debating code style and setting up lint rules. Go provides opinionated formatting, linting &amp; vet tool as part of the package and the Go compiler even enforces things like unused variable and stuff. Most of the IDE/Editor plugins also use these tools for formatting and linting and hence helps to keep consistent code style across Go projects which again adds to readability and maintenance.</p>
+<p>This is such a time saver. IMO every language should just do this so that you don’t waste time debating code style and setting up lint rules. Go provides opinionated formatting, linting &amp; vet tool as part of the package and the Go compiler even enforces things like unused variables and stuff. Most of the IDE/Editor plugins also use these tools for formatting and linting and hence helps to keep consistent code style across Go projects which again adds to readability and maintenance.</p>
 
 <h3 id="goroutines--channels">Goroutines &amp; Channels</h3>
 
-<p>This is one of the biggest strength of Go. The native support for concurrency and parallelism. This makes Go an ideal candidate for applications that require heavy concurrent and/or parallel processing, networking and so on. Goroutines makes it so easy to start lightweight threads and channels provide a way to communicate between these threads acting like a message bus.</p>
+<p>This is one of the biggest strengths of Go. The native support for concurrency and parallelism. This makes Go an ideal candidate for applications that require heavy concurrent and/or parallel processing, networking and so on. Goroutines makes it so easy to start lightweight threads and channels provide a way to communicate between these threads acting like a message bus.</p>
 
 <div class="language-go highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -392,17 +450,17 @@
 <ul>
   <li>Generics: This is currently <a href="https://go.googlesource.com/proposal/+/master/design/go2draft-generics-overview.md">being considered</a> in the next major iteration of Go, but until then this just makes you repeat code unnecessarily. I have lost count of the number of times I had to repeat the same block of code for different types where Generics would have kept it nice and simple. This is also one reason you don’t see libraries like Lodash for Go.</li>
   <li>Standard error handling: This also seems to be <a href="https://go.googlesource.com/proposal/+/master/design/go2draft-error-handling-overview.md">coming</a> in the next major iteration of Go but until it lands I can complain. Anyone writing Go will remember doing <code class="highlighter-rouge">if err != nil</code> uncountable times in your code. Removing those might cut the codebase in size by at least 20%</li>
-  <li>Default values: Would love to see this in Go, this is quite useful. Maybe I’m just spoiled by JS.</li>
+  <li>Default values: I would love to see this in Go, this is quite useful. Maybe I’m just spoiled by JS.</li>
 </ul>
 
 <h3 id="too-much-boilerplatenot-suitable-for-dry">Too much boilerplate(not suitable for DRY)</h3>
 
-<p>Go being too simple means you would have to write a lot of code as the language doesn’t offer constructs like map, reduce, and so on, and add the lack of generic on top means you would end up writing a lot of utility code and a lot of that will be repeated to accommodate different types. Imagine writing a map function in Go, you would have to write one for every combination of Map that can be used. These factors don’t make it easy to do DRY programming in Go.</p>
+<p>Go being too simple means you would have to write a lot of code as the language doesn’t offer constructs like map, reduce, and so on, and add the lack of generic on top means you would end up writing a lot of utility code and a lot of that will be repeated to accommodate different types. Imagine writing a map function in Go, you would have to write one for every combination of maps that can be used. These factors don’t make it easy to do DRY programming in Go.</p>
 
 <h3 id="dependency-management">Dependency management</h3>
 
 <p>The dependency management in the Go ecosystem feels immature and too basic compared to other mainstream languages. Importing packages from Git is nice but it also makes it more fragile. What can go wrong when you are depending on a Git branch on your production application right! There is no way to use relative dependencies(Can’t beat NPM link!).
-These problems are similar to the issues with dependency range in Node package managers. Glide seems to be a popular choice but still is not as mature as solutions in other languages. In the project, I work on we used Gradle along with <a href="https://github.com/gogradle/gogradle">Gogradle</a> and though it works fine the developer experience is not as good as using Gradle/Maven for Java project or using NPM on a NodeJS project.</p>
+These problems are similar to the issues with the dependency range in Node package managers. Glide seems to be a popular choice but still is not as mature as solutions in other languages. In the project, I work on we used Gradle along with <a href="https://github.com/gogradle/gogradle">Gogradle</a> and though it works fine the developer experience is not as good as using Gradle/Maven for Java project or using NPM on a NodeJS project.</p>
 
 <h3 id="source-code-in-gopath">Source code in GOPATH</h3>
 
@@ -679,7 +737,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#react">react (1)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#javascript">javascript (2)</a>
+                    <a class="mt-1 mb-1" href="/tags#javascript">javascript (3)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#webdev">webdev (1)</a>
                 
@@ -689,15 +747,21 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#medium">medium (1)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#development">development (3)</a>
+                    <a class="mt-1 mb-1" href="/tags#development">development (1)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#linux">linux (3)</a>
+                    <a class="mt-1 mb-1" href="/tags#linux,">linux, (1)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#fedora">fedora (2)</a>
+                    <a class="mt-1 mb-1" href="/tags#fedora,">fedora, (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#development,">development, (2)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#gnome">gnome (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#linux">linux (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#fedora">fedora (1)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a>
                 
@@ -715,9 +779,9 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (2)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#vscode">vscode (1)</a>
+                    <a class="mt-1 mb-1" href="/tags#vscode,">vscode, (1)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#ide">ide (1)</a>
+                    <a class="mt-1 mb-1" href="/tags#ide,">ide, (1)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a>
                 
@@ -741,7 +805,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#distributedsystems">distributedsystems (1)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#rust">rust (2)</a>
+                    <a class="mt-1 mb-1" href="/tags#rust">rust (1)</a>
                 
             
             
