@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 22 Nov 2019 14:47:09 +0100</pubDate>
-    <lastBuildDate>Fri, 22 Nov 2019 14:47:09 +0100</lastBuildDate>
+    <pubDate>Tue, 26 Nov 2019 16:40:27 +0100</pubDate>
+    <lastBuildDate>Tue, 26 Nov 2019 16:40:27 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -4665,11 +4665,11 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
         <link>/make-the-most-out-of-vscode/</link>
         <guid isPermaLink="true">/make-the-most-out-of-vscode/</guid>
         
-        <category>vscode,</category>
+        <category>vscode</category>
         
-        <category>development,</category>
+        <category>development</category>
         
-        <category>ide,</category>
+        <category>ide</category>
         
         <category>opensource</category>
         
