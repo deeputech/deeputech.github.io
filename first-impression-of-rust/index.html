@@ -316,7 +316,7 @@
 
 <p>But unlike Go, I actually didn’t build any real-world application in Rust, so my opinions here are purely personal and some might not be accurate as I might have misunderstood something. So do give me the consideration of a Rust newbie. If you find something I said here is inaccurate please do let me know. Also, my impressions might actually change once I start using the language more. If it does, I’ll make sure to update the post.</p>
 
-<p>As I have said in some of my other posts, I consider myself to be more pragmatic than my younger self now. Some of the opinions are also from that pragmatic perspective(or at least I think so). 
+<p>As I have said in some of my other posts, I consider myself to be more pragmatic than my younger self now. Some of the opinions are also from that pragmatic perspective(or at least I think so).
 I have weighed practicality, readability, and simplicity over fancy features, syntax sugars, and complexity. Also, some things which I didn’t like but found not such a big deal are put under nitpicks rather than the dislike section as I thought it was fairer that way.</p>
 
 <p>One thing that sets Rust apart from languages like Go is that Rust is not garbage collected, and I understand that many of the language features/choices where designed with that in mind.</p>
@@ -398,7 +398,7 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 <div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="rouge-code"><pre><span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="s">"hello"</span> <span class="c">// immutable</span>
-<span class="k">let</span> <span class="k">mut</span> <span class="n">bar</span> <span class="o">=</span> <span class="s">"hello"</span> <span class="c">// mutable </span>
+<span class="k">let</span> <span class="k">mut</span> <span class="n">bar</span> <span class="o">=</span> <span class="s">"hello"</span> <span class="c">// mutable</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Variables are by default passed by value, in order to pass a reference we would have to use the <code class="highlighter-rouge">&amp;</code> symbol. Quite similar to Golang.</p>
@@ -421,7 +421,7 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 16
 </pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">let</span> <span class="n">world</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"world"</span><span class="p">);</span>
-    
+
     <span class="nf">hello_ref</span><span class="p">(</span><span class="o">&amp;</span><span class="n">world</span><span class="p">);</span> <span class="c">// pass by reference. Keeps ownership</span>
     <span class="c">// prints: Hello world</span>
     <span class="nf">hello_val</span><span class="p">(</span><span class="n">world</span><span class="p">);</span> <span class="c">// pass by value and hence transfer ownership</span>
@@ -458,7 +458,7 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 17
 </pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">let</span> <span class="k">mut</span> <span class="n">world</span> <span class="o">=</span> <span class="nn">String</span><span class="p">::</span><span class="nf">from</span><span class="p">(</span><span class="s">"world"</span><span class="p">);</span>
-    
+
     <span class="nf">hello_ref</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span> <span class="n">world</span><span class="p">);</span> <span class="c">// pass by mutable reference. Keeps ownership</span>
     <span class="c">// prints: Hello world!</span>
     <span class="nf">hello_val</span><span class="p">(</span><span class="n">world</span><span class="p">);</span> <span class="c">// pass by value and hence transfer ownership</span>
@@ -589,9 +589,9 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 
 <span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="s">"hello.txt"</span><span class="p">)</span><span class="nf">.expect</span><span class="p">(</span><span class="s">"Failed to open hello.txt"</span><span class="p">);</span>
-    
+
     <span class="c">// or</span>
-    
+
     <span class="k">let</span> <span class="n">f</span> <span class="o">=</span> <span class="k">match</span> <span class="nn">File</span><span class="p">::</span><span class="nf">open</span><span class="p">(</span><span class="s">"hello.txt"</span><span class="p">)</span> <span class="p">{</span>
         <span class="nf">Ok</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="n">file</span><span class="p">,</span>
         <span class="nf">Err</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="k">=&gt;</span> <span class="p">{</span>
@@ -792,6 +792,7 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
     <span class="nd">println!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">foo</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
+
 <ul>
   <li>Kind of beats being immutable by default(I understand the reasoning of being able to perform transformations on an immutable variable, especially when passing references to a function and getting it back)</li>
   <li>IMO lets people practice bad practices unintentionally, I would have rather marked the variable mutable as I consider the above mutation as well.</li>
@@ -1090,6 +1091,8 @@ https://search.google.com/structured-data/testing-tool/u/0/
 <script id="dsq-count-scr" src="//deepu-tech.disqus.com/count.js"></script>
 
 
-<script src="https://assets.digitalclimatestrike.net/widget.js" async></script>
+
+
+<!-- <script src="https://assets.digitalclimatestrike.net/widget.js" async></script> -->
 </body>
 </html>
