@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 05 Dec 2019 13:03:25 +0100</pubDate>
-    <lastBuildDate>Thu, 05 Dec 2019 13:03:25 +0100</lastBuildDate>
+    <pubDate>Thu, 05 Dec 2019 17:43:31 +0100</pubDate>
+    <lastBuildDate>Thu, 05 Dec 2019 17:43:31 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -758,6 +758,10 @@
 &lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Cover image photo created using images from &lt;a href=&quot;https://norfolkjs.org/&quot;&gt;norfolkjs&lt;/a&gt; (designed by &lt;a href=&quot;https://github.com/cosmicmeow&quot;&gt;Lookmai Rattana&lt;/a&gt;) and &lt;a href=&quot;https://juststickers.in/product/ninja-go-lang-gopher-sticker/&quot;&gt;juststickers&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 04 Dec 2019 00:00:00 +0100</pubDate>
         <link>/golang-for-javascript-developers-part-1/</link>
