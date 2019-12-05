@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 04 Dec 2019 16:52:02 +0100</pubDate>
-    <lastBuildDate>Wed, 04 Dec 2019 16:52:02 +0100</lastBuildDate>
+    <pubDate>Thu, 05 Dec 2019 09:32:21 +0100</pubDate>
+    <lastBuildDate>Thu, 05 Dec 2019 09:32:21 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -17,11 +17,13 @@
 
 &lt;p&gt;If you are a JavaScript developer thinking about learning another programming language, then Golang is a great choice. It is simple, has a lot of momentum, very performant and has some similarities to JavaScript.&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;Edit&lt;/strong&gt;: Someone asked me in the comments that why should a JS developer choose Go among all the available options. In my &lt;a href=&quot;https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66&quot;&gt;opinion&lt;/a&gt;, JS is not a perfect language and hence learning few other languages will greatly benefit a JS developer to use JS more pragmatically and would help to cement her/his knowledge of fundamental programming concepts better. There are of course many options out there like Rust, Go, Haskel, Kotlin and so on, but I think Go is a great place to start as its one of the simplest among all the available options and has wide adoption. My second choice would be Kotlin or &lt;a href=&quot;https://dev.to/deepu105/my-first-impressions-of-rust-1a8o&quot;&gt;Rust&lt;/a&gt;.&lt;/p&gt;
+
 &lt;p&gt;This post is not a comparison of the languages or is stating that they are very similar. Its a guide for JavaScript developers to grasp Golang quickly. There are many aspects of Go that are entirely different from JavaScript we will touch upon that as well.&lt;/p&gt;
 
 &lt;h1 id=&quot;things-that-are-more-similar&quot;&gt;Things that are more similar&lt;/h1&gt;
 
-&lt;p&gt;There are many things in Go which are quite similar to concepts in JavaScript. Most are not exactly the same but similar. let us get them out of our way first. In the first part of this series, we will see how they are similar and note any key differences as well.&lt;/p&gt;
+&lt;p&gt;There are many things in Go which are quite similar to concepts in JavaScript. Most are not the same but similar. let us get them out of our way first. In the first part of this series, we will see how they are similar and note any key differences as well.&lt;/p&gt;
 
 &lt;h2 id=&quot;functions&quot;&gt;Functions&lt;/h2&gt;
 
@@ -348,7 +350,7 @@
 &lt;h3 id=&quot;differences&quot;&gt;Differences&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;JavaScript Functions have two forms; regular functions, and arrow functions whereas in Go there is normal functions and interface functions. Normal Go functions do not have a &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; and hence are more similar to arrow functions whereas interface functions has something similar to a &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; and hence closer to normal functions in JavaScript. Go doesn’t have the concept of a global &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;JavaScript Functions have two forms; regular functions, and arrow functions whereas in Go there is normal functions and interface functions. Normal Go functions do not have a &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; and hence are more similar to arrow functions whereas interface functions have something similar to a &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt; and hence closer to normal functions in JavaScript. Go doesn’t have the concept of a global &lt;code class=&quot;highlighter-rouge&quot;&gt;this&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;JavaScript&lt;/strong&gt;&lt;/p&gt;
@@ -681,10 +683,10 @@
 
 &lt;ul&gt;
   &lt;li&gt;There is no ternary operator in Go.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;if/else&lt;/code&gt; can have an init assignment in Go.&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;switch&lt;/code&gt; statement syntax is similar but Go defaults to break and JS defaults to fall through. In Go, you can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;fallthrough&lt;/code&gt; keyword for that functionality while in JS, we have the &lt;code class=&quot;highlighter-rouge&quot;&gt;break&lt;/code&gt; keyword.&lt;/li&gt;
   &lt;li&gt;JS has many more ways of iterations, like &lt;code class=&quot;highlighter-rouge&quot;&gt;while&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;for in&lt;/code&gt; &amp;amp; &lt;code class=&quot;highlighter-rouge&quot;&gt;for of&lt;/code&gt; loops and so on which are not available in Go though most of them can be achieved using the &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; syntax.&lt;/li&gt;
   &lt;li&gt;There is no labeled break in Go.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;if/else&lt;/code&gt; can have an init assignment in Go. In the below code the assignment for &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; has scope only within the &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;else&lt;/code&gt; blocks and not outside of it. This is not possible in JS.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;strong&gt;Go&lt;/strong&gt;&lt;/p&gt;
@@ -700,8 +702,6 @@
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This is not possible in JS&lt;/p&gt;
 
 &lt;h2 id=&quot;memory-management&quot;&gt;Memory management&lt;/h2&gt;
 
@@ -725,7 +725,7 @@
 
 &lt;ul&gt;
   &lt;li&gt;Commenting is same in both, with &lt;code class=&quot;highlighter-rouge&quot;&gt;//&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;/* */&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Both JS and Go supports importing other modules, though the behavior is not exactly the same&lt;/li&gt;
+  &lt;li&gt;Both JS and Go supports importing other modules, though the behavior is not the same&lt;/li&gt;
   &lt;li&gt;SetTimeout is similar in both. &lt;code class=&quot;highlighter-rouge&quot;&gt;setTimeout(somefunction, 3*1000)&lt;/code&gt; vs &lt;code class=&quot;highlighter-rouge&quot;&gt;time.AfterFunc(3*time.Second, somefunction)&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;Both have a spread operator &lt;code class=&quot;highlighter-rouge&quot;&gt;console.log(...array)&lt;/code&gt; vs &lt;code class=&quot;highlighter-rouge&quot;&gt;fmt.Println(array...)&lt;/code&gt;. Go spread works only on interface arrays/slices though.&lt;/li&gt;
   &lt;li&gt;Both have rest operator for method arguments &lt;code class=&quot;highlighter-rouge&quot;&gt;...nums&lt;/code&gt; vs &lt;code class=&quot;highlighter-rouge&quot;&gt;nums ...int&lt;/code&gt;.&lt;/li&gt;
@@ -733,7 +733,7 @@
 
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
 
-&lt;p&gt;In this part, we saw concepts that are similar in both languages. In the next part of the series, we will see things that are more different between JS and Go. There are more things that are different in the next part than this, but please also note that some differences are quite subtle so it would be easy to digest for a JavaScript developer.&lt;/p&gt;
+&lt;p&gt;In this part, we saw concepts that are similar in both languages. In the next part of the series, we will see things that are more different between JS and Go. There are more things in the next part, that are different, than this, but please also note that some differences are quite subtle so it would be easy to digest for a JavaScript developer.&lt;/p&gt;
 
 &lt;p&gt;In the next chapter we will see:&lt;/p&gt;
 
