@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 05 Dec 2019 09:32:21 +0100</pubDate>
-    <lastBuildDate>Thu, 05 Dec 2019 09:32:21 +0100</lastBuildDate>
+    <pubDate>Thu, 05 Dec 2019 13:03:25 +0100</pubDate>
+    <lastBuildDate>Thu, 05 Dec 2019 13:03:25 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -511,7 +511,7 @@
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; loops are very similar in both.&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;while&lt;/code&gt; loops are very similar, though Go uses the same &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; keyword.&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt; is also similar in functionality but the syntax is quite different.&lt;/li&gt;
-  &lt;li&gt;You can break/continue from a loop.&lt;/li&gt;
+  &lt;li&gt;You can break/continue from a loop. You can use labels to do so as well.&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;if/else&lt;/code&gt; syntax is quite similar, Go version is a bit more powerful&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -685,7 +685,6 @@
   &lt;li&gt;There is no ternary operator in Go.&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;switch&lt;/code&gt; statement syntax is similar but Go defaults to break and JS defaults to fall through. In Go, you can use the &lt;code class=&quot;highlighter-rouge&quot;&gt;fallthrough&lt;/code&gt; keyword for that functionality while in JS, we have the &lt;code class=&quot;highlighter-rouge&quot;&gt;break&lt;/code&gt; keyword.&lt;/li&gt;
   &lt;li&gt;JS has many more ways of iterations, like &lt;code class=&quot;highlighter-rouge&quot;&gt;while&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;forEach&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;for in&lt;/code&gt; &amp;amp; &lt;code class=&quot;highlighter-rouge&quot;&gt;for of&lt;/code&gt; loops and so on which are not available in Go though most of them can be achieved using the &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; syntax.&lt;/li&gt;
-  &lt;li&gt;There is no labeled break in Go.&lt;/li&gt;
   &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;if/else&lt;/code&gt; can have an init assignment in Go. In the below code the assignment for &lt;code class=&quot;highlighter-rouge&quot;&gt;val&lt;/code&gt; has scope only within the &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;else&lt;/code&gt; blocks and not outside of it. This is not possible in JS.&lt;/li&gt;
 &lt;/ul&gt;
 
