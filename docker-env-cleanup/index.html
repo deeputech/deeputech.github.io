@@ -294,7 +294,14 @@
 
 <p><code class="highlighter-rouge">docker images -q -f dangling=true</code> returns the image names that are not related to any tagged images and <code class="highlighter-rouge">docker image rm</code> removes them. Run <code class="highlighter-rouge">docker image rm --help</code> and <code class="highlighter-rouge">docker images --help</code> to see what the flags mean.</p>
 
-<h1 id="an-easy-bash-command">An easy Bash command</h1>
+<h1 id="clean-up-everything">Clean up everything</h1>
+
+<p><strong>Update:</strong> Seems like docker provides a native command to clean up everything.</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>docker system prune <span class="nt">--volumes</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>You can run this to achieve the same result as below command and a bit more. Thanks to <a href="https://dev.to/cyberjack">cyberjack</a> for pointing it out. I’ll leave the below for educational purposes.</p>
 
 <p>Now we can add these commands as a handy bash function so that we can do this cleanup with a single command like I always do. It frees up a lot of disk space and helps when I’m having some weird cache issues with docker-compose 😉.</p>
 

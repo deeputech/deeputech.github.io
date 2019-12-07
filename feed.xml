@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 06 Dec 2019 14:43:20 +0100</pubDate>
-    <lastBuildDate>Fri, 06 Dec 2019 14:43:20 +0100</lastBuildDate>
+    <pubDate>Sat, 07 Dec 2019 16:00:48 +0100</pubDate>
+    <lastBuildDate>Sat, 07 Dec 2019 16:00:48 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -57,7 +57,14 @@
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;docker images -q -f dangling=true&lt;/code&gt; returns the image names that are not related to any tagged images and &lt;code class=&quot;highlighter-rouge&quot;&gt;docker image rm&lt;/code&gt; removes them. Run &lt;code class=&quot;highlighter-rouge&quot;&gt;docker image rm --help&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;docker images --help&lt;/code&gt; to see what the flags mean.&lt;/p&gt;
 
-&lt;h1 id=&quot;an-easy-bash-command&quot;&gt;An easy Bash command&lt;/h1&gt;
+&lt;h1 id=&quot;clean-up-everything&quot;&gt;Clean up everything&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Update:&lt;/strong&gt; Seems like docker provides a native command to clean up everything.&lt;/p&gt;
+
+&lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;docker system prune &lt;span class=&quot;nt&quot;&gt;--volumes&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;You can run this to achieve the same result as below command and a bit more. Thanks to &lt;a href=&quot;https://dev.to/cyberjack&quot;&gt;cyberjack&lt;/a&gt; for pointing it out. I’ll leave the below for educational purposes.&lt;/p&gt;
 
 &lt;p&gt;Now we can add these commands as a handy bash function so that we can do this cleanup with a single command like I always do. It frees up a lot of disk space and helps when I’m having some weird cache issues with docker-compose 😉.&lt;/p&gt;
 
