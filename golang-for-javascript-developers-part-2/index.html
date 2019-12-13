@@ -214,7 +214,7 @@
                                 <time class="post-date" datetime="2019-12-12">12 Dec 2019</time>
                                 
                             </small> |
-                            <small>19 mins read</small>
+                            <small>20 mins read</small>
                         </span>
                     </div>
                 </div>
@@ -449,6 +449,7 @@
   <li>Variables assignments cannot use short-circuit expressions in Go.</li>
   <li><code class="highlighter-rouge">var</code> has a shorthand syntax with <code class="highlighter-rouge">:=</code> inside Go functions.</li>
   <li>Go strictly doesn’t let you have unused variables, any unused variable must be named as <code class="highlighter-rouge">_</code>, which is a reserved character.</li>
+  <li>JS does not have <code class="highlighter-rouge">private/public</code> access modifiers(There is a proposal to add it), In Go, however, you can modify that using the naming convention. Starting a filed, variable name with uppercase will make it public and lowercase will make it private.</li>
   <li><code class="highlighter-rouge">const</code> in Go is not the same as in JavaScript. Only primitives like character, string, boolean, or numeric values can be assigned to constants in Go.</li>
   <li>Arrays in Go are different from JS as they are fixed length. JS arrays are dynamic and hence are more similar to Go slices which are slices of an array with dynamic length.</li>
 </ul>
@@ -617,7 +618,15 @@
 
 <p>The only similarity in terms of error handling between Go and JS is that errors are also just value types. In both languages, you can pass errors as values.</p>
 
-<p>Apart from the above error handling are quite different in both. In JavaScript, we have a <code class="highlighter-rouge">try/catch</code> mechanism to catch errors from synchronous functions and asynchronous functions using <code class="highlighter-rouge">async/await</code> or we can also handle errors by passing them to callback functions or using promises for asynchronous functions. In Go there is no <code class="highlighter-rouge">try/catch</code> mechanism, the only way to handle the error is by returning it as a value from a function or by halting execution with a <code class="highlighter-rouge">panic</code>. This makes error handling quite verbose in Go and you will often see the famous <code class="highlighter-rouge">if err != nil</code> statement in Go.</p>
+<p>Apart from the above error handling are quite different in both.
+In JavaScript, we can either;</p>
+
+<ul>
+  <li>use a <code class="highlighter-rouge">try/catch</code> mechanism to catch errors from synchronous functions and asynchronous functions that use <code class="highlighter-rouge">async/await</code></li>
+  <li>handle errors by passing them to callback functions or using promises for asynchronous functions.</li>
+</ul>
+
+<p>In Go there is no <code class="highlighter-rouge">try/catch</code> mechanism, the only way to handle the error is by returning it as a value from a function or by halting execution with a <code class="highlighter-rouge">panic</code> function or using the <code class="highlighter-rouge">recover</code> function in a <code class="highlighter-rouge">defer</code> block to <a href="https://blog.golang.org/defer-panic-and-recover">rescue the execution</a>. This makes error handling quite verbose in Go and you will often see the famous <code class="highlighter-rouge">if err != nil</code> statement in Go.</p>
 
 <p><strong>JavaScript</strong></p>
 
@@ -706,6 +715,21 @@
 13
 14
 15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
 </pre></td><td class="rouge-code"><pre><span class="k">var</span> <span class="n">errorCausingFunction</span> <span class="o">=</span> <span class="k">func</span><span class="p">()</span> <span class="kt">error</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">fmt</span><span class="o">.</span><span class="n">Errorf</span><span class="p">(</span><span class="s">"Oops"</span><span class="p">)</span>
 <span class="p">}</span>
@@ -721,6 +745,21 @@
 <span class="c">// prints</span>
 <span class="c">// Error: Oops</span>
 <span class="c">// Done</span>
+
+<span class="c">// or</span>
+<span class="n">err</span> <span class="o">:=</span> <span class="n">errorCausingFunction</span><span class="p">()</span>
+
+<span class="k">defer</span> <span class="k">func</span><span class="p">()</span> <span class="p">{</span> <span class="c">// Closest thing to finally behaviour, but executes only at end of the enclosing function</span>
+    <span class="k">if</span> <span class="n">err</span> <span class="o">:=</span> <span class="nb">recover</span><span class="p">();</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Recovered from err"</span><span class="p">,</span> <span class="n">err</span><span class="p">)</span> <span class="c">// closest thing to catch behaviour</span>
+    <span class="p">}</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">"Done"</span><span class="p">)</span>
+<span class="p">}()</span>
+<span class="k">if</span> <span class="n">err</span> <span class="o">!=</span> <span class="no">nil</span> <span class="p">{</span>
+    <span class="nb">panic</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">.</span><span class="n">Println</span><span class="p">(</span><span class="s">":)"</span><span class="p">)</span>
+<span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="composition-instead-of-inheritance">Composition instead of inheritance</h2>
