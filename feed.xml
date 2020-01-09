@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 08 Jan 2020 20:39:01 +0100</pubDate>
-    <lastBuildDate>Wed, 08 Jan 2020 20:39:01 +0100</lastBuildDate>
+    <pubDate>Thu, 09 Jan 2020 11:26:07 +0100</pubDate>
+    <lastBuildDate>Thu, 09 Jan 2020 11:26:07 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -51,7 +51,7 @@
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/7KpvEn1.gif&quot; alt=&quot;stack in JavaScript&quot; /&gt;
-Stack used in JavaScript, objects are stored in Heap and referenced when needed.&lt;/p&gt;
+Stack used in JavaScript, objects are stored in Heap and referenced when needed. &lt;a href=&quot;https://youtu.be/95_CAUC9nvE&quot;&gt;Here &lt;/a&gt; is a video of the same.&lt;/p&gt;
 
 &lt;h3 id=&quot;heap&quot;&gt;Heap&lt;/h3&gt;
 
