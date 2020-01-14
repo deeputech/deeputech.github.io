@@ -214,7 +214,7 @@
                                 <time class="post-date" datetime="2020-01-08">08 Jan 2020</time>
                                 
                             </small> |
-                            <small>8 mins read</small>
+                            <small>9 mins read</small>
                         </span>
                     </div>
                 </div>
@@ -336,17 +336,17 @@
 
 <h3 id="stack">Stack</h3>
 
-<p>The stack is used for <strong>static memory allocation</strong> and as the name suggests it is a last in first out(<strong>LIFO</strong>) stack(Think of it as a stack of plates).</p>
+<p>The stack is used for <strong>static memory allocation</strong> and as the name suggests it is a last in first out(<strong>LIFO</strong>) stack (Think of it as a stack of boxes).</p>
 
 <ul>
-  <li>Due to this nature, storing and retrieving data from the stack is <strong>very fast</strong> as there is no lookup required, you just store on top and retrieve it from the top.</li>
-  <li>But this means the data that is stored on the stack has to be <strong>finite and static</strong>(The size is known at compile-time).</li>
-  <li>This is where the execution of the functions is stored as <strong>stack frames</strong>. For example, every time a function declares a new variable, it is “pushed” onto the stack. Then every time a function exits, all of the variables pushed onto the stack by that function, are cleared. These can be determined at compile time due to the static nature of the data stored here.</li>
+  <li>Due to this nature, the process of storing and retrieving data from the stack is <strong>very fast</strong> as there is no lookup required, you just store and retrieve data from the topmost block on it.</li>
+  <li>But this means any data that is stored on the stack has to be <strong>finite and static</strong>(The size of the data is known at compile-time).</li>
+  <li>This is where the execution data of the functions is stored as <strong>stack frames</strong>. Each frame is a block of space where the data required for that function is stored. For example, every time a function declares a new variable, it is “pushed” onto the topmost block in the stack. Then every time a function exits, the topmost block is cleared, thus all of the variables pushed onto the stack by that function, are cleared. These can be determined at compile time due to the static nature of the data stored here.</li>
   <li><strong>Multi-threaded applications</strong> can have a <strong>stack per thread</strong>.</li>
-  <li>Memory management of the stack is <strong>simple and straightforward</strong> and is done by the CPU.</li>
-  <li>Typical data that are stored on stack are <strong>local variables</strong>(value types or primitives, primitive constants) and <strong>function calls</strong>.</li>
+  <li>Memory management of the stack is <strong>simple and straightforward</strong> and is done by the OS.</li>
+  <li>Typical data that are stored on stack are <strong>local variables</strong>(value types or primitives, primitive constants), <strong>pointers</strong> and <strong>function frames</strong>.</li>
   <li>This is where you would encounter <strong>stack overflow errors</strong> as the size of the stack is limited compared to the Heap.</li>
-  <li>There is a <strong>limit on the size</strong> of value that can be stored on the Stack.</li>
+  <li>There is a <strong>limit on the size</strong> of value that can be stored on the Stack for most languages.</li>
 </ul>
 
 <p><img src="https://i.imgur.com/7KpvEn1.gif" alt="stack in JavaScript" />
@@ -354,16 +354,16 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 
 <h3 id="heap">Heap</h3>
 
-<p>Heap is used for <strong>dynamic memory allocation</strong> and unlike stack, the program needs to look up the data in heap using <strong>pointers</strong>(Think of it as a big multi-level library).</p>
+<p>Heap is used for <strong>dynamic memory allocation</strong> and unlike stack, the program needs to look up the data in heap using <strong>pointers</strong> (Think of it as a big multi-level library).</p>
 
 <ul>
-  <li>It is <strong>slower</strong> than stack but can store more data than the stack.</li>
+  <li>It is <strong>slower</strong> than stack as the process of looking up data is more involved but it can store more data than the stack.</li>
   <li>This means data with <strong>dynamic size</strong> can be stored here.</li>
   <li>Heap is <strong>shared</strong> among threads of an application.</li>
   <li>Due to its dynamic nature heap is <strong>trickier to manage</strong> and this is where most of the memory management issues arise from and this is where the automatic memory management solutions from the language kick in.</li>
   <li>Typical data that are stored on the heap are <strong>global variables</strong>, <strong>reference types</strong> like objects, strings, maps, and other complex data structures.</li>
-  <li>This is where you would encounter <strong>out of memory errors</strong> if your application tries to use more memory than the allocated heap.</li>
-  <li>Generally, there is <strong>no limit</strong> on the size of value that can be stored on the heap. Of course, there is the upper limit of how much memory is allocated to the application.</li>
+  <li>This is where you would encounter <strong>out of memory errors</strong> if your application tries to use more memory than the allocated heap(Though there are many other factors at play here like GC, compacting).</li>
+  <li>Generally, there is <strong>no limit</strong> on the size of the value that can be stored on the heap. Of course, there is the upper limit of how much memory is allocated to the application.</li>
 </ul>
 
 <h2 id="why-is-it-important">Why is it important?</h2>
@@ -416,6 +416,7 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
   <li>Part 5: Memory management in Rust</li>
   <li>Part 6: Memory management in Python</li>
   <li>Part 7: Memory management in C++</li>
+  <li>Part 8: Memory management in C#</li>
 </ul>
 
 <h1 id="references">References</h1>

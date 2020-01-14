@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 09 Jan 2020 11:26:07 +0100</pubDate>
-    <lastBuildDate>Thu, 09 Jan 2020 11:26:07 +0100</lastBuildDate>
+    <pubDate>Wed, 15 Jan 2020 00:51:08 +0100</pubDate>
+    <lastBuildDate>Wed, 15 Jan 2020 00:51:08 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -37,17 +37,17 @@
 
 &lt;h3 id=&quot;stack&quot;&gt;Stack&lt;/h3&gt;
 
-&lt;p&gt;The stack is used for &lt;strong&gt;static memory allocation&lt;/strong&gt; and as the name suggests it is a last in first out(&lt;strong&gt;LIFO&lt;/strong&gt;) stack(Think of it as a stack of plates).&lt;/p&gt;
+&lt;p&gt;The stack is used for &lt;strong&gt;static memory allocation&lt;/strong&gt; and as the name suggests it is a last in first out(&lt;strong&gt;LIFO&lt;/strong&gt;) stack (Think of it as a stack of boxes).&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Due to this nature, storing and retrieving data from the stack is &lt;strong&gt;very fast&lt;/strong&gt; as there is no lookup required, you just store on top and retrieve it from the top.&lt;/li&gt;
-  &lt;li&gt;But this means the data that is stored on the stack has to be &lt;strong&gt;finite and static&lt;/strong&gt;(The size is known at compile-time).&lt;/li&gt;
-  &lt;li&gt;This is where the execution of the functions is stored as &lt;strong&gt;stack frames&lt;/strong&gt;. For example, every time a function declares a new variable, it is “pushed” onto the stack. Then every time a function exits, all of the variables pushed onto the stack by that function, are cleared. These can be determined at compile time due to the static nature of the data stored here.&lt;/li&gt;
+  &lt;li&gt;Due to this nature, the process of storing and retrieving data from the stack is &lt;strong&gt;very fast&lt;/strong&gt; as there is no lookup required, you just store and retrieve data from the topmost block on it.&lt;/li&gt;
+  &lt;li&gt;But this means any data that is stored on the stack has to be &lt;strong&gt;finite and static&lt;/strong&gt;(The size of the data is known at compile-time).&lt;/li&gt;
+  &lt;li&gt;This is where the execution data of the functions is stored as &lt;strong&gt;stack frames&lt;/strong&gt;. Each frame is a block of space where the data required for that function is stored. For example, every time a function declares a new variable, it is “pushed” onto the topmost block in the stack. Then every time a function exits, the topmost block is cleared, thus all of the variables pushed onto the stack by that function, are cleared. These can be determined at compile time due to the static nature of the data stored here.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Multi-threaded applications&lt;/strong&gt; can have a &lt;strong&gt;stack per thread&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;Memory management of the stack is &lt;strong&gt;simple and straightforward&lt;/strong&gt; and is done by the CPU.&lt;/li&gt;
-  &lt;li&gt;Typical data that are stored on stack are &lt;strong&gt;local variables&lt;/strong&gt;(value types or primitives, primitive constants) and &lt;strong&gt;function calls&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Memory management of the stack is &lt;strong&gt;simple and straightforward&lt;/strong&gt; and is done by the OS.&lt;/li&gt;
+  &lt;li&gt;Typical data that are stored on stack are &lt;strong&gt;local variables&lt;/strong&gt;(value types or primitives, primitive constants), &lt;strong&gt;pointers&lt;/strong&gt; and &lt;strong&gt;function frames&lt;/strong&gt;.&lt;/li&gt;
   &lt;li&gt;This is where you would encounter &lt;strong&gt;stack overflow errors&lt;/strong&gt; as the size of the stack is limited compared to the Heap.&lt;/li&gt;
-  &lt;li&gt;There is a &lt;strong&gt;limit on the size&lt;/strong&gt; of value that can be stored on the Stack.&lt;/li&gt;
+  &lt;li&gt;There is a &lt;strong&gt;limit on the size&lt;/strong&gt; of value that can be stored on the Stack for most languages.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/7KpvEn1.gif&quot; alt=&quot;stack in JavaScript&quot; /&gt;
@@ -55,16 +55,16 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 
 &lt;h3 id=&quot;heap&quot;&gt;Heap&lt;/h3&gt;
 
-&lt;p&gt;Heap is used for &lt;strong&gt;dynamic memory allocation&lt;/strong&gt; and unlike stack, the program needs to look up the data in heap using &lt;strong&gt;pointers&lt;/strong&gt;(Think of it as a big multi-level library).&lt;/p&gt;
+&lt;p&gt;Heap is used for &lt;strong&gt;dynamic memory allocation&lt;/strong&gt; and unlike stack, the program needs to look up the data in heap using &lt;strong&gt;pointers&lt;/strong&gt; (Think of it as a big multi-level library).&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;It is &lt;strong&gt;slower&lt;/strong&gt; than stack but can store more data than the stack.&lt;/li&gt;
+  &lt;li&gt;It is &lt;strong&gt;slower&lt;/strong&gt; than stack as the process of looking up data is more involved but it can store more data than the stack.&lt;/li&gt;
   &lt;li&gt;This means data with &lt;strong&gt;dynamic size&lt;/strong&gt; can be stored here.&lt;/li&gt;
   &lt;li&gt;Heap is &lt;strong&gt;shared&lt;/strong&gt; among threads of an application.&lt;/li&gt;
   &lt;li&gt;Due to its dynamic nature heap is &lt;strong&gt;trickier to manage&lt;/strong&gt; and this is where most of the memory management issues arise from and this is where the automatic memory management solutions from the language kick in.&lt;/li&gt;
   &lt;li&gt;Typical data that are stored on the heap are &lt;strong&gt;global variables&lt;/strong&gt;, &lt;strong&gt;reference types&lt;/strong&gt; like objects, strings, maps, and other complex data structures.&lt;/li&gt;
-  &lt;li&gt;This is where you would encounter &lt;strong&gt;out of memory errors&lt;/strong&gt; if your application tries to use more memory than the allocated heap.&lt;/li&gt;
-  &lt;li&gt;Generally, there is &lt;strong&gt;no limit&lt;/strong&gt; on the size of value that can be stored on the heap. Of course, there is the upper limit of how much memory is allocated to the application.&lt;/li&gt;
+  &lt;li&gt;This is where you would encounter &lt;strong&gt;out of memory errors&lt;/strong&gt; if your application tries to use more memory than the allocated heap(Though there are many other factors at play here like GC, compacting).&lt;/li&gt;
+  &lt;li&gt;Generally, there is &lt;strong&gt;no limit&lt;/strong&gt; on the size of the value that can be stored on the heap. Of course, there is the upper limit of how much memory is allocated to the application.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;why-is-it-important&quot;&gt;Why is it important?&lt;/h2&gt;
@@ -117,6 +117,7 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
   &lt;li&gt;Part 5: Memory management in Rust&lt;/li&gt;
   &lt;li&gt;Part 6: Memory management in Python&lt;/li&gt;
   &lt;li&gt;Part 7: Memory management in C++&lt;/li&gt;
+  &lt;li&gt;Part 8: Memory management in C#&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
