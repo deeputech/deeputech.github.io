@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 15 Jan 2020 00:51:08 +0100</pubDate>
-    <lastBuildDate>Wed, 15 Jan 2020 00:51:08 +0100</lastBuildDate>
+    <pubDate>Sun, 19 Jan 2020 17:31:20 +0100</pubDate>
+    <lastBuildDate>Sun, 19 Jan 2020 17:31:20 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -42,7 +42,7 @@
 &lt;ul&gt;
   &lt;li&gt;Due to this nature, the process of storing and retrieving data from the stack is &lt;strong&gt;very fast&lt;/strong&gt; as there is no lookup required, you just store and retrieve data from the topmost block on it.&lt;/li&gt;
   &lt;li&gt;But this means any data that is stored on the stack has to be &lt;strong&gt;finite and static&lt;/strong&gt;(The size of the data is known at compile-time).&lt;/li&gt;
-  &lt;li&gt;This is where the execution data of the functions is stored as &lt;strong&gt;stack frames&lt;/strong&gt;. Each frame is a block of space where the data required for that function is stored. For example, every time a function declares a new variable, it is “pushed” onto the topmost block in the stack. Then every time a function exits, the topmost block is cleared, thus all of the variables pushed onto the stack by that function, are cleared. These can be determined at compile time due to the static nature of the data stored here.&lt;/li&gt;
+  &lt;li&gt;This is where the execution data of the functions are stored as &lt;strong&gt;stack frames&lt;/strong&gt;(So, this is the actual execution stack). Each frame is a block of space where the data required for that function is stored. For example, every time a function declares a new variable, it is “pushed” onto the topmost block in the stack. Then every time a function exits, the topmost block is cleared, thus all of the variables pushed onto the stack by that function, are cleared. These can be determined at compile time due to the static nature of the data stored here.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Multi-threaded applications&lt;/strong&gt; can have a &lt;strong&gt;stack per thread&lt;/strong&gt;.&lt;/li&gt;
   &lt;li&gt;Memory management of the stack is &lt;strong&gt;simple and straightforward&lt;/strong&gt; and is done by the OS.&lt;/li&gt;
   &lt;li&gt;Typical data that are stored on stack are &lt;strong&gt;local variables&lt;/strong&gt;(value types or primitives, primitive constants), &lt;strong&gt;pointers&lt;/strong&gt; and &lt;strong&gt;function frames&lt;/strong&gt;.&lt;/li&gt;
