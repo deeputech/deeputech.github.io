@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 19 Jan 2020 17:40:43 +0100</pubDate>
-    <lastBuildDate>Sun, 19 Jan 2020 17:40:43 +0100</lastBuildDate>
+    <pubDate>Sun, 19 Jan 2020 17:57:50 +0100</pubDate>
+    <lastBuildDate>Sun, 19 Jan 2020 17:57:50 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -3716,6 +3716,12 @@ So here are some reasons not to choose microservices and maybe stick to monolith
 
 &lt;p&gt;So in conclusion, don’t choose an architecture pattern because it works for someone else, choose a pattern that is appropriate for your use case, scale and requirements. 
 Not everyone needs to handle millions of concurrent users or stream terabytes of data.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you liked this article you might like my &lt;a href=&quot;https://deepu.tech/books&quot;&gt;book&lt;/a&gt; as well. You can get it from &lt;a href=&quot;https://www.packtpub.com/web-development/full-stack-development-with-jhipster-second-edition&quot;&gt;Packt&lt;/a&gt; and &lt;a href=&quot;https://smile.amazon.com/Full-Stack-Development-JHipster-applications-microservices-ebook/dp/B083XLGV98&quot;&gt;Amazon&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/SSnzOvR.png&quot; alt=&quot;book cover&quot; /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
