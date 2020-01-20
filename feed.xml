@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 19 Jan 2020 18:05:14 +0100</pubDate>
-    <lastBuildDate>Sun, 19 Jan 2020 18:05:14 +0100</lastBuildDate>
+    <pubDate>Mon, 20 Jan 2020 18:19:24 +0100</pubDate>
+    <lastBuildDate>Mon, 20 Jan 2020 18:19:24 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -99,6 +99,8 @@
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@arianismmm?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Arian Darvishi&lt;/a&gt; on Unsplash&lt;/p&gt;
+
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/life-of-a-full-stack-developer-2og5&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 19 Jan 2020 00:00:00 +0100</pubDate>
         <link>/life-of-a-full-stack-developer/</link>
@@ -229,14 +231,14 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;http://homepages.inf.ed.ac.uk/stg/teaching/apl/handouts/memory.pdf&lt;/li&gt;
-  &lt;li&gt;https://javarevisited.blogspot.com/2013/01/difference-between-stack-and-heap-java.html?m=1&lt;/li&gt;
-  &lt;li&gt;http://net-informations.com/faq/net/stack-heap.htm&lt;/li&gt;
-  &lt;li&gt;https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html&lt;/li&gt;
-  &lt;li&gt;https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81&lt;/li&gt;
-  &lt;li&gt;https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)&lt;/li&gt;
-  &lt;li&gt;https://en.wikipedia.org/wiki/Automatic_Reference_Counting&lt;/li&gt;
-  &lt;li&gt;https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://homepages.inf.ed.ac.uk/stg/teaching/apl/handouts/memory.pdf&quot;&gt;http://homepages.inf.ed.ac.uk/stg/teaching/apl/handouts/memory.pdf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://javarevisited.blogspot.com/2013/01/difference-between-stack-and-heap-java.html?m=1&quot;&gt;https://javarevisited.blogspot.com/2013/01/difference-between-stack-and-heap-java.html?m=1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://net-informations.com/faq/net/stack-heap.htm&quot;&gt;http://net-informations.com/faq/net/stack-heap.htm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html&quot;&gt;https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81&quot;&gt;https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)&quot;&gt;https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Automatic_Reference_Counting&quot;&gt;https://en.wikipedia.org/wiki/Automatic_Reference_Counting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec&quot;&gt;https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -249,6 +251,7 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 Stack visualization: Created based on &lt;a href=&quot;http://pythontutor.com/javascript.html#mode=display&quot;&gt;pythontutor&lt;/a&gt;.
 Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-2018-is-here/&quot;&gt;Link Clark, The Rust team&lt;/a&gt; under &lt;a href=&quot;https://creativecommons.org/licenses/by-sa/3.0/&quot;&gt;Creative Commons Attribution Share-Alike License v3.0&lt;/a&gt;.&lt;/p&gt;
 
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 08 Jan 2020 00:00:00 +0100</pubDate>
         <link>/memory-management-in-programming/</link>
@@ -312,7 +315,7 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 
 &lt;p&gt;Golang is a simple language by design and has become hugely popular thanks to the marketing from google and early adoption by popular tools like Docker and Kubernetes. Here is my detailed review of the language.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://dev.to/deepu105/my-reflections-on-golang-38jk &quot;&gt;https://dev.to/deepu105/my-reflections-on-golang-38jk &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/ &quot;&gt;https://deepu.tech/reflection-on-golang/ &lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;why-1&quot;&gt;Why&lt;/h3&gt;
 
@@ -346,7 +349,7 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 
 &lt;p&gt;You like it or not JavaScript is here to stay as long as the internet is around. So if you are not already a fan why not embrace it in the form of TypeScript instead of hating it.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66 &quot;&gt;https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66 &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/ &quot;&gt;https://deepu.tech/reflections-on-javascript/ &lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;why-2&quot;&gt;Why&lt;/h3&gt;
 
@@ -413,7 +416,7 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 
 &lt;p&gt;Rust is the most loved language according to the Stack Overflow developer survey last few years, not only this, the language is gaining momentum and is one of the fastest-growing languages. Here is my detailed review of Rust.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://dev.to/deepu105/my-first-impressions-of-rust-1a8o &quot;&gt;https://dev.to/deepu105/my-first-impressions-of-rust-1a8o &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://deepu.tech/first-impression-of-rust/ &quot;&gt;https://deepu.tech/first-impression-of-rust/ &lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;why-4&quot;&gt;Why&lt;/h3&gt;
 
@@ -509,6 +512,8 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Based on official logos.&lt;/p&gt;
+
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/7-languages-to-learn-in-2020-with-resources-to-get-started-1ieo&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 01 Jan 2020 00:00:00 +0100</pubDate>
         <link>/languages-to-learn-in-2020/</link>
@@ -517,6 +522,278 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
         <category>languages</category>
         
         <category>career</category>
+        
+        <category>programming</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>3 tips for clean &amp; efficient code</title>
+        <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;One of the most important aspect of software engineering is code quality and one of the most important criteria should be readability and maintainability of your code, especially when working in teams where others have to read and understand your code. The best code in my opinion is that doesn’t need any explanation or even documentation and that even a complete beginner can read and understand.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;It is easy to write complex and cryptic piece of code. It is much harder to write simple and readable code.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It is easy to get carried away and write long and complex functions and code that shows off how smart you are and how you can write something in the smartest way, especially when you area beginner and you are trying impress your peers. But the smartest way might not be the most readable and maintainable way. It doesn’t take a lot of skill to do that IMO, but writing simple and clean code that is easy to read and maintain takes skill. Its not a skill that you can acquire overnight, its something you develop over the years.&lt;/p&gt;
+
+&lt;p&gt;Below are some tips to make your code more efficient, readable, easy to navigate and more maintainable. This is not an exhaustive list, its just some of them that could help.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-fail-fast-and-early&quot;&gt;1. Fail fast and early&lt;/h2&gt;
+
+&lt;p&gt;When writing any logic try to do the failure assertions as early as possible and fail fast. It makes programs feel faster as you wouldn’t execute a lot of stuff first just to fail at the end for something that you could have checked to begin with. This approach also makes your code easier to understand as it makes intent much clearer.&lt;/p&gt;
+
+&lt;p&gt;Consider the below function, let us use JavaScript on NodeJS for simplicity. Note that i’m using the syncrnous methods from the NodeJS FileSystem API for simplicity.&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;processFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;existsSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// check if file exists&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readFileSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;utf8&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// read the file content&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Content found&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// do stuff&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;No content found on file!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;File not found!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We are fetching the given file and doing some processing on it, if the file is not found or if the content is empty we throw an error. There is nothing wrong with this method but if you have a lot of steps in processing the reader has to go through all that first to see the error handling hence the intent is not that clear, also the &lt;a href=&quot;https://en.wikipedia.org/wiki/Cyclomatic_complexity&quot;&gt;cyclomatic complexity&lt;/a&gt; of the function is higher due to multiple if/else. Consider the below version of the same function&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;processFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;existsSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// check if file does not exist&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;File not found!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readFileSync&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;utf8&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// read the file content&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;No content found on file!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Content found&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// do stuff&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This does the same logic but is less complex and more readable. It has less cyclomatic complexity and the intent is clear&lt;/p&gt;
+
+&lt;h2 id=&quot;2-return-early&quot;&gt;2. Return early&lt;/h2&gt;
+
+&lt;p&gt;Similar to failing early it is also much nicer to return early, i.e use the language’s ability to flow code based on returns to reduce the complexity of code and improve readability and intent. Consider the below logic added to our function&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;processFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Content found&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// check if the file content is base64 encoded: Lib used https://github.com/miguelmota/is-base64&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isBase64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;trim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Decoding content&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// check if the base64 content is image and return a placeholder&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isBase64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;trim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;allowMime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Image content&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// decode to string&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;base64&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decoded&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ascii&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decoded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The logic checks if the content is base64 encoded, and if not decodes it. Again the function works fine but consider the below version as well&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;processFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Content found&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// check if the base64 content is image and return a placeholder&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isBase64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;allowMime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Image content&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// check if the file content is not base64 encoded: Lib used https://github.com/miguelmota/is-base64&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isBase64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;trim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Decoding content&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// decode to string&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;base64&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decoded&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ascii&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decoded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Isn’t this much simpler and easier to reason with. So try to return early and keep the code flow simple.&lt;/p&gt;
+
+&lt;h2 id=&quot;3-write-small-focused-functions&quot;&gt;3. Write small focused functions&lt;/h2&gt;
+
+&lt;p&gt;Finally do not write huge functions, even if you are doing imperative style of programming try to break it down into small functions as much as possible. The above example is not a huge function, but still you could break it logically into two as below&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decodeBase64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// check if the base64 content is image and return a placeholder&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isBase64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;allowMime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Image content&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// check if the file content is not base64 encoded: Lib used https://github.com/miguelmota/is-base64&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isBase64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;trim&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Decoding content&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// decode to string&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;base64&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decoded&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;ascii&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decoded&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;processFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;filePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Content found&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;decodeBase64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fileContent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Having smaller focused functions helps with following&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Unit testing becomes easier.&lt;/li&gt;
+  &lt;li&gt;Functions become reuseable and composable.&lt;/li&gt;
+  &lt;li&gt;Easier to focus and read, without having to build a mental model of the entire logic&lt;/li&gt;
+  &lt;li&gt;Easier to change something in a small function than in a huge one, as you will have less cases to worry about.&lt;/li&gt;
+  &lt;li&gt;Easier to debug and easier to spot bugs.&lt;/li&gt;
+  &lt;li&gt;reduces side effects as the function does something very focused.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;bonus-write-pure-functions&quot;&gt;Bonus: Write pure functions&lt;/h2&gt;
+
+&lt;p&gt;This is not a functional programming thing, though it was made popular by FP. In general mutations are always tricky and could cause unwanted bugs. When we try to avoid side effects(includes external date mutations) by keeping small functions pure we also reduce the surface area for such bugs. So keep your pure functions separate from impure functions and try to write as much as pure functions. Do side-effects and external data/state mutations from within a unction only if its unavoidable. You can follow this regardless of programming paradigm you are following.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@cebbbinghaus?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Christopher Robin Ebbinghaus&lt;/a&gt; on Unsplash&lt;/p&gt;
+
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/3-tips-for-clean-efficient-code-1ea8&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 16 Dec 2019 00:00:00 +0100</pubDate>
+        <link>/three-tips-for-clean-code/</link>
+        <guid isPermaLink="true">/three-tips-for-clean-code/</guid>
+        
+        <category>beginners</category>
+        
+        <category>codenewbie</category>
+        
+        <category>codequality</category>
         
         <category>programming</category>
         
@@ -533,7 +810,7 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 
 &lt;p&gt;This post is not a comparison of the languages or is stating that they are very similar. Its a guide for JavaScript developers to grasp Golang quickly. There are many aspects of Go that are entirely different from JavaScript. We will touch upon that as well.&lt;/p&gt;
 
-&lt;p&gt;In the previous &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je&quot;&gt;part&lt;/a&gt; of this series, we learned about things that are more similar between JS and Go. We touched upon:&lt;/p&gt;
+&lt;p&gt;In the previous &lt;a href=&quot;https://deepu.tech/golang-for-javascript-developers-part-1/&quot;&gt;part&lt;/a&gt; of this series, we learned about things that are more similar between JS and Go. We touched upon:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Functions&lt;/li&gt;
@@ -1245,13 +1522,13 @@ In JavaScript, we can either;&lt;/p&gt;
 
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
 
-&lt;p&gt;Someone asked me in the comments of the previous &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je&quot;&gt;part&lt;/a&gt; in the series that why should a JS developer choose Go among all the available options. In my &lt;a href=&quot;https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66&quot;&gt;opinion&lt;/a&gt;, JS is not a perfect language and hence learning few other languages will greatly benefit a JS developer to use JS more pragmatically and would help to cement her/his knowledge of fundamental programming concepts better. There are of course many options out there like Rust, Go, Haskel, Kotlin and so on, but I think Go is a great place to start as its one of the simplest among all the available options and has wide adoption. My second choice would be Kotlin or &lt;a href=&quot;https://dev.to/deepu105/my-first-impressions-of-rust-1a8o&quot;&gt;Rust&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Someone asked me in the comments of the previous &lt;a href=&quot;https://deepu.tech/golang-for-javascript-developers-part-1/&quot;&gt;part&lt;/a&gt; in the series that why should a JS developer choose Go among all the available options. In my &lt;a href=&quot;https://deepu.tech/reflections-on-javascript/&quot;&gt;opinion&lt;/a&gt;, JS is not a perfect language and hence learning few other languages will greatly benefit a JS developer to use JS more pragmatically and would help to cement her/his knowledge of fundamental programming concepts better. There are of course many options out there like Rust, Go, Haskel, Kotlin and so on, but I think Go is a great place to start as its one of the simplest among all the available options and has wide adoption. My second choice would be Kotlin or &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;Rust&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;http://www.pazams.com/Go-for-Javascript-Developers/&lt;/li&gt;
-  &lt;li&gt;https://github.com/miguelmota/golang-for-nodejs-developers&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.pazams.com/Go-for-Javascript-Developers/&quot;&gt;http://www.pazams.com/Go-for-Javascript-Developers/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/miguelmota/golang-for-nodejs-developers&quot;&gt;https://github.com/miguelmota/golang-for-nodejs-developers&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -1263,6 +1540,8 @@ In JavaScript, we can either;&lt;/p&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Cover image photo created using images from &lt;a href=&quot;https://norfolkjs.org/&quot;&gt;norfolkjs&lt;/a&gt; (designed by &lt;a href=&quot;https://github.com/cosmicmeow&quot;&gt;Lookmai Rattana&lt;/a&gt;) and &lt;a href=&quot;https://juststickers.in/product/ninja-go-lang-gopher-sticker/&quot;&gt;juststickers&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-2-p3p&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 12 Dec 2019 00:00:00 +0100</pubDate>
         <link>/golang-for-javascript-developers-part-2/</link>
@@ -1361,6 +1640,8 @@ In JavaScript, we can either;&lt;/p&gt;
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@chuttersnap?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;chuttersnap&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/containers?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/how-to-clean-up-your-docker-environment-4jm4&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 06 Dec 2019 00:00:00 +0100</pubDate>
         <link>/docker-env-cleanup/</link>
@@ -1385,7 +1666,7 @@ In JavaScript, we can either;&lt;/p&gt;
 
 &lt;p&gt;If you are a JavaScript developer thinking about learning another programming language, then Golang is a great choice. It is simple, has a lot of momentum, very performant and has some similarities to JavaScript.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Edit&lt;/strong&gt;: Someone asked me in the comments that why should a JS developer choose Go among all the available options. In my &lt;a href=&quot;https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66&quot;&gt;opinion&lt;/a&gt;, JS is not a perfect language and hence learning few other languages will greatly benefit a JS developer to use JS more pragmatically and would help to cement her/his knowledge of fundamental programming concepts better. There are of course many options out there like Rust, Go, Haskel, Kotlin and so on, but I think Go is a great place to start as its one of the simplest among all the available options and has wide adoption. My second choice would be Kotlin or &lt;a href=&quot;https://dev.to/deepu105/my-first-impressions-of-rust-1a8o&quot;&gt;Rust&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Edit&lt;/strong&gt;: Someone asked me in the comments that why should a JS developer choose Go among all the available options. In my &lt;a href=&quot;https://deepu.tech/reflections-on-javascript/&quot;&gt;opinion&lt;/a&gt;, JS is not a perfect language and hence learning few other languages will greatly benefit a JS developer to use JS more pragmatically and would help to cement her/his knowledge of fundamental programming concepts better. There are of course many options out there like Rust, Go, Haskel, Kotlin and so on, but I think Go is a great place to start as its one of the simplest among all the available options and has wide adoption. My second choice would be Kotlin or &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;Rust&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;This post is not a comparison of the languages or is stating that they are very similar. Its a guide for JavaScript developers to grasp Golang quickly. There are many aspects of Go that are entirely different from JavaScript we will touch upon that as well.&lt;/p&gt;
 
@@ -2102,7 +2383,7 @@ In JavaScript, we can either;&lt;/p&gt;
 
 &lt;p&gt;In this part, we saw concepts that are similar in both languages. In the next part of the series, we will see things that are more different between JS and Go. There are more things in the next part, that are different, than this, but please also note that some differences are quite subtle so it would be easy to digest for a JavaScript developer.&lt;/p&gt;
 
-&lt;p&gt;In the next chapter we will see:&lt;/p&gt;
+&lt;p&gt;In the &lt;a href=&quot;https://deepu.tech/golang-for-javascript-developers-part-2/&quot;&gt;next chapter&lt;/a&gt; we will see:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Types &amp;amp; Variables&lt;/li&gt;
@@ -2117,8 +2398,8 @@ In JavaScript, we can either;&lt;/p&gt;
 &lt;h1 id=&quot;references&quot;&gt;References:&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;http://www.pazams.com/Go-for-Javascript-Developers/&lt;/li&gt;
-  &lt;li&gt;https://github.com/miguelmota/golang-for-nodejs-developers&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.pazams.com/Go-for-Javascript-Developers/&quot;&gt;http://www.pazams.com/Go-for-Javascript-Developers/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/miguelmota/golang-for-nodejs-developers&quot;&gt;https://github.com/miguelmota/golang-for-nodejs-developers&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -2130,6 +2411,8 @@ In JavaScript, we can either;&lt;/p&gt;
 &lt;hr /&gt;
 
 &lt;p&gt;Cover image photo created using images from &lt;a href=&quot;https://norfolkjs.org/&quot;&gt;norfolkjs&lt;/a&gt; (designed by &lt;a href=&quot;https://github.com/cosmicmeow&quot;&gt;Lookmai Rattana&lt;/a&gt;) and &lt;a href=&quot;https://juststickers.in/product/ninja-go-lang-gopher-sticker/&quot;&gt;juststickers&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 04 Dec 2019 00:00:00 +0100</pubDate>
         <link>/golang-for-javascript-developers-part-1/</link>
@@ -2218,7 +2501,7 @@ In JavaScript, we can either;&lt;/p&gt;
 
 &lt;h2 id=&quot;multiparadigm&quot;&gt;Multiparadigm&lt;/h2&gt;
 
-&lt;p&gt;JavaScript started as an imperative scripting language and later added features to make OOP possible and due to a lot of features it has you can &lt;a href=&quot;https://dev.to/deepu105/easy-functional-programming-techniques-in-typescript-for-everyone-1bl2&quot;&gt;use it as a functional programming language&lt;/a&gt; as well. I like this in a language as you can use the best of all paradigms to get your work done efficiently.&lt;/p&gt;
+&lt;p&gt;JavaScript started as an imperative scripting language and later added features to make OOP possible and due to a lot of features it has you can &lt;a href=&quot;https://deepu.tech/functional-programming-in-typescript/&quot;&gt;use it as a functional programming language&lt;/a&gt; as well. I like this in a language as you can use the best of all paradigms to get your work done efficiently.&lt;/p&gt;
 
 &lt;h2 id=&quot;functions-as-first-class-citizens&quot;&gt;Functions as first-class citizens&lt;/h2&gt;
 
@@ -2372,6 +2655,8 @@ The problem is the ECMAScript standard for JS doesn’t have any reference imple
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Made with &lt;a href=&quot;https://imgflip.com/i/3h3srk&quot;&gt;imgflip&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 21 Nov 2019 00:00:00 +0100</pubDate>
         <link>/reflections-on-javascript/</link>
@@ -3089,6 +3374,8 @@ executing multiply
 &lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/easy-functional-programming-techniques-in-rust-for-everyone-nae&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 14 Nov 2019 00:00:00 +0100</pubDate>
         <link>/functional-programming-in-rust/</link>
@@ -3111,7 +3398,7 @@ executing multiply
 
 &lt;hr /&gt;
 
-&lt;p&gt;So I started learning Rust a while ago and since my post about what &lt;a href=&quot;https://dev.to/deepu105/my-reflections-on-golang-38jk&quot;&gt;I thought of Go&lt;/a&gt; was popular, I decided to write about what my first impressions of Rust were as well.&lt;/p&gt;
+&lt;p&gt;So I started learning Rust a while ago and since my post about what &lt;a href=&quot;https://deepu.tech/reflection-on-golang/&quot;&gt;I thought of Go&lt;/a&gt; was popular, I decided to write about what my first impressions of Rust were as well.&lt;/p&gt;
 
 &lt;p&gt;But unlike Go, I actually didn’t build any real-world application in Rust, so my opinions here are purely personal and some might not be accurate as I might have misunderstood something. So do give me the consideration of a Rust newbie. If you find something I said here is inaccurate please do let me know. Also, my impressions might actually change once I start using the language more. If it does, I’ll make sure to update the post.&lt;/p&gt;
 
@@ -3628,7 +3915,7 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 
 &lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
 
-&lt;p&gt;I like programming languages that focus more on simplicity rather than fancy syntax sugars and complex features. In my post &lt;a href=&quot;https://dev.to/deepu105/my-reflections-on-golang-38jk&quot;&gt;“My reflections on Golang”&lt;/a&gt;, I explain why I consider Golang to be too simple for my taste. Rust, on the other hand, is leaning towards the other side of the spectrum. While it is not as complex as Scala it is not as simple as Go as well. So its somewhere in between, not exactly the sweet spot but almost near that quite close to where JavaScript is maybe.&lt;/p&gt;
+&lt;p&gt;I like programming languages that focus more on simplicity rather than fancy syntax sugars and complex features. In my post &lt;a href=&quot;https://deepu.tech/reflection-on-golang/&quot;&gt;“My reflections on Golang”&lt;/a&gt;, I explain why I consider Golang to be too simple for my taste. Rust, on the other hand, is leaning towards the other side of the spectrum. While it is not as complex as Scala it is not as simple as Go as well. So its somewhere in between, not exactly the sweet spot but almost near that quite close to where JavaScript is maybe.&lt;/p&gt;
 
 &lt;p&gt;So overall I can say that there are more things in Rust for me to like than to dislike which is what I would expect from a nice programming language. Also, bear in mind that I’m not saying Rust should do anything differently or that there are better ways to do things that I complained about. I’m just saying that I don’t like those things but I can live with it given the overall advantages. Also, I fully understand why some of those concepts are the way they are, those are mostly tradeoffs to focus on memory safety and performance.&lt;/p&gt;
 
@@ -3643,6 +3930,8 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Image from &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-2018-is-here/&quot;&gt;Link Clark, The Rust team&lt;/a&gt; under &lt;a href=&quot;https://creativecommons.org/licenses/by-sa/3.0/&quot;&gt;Creative Commons Attribution Share-Alike License v3.0&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/my-first-impressions-of-rust-1a8o&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 07 Nov 2019 00:00:00 +0100</pubDate>
         <link>/first-impression-of-rust/</link>
@@ -3655,207 +3944,6 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
         <category>languages</category>
         
         <category>thepragmaticprogrammer</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Microservices - the good, bad, and the ugly</title>
-        <description>&lt;p&gt;So you are attending this awesome conference where speaker after speaker talks about how awesome microservices are. You hear a speaker from a Tech giant presenting how they scaled up and solved their issues using microservices running on containers or something, and you wonder shouldn’t we do the same as well?&lt;/p&gt;
-
-&lt;p&gt;The reality is that there is no silver bullet in software engineering. Microservices doesn’t magically solve every scaling issues, some times they introduce more problems then they solve.&lt;/p&gt;
-
-&lt;p&gt;Well, this is not a microservice bashing post, as someone who likes microservice architectures(sometimes for their sheer complexity and sometimes for the ingenuity), I think it’s important to know the cost of doing microservice architectures in real-world use cases. I talked briefly about this in my &lt;a href=&quot;https://www.packtpub.com/application-development/full-stack-development-jhipster&quot;&gt;book&lt;/a&gt; as well.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;microservice-architectures&quot;&gt;Microservice architectures&lt;/h1&gt;
-
-&lt;p&gt;In a microservice architecture, you generally split your domain model into individual loosely coupled services that can be deployed and scaled individually.
-Each of the services is in itself a small application with its own architecture and even runtime sometimes.&lt;/p&gt;
-
-&lt;p&gt;The services might offer REST endpoints that can be aggregated by an application acting as a gateway or the services could be communicating with each other using a messaging system. Some services might have  Web GUI some are headless services offering just an API.&lt;/p&gt;
-
-&lt;p&gt;In microservice architectures, each service is responsible for handling its data and ideally do not share database schema with other services. 
-Such architectures make it easy to provide different clients for Mobile and Desktop experience which can be scaled independently based on demand.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://thepracticaldev.s3.amazonaws.com/i/8qgu7ue5togsslflganb.jpg&quot; alt=&quot;Monolith vs Microservice architecture&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;There are different architecture patterns for building microservices. The patterns used also decides the way services communicate and the way they are aggregated.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://microservices.io/patterns/microservices.html&quot;&gt;This&lt;/a&gt; article details some of these patterns quite nicely.&lt;/p&gt;
-
-&lt;p&gt;So let’s break down the benefits and issues of microservice architecture and see when it makes sense to adopt one and when to avoid one.&lt;/p&gt;
-
-&lt;h1 id=&quot;general-benefits-of-microservice-architectures&quot;&gt;General benefits of Microservice architectures&lt;/h1&gt;
-
-&lt;p&gt;In general, Microservices provide(As it depends on how you actually implement it) or at least promise the below benefits, which can be grouped into three major categories&lt;/p&gt;
-
-&lt;h3 id=&quot;loose-coupling&quot;&gt;Loose coupling&lt;/h3&gt;
-
-&lt;p&gt;Microservice components are more loosely coupled than traditional architectures. 
-Such systems employ event-driven or message-driven architectures to achieve communication between loosely coupled components.
-This results in better isolation of components and makes it easy to unit test them and faster to startup.&lt;/p&gt;
-
-&lt;p&gt;Such systems also provide other benefits like, for example, a memory leak in one of the services, are isolated and hence will not bring down the entire application. Hence overall single point of failures are reduced&lt;/p&gt;
-
-&lt;p&gt;Loosely coupled individual components will start up much faster than a big monolith making it possible to parallelize and improve overall start-up for large systems.&lt;/p&gt;
-
-&lt;p&gt;It also makes it easy to refactor existing features as you can gradually refactor things rather than having to refactor an entire system in one go.&lt;/p&gt;
-
-&lt;p&gt;Because of such loose coupling, each service can choose to use a database/datastore that is more appropriate whereas in a monolith you might compromise with a single database type.
-For example, a service dealing with a lot of unstructured data can choose a NoSQL database while a service that is handling transactions or structured data can opt for a SQL database.&lt;/p&gt;
-
-&lt;h3 id=&quot;faster-development--release-cycle&quot;&gt;Faster development &amp;amp; release cycle&lt;/h3&gt;
-
-&lt;p&gt;In a well-implemented microservice architecture, development turnaround is faster and hence you get a better time to market for new features and easier refactoring of existing features.&lt;/p&gt;
-
-&lt;p&gt;A complex problem domain can be easily tackled by splitting it into separately manageable services making it easier to understand and maintain in the long run.&lt;/p&gt;
-
-&lt;p&gt;Technology adoption is easier, components can be independently upgraded in incremental migration making it possible to have a different stack for each component.&lt;/p&gt;
-
-&lt;p&gt;It is also possible to have different microservices in a system use different implementation languages and just communicate using a common messaging format like gRPC or a message queue or pub/sub, 
-thus making it possible to have teams with different language skills hence less dependency on a single language or stack.&lt;/p&gt;
-
-&lt;p&gt;Teams will be less dependent on each other as communication between systems is governed by a public API or contract letting you change internals without having to worry about breaking someone else’s code.&lt;/p&gt;
-
-&lt;p&gt;Best suited for agile teams. Such teams can have better focus as they only need to worry about a single service.&lt;/p&gt;
-
-&lt;h3 id=&quot;fine-grained-scaling&quot;&gt;Fine-grained scaling&lt;/h3&gt;
-
-&lt;p&gt;One of the most important benefits of a microservice architecture is the ability to scale individual components based on load. 
-If implemented properly this will result in ideal load distribution and reduced overall infrastructure cost. 
-Services with more demand can be scaled up while the ones with less demand can be scaled down utilizing infrastructure more efficiently.&lt;/p&gt;
-
-&lt;p&gt;Deploying services independently also makes the application more reliable and makes patching easier as you do not have to upgrade the entire application to fix an issue in a single service.&lt;/p&gt;
-
-&lt;p&gt;More complex and efficient scaling models can be established. Critical services can be scaled more effectively. Infrastructure is used more efficiently.&lt;/p&gt;
-
-&lt;p&gt;Continuous delivery of such complex applications also would be easier than its equivalent monolith as components are smaller and any issue in deployment can be investigated easily and rectified on a per-component basis&lt;/p&gt;
-
-&lt;h1 id=&quot;general-issues-with-microservice-architectures&quot;&gt;General issues with microservice architectures&lt;/h1&gt;
-
-&lt;p&gt;Well with any architectures, there are disadvantages of Microservice architectures as well.&lt;/p&gt;
-
-&lt;h3 id=&quot;complexity&quot;&gt;Complexity&lt;/h3&gt;
-
-&lt;p&gt;Complexity is one of the biggest side effects of this architecture. While microservices can reduce the domain complexity by breaking the problem into smaller services,
-there could be complexities of a distributed system in terms of;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Overall stack as different components might have different technology stacks forcing the team to invest more time in keeping up with them.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Scaling is more efficient but it would require advanced features such as service discovery, DNS routing, and so on.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Communication between components might require a messaging system(Queue, PubSub, Event store).&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Business transactions on a distributed system might involve updating multiple databases making rollbacks more complex and error-prone.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;The entire application is more complex to deploy as there are complexities with containers, orchestration, and virtualization involved.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Requires a complex infrastructure. Most often will require containers (Docker), Orchestration(Kubernetes) and multiple JVM or app containers to run on.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;integration-testing&quot;&gt;Integration testing&lt;/h3&gt;
-
-&lt;p&gt;End-to-end tests and integration tests become harder to perform there are more moving parts in the stack and more complex communication between components.
-The testing infrastructure required also becomes more difficult to set up and maintain.&lt;/p&gt;
-
-&lt;h3 id=&quot;team-size-and-experience&quot;&gt;Team size and experience&lt;/h3&gt;
-
-&lt;p&gt;The technical stack for microservices is more complex and most of the time harder to learn and hence it would demand a more experienced team with more senior-level skillset than that would be required for a similar monolithic application.&lt;/p&gt;
-
-&lt;p&gt;It will also require a bigger team to maintain the application as there are more components and more technologies involved.&lt;/p&gt;
-
-&lt;p&gt;Implementing requirements that span multiple services would require more upfront time to agree on contracts and APIs.&lt;/p&gt;
-
-&lt;p&gt;Team members share varying skill sets based on the component they work on but might not be having a birds-eye view of the entire application making business requirements harder to visualize and cross-cutting issues harder to fix.&lt;/p&gt;
-
-&lt;h3 id=&quot;overhead&quot;&gt;Overhead&lt;/h3&gt;
-&lt;p&gt;Complex microservices will have the additional overhead of running monitoring setup, messaging services, orchestration, service registry and so on.&lt;/p&gt;
-
-&lt;p&gt;Initial development time will be higher due to the complexity making time to market slower.&lt;/p&gt;
-
-&lt;p&gt;The overall cost of the initial infrastructure might be much higher than that of a similar monolith.&lt;/p&gt;
-
-&lt;p&gt;In microservice architectures, there is always code duplication between services which also can be considered overhead.&lt;/p&gt;
-
-&lt;h1 id=&quot;when-you-should-not-be-considering-microservice-architectures&quot;&gt;When you should not be considering Microservice architectures&lt;/h1&gt;
-
-&lt;p&gt;You should not be using microservice architecture unless you absolutely have to, remember not every application has the same scale requirements as Netflix, Google, Amazon or Spotify. 
-Many of the benefits that microservices provide to these kinds of applications are due to their sheer scale which might not be applicable to you. 
-So here are some reasons not to choose microservices and maybe stick to monoliths.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;When your application’s scope is small and you know that it’s not going to grow and turn into something like Facebook. For well defined simple usecases a monolith is always the best fit. Examples are
-    &lt;ul&gt;
-      &lt;li&gt;A CRUD application for an internal use case in a company.&lt;/li&gt;
-      &lt;li&gt;A small application with a very niche user base. Like a shopping site for some specialty items.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;When the time to market is critical for a new application. The initial time to market would be higher for microservices.&lt;/li&gt;
-  &lt;li&gt;When the size of your team is small or the average experience of the team is less. Its best to start with a monolith when you are a small or inexperienced team.&lt;/li&gt;
-  &lt;li&gt;When your infrastructure budget is limited. Though on long-run microservice might help to save money, in the beginning, it is going to cost you more.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Most importantly do not choose microservices because it is the hype or because it is used by a popular company or because it was suggested by a popular person. For most use cases monoliths are still a great solution and even if you start with a monolith you can always split away into microservices if required.&lt;/p&gt;
-
-&lt;h1 id=&quot;when-you-could-consider-microservice-architectures&quot;&gt;When you could consider Microservice architectures&lt;/h1&gt;
-
-&lt;p&gt;In general, Microservices tend to be beneficial if you have one of the below scenarios.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;When your use case domain is complex, you have a large team with experience and splitting it up would make it easier to implement.&lt;/li&gt;
-  &lt;li&gt;When you are expecting to become the next Facebook, Netflix or Twitter in terms of user load. So ideally when you are expecting an exponential user base.&lt;/li&gt;
-  &lt;li&gt;If your application is going to be an API provider for other applications with a large userbase. Like a payment gateway or inventory service that will be used by a social media application&lt;/li&gt;
-  &lt;li&gt;When you have a popular e-commerce application with a large userbase with an uneven load on different services in the application. Its time to split them into microservices.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;So in conclusion, don’t choose an architecture pattern because it works for someone else, choose a pattern that is appropriate for your use case, scale and requirements. 
-Not everyone needs to handle millions of concurrent users or stream terabytes of data.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you liked this article you might like my &lt;a href=&quot;https://deepu.tech/books&quot;&gt;book&lt;/a&gt; as well. You can get it from &lt;a href=&quot;https://www.packtpub.com/web-development/full-stack-development-with-jhipster-second-edition&quot;&gt;Packt&lt;/a&gt; and &lt;a href=&quot;https://smile.amazon.com/Full-Stack-Development-JHipster-applications-microservices-ebook/dp/B083XLGV98&quot;&gt;Amazon&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/SSnzOvR.png&quot; alt=&quot;book cover&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;If you do decide to build microservices checkout JHipster and my below articles don’t forget to give it a star on &lt;a href=&quot;https://github.com/jhipster/generator-jhipster&quot;&gt;Github&lt;/a&gt;.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele&quot;&gt;Create full Microservice stack using JHipster Domain Language under 30 minutes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d&quot;&gt;Deploying JHipster Microservices on Azure Kubernetes Service (AKS)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d&quot;&gt;JHipster microservices with Istio service mesh on Kubernetes&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image photo by &lt;a href=&quot;https://unsplash.com/@sakulich?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Sergei Akulich&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/hFBFC5YmIck&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-</description>
-        <pubDate>Tue, 29 Oct 2019 00:00:00 +0100</pubDate>
-        <link>/microservices-the-good-bad-and-the-ugly/</link>
-        <guid isPermaLink="true">/microservices-the-good-bad-and-the-ugly/</guid>
-        
-        <category>microservices</category>
-        
-        <category>architecture</category>
-        
-        <category>devops</category>
-        
-        <category>distributedsystems</category>
         
         
       </item>

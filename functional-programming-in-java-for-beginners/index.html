@@ -314,6 +314,8 @@
                 
                 
                 
+                
+                
                 </div>
             </div>
             
@@ -339,18 +341,21 @@
 </blockquote>
 
 <p>Hence in functional programming, there are two very important rules</p>
+
 <ul>
   <li><strong>No Data mutations</strong>: It means a data object should not be changed after it is created.</li>
   <li><strong>No implicit state</strong>: Hidden/Implicit state should be avoided. In functional programming state is not eliminated, instead, its made visible and explicit</li>
 </ul>
 
 <p>This means:</p>
+
 <ul>
   <li><strong>No side effects</strong>: A function or operation should not change any state outside of its functional scope. I.e, A function should only return a value to the invoker and should not affect any external state. This means programs are easier to understand.</li>
   <li><strong>Pure functions only</strong>: Functional code is idempotent. A function should return values only based on the arguments passed and should not affect(side-effect) or depend on global state. Such functions always produce the same result for the same arguments.</li>
 </ul>
 
 <p>Apart from these there are functional programming concepts below that can be applied in Java, we will touch upon these further down.</p>
+
 <ul>
   <li><a href="https://en.wikipedia.org/wiki/Higher-order_function">Higher-order-functions</a></li>
   <li><a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">Closures</a></li>
@@ -459,7 +464,7 @@
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">var</span> <span class="n">list</span> <span class="o">=</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Orange"</span><span class="o">,</span> <span class="s">"Apple"</span><span class="o">,</span> <span class="s">"Banana"</span><span class="o">,</span> <span class="s">"Grape"</span><span class="o">);</span>
         <span class="c1">// we are passing the array and a lambda expression as arguments to mapForEach method.</span>
-        <span class="kt">var</span> <span class="n">out</span> <span class="o">=</span> <span class="n">mapForEach</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">it</span> <span class="o">-&gt;</span> <span class="n">it</span><span class="o">.</span><span class="na">length</span><span class="o">());</span> 
+        <span class="kt">var</span> <span class="n">out</span> <span class="o">=</span> <span class="n">mapForEach</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="n">it</span> <span class="o">-&gt;</span> <span class="n">it</span><span class="o">.</span><span class="na">length</span><span class="o">());</span>
         <span class="c1">// This can be further simplified to "mapForEach(list, String::length);", I'm writing the expanded version for readability</span>
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">out</span><span class="o">);</span> <span class="c1">// [6, 5, 6, 5]</span>
     <span class="o">}</span>
@@ -759,6 +764,7 @@
     <span class="o">}</span>
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
+
 <p>Consider using stream API or recursion when writing Java code for readability and immutability, but if performance is critical or if the number of iterations will be huge use standard loops.</p>
 
 <h3 id="lazy-evaluation">Lazy evaluation</h3>
@@ -810,6 +816,7 @@
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>This will produce the below output and we can see that both functions are executed always</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
@@ -932,10 +939,11 @@ executing multiply
 
 <h3 id="data-structures"><a href="https://en.wikipedia.org/wiki/Purely_functional_data_structure">Data structures</a></h3>
 
-<p>When using functional programming techniques it is encouraged to use functional data types such as Stacks, Maps and Queues. 
+<p>When using functional programming techniques it is encouraged to use functional data types such as Stacks, Maps and Queues.
 Hence maps are better than arrays or hash sets in functional programming as data stores.</p>
 
 <hr />
+
 <h2 id="conclusion">Conclusion</h2>
 
 <p>This is just an introduction for those who are trying to apply some functional programming techniques in Java. There are lot more that can be done in Java and Java 8 added a lot of API to make it easy to do functional programming in Java, like the stream API, Optional interface, functional interfaces and so on. As I said earlier functional programming is not a silver bullet but it offers a lot of useful techniques for more understandable, maintainable and testable code. It can co-exist perfectly well with imperative and object-oriented programming styles. In fact, we all should be using the best of everything.</p>
@@ -955,6 +963,8 @@ Hence maps are better than arrays or hash sets in functional programming as data
 <p>If you like this article, please leave a like or a comment.</p>
 
 <p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
+
+<p>Also published on <a href="https://dev.to/deepu105/functional-programming-in-java-a-primer-13nb">Dev.to</a></p>
 
             </div>
 
@@ -1114,7 +1124,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#go">go (4)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#programming">programming (8)</a>
+                    <a class="mt-1 mb-1" href="/tags#programming">programming (9)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#languages">languages (7)</a>
                 
@@ -1130,7 +1140,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#functional">functional (4)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (6)</a>
+                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (7)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#showdev">showdev (2)</a>
                 
@@ -1149,6 +1159,10 @@ https://search.google.com/structured-data/testing-tool/u/0/
                     <a class="mt-1 mb-1" href="/tags#rust">rust (2)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#bash">bash (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#codenewbie">codenewbie (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#codequality">codequality (1)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#career">career (1)</a>
                 

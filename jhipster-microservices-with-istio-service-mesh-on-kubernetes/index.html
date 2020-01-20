@@ -310,6 +310,8 @@
                 
                 
                 
+                
+                
                 </div>
             </div>
             
@@ -388,6 +390,7 @@
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre><span class="nv">$ </span>az group create <span class="nt">--name</span> eCommerceCluster <span class="nt">--location</span> eastus
 </pre></td></tr></tbody></table></code></pre></div></div>
+
 <p>Create the Kubernetes cluster:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
@@ -592,7 +595,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 <h2 id="creating-the-microservice-application-stack">Creating the microservice application stack</h2>
 
-<p>In one of my <a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">previous posts</a>, I showcased how to create a full-stack microservice architecture using <strong>JHipster</strong> and <strong>JDL</strong>. You can read the post <a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">here</a> if you want to learn more details about it. For this exercise, we will use the same application but we will not use the Eureka service discovery option we used earlier. Also, note that the store application is further split into Gateway and Product applications.</p>
+<p>In one of my <a href="https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes">previous posts</a>, I showcased how to create a full-stack microservice architecture using <strong>JHipster</strong> and <strong>JDL</strong>. You can read the post <a href="https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes">here</a> if you want to learn more details about it. For this exercise, we will use the same application but we will not use the Eureka service discovery option we used earlier. Also, note that the store application is further split into Gateway and Product applications.</p>
 
 <h3 id="architecture">Architecture</h3>
 
@@ -604,7 +607,7 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 
 <p>The Ingress gateway from Istio is the only entry point for traffic and it routes traffic to all microservices accordingly. Telemetry is collected from all the containers running in the cluster, including the applications, databases, and Istio components.</p>
 
-<p>Compared to the architecture of the original application <a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">here</a>, you can clearly see that we replaced the JHipster registry and Netflix OSS components with Istio. The ELK monitoring stack is replaced with Prometheus, Grafana and Jaeger configured by Istio. Here is the original architecture diagram without Istio for a quick visual comparison.</p>
+<p>Compared to the architecture of the original application <a href="https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes">here</a>, you can clearly see that we replaced the JHipster registry and Netflix OSS components with Istio. The ELK monitoring stack is replaced with Prometheus, Grafana and Jaeger configured by Istio. Here is the original architecture diagram without Istio for a quick visual comparison.</p>
 
 <p><img src="https://cdn-images-1.medium.com/max/2162/1*H-6_dz1-aYXQ-fzWEuJcRw.png" alt="Microservice architecture with Netflix OSS" /><em>Microservice architecture with Netflix OSS</em></p>
 
@@ -761,11 +764,13 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 <p>Istio provides building blocks to build distributed microservices in a more Kubernetes-native way and takes the complexity and responsibility of maintaining those blocks away from you. This means you do not have to worry about maintaining the code or deployments for service discovery, tracing and so on.</p>
 
 <p>Istio documentation says</p>
+
 <blockquote>
   <p>Deploying a microservice-based application in an Istio service mesh allows one to externally control service monitoring and tracing, request (version) routing, resiliency testing, security and policy enforcement, etc., in a consistent way across the services, for the application as a whole.</p>
 </blockquote>
 
 <p>Werner Vogels (CTO of AWS) quoted at AWS Re:Invent</p>
+
 <blockquote>
   <p>“In the future, all the code you ever write will be business logic.”</p>
 </blockquote>
@@ -828,6 +833,8 @@ istio-ingressgateway   LoadBalancer   10.27.249.83   35.195.81.130
 <p>If you like this article, please leave likes/comments. I hope to write more about Istio soon.</p>
 
 <p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
+
+<p>Also published on <a href="https://dev.to/deepu105/how-to-set-up-java-microservices-with-istio-service-mesh-on-kubernetes-5bkn">Dev.to</a></p>
 
             </div>
 
@@ -987,7 +994,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#go">go (4)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#programming">programming (8)</a>
+                    <a class="mt-1 mb-1" href="/tags#programming">programming (9)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#languages">languages (7)</a>
                 
@@ -1003,7 +1010,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#functional">functional (4)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (6)</a>
+                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (7)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#showdev">showdev (2)</a>
                 
@@ -1022,6 +1029,10 @@ https://search.google.com/structured-data/testing-tool/u/0/
                     <a class="mt-1 mb-1" href="/tags#rust">rust (2)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#bash">bash (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#codenewbie">codenewbie (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#codequality">codequality (1)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#career">career (1)</a>
                 

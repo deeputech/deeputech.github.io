@@ -261,9 +261,9 @@
 <p>In a microservice architecture, you generally split your domain model into individual loosely coupled services that can be deployed and scaled individually.
 Each of the services is in itself a small application with its own architecture and even runtime sometimes.</p>
 
-<p>The services might offer REST endpoints that can be aggregated by an application acting as a gateway or the services could be communicating with each other using a messaging system. Some services might have  Web GUI some are headless services offering just an API.</p>
+<p>The services might offer REST endpoints that can be aggregated by an application acting as a gateway or the services could be communicating with each other using a messaging system. Some services might have Web GUI some are headless services offering just an API.</p>
 
-<p>In microservice architectures, each service is responsible for handling its data and ideally do not share database schema with other services. 
+<p>In microservice architectures, each service is responsible for handling its data and ideally do not share database schema with other services.
 Such architectures make it easy to provide different clients for Mobile and Desktop experience which can be scaled independently based on demand.</p>
 
 <p><img src="https://thepracticaldev.s3.amazonaws.com/i/8qgu7ue5togsslflganb.jpg" alt="Monolith vs Microservice architecture" /></p>
@@ -280,7 +280,7 @@ Such architectures make it easy to provide different clients for Mobile and Desk
 
 <h3 id="loose-coupling">Loose coupling</h3>
 
-<p>Microservice components are more loosely coupled than traditional architectures. 
+<p>Microservice components are more loosely coupled than traditional architectures.
 Such systems employ event-driven or message-driven architectures to achieve communication between loosely coupled components.
 This results in better isolation of components and makes it easy to unit test them and faster to startup.</p>
 
@@ -301,7 +301,7 @@ For example, a service dealing with a lot of unstructured data can choose a NoSQ
 
 <p>Technology adoption is easier, components can be independently upgraded in incremental migration making it possible to have a different stack for each component.</p>
 
-<p>It is also possible to have different microservices in a system use different implementation languages and just communicate using a common messaging format like gRPC or a message queue or pub/sub, 
+<p>It is also possible to have different microservices in a system use different implementation languages and just communicate using a common messaging format like gRPC or a message queue or pub/sub,
 thus making it possible to have teams with different language skills hence less dependency on a single language or stack.</p>
 
 <p>Teams will be less dependent on each other as communication between systems is governed by a public API or contract letting you change internals without having to worry about breaking someone else’s code.</p>
@@ -310,8 +310,8 @@ thus making it possible to have teams with different language skills hence less 
 
 <h3 id="fine-grained-scaling">Fine-grained scaling</h3>
 
-<p>One of the most important benefits of a microservice architecture is the ability to scale individual components based on load. 
-If implemented properly this will result in ideal load distribution and reduced overall infrastructure cost. 
+<p>One of the most important benefits of a microservice architecture is the ability to scale individual components based on load.
+If implemented properly this will result in ideal load distribution and reduced overall infrastructure cost.
 Services with more demand can be scaled up while the ones with less demand can be scaled down utilizing infrastructure more efficiently.</p>
 
 <p>Deploying services independently also makes the application more reliable and makes patching easier as you do not have to upgrade the entire application to fix an issue in a single service.</p>
@@ -330,24 +330,12 @@ Services with more demand can be scaled up while the ones with less demand can b
 there could be complexities of a distributed system in terms of;</p>
 
 <ul>
-  <li>
-    <p>Overall stack as different components might have different technology stacks forcing the team to invest more time in keeping up with them.</p>
-  </li>
-  <li>
-    <p>Scaling is more efficient but it would require advanced features such as service discovery, DNS routing, and so on.</p>
-  </li>
-  <li>
-    <p>Communication between components might require a messaging system(Queue, PubSub, Event store).</p>
-  </li>
-  <li>
-    <p>Business transactions on a distributed system might involve updating multiple databases making rollbacks more complex and error-prone.</p>
-  </li>
-  <li>
-    <p>The entire application is more complex to deploy as there are complexities with containers, orchestration, and virtualization involved.</p>
-  </li>
-  <li>
-    <p>Requires a complex infrastructure. Most often will require containers (Docker), Orchestration(Kubernetes) and multiple JVM or app containers to run on.</p>
-  </li>
+  <li>Overall stack as different components might have different technology stacks forcing the team to invest more time in keeping up with them.</li>
+  <li>Scaling is more efficient but it would require advanced features such as service discovery, DNS routing, and so on.</li>
+  <li>Communication between components might require a messaging system(Queue, PubSub, Event store).</li>
+  <li>Business transactions on a distributed system might involve updating multiple databases making rollbacks more complex and error-prone.</li>
+  <li>The entire application is more complex to deploy as there are complexities with containers, orchestration, and virtualization involved.</li>
+  <li>Requires a complex infrastructure. Most often will require containers (Docker), Orchestration(Kubernetes) and multiple JVM or app containers to run on.</li>
 </ul>
 
 <h3 id="integration-testing">Integration testing</h3>
@@ -366,6 +354,7 @@ The testing infrastructure required also becomes more difficult to set up and ma
 <p>Team members share varying skill sets based on the component they work on but might not be having a birds-eye view of the entire application making business requirements harder to visualize and cross-cutting issues harder to fix.</p>
 
 <h3 id="overhead">Overhead</h3>
+
 <p>Complex microservices will have the additional overhead of running monitoring setup, messaging services, orchestration, service registry and so on.</p>
 
 <p>Initial development time will be higher due to the complexity making time to market slower.</p>
@@ -376,8 +365,8 @@ The testing infrastructure required also becomes more difficult to set up and ma
 
 <h1 id="when-you-should-not-be-considering-microservice-architectures">When you should not be considering Microservice architectures</h1>
 
-<p>You should not be using microservice architecture unless you absolutely have to, remember not every application has the same scale requirements as Netflix, Google, Amazon or Spotify. 
-Many of the benefits that microservices provide to these kinds of applications are due to their sheer scale which might not be applicable to you. 
+<p>You should not be using microservice architecture unless you absolutely have to, remember not every application has the same scale requirements as Netflix, Google, Amazon or Spotify.
+Many of the benefits that microservices provide to these kinds of applications are due to their sheer scale which might not be applicable to you.
 So here are some reasons not to choose microservices and maybe stick to monoliths.</p>
 
 <ul>
@@ -407,7 +396,7 @@ So here are some reasons not to choose microservices and maybe stick to monolith
 
 <hr />
 
-<p>So in conclusion, don’t choose an architecture pattern because it works for someone else, choose a pattern that is appropriate for your use case, scale and requirements. 
+<p>So in conclusion, don’t choose an architecture pattern because it works for someone else, choose a pattern that is appropriate for your use case, scale and requirements.
 Not everyone needs to handle millions of concurrent users or stream terabytes of data.</p>
 
 <hr />
@@ -423,14 +412,16 @@ Not everyone needs to handle millions of concurrent users or stream terabytes of
 <p>If you do decide to build microservices checkout JHipster and my below articles don’t forget to give it a star on <a href="https://github.com/jhipster/generator-jhipster">Github</a>.</p>
 
 <ol>
-  <li><a href="https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele">Create full Microservice stack using JHipster Domain Language under 30 minutes</a></li>
-  <li><a href="https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d">Deploying JHipster Microservices on Azure Kubernetes Service (AKS)</a></li>
-  <li><a href="https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d">JHipster microservices with Istio service mesh on Kubernetes</a></li>
+  <li><a href="https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes">Create full Microservice stack using JHipster Domain Language under 30 minutes</a></li>
+  <li><a href="https://deepu.tech/deploying-jhipster-microservices-on-azure-kubernetes-service-aks">Deploying JHipster Microservices on Azure Kubernetes Service (AKS)</a></li>
+  <li><a href="https://deepu.tech/deploying-jhipster-microservices-on-azure-kubernetes-service-aks">JHipster microservices with Istio service mesh on Kubernetes</a></li>
 </ol>
 
 <p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
 
 <p>Cover image photo by <a href="https://unsplash.com/@sakulich?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sergei Akulich</a> on <a href="https://unsplash.com/photos/hFBFC5YmIck">Unsplash</a></p>
+
+<p>Also published on <a href="https://dev.to/deepu105/microservices-the-good-bad-and-the-ugly-9gp">Dev.to</a></p>
 
             </div>
 
@@ -590,7 +581,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#go">go (4)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#programming">programming (8)</a>
+                    <a class="mt-1 mb-1" href="/tags#programming">programming (9)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#languages">languages (7)</a>
                 
@@ -606,7 +597,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#functional">functional (4)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (6)</a>
+                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (7)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#showdev">showdev (2)</a>
                 
@@ -625,6 +616,10 @@ https://search.google.com/structured-data/testing-tool/u/0/
                     <a class="mt-1 mb-1" href="/tags#rust">rust (2)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#bash">bash (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#codenewbie">codenewbie (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#codequality">codequality (1)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#career">career (1)</a>
                 
