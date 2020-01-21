@@ -32,7 +32,7 @@ async function postContentToDevTo(payload, id) {
                     : ""
             }`
         );
-        throw error;
+        process.exit(1);
     }
 }
 
@@ -41,7 +41,8 @@ const POSTS_DIR = "_posts/";
 const filenames = fs.readdirSync(POSTS_DIR);
 
 if (filenames.length == 0) {
-    throw new Error(`No files found in path ${POSTS_DIR}`);
+    console.error(`No files found in path ${POSTS_DIR}`);
+    process.exit(1);
 }
 
 filenames.forEach(async filename => {
@@ -71,6 +72,7 @@ filenames.forEach(async filename => {
                     .save(POSTS_DIR, null, err => {
                         if (err) {
                             console.error(err);
+                            process.exit(1);
                         } else {
                             console.log(`File ${filename} updated`);
                         }
