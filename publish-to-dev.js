@@ -37,7 +37,10 @@ async function processFiles() {
             try {
                 const parsedContent = editor.read(POSTS_DIR + filename);
                 const frontMatter = parsedContent.matter.data;
-                const body_markdown = parsedContent.matter.orig;
+                const body_markdown =
+                    parsedContent.matter.orig +
+                    `\n*Also published on [my blog](${frontMatter.blog_url ||
+                        frontMatter.canonical_url})*`;
                 if (frontMatter && frontMatter.published) {
                     console.log("===================================");
                     console.log(`Publish ${filename} to Dev.to`);

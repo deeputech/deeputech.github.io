@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 21 Jan 2020 18:36:05 +0100</pubDate>
-    <lastBuildDate>Tue, 21 Jan 2020 18:36:05 +0100</lastBuildDate>
+    <pubDate>Tue, 21 Jan 2020 19:51:32 +0100</pubDate>
+    <lastBuildDate>Tue, 21 Jan 2020 19:51:32 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -100,7 +100,7 @@
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@arianismmm?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Arian Darvishi&lt;/a&gt; on Unsplash&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/life-of-a-full-stack-developer-2og5&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/life-of-a-full-stack-developer-2og5&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 19 Jan 2020 00:00:00 +0100</pubDate>
         <link>/life-of-a-full-stack-developer/</link>
@@ -251,7 +251,7 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 Stack visualization: Created based on &lt;a href=&quot;http://pythontutor.com/javascript.html#mode=display&quot;&gt;pythontutor&lt;/a&gt;.
 Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-2018-is-here/&quot;&gt;Link Clark, The Rust team&lt;/a&gt; under &lt;a href=&quot;https://creativecommons.org/licenses/by-sa/3.0/&quot;&gt;Creative Commons Attribution Share-Alike License v3.0&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 08 Jan 2020 00:00:00 +0100</pubDate>
         <link>/memory-management-in-programming/</link>
@@ -513,7 +513,7 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 
 &lt;p&gt;Cover image credit: Based on official logos.&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/7-languages-to-learn-in-2020-with-resources-to-get-started-1ieo&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/7-languages-to-learn-in-2020-with-resources-to-get-started-1ieo&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 01 Jan 2020 00:00:00 +0100</pubDate>
         <link>/languages-to-learn-in-2020/</link>
@@ -783,7 +783,7 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@cebbbinghaus?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Christopher Robin Ebbinghaus&lt;/a&gt; on Unsplash&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/3-tips-for-clean-efficient-code-1ea8&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/3-tips-for-clean-efficient-code-1ea8&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 16 Dec 2019 00:00:00 +0100</pubDate>
         <link>/three-tips-for-clean-code/</link>
@@ -1541,7 +1541,7 @@ In JavaScript, we can either;&lt;/p&gt;
 
 &lt;p&gt;Cover image photo created using images from &lt;a href=&quot;https://norfolkjs.org/&quot;&gt;norfolkjs&lt;/a&gt; (designed by &lt;a href=&quot;https://github.com/cosmicmeow&quot;&gt;Lookmai Rattana&lt;/a&gt;) and &lt;a href=&quot;https://juststickers.in/product/ninja-go-lang-gopher-sticker/&quot;&gt;juststickers&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-2-p3p&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-2-p3p&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 12 Dec 2019 00:00:00 +0100</pubDate>
         <link>/golang-for-javascript-developers-part-2/</link>
@@ -1641,7 +1641,7 @@ In JavaScript, we can either;&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@chuttersnap?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;chuttersnap&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/containers?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/how-to-clean-up-your-docker-environment-4jm4&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/how-to-clean-up-your-docker-environment-4jm4&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 06 Dec 2019 00:00:00 +0100</pubDate>
         <link>/docker-env-cleanup/</link>
@@ -2412,7 +2412,7 @@ In JavaScript, we can either;&lt;/p&gt;
 
 &lt;p&gt;Cover image photo created using images from &lt;a href=&quot;https://norfolkjs.org/&quot;&gt;norfolkjs&lt;/a&gt; (designed by &lt;a href=&quot;https://github.com/cosmicmeow&quot;&gt;Lookmai Rattana&lt;/a&gt;) and &lt;a href=&quot;https://juststickers.in/product/ninja-go-lang-gopher-sticker/&quot;&gt;juststickers&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 04 Dec 2019 00:00:00 +0100</pubDate>
         <link>/golang-for-javascript-developers-part-1/</link>
@@ -2656,7 +2656,7 @@ The problem is the ECMAScript standard for JS doesn’t have any reference imple
 
 &lt;p&gt;Cover image credit: Made with &lt;a href=&quot;https://imgflip.com/i/3h3srk&quot;&gt;imgflip&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 21 Nov 2019 00:00:00 +0100</pubDate>
         <link>/reflections-on-javascript/</link>
@@ -3375,7 +3375,7 @@ executing multiply
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/easy-functional-programming-techniques-in-rust-for-everyone-nae&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/easy-functional-programming-techniques-in-rust-for-everyone-nae&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 14 Nov 2019 00:00:00 +0100</pubDate>
         <link>/functional-programming-in-rust/</link>
@@ -3931,7 +3931,7 @@ I have weighed practicality, readability, and simplicity over fancy features, sy
 
 &lt;p&gt;Cover image credit: Image from &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-2018-is-here/&quot;&gt;Link Clark, The Rust team&lt;/a&gt; under &lt;a href=&quot;https://creativecommons.org/licenses/by-sa/3.0/&quot;&gt;Creative Commons Attribution Share-Alike License v3.0&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/my-first-impressions-of-rust-1a8o&quot;&gt;Dev.to&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/my-first-impressions-of-rust-1a8o&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 07 Nov 2019 00:00:00 +0100</pubDate>
         <link>/first-impression-of-rust/</link>
