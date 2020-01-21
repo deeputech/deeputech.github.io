@@ -50,18 +50,30 @@ async function processFiles() {
                     };
                     let response;
                     if (frontMatter.devto_url) {
-                        console.log(`Update post ${frontMatter.devto_url}`);
-                        response = await axiosInstance.put(
-                            `${DEV_TO_ARTICLES}/${frontMatter.devto_id}`,
-                            payload
-                        );
+                        const endpoint = `${DEV_TO_ARTICLES}/${frontMatter.devto_id}`;
+                        // check if the post has changed
+                        response = await axiosInstance.get(endpoint);
+                        if (response && response.status === 200) {
+                            if (response.data.body_markdown !== body_markdown) {
+                                // content has changed update
+                                console.log(
+                                    `Updating post ${frontMatter.devto_url}`
+                                );
+                                response = await axiosInstance.put(
+                                    endpoint,
+                                    payload
+                                );
+                            } else {
+                                response = null;
+                            }
+                        }
                     } else {
-                        console.log(`Create post ${frontMatter.titlel}`);
+                        console.log(`Creating post ${frontMatter.titlel}`);
                         response = await axiosInstance.post(
                             DEV_TO_ARTICLES,
                             payload
                         );
-                        if (response) {
+                        if (response && response.status === 200) {
                             // update devto_url & devto_id in the original post
                             parsedContent
                                 .data((data, matter) => {
@@ -79,15 +91,15 @@ async function processFiles() {
                                 });
                         }
                     }
-                    if (response) {
+                    if (response && response.status === 200) {
                         console.log(
                             `Success: ${response.status} ${response.statusText}`
                         );
                         console.log(
                             `Id: ${response.data.id}, URL: ${response.data.url}`
                         );
+                        await sleep(2000); // to avoid hitting rate limit errors
                     }
-                    await sleep(2000);
                 }
             } catch (err) {
                 console.error(
