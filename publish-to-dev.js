@@ -16,18 +16,6 @@ const axiosInstance = axios.create({
     headers: HEADERS
 });
 
-function readFileNames(dirname, onFileName) {
-    fs.readdir(dirname, (err, filenames) => {
-        if (err) {
-            console.error(err)
-            throw err;
-        }
-        filenames.forEach(filename => {
-            onFileName(dirname + filename);
-        });
-    });
-}
-
 async function postContentToDevTo(payload, id) {
     try {
         if (id) {
@@ -50,52 +38,48 @@ async function postContentToDevTo(payload, id) {
 
 const POSTS_DIR = "_posts/";
 
-readFileNames(
-    POSTS_DIR,
-    async filename => {
-        const parsedContent = editor.read(filename);
-        const frontMatter = parsedContent.matter.data;
-        const body_markdown = parsedContent.matter.orig;
-        if (frontMatter && frontMatter.published) {
-            console.log("===================================");
-            console.log(`Publish ${filename} to Dev.to: ${frontMatter.title}`);
-            console.log("===================================");
-            const payload = {
-                article: { body_markdown }
-            };
-            let response;
-            if (frontMatter.devto_url) {
-                response = await postContentToDevTo(
-                    payload,
-                    frontMatter.devto_id
-                );
-            } else {
-                response = await postContentToDevTo(payload);
-                if (response) {
-                    // update devto_url & devto_id in the original post
-                    parsedContent
-                        .data((data, matter) => {
-                            data.devto_id = response.data.id;
-                            data.devto_url = response.data.url;
-                            matter.data = data;
-                        })
-                        .save(POSTS_DIR, null, (err, data) => {
-                            if (err) {
-                                console.error(err);
-                            } else {
-                                console.log(`File ${filename} updated`);
-                            }
-                        });
-                }
-            }
+const filenames = fs.readdirSync(POSTS_DIR);
+
+if (filenames.length == 0) {
+    throw new Error(`No files found in path ${POSTS_DIR}`);
+}
+
+filenames.forEach(async filename => {
+    const parsedContent = editor.read(filename);
+    const frontMatter = parsedContent.matter.data;
+    const body_markdown = parsedContent.matter.orig;
+    if (frontMatter && frontMatter.published) {
+        console.log("===================================");
+        console.log(`Publish ${filename} to Dev.to: ${frontMatter.title}`);
+        console.log("===================================");
+        const payload = {
+            article: { body_markdown }
+        };
+        let response;
+        if (frontMatter.devto_url) {
+            response = await postContentToDevTo(payload, frontMatter.devto_id);
+        } else {
+            response = await postContentToDevTo(payload);
             if (response) {
-                console.log(
-                    `Success: ${response.status} ${response.statusText}`
-                );
-                console.log(
-                    `Id: ${response.data.id}, URL: ${response.data.url}`
-                );
+                // update devto_url & devto_id in the original post
+                parsedContent
+                    .data((data, matter) => {
+                        data.devto_id = response.data.id;
+                        data.devto_url = response.data.url;
+                        matter.data = data;
+                    })
+                    .save(POSTS_DIR, null, err => {
+                        if (err) {
+                            console.error(err);
+                        } else {
+                            console.log(`File ${filename} updated`);
+                        }
+                    });
             }
         }
+        if (response) {
+            console.log(`Success: ${response.status} ${response.statusText}`);
+            console.log(`Id: ${response.data.id}, URL: ${response.data.url}`);
+        }
     }
-);
+});
