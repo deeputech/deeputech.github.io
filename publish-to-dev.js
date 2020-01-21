@@ -16,11 +16,11 @@ const axiosInstance = axios.create({
     headers: HEADERS
 });
 
-function readFileNames(dirname, onFileName, onError) {
+function readFileNames(dirname, onFileName) {
     fs.readdir(dirname, (err, filenames) => {
         if (err) {
-            onError(err);
-            return;
+            console.error(err)
+            throw err;
         }
         filenames.forEach(filename => {
             onFileName(dirname + filename);
@@ -44,7 +44,7 @@ async function postContentToDevTo(payload, id) {
                     : ""
             }`
         );
-        return null;
+        throw error;
     }
 }
 
@@ -97,6 +97,5 @@ readFileNames(
                 );
             }
         }
-    },
-    err => console.error(err)
+    }
 );
