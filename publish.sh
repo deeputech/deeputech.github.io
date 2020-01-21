@@ -9,9 +9,13 @@ if [ -z "$(git status --porcelain)" ]; then
     /bin/rm -rf _site || exit
     /bin/rm -rf $TMP_LOC || exit
 
+    echo ">> Publish to Dev.to and update slugs"
+    npm run publish-to-dev || exit
+
     echo ">> Building site"
     bundle update listen || exit
-    bundle exec jekyll build
+    bundle exec jekyll build || exit
+
 
     echo ">> Move site to temp folder"
     mkdir --parents $TMP_LOC || exit
