@@ -22,6 +22,10 @@ function sleep(ms) {
     });
 }
 
+function getBlogUrl(filename) {
+    return filename.replace(/^[0-9]{4}-[0-9]{2}-[0-9]{2}-/, "");
+}
+
 const POSTS_DIR = "_posts/";
 
 async function processFiles() {
@@ -38,9 +42,7 @@ async function processFiles() {
                 const parsedContent = editor.read(POSTS_DIR + filename);
                 const frontMatter = parsedContent.matter.data;
                 const body_markdown =
-                    parsedContent.matter.orig +
-                    `\n*Also published on [my blog](${frontMatter.blog_url ||
-                        frontMatter.canonical_url})*`;
+                    parsedContent.matter.orig + `\n*Also published on [my blog](https://deepu.tech/${getBlogUrl(filename)}/)*`;
                 if (frontMatter && frontMatter.published) {
                     console.log("===================================");
                     console.log(`Publish ${filename} to Dev.to`);
@@ -56,23 +58,15 @@ async function processFiles() {
                         if (response && response.status === 200) {
                             if (response.data.body_markdown !== body_markdown) {
                                 // content has changed update
-                                console.log(
-                                    `Updating post ${frontMatter.devto_url}`
-                                );
-                                response = await axiosInstance.put(
-                                    endpoint,
-                                    payload
-                                );
+                                console.log(`Updating post ${frontMatter.devto_url}`);
+                                response = await axiosInstance.put(endpoint, payload);
                             } else {
                                 response = null;
                             }
                         }
                     } else {
                         console.log(`Creating post ${frontMatter.titlel}`);
-                        response = await axiosInstance.post(
-                            DEV_TO_ARTICLES,
-                            payload
-                        );
+                        response = await axiosInstance.post(DEV_TO_ARTICLES, payload);
                         if (response && response.status === 200) {
                             // update devto_url & devto_id in the original post
                             parsedContent
@@ -92,23 +86,13 @@ async function processFiles() {
                         }
                     }
                     if (response && response.status === 200) {
-                        console.log(
-                            `Success: ${response.status} ${response.statusText}`
-                        );
-                        console.log(
-                            `Id: ${response.data.id}, URL: ${response.data.url}`
-                        );
+                        console.log(`Success: ${response.status} ${response.statusText}`);
+                        console.log(`Id: ${response.data.id}, URL: ${response.data.url}`);
                         await sleep(2000); // to avoid hitting rate limit errors
                     }
                 }
             } catch (err) {
-                console.error(
-                    `Failed: ${err.message}, details: ${
-                        err.response && err.response.data
-                            ? err.response.data.error
-                            : ""
-                    }`
-                );
+                console.error(`Failed: ${err.message}, details: ${err.response && err.response.data ? err.response.data.error : ""}`);
                 process.exit(1);
             }
         }
