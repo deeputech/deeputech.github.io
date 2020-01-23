@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Jan 2020 21:56:46 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Jan 2020 21:56:46 +0100</lastBuildDate>
+    <pubDate>Thu, 23 Jan 2020 22:13:59 +0100</pubDate>
+    <lastBuildDate>Thu, 23 Jan 2020 22:13:59 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -144,6 +144,8 @@
             &lt;/noscript&gt;
           &lt;/p&gt;
 
+&lt;p&gt;&lt;em&gt;Note: If the slides look cut off at edges, then click on the title of the slide or &lt;a href=&quot;https://speakerdeck.com/deepu105/jvm-memory-usage-stack-vs-heap&quot;&gt;here&lt;/a&gt; to open it directly in SpeakerDeck.&lt;/em&gt;&lt;/p&gt;
+
 &lt;p&gt;As you can see:&lt;/p&gt;
 
 &lt;ul&gt;
@@ -241,6 +243,8 @@
             &lt;/noscript&gt;
           &lt;/p&gt;
 
+&lt;p&gt;&lt;em&gt;Note: If the slides look cut off at edges, then click on the title of the slide or &lt;a href=&quot;https://speakerdeck.com/deepu105/jvm-minor-gc&quot;&gt;here&lt;/a&gt; to open it directly in SpeakerDeck.&lt;/em&gt;&lt;/p&gt;
+
 &lt;ol&gt;
   &lt;li&gt;Let us assume that there are already objects on the Eden space when we start(Blocks 01 to 06 marked as used memory)&lt;/li&gt;
   &lt;li&gt;The application creates a new object(07)&lt;/li&gt;
@@ -305,6 +309,8 @@
 &lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19lecu&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 23 Jan 2020 00:00:00 +0100</pubDate>
         <link>/memory-management-in-jvm/</link>
@@ -531,7 +537,7 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 &lt;p&gt;Stay tuned for upcoming parts of this series:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Part 2: Memory management in JVM(Java, Kotlin, Scala, Groovy)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/memory-management-in-jvm/&quot;&gt;Part 2: Memory management in JVM(Java, Kotlin, Scala, Groovy)&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Part 3: Memory management in V8(JavaScript)&lt;/li&gt;
   &lt;li&gt;Part 4: Memory management in Go&lt;/li&gt;
   &lt;li&gt;Part 5: Memory management in Rust&lt;/li&gt;
@@ -548,7 +554,7 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
   &lt;li&gt;&lt;a href=&quot;http://net-informations.com/faq/net/stack-heap.htm&quot;&gt;http://net-informations.com&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html&quot;&gt;https://gribblelab.org&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81&quot;&gt;https://medium.com/computed-comparisons&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)&quot;&gt;https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)&quot;&gt;https://en.wikipedia.org/wiki/Garbage&lt;em&gt;collection&lt;/em&gt;(computer_science)&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Automatic_Reference_Counting&quot;&gt;https://en.wikipedia.org/wiki/Automatic_Reference_Counting&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec&quot;&gt;https://blog.sessionstack.com/&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;

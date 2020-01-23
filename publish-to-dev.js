@@ -65,10 +65,11 @@ async function processFiles() {
                             }
                         }
                     } else {
-                        console.log(`Creating post ${frontMatter.titlel}`);
+                        console.log(`Creating post ${frontMatter.title}`);
                         response = await axiosInstance.post(DEV_TO_ARTICLES, payload);
                         if (response && response.status === 200) {
                             // update devto_url & devto_id in the original post
+                            console.log(`Update post on disk ${frontMatter.title}`);
                             parsedContent
                                 .data((data, matter) => {
                                     data.devto_id = response.data.id;
@@ -85,8 +86,8 @@ async function processFiles() {
                                 });
                         }
                     }
+                    response && console.log(`Status: ${response.status} ${response.statusText}`);
                     if (response && response.status === 200) {
-                        console.log(`Success: ${response.status} ${response.statusText}`);
                         console.log(`Id: ${response.data.id}, URL: ${response.data.url}`);
                         await sleep(2000); // to avoid hitting rate limit errors
                     }
