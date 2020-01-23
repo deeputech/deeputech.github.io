@@ -43,7 +43,7 @@ async function processFiles() {
                 const frontMatter = parsedContent.matter.data;
                 const body_markdown =
                     parsedContent.matter.orig + `\n*Also published on [my blog](https://deepu.tech/${getBlogUrl(filename)}/)*`;
-                if (frontMatter && frontMatter.published) {
+                if (frontMatter && (frontMatter.published || frontMatter.draft)) {
                     console.log("===================================");
                     console.log(`Publish ${filename} to Dev.to`);
                     console.log("===================================");
