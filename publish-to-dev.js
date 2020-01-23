@@ -44,9 +44,6 @@ async function processFiles() {
                 const body_markdown =
                     parsedContent.matter.orig + `\n*Also published on [my blog](https://deepu.tech/${getBlogUrl(filename)}/)*`;
                 if (frontMatter && (frontMatter.published || frontMatter.draft)) {
-                    console.log("===================================");
-                    console.log(`Publish ${filename} to Dev.to`);
-                    console.log("===================================");
                     const payload = {
                         article: { body_markdown }
                     };
@@ -58,18 +55,28 @@ async function processFiles() {
                         if (response && response.status === 200) {
                             if (response.data.body_markdown !== body_markdown) {
                                 // content has changed update
+                                console.log("===================================");
+                                console.log(`Publish ${filename} to Dev.to`);
                                 console.log(`Updating post ${frontMatter.devto_url}`);
+                                console.log("===================================");
                                 response = await axiosInstance.put(endpoint, payload);
+                                if (response && response.status === 200) {
+                                    console.log(`Id: ${response.data.id}, URL: ${response.data.url}`);
+                                }
                             } else {
                                 response = null;
                             }
                         }
                     } else {
+                        console.log("===================================");
+                        console.log(`Publish ${filename} to Dev.to`);
                         console.log(`Creating post ${frontMatter.title}`);
+                        console.log("===================================");
                         response = await axiosInstance.post(DEV_TO_ARTICLES, payload);
-                        if (response && response.status === 200) {
+                        if (response && response.status === 201) {
+                            console.log(`Id: ${response.data.id}, URL: ${response.data.url}`);
                             // update devto_url & devto_id in the original post
-                            console.log(`Update post on disk ${frontMatter.title}`);
+                            console.log(`Update post on disk: ${frontMatter.title}`);
                             parsedContent
                                 .data((data, matter) => {
                                     data.devto_id = response.data.id;
@@ -86,9 +93,8 @@ async function processFiles() {
                                 });
                         }
                     }
-                    response && console.log(`Status: ${response.status} ${response.statusText}`);
-                    if (response && response.status === 200) {
-                        console.log(`Id: ${response.data.id}, URL: ${response.data.url}`);
+                    if (response) {
+                        console.log(`Status: ${response.status} ${response.statusText}`);
                         await sleep(2000); // to avoid hitting rate limit errors
                     }
                 }

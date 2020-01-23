@@ -11,6 +11,8 @@ if [ -z "$(git status --porcelain)" ]; then
 
     echo ">> Publish to Dev.to and update slugs"
     npm run publish-to-dev || exit
+    git add --all || exit
+    git commit -am "Updated posts with Dev.to slug" || exit
 
     echo ">> Building site"
     bundle update listen || exit
