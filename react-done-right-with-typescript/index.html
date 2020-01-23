@@ -271,12 +271,12 @@
 4
 5
 6
-</pre></td><td class="rouge-code"><pre>    <span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
-      <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
-      <span class="nl">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
-      <span class="nl">address</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
-      <span class="nl">sayHi</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">string</span><span class="p">;</span>
-    <span class="p">}</span>
+</pre></td><td class="rouge-code"><pre><span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+    <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="nl">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="nl">address</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="nl">sayHi</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">keyof T</code> operator gets a union type of all the key names of the type <code class="highlighter-rouge">T</code> and hence <code class="highlighter-rouge">keyof Person</code> will give us <code class="highlighter-rouge">'name' | 'age' | 'address' | sayHi'</code> as result.</p>
@@ -293,12 +293,12 @@
 4
 5
 6
-</pre></td><td class="rouge-code"><pre>    <span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
-      <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
-      <span class="nl">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
-      <span class="nl">address</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
-      <span class="nl">sayHi</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">string</span><span class="p">;</span>
-    <span class="p">}</span>
+</pre></td><td class="rouge-code"><pre><span class="kr">interface</span> <span class="nx">Person</span> <span class="p">{</span>
+    <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="nl">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="nl">address</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="nl">sayHi</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>Now in every project, it is almost always a common requirement to have variations of a certain interface. For example, let’s say we need a read-only version of the person as below.</p>
@@ -309,18 +309,18 @@
 4
 5
 6
-</pre></td><td class="rouge-code"><pre>    <span class="kr">interface</span> <span class="nx">ReadonlyPerson</span> <span class="p">{</span>
-      <span class="nx">readonly</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
-      <span class="nx">readonly</span> <span class="nx">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
-      <span class="nx">readonly</span> <span class="nx">address</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
-      <span class="nx">readonly</span> <span class="nx">sayHi</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">string</span><span class="p">;</span>
-    <span class="p">}</span>
+</pre></td><td class="rouge-code"><pre><span class="kr">interface</span> <span class="nx">ReadonlyPerson</span> <span class="p">{</span>
+    <span class="nx">readonly</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="nx">readonly</span> <span class="nx">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="nx">readonly</span> <span class="nx">address</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="nx">readonly</span> <span class="nx">sayHi</span><span class="p">:</span> <span class="p">(</span><span class="nx">msg</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>In this case, we would have to replicate the Person interface and we have to keep them in sync manually. This is where mapped types will come in handy, so let us use the builtin mapped type, <code class="highlighter-rouge">Readonly</code>, for this.</p>
 
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>    <span class="nx">type</span> <span class="nx">ReadonlyPerson</span>  <span class="o">=</span> <span class="nx">Readonly</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span>
+</pre></td><td class="rouge-code"><pre><span class="nx">type</span> <span class="nx">ReadonlyPerson</span> <span class="o">=</span> <span class="nx">Readonly</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>If you hover over the <code class="highlighter-rouge">ReadonlyPerson</code> type you can see the inferred type as below.</p>
@@ -332,9 +332,9 @@
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre></td><td class="rouge-code"><pre>    <span class="nx">type</span> <span class="nx">Readonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">readonly</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="nx">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
-    <span class="p">}</span>
+</pre></td><td class="rouge-code"><pre><span class="nx">type</span> <span class="nx">Readonly</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">readonly</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="nx">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">];</span>
+<span class="p">};</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>The <code class="highlighter-rouge">in</code> operator from TypeScript does the trick here. It maps all the declarations of the existing type into the new type. The <code class="highlighter-rouge">keyof</code> operator provides the keys from our type for the mapping. Let us build our own mapped type.</p>
@@ -344,9 +344,9 @@
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre></td><td class="rouge-code"><pre>    <span class="nx">type</span> <span class="nx">ReadonlyNullablePerson</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">readonly</span> <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="nx">keyof</span> <span class="nx">Person</span><span class="p">]:</span> <span class="nx">Person</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
-    <span class="p">}</span>
+</pre></td><td class="rouge-code"><pre><span class="nx">type</span> <span class="nx">ReadonlyNullablePerson</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">readonly</span> <span class="p">[</span><span class="nx">P</span> <span class="k">in</span> <span class="nx">keyof</span> <span class="nx">Person</span><span class="p">]:</span> <span class="nx">Person</span><span class="p">[</span><span class="nx">P</span><span class="p">]</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">};</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>And it is inferred as below</p>
@@ -360,11 +360,11 @@
 3
 4
 5
-</pre></td><td class="rouge-code"><pre>    <span class="nx">type</span> <span class="nx">ReadonlyNullable</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">readonly</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="nx">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
-    <span class="p">}</span>
+</pre></td><td class="rouge-code"><pre><span class="nx">type</span> <span class="nx">ReadonlyNullable</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">readonly</span> <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="nx">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="o">|</span> <span class="kc">null</span><span class="p">;</span>
+<span class="p">};</span>
 
-    <span class="nx">type</span> <span class="nx">ReadonlyNullablePerson</span>  <span class="o">=</span> <span class="nx">ReadonlyNullable</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span>
+<span class="nx">type</span> <span class="nx">ReadonlyNullablePerson</span> <span class="o">=</span> <span class="nx">ReadonlyNullable</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>TypeScript includes <code class="highlighter-rouge">Readonly&lt;T&gt;</code>, <code class="highlighter-rouge">Partial&lt;T&gt;</code>, <code class="highlighter-rouge">Pick&lt;T, K extends keyof T&gt;</code> and <code class="highlighter-rouge">Record&lt;K extends string, T&gt;</code> as built-in mapped types. Pick and Record can be used as below, check them in your editor to see what types they produce.</p>
@@ -372,9 +372,9 @@
 <div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre></td><td class="rouge-code"><pre>    <span class="nx">type</span> <span class="nx">PersonMinimal</span> <span class="o">=</span> <span class="nx">Pick</span><span class="o">&lt;</span><span class="nx">Person</span><span class="p">,</span> <span class="dl">'</span><span class="s1">name</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">age</span><span class="dl">'</span><span class="o">&gt;</span>
+</pre></td><td class="rouge-code"><pre><span class="nx">type</span> <span class="nx">PersonMinimal</span> <span class="o">=</span> <span class="nx">Pick</span><span class="o">&lt;</span><span class="nx">Person</span><span class="p">,</span> <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">age</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">;</span>
 
-    <span class="nx">type</span> <span class="nx">RecordedPerson</span> <span class="o">=</span> <span class="nx">Record</span><span class="o">&lt;</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span> <span class="o">|</span> <span class="dl">'</span><span class="s1">address</span><span class="dl">'</span><span class="p">,</span> <span class="nx">string</span><span class="o">&gt;</span>
+<span class="nx">type</span> <span class="nx">RecordedPerson</span> <span class="o">=</span> <span class="nx">Record</span><span class="o">&lt;</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span> <span class="o">|</span> <span class="dl">"</span><span class="s2">address</span><span class="dl">"</span><span class="p">,</span> <span class="nx">string</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>For every other use case, you can build your own mapped types.</p>
@@ -394,13 +394,13 @@
 5
 6
 7
-</pre></td><td class="rouge-code"><pre>    <span class="nx">type</span> <span class="nx">Foo</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="nx">U</span> <span class="p">?</span> <span class="nx">string</span> <span class="p">:</span> <span class="nx">boolean</span>
+</pre></td><td class="rouge-code"><pre><span class="nx">type</span> <span class="nx">Foo</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">U</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">T</span> <span class="kd">extends</span> <span class="nx">U</span> <span class="p">?</span> <span class="nx">string</span> <span class="p">:</span> <span class="nx">boolean</span><span class="p">;</span>
 
-    <span class="kr">interface</span> <span class="nx">Me</span> <span class="p">{}</span>
-    <span class="kr">interface</span> <span class="nx">You</span> <span class="kd">extends</span> <span class="nx">Person</span> <span class="p">{}</span>
+<span class="kr">interface</span> <span class="nx">Me</span> <span class="p">{}</span>
+<span class="kr">interface</span> <span class="nx">You</span> <span class="kd">extends</span> <span class="nx">Person</span> <span class="p">{}</span>
 
-    <span class="nx">type</span> <span class="nx">FooBool</span> <span class="o">=</span> <span class="nx">Foo</span><span class="o">&lt;</span><span class="nx">Me</span><span class="p">,</span> <span class="nx">Person</span><span class="o">&gt;</span> <span class="c1">// will result in boolean</span>
-    <span class="nx">type</span> <span class="nx">FooString</span> <span class="o">=</span> <span class="nx">Foo</span><span class="o">&lt;</span><span class="nx">You</span><span class="p">,</span> <span class="nx">Person</span><span class="o">&gt;</span> <span class="c1">// will result in string</span>
+<span class="nx">type</span> <span class="nx">FooBool</span> <span class="o">=</span> <span class="nx">Foo</span><span class="o">&lt;</span><span class="nx">Me</span><span class="p">,</span> <span class="nx">Person</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// will result in boolean</span>
+<span class="nx">type</span> <span class="nx">FooString</span> <span class="o">=</span> <span class="nx">Foo</span><span class="o">&lt;</span><span class="nx">You</span><span class="p">,</span> <span class="nx">Person</span><span class="o">&gt;</span><span class="p">;</span> <span class="c1">// will result in string</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <p>The type dynamically inferred from <code class="highlighter-rouge">Foo&lt;T, U&gt;</code> will be either <code class="highlighter-rouge">string</code> or <code class="highlighter-rouge">boolean</code> depending on what the first generic is extended from.</p>
@@ -422,15 +422,15 @@
 13
 14
 15
-</pre></td><td class="rouge-code"><pre>    <span class="nx">type</span> <span class="nx">NonFunctionPropNames</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="nx">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="kd">extends</span> <span class="nb">Function</span> <span class="p">?</span> <span class="nx">never</span> <span class="p">:</span> <span class="nx">K</span>
-    <span class="p">}[</span><span class="nx">keyof</span> <span class="nx">T</span><span class="p">];</span>
+</pre></td><td class="rouge-code"><pre><span class="nx">type</span> <span class="nx">NonFunctionPropNames</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nx">K</span> <span class="k">in</span> <span class="nx">keyof</span> <span class="nx">T</span><span class="p">]:</span> <span class="nx">T</span><span class="p">[</span><span class="nx">K</span><span class="p">]</span> <span class="kd">extends</span> <span class="nb">Function</span> <span class="p">?</span> <span class="nx">never</span> <span class="p">:</span> <span class="nx">K</span><span class="p">;</span>
+<span class="p">}[</span><span class="nx">keyof</span> <span class="nx">T</span><span class="p">];</span>
 
-    <span class="nx">type</span> <span class="nx">NonFunctionProps</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">NonFunctionPropNames</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&gt;</span>
+<span class="nx">type</span> <span class="nx">NonFunctionProps</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="o">=</span> <span class="nx">Pick</span><span class="o">&lt;</span><span class="nx">T</span><span class="p">,</span> <span class="nx">NonFunctionPropNames</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;&gt;</span><span class="p">;</span>
 
-    <span class="nx">type</span> <span class="nx">PersonProps</span> <span class="o">=</span> <span class="nx">NonFunctionProps</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span>
+<span class="nx">type</span> <span class="nx">PersonProps</span> <span class="o">=</span> <span class="nx">NonFunctionProps</span><span class="o">&lt;</span><span class="nx">Person</span><span class="o">&gt;</span><span class="p">;</span>
 
-    <span class="cm">/* Produces the below type
+<span class="cm">/* Produces the below type
     type PersonProps = {
         name: string;
         age: number;
@@ -650,7 +650,7 @@ https://search.google.com/structured-data/testing-tool/u/0/
                 
                     <a class="mt-1 mb-1" href="/tags#jhipster">jhipster (3)</a>
                 
-                    <a class="mt-1 mb-1" href="/tags#java">java (4)</a>
+                    <a class="mt-1 mb-1" href="/tags#java">java (5)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#microservices">microservices (5)</a>
                 
@@ -741,6 +741,12 @@ https://search.google.com/structured-data/testing-tool/u/0/
                     <a class="mt-1 mb-1" href="/tags#motivation">motivation (1)</a>
                 
                     <a class="mt-1 mb-1" href="/tags#books">books (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#kotlin">kotlin (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#scala">scala (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#clojure">clojure (1)</a>
                 
             
             

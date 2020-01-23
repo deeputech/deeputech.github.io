@@ -105,6 +105,10 @@
 <lastmod>2020-01-19T00:00:00+01:00</lastmod>
 </url>
 <url>
+<loc>/memory-management-in-jvm/</loc>
+<lastmod>2020-01-23T00:00:00+01:00</lastmod>
+</url>
+<url>
 <loc>/books</loc>
 </url>
 <url>
@@ -133,6 +137,14 @@
 </url>
 <url>
 <loc>/blogs/page/5/</loc>
+</url>
+<url>
+<loc>/assets/images/jvm/JVM%20memory%20use.pdf</loc>
+<lastmod>2020-01-23T00:54:36+01:00</lastmod>
+</url>
+<url>
+<loc>/assets/images/jvm/JVM%20minor%20GC.pdf</loc>
+<lastmod>2020-01-23T18:23:03+01:00</lastmod>
 </url>
 <url>
 <loc>/svg-seq-diagram/Reference_Guide.pdf</loc>

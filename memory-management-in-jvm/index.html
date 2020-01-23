@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" href="/assets/images/logo.png">
+
+    <title>🚀💆🚀 Visualizing memory management in JVM(Java, Kotlin, Scala, Groovy, Clojure) | Technorage</title>
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>🚀💆🚀 Visualizing memory management in JVM(Java, Kotlin, Scala, Groovy, Clojure) | Technorage</title>
+<meta name="generator" content="Jekyll v2.0.0" />
+<meta property="og:title" content="🚀💆🚀 Visualizing memory management in JVM(Java, Kotlin, Scala, Groovy, Clojure)" />
+<meta name="author" content="deepu" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Let us take a look at how the JVM manages memory." />
+<meta property="og:description" content="Let us take a look at how the JVM manages memory." />
+<meta property="og:site_name" content="Technorage" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-01-23T00:00:00+01:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"deepu"},"description":"Let us take a look at how the JVM manages memory.","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"url":"https://deepu.tech/memory-management-in-jvm/","headline":"🚀💆🚀 Visualizing memory management in JVM(Java, Kotlin, Scala, Groovy, Clojure)","dateModified":"2020-01-23T00:00:00+01:00","datePublished":"2020-01-23T00:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/memory-management-in-jvm/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+    <link rel="canonical" href="https://deepu.tech/memory-management-in-jvm/" />
+    
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link href="/assets/css/screen.css" rel="stylesheet">
+
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- change your GA id in _config.yml -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74370272-6"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-74370272-6');
+    </script>
+</head>
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down pr-md-0 pl-md-0">
+
+    <div class="container">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/">
+        <h2>Deepu K Sasidharan</h2>
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                    <a class="nav-link" href="/">About</a>
+                </li>
+
+                
+                <li class="nav-item active">
+                
+                    <a class="nav-link" href="/blogs/"><i class="fas fa-blog"></i> Blog</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/books"><i class="fas fa-book"></i> Books</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK"><i class="fab fa-youtube"></i> Videos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a target="_blank" class="nav-link" href="https://speakerdeck.com/deepu105"><i class="fab fa-speaker-deck"></i> Presentations</a>
+                </li>
+
+                <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Technorage</h1>
+    <p class="lead">
+        Where I rage about technology and stuff!
+    </p>
+</div>
+<!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=🚀💆🚀 Visualizing memory management in JVM(Java, Kotlin, Scala, Groovy, Clojure)&url=https://deepu.js.org//memory-management-in-jvm/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=https://deepu.js.org//memory-management-in-jvm/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://deepu.js.org//memory-management-in-jvm/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+    
+
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=250&d=mm&r=x" alt="Deepu K Sasidharan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.deepu.tech">Deepu K Sasidharan</a><a target="_blank" href="https://twitter.com/deepu105" class="btn follow">Follow</a>
+                        <span class="author-description">JHipster co-lead, Java, JS, Cloud Native Advocate, Dev @ XebiaLabs, Author, Speaker, Software craftsman. Loves simple & beautiful code. bit.ly/JHIPSTER-BOOK</span>
+                        <!-- Post Date -->
+                        <span class="author-description">
+                            <small>
+                                <time class="post-date" datetime="2020-01-23">23 Jan 2020</time>
+                                
+                            </small> |
+                            <small>16 mins read</small>
+                        </span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">🚀💆🚀 Visualizing memory management in JVM(Java, Kotlin, Scala, Groovy, Clojure)</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+                
+                    <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://i.imgur.com/Kv9ichJ.gif" alt="🚀💆🚀 Visualizing memory management in JVM(Java, Kotlin, Scala, Groovy, Clojure)">
+                
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post series -->
+            
+            <div class="panel series-wrapper">
+                <p>
+                    <strong>Part of "memory-management" series</strong>
+                </p>
+                <div class="article-collection">
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                    
+                    <a href="/memory-management-in-programming/" title="Part 1: 🚀💆🚀 Demystifying memory management in modern programming languages" ></a>
+                    </a>
+                
+                
+                
+                
+                
+                    
+                    <a href="/memory-management-in-jvm/" title="Part 2: 🚀💆🚀 Visualizing memory management in JVM(Java, Kotlin, Scala, Groovy, Clojure)" class="current-article"></a>
+                    </a>
+                
+                
+                </div>
+            </div>
+            
+            <!-- End series -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>Please follow me on <a href="https://twitter.com/deepu105">Twitter</a> for updates and let me know if something can be improved in the post.</p>
+
+<hr />
+
+<p>In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management. In this chapter, we will look at the memory model of the <strong>Java Virtual Machine(JVM)</strong> used by languages like Java, Kotlin, Scala, Clojure, JRuby and so on.</p>
+
+<p>If you haven’t read the <a href="https://deepu.tech/memory-management-in-programming/">first part</a> of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.</p>
+
+<h1 id="jvm-memory-model">JVM memory model</h1>
+
+<p>First, let us see what the memory model of JVM is. This is based on <strong>JDK 11</strong> onwards. Below is the memory available to a JVM process and is allocated by the Operating System(OS).</p>
+
+<p><img src="https://i.imgur.com/8uh8SPy.png" alt="JVM Memory model" /></p>
+
+<p>This is the native memory allocated by the OS and the amount depends on OS, processor, and JRE. Let us see what the different areas are for:</p>
+
+<h2 id="heap-memory">Heap Memory</h2>
+
+<p>This is where JVM stores objects or dynamic data. This is the biggest block of memory area and this is where <strong>Garbage Collection(GC)</strong> takes place. The size of heap memory can be controlled using the <code class="highlighter-rouge">Xms</code>(Initial) and <code class="highlighter-rouge">Xmx</code>(Max) flags. The entire heap memory is not committed to the <strong>Virtual Machine(VM)</strong> as some of it is reserved as virtual space and the heap can grow to use this. Heap is further divided into <strong>“Young”</strong> and <strong>“Old”</strong> generation space.</p>
+
+<ul>
+  <li><strong>Young generation</strong>: Young generation or “New Space” is where new objects live and is further divided into “Eden Space” and “Survivor Space”. This space is managed by <strong>“Minor GC”</strong> also sometimes called “Young GC”
+    <ul>
+      <li><strong>Eden Space</strong>: This is where new objects are created. When we create a new object, memory is allocated here.</li>
+      <li><strong>Survivor Space</strong>: This is where objects that survived the minor GC are stored. This is divided into two halves, <strong>S0</strong> and <strong>S1</strong>.</li>
+    </ul>
+  </li>
+  <li><strong>Old generation</strong>: Old generation or <strong>“Tenured Space”</strong> is where objects that reached the maximum tenure threshold during minor GC live. This space is managed up by <strong>“Major GC”</strong>.</li>
+</ul>
+
+<h2 id="thread-stacks">Thread Stacks</h2>
+
+<p>This is the stack memory area and there is one stack memory per thread in the process. This is where thread-specific static data including method/function frames and pointers to objects are stored. The stack memory limit can be set using the <code class="highlighter-rouge">Xss</code> flag.</p>
+
+<h2 id="meta-space">Meta Space</h2>
+
+<p>This is part of the native memory and doesn’t have an upper limit by default. This is what used to be <strong>Permanent Generation(PermGen) Space</strong> in earlier versions of JVM. This space is used by the class loaders to store class definitions. If this space keeps growing, the OS might move data stored here from RAM to virtual memory which might slow down the application. To avoid that its possible to set a limit on meta space used with the <code class="highlighter-rouge">XX:MetaspaceSize</code> and <code class="highlighter-rouge">-XX:MaxMetaspaceSize</code> flag in which case application might just throw out of memory errors.</p>
+
+<h2 id="code-cache">Code Cache</h2>
+
+<p>This is where the <strong>Just In Time(JIT)</strong> compiler stores compiled code blocks that are often accessed. Generally, JVM has to interpret byte code to native machine code whereas JIT-compiled code need not be interpreted as it is already in native format and is cached here.</p>
+
+<h2 id="shared-libraries">Shared Libraries</h2>
+
+<p>This is where native code for any shared libraries used are stored. This is loaded only once per process by the OS.</p>
+
+<hr />
+
+<h1 id="jvm-memory-usage-stack-vs-heap">JVM memory usage (Stack vs Heap)</h1>
+
+<p>Now that we are clear about how memory is organized let’s see how the most important parts of it are used when a program is executed.</p>
+
+<p>Let’s use the below Java program, the code is not optimized for correctness hence ignore issues like unnecessary intermediatory variables, improper modifiers and such, the focus is to visualize stack and heap memory usage.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td><td class="rouge-code"><pre><span class="kd">class</span> <span class="nc">Employee</span> <span class="o">{</span>
+    <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="nc">Integer</span> <span class="n">salary</span><span class="o">;</span>
+    <span class="nc">Integer</span> <span class="n">sales</span><span class="o">;</span>
+    <span class="nc">Integer</span> <span class="n">bonus</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="nf">Employee</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">Integer</span> <span class="n">salary</span><span class="o">,</span> <span class="nc">Integer</span> <span class="n">sales</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">salary</span> <span class="o">=</span> <span class="n">salary</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">sales</span> <span class="o">=</span> <span class="n">sales</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">static</span> <span class="kt">int</span> <span class="no">BONUS_PERCENTAGE</span> <span class="o">=</span> <span class="mi">10</span><span class="o">;</span>
+
+    <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getBonusPercentage</span><span class="o">(</span><span class="kt">int</span> <span class="n">salary</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">percentage</span> <span class="o">=</span> <span class="n">salary</span> <span class="o">*</span> <span class="no">BONUS_PERCENTAGE</span> <span class="o">/</span> <span class="mi">100</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">percentage</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">static</span> <span class="kt">int</span> <span class="nf">findEmployeeBonus</span><span class="o">(</span><span class="kt">int</span> <span class="n">salary</span><span class="o">,</span> <span class="kt">int</span> <span class="n">noOfSales</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">bonusPercentage</span> <span class="o">=</span> <span class="n">getBonusPercentage</span><span class="o">(</span><span class="n">salary</span><span class="o">);</span>
+        <span class="kt">int</span> <span class="n">bonus</span> <span class="o">=</span> <span class="n">bonusPercentage</span> <span class="o">*</span> <span class="n">noOfSales</span><span class="o">;</span>
+        <span class="k">return</span> <span class="n">bonus</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Employee</span> <span class="n">john</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Employee</span><span class="o">(</span><span class="s">"John"</span><span class="o">,</span> <span class="mi">5000</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>
+        <span class="n">john</span><span class="o">.</span><span class="na">bonus</span> <span class="o">=</span> <span class="n">findEmployeeBonus</span><span class="o">(</span><span class="n">john</span><span class="o">.</span><span class="na">salary</span><span class="o">,</span> <span class="n">john</span><span class="o">.</span><span class="na">sales</span><span class="o">);</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">john</span><span class="o">.</span><span class="na">bonus</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Click on the slides and move forward/backward using arrow keys to see how the above program is executed and how the stack and heap memory is used:</p>
+
+<p>
+            <script async="" class="speakerdeck-embed" data-id="9780d352c95f4361bd8c6fa164554afc" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+            <noscript>
+                <a href="//speakerdeck.com/player/9780d352c95f4361bd8c6fa164554afc">
+                <img alt="Speakerdeck" src="//speakerd.s3.amazonaws.com/presentations/9780d352c95f4361bd8c6fa164554afc/slide_0.jpg" />
+                </a>
+            </noscript>
+          </p>
+
+<p>As you can see:</p>
+
+<ul>
+  <li><strong>Static fields</strong> are kept in a separate block on the Stack</li>
+  <li>Every function call is added to the thread’s stack memory as a frame-block</li>
+  <li>All local variables including arguments and the return value is saved within the function frame-block on the Stack</li>
+  <li>All primitive types like <code class="highlighter-rouge">int</code> are stored directly on the Stack. This applies to static fields as well</li>
+  <li>All object types like <code class="highlighter-rouge">Employee</code>, <code class="highlighter-rouge">Integer</code>, <code class="highlighter-rouge">String</code> are created on the Heap and is referenced from the Stack using Stack pointers. This applies to static fields as well</li>
+  <li>Functions called from the current function is pushed on top of the Stack</li>
+  <li>When a function returns its frame is removed from the Stack</li>
+  <li>Once the main process is complete the objects on the Heap do not have any more pointers from Stack and becomes orphan</li>
+  <li>Unless you make a copy explicitly, all object references within other objects are done using pointers</li>
+</ul>
+
+<p>The Stack as you can see is automatically managed and is done so by the operating system rather than JVM itself. Hence we do not have to worry much about the Stack. The Heap, on the other hand, is not automatically managed by the OS and since its the biggest memory space and holds dynamic data, it could grow exponentially causing our program to run out of memory over time. It also becomes fragmented over time slowing down applications. This is where the JVM helps. It manages the Heap automatically using the garbage collection process.</p>
+
+<hr />
+
+<h1 id="jvm-memory-management-garbage-collection">JVM Memory management: Garbage collection</h1>
+
+<p>Now that we know how JVM allocates memory, let us see how it automatically manages the Heap memory which is very important for the performance of an application. When a program tries to allocate more memory on the Heap than that is freely available(depending on the <code class="highlighter-rouge">Xmx</code> config) we encounter <strong>out of memory errors</strong>.</p>
+
+<p>JVM manages the heap memory by garbage collection. In simple terms, it frees the memory used by orphan objects, i.e, objects that are no longer referenced from the Stack directly or indirectly(via a reference in another object) to make space for new object creation.</p>
+
+<p><img src="https://i.imgur.com/RbnjDWX.png" alt="GC Roots" /></p>
+
+<p>The garbage collector in JVM is responsible for:</p>
+
+<ul>
+  <li>Memory allocation from OS and back to OS.</li>
+  <li>Handing out allocated memory to the application as it requests it.</li>
+  <li>Determining which parts of the allocated memory is still in use by the application.</li>
+  <li>Reclaiming the unused memory for reuse by the application.</li>
+</ul>
+
+<p>There are many different algorithms available for garbage collection but <strong>Mark &amp; Sweep</strong> is the most commonly used one.</p>
+
+<h2 id="mark--sweep-garbage-collection">Mark &amp; Sweep Garbage collection</h2>
+
+<p>JVM uses a separate daemon thread that runs in the background for garbage collection and the process runs when certain conditions are met. Mark &amp; Sweep GC generally involves two phases and sometimes there is an optional third phase depending on the algorithm used.</p>
+
+<p><img src="http://i.imgur.com/AZaR0LP.gif" alt="Mark &amp; sweep GC" /></p>
+
+<ul>
+  <li><strong>Marking</strong>: First step where garbage collector identifies which objects are in use and which ones are not in use. The objects in use or reachable from GC roots(Stack pointers) recursively are marked as alive.</li>
+  <li><strong>Sweeping</strong>: The garbage collector traverses the heap and removes any object that is not marked alive. This space is now marked as free.</li>
+  <li><strong>Compacting</strong>: After deleting unused objects, all the survived objects will be moved to be together. This will decrease fragmentation and increase the performance of allocation of memory to newer objects</li>
+</ul>
+
+<p>This type of GC is also referred to us stop-the-world GC as they introduce pause-times in the application while performing GC.</p>
+
+<p>JVM offers few different algorithms to choose from when it comes to GC and there might be few more options available depending on the JDK vendor you use. The different implementations focus on different goals like:</p>
+
+<ul>
+  <li><strong>Throughput</strong>: Time spent collecting garbage instead of application time affects throughput. The throughput ideally should be high(I.e when GC times are low).</li>
+  <li><strong>Pause-time</strong>: The duration for which GC stops the application from executing. The pause-time ideally should be very low.</li>
+  <li><strong>Footprint</strong>: Size of the heap used. This ideally should be kept low.</li>
+</ul>
+
+<h3 id="collectors-available-as-of-jdk-11">Collectors available as of JDK 11</h3>
+
+<p>As of JDK 11, which is the current LTE version, the below garbage collectors are available and the default used is chosen by JVM based on hardware and OS used. We can always specify the GC to be used with the <code class="highlighter-rouge">-XX</code> switch as well.</p>
+
+<ul>
+  <li><strong>Serial Collector</strong>: It uses a single thread for GC and is efficient for applications with small data sets and is most suitable for single-processor machines. This can be enabled using <code class="highlighter-rouge">-XX:+UseSerialGC</code> switch.</li>
+  <li><strong>Parallel Collector</strong>: This one is focused on high throughput and uses multiple threads to speed up the GC process. This is intended for applications with medium to large data sets running on multi-threaded/multi-processor hardware. This can be enabled using <code class="highlighter-rouge">-XX:+UseParallelGC</code> switch.</li>
+  <li><strong>Garbage-First(G1) Collector</strong>: The G1 collector is a mostly concurrent collector(Means only expensive work is done concurrently). This is for multi-processor machines with a large amount of memory and is enabled as default on most modern machines and OS. It has a focus on low pause-times and high throughput. This can be enabled using <code class="highlighter-rouge">-XX:+UseG1GC</code> switch.</li>
+  <li><strong>Z Garbage Collector</strong>: This is a new experimental GC introduced in JDK11. It is a scalable low-latency collector. It’s concurrent and does not stop the execution of application threads, hence no stop-the-world. It is intended for applications that require low latency and/or use a very large heap(multi-terabytes). This can be enabled using <code class="highlighter-rouge">-XX:+UseZGC</code> switch.</li>
+</ul>
+
+<h2 id="gc-process">GC process</h2>
+
+<p>Regardless of the collector used, JVM has two types of GC process depending on when and where its performed, the minor GC and major GC.</p>
+
+<h3 id="minor-gc">Minor GC</h3>
+
+<p>This type of GC keeps the young generation space compact and clean. This is triggered when below conditions are met:</p>
+
+<ul>
+  <li>JVM is not able to get the required memory from the Eden space to allocate a new object</li>
+</ul>
+
+<p>Initially, all the areas of heap space are empty. Eden memory is the first one to be filled, followed by survivor space and finally by tenured space.</p>
+
+<p>Let us look at the minor GC process:</p>
+
+<p>Click on the slides and move forward/backward using arrow keys to see the process:</p>
+
+<p>
+            <script async="" class="speakerdeck-embed" data-id="f4783404769145f4b990154d0cc05629" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+            <noscript>
+                <a href="//speakerdeck.com/player/f4783404769145f4b990154d0cc05629">
+                <img alt="Speakerdeck" src="//speakerd.s3.amazonaws.com/presentations/f4783404769145f4b990154d0cc05629/slide_0.jpg" />
+                </a>
+            </noscript>
+          </p>
+
+<ol>
+  <li>Let us assume that there are already objects on the Eden space when we start(Blocks 01 to 06 marked as used memory)</li>
+  <li>The application creates a new object(07)</li>
+  <li>JVM tries to get required memory from Eden space, but there is no free space in Eden to accommodate our object and hence JVM triggers minor GC</li>
+  <li>The GC recursively traverses the object graph starting from stack pointers to mark objects that are used as alive(Used memory) and remaining objects as garbage(Orphans)</li>
+  <li>JVM chooses one random block from S0 and S1 as the “To Space”, let’s assume it was S0. The GC now moves all the alive objects into the “To Space”, S0, which was empty when we started and increments their age by one.</li>
+  <li>The GC now empties the Eden space and the new object is allocated memory in the Eden space</li>
+  <li>Let us assume that some time has passed and there are more objects on the Eden space now(Blocks 07 to 13 marked as used memory)</li>
+  <li>The application creates a new object(14)</li>
+  <li>JVM tries to get required memory from Eden space, but there is no free space in Eden to accommodate our object and hence JVM triggers second minor GC</li>
+  <li>The mark phase is repeated and alive/orphan objects are marked including the ones in survivor space “To Space”</li>
+  <li>JVM chooses the free S1 as the “To Space” now and S0 becomes “From Space”. The GC now moves all the alive objects from Eden space and the “From Space”, S0, into the “To Space”, S1, which was empty when we started and increments their age by one. Since some objects don’t fit here, they are moved to the “Tenured Space” as the survivor space cannot grow and this process is called premature promotion. This can happen even if one of the survivor space is free</li>
+  <li>The GC now empties the Eden space and the “From Space”, S0, and the new object is allocated memory in the Eden space</li>
+  <li>This keeps on repeating for each minor GC and the survivors are shifted between S0 and S1 and their age is incremented. Once the age reaches the “max-age threshold”, 15 by default, the object is moved to the “Tenured space”</li>
+</ol>
+
+<p>So we saw how minor GC reclaims space from the young generation. It is a stop-the-world process but it’s so fast that it is negligible most of the time.</p>
+
+<h3 id="major-gc">Major GC</h3>
+
+<p>This type of GC keeps the old generation(Tenured) space compact and clean. This is triggered when below conditions are met:</p>
+
+<ul>
+  <li>Developer calls <code class="highlighter-rouge">System.gc()</code>, or <code class="highlighter-rouge">Runtime.getRunTime().gc()</code> from the program.</li>
+  <li>JVM decides there is not enough tenured space as it gets filled up from minor GC cycles.</li>
+  <li>During minor GC, if the JVM is not able to reclaim enough memory from the Eden or survivor spaces.</li>
+  <li>If we set a <code class="highlighter-rouge">MaxMetaspaceSize</code> option for the JVM and there is not enough space to load new classes.</li>
+</ul>
+
+<p>Let us look at the major GC process, it’s not as complex as minor GC:</p>
+
+<ol>
+  <li>Let us assume that many minor GC cycles have passed and the tenured space is almost full and JVM decides to trigger a “Major GC”</li>
+  <li>The GC recursively traverses the object graph starting from stack pointers to mark objects that are used as alive(Used memory) and remaining objects as garbage(Orphans) in the tenured space. If the major GC was triggered during a minor GC the process includes the young(Eden &amp; Survivor) and tenured space</li>
+  <li>The GC now removed all orphan objects and reclaims the memory</li>
+  <li>During a major GC event, if there are no more objects in the Heap, the JVM reclaims memory from the metaspace as well by removing loaded classes from it this is also referred to as full GC</li>
+</ol>
+
+<hr />
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This post should give you an overview of the JVM memory model and memory management. This is not exhaustive, there are a lot more advanced concepts and tuning options available for specific use cases and you can learn about them from <a href="https://docs.oracle.com/en/java/javase/13/gctuning/">https://docs.oracle.com</a>. But for most JVM(Java, Kotlin, Scala, Clojure, JRuby, Jython) developers this level of information would be sufficient and I hope it helps you write better code considering these in mind for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.</p>
+
+<p>I hope you had fun learning about the JVM internals, stay tuned for the next post in the series.</p>
+
+<hr />
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li><a href="https://docs.oracle.com/en/java/javase/13/gctuning/">https://docs.oracle.com</a></li>
+  <li><a href="http://pythontutor.com/java.html">http://pythontutor.com/java.html</a></li>
+  <li><a href="https://www.journaldev.com/2856/java-jvm-memory-model-memory-management-in-java">https://www.journaldev.com</a></li>
+  <li><a href="https://www.yourkit.com/docs/kb/sizes.jsp">https://www.yourkit.com</a></li>
+  <li><a href="https://dzone.com/articles/understanding-the-java-memory-model-and-the-garbag/">https://dzone.com</a></li>
+  <li><a href="https://www.infoq.com/articles/Visualizing-Java-Garbage-Collection/">https://www.infoq.com</a></li>
+</ul>
+
+<hr />
+
+<p>If you like this article, please leave a like or a comment.</p>
+
+<p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#clojure">#clojure</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#java">#java</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#kotlin">#kotlin</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#scala">#scala</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="/life-of-a-full-stack-developer/"> &laquo; 😱 🤯 😱 Life of a Full-stack developer 😱 🤯 😱</a>
+            
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'deepu-tech'; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first:
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+
+</div>
+
+
+
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/tags#jhipster">jhipster (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#java">java (5)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#microservices">microservices (5)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#docker">docker (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#azure">azure (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#kubernetes">kubernetes (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#typescript">typescript (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#react">react (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#javascript">javascript (5)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#webdev">webdev (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terraform">terraform (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#writing">writing (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#medium">medium (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#development">development (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#linux">linux (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#fedora">fedora (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#gnome">gnome (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#terminal">terminal (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#ohmyzsh">ohmyzsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#zsh">zsh (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#go">go (4)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#programming">programming (9)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#languages">languages (7)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (3)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#vscode">vscode (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#ide">ide (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#istio">istio (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#functional">functional (4)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (7)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#showdev">showdev (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#ruby">ruby (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#Jekyll">Jekyll (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#blogging">blogging (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#architecture">architecture (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#devops">devops (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#distributedsystems">distributedsystems (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#rust">rust (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#bash">bash (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#codenewbie">codenewbie (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#codequality">codequality (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#career">career (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#computerscience">computerscience (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#motivation">motivation (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#books">books (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#kotlin">kotlin (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#scala">scala (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/tags#clojure">clojure (1)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2020 Deepu K Sasidharan
+                <br/>
+                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+                </a>
+                Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net |
+                Domain by
+                <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
+                    <img src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo">
+                </a> |
+                Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/assets/js/mediumish.js"></script>
+
+
+<script src="/assets/js/lazyload.js"></script>
+
+
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+<script id="dsq-count-scr" src="//deepu-tech.disqus.com/count.js"></script>
+
+
+
+
+<!-- <script src="https://assets.digitalclimatestrike.net/widget.js" async></script> -->
+</body>
+</html>
