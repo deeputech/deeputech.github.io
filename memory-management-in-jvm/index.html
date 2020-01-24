@@ -509,7 +509,7 @@
 
 <p>This type of GC is also referred to us stop-the-world GC as they introduce pause-times in the application while performing GC.</p>
 
-<p>JVM offers few different algorithms to choose from when it comes to GC and there might be few more options available depending on the JDK vendor you use. The different implementations focus on different goals like:</p>
+<p>JVM offers few different algorithms to choose from when it comes to GC and there might be few more options available depending on the JDK vendor you use(Like the <a href="https://wiki.openjdk.java.net/display/shenandoah/Main">Shenandoah GC</a>, available on OpenJDK). The different implementations focus on different goals like:</p>
 
 <ul>
   <li><strong>Throughput</strong>: Time spent collecting garbage instead of application time affects throughput. The throughput ideally should be high(I.e when GC times are low).</li>

@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Jan 2020 22:34:02 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Jan 2020 22:34:02 +0100</lastBuildDate>
+    <pubDate>Fri, 24 Jan 2020 10:34:40 +0100</pubDate>
+    <lastBuildDate>Fri, 24 Jan 2020 10:34:40 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -197,7 +197,7 @@
 
 &lt;p&gt;This type of GC is also referred to us stop-the-world GC as they introduce pause-times in the application while performing GC.&lt;/p&gt;
 
-&lt;p&gt;JVM offers few different algorithms to choose from when it comes to GC and there might be few more options available depending on the JDK vendor you use. The different implementations focus on different goals like:&lt;/p&gt;
+&lt;p&gt;JVM offers few different algorithms to choose from when it comes to GC and there might be few more options available depending on the JDK vendor you use(Like the &lt;a href=&quot;https://wiki.openjdk.java.net/display/shenandoah/Main&quot;&gt;Shenandoah GC&lt;/a&gt;, available on OpenJDK). The different implementations focus on different goals like:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Throughput&lt;/strong&gt;: Time spent collecting garbage instead of application time affects throughput. The throughput ideally should be high(I.e when GC times are low).&lt;/li&gt;
@@ -456,7 +456,7 @@
 &lt;ul&gt;
   &lt;li&gt;load its own &lt;strong&gt;bytecode&lt;/strong&gt; that needs to be executed&lt;/li&gt;
   &lt;li&gt;store the &lt;strong&gt;data values&lt;/strong&gt; and &lt;strong&gt;data structures&lt;/strong&gt; used by the program that is executed&lt;/li&gt;
-  &lt;li&gt;load any &lt;strong&gt;run-time systems&lt;/strong&gt; that is required for the program to execute&lt;/li&gt;
+  &lt;li&gt;load any &lt;strong&gt;run-time systems&lt;/strong&gt; that are required for the program to execute&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;When a software program uses memory there are two regions of memory they use, apart from the space used to load the bytecode, Stack and Heap memory.&lt;/p&gt;
