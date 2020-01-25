@@ -327,15 +327,15 @@
 
 <hr />
 
-<p>In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management. In this chapter, we will look at the memory model of the <strong>Java Virtual Machine(JVM)</strong> used by languages like Java, Kotlin, Scala, Clojure, JRuby and so on.</p>
+<p>In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management. In this chapter, we will look at the memory management of the <strong>Java Virtual Machine(JVM)</strong> used by languages like Java, Kotlin, Scala, Clojure, JRuby and so on.</p>
 
 <p>If you haven’t read the <a href="https://deepu.tech/memory-management-in-programming/">first part</a> of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.</p>
 
-<h1 id="jvm-memory-model">JVM memory model</h1>
+<h1 id="jvm-memory-structure">JVM memory structure</h1>
 
-<p>First, let us see what the memory model of JVM is. This is based on <strong>JDK 11</strong> onwards. Below is the memory available to a JVM process and is allocated by the Operating System(OS).</p>
+<p>First, let us see what the memory structure of JVM is. This is based on <strong>JDK 11</strong> onwards. Below is the memory available to a JVM process and is allocated by the Operating System(OS).</p>
 
-<p><img src="https://i.imgur.com/8uh8SPy.png" alt="JVM Memory model" /></p>
+<p><img src="https://i.imgur.com/8uh8SPy.png" alt="JVM Memory structure" /></p>
 
 <p>This is the native memory allocated by the OS and the amount depends on OS, processor, and JRE. Let us see what the different areas are for:</p>
 
@@ -592,14 +592,14 @@
   <li>Let us assume that many minor GC cycles have passed and the tenured space is almost full and JVM decides to trigger a “Major GC”</li>
   <li>The GC recursively traverses the object graph starting from stack pointers to mark objects that are used as alive(Used memory) and remaining objects as garbage(Orphans) in the tenured space. If the major GC was triggered during a minor GC the process includes the young(Eden &amp; Survivor) and tenured space</li>
   <li>The GC now removed all orphan objects and reclaims the memory</li>
-  <li>During a major GC event, if there are no more objects in the Heap, the JVM reclaims memory from the metaspace as well by removing loaded classes from it this is also referred to as full GC</li>
+  <li>During a major GC event, if there are no more objects in the Heap, the JVM reclaims memory from the meta space as well by removing loaded classes from it this is also referred to as full GC</li>
 </ol>
 
 <hr />
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>This post should give you an overview of the JVM memory model and memory management. This is not exhaustive, there are a lot more advanced concepts and tuning options available for specific use cases and you can learn about them from <a href="https://docs.oracle.com/en/java/javase/13/gctuning/">https://docs.oracle.com</a>. But for most JVM(Java, Kotlin, Scala, Clojure, JRuby, Jython) developers this level of information would be sufficient and I hope it helps you write better code considering these in mind for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.</p>
+<p>This post should give you an overview of the JVM memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and tuning options available for specific use cases and you can learn about them from <a href="https://docs.oracle.com/en/java/javase/13/gctuning/">https://docs.oracle.com</a>. But for most JVM(Java, Kotlin, Scala, Clojure, JRuby, Jython) developers this level of information would be sufficient and I hope it helps you write better code considering these in mind for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.</p>
 
 <p>I hope you had fun learning about the JVM internals, stay tuned for the next post in the series.</p>
 
