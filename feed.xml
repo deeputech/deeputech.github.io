@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 24 Jan 2020 10:34:40 +0100</pubDate>
-    <lastBuildDate>Fri, 24 Jan 2020 10:34:40 +0100</lastBuildDate>
+    <pubDate>Sat, 25 Jan 2020 13:33:38 +0100</pubDate>
+    <lastBuildDate>Sat, 25 Jan 2020 13:33:38 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -181,7 +181,7 @@
   &lt;li&gt;Reclaiming the unused memory for reuse by the application.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;There are many different algorithms available for garbage collection but &lt;strong&gt;Mark &amp;amp; Sweep&lt;/strong&gt; is the most commonly used one.&lt;/p&gt;
+&lt;p&gt;JVM garbage collectors are generational(Objects in Heap are grouped by their age and cleared at different stages). There are many different algorithms available for garbage collection but &lt;strong&gt;Mark &amp;amp; Sweep&lt;/strong&gt; is the most commonly used one.&lt;/p&gt;
 
 &lt;h2 id=&quot;mark--sweep-garbage-collection&quot;&gt;Mark &amp;amp; Sweep Garbage collection&lt;/h2&gt;
 
