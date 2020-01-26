@@ -109,6 +109,10 @@
 <lastmod>2020-01-23T00:00:00+01:00</lastmod>
 </url>
 <url>
+<loc>/memory-management-in-v8/</loc>
+<lastmod>2020-01-27T00:00:00+01:00</lastmod>
+</url>
+<url>
 <loc>/books</loc>
 </url>
 <url>
@@ -145,6 +149,14 @@
 <url>
 <loc>/assets/images/jvm/JVM%20minor%20GC.pdf</loc>
 <lastmod>2020-01-23T18:23:03+01:00</lastmod>
+</url>
+<url>
+<loc>/assets/images/v8/V8%20memory%20use.pdf</loc>
+<lastmod>2020-01-26T20:41:33+01:00</lastmod>
+</url>
+<url>
+<loc>/assets/images/v8/V8%20minor%20GC.pdf</loc>
+<lastmod>2020-01-26T22:58:05+01:00</lastmod>
 </url>
 <url>
 <loc>/svg-seq-diagram/Reference_Guide.pdf</loc>
