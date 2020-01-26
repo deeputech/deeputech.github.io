@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 27 Jan 2020 00:26:31 +0100</pubDate>
-    <lastBuildDate>Mon, 27 Jan 2020 00:26:31 +0100</lastBuildDate>
+    <pubDate>Mon, 27 Jan 2020 00:27:21 +0100</pubDate>
+    <lastBuildDate>Mon, 27 Jan 2020 00:27:21 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -699,7 +699,7 @@
       </item>
     
       <item>
-        <title>🚀💆🚀 Demystifying memory management in modern programming languages</title>
+        <title>🚀 Demystifying memory management in modern programming languages</title>
         <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know if something can be improved in the post.&lt;/p&gt;
 
 &lt;hr /&gt;
