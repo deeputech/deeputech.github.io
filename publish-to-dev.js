@@ -23,7 +23,7 @@ function sleep(ms) {
 }
 
 function getBlogUrl(filename) {
-    return filename.replace(/^[0-9]{4}-[0-9]{2}-[0-9]{2}-/, "");
+    return filename.replace(/^[0-9]{4}-[0-9]{2}-[0-9]{2}-/, "").replace(".md", "");
 }
 
 const POSTS_DIR = "_posts/";
