@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 27 Jan 2020 09:57:27 +0100</pubDate>
-    <lastBuildDate>Mon, 27 Jan 2020 09:57:27 +0100</lastBuildDate>
+    <pubDate>Mon, 27 Jan 2020 16:24:36 +0100</pubDate>
+    <lastBuildDate>Mon, 27 Jan 2020 16:24:36 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -220,7 +220,7 @@
   &lt;li&gt;&lt;strong&gt;Lazy sweeping&lt;/strong&gt;. Lazy sweeping involves delaying the deletion of garbage in pages until the memory is required.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Let us look at the major GC process, it’s not as complex as minor GC:&lt;/p&gt;
+&lt;p&gt;Let us look at the major GC process:&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Let us assume that many minor GC cycles have passed and the old space is almost full and V8 decides to trigger a “Major GC”&lt;/li&gt;
@@ -310,7 +310,7 @@
 
 &lt;h2 id=&quot;meta-space&quot;&gt;Meta Space&lt;/h2&gt;
 
-&lt;p&gt;This is part of the native memory and doesn’t have an upper limit by default. This is what used to be &lt;strong&gt;Permanent Generation(PermGen) Space&lt;/strong&gt; in earlier versions of JVM. This space is used by the class loaders to store class definitions. If this space keeps growing, the OS might move data stored here from RAM to virtual memory which might slow down the application. To avoid that its possible to set a limit on meta space used with the &lt;code class=&quot;highlighter-rouge&quot;&gt;XX:MetaspaceSize&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;-XX:MaxMetaspaceSize&lt;/code&gt; flag in which case application might just throw out of memory errors.&lt;/p&gt;
+&lt;p&gt;This is part of the native memory and doesn’t have an upper limit by default. This is what used to be &lt;strong&gt;Permanent Generation(PermGen) Space&lt;/strong&gt; in earlier versions of JVM. This space is used by the class loaders to store class definitions. If this space keeps growing, the OS might move data stored here from RAM to virtual memory which might slow down the application. To avoid that its possible to set a limit on meta-space used with the &lt;code class=&quot;highlighter-rouge&quot;&gt;XX:MetaspaceSize&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;-XX:MaxMetaspaceSize&lt;/code&gt; flag in which case application might just throw out of memory errors.&lt;/p&gt;
 
 &lt;h2 id=&quot;code-cache&quot;&gt;Code Cache&lt;/h2&gt;
 
@@ -543,7 +543,7 @@
   &lt;li&gt;Let us assume that many minor GC cycles have passed and the tenured space is almost full and JVM decides to trigger a “Major GC”&lt;/li&gt;
   &lt;li&gt;The GC recursively traverses the object graph starting from stack pointers to mark objects that are used as alive(Used memory) and remaining objects as garbage(Orphans) in the tenured space. If the major GC was triggered during a minor GC the process includes the young(Eden &amp;amp; Survivor) and tenured space&lt;/li&gt;
   &lt;li&gt;The GC now removed all orphan objects and reclaims the memory&lt;/li&gt;
-  &lt;li&gt;During a major GC event, if there are no more objects in the Heap, the JVM reclaims memory from the meta space as well by removing loaded classes from it this is also referred to as full GC&lt;/li&gt;
+  &lt;li&gt;During a major GC event, if there are no more objects in the Heap, the JVM reclaims memory from the meta-space as well by removing loaded classes from it this is also referred to as full GC&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;hr /&gt;
@@ -783,9 +783,9 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 
 &lt;p&gt;In this type of memory management, an object’s memory allocation is tied to its lifetime, which is from construction until destruction. It was introduced in &lt;strong&gt;C++&lt;/strong&gt; and is also used by &lt;strong&gt;Ada&lt;/strong&gt; and &lt;strong&gt;Rust&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;h3 id=&quot;automatic-reference-countingarc&quot;&gt;Automatic Reference counting(ARC)&lt;/h3&gt;
+&lt;h3 id=&quot;automatic-reference-countingarc&quot;&gt;Automatic Reference Counting(ARC)&lt;/h3&gt;
 
-&lt;p&gt;Its similar to Reference counting GC but instead of running a runtime process at a specific interval the &lt;code class=&quot;highlighter-rouge&quot;&gt;retain&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;release&lt;/code&gt; instructions are inserted to the compiled code at compile-time and when an object reference becomes zero its cleared automatically as part of execution without any program pause. It also cannot handle cyclic references and relies on the developer to handle that by using certain keywords. Its a feature of the Clang compiler and provides ARC for &lt;strong&gt;Objective C&lt;/strong&gt; &amp;amp; &lt;strong&gt;Swift&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;It’s similar to Reference counting GC but instead of running a runtime process at a specific interval the &lt;code class=&quot;highlighter-rouge&quot;&gt;retain&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;release&lt;/code&gt; instructions are inserted to the compiled code at compile-time and when an object reference becomes zero its cleared automatically as part of execution without any program pause. It also cannot handle cyclic references and relies on the developer to handle that by using certain keywords. Its a feature of the Clang compiler and provides ARC for &lt;strong&gt;Objective C&lt;/strong&gt; &amp;amp; &lt;strong&gt;Swift&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;ownership&quot;&gt;Ownership&lt;/h3&gt;
 

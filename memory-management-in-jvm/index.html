@@ -365,7 +365,7 @@
 
 <h2 id="meta-space">Meta Space</h2>
 
-<p>This is part of the native memory and doesn’t have an upper limit by default. This is what used to be <strong>Permanent Generation(PermGen) Space</strong> in earlier versions of JVM. This space is used by the class loaders to store class definitions. If this space keeps growing, the OS might move data stored here from RAM to virtual memory which might slow down the application. To avoid that its possible to set a limit on meta space used with the <code class="highlighter-rouge">XX:MetaspaceSize</code> and <code class="highlighter-rouge">-XX:MaxMetaspaceSize</code> flag in which case application might just throw out of memory errors.</p>
+<p>This is part of the native memory and doesn’t have an upper limit by default. This is what used to be <strong>Permanent Generation(PermGen) Space</strong> in earlier versions of JVM. This space is used by the class loaders to store class definitions. If this space keeps growing, the OS might move data stored here from RAM to virtual memory which might slow down the application. To avoid that its possible to set a limit on meta-space used with the <code class="highlighter-rouge">XX:MetaspaceSize</code> and <code class="highlighter-rouge">-XX:MaxMetaspaceSize</code> flag in which case application might just throw out of memory errors.</p>
 
 <h2 id="code-cache">Code Cache</h2>
 
@@ -598,7 +598,7 @@
   <li>Let us assume that many minor GC cycles have passed and the tenured space is almost full and JVM decides to trigger a “Major GC”</li>
   <li>The GC recursively traverses the object graph starting from stack pointers to mark objects that are used as alive(Used memory) and remaining objects as garbage(Orphans) in the tenured space. If the major GC was triggered during a minor GC the process includes the young(Eden &amp; Survivor) and tenured space</li>
   <li>The GC now removed all orphan objects and reclaims the memory</li>
-  <li>During a major GC event, if there are no more objects in the Heap, the JVM reclaims memory from the meta space as well by removing loaded classes from it this is also referred to as full GC</li>
+  <li>During a major GC event, if there are no more objects in the Heap, the JVM reclaims memory from the meta-space as well by removing loaded classes from it this is also referred to as full GC</li>
 </ol>
 
 <hr />

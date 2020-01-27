@@ -412,9 +412,9 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 
 <p>In this type of memory management, an object’s memory allocation is tied to its lifetime, which is from construction until destruction. It was introduced in <strong>C++</strong> and is also used by <strong>Ada</strong> and <strong>Rust</strong>.</p>
 
-<h3 id="automatic-reference-countingarc">Automatic Reference counting(ARC)</h3>
+<h3 id="automatic-reference-countingarc">Automatic Reference Counting(ARC)</h3>
 
-<p>Its similar to Reference counting GC but instead of running a runtime process at a specific interval the <code class="highlighter-rouge">retain</code> and <code class="highlighter-rouge">release</code> instructions are inserted to the compiled code at compile-time and when an object reference becomes zero its cleared automatically as part of execution without any program pause. It also cannot handle cyclic references and relies on the developer to handle that by using certain keywords. Its a feature of the Clang compiler and provides ARC for <strong>Objective C</strong> &amp; <strong>Swift</strong>.</p>
+<p>It’s similar to Reference counting GC but instead of running a runtime process at a specific interval the <code class="highlighter-rouge">retain</code> and <code class="highlighter-rouge">release</code> instructions are inserted to the compiled code at compile-time and when an object reference becomes zero its cleared automatically as part of execution without any program pause. It also cannot handle cyclic references and relies on the developer to handle that by using certain keywords. Its a feature of the Clang compiler and provides ARC for <strong>Objective C</strong> &amp; <strong>Swift</strong>.</p>
 
 <h3 id="ownership">Ownership</h3>
 
