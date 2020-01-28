@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 27 Jan 2020 16:44:46 +0100</pubDate>
-    <lastBuildDate>Mon, 27 Jan 2020 16:44:46 +0100</lastBuildDate>
+    <pubDate>Tue, 28 Jan 2020 17:58:14 +0100</pubDate>
+    <lastBuildDate>Tue, 28 Jan 2020 17:58:14 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -34,7 +34,7 @@
 &lt;p&gt;This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where &lt;strong&gt;Garbage Collection(GC)&lt;/strong&gt; takes place. The entire heap memory is not garbage collected, only the Young and Old spare is managed by garbage collection. Heap is further divided into below:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;New Space&lt;/strong&gt;: New space or &lt;strong&gt;“Young generation”&lt;/strong&gt; is where new objects live and most of these objects are short-lived. This space is small and has two &lt;strong&gt;semi-space&lt;/strong&gt;, similar to &lt;strong&gt;S0&lt;/strong&gt; &amp;amp; &lt;strong&gt;S1&lt;/strong&gt; in JVM. This space is managed by the &lt;strong&gt;“Scavenger(Minor GC)”&lt;/strong&gt;, we will look at it later. The size of new space can be controlled using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--min_semi_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;highlighter-rouge&quot;&gt;--max_semi_space_size&lt;/code&gt;(Max) V8 flags.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;New Space&lt;/strong&gt;: New space or &lt;strong&gt;“Young generation”&lt;/strong&gt; is where new objects live and most of these objects are short-lived. This space is small and has two &lt;strong&gt;semi-space&lt;/strong&gt;, similar to &lt;strong&gt;S0&lt;/strong&gt; &amp;amp; &lt;strong&gt;S1&lt;/strong&gt; in JVM. This space is managed by the &lt;strong&gt;“Scavenger(Minor GC)”&lt;/strong&gt;, we will look at it later. The size of the new space can be controlled using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--min_semi_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;highlighter-rouge&quot;&gt;--max_semi_space_size&lt;/code&gt;(Max) V8 flags.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Old Space&lt;/strong&gt;: Old space or &lt;strong&gt;“Old generation”&lt;/strong&gt; is where objects that survived the “New space” for two minor GC cycles are moved to. This space is managed up by the &lt;strong&gt;Major GC(Mark-Sweep &amp;amp; Mark-Compact)”&lt;/strong&gt;, we will look at it later. The size of old space can be controlled using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--initial_old_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;highlighter-rouge&quot;&gt;--max_old_space_size&lt;/code&gt;(Max) V8 flags. This space is divided into two:
     &lt;ul&gt;
       &lt;li&gt;&lt;strong&gt;Old pointer space&lt;/strong&gt;: Contains survived objects that have pointers to other objects.&lt;/li&gt;
@@ -43,7 +43,7 @@
   &lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Large object space&lt;/strong&gt;: This is where objects which are larger than the size limits of other spaces live. Each object gets its own &lt;code class=&quot;highlighter-rouge&quot;&gt;[mmap](https://en.wikipedia.org/wiki/Mmap)'d&lt;/code&gt; region of memory. Large objects are never moved by the garbage collector.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Code-space&lt;/strong&gt;: This is where the &lt;strong&gt;Just In Time(JIT)&lt;/strong&gt; compiler stores compiled code Blocks. This is the only space with executable memory (although &lt;code class=&quot;highlighter-rouge&quot;&gt;Codes&lt;/code&gt; may be allocated in “Large object space”, and those are executable, too).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cell space, property cell space and map space&lt;/strong&gt;: These spaces contain &lt;code class=&quot;highlighter-rouge&quot;&gt;Cells&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;PropertyCells&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;Maps&lt;/code&gt;, respectively. Each of these spaces contains objects which are all the same size and has some constraints on what kind of objects they point to, which simplifies collection.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cell space, property cell space, and map space&lt;/strong&gt;: These spaces contain &lt;code class=&quot;highlighter-rouge&quot;&gt;Cells&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;PropertyCells&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;Maps&lt;/code&gt;, respectively. Each of these spaces contains objects which are all the same size and has some constraints on what kind of objects they point to, which simplifies collection.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Each of these spaces is composed of a set of pages. A Page is a contiguous chunk of memory allocated from the operating system with &lt;code class=&quot;highlighter-rouge&quot;&gt;mmap&lt;/code&gt; (or &lt;code class=&quot;highlighter-rouge&quot;&gt;[MapViewOfFile](https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile)&lt;/code&gt; on Windows). Each page is 1MB in size, except for Large object space.&lt;/p&gt;
@@ -199,7 +199,7 @@
 
 &lt;p&gt;This type of GC keeps the old generation space compact and clean. This is triggered when V8 decides there is not enough old space, based on a dynamically computed limit, as it gets filled up from minor GC cycles.&lt;/p&gt;
 
-&lt;p&gt;The Scavenger algorithm is perfect for small data size but is impractical for large heap, as the old space, as it has memory overhead and hence major GC is done using &lt;strong&gt;Mark-Sweep-Compact&lt;/strong&gt; algorithm. It uses a &lt;strong&gt;tri-color&lt;/strong&gt;(white-grey-black) marking system. Hence major GC is a three-step process and the third step is executed depending on a fragmentation heuristic.&lt;/p&gt;
+&lt;p&gt;The Scavenger algorithm is perfect for small data size but is impractical for large heap, as the old space, as it has memory overhead and hence major GC is done using the &lt;strong&gt;Mark-Sweep-Compact&lt;/strong&gt; algorithm. It uses a &lt;strong&gt;tri-color&lt;/strong&gt;(white-grey-black) marking system. Hence major GC is a three-step process and the third step is executed depending on a fragmentation heuristic.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/rcjSZ0T.gif&quot; alt=&quot;Mark-sweep-compact GC&quot; /&gt;&lt;/p&gt;
 
@@ -800,7 +800,7 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 &lt;p&gt;Stay tuned for upcoming parts of this series:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/memory-management-in-jvm/cu&quot;&gt;Part 2: Memory management in JVM(Java, Kotlin, Scala, Groovy)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/memory-management-in-jvm/&quot;&gt;Part 2: Memory management in JVM(Java, Kotlin, Scala, Groovy)&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/memory-management-in-v8/&quot;&gt;Part 3: Memory management in V8(JavaScript/WebAssembly)&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Part 4: Memory management in Go&lt;/li&gt;
   &lt;li&gt;Part 5: Memory management in Rust&lt;/li&gt;

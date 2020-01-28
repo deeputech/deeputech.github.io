@@ -352,7 +352,7 @@
 <p>This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where <strong>Garbage Collection(GC)</strong> takes place. The entire heap memory is not garbage collected, only the Young and Old spare is managed by garbage collection. Heap is further divided into below:</p>
 
 <ul>
-  <li><strong>New Space</strong>: New space or <strong>“Young generation”</strong> is where new objects live and most of these objects are short-lived. This space is small and has two <strong>semi-space</strong>, similar to <strong>S0</strong> &amp; <strong>S1</strong> in JVM. This space is managed by the <strong>“Scavenger(Minor GC)”</strong>, we will look at it later. The size of new space can be controlled using the <code class="highlighter-rouge">--min_semi_space_size</code>(Initial) and <code class="highlighter-rouge">--max_semi_space_size</code>(Max) V8 flags.</li>
+  <li><strong>New Space</strong>: New space or <strong>“Young generation”</strong> is where new objects live and most of these objects are short-lived. This space is small and has two <strong>semi-space</strong>, similar to <strong>S0</strong> &amp; <strong>S1</strong> in JVM. This space is managed by the <strong>“Scavenger(Minor GC)”</strong>, we will look at it later. The size of the new space can be controlled using the <code class="highlighter-rouge">--min_semi_space_size</code>(Initial) and <code class="highlighter-rouge">--max_semi_space_size</code>(Max) V8 flags.</li>
   <li><strong>Old Space</strong>: Old space or <strong>“Old generation”</strong> is where objects that survived the “New space” for two minor GC cycles are moved to. This space is managed up by the <strong>Major GC(Mark-Sweep &amp; Mark-Compact)”</strong>, we will look at it later. The size of old space can be controlled using the <code class="highlighter-rouge">--initial_old_space_size</code>(Initial) and <code class="highlighter-rouge">--max_old_space_size</code>(Max) V8 flags. This space is divided into two:
     <ul>
       <li><strong>Old pointer space</strong>: Contains survived objects that have pointers to other objects.</li>
@@ -361,7 +361,7 @@
   </li>
   <li><strong>Large object space</strong>: This is where objects which are larger than the size limits of other spaces live. Each object gets its own <code class="highlighter-rouge">[mmap](https://en.wikipedia.org/wiki/Mmap)'d</code> region of memory. Large objects are never moved by the garbage collector.</li>
   <li><strong>Code-space</strong>: This is where the <strong>Just In Time(JIT)</strong> compiler stores compiled code Blocks. This is the only space with executable memory (although <code class="highlighter-rouge">Codes</code> may be allocated in “Large object space”, and those are executable, too).</li>
-  <li><strong>Cell space, property cell space and map space</strong>: These spaces contain <code class="highlighter-rouge">Cells</code>, <code class="highlighter-rouge">PropertyCells</code>, and <code class="highlighter-rouge">Maps</code>, respectively. Each of these spaces contains objects which are all the same size and has some constraints on what kind of objects they point to, which simplifies collection.</li>
+  <li><strong>Cell space, property cell space, and map space</strong>: These spaces contain <code class="highlighter-rouge">Cells</code>, <code class="highlighter-rouge">PropertyCells</code>, and <code class="highlighter-rouge">Maps</code>, respectively. Each of these spaces contains objects which are all the same size and has some constraints on what kind of objects they point to, which simplifies collection.</li>
 </ul>
 
 <p>Each of these spaces is composed of a set of pages. A Page is a contiguous chunk of memory allocated from the operating system with <code class="highlighter-rouge">mmap</code> (or <code class="highlighter-rouge">[MapViewOfFile](https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile)</code> on Windows). Each page is 1MB in size, except for Large object space.</p>
@@ -517,7 +517,7 @@
 
 <p>This type of GC keeps the old generation space compact and clean. This is triggered when V8 decides there is not enough old space, based on a dynamically computed limit, as it gets filled up from minor GC cycles.</p>
 
-<p>The Scavenger algorithm is perfect for small data size but is impractical for large heap, as the old space, as it has memory overhead and hence major GC is done using <strong>Mark-Sweep-Compact</strong> algorithm. It uses a <strong>tri-color</strong>(white-grey-black) marking system. Hence major GC is a three-step process and the third step is executed depending on a fragmentation heuristic.</p>
+<p>The Scavenger algorithm is perfect for small data size but is impractical for large heap, as the old space, as it has memory overhead and hence major GC is done using the <strong>Mark-Sweep-Compact</strong> algorithm. It uses a <strong>tri-color</strong>(white-grey-black) marking system. Hence major GC is a three-step process and the third step is executed depending on a fragmentation heuristic.</p>
 
 <p><img src="https://i.imgur.com/rcjSZ0T.gif" alt="Mark-sweep-compact GC" /></p>
 
