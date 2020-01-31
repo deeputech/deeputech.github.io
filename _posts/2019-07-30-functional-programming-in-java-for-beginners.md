@@ -4,7 +4,10 @@ published: true
 description: Functional programming concepts in Java for beginners.
 tags: [java, functional, beginners, programming]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/zf8mvgix8icaz64mgj89.png
-canonical_url: https://deepu.js.org/functional-programming-in-java-for-beginners/
+canonical_url: https://deepu.tech/functional-programming-in-java-for-beginners/
+devto_url: https://dev.to/deepu105/functional-programming-in-java-a-primer-13nb
+devto_id: 150152
+series: functional-programming
 ---
 
 There is a lot of hype around functional programming(FP) and a lot of cool kids are doing it but it is not a silver bullet. Like other programming paradigms/styles, functional programming also has its pros and cons and one may prefer one paradigm over the other. If you are a Java developer and wants to venture into functional programming, do not worry, you don't have to learn functional programming oriented languages like Haskell or Clojure(or even Scala or JavaScript though they are not pure functional programming languages) since Java has you covered and this post is for you.
@@ -13,28 +16,30 @@ I'm not gonna dive into all functional programming concepts in detail, instead, 
 
 ---
 
-
 ## What is functional programming?
 
-As per Wikipedia, 
+As per Wikipedia,
 
-> Functional programming is a programming paradigm—a style of building the structure and elements of computer programs—that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data. 
+> Functional programming is a programming paradigm—a style of building the structure and elements of computer programs—that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data.
 
 Hence in functional programming, there are two very important rules
-- **No Data mutations**: It means a data object should not be changed after it is created.
-- **No implicit state**: Hidden/Implicit state should be avoided. In functional programming state is not eliminated, instead, its made visible and explicit
+
+-   **No Data mutations**: It means a data object should not be changed after it is created.
+-   **No implicit state**: Hidden/Implicit state should be avoided. In functional programming state is not eliminated, instead, its made visible and explicit
 
 This means:
-  - **No side effects**: A function or operation should not change any state outside of its functional scope. I.e, A function should only return a value to the invoker and should not affect any external state. This means programs are easier to understand.
-  - **Pure functions only**: Functional code is idempotent. A function should return values only based on the arguments passed and should not affect(side-effect) or depend on global state. Such functions always produce the same result for the same arguments.
+
+-   **No side effects**: A function or operation should not change any state outside of its functional scope. I.e, A function should only return a value to the invoker and should not affect any external state. This means programs are easier to understand.
+-   **Pure functions only**: Functional code is idempotent. A function should return values only based on the arguments passed and should not affect(side-effect) or depend on global state. Such functions always produce the same result for the same arguments.
 
 Apart from these there are functional programming concepts below that can be applied in Java, we will touch upon these further down.
-- [Higher-order-functions](https://en.wikipedia.org/wiki/Higher-order_function)
-- [Closures](https://en.wikipedia.org/wiki/Closure_(computer_programming))
-- [Currying](https://en.wikipedia.org/wiki/Currying)
-- [Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))
-- [Lazy evaluations](https://en.wikipedia.org/wiki/Evaluation_strategy)
-- [Referential transparency](https://en.wikipedia.org/wiki/Referential_transparency) 
+
+-   [Higher-order-functions](https://en.wikipedia.org/wiki/Higher-order_function)
+-   [Closures](<https://en.wikipedia.org/wiki/Closure_(computer_programming)>)
+-   [Currying](https://en.wikipedia.org/wiki/Currying)
+-   [Recursion](<https://en.wikipedia.org/wiki/Recursion_(computer_science)>)
+-   [Lazy evaluations](https://en.wikipedia.org/wiki/Evaluation_strategy)
+-   [Referential transparency](https://en.wikipedia.org/wiki/Referential_transparency)
 
 Using functional programming doesn't mean its all or nothing, you can always use functional programming concepts to complement Object-oriented concepts, especially in Java. The benefits of functional programming can be utilized whenever possible regardless of the paradigm or language you use. And that is exactly what we are going to see.
 
@@ -44,10 +49,9 @@ Using functional programming doesn't mean its all or nothing, you can always use
 
 So let us see how we can apply some of the functional programming concepts above in Java. We will be using Java 11 as it is the LTS version currently.
 
-
 ### First-class and higher-order functions
 
-First-class functions(function as a first-class citizen) means you can assign functions to variables, pass a function as an argument to another function or return a function from another. Unfortunately, Java doesn't support this and hence makes concepts like closures, currying and higher-order-functions less convenient to write. 
+First-class functions(function as a first-class citizen) means you can assign functions to variables, pass a function as an argument to another function or return a function from another. Unfortunately, Java doesn't support this and hence makes concepts like closures, currying and higher-order-functions less convenient to write.
 
 The closest to first-class functions in Java is [Lambda expressions](https://www.geeksforgeeks.org/lambda-expressions-java-8/). There are also some built-in functional interfaces like `Function`, `Consumer`, `Predicate`, `Supplier` and so on under the `java.util.function` package which can be used for functional programming.
 
@@ -93,7 +97,7 @@ public class HocSample {
     public static void main(String[] args) {
         var list = Arrays.asList("Orange", "Apple", "Banana", "Grape");
         // we are passing the array and a lambda expression as arguments to mapForEach method.
-        var out = mapForEach(list, it -> it.length()); 
+        var out = mapForEach(list, it -> it.length());
         // This can be further simplified to "mapForEach(list, String::length);", I'm writing the expanded version for readability
         System.out.println(out); // [6, 5, 6, 5]
     }
@@ -185,7 +189,7 @@ The Java stream API also provides many interesting higher-order-functions like f
 
 ### Pure functions
 
-As we saw already a pure function should return values only based on the arguments passed and should not affect or depend on global state. It is possible to do this in Java except for some cases when there are checked exceptions involved. 
+As we saw already a pure function should return values only based on the arguments passed and should not affect or depend on global state. It is possible to do this in Java except for some cases when there are checked exceptions involved.
 
 This is quite simple, take the below this is a pure function. It will always return the same output for the given input and its behavior is highly predictable. We can safely cache the method if needed.
 
@@ -249,7 +253,7 @@ public class FactorialSample {
 }
 ```
 
-The downside of the recursive approach is that it will be slower compared to an iterative approach most of the times(The advantage we are aiming for is code simplicity and readability) and might result in stack overflow errors since every function call needs to be saved as a frame to the stack. To avoid this tail recursion is preferred, especially when the recursion is done too many times. In tail recursion, the recursive call is the last thing executed by the function and hence the functions stack frame is not saved by the compiler. Most compilers can optimize the tail recursion code the same way iterative code is optimized hence avoiding the performance penalty. Java compiler, unfortunately, does not do this optimization :(
+The downside of the recursive approach is that it will be slower compared to an iterative approach most of the times(The advantage we are aiming for is code simplicity and readability) and might result in stack overflow errors since every function call needs to be saved as a frame to the stack. To avoid this tail recursion is preferred, especially when the recursion is done too many times. In tail recursion, the recursive call is the last thing executed by the function and hence the functions stack frame need not be saved by the compiler. Most compilers can optimize the tail recursion code the same way iterative code is optimized hence avoiding the performance penalty. Java compiler, unfortunately, does not do this optimization :(
 
 Now using tail recursion the same function can be written as below, but Java doesn't optimize this, though there are [workarounds](https://blog.knoldus.com/tail-recursion-in-java-8/), still it performed better in benchmarks.
 
@@ -285,6 +289,7 @@ public class FactorialSample {
     }
 }
 ```
+
 Consider using stream API or recursion when writing Java code for readability and immutability, but if performance is critical or if the number of iterations will be huge use standard loops.
 
 ### Lazy evaluation
@@ -317,6 +322,7 @@ public class EagerSample {
 ```
 
 This will produce the below output and we can see that both functions are executed always
+
 ```
 executing add
 executing multiply
@@ -339,7 +345,7 @@ public class LazySample {
         // This is a lambda expression behaving as a closure
         Function<Integer, Integer> multiply = t -> {
             System.out.println("executing multiply");
-            return t * t * t;
+            return t * t;
         };
         // Lambda closures are passed instead of plain functions
         System.out.println(addOrMultiply(true, add, multiply, 4));
@@ -363,7 +369,7 @@ This outputs the below and we can see that only required functions were executed
 executing add
 8
 executing multiply
-64
+16
 ```
 
 ### Type system
@@ -396,13 +402,14 @@ list.add("Test 2");
 ```
 
 `final` keyword allows the internal state of referenced variables to be mutated and hence from a functional programming perspective `final` keyword is useful only for constants and to catch reassignments.
- 
+
 ### [Data structures](https://en.wikipedia.org/wiki/Purely_functional_data_structure)
 
-When using functional programming techniques it is encouraged to use functional data types such as Stacks, Maps and Queues. 
+When using functional programming techniques it is encouraged to use functional data types such as Stacks, Maps and Queues.
 Hence maps are better than arrays or hash sets in functional programming as data stores.
 
 ---
+
 ## Conclusion
 
 This is just an introduction for those who are trying to apply some functional programming techniques in Java. There are lot more that can be done in Java and Java 8 added a lot of API to make it easy to do functional programming in Java, like the stream API, Optional interface, functional interfaces and so on. As I said earlier functional programming is not a silver bullet but it offers a lot of useful techniques for more understandable, maintainable and testable code. It can co-exist perfectly well with imperative and object-oriented programming styles. In fact, we all should be using the best of everything.

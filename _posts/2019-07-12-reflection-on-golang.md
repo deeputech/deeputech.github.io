@@ -5,16 +5,23 @@ description: After using Go for more than 9 months, here is what I think of it
 tags: [go, programming, languages, thepragmaticprogrammer]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg
 featured: true
-canonical_url: https://deepu.js.org/reflection-on-golang/
+canonical_url: https://deepu.tech/reflection-on-golang/
+devto_url: https://dev.to/deepu105/my-reflections-on-golang-38jk
+devto_id: 135373
+series: languages
 ---
 
+Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
+
+----
+ 
 Do I like [Go](https://golang.org/)? Yes. Would I use it for every use case I have? Definitely not. 
 
 {% twitter 1103546225851277313 %}
 
 Don't get me wrong, I like **Go** for what it is but like every other programming language, it is always a love-hate relationship. No programming language is perfect and all of them have their own merits and use cases. I hate it when I see people overusing something and I see that pattern with Go these days. To be fair, I have done my fair share of overusing in my career as well (mostly with JavaScript) and I can see why people do it. This is not gonna be a blog bashing Go or praising Go, it is just what I think of it after using it for over 9 months. Before I start a rant on the good and bad of Go, here is some background. 
 
-After being in the tech industry for over 10 years, I would like to think of myself as a pragmatic programmer or at least as someone getting closer to that - that should be a programmer's [Nirvana](https://www.britannica.com/topic/nirvana-religion). I didn't even plan to be a programmer, if you ask the 18-year-old self of me, he would say that he wanted to be an astrophysicist or a robotics engineer(Yes building space robots was my dream). Like most teenage dreams, it didn't happen and I ended up in tech instead. 
+After being in the tech industry for over 10 years, I would like to think of myself as a pragmatic programmer or at least as someone getting closer to that - that should be a programmer's [Nirvana](https://www.britannica.com/topic/nirvana-religion). I didn't even plan to be a programmer, if you ask the 18-year-old self of me, he would say that he wanted to be an astrophysicist or a robotics engineer(Yes building space robots were my dream). Like most teenage dreams, it didn't happen and I ended up in tech instead. 
 
 Though landing an IT Job was an accident, programming wasn't alien to me. I did learn some C/C++ when I was in high school to help my girlfriend with her project and did dabble in some PHP, JavaScript, HTML and Flash(ActionScript) during my early college years for personal projects and blogs. So when I got a real IT job without having an IT background, I did what many in that situation did, I started learning the language that I stumbled upon first based on the task I was given, which happened to be Java. Being a quick learner and having some idea of programming concepts from C/C++ Java wasn't that hard to learn and I was a pretty decent Java programmer in a few months. Then I was tasked with building some Web UI and I dived deep into the world of HTML, CSS, and JavaScript and honestly fell in love with JavaScript due to its flexibility and ease. I mastered JQuery and soon become the go-to guy for front end stuff in the office. 
 
@@ -22,7 +29,7 @@ I was anything but pragmatic back then, I was preaching JavaScript to everyone a
 
 Fast forward to now and if I look back I have done projects in C/C++, PHP, JavaScript, TypeScript, HTML, CSS, Java, Groovy, Scala, Python and recently Go. I think this exposure probably helped me become more pragmatic as I have started to look at programming languages as tools and each of them has their own strengths and weaknesses. Well, there is more to this story but that's for another time, the point is to set a baseline for the below reflections so that I don't sound like someone just trying **Go** and going on a rant.
 
----
+----
 
 Go is the latest language I learned and worked with, I have worked on a CLI project built with Go for over 9 months now, building a powerful scaffolding engine with my team(Yes, pretty much like [JHipster](https://www.jhipster.tech/)) that uses Go templates where you could create what we call [blueprints](https://github.com/xebialabs/blueprints) at [XebiaLabs](https://xebialabs.com/). So yes I have done much more than a hello world app with Go.
 
@@ -32,15 +39,15 @@ Without wasting more time on unrelated things here is what I like about Go and w
 
 ### Simplicity
 
-I like the fact that Go is a simple language(Going through the entire language features on the [tour](https://tour.golang.org) page literally takes 15 minutes unless you do the exercises) and unlike Scala, Rust or even JavaScript Go doesn't have many ways of doing the same thing which is extremely valuable for people working in teams and companies wanting to write maintainable code where even a newly joined employee can read and understand the code without needing much help. I think this is one of the biggest reason that is driving Go adoption. If you have worked on large scale projects you know how difficult it is when the code is unreadable and every new team member have to spend so much time trying to understand what a piece of code does. So I was really happy when I saw that Go doesn't have features that rely heavily on implicit and such. The language features and concepts are easy to grasp and you can start being productive in Go quite soon. The only concepts that might seem bit complex are the concurrency part and even that is simpler compared to other languages.
+I like the fact that Go is a simple language(Going through the entire language features on the [tour](https://tour.golang.org) page literally takes 15 minutes unless you do the exercises) and unlike Scala, Rust or even JavaScript Go doesn't have many ways of doing the same thing which is extremely valuable for people working in teams and companies wanting to write maintainable code where even a newly joined employee can read and understand the code without needing much help. I think this is one of the biggest reasons that is driving Go adoption. If you have worked on large scale projects you know how difficult it is when the code is unreadable and every new team member has to spend so much time trying to understand what a piece of code does. So I was really happy when I saw that Go doesn't have features that rely heavily on implicit and such. The language features and concepts are easy to grasp and you can start being productive in Go quite soon. The only concepts that might seem bit complex are the concurrency part and even that is simpler compared to other languages.
 
 ### Language provided code style and vetting
 
-This is such a time saver. IMO every language should just do this so that you don't waste time debating code style and setting up lint rules. Go provides opinionated formatting, linting & vet tool as part of the package and the Go compiler even enforces things like unused variable and stuff. Most of the IDE/Editor plugins also use these tools for formatting and linting and hence helps to keep consistent code style across Go projects which again adds to readability and maintenance.
+This is such a time saver. IMO every language should just do this so that you don't waste time debating code style and setting up lint rules. Go provides opinionated formatting, linting & vet tool as part of the package and the Go compiler even enforces things like unused variables and stuff. Most of the IDE/Editor plugins also use these tools for formatting and linting and hence helps to keep consistent code style across Go projects which again adds to readability and maintenance.
 
 ### Goroutines & Channels
 
-This is one of the biggest strength of Go. The native support for concurrency and parallelism. This makes Go an ideal candidate for applications that require heavy concurrent and/or parallel processing, networking and so on. Goroutines makes it so easy to start lightweight threads and channels provide a way to communicate between these threads acting like a message bus.
+This is one of the biggest strengths of Go. The native support for concurrency and parallelism. This makes Go an ideal candidate for applications that require heavy concurrent and/or parallel processing, networking and so on. Goroutines makes it so easy to start lightweight threads and channels provide a way to communicate between these threads acting like a message bus.
 
 ```go
 func main() {
@@ -115,16 +122,16 @@ Go doesn't need a runtime like JVM or NodeJS, Go applications can be compiled in
 This is where the love-hate relationship starts, Go is a simple language which is nice but at times it feels too simple & verbose and coming from Java/JavaScript ecosystem you are spoiled with some nice features & syntax sugars which IMO makes the code more expressive and helps to keep it DRY. The things that I miss the most are
 - Generics: This is currently [being considered](https://go.googlesource.com/proposal/+/master/design/go2draft-generics-overview.md) in the next major iteration of Go, but until then this just makes you repeat code unnecessarily. I have lost count of the number of times I had to repeat the same block of code for different types where Generics would have kept it nice and simple. This is also one reason you don't see libraries like Lodash for Go.
 - Standard error handling: This also seems to be [coming](https://go.googlesource.com/proposal/+/master/design/go2draft-error-handling-overview.md) in the next major iteration of Go but until it lands I can complain. Anyone writing Go will remember doing `if err != nil` uncountable times in your code. Removing those might cut the codebase in size by at least 20%
-- Default values: Would love to see this in Go, this is quite useful. Maybe I'm just spoiled by JS.
+- Default values: I would love to see this in Go, this is quite useful. Maybe I'm just spoiled by JS.
 
 ### Too much boilerplate(not suitable for DRY)
 
-Go being too simple means you would have to write a lot of code as the language doesn't offer constructs like map, reduce, and so on, and add the lack of generic on top means you would end up writing a lot of utility code and a lot of that will be repeated to accommodate different types. Imagine writing a map function in Go, you would have to write one for every combination of Map that can be used. These factors don't make it easy to do DRY programming in Go.
+Go being too simple means you would have to write a lot of code as the language doesn't offer constructs like map, reduce, and so on, and add the lack of generic on top means you would end up writing a lot of utility code and a lot of that will be repeated to accommodate different types. Imagine writing a map function in Go, you would have to write one for every combination of maps that can be used. These factors don't make it easy to do DRY programming in Go.
 
 ### Dependency management
 
 The dependency management in the Go ecosystem feels immature and too basic compared to other mainstream languages. Importing packages from Git is nice but it also makes it more fragile. What can go wrong when you are depending on a Git branch on your production application right! There is no way to use relative dependencies(Can't beat NPM link!).
-These problems are similar to the issues with dependency range in Node package managers. Glide seems to be a popular choice but still is not as mature as solutions in other languages. In the project, I work on we used Gradle along with [Gogradle](https://github.com/gogradle/gogradle) and though it works fine the developer experience is not as good as using Gradle/Maven for Java project or using NPM on a NodeJS project.
+These problems are similar to the issues with the dependency range in Node package managers. Glide seems to be a popular choice but still is not as mature as solutions in other languages. In the project, I work on we used Gradle along with [Gogradle](https://github.com/gogradle/gogradle) and though it works fine the developer experience is not as good as using Gradle/Maven for Java project or using NPM on a NodeJS project.
 
 ### Source code in GOPATH
 
@@ -132,7 +139,7 @@ Go recommends you to create your Go projects under the GOPATH. Maybe it is just 
 
 ### Confusing pointer behaviors
 
-Go has pretty good pointer support and the default behavior is to pass an object by value. If you want to pass something by reference you have to mark it specifically. But this behavior is not very consistent as the content of Maps and Slices by default are passed by reference and hence this could be a bit surprising to beginners.
+Go has pretty good pointer support and the default behavior is to pass an object by value. If you want to pass something by reference you have to mark it specifically. But this behavior is not very consistent as Maps and Slices by default are passed by reference and hence this could be a bit surprising to beginners.
 
 ### Struct hell
 
@@ -220,7 +227,7 @@ But then you can always choose to fasten a screw using a hammer.
 
 {% twitter 1142967056150728708 %}
 
----
+----
 
 If you like this article, please leave a like or a comment.
 

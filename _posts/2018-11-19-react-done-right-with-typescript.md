@@ -5,6 +5,8 @@ description: Learn how to write efficient and concise react components using Typ
 tags: [typescript, react, javascript, webdev]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/4eaahfl09brz9ozacdg1.jpeg
 canonical_url: https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79
+devto_url: https://dev.to/deepu105/react-components-done-right-with-typescript-mapped-and-conditional-types-420l
+devto_id: 140105
 ---
 
 You’ve probably heard about TypeScript, If not you should check it out. You may have heard someone claiming how great type safety is.
@@ -22,12 +24,12 @@ Additionally, TypeScript 2.1 and 2.8 introduced a bunch of cool lookup types. No
 Index types enable us to check properties and types of an interface or type dynamically using the `keyof T` (**index type query operator**) and `T[K]` (**indexed access operator**). Let's take the below interface for example.
 
 ```typescript
-    interface Person {
-      name: string;
-      age: number;
-      address: string;
-      sayHi: (msg: string) => string;
-    }
+interface Person {
+    name: string;
+    age: number;
+    address: string;
+    sayHi: (msg: string) => string;
+}
 ```
 
 The `keyof T` operator gets a union type of all the key names of the type `T` and hence `keyof Person` will give us `'name' | 'age' | 'address' | sayHi'` as result.
@@ -39,41 +41,41 @@ The `T[K]` operator gets the type for the provided key. `Person['name']` will re
 Let us see what mapped types are. Let us say we have the below interface for a Person.
 
 ```typescript
-    interface Person {
-      name: string;
-      age: number;
-      address: string;
-      sayHi: (msg: string) => string;
-    }
+interface Person {
+    name: string;
+    age: number;
+    address: string;
+    sayHi: (msg: string) => string;
+}
 ```
 
 Now in every project, it is almost always a common requirement to have variations of a certain interface. For example, let’s say we need a read-only version of the person as below.
 
 ```typescript
-    interface ReadonlyPerson {
-      readonly name: string;
-      readonly age: number;
-      readonly address: string;
-      readonly sayHi: (msg: string) => string;
-    }
+interface ReadonlyPerson {
+    readonly name: string;
+    readonly age: number;
+    readonly address: string;
+    readonly sayHi: (msg: string) => string;
+}
 ```
 
 In this case, we would have to replicate the Person interface and we have to keep them in sync manually. This is where mapped types will come in handy, so let us use the builtin mapped type, `Readonly`, for this.
 
 ```typescript
-    type ReadonlyPerson  = Readonly<Person>
+type ReadonlyPerson = Readonly<Person>;
 ```
 
 If you hover over the `ReadonlyPerson` type you can see the inferred type as below.
 
-![Inferred type view in VsCode](https://cdn-images-1.medium.com/max/2000/1*GLnLx-iMscyEMe9BQqCazg.png)*Inferred type view in VsCode*
+![Inferred type view in VsCode](https://cdn-images-1.medium.com/max/2000/1*GLnLx-iMscyEMe9BQqCazg.png)_Inferred type view in VsCode_
 
 That is cool, right? Now we can create types from existing types and don’t have to worry about keeping them in sync. How does it work, what does `Readonly<Person>` do? Let’s take a look at the mapped type.
 
 ```typescript
-    type Readonly<T> = {
-        readonly [K in keyof T]: T[K];
-    }
+type Readonly<T> = {
+    readonly [K in keyof T]: T[K];
+};
 ```
 
 The `in` operator from TypeScript does the trick here. It maps all the declarations of the existing type into the new type. The `keyof` operator provides the keys from our type for the mapping. Let us build our own mapped type.
@@ -81,9 +83,9 @@ The `in` operator from TypeScript does the trick here. It maps all the declarati
 Let us say we need a read-only Person interface where all the fields are nullable as well. We can build a mapped type as below for that.
 
 ```typescript
-    type ReadonlyNullablePerson = {
-        readonly [P in keyof Person]: Person[P] | null;
-    }
+type ReadonlyNullablePerson = {
+    readonly [P in keyof Person]: Person[P] | null;
+};
 ```
 
 And it is inferred as below
@@ -93,19 +95,19 @@ And it is inferred as below
 Let’s make it generic so that it can be used with any interface.
 
 ```typescript
-    type ReadonlyNullable<T> = {
-        readonly [K in keyof T]: T[K] | null;
-    }
+type ReadonlyNullable<T> = {
+    readonly [K in keyof T]: T[K] | null;
+};
 
-    type ReadonlyNullablePerson  = ReadonlyNullable<Person>
+type ReadonlyNullablePerson = ReadonlyNullable<Person>;
 ```
 
 TypeScript includes `Readonly<T>`, `Partial<T>`, `Pick<T, K extends keyof T>` and `Record<K extends string, T>` as built-in mapped types. Pick and Record can be used as below, check them in your editor to see what types they produce.
 
 ```typescript
-    type PersonMinimal = Pick<Person, 'name' | 'age'>
+type PersonMinimal = Pick<Person, "name" | "age">;
 
-    type RecordedPerson = Record<'name' | 'address', string>
+type RecordedPerson = Record<"name" | "address", string>;
 ```
 
 For every other use case, you can build your own mapped types.
@@ -117,13 +119,13 @@ For every other use case, you can build your own mapped types.
 Let us look at an example.
 
 ```typescript
-    type Foo<T, U> = T extends U ? string : boolean
+type Foo<T, U> = T extends U ? string : boolean;
 
-    interface Me {}
-    interface You extends Person {}
+interface Me {}
+interface You extends Person {}
 
-    type FooBool = Foo<Me, Person> // will result in boolean
-    type FooString = Foo<You, Person> // will result in string
+type FooBool = Foo<Me, Person>; // will result in boolean
+type FooString = Foo<You, Person>; // will result in string
 ```
 
 The type dynamically inferred from `Foo<T, U>` will be either `string` or `boolean` depending on what the first generic is extended from.
@@ -131,15 +133,15 @@ The type dynamically inferred from `Foo<T, U>` will be either `string` or `boole
 Let us see how we can mix conditional types with mapped types to infer a new type from Person which only includes the non-function properties.
 
 ```typescript
-    type NonFunctionPropNames<T> = {
-      [K in keyof T]: T[K] extends Function ? never : K
-    }[keyof T];
+type NonFunctionPropNames<T> = {
+    [K in keyof T]: T[K] extends Function ? never : K;
+}[keyof T];
 
-    type NonFunctionProps<T> = Pick<T, NonFunctionPropNames<T>>
+type NonFunctionProps<T> = Pick<T, NonFunctionPropNames<T>>;
 
-    type PersonProps = NonFunctionProps<Person>
+type PersonProps = NonFunctionProps<Person>;
 
-    /* Produces the below type
+/* Produces the below type
     type PersonProps = {
         name: string;
         age: number;
@@ -152,15 +154,15 @@ We first get all the non-function property names from the interface. Then use th
 
 TypeScript provides the following inbuilt conditional types:
 
-* `Exclude<T, U>` – Exclude from `T` those types that are assignable to `U`.
+-   `Exclude<T, U>` – Exclude from `T` those types that are assignable to `U`.
 
-* `Extract<T, U>` – Extract from `T` those types that are assignable to `U`.
+-   `Extract<T, U>` – Extract from `T` those types that are assignable to `U`.
 
-* `NonNullable<T>` – Exclude `null` and `undefined` from `T`.
+-   `NonNullable<T>` – Exclude `null` and `undefined` from `T`.
 
-* `ReturnType<T>` – Obtain the return type of a function type.
+-   `ReturnType<T>` – Obtain the return type of a function type.
 
-* `InstanceType<T>` – Obtain the instance type of a constructor function type.
+-   `InstanceType<T>` – Obtain the instance type of a constructor function type.
 
 ## Let us put it into use
 
@@ -168,7 +170,7 @@ These advanced types become even more powerful when you combine them together. L
 
 ### React component and Redux reducer in ES6
 
-Let see a simple React component with a reducer written in ES6. Take a look at ***index.jsx*** in the below code sandbox:
+Let see a simple React component with a reducer written in ES6. Take a look at **_index.jsx_** in the below code sandbox:
 
 {% codesandbox 40n3y52qlx runonclick=1 %}
 
@@ -176,7 +178,7 @@ As you can see, we use the prop-types library to define the component props. It 
 
 ### React component and Redux reducer in TypeScript
 
-Now let us convert this simple example to TypeScript so that it is type safe. Take a look at ***index.tsx*** in the below code sandbox:
+Now let us convert this simple example to TypeScript so that it is type safe. Take a look at **_index.tsx_** in the below code sandbox:
 
 {% codesandbox znv36k09op runonclick=1 %}
 
@@ -184,7 +186,7 @@ As you can see, the code is more type-safe now. It is also much more verbose eve
 
 ### React component and Redux reducer in TypeScript with advanced types
 
-Now let us apply the advanced types that we learned to make this example less verbose and even more type safe. Take a look at ***index.tsx*** in the below code sandbox:
+Now let us apply the advanced types that we learned to make this example less verbose and even more type safe. Take a look at **_index.tsx_** in the below code sandbox:
 
 {% codesandbox zq7w69p57x runonclick=1 %}
 
@@ -202,7 +204,7 @@ I gave a talk on TypeScript for Devoxx 2018, and you can see the video and slide
 
 ---
 
-Check out my book “*Full Stack Development with JHipster*” on [Amazon](https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X) and [Packt](https://www.packtpub.com/application-development/full-stack-development-jhipster) if you like to learn about Full stack development with an awesome stack that includes TypeScript and React.
+Check out my book “_Full Stack Development with JHipster_” on [Amazon](https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X) and [Packt](https://www.packtpub.com/application-development/full-stack-development-jhipster) if you like to learn about Full stack development with an awesome stack that includes TypeScript and React.
 
 If you like JHipster don’t forget to give it a star on [Github](https://github.com/jhipster/generator-jhipster).
 

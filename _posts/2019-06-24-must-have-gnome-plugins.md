@@ -5,7 +5,9 @@ description: A list of awesome extensions you must have on GNOME Desktop
 tags: [linux, gnome, fedora, desktop]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/r9qqpkk8iljl7hsskd6s.jpg
 series: Linux environment for developers
-canonical_url: https://deepu.js.org/must-have-gnome-plugins/
+canonical_url: https://deepu.tech/must-have-gnome-plugins/
+devto_url: https://dev.to/deepu105/must-have-gnome-extensions-31e3
+devto_id: 127938
 ---
 
 I'm a sucker for nice polished UI and great UX. While there are a lot of Linux Desktop environments out there providing great UX and UI, I found [GNOME](https://www.gnome.org/) to be the perfect one for my liking. Yes, I have seen/tried a few others. I also found some which are more polished and providing a better default UX out of the box than GNOME like [Deepin](https://www.deepin.org/en/dde/) and [Elementary](https://elementary.io/). But below plugins bridge that gap and hence I choose to stick with GNOME which is the default in Fedora, hence quite stable, unless I had a compelling reason to switch.

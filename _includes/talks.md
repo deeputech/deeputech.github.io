@@ -1,0 +1,2 @@
+<!-- - [CodeMotion, Berlin](https://events.codemotion.com/conferences/berlin/2019/): November 12-13th - [Microservices with Istio, JHipster and Kubernetes](https://events.codemotion.com/conferences/berlin/2019/speaker/3135/)
+- [Devoxx, Kyiv, Ukraine](https://devoxx.com.ua/): November 1-2 - [Building Native TypeScript applications using Deno runtime](https://devoxx.com.ua/speaker-details/?id=9301) -->

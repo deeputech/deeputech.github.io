@@ -2,13 +2,19 @@
 title: Configure a beautiful terminal on Unix with Zsh
 published: true
 description: See how you can configure a beautiful terminal on Unix with Zsh and Oh-My-Zsh
-tags: [linux, terminal, oh-my-zsh, zsh]
+tags: [linux, terminal, ohmyzsh, zsh]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/vt2sh5znt9ks31xn0040.png
 series: Linux environment for developers
-canonical_url: https://deepu.js.org/configure-a-beautiful-terminal-on-unix/
+canonical_url: https://deepu.tech/configure-a-beautiful-terminal-on-unix/
+devto_url: https://dev.to/deepu105/configure-a-beautiful-terminal-on-unix-with-zsh-4mcb
+devto_id: 126019
 ---
 
-I was a long time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I'm not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup [here](https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc)
+Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
+
+----
+ 
+I was a long-time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I'm not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup [here](https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc)
 
 As a senior developer and open source community lead, I spent a lot of time on the terminal and a terminal with a nice developer experience instantly makes you happier and more productive. The default bash terminal is good for beginners but if you really want a powerful terminal you need something more than bash.
 
@@ -279,9 +285,9 @@ Follow these steps
 ```
 Replace `linux` with `osx` if you are on a Mac.
  
----
+----
 
-I hope you like it. If you have any question or if you think I missed something please add a comment.
+I hope you like it. If you have any questions or if you think I missed something please add a comment.
 
 If you like this article, please leave a like or a comment.
 

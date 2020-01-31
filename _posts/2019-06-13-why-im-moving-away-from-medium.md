@@ -5,6 +5,8 @@ tags: [writing, medium, development, tech]
 published: true
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/8cexsumefdxmrhqb6nto.jpg
 canonical_url: https://medium.com/@deepu105/why-im-moving-away-from-medium-f9153a01247e
+devto_url: https://dev.to/deepu105/why-i-m-moving-away-from-medium-13ki
+devto_id: 123275
 ---
 
 After much deliberation, I have decided to move my blogs away from [Medium](https://medium.com/@deepu105). I was considering setting up my own blog with [Hugo](https://gohugo.io/) but then decided to go with [Dev.to](https://dev.to/deepu105). Below are the reasons why I decided to leave Medium and why I chose Dev.to.

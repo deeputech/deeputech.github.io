@@ -5,14 +5,20 @@ description: How I have configured VS Code to make the most out of it for develo
 tags: [vscode, development, ide, opensource]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/zkv3883der29keb7qkrr.png
 series: Linux environment for developers
-canonical_url: https://deepu.js.org/make-the-most-out-of-vscode
+canonical_url: https://deepu.tech/make-the-most-out-of-vscode
+devto_url: https://dev.to/deepu105/my-vs-code-setup-making-the-most-out-of-vs-code-4enl
+devto_id: 141925
 ---
 
+Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
+
+----
+ 
 [Visual Studio Code](https://code.visualstudio.com/)(I like the sound of VS Code better), I just love it. It is my primary IDE. 
 
 I always loved lightweight editors over IDEs. Many years ago I was using Eclipse for development and [Notepad++](https://notepad-plus-plus.org/) with some plugins for all other lightweight stuff. Then I discovered sublime text and was using it for a while. I still was finding Eclipse too heavyweight when I was doing web development. Then came [Brackets](http://brackets.io/) from Adobe. It was a fairly nice editor especially for web development and I started using it heavily for web development. But Brackets was bit slow back then on a large codebase. Then came [Atom](https://atom.io/) which revolutionized the NodeJS desktop application landscape by introducing the Atom shell which ultimately became [Electron](https://electronjs.org/). So I switched to Atom and loved its slick interface and nice pluggable features. It became my primary editor for all web development. 
 
-So Electron paved the way for VS Code and though at first, I was skeptical dues to the association with Visual Studio, I tried it out and was amazed by its speed and user experience. There was no turning back now. I slowly started using VS Code for most of my day to day development, except for Java which I was using IntelliJ by now. Fast forward now below are the editor/IDE I use for development.
+So Electron paved the way for VS Code and though at first, I was skeptical due to the association with Visual Studio, I tried it out and was amazed by its speed and user experience. There was no turning back now. I slowly started using VS Code for most of my day to day development, except for Java which I was using IntelliJ by now. Fast forward now below are the editor/IDE I use for development.
 
 - **VS Code**: JavaScript, TypeScript, EJS, HTML, CSS, Golang, Python, Ruby, Shell, Docker, Kubernetes, Terraform and everything in between including writing this blog post.
 - **IntelliJ Idea**: Java, Scala, Kotlin (Though I use VS Code for minor edits and to read the code, etc)
@@ -123,7 +129,7 @@ Marks matching bracket pairs with unique colors. This really makes reading code 
 
 #### [Change case](https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case)
 
-Convert between different case. Trust me this is so handy 
+Convert between different cases. Trust me this is so handy 
 > `code --install-extension wmaurer.change-case`
 
 #### [Code spell checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
@@ -206,7 +212,7 @@ Follow these steps
 ```
 Replace `linux` with `osx` if you are on a Mac.
  
----
+----
 
 # Conclusion
 
@@ -214,11 +220,11 @@ This might seem like too many plugins but on [my configuration](https://dev.to/d
 
 Many people [ask](https://www.reddit.com/r/linux/comments/c42kpk/my_beautiful_linux_development_environment/erum9sf/) me why I use VS Code when I have IntelliJ and my answer have been always the same. IntelliJ is great but its also quite heavy. While all those advanced features are needed for Java, Scala or Kotlin development, VS Code is perfectly capable of giving a nice developer experience for lightweight languages like JS, TS, Go, Python, Rust, Ruby, etc. 
 
-As a regular user of both IntelliJ and VS Code, I prefer VS Code as much as possible. The user experience is much nicer for my taste. In fact, I like the developer experience in VS Code better for JavaScript, TypeScript, Web, Python, and Golang. Also switching between them for JVM projects and others don't feel weird for me as I have same keyboard mappings for both. The only time I fire up IntelliJ these days are when I want to do full-fledged Java development. For everything else, I use VS Code.
+As a regular user of both IntelliJ and VS Code, I prefer VS Code as much as possible. The user experience is much nicer for my taste. In fact, I like the developer experience in VS Code better for JavaScript, TypeScript, Web, Python, and Golang. Also switching between them for JVM projects and others don't feel weird for me as I have the same keyboard mappings for both. The only time I fire up IntelliJ these days is when I want to do full-fledged Java development. For everything else, I use VS Code.
 
----
+----
 
-I hope you find this useful. If you have any question or if you think I missed something please add a comment.
+I hope you find this useful. If you have any questions or if you think I missed something please add a comment.
 
 If you like this article, please leave a like or a comment.
 

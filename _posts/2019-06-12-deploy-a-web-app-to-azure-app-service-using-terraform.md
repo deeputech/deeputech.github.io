@@ -4,7 +4,9 @@ description: Deploy a web app to Azure App Service using Terraform
 tags: [java, jhipster, azure, terraform]
 published: true
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/8mb4tyleqthxsvl1yxy6.png
-canonical_url: https://deepu.js.org/deploy-a-web-app-to-azure-app-service-using-terraform
+canonical_url: https://deepu.tech/deploy-a-web-app-to-azure-app-service-using-terraform
+devto_url: https://dev.to/deepu105/deploy-a-web-app-to-azure-app-service-using-terraform-40e1
+devto_id: 122702
 ---
 
 Deploying Java web applications to Azure is easy and has been tried, tested and explained many times by many people. My friend [Julien Dubois](https://dev.to/jdubois) has a nice series on it [here](https://dev.to/azure/creating-a-spring-boot-and-angular-application-for-azure-1-7-2mb8). Azure makes it really easy to use its [App Service](https://azure.microsoft.com/en-gb/services/app-service/) as it provides many different ways of deploying a web app.
@@ -258,7 +260,7 @@ You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](http
 
 My other related posts:
 
-- [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://medium.com/@deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-ecc6e7fc3f77)
-- [Deploying JHipster Microservices on Azure Kubernetes Service (AKS)](https://medium.com/@deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-fb46991746ba)
-- [How to set up JHipster microservices with Istio service mesh on Kubernetes](https://medium.freecodecamp.org/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3)
+- [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele)
+- [Deploying JHipster Microservices on Azure Kubernetes Service (AKS)](https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d)
+- [How to set up JHipster microservices with Istio service mesh on Kubernetes](https://dev.to/deepu105/how-to-set-up-java-microservices-with-istio-service-mesh-on-kubernetes-5bkn)
 - [Continuous delivery of Microservices with XebiaLabs — a.k.a DevOps as Code](https://medium.com/xebialabs/continuous-delivery-of-microservices-with-xebialabs-a-k-a-devops-as-code-b5f0c3b2b1c8)

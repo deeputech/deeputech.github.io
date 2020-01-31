@@ -5,6 +5,8 @@ tags: [azure, kubernetes, jhipster, microservices]
 published: true
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/zvmxe2mqyft5qa6vajgd.png
 canonical_url: https://medium.com/jhipster/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-fb46991746ba
+devto_url: https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d
+devto_id: 127515
 series: Microservices with JHipster
 ---
 
@@ -305,6 +307,6 @@ My other related posts:
 
 1. [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele)
 
-1. [JHipster microservices with Istio service mesh on Kubernetes](https://medium.com/@deepu105/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3)
+1. [JHipster microservices with Istio service mesh on Kubernetes](https://dev.to/deepu105/how-to-set-up-java-microservices-with-istio-service-mesh-on-kubernetes-5bkn)
 
 Originally published in [Medium](https://medium.com/jhipster/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-fb46991746ba) on Oct 01, 2018

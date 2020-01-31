@@ -32,17 +32,17 @@ author: deepu
         </div>
         <div>
             <p>
-                Full Stack Development with JHipster.
+                Full Stack Development with JHipster - second edition.
                 Get it on
-                <a href="https://www.packtpub.com/application-development/full-stack-development-jhipster" target="_blank">Packt</a>,
-                <a href="https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X" target="_blank">Amazon</a> and
-                <a href="https://www.safaribooksonline.com/library/view/full-stack-development/9781788476317/" target="_blank">Safari</a>.
+                <a href="https://www.packtpub.com/web-development/full-stack-development-with-jhipster-second-edition" target="_blank">Packt</a> and
+                <a href="https://smile.amazon.com/Full-Stack-Development-JHipster-microservices/dp/1838824987" target="_blank">Amazon</a> <!-- and
+                <a href="https://www.safaribooksonline.com/library/view/full-stack-development/9781788476317/" target="_blank">Safari</a>. -->
 
             </p>
             <p class="mb-5">
               <img
                 class="shadow-lg"
-                src="{{ site.baseurl }}/assets/images/jhbook-banner.png"
+                src="{{ site.baseurl }}/assets/images/jhbook-banner-v2.png"
                 alt="Full stack development with JHipster"
               />
             </p>
@@ -177,18 +177,34 @@ author: deepu
                 <a href="https://twitter.com/deepu105">
                     <i class="fab fa-twitter fa-lg"></i>
                 </a>
-                <a href="https://github.com/deepu105">
-                    <i class="fab fa-github fa-lg"></i>
+                <a href="https://dev.to/deepu105">
+                    <i class="fab fa-dev fa-lg"></i>
                 </a>
                 <a href="https://www.linkedin.com/in/deepu05">
                     <i class="fab fa-linkedin fa-lg"></i>
                 </a>
-                <a href="https://dev.to/deepu105">
-                    <i class="fab fa-dev fa-lg"></i>
-                </a>
                 <a href="https://medium.com/@deepu105">
                     <i class="fab fa-medium fa-lg"></i>
                 </a>
+                <a href="https://github.com/deepu105">
+                    <i class="fab fa-github fa-lg"></i>
+                </a>
+            </div>
+        </section>
+        <section>
+            <div class="section-title">
+                <h2><span>Blogs on Dev.to</span></h2>
+            </div>
+            <dev-widget data-username="deepu105" data-width="100%"></dev-widget>
+        </section>
+      <!-- Upcoming talks ================================================= -->
+        <section class="featured-posts">
+            <div class="section-title">
+                <h2><span>Upcoming talks</span></h2>
+            </div>
+            <div class="row">
+                {% capture talks %}{% include talks.md %}{% endcapture %}
+                {{ talks | markdownify }}
             </div>
         </section>
       <!-- Featured ================================================= -->
