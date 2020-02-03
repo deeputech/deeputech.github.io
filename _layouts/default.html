@@ -82,7 +82,11 @@
                     <a class="nav-link" href="{{ site.baseurl }}/blogs/"><i class="fas fa-blog"></i> Blog</a>
                 </li>
 
+                {% if page.url == "/books" %}
+                <li class="nav-item active">
+                {% else %}
                 <li class="nav-item">
+                {% endif %}
                     <a class="nav-link" href="{{ site.baseurl }}/books"><i class="fas fa-book"></i> Books</a>
                 </li>
 
