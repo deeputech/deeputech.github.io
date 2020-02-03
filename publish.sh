@@ -25,7 +25,7 @@ if [ -z "$(git status --porcelain)" ]; then
 
     echo ">> Checkout and clean master"
     git checkout master || exit
-    find -mindepth 1 -depth -print0 | grep -vEzZ '(_json(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf || exit
+    find -mindepth 1 -depth -print0 | grep -vEzZ '(_drafts(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf || exit
 
     echo ">> Move site form temp & publish to GitHub"
     mv $TMP_LOC/* . || exit
