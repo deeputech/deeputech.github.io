@@ -11,6 +11,7 @@ include: ["_pages"]
 permalink: /:title/
 
 twitter_username: 'deepu105'
+title_image: 'assets/images/logo.png'
 
 # Authors
 authors:
