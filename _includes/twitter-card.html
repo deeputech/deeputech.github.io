@@ -12,7 +12,7 @@
 {% if page.cover_image %}
 <meta name="twitter:card"  content="summary_large_image">
 <meta name="twitter:image" content="{{ page.cover_image }}">
-{% else if page.url == "/books" %}
+{% elsif page.url == "/books" %}
 <meta name="twitter:card"  content="summary_large_image">
 <meta name="twitter:image" content="https://deepu.tech/assets/images/jhbook-banner-v2.png">
 {% else %}
