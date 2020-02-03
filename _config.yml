@@ -10,6 +10,8 @@ disqus: 'deepu-tech'
 include: ["_pages"]
 permalink: /:title/
 
+twitter_username: 'deepu105'
+
 # Authors
 authors:
   deepu:
