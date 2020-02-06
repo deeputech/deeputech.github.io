@@ -1,20 +1,20 @@
 ---
 title: "Polyglot inception with GraalVM. Why? Because it's fun \U0001F3C4"
 description: >-
-  Let's test drive GraalVM with a program that uses many languages together.
-  Why? Because it's fun!
+    Let's test drive GraalVM with a program that uses many languages together.
+    Why? Because it's fun!
 published: true
 featured: false
 tags:
-  - java
-  - python
-  - javascript
-  - rust
-canonical_url: 'https://deepu.tech/polyglot-showdown-with-graalvm/'
-cover_image: 'https://i.imgur.com/SHMvb6A.jpg'
+    - java
+    - python
+    - javascript
+    - rust
+canonical_url: "https://deepu.tech/polyglot-showdown-with-graalvm/"
+cover_image: "https://i.imgur.com/SHMvb6A.jpg"
 devto_id: 256804
 devto_url: >-
-  https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa
+    https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -79,7 +79,7 @@ That's it we are ready to roll!
 
 # Lets have some fun
 
-As a polyglot developer, GraalVM is quite interesting to me as I can use many languages I love together making use of the best parts from each. Let's explore the polyglot capabilities offered by GraalVM, please note that support for Python, Ruby, R, and Rust are still in the experimental stage and hence your mileage may vary. We will build a program today using Java, JavaScript, Ruby, Python, and C++.
+As a polyglot developer, GraalVM is quite interesting to me as I can use many languages I love together making use of the best parts from each. Let's explore the polyglot capabilities offered by GraalVM, please note that support for Python, Ruby, R, and Rust are still in the experimental stage and hence your mileage may vary. We will build a program today using Java, JavaScript, Ruby, Rust, Python, and C++.
 
 > I wanted to use Rust and Go as well. While Rust mostly works via the GraalVM `lli` command line, it has a lot of limitations when embedded in polyglot mode. After a lot of fiddling around, I did manage to get it working. For Golang, it might be possible with [this](https://github.com/zegl/tre) Go LLVM compiler as shown [here](https://gist.github.com/eginez/d69e3e1c4045eb692a274bd2bd5d31d6), but it's having its own set of issues as well when I tried. So I have given up on Golang for now. Let me know if any of you got it working.
 
@@ -342,4 +342,3 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Based on official logos of respective projects.
-
