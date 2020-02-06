@@ -3,7 +3,7 @@ title: Polyglot inception with GraalVM. Why? Because it's fun 🏄
 description: Let's test drive GraalVM with a program that uses many languages together. Why? Because it's fun!
 published: true
 featured: false
-tags: [java, python, javascript, rust, ruby, c++, graalvm]
+tags: [java, python, javascript, rust]
 canonical_url: https://deepu.tech/polyglot-showdown-with-graalvm/
 cover_image: https://i.imgur.com/SHMvb6A.jpg
 ---
