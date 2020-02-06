@@ -1,8 +1,6 @@
 ---
 title: "Polyglot inception with GraalVM. Why? Because it's fun \U0001F3C4"
-description: >-
-    Let's test drive GraalVM with a program that uses many languages together.
-    Why? Because it's fun!
+description: "Let's test drive GraalVM with a program that uses many languages together. Why? Because it's fun!"
 published: true
 featured: false
 tags:
@@ -13,8 +11,7 @@ tags:
 canonical_url: "https://deepu.tech/polyglot-showdown-with-graalvm/"
 cover_image: "https://i.imgur.com/SHMvb6A.jpg"
 devto_id: 256804
-devto_url: >-
-    https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa
+devto_url: "https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa"
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
