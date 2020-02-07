@@ -454,3 +454,9 @@ pre.lineno {
       transform: rotateY(180deg); }
   .profile-pic:hover .flip-card-inner {
     transform: rotateY(180deg); }
+
+.no-image .image-block {
+  display: none; }
+.no-image .col-lg-7 {
+  flex: 0 0 100%;
+  max-width: 100%; }
