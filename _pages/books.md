@@ -17,9 +17,9 @@ comments: false
     <a href="https://smile.amazon.com/Full-Stack-Development-JHipster-microservices/dp/1838824987" target="_blank" class="book-company-logo">
         <img width="100" src="{{ site.baseurl }}/assets/images/Amazon_logo.svg"/>
     </a>
-    <!-- <a href="https://www.safaribooksonline.com/library/view/full-stack-development/9781788476317/" target="_blank" class="book-company-logo">
+    <a href="https://learning.oreilly.com/library/view/full-stack-development/9781838824983/" target="_blank" class="book-company-logo">
         <img width="100" src="{{ site.baseurl }}/assets/images/Oreilly_safari_logo.png"/>
-    </a> -->
+    </a>
 </div>
 
 **Follow on Twitter [@FullstackBook](https://twitter.com/FullstackBook)**
