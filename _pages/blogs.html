@@ -2,7 +2,7 @@
 layout: default
 title: Blogs
 permalink: /blogs
-pagination: 
+pagination:
   enabled: true
 comments: false
 ---
@@ -14,6 +14,23 @@ comments: false
         {{ site.description }}
     </p>
 </div>
+<!-- Latest
+================================================== -->
+<section class="featured-posts">
+    <div class="section-title">
+        <h2><span>Latest</span></h2>
+    </div>
+    <div class="row">
+        {% for post in site.posts %}
+            {% if forloop.index == 1 %}
+            <div class="col-md-12 mb-30px">
+                {% include featuredbox.html %}
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</section>
+
 <!-- Featured
 ================================================== -->
 <section class="featured-posts">

@@ -40,7 +40,7 @@ author: deepu
         <!-- Book ================================================= -->
         <section class="featured-posts">
             <div class="section-title">
-                <h2><span>Book</span></h2>
+                <h2><span>Latest Book</span></h2>
             </div>
             <div>
                 <p>
@@ -62,10 +62,27 @@ author: deepu
                 </p>
             </div>
         </section>
+        <!-- Latest blog ================================================= -->
+        <section class="featured-posts">
+            <div class="section-title">
+                <h2><span>Latest Blog Post</span></h2>
+            </div>
+            <div>
+                <div class="row">
+                    {% for post in site.posts %}
+                        {% if forloop.index == 1 %}
+                        <div class="col-md-12 mb-30px">
+                            {% include featuredbox.html %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
         <!-- Projects ================================================= -->
         <section class="featured-posts">
             <div class="section-title">
-                <h2><span>OSS projects</span></h2>
+                <h2><span>Some OSS projects I work on</span></h2>
             </div>
             <div>
                 <div class="row">
@@ -81,12 +98,10 @@ author: deepu
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="about-item">
-                            <a class="project-link" target="_blank" href="/angular-clock">
-                                <h3>Angular Clock</h3>
+                            <a class="project-link" target="_blank" href="http://jhipster.github.io/jdl-studio/">
+                                <h3>JDL Studio</h3>
                             </a>
-                            <p>
-                                A beautiful responsive clock face and clock widget for angular JS. Built in SVG
-                            </p>
+                            <p>An awesome online JDL editor and visualizer</p>
                         </div>
                     </div>
                     <div class="clearfix visible-sm-block"></div>
@@ -113,10 +128,12 @@ author: deepu
                     <div class="clearfix visible-sm-block"></div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
                         <div class="about-item">
-                            <a class="project-link" target="_blank" href="http://jhipster.github.io/jdl-studio/">
-                                <h3>JDL Studio</h3>
+                            <a class="project-link" target="_blank" href="/angular-clock">
+                                <h3>Angular Clock</h3>
                             </a>
-                            <p>An awesome online JDL editor and visualizer</p>
+                            <p>
+                                A beautiful responsive clock face and clock widget for angular JS. Built in SVG
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-3 col-sm-6 col-xs-12">
