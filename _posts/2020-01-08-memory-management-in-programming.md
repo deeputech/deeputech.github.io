@@ -112,14 +112,14 @@ Stay tuned for upcoming parts of this series:
 
 # References
 
--   [http://homepages.inf.ed.ac.uk](http://homepages.inf.ed.ac.uk/stg/teaching/apl/handouts/memory.pdf)
--   [https://javarevisited.blogspot.com](https://javarevisited.blogspot.com/2013/01/difference-between-stack-and-heap-java.html?m=1)
--   [http://net-informations.com](http://net-informations.com/faq/net/stack-heap.htm)
--   [https://gribblelab.org](https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html)
--   [https://medium.com/computed-comparisons](https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81)
--   [https://en.wikipedia.org/wiki/Garbage*collection*(computer_science)](<https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)>)
--   [https://en.wikipedia.org/wiki/Automatic_Reference_Counting](https://en.wikipedia.org/wiki/Automatic_Reference_Counting)
--   [https://blog.sessionstack.com/](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
+-   [homepages.inf.ed.ac.uk](http://homepages.inf.ed.ac.uk/stg/teaching/apl/handouts/memory.pdf)
+-   [javarevisited.blogspot.com](https://javarevisited.blogspot.com/2013/01/difference-between-stack-and-heap-java.html?m=1)
+-   [net-informations.com](http://net-informations.com/faq/net/stack-heap.htm)
+-   [gribblelab.org](https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html)
+-   [medium.com/computed-comparisons](https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81)
+-   [en.wikipedia.org/wiki/Garbage-collection](<https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)>)
+-   [en.wikipedia.org/wiki/Automatic-Reference-Counting](https://en.wikipedia.org/wiki/Automatic_Reference_Counting)
+-   [blog.sessionstack.com](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
 
 ---
 

@@ -191,11 +191,11 @@ I hope you had fun learning about the V8 internals, stay tuned for the next post
 
 # References
 
--   [https://v8.dev/blog/trash-talk](https://v8.dev/blog/trash-talk)
--   [http://jayconrod.com](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection)
--   [https://blog.codeship.com](https://blog.codeship.com/understanding-garbage-collection-in-node-js/)
--   [https://developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
--   [https://blog.sessionstack.com](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
+-   [v8.dev/blog/trash-talk](https://v8.dev/blog/trash-talk)
+-   [jayconrod.com](http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection)
+-   [blog.codeship.com](https://blog.codeship.com/understanding-garbage-collection-in-node-js/)
+-   [developer.mozilla.org](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
+-   [blog.sessionstack.com](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
 
 ---
 

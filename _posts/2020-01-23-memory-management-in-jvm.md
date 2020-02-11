@@ -226,12 +226,12 @@ I hope you had fun learning about the JVM internals, stay tuned for the next pos
 
 # References
 
--   [https://docs.oracle.com](https://docs.oracle.com/en/java/javase/13/gctuning/)
--   [http://pythontutor.com/java.html](http://pythontutor.com/java.html)
--   [https://www.journaldev.com](https://www.journaldev.com/2856/java-jvm-memory-model-memory-management-in-java)
--   [https://www.yourkit.com](https://www.yourkit.com/docs/kb/sizes.jsp)
--   [https://dzone.com](https://dzone.com/articles/understanding-the-java-memory-model-and-the-garbag/)
--   [https://www.infoq.com](https://www.infoq.com/articles/Visualizing-Java-Garbage-Collection/)
+-   [docs.oracle.com](https://docs.oracle.com/en/java/javase/13/gctuning/)
+-   [pythontutor.com/java.html](http://pythontutor.com/java.html)
+-   [www.journaldev.com](https://www.journaldev.com/2856/java-jvm-memory-model-memory-management-in-java)
+-   [www.yourkit.com](https://www.yourkit.com/docs/kb/sizes.jsp)
+-   [dzone.com](https://dzone.com/articles/understanding-the-java-memory-model-and-the-garbag/)
+-   [www.infoq.com](https://www.infoq.com/articles/Visualizing-Java-Garbage-Collection/)
 
 ---
 
