@@ -9,7 +9,7 @@ tags:
     - programming
     - computerscience
 canonical_url: "https://deepu.tech/memory-management-in-golang/"
-cover_image: "https://i.imgur.com/kSgatSL.png"
+cover_image: "https://i.imgur.com/IFsYct8.gif"
 series: memory-management
 ---
 
@@ -29,7 +29,7 @@ If you haven't read the [first part](https://dev.to/deepu105/demystifying-memory
 
 First, let us see what the internal memory structure of Go is.
 
-> Go Runtime schedules Goroutines (`G`) onto Logical Processors (`P`) for execution. Each `P` has a machine (`M`). We will use `P`, `M` & `G` through out this post. If you’re not familiar with the Go scheduler read [Go scheduler: Ms, Ps & Gs](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html) first.
+> Go Runtime schedules Goroutines (`G`) onto Logical Processors (`P`) for execution. Each `P` has a machine (`M`). We will use `P`, `M` & `G` throughout this post. If you’re not familiar with the Go scheduler read [Go scheduler: Ms, Ps & Gs](https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html) first.
 
 ![Go Scheduler](https://i.imgur.com/wThLAbQ.png)
 
@@ -37,7 +37,7 @@ Each Go program process is allocated some virtual memory by the Operating System
 
 ![Go Memory structure](https://i.imgur.com/vFtq3uj.png)
 
-This is a simplified view based on the internal objects used by Go, In reality Go divides and groups memory into pages as described in [this great article](https://blog.learngoprogramming.com/a-visual-guide-to-golang-memory-allocator-from-ground-up-e132258453ed).
+This is a simplified view based on the internal objects used by Go, In reality, Go divides and groups memory into pages as described in [this great article](https://blog.learngoprogramming.com/a-visual-guide-to-golang-memory-allocator-from-ground-up-e132258453ed).
 
 This is quite different from the memory structure we saw in the previous chapters for [JVM](https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le) and [V8](https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p). As you can see there is no generational memory here. The main reason for this is the [**TCMalloc**](http://goog-perftools.sourceforge.net/doc/tcmalloc.html)(Thread-Caching Malloc), which is what Go's own memory allocator was modeled upon.
 
@@ -49,30 +49,30 @@ This is where Go stores dynamic data(any data for which size cannot be calculate
 
 The resident set is divided into pages of 8KB each and is managed by one global `mheap` object.
 
-> Large objects(Object of Size > 32kb) are allocated directly from `mheap`. These large request comes at an expenses of central lock, so only one `P`’s request can be served at any given point of time.
+> Large objects(Object of Size > 32kb) are allocated directly from `mheap`. These large requests come at an expense of central lock, so only one `P`’s request can be served at any given point of time.
 
 `mheap` manages pages grouped into different constructs as below:
 
--   **mspan**: `mspan` is the most basic structure that manages the pages of memory in `mheap`. Its a double linked list that holds the address of the start page, span size class and number of pages in the span. Like TCMalloc, Go also divides Memory Pages into a block of 67 different classes by size starting at 8 bytes up to 32 kilobytes as in the below image
+-   **mspan**: `mspan` is the most basic structure that manages the pages of memory in `mheap`. Its a double linked list that holds the address of the start page, span size class and the number of pages in the span. Like TCMalloc, Go also divides Memory Pages into a block of 67 different classes by size starting at 8 bytes up to 32 kilobytes as in the below image
 
     ![](https://i.imgur.com/IxjG2aF.png)
 
-    Each span exists twice, one for objects with pointers (**scan** classes) and one for objects with no pointers (**noscan** classes). This helps during GC as `noscan` spans need not be traversed to look for live objects.
+    Each span exists twice, one for objects with pointers (**scan** classes) and one for objects with no pointers (**`noscan`** classes). This helps during GC as `noscan` spans need not be traversed to look for live objects.
 
 -   **mcentral**: `mcentral` groups spans of same size class together. Each `mcentral` contains two `mspanList`:
 
-    -   **empty**: Double linked list of spans with no free objects or spans that are cached in an `mcache`. When a span here is freed, its moved to the nonempty list.
-    -   **nonempty**: Double linked list of spans with a free object. When a new span is requested from `mcentral`, it takes that from the nonempty list and moves it into the empty list.
+    -   **empty**: Double linked list of spans with no free objects or spans that are cached in a `mcache`. When a span here is freed, it's moved to the nonempty list.
+    -   **non-empty**: Double linked list of spans with a free object. When a new span is requested from `mcentral`, it takes that from the nonempty list and moves it into the empty list.
 
     When `mcentral` doesn't have any free span, it requests a new run of pages from `mheap`.
 
--   **arena**: The heap memory grows and shrinks as required within the virtual memory allocated. When more memory is needed, `mheap` pulls them from the virtual memory as chunk of 64MB(for 64 bit architectures) called `arena`. The pages are mapped to spans here.
+-   **arena**: The heap memory grows and shrinks as required within the virtual memory allocated. When more memory is needed, `mheap` pulls them from the virtual memory as a chunk of 64MB(for 64-bit architectures) called `arena`. The pages are mapped to spans here.
 
 -   **mcache**: This is a very interesting construct. `mcache` is a cache of memory provided to a `P`(Logical Processor) to store small objects(Object size <=32Kb). Though this resembles the thread stack, it is part of the heap and is used for dynamic data. `mcache` contains `scan` and `noscan` types of `mspan` for all class sizes. Goroutines can obtain memory from `mcache` without any locks as a `P` can have only one `G` at a time. Hence this is more efficient. `mcache` requests new spans from `mcentral` when required.
 
 ## Stack
 
-This is the stack memory area and there is one stack per Goroutine(`G`). This is where static data including function frames, primitive values, and pointers to structs are stored. This is not same as `mcache` which is assigned to a `P`
+This is the stack memory area and there is one stack per Goroutine(`G`). This is where static data including function frames, static structs, primitive values, and pointers to dynamic structs are stored. This is not same as `mcache` which is assigned to a `P`
 
 ---
 
@@ -114,7 +114,8 @@ func main() {
 }
 ```
 
-During compilation Go does an escape analysis to determine what can go into Stack(static data) and what needs to go into Heap(dynamic data). We can see this details during compilation by running `go build` with `-gcflags '-m'` flag. For the above code, it will output the below:
+One major difference Go has compared to many garbage collected languages is that many objects are allocated directly on the program stack. The Go compiler uses a process called [escape analysis](https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-escape-analysis.html) to find objects whose lifetime is known at compile-time and allocates them on the stack rather than in garbage-collected heap memory.
+During compilation Go does the escape analysis to determine what can go into Stack(static data) and what needs to go into Heap(dynamic data). We can see this details during compilation by running `go build` with `-gcflags '-m'` flag. For the above code, it will output something like below:
 
 ```
 ❯ go build -gcflags '-m' gc.go
@@ -143,8 +144,8 @@ As you can see:
 -   Every function call is added to the stack memory as a frame-block
 -   All static variables including arguments and the return value is saved within the function frame-block on the Stack
 -   All static values regardless of type are stored directly on the Stack. This applies to global scope as well
--   All dynamic types created on the Heap and is referenced from the Stack using Stack pointers. Objects of size less than 32Kb goes to the `mcache` of the `P`. This applies to global scope as well
--   Struct with static data is kept on the stack until any dynamic value is added at that point the struct is moved to heap
+-   All dynamic types created on the Heap and is referenced from the Stack using Stack pointers. Objects of size less than 32Kb go to the `mcache` of the `P`. This applies to global scope as well
+-   The struct with static data is kept on the stack until any dynamic value is added at that point the struct is moved to heap
 -   Functions called from the current function is pushed on top of the Stack
 -   When a function returns its frame is removed from the Stack
 -   Once the main process is complete, the objects on the Heap do not have any more pointers from Stack and becomes orphan
@@ -159,11 +160,11 @@ Go's memory management involves automatic allocation when memory is needed and g
 
 ## Memory Allocation
 
-Many programming languages that employ Garbage collection uses a generational memory structure to make collection efficient. Go takes a different approach here, as we saw earlier, Go structures memory quite differently. Go employs a thread local cache to speed up small object allocations and maintains `scan`/`noscan` spans to speed up GC. Lets see how this allocation takes place.
+Many programming languages that employ Garbage collection uses a generational memory structure to make collection efficient along with compaction to reduce fragmentation. Go takes a different approach here, as we saw earlier, Go structures memory quite differently. Go employs a thread-local cache to speed up small object allocations and maintains `scan`/`noscan` spans to speed up GC. This structure along with the process avoids fragmentation to a great extent making compact unnecessary during GC. Let's see how this allocation takes place.
 
-Go decides allocation process of an object based on its size and is divided into three categories:
+Go decides the allocation process of an object based on its size and is divided into three categories:
 
-**Tiny(size < 16B)**: Objects of size less than 16 bytes are allocated using the `mcache`'s tiny allocator. This is efficient and multiple tiny allocations are done on single 16 byte block.
+**Tiny(size < 16B)**: Objects of size less than 16 bytes are allocated using the `mcache`'s tiny allocator. This is efficient and multiple tiny allocations are done on a single 16-byte block.
 
 ![Tiny allocation](https://i.imgur.com/Kh26oVp.gif)
 
@@ -171,9 +172,9 @@ Go decides allocation process of an object based on its size and is divided into
 
 ![Small allocation](https://i.imgur.com/PY4pZhq.gif)
 
-In both tiny and small allocation if the `mspan`’s list is empty the the allocator will obtain a run of pages from the `mheap` to use for the `mspan`. If the `mheap` is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.
+In both tiny and small allocation if the `mspan`’s list is empty the allocator will obtain a run of pages from the `mheap` to use for the `mspan`. If the `mheap` is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.
 
-**Large(size > 32KB)**: Objects of size greater than 32 kilbytes are allocated directly on the corresponding size class of `mheap`. If the `mheap` is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.
+**Large(size > 32KB)**: Objects of size greater than 32 kilobytes are allocated directly on the corresponding size class of `mheap`. If the `mheap` is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.
 
 ![Large allocation](https://i.imgur.com/uLhLZMm.gif)
 
@@ -185,76 +186,52 @@ Now that we know how Go allocates memory, let us see how it automatically collec
 
 Go manages the heap memory by garbage collection. In simple terms, it frees the memory used by orphan objects, i.e, objects that are no longer referenced from the Stack directly or indirectly(via a reference in another object) to make space for new object creation.
 
-As of version 1.12, the Golang uses a non-generational concurrent tri-color mark and sweep collector.
+As of version 1.12, the Golang uses a non-generational concurrent tri-color mark and sweep collector. The collection process roughly looks like the below, I don't want to go into details as it changes from version to version. However, if you are interested in those, then I recommend [this](https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html) great series.
 
- //TODO
+The process starts when a certain percentage(GC Percentage) of heap allocations are done and the collector does different phases of work:
 
-Click on the slides and move forward/backward using arrow keys to see the process:
+-   **Mark Setup** (Stop the world): When GC starts, the collector turns on **[write barriers](https://www.memorymanagement.org/glossary/w.html#term-write-barrier)** so that data integrity can be maintained during the next concurrent phase. This step needs a very small pause as every running Goroutine is paused to enable this and then continues.
+-   **Marking** (Concurrent): Once write barriers are turned on the actual marking process is started in parallel to the application using 25% of the available CPU capacity. The corresponding `P`s are reserved until marking is complete. This is done using dedicated Goroutines. Here the GC marks values in the heap that is alive(referenced from the Stack of any active Goroutines). When collection takes longer the process may employ active Goroutine from application to assist in the marking process. this is called **Mark Assist**.
+-   **Mark Termination** (Stop the world): Once marking is done every active Goroutine is paused and write barriers are turned off and clean up tasks are started. The GC also calculates the next GC goal here. Once this is done the reserved `P`s are released back to the application.
+-   **Sweeping** (Concurrent): Once the collection is done and allocations are attempted, the sweeping process starts to reclaim memory from the heap that is not marked alive. The amount of memory swept is synchronous to the amount being allocated.
 
-{% speakerdeck 5fff2548e55c4bb0a9c837c7eb598bee %}
+Let us see these in action for a single Goroutine. The number of objects are kept small for brevity. Click on the slides and move forward/backward using arrow keys to see the process:
 
-_Note: If the slides look cut off at edges, then click on the title of the slide or [here](https://speakerdeck.com/deepu105/v8-minor-gc) to open it directly in SpeakerDeck._
+{% speakerdeck f162d0725e1940a69bdbb8c0cd9e302a %}
 
-1. Let us assume that there are already objects on the “to-space” when we start(Blocks 01 to 06 marked as used memory)
-2. The process creates a new object(07)
-3. V8 tries to get required memory from to-space, but there is no free space in there to accommodate our object and hence V8 triggers minor GC
-4. Minor GC swaps the "to-space" and "from-space", all the objects are now in "from-space" and the "to-space" is empty
-5. Minor GC recursively traverses the object graph in "from-space" starting from stack pointers(GC roots) to find objects that are used or alive(Used memory). These objects are moved to a page in the "to-space". Any objects reference by these objects are also moved to this page in "to-space" and their pointers are updated. This is repeated until all the objects in "from-space" are scanned. By end of this, the "to-space" is automatically compacted reducing fragmentation
-6. Minor GC now empties the "from-space" as any remaining object here is garbage
-7. The new object is allocated memory in the "to-space"
-8. Let us assume that some time has passed and there are more objects on the "to-space" now(Blocks 07 to 09 marked as used memory)
-9. The application creates a new object(10)
-10. V8 tries to get required memory from "to-space", but there is no free space in there to accommodate our object and hence V8 triggers second minor GC
-11. The above process is repeated and any alive objects that survived second minor GC is moved to the "Old space". First-time survivors are moved to the "to-space" and remaining garbage is cleared from "from-space"
-12. The new object is allocated memory in the "to-space"
+_Note: If the slides look cut off at edges, then click on the title of the slide or [here](https://speakerdeck.com/deepu105/go-gc-visualized) to open it directly in SpeakerDeck._
 
-So we saw how minor GC reclaims space from the young generation and keeps it compact. It is a stop-the-world process but it's so fast and efficient that it is negligible most of the time. Since this process doesn't scan objects in the "old space" for any reference in the "new space" it uses a register of all pointers from old space to new space. This is recorded to the store buffer by a process called **[write barriers](https://www.memorymanagement.org/glossary/w.html#term-write-barrier)**.
+1. We are looking at a single Goroutine, actual process does this for all active Goroutines. The write barriers are turned on first.
+2. The marking process picks a GC root and colors it black and traverses pointers from it in a depth-first tree-like manner, it marks each object encountered grey
+3. When it reaches an object in a `noscan` span or when an object has no more pointers it finishes for the root and picks up next GC root object
+4. Once all GC roots are scanned, it picks up a grey object and continues to traverse its pointers in similar fashion
+5. If there are any pointer changes to an object when write barriers are on, the object gets colored grey so that GC re-scans it
+6. When there are no more grey objects left the mark process is complete and write barrier is turned off
+7. Sweeping will take place when allocations start
 
-## Major GC
-
-This type of GC keeps the old generation space compact and clean. This is triggered when V8 decides there is not enough old space, based on a dynamically computed limit, as it gets filled up from minor GC cycles.
-
-The Scavenger algorithm is perfect for small data size but is impractical for large heap, as the old space, as it has memory overhead and hence major GC is done using the **Mark-Sweep-Compact** algorithm. It uses a **tri-color**(white-grey-black) marking system. Hence major GC is a three-step process and the third step is executed depending on a fragmentation heuristic.
-
-![Mark-sweep-compact GC](https://i.imgur.com/rcjSZ0T.gif)
-
--   **Marking**: First step, common for both algorithms, where garbage collector identifies which objects are in use and which ones are not in use. The objects in use or reachable from GC roots(Stack pointers) recursively are marked as alive. It's technically a depth-first-search of the heap which can be considered as a directed graph
--   **Sweeping**: The garbage collector traverses the heap and makes note of the memory address of any object that is not marked alive. This space is now marked as free in the free-list and can be used to store other objects
--   **Compacting**: After sweeping, if required, all the survived objects will be moved to be together. This will decrease fragmentation and increase the performance of allocation of memory to newer objects
-
-This type of GC is also referred to us stop-the-world GC as they introduce pause-times in the process while performing GC. To avoid this V8 uses techniques like
-
-![The major GC](https://v8.dev/_img/trash-talk/09.svg)
-
--   **Incremental GC**: GC is done in multiple incremental steps instead of one.
--   **Concurrent marking**: Marking is done concurrently using multiple helper threads without affecting the main JavaScript thread. Write barriers are used to keep track of new references between objects that JavaScript creates while the helpers are marking concurrently.
--   **Concurrent sweeping/compacting**: Sweeping and compacting are done in helper threads concurrently without affecting the main JavaScript thread.
--   **Lazy sweeping**. Lazy sweeping involves delaying the deletion of garbage in pages until the memory is required.
-
-Let us look at the major GC process:
-
-1. Let us assume that many minor GC cycles have passed and the old space is almost full and V8 decides to trigger a "Major GC"
-2. Major GC recursively traverses the object graph starting from stack pointers to mark objects that are used as alive(Used memory) and remaining objects as garbage(Orphans) in the old space. This is done using multiple concurrent helper threads and each helper follows a pointer. This does not affect the main JS thread.
-3. When concurrent marking is done or if memory limit is reached the GC does a mark finalization step using the main thread. This introduces a small pause-time.
-4. Major GC now marks all orphan object's memory as free using concurrent sweep threads. Parallel compaction tasks are also triggered to move related blocks of memory to the same page to avoid fragmentation. Pointers are updated during these steps.
+This has some stop-the-world process but it's generally very fast that it is negligible most of the time. The coloring of objects takes place in the `gcmarkBits` attribute on the span.
 
 ---
 
 # Conclusion
 
-This post should give you an overview of the V8 memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and you can learn about them from [v8.dev](https://v8.dev/blog/trash-talk). But for most JS/WebAssembly developers this level of information would be sufficient and I hope it helps you write better code, considering these in mind, for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.
+This post should give you an overview of the Go memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and the implementation details keeps changing from version to version. But for most Go developers this level of information would be sufficient and I hope it helps you write better code, considering these in mind, for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.
 
-I hope you had fun learning about the V8 internals, stay tuned for the next post in the series.
+I hope you had fun learning this, stay tuned for the next post in the series.
 
 ---
 
 # References
 
--   [making.pusher.com/](https://making.pusher.com/golangs-real-time-gc-in-theory-and-practice/)
--   [povilasv.me](https://povilasv.me/go-memory-management/)
--   [www.ardanlabs.com](https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html)
 -   [blog.learngoprogramming.com](https://blog.learngoprogramming.com/a-visual-guide-to-golang-memory-allocator-from-ground-up-e132258453ed)
+-   [www.ardanlabs.com](https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html)
+-   [povilasv.me](https://povilasv.me/go-memory-management/)
 -   [medium.com/a-journey-with-go](https://medium.com/a-journey-with-go/go-memory-management-and-allocation-a7396d430f44)
+-   [medium.com/a-journey-with-go](https://medium.com/a-journey-with-go/go-how-does-the-garbage-collector-mark-the-memory-72cfc12c6976)
+-   [hub.packtpub.com](https://hub.packtpub.com/implementing-memory-management-with-golang-garbage-collector/)
+-   [making.pusher.com](https://making.pusher.com/golangs-real-time-gc-in-theory-and-practice/)
+-   [segment.com/blog](https://segment.com/blog/allocation-efficiency-in-high-performance-go-services/)
+-   [go101.org](https://go101.org/article/memory-block.html)
 
 ---
 
