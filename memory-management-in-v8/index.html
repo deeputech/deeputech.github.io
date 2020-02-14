@@ -381,7 +381,7 @@
 
 <h2 id="heap-memory">Heap Memory</h2>
 
-<p>This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where <strong>Garbage Collection(GC)</strong> takes place. The entire heap memory is not garbage collected, only the Young and Old spare is managed by garbage collection. Heap is further divided into below:</p>
+<p>This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where <strong>Garbage Collection(GC)</strong> takes place. The entire heap memory is not garbage collected, only the Young and Old space is managed by garbage collection. Heap is further divided into below:</p>
 
 <ul>
   <li><strong>New Space</strong>: New space or <strong>“Young generation”</strong> is where new objects live and most of these objects are short-lived. This space is small and has two <strong>semi-space</strong>, similar to <strong>S0</strong> &amp; <strong>S1</strong> in JVM. This space is managed by the <strong>“Scavenger(Minor GC)”</strong>, we will look at it later. The size of the new space can be controlled using the <code class="highlighter-rouge">--min_semi_space_size</code>(Initial) and <code class="highlighter-rouge">--max_semi_space_size</code>(Max) V8 flags.</li>
@@ -592,11 +592,11 @@
 <h1 id="references">References</h1>
 
 <ul>
-  <li><a href="https://v8.dev/blog/trash-talk">https://v8.dev/blog/trash-talk</a></li>
-  <li><a href="http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection">http://jayconrod.com</a></li>
-  <li><a href="https://blog.codeship.com/understanding-garbage-collection-in-node-js/">https://blog.codeship.com</a></li>
-  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management">https://developer.mozilla.org</a></li>
-  <li><a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec">https://blog.sessionstack.com</a></li>
+  <li><a href="https://v8.dev/blog/trash-talk">v8.dev/blog/trash-talk</a></li>
+  <li><a href="http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection">jayconrod.com</a></li>
+  <li><a href="https://blog.codeship.com/understanding-garbage-collection-in-node-js/">blog.codeship.com</a></li>
+  <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management">developer.mozilla.org</a></li>
+  <li><a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec">blog.sessionstack.com</a></li>
 </ul>
 
 <hr />

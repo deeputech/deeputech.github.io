@@ -247,7 +247,7 @@
                                 <time class="post-date" datetime="2019-08-01">01 Aug 2019</time>
                                 
                             </small> |
-                            <small>11 mins read</small>
+                            <small>12 mins read</small>
                         </span>
                     </div>
                 </div>
@@ -281,7 +281,7 @@
                 <!-- Toc if any -->
                 
                 <!-- End Toc -->
-                <p>Last month I decided to move my blogs from <a href="https://medium.com/@deepu105">Medium</a> to <a href="https://dev.to/deepu105">Dev.to</a>, I have detailed the reasons in the below post.</p>
+                <p>Some time ago I decided to move my blogs from <a href="https://medium.com/@deepu105">Medium</a> to <a href="https://dev.to/deepu105">Dev.to</a>, I have detailed the reasons in the below post.</p>
 
 <div class="link-container">
                 <a href="https://deepu.tech/why-im-moving-away-from-medium/">
@@ -463,7 +463,7 @@
 
 <h3 id="adding-custom-liquid-tags">Adding custom liquid tags</h3>
 
-<p>In order to use Dev.to tags, first I tried if I can reuse them from Dev since its OSS, but it seems like they are heavily coupled with Rails and internal models to be extracted into Gems. I created a <a href="https://github.com/thepracticaldev/dev.to/issues/3491">ticket</a> asking for it as well.</p>
+<p>In order to use Dev.to tags, first I tried if I can reuse them from Dev since its OSS, but it seems like they are heavily coupled with Rails and internal models to be extracted into Gems. I created a <a href="https://github.com/thepracticaldev/dev.to/issues/3491">ticket</a> hoping this would happen eventually.</p>
 
 <p>So decided to write my own Liquid tags in Ruby. I reused available OSS Liquid tags and customized them to work like the Dev.to ones in syntax and feature. I ended up creating the <code class="highlighter-rouge">codesandbox</code>, <code class="highlighter-rouge">twitter</code>, <code class="highlighter-rouge">gist</code>, <code class="highlighter-rouge">link</code>, <code class="highlighter-rouge">speakerdeck</code> and <code class="highlighter-rouge">youtube</code> tags. You can find them <a href="https://github.com/deepu105/deepu105.github.io/tree/site_src/_plugins">here</a>. Probably will add more as I use them. This is not scalable and I would love to see the Dev.to tags published as Ruby gems.</p>
 
@@ -556,6 +556,12 @@
 35
 36
 37
+38
+39
+40
+41
+42
+43
 </pre></td><td class="rouge-code"><pre><span class="c">#!/bin/bash</span>
 
 <span class="nb">rm</span> <span class="nt">-rf</span> _site
@@ -564,40 +570,48 @@
     </span><span class="nb">echo</span> <span class="s2">"&gt;&gt;&gt; Working directory clean"</span>
     <span class="nv">TMP_LOC</span><span class="o">=</span>/tmp/deepu.github.io
 
-    /bin/rm <span class="nt">-rf</span> _site
-    /bin/rm <span class="nt">-rf</span> <span class="nv">$TMP_LOC</span>
+    /bin/rm <span class="nt">-rf</span> _site <span class="o">||</span> <span class="nb">exit</span>
+    /bin/rm <span class="nt">-rf</span> <span class="nv">$TMP_LOC</span> <span class="o">||</span> <span class="nb">exit
 
-    <span class="nb">echo</span> <span class="s2">"&gt;&gt; Building site"</span>
-    bundle update listen
-    bundle <span class="nb">exec </span>jekyll build
+    echo</span> <span class="s2">"&gt;&gt; Publish to Dev.to and update slugs"</span>
+    npm run publish-to-dev <span class="o">||</span> <span class="nb">exit
+    </span>git add <span class="nt">--all</span> <span class="o">||</span> <span class="nb">exit
+    </span>git commit <span class="nt">--allow-empty</span> <span class="nt">-am</span> <span class="s2">"Updated posts with Dev.to slug"</span> <span class="o">||</span> <span class="nb">exit
 
-    <span class="nb">echo</span> <span class="s2">"&gt;&gt; Move site to temp folder"</span>
-    <span class="nb">mkdir</span> <span class="nt">--parents</span> <span class="nv">$TMP_LOC</span>
-    <span class="nb">mv </span>_site/<span class="k">*</span> <span class="nv">$TMP_LOC</span>
+    echo</span> <span class="s2">"&gt;&gt; Building site"</span>
+    bundle update listen <span class="o">||</span> <span class="nb">exit
+    </span>bundle <span class="nb">exec </span>jekyll build <span class="o">||</span> <span class="nb">exit
 
-    <span class="nb">echo</span> <span class="s2">"&gt;&gt; Checkout and clean master"</span>
-    git checkout master
-    find <span class="nt">-mindepth</span> 1 <span class="nt">-depth</span> <span class="nt">-print0</span> | <span class="nb">grep</span> <span class="nt">-vEzZ</span> <span class="s1">'(temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)'</span> | xargs <span class="nt">-0</span> <span class="nb">rm</span> <span class="nt">-rvf</span>
 
-    <span class="nb">echo</span> <span class="s2">"&gt;&gt; Move site form temp &amp; publish to GitHub"</span>
-    <span class="nb">mv</span> <span class="nv">$TMP_LOC</span>/<span class="k">*</span> <span class="nb">.</span>
-    <span class="nv">now</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span>
-    git add <span class="nt">--all</span>
-    git commit <span class="nt">-am</span> <span class="s2">"Updated site on </span><span class="nv">$now</span><span class="s2">"</span>
-    git push origin master <span class="nt">--force</span>
+    echo</span> <span class="s2">"&gt;&gt; Move site to temp folder"</span>
+    <span class="nb">mkdir</span> <span class="nt">--parents</span> <span class="nv">$TMP_LOC</span> <span class="o">||</span> <span class="nb">exit
+    mv </span>_site/<span class="k">*</span> <span class="nv">$TMP_LOC</span> <span class="o">||</span> <span class="nb">exit
 
-    <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$now</span><span class="s2">: Published changes to GitHub"</span>
+    echo</span> <span class="s2">"&gt;&gt; Checkout and clean master"</span>
+    git checkout master <span class="o">||</span> <span class="nb">exit
+    </span>find <span class="nt">-mindepth</span> 1 <span class="nt">-depth</span> <span class="nt">-print0</span> | <span class="nb">grep</span> <span class="nt">-vEzZ</span> <span class="s1">'(_drafts(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)'</span> | xargs <span class="nt">-0</span> <span class="nb">rm</span> <span class="nt">-rvf</span> <span class="o">||</span> <span class="nb">exit
+
+    echo</span> <span class="s2">"&gt;&gt; Move site form temp &amp; publish to GitHub"</span>
+    <span class="nb">mv</span> <span class="nv">$TMP_LOC</span>/<span class="k">*</span> <span class="nb">.</span> <span class="o">||</span> <span class="nb">exit
+    </span><span class="nv">now</span><span class="o">=</span><span class="si">$(</span><span class="nb">date</span><span class="si">)</span>
+    git add <span class="nt">--all</span> <span class="o">||</span> <span class="nb">exit
+    </span>git commit <span class="nt">-am</span> <span class="s2">"Updated site on </span><span class="nv">$now</span><span class="s2">"</span> <span class="o">||</span> <span class="nb">exit
+    </span>git push origin master <span class="nt">--force</span> <span class="o">||</span> <span class="nb">exit
+
+    echo</span> <span class="s2">"&gt;&gt; </span><span class="nv">$now</span><span class="s2">: Published changes to GitHub"</span>
 
     git checkout site_src
 <span class="k">else
-    </span><span class="nb">echo</span> <span class="s2">"Working directory is not clean. Commit changes!"</span>
+    </span><span class="nb">echo</span> <span class="s2">"&gt;&gt; Working directory is not clean. Commit changes!"</span>
     <span class="nb">exit
 </span><span class="k">fi</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
 <h2 id="my-current-workflow">My current workflow</h2>
 
-<p>So now that I have things in place, I author posts as markdown with a full front matter like below and publish on my blog first. Then I publish the same to Dev.to</p>
+<p>I also wrote a small script to automatically publish or update posts to Dev.to as well using their API. <a href="https://github.com/deeputech/deeputech.github.io/blob/site_src/publish-to-dev.js">Here</a> is the script.</p>
+
+<p>So now that I have things in place, I author posts as markdown with a full front matter like below and publish on my blog and the script automatically cross-post the same to Dev.to as well.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
@@ -619,13 +633,15 @@ canonical_url: https://deepu.tech/setting-up-a-blog-with-jekyll/
 
 <p>I’m not using the RSS import option in Dev as it uses the rendered blog and hence might need adjustments. I also set the <code class="highlighter-rouge">canonical_url</code> to my blog site.</p>
 
+<p>When I update a post the same script above takes care of updating it on my site and Dev.to as well so both are always kept in sync.</p>
+
 <h2 id="future-plans">Future plans</h2>
 
 <p>There are some things that can be improved.</p>
 
 <ol>
   <li>Use the Dev.to API to publish this direct from my publish script when I author a new post or make updates to an existing one. <strong>Update: This is done</strong></li>
-  <li>Improve the link tag and add some more tags for GitHub.</li>
+  <li>Improve the link tag and add some more tags for GitHub. <strong>Update: This is partially done</strong></li>
   <li>Use local assets image for my own blog and generate the image URL for Dev.to when publishing.</li>
   <li>Currently, all links point to Dev.to, make the link tag smart enough to point to my blog when published to my site(I don’t want my readers to switch between sites). This might be a bit hard since Dev.to links have a random suffix. <strong>Update: This is done</strong></li>
 </ol>

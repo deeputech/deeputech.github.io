@@ -147,6 +147,14 @@
 <loc>/blogs/page/5/</loc>
 </url>
 <url>
+<loc>/assets/images/go-gc/Go%20memory%20allocation.pdf</loc>
+<lastmod>2020-02-14T00:12:55+01:00</lastmod>
+</url>
+<url>
+<loc>/assets/images/go-gc/Golang%20memory%20use.pdf</loc>
+<lastmod>2020-02-12T17:26:21+01:00</lastmod>
+</url>
+<url>
 <loc>/assets/images/jvm/JVM%20memory%20use.pdf</loc>
 <lastmod>2020-01-23T00:54:36+01:00</lastmod>
 </url>

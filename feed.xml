@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 07 Feb 2020 17:55:54 +0100</pubDate>
-    <lastBuildDate>Fri, 07 Feb 2020 17:55:54 +0100</lastBuildDate>
+    <pubDate>Fri, 14 Feb 2020 13:08:29 +0100</pubDate>
+    <lastBuildDate>Fri, 14 Feb 2020 13:08:29 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -528,7 +528,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;h2 id=&quot;heap-memory&quot;&gt;Heap Memory&lt;/h2&gt;
 
-&lt;p&gt;This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where &lt;strong&gt;Garbage Collection(GC)&lt;/strong&gt; takes place. The entire heap memory is not garbage collected, only the Young and Old spare is managed by garbage collection. Heap is further divided into below:&lt;/p&gt;
+&lt;p&gt;This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where &lt;strong&gt;Garbage Collection(GC)&lt;/strong&gt; takes place. The entire heap memory is not garbage collected, only the Young and Old space is managed by garbage collection. Heap is further divided into below:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;New Space&lt;/strong&gt;: New space or &lt;strong&gt;“Young generation”&lt;/strong&gt; is where new objects live and most of these objects are short-lived. This space is small and has two &lt;strong&gt;semi-space&lt;/strong&gt;, similar to &lt;strong&gt;S0&lt;/strong&gt; &amp;amp; &lt;strong&gt;S1&lt;/strong&gt; in JVM. This space is managed by the &lt;strong&gt;“Scavenger(Minor GC)”&lt;/strong&gt;, we will look at it later. The size of the new space can be controlled using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--min_semi_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;highlighter-rouge&quot;&gt;--max_semi_space_size&lt;/code&gt;(Max) V8 flags.&lt;/li&gt;
@@ -739,11 +739,11 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://v8.dev/blog/trash-talk&quot;&gt;https://v8.dev/blog/trash-talk&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection&quot;&gt;http://jayconrod.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.codeship.com/understanding-garbage-collection-in-node-js/&quot;&gt;https://blog.codeship.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management&quot;&gt;https://developer.mozilla.org&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec&quot;&gt;https://blog.sessionstack.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://v8.dev/blog/trash-talk&quot;&gt;v8.dev/blog/trash-talk&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection&quot;&gt;jayconrod.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.codeship.com/understanding-garbage-collection-in-node-js/&quot;&gt;blog.codeship.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management&quot;&gt;developer.mozilla.org&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec&quot;&gt;blog.sessionstack.com&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -1056,12 +1056,12 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.oracle.com/en/java/javase/13/gctuning/&quot;&gt;https://docs.oracle.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://pythontutor.com/java.html&quot;&gt;http://pythontutor.com/java.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.journaldev.com/2856/java-jvm-memory-model-memory-management-in-java&quot;&gt;https://www.journaldev.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.yourkit.com/docs/kb/sizes.jsp&quot;&gt;https://www.yourkit.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://dzone.com/articles/understanding-the-java-memory-model-and-the-garbag/&quot;&gt;https://dzone.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.infoq.com/articles/Visualizing-Java-Garbage-Collection/&quot;&gt;https://www.infoq.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.oracle.com/en/java/javase/13/gctuning/&quot;&gt;docs.oracle.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pythontutor.com/java.html&quot;&gt;pythontutor.com/java.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.journaldev.com/2856/java-jvm-memory-model-memory-management-in-java&quot;&gt;www.journaldev.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.yourkit.com/docs/kb/sizes.jsp&quot;&gt;www.yourkit.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dzone.com/articles/understanding-the-java-memory-model-and-the-garbag/&quot;&gt;dzone.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.infoq.com/articles/Visualizing-Java-Garbage-Collection/&quot;&gt;www.infoq.com&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -1309,14 +1309,14 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://homepages.inf.ed.ac.uk/stg/teaching/apl/handouts/memory.pdf&quot;&gt;http://homepages.inf.ed.ac.uk&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://javarevisited.blogspot.com/2013/01/difference-between-stack-and-heap-java.html?m=1&quot;&gt;https://javarevisited.blogspot.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://net-informations.com/faq/net/stack-heap.htm&quot;&gt;http://net-informations.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html&quot;&gt;https://gribblelab.org&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81&quot;&gt;https://medium.com/computed-comparisons&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)&quot;&gt;https://en.wikipedia.org/wiki/Garbage&lt;em&gt;collection&lt;/em&gt;(computer_science)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Automatic_Reference_Counting&quot;&gt;https://en.wikipedia.org/wiki/Automatic_Reference_Counting&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec&quot;&gt;https://blog.sessionstack.com/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://homepages.inf.ed.ac.uk/stg/teaching/apl/handouts/memory.pdf&quot;&gt;homepages.inf.ed.ac.uk&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://javarevisited.blogspot.com/2013/01/difference-between-stack-and-heap-java.html?m=1&quot;&gt;javarevisited.blogspot.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://net-informations.com/faq/net/stack-heap.htm&quot;&gt;net-informations.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html&quot;&gt;gribblelab.org&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81&quot;&gt;medium.com/computed-comparisons&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)&quot;&gt;en.wikipedia.org/wiki/Garbage-collection&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Automatic_Reference_Counting&quot;&gt;en.wikipedia.org/wiki/Automatic-Reference-Counting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec&quot;&gt;blog.sessionstack.com&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
