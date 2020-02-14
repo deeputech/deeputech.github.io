@@ -9,7 +9,7 @@ devto_url: https://dev.to/deepu105/static-site-generators-rundown-how-i-set-up-m
 devto_id: 150976
 ---
 
-Last month I decided to move my blogs from [Medium](https://medium.com/@deepu105) to [Dev.to](https://dev.to/deepu105), I have detailed the reasons in the below post.
+Some time ago I decided to move my blogs from [Medium](https://medium.com/@deepu105) to [Dev.to](https://dev.to/deepu105), I have detailed the reasons in the below post.
 
 {% link https://dev.to/deepu105/why-i-m-moving-away-from-medium-13ki %}
 
@@ -149,7 +149,7 @@ I also added support for Dev.to like [series](https://github.com/deepu105/deepu1
 
 ### Adding custom liquid tags
 
-In order to use Dev.to tags, first I tried if I can reuse them from Dev since its OSS, but it seems like they are heavily coupled with Rails and internal models to be extracted into Gems. I created a [ticket](https://github.com/thepracticaldev/dev.to/issues/3491) asking for it as well.
+In order to use Dev.to tags, first I tried if I can reuse them from Dev since its OSS, but it seems like they are heavily coupled with Rails and internal models to be extracted into Gems. I created a [ticket](https://github.com/thepracticaldev/dev.to/issues/3491) hoping this would happen eventually.
 
 So decided to write my own Liquid tags in Ruby. I reused available OSS Liquid tags and customized them to work like the Dev.to ones in syntax and feature. I ended up creating the `codesandbox`, `twitter`, `gist`, `link`, `speakerdeck` and `youtube` tags. You can find them [here](https://github.com/deepu105/deepu105.github.io/tree/site_src/_plugins). Probably will add more as I use them. This is not scalable and I would love to see the Dev.to tags published as Ruby gems.
 
@@ -194,40 +194,48 @@ if [ -z "$(git status --porcelain)" ]; then
     echo ">>> Working directory clean"
     TMP_LOC=/tmp/deepu.github.io
 
-    /bin/rm -rf _site
-    /bin/rm -rf $TMP_LOC
+    /bin/rm -rf _site || exit
+    /bin/rm -rf $TMP_LOC || exit
+
+    echo ">> Publish to Dev.to and update slugs"
+    npm run publish-to-dev || exit
+    git add --all || exit
+    git commit --allow-empty -am "Updated posts with Dev.to slug" || exit
 
     echo ">> Building site"
-    bundle update listen
-    bundle exec jekyll build
+    bundle update listen || exit
+    bundle exec jekyll build || exit
+
 
     echo ">> Move site to temp folder"
-    mkdir --parents $TMP_LOC
-    mv _site/* $TMP_LOC
+    mkdir --parents $TMP_LOC || exit
+    mv _site/* $TMP_LOC || exit
 
     echo ">> Checkout and clean master"
-    git checkout master
-    find -mindepth 1 -depth -print0 | grep -vEzZ '(temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf
+    git checkout master || exit
+    find -mindepth 1 -depth -print0 | grep -vEzZ '(_drafts(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf || exit
 
     echo ">> Move site form temp & publish to GitHub"
-    mv $TMP_LOC/* .
+    mv $TMP_LOC/* . || exit
     now=$(date)
-    git add --all
-    git commit -am "Updated site on $now"
-    git push origin master --force
+    git add --all || exit
+    git commit -am "Updated site on $now" || exit
+    git push origin master --force || exit
 
-    echo "$now: Published changes to GitHub"
+    echo ">> $now: Published changes to GitHub"
 
     git checkout site_src
 else
-    echo "Working directory is not clean. Commit changes!"
+    echo ">> Working directory is not clean. Commit changes!"
     exit
 fi
 ```
 
 ## My current workflow
 
-So now that I have things in place, I author posts as markdown with a full front matter like below and publish on my blog first. Then I publish the same to Dev.to
+I also wrote a small script to automatically publish or update posts to Dev.to as well using their API. [Here](https://github.com/deeputech/deeputech.github.io/blob/site_src/publish-to-dev.js) is the script.
+
+So now that I have things in place, I author posts as markdown with a full front matter like below and publish on my blog and the script automatically cross-post the same to Dev.to as well.
 
 ```
 ---
@@ -242,12 +250,14 @@ canonical_url: https://deepu.tech/setting-up-a-blog-with-jekyll/
 
 I'm not using the RSS import option in Dev as it uses the rendered blog and hence might need adjustments. I also set the `canonical_url` to my blog site.
 
+When I update a post the same script above takes care of updating it on my site and Dev.to as well so both are always kept in sync.
+
 ## Future plans
 
 There are some things that can be improved.
 
 1. Use the Dev.to API to publish this direct from my publish script when I author a new post or make updates to an existing one. **Update: This is done**
-2. Improve the link tag and add some more tags for GitHub.
+2. Improve the link tag and add some more tags for GitHub. **Update: This is partially done**
 3. Use local assets image for my own blog and generate the image URL for Dev.to when publishing.
 4. Currently, all links point to Dev.to, make the link tag smart enough to point to my blog when published to my site(I don't want my readers to switch between sites). This might be a bit hard since Dev.to links have a random suffix. **Update: This is done**
 

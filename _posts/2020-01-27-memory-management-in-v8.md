@@ -35,7 +35,7 @@ This is slightly similar to the JVM memory structure we saw in the [previous cha
 
 ## Heap Memory
 
-This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where **Garbage Collection(GC)** takes place. The entire heap memory is not garbage collected, only the Young and Old spare is managed by garbage collection. Heap is further divided into below:
+This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where **Garbage Collection(GC)** takes place. The entire heap memory is not garbage collected, only the Young and Old space is managed by garbage collection. Heap is further divided into below:
 
 -   **New Space**: New space or **"Young generation"** is where new objects live and most of these objects are short-lived. This space is small and has two **semi-space**, similar to **S0** & **S1** in JVM. This space is managed by the **"Scavenger(Minor GC)"**, we will look at it later. The size of the new space can be controlled using the `--min_semi_space_size`(Initial) and `--max_semi_space_size`(Max) V8 flags.
 -   **Old Space**: Old space or **"Old generation"** is where objects that survived the "New space" for two minor GC cycles are moved to. This space is managed up by the **Major GC(Mark-Sweep & Mark-Compact)"**, we will look at it later. The size of old space can be controlled using the `--initial_old_space_size`(Initial) and `--max_old_space_size`(Max) V8 flags. This space is divided into two:
