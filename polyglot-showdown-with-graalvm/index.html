@@ -1,322 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="icon" href="/assets/images/logo.png">
-
-    <title>Polyglot inception with GraalVM. Why? Because it's fun 🏄 | Technorage</title>
-
-    <!-- Begin Jekyll SEO tag v2.6.1 -->
-<meta name="generator" content="Jekyll v2.0.0" />
-<meta property="og:title" content="Polyglot inception with GraalVM. Why? Because it’s fun 🏄" />
-<meta name="author" content="deepu" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Let’s test drive GraalVM with a program that uses many languages together. Why? Because it’s fun!" />
-<meta property="og:description" content="Let’s test drive GraalVM with a program that uses many languages together. Why? Because it’s fun!" />
-<meta property="og:site_name" content="Technorage" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-02-06T00:00:00+01:00" />
-<script type="application/ld+json">
-{"headline":"Polyglot inception with GraalVM. Why? Because it’s fun 🏄","dateModified":"2020-02-06T00:00:00+01:00","datePublished":"2020-02-06T00:00:00+01:00","description":"Let’s test drive GraalVM with a program that uses many languages together. Why? Because it’s fun!","author":{"@type":"Person","name":"deepu"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/polyglot-showdown-with-graalvm/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"url":"https://deepu.tech/polyglot-showdown-with-graalvm/","@context":"https://schema.org"}</script>
-<!-- End Jekyll SEO tag -->
-
-    
-    <link rel="canonical" href="https://deepu.tech/polyglot-showdown-with-graalvm/" />
-    <meta property="og:url" content="" />
-    
-
-    <!-- Twitter cards -->
-<meta name="twitter:site"    content="@deepu105">
-<meta name="twitter:creator" content="@deepu105">
-<meta name="twitter:title"   content="Polyglot inception with GraalVM. Why? Because it's fun 🏄">
-
-
-<meta name="twitter:description" content="Let's test drive GraalVM with a program that uses many languages together. Why? Because it's fun!">
-
-
-
-<meta name="twitter:card"  content="summary_large_image">
-<meta name="twitter:image" content="https://i.imgur.com/SHMvb6A.jpg">
-
-<!-- end of Twitter cards -->
-
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <link href="/assets/css/screen.css" rel="stylesheet">
-
-    <link href="/assets/css/main.css" rel="stylesheet">
-
-    <script src="/assets/js/jquery.min.js"></script>
-    <!-- change your GA id in _config.yml -->
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-74370272-6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="icon" href="/assets/images/logo.png"><title>Polyglot inception with GraalVM. Why? Because it's fun 🏄 | Technorage</title><meta name="generator" content="Jekyll v2.0.0"><meta property="og:title" content="Polyglot inception with GraalVM. Why? Because it’s fun 🏄"><meta name="author" content="deepu"><meta property="og:locale" content="en_US"><meta name="description" content="Let’s test drive GraalVM with a program that uses many languages together. Why? Because it’s fun!"><meta property="og:description" content="Let’s test drive GraalVM with a program that uses many languages together. Why? Because it’s fun!"><meta property="og:site_name" content="Technorage"><meta property="og:type" content="article"><meta property="article:published_time" content="2020-02-06T00:00:00+01:00"><script type="application/ld+json">{"headline":"Polyglot inception with GraalVM. Why? Because it’s fun 🏄","dateModified":"2020-02-06T00:00:00+01:00","datePublished":"2020-02-06T00:00:00+01:00","description":"Let’s test drive GraalVM with a program that uses many languages together. Why? Because it’s fun!","author":{"@type":"Person","name":"deepu"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/polyglot-showdown-with-graalvm/"},"@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"deepu"},"url":"https://deepu.tech/polyglot-showdown-with-graalvm/","@context":"https://schema.org"}</script><link rel="canonical" href="https://deepu.tech/polyglot-showdown-with-graalvm/"><meta property="og:url" content=""><meta name="twitter:site" content="@deepu105"><meta name="twitter:creator" content="@deepu105"><meta name="twitter:title" content="Polyglot inception with GraalVM. Why? Because it's fun 🏄"><meta name="twitter:description" content="Let's test drive GraalVM with a program that uses many languages together. Why? Because it's fun!"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://i.imgur.com/SHMvb6A.jpg"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"><link href="/assets/css/screen.css" rel="stylesheet"><link href="/assets/css/main.css" rel="stylesheet"><script src="/assets/js/jquery.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-74370272-6"></script><script>window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'UA-74370272-6');
-    </script>
-</head>
-
-
-<body class="layout-post">
-	<!-- defer loading of font and font awesome -->
-	<noscript id="deferred-styles">
-		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous">
-	</noscript>
-
-
-<!-- Begin Menu Navigation
-================================================== -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down pr-md-0 pl-md-0">
-
-    <div class="container">
-
-    <!-- Begin Logo -->
-    <a class="navbar-brand" href="/">
-        <h2>Deepu K Sasidharan</h2>
-    </a>
-    <!-- End Logo -->
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarMediumish">
-
-        <!-- Begin Menu -->
-
-            <ul class="navbar-nav ml-auto">
-
-                
-                <li class="nav-item">
-                
-                    <a class="nav-link" href="/">About</a>
-                </li>
-
-                
-                <li class="nav-item active">
-                
-                    <a class="nav-link" href="/blogs/"><i class="fas fa-blog"></i> Blog</a>
-                </li>
-
-                
-                <li class="nav-item">
-                
-                    <a class="nav-link" href="/books"><i class="fas fa-book"></i> Books</a>
-                </li>
-
-                <li class="nav-item">
-                    <a target="_blank" class="nav-link" href="https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK"><i class="fab fa-youtube"></i> Videos</a>
-                </li>
-
-                <li class="nav-item">
-                    <a target="_blank" class="nav-link" href="https://speakerdeck.com/deepu105"><i class="fab fa-speaker-deck"></i> Presentations</a>
-                </li>
-
-                <script src="/assets/js/lunr.js"></script>
-
-
-<style>
-    .lunrsearchresult .title {color: #d9230f;}
+    gtag('config', 'UA-74370272-6');</script></head><body class="layout-post"><noscript id="deferred-styles"><link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous"></noscript><nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down pr-md-0 pl-md-0"><div class="container"><a class="navbar-brand" href="/"><h2>Deepu K Sasidharan</h2></a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarMediumish"><ul class="navbar-nav ml-auto"><li class="nav-item"><a class="nav-link" href="/">About</a></li><li class="nav-item active"><a class="nav-link" href="/blogs/"><i class="fas fa-blog"></i> Blog</a></li><li class="nav-item"><a class="nav-link" href="/books"><i class="fas fa-book"></i> Books</a></li><li class="nav-item"><a target="_blank" class="nav-link" href="https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK"><i class="fab fa-youtube"></i> Videos</a></li><li class="nav-item"><a target="_blank" class="nav-link" href="https://speakerdeck.com/deepu105"><i class="fab fa-speaker-deck"></i> Presentations</a></li><script src="/assets/js/lunr.js"></script><style>.lunrsearchresult .title {color: #d9230f;}
     .lunrsearchresult .url {color: silver;}
     .lunrsearchresult a {display: block; color: #777;}
     .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
-    .lunrsearchresult a:hover .title {text-decoration: underline;}
-</style>
-
-
-<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
-    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
-</form>
-
-<div id="lunrsearchresults">
-    <ul></ul>
-</div>
-
-<script src="/assets/js/lunrsearchengine.js"></script>
-
-            </ul>
-
-        <!-- End Menu -->
-
-    </div>
-
-    </div>
-</nav>
-<!-- End Navigation
-================================================== -->
-
-<div class="site-content">
-
-<div class="container">
-
-<!-- Content
-================================================== -->
-<div class="main-content">
-    <!-- Site Title
-================================================== -->
-<div class="mainheading">
-    <h1 class="sitetitle">Technorage</h1>
-    <p class="lead">
-        Where I rage about technology and stuff!
-    </p>
-</div>
-<!-- Begin Article
-================================================== -->
-<div class="container">
-    <div class="row">
-
-        <!-- Post Share -->
-        <div class="col-md-2 pl-0">
-            <div class="share sticky-top sticky-top-offset">
-    <p>
-        Share
-    </p>
-    <ul>
-        <li class="ml-1 mr-1">
-            <a target="_blank" href="https://twitter.com/intent/tweet?text=Polyglot inception with GraalVM. Why? Because it's fun 🏄&url=https://deepu.tech/polyglot-showdown-with-graalvm/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Twitter">
-                <i class="fab fa-twitter"></i>
-            </a>
-        </li>
-
-        <li class="ml-1 mr-1">
-            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://deepu.tech/polyglot-showdown-with-graalvm/" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=435');return false;" title="Linkedin">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-        </li>
-
-        <li class="ml-1 mr-1">
-            <a target="_blank" href="https://news.ycombinator.com/submitlink?u=https://deepu.tech/polyglot-showdown-with-graalvm/&t=Polyglot inception with GraalVM. Why? Because it's fun 🏄?" onclick="window.open(this.href, 'hackernews-share', 'width=550,height=435');return false;" title="Hacker News">
-                <i class="fab fa-hacker-news-square"></i>
-            </a>
-        </li>
-
-        <li class="ml-1 mr-1">
-            <a target="_blank" href="https://www.reddit.com/submit?url=https://deepu.tech/polyglot-showdown-with-graalvm/&title=Polyglot inception with GraalVM. Why? Because it's fun 🏄" onclick="window.open(this.href, 'reddit-share', 'width=550,height=435');return false;" title="Reddit">
-                <i class="fab fa-reddit-square"></i>
-            </a>
-        </li>
-
-        <li class="ml-1 mr-1">
-            <a target="_blank" href="https://facebook.com/sharer.php?u=https://deepu.tech/polyglot-showdown-with-graalvm/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;" title="Facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-        </li>
-
-    </ul>
-    
-    <div class="sep">
-    </div>
-    <ul>
-        <li>
-        <a class="small smoothscroll" href="#disqus_thread"></a>
-        </li>
-    </ul>
-    
-
-</div>
-
-        </div>
-
-        <!-- Post -->
-        
-
-        <div class="col-md-9 flex-first flex-md-unordered">
-            <div class="mainheading">
-
-                <!-- Author Box -->
-                
-                <div class="row post-top-meta">
-                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
-                        
-                        <img class="author-thumb" src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=250&d=mm&r=x" alt="Deepu K Sasidharan">
-                        
-                    </div>
-                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
-                        <a target="_blank" class="link-dark" href="https://www.deepu.tech">Deepu K Sasidharan</a><a target="_blank" href="https://twitter.com/deepu105" class="btn follow">Follow</a>
-                        <span class="author-description">JHipster co-lead, Java, JS, Cloud Native Advocate, Dev @ XebiaLabs, Author, Speaker, Software craftsman. Loves simple & beautiful code. bit.ly/JHIPSTER-BOOK</span>
-                        <!-- Post Date -->
-                        <span class="author-description">
-                            <small>
-                                <time class="post-date" datetime="2020-02-06">06 Feb 2020</time>
-                                
-                            </small> |
-                            <small>17 mins read</small>
-                        </span>
-                    </div>
-                </div>
-                
-
-                <!-- Post Title -->
-                <h1 class="posttitle">Polyglot inception with GraalVM. Why? Because it's fun 🏄</h1>
-
-            </div>
-
-            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
-            
-            <!-- End Adsense -->
-
-            <!-- Post Featured Image -->
-            
-
-                
-                    <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://i.imgur.com/SHMvb6A.jpg" alt="Polyglot inception with GraalVM. Why? Because it's fun 🏄">
-                
-
-            
-            <!-- End Featured Image -->
-
-            <!-- Post series -->
-            
-            <!-- End series -->
-
-            <!-- Post Content -->
-            <div class="article-post">
-                <!-- Toc if any -->
-                
-                <!-- End Toc -->
-                <p>Please follow me on <a href="https://twitter.com/deepu105">Twitter</a> for updates and let me know what can be improved in the post.</p>
-
-<hr />
-
-<p>Have you heard of <a href="https://www.graalvm.org/">GraalVM</a>? If you haven’t you should check it out. It is an exciting technology, you know the kind that gets a polyglot developer going 😉</p>
-
-<p>From the website:</p>
-
-<blockquote>
-  <p>GraalVM is a universal virtual machine for running applications written in JavaScript, Python, Ruby, R, JVM-based languages like Java, Scala, Groovy, Kotlin, Clojure, and LLVM-based languages such as C and C++.</p>
-</blockquote>
-
-<p>GraalVM is one of its kind. It is a polyglot VM developed at Oracle and apart from its polyglot capabilities it also has been proven to be quite performant and has a smaller memory footprint. It has support for building native images and some modern Java microservice frameworks like <a href="https://micronaut.io/">Micronaut</a> and <a href="https://quarkus.io/">Quarkus</a> support GraalVM as it provides faster startup and smaller footprint which is ideal in microservice architectures.</p>
-
-<p>So what are the capabilities of GraalVM? Let us take a quick look</p>
-
-<h2 id="graalvm-features">GraalVM features</h2>
-
-<ul>
-  <li><a href="https://www.graalvm.org/docs/why-graal/#for-java-programs">Drop in JDK replacement</a> - Some benchmarks show GraalVM to be faster and less memory hungry than other JDK vendors, I haven’t personally run any benchmarks</li>
-  <li><a href="https://www.graalvm.org/docs/why-graal/#for-nodejs-programs">Drop in NodeJS replacement</a> - Uses GraalVM instead of V8 as the engine for NodeJS</li>
-  <li>Faster runtime for <a href="https://pragtob.wordpress.com/2017/01/24/benchmarking-a-go-ai-in-ruby-cruby-vs-rubinius-vs-jruby-vs-truffle-a-year-later/">Ruby</a> and <a href="https://medium.com/graalvm/faster-r-with-fastr-4b8db0e0dceb">R</a> than the default implementations</li>
-  <li><a href="https://www.graalvm.org/docs/why-graal/#for-microservices-frameworks">Ahead-of-time(AOT) compiled native images</a></li>
-  <li><a href="https://www.graalvm.org/docs/why-graal/#for-ruby-r-or-python">Polyglot capabilities</a> - Java(Any JVM language), JavaScript, Ruby, Python, R, C/C++/Rust(LLVM) along with language interoperability</li>
-  <li><a href="https://www.graalvm.org/docs/why-graal/#for-your-languages-and-tools">The Truffle Language Implementation framework</a> to implement third-party language support</li>
-</ul>
-
-<h2 id="install-graalvm">Install GraalVM</h2>
-
-<p>Before we start, let us setup GraalVM. I used SDKMAN, you can also follow <a href="https://www.graalvm.org/docs/getting-started/">this</a> if you like to install it manually.</p>
-
-<ol>
-  <li>First <a href="https://sdkman.io/install">install SDKMAN</a> if you don’t have it already</li>
-</ol>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+    .lunrsearchresult a:hover .title {text-decoration: underline;}</style><form class="bd-search" onsubmit="return lunr_search(document.getElementById('lunrsearch').value);"><input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."></form><div id="lunrsearchresults"><ul></ul></div><script src="/assets/js/lunrsearchengine.js"></script></ul></div></div></nav><div class="site-content"><div class="container"><div class="main-content"><div class="mainheading"><h1 class="sitetitle">Technorage</h1><p class="lead">Where I rage about technology and stuff!</p></div><div class="container"><div class="row"><div class="col-md-2 pl-0"><div class="share sticky-top sticky-top-offset"><p>Share</p><ul><li class="ml-1 mr-1"><a target="_blank" href="https://twitter.com/intent/tweet?text=Polyglot inception with GraalVM. Why? Because it's fun 🏄&url=https://deepu.tech/polyglot-showdown-with-graalvm/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Twitter"><i class="fab fa-twitter"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://deepu.tech/polyglot-showdown-with-graalvm/" onclick="window.open(this.href, 'linkedin-share', 'width=550,height=435');return false;" title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://news.ycombinator.com/submitlink?u=https://deepu.tech/polyglot-showdown-with-graalvm/&t=Polyglot inception with GraalVM. Why? Because it's fun 🏄?" onclick="window.open(this.href, 'hackernews-share', 'width=550,height=435');return false;" title="Hacker News"><i class="fab fa-hacker-news-square"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://www.reddit.com/submit?url=https://deepu.tech/polyglot-showdown-with-graalvm/&title=Polyglot inception with GraalVM. Why? Because it's fun 🏄" onclick="window.open(this.href, 'reddit-share', 'width=550,height=435');return false;" title="Reddit"><i class="fab fa-reddit-square"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://facebook.com/sharer.php?u=https://deepu.tech/polyglot-showdown-with-graalvm/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;" title="Facebook"><i class="fab fa-facebook-f"></i></a></li></ul><div class="sep"></div><ul><li><a class="small smoothscroll" href="#disqus_thread"></a></li></ul></div></div><div class="col-md-9 flex-first flex-md-unordered"><div class="mainheading"><div class="row post-top-meta"><div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0"><img class="author-thumb" src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=250&d=mm&r=x" alt="Deepu K Sasidharan"></div><div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left"><a target="_blank" class="link-dark" href="https://www.deepu.tech">Deepu K Sasidharan</a><a target="_blank" href="https://twitter.com/deepu105" class="btn follow">Follow</a> <span class="author-description">JHipster co-lead, Java, JS, Cloud Native Advocate, Dev @ XebiaLabs, Author, Speaker, Software craftsman. Loves simple & beautiful code. bit.ly/JHIPSTER-BOOK</span><span class="author-description"><small><time class="post-date" datetime="2020-02-06">06 Feb 2020</time> </small>| <small>17 mins read</small></span></div></div><h1 class="posttitle">Polyglot inception with GraalVM. Why? Because it's fun 🏄</h1></div><img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="https://i.imgur.com/SHMvb6A.jpg" alt="Polyglot inception with GraalVM. Why? Because it's fun 🏄"><div class="article-post"><p>Please follow me on <a href="https://twitter.com/deepu105">Twitter</a> for updates and let me know what can be improved in the post.</p><hr><p>Have you heard of <a href="https://www.graalvm.org/">GraalVM</a>? If you haven’t you should check it out. It is an exciting technology, you know the kind that gets a polyglot developer going 😉</p><p>From the website:</p><blockquote><p>GraalVM is a universal virtual machine for running applications written in JavaScript, Python, Ruby, R, JVM-based languages like Java, Scala, Groovy, Kotlin, Clojure, and LLVM-based languages such as C and C++.</p></blockquote><p>GraalVM is one of its kind. It is a polyglot VM developed at Oracle and apart from its polyglot capabilities it also has been proven to be quite performant and has a smaller memory footprint. It has support for building native images and some modern Java microservice frameworks like <a href="https://micronaut.io/">Micronaut</a> and <a href="https://quarkus.io/">Quarkus</a> support GraalVM as it provides faster startup and smaller footprint which is ideal in microservice architectures.</p><p>So what are the capabilities of GraalVM? Let us take a quick look</p><h2 id="graalvm-features">GraalVM features</h2><ul><li><a href="https://www.graalvm.org/docs/why-graal/#for-java-programs">Drop in JDK replacement</a> - Some benchmarks show GraalVM to be faster and less memory hungry than other JDK vendors, I haven’t personally run any benchmarks</li><li><a href="https://www.graalvm.org/docs/why-graal/#for-nodejs-programs">Drop in NodeJS replacement</a> - Uses GraalVM instead of V8 as the engine for NodeJS</li><li>Faster runtime for <a href="https://pragtob.wordpress.com/2017/01/24/benchmarking-a-go-ai-in-ruby-cruby-vs-rubinius-vs-jruby-vs-truffle-a-year-later/">Ruby</a> and <a href="https://medium.com/graalvm/faster-r-with-fastr-4b8db0e0dceb">R</a> than the default implementations</li><li><a href="https://www.graalvm.org/docs/why-graal/#for-microservices-frameworks">Ahead-of-time(AOT) compiled native images</a></li><li><a href="https://www.graalvm.org/docs/why-graal/#for-ruby-r-or-python">Polyglot capabilities</a> - Java(Any JVM language), JavaScript, Ruby, Python, R, C/C++/Rust(LLVM) along with language interoperability</li><li><a href="https://www.graalvm.org/docs/why-graal/#for-your-languages-and-tools">The Truffle Language Implementation framework</a> to implement third-party language support</li></ul><h2 id="install-graalvm">Install GraalVM</h2><p>Before we start, let us setup GraalVM. I used SDKMAN, you can also follow <a href="https://www.graalvm.org/docs/getting-started/">this</a> if you like to install it manually.</p><ol><li>First <a href="https://sdkman.io/install">install SDKMAN</a> if you don’t have it already</li></ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -332,15 +22,7 @@ sdk use java 19.3.1.r11-grl
 java <span class="nt">-version</span>
 node <span class="nt">-v</span>
 lli <span class="nt">--version</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>The above will install GraalVM and set it up as <code class="highlighter-rouge">java</code>, <code class="highlighter-rouge">node</code> and <code class="highlighter-rouge">lli</code> context. <strong>Please note</strong>: If you start a new terminal session, you would have to run <code class="highlighter-rouge">sdk use java 19.3.1.r11-grl</code> again.</p>
-
-<ol>
-  <li>Install LLVM toolchain, Python and Ruby support</li>
-</ol>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>The above will install GraalVM and set it up as <code class="highlighter-rouge">java</code>, <code class="highlighter-rouge">node</code> and <code class="highlighter-rouge">lli</code> context. <strong>Please note</strong>: If you start a new terminal session, you would have to run <code class="highlighter-rouge">sdk use java 19.3.1.r11-grl</code> again.</p><ol><li>Install LLVM toolchain, Python and Ruby support</li></ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -350,44 +32,9 @@ lli <span class="nt">--version</span>
 
 gu <span class="nb">install </span>python
 gu <span class="nb">install </span>ruby
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<ol>
-  <li>Install Rust</li>
-</ol>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><ol><li>Install Rust</li></ol><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>curl https://sh.rustup.rs <span class="nt">-sSf</span> | sh
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>That’s it we are ready to roll!</p>
-
-<h1 id="lets-have-some-fun">Lets have some fun</h1>
-
-<p>As a polyglot developer, GraalVM is quite interesting to me as I can use many languages I love together making use of the best parts from each. Let’s explore the polyglot capabilities offered by GraalVM, please note that support for Python, Ruby, R, and Rust are still in the experimental stage and hence your mileage may vary. We will build a program today using Java, JavaScript, Ruby, Rust, Python, and C++.</p>
-
-<blockquote>
-  <p>I wanted to use Rust and Go as well. While Rust mostly works via the GraalVM <code class="highlighter-rouge">lli</code> command line, it has a lot of limitations when embedded in polyglot mode. After a lot of fiddling around, I did manage to get it working. For Golang, it might be possible with <a href="https://github.com/zegl/tre">this</a> Go LLVM compiler as shown <a href="https://gist.github.com/eginez/d69e3e1c4045eb692a274bd2bd5d31d6">here</a>, but it’s having its own set of issues as well when I tried. So I have given up on Golang for now. Let me know if any of you got it working.</p>
-</blockquote>
-
-<p>We will have a simple(silly 😉) application written in Java that composes methods from different languages for each step from within Java</p>
-
-<ol>
-  <li><strong>Python</strong>: Filters out the Fibonacci numbers from the given input array</li>
-  <li><strong>JavaScript</strong>: Find the cube of each number in the output array from the previous step</li>
-  <li><strong>C++</strong>: Get the sum of the numbers in the output array from the previous step</li>
-  <li><strong>Rust</strong>: Find the cube-root of the number from the previous step</li>
-  <li><strong>Ruby</strong>: Find factorial of the number from the previous step</li>
-  <li><strong>Java</strong>: Finally print the result(this is also the wrapper program)</li>
-</ol>
-
-<p>If you prefer a more complex example, check <a href="https://github.com/graalvm/examples/tree/master/weather_predictor">this</a> out.</p>
-
-<h3 id="step-1-java">Step 1: Java</h3>
-
-<p>Let’s start with our Java wrapper program <code class="highlighter-rouge">Polyglot.java</code></p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>That’s it we are ready to roll!</p><h1 id="lets-have-some-fun">Lets have some fun</h1><p>As a polyglot developer, GraalVM is quite interesting to me as I can use many languages I love together making use of the best parts from each. Let’s explore the polyglot capabilities offered by GraalVM, please note that support for Python, Ruby, R, and Rust are still in the experimental stage and hence your mileage may vary. We will build a program today using Java, JavaScript, Ruby, Rust, Python, and C++.</p><blockquote><p>I wanted to use Rust and Go as well. While Rust mostly works via the GraalVM <code class="highlighter-rouge">lli</code> command line, it has a lot of limitations when embedded in polyglot mode. After a lot of fiddling around, I did manage to get it working. For Golang, it might be possible with <a href="https://github.com/zegl/tre">this</a> Go LLVM compiler as shown <a href="https://gist.github.com/eginez/d69e3e1c4045eb692a274bd2bd5d31d6">here</a>, but it’s having its own set of issues as well when I tried. So I have given up on Golang for now. Let me know if any of you got it working.</p></blockquote><p>We will have a simple(silly 😉) application written in Java that composes methods from different languages for each step from within Java</p><ol><li><strong>Python</strong>: Filters out the Fibonacci numbers from the given input array</li><li><strong>JavaScript</strong>: Find the cube of each number in the output array from the previous step</li><li><strong>C++</strong>: Get the sum of the numbers in the output array from the previous step</li><li><strong>Rust</strong>: Find the cube-root of the number from the previous step</li><li><strong>Ruby</strong>: Find factorial of the number from the previous step</li><li><strong>Java</strong>: Finally print the result(this is also the wrapper program)</li></ol><p>If you prefer a more complex example, check <a href="https://github.com/graalvm/examples/tree/master/weather_predictor">this</a> out.</p><h3 id="step-1-java">Step 1: Java</h3><p>Let’s start with our Java wrapper program <code class="highlighter-rouge">Polyglot.java</code></p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -505,15 +152,7 @@ gu <span class="nb">install </span>ruby
         <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Factorial: "</span> <span class="o">+</span> <span class="n">out</span><span class="o">);</span>
     <span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>The utility functions are to simplify the code, now let’s look at each step where it composes the functions.</p>
-
-<h3 id="step-2-python">Step 2: Python</h3>
-
-<p>We are executing the <code class="highlighter-rouge">getFibonacciNumbers</code> function located in file <code class="highlighter-rouge">pythonpart.py</code> and passing it our input array.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>The utility functions are to simplify the code, now let’s look at each step where it composes the functions.</p><h3 id="step-2-python">Step 2: Python</h3><p>We are executing the <code class="highlighter-rouge">getFibonacciNumbers</code> function located in file <code class="highlighter-rouge">pythonpart.py</code> and passing it our input array.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -521,11 +160,7 @@ gu <span class="nb">install </span>ruby
 <span class="n">loadSource</span><span class="o">(</span><span class="s">"python"</span><span class="o">,</span> <span class="s">"pythonpart.py"</span><span class="o">);</span>
 <span class="nc">Value</span> <span class="n">getFibonacciNumbersFn</span> <span class="o">=</span> <span class="n">polyglotCtx</span><span class="o">.</span><span class="na">getBindings</span><span class="o">(</span><span class="s">"python"</span><span class="o">).</span><span class="na">getMember</span><span class="o">(</span><span class="s">"getFibonacciNumbers"</span><span class="o">);</span>
 <span class="kt">int</span><span class="o">[]</span> <span class="n">fibNumbers</span> <span class="o">=</span> <span class="n">getIntArrayFromValue</span><span class="o">(</span><span class="n">getFibonacciNumbersFn</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">input</span><span class="o">));</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Let’s look at <code class="highlighter-rouge">pythonpart.py</code>, it is a standard python program that takes an array and filters out the Fibonacci numbers from it and returns the resulting array.</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>Let’s look at <code class="highlighter-rouge">pythonpart.py</code>, it is a standard python program that takes an array and filters out the Fibonacci numbers from it and returns the resulting array.</p><div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -573,13 +208,7 @@ gu <span class="nb">install </span>ruby
         <span class="k">print</span><span class="p">(</span><span class="s">"None present"</span><span class="p">);</span>
 
     <span class="k">return</span> <span class="n">out</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h3 id="step-3-javascript">Step 3: JavaScript</h3>
-
-<p>We are executing the <code class="highlighter-rouge">findCubeOfNumbers</code> function located in file <code class="highlighter-rouge">jspart.js</code> and passing the result from the Python function.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><h3 id="step-3-javascript">Step 3: JavaScript</h3><p>We are executing the <code class="highlighter-rouge">findCubeOfNumbers</code> function located in file <code class="highlighter-rouge">jspart.js</code> and passing the result from the Python function.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -587,11 +216,7 @@ gu <span class="nb">install </span>ruby
 <span class="n">loadSource</span><span class="o">(</span><span class="s">"js"</span><span class="o">,</span> <span class="s">"jspart.js"</span><span class="o">);</span>
 <span class="nc">Value</span> <span class="n">findCubeOfNumbersFn</span> <span class="o">=</span> <span class="n">polyglotCtx</span><span class="o">.</span><span class="na">getBindings</span><span class="o">(</span><span class="s">"js"</span><span class="o">).</span><span class="na">getMember</span><span class="o">(</span><span class="s">"findCubeOfNumbers"</span><span class="o">);</span>
 <span class="kt">int</span><span class="o">[]</span> <span class="n">sqrNumbers</span> <span class="o">=</span> <span class="n">getIntArrayFromValue</span><span class="o">(</span><span class="n">findCubeOfNumbersFn</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">fibNumbers</span><span class="o">));</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Let’s look at <code class="highlighter-rouge">jspart.js</code>, it is a standard JavaScript function that takes an array and maps over the elements and returns the array. But we had to call <code class="highlighter-rouge">Array.prototype.map.call</code> instead of just <code class="highlighter-rouge">array.map</code> as the array passed by Java is not standard JS array.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>Let’s look at <code class="highlighter-rouge">jspart.js</code>, it is a standard JavaScript function that takes an array and maps over the elements and returns the array. But we had to call <code class="highlighter-rouge">Array.prototype.map.call</code> instead of just <code class="highlighter-rouge">array.map</code> as the array passed by Java is not standard JS array.</p><div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -601,13 +226,7 @@ gu <span class="nb">install </span>ruby
 
     <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">map</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="nx">it</span> <span class="o">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nx">it</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
 <span class="p">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h3 id="step-4-c">Step 4: C++</h3>
-
-<p>We are executing the <code class="highlighter-rouge">getSumOfArray</code> function located in the <code class="highlighter-rouge">cpppart</code> binary file. We pass the result from JS function and the length of the array here. We have to use compiled binary here unlike Python, Ruby, and JavaScript which are interpreted languages.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><h3 id="step-4-c">Step 4: C++</h3><p>We are executing the <code class="highlighter-rouge">getSumOfArray</code> function located in the <code class="highlighter-rouge">cpppart</code> binary file. We pass the result from JS function and the length of the array here. We have to use compiled binary here unlike Python, Ruby, and JavaScript which are interpreted languages.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -615,19 +234,11 @@ gu <span class="nb">install </span>ruby
 <span class="n">loadSource</span><span class="o">(</span><span class="s">"llvm"</span><span class="o">,</span> <span class="s">"cpppart"</span><span class="o">);</span>
 <span class="nc">Value</span> <span class="n">getSumOfArrayFn</span> <span class="o">=</span> <span class="n">polyglotCtx</span><span class="o">.</span><span class="na">getBindings</span><span class="o">(</span><span class="s">"llvm"</span><span class="o">).</span><span class="na">getMember</span><span class="o">(</span><span class="s">"getSumOfArray"</span><span class="o">);</span>
 <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">getSumOfArrayFn</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">sqrNumbers</span><span class="o">,</span> <span class="n">sqrNumbers</span><span class="o">.</span><span class="na">length</span><span class="o">).</span><span class="na">asInt</span><span class="o">();</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>The source of the binary is in <code class="highlighter-rouge">cpppart.cpp</code> file. Which is compiled using the below</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>The source of the binary is in <code class="highlighter-rouge">cpppart.cpp</code> file. Which is compiled using the below</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="rouge-code"><pre><span class="nb">export </span><span class="nv">LLVM_TOOLCHAIN</span><span class="o">=</span><span class="si">$(</span>lli <span class="nt">--print-toolchain-path</span><span class="si">)</span>
 <span class="nv">$LLVM_TOOLCHAIN</span>/clang++ <span class="nt">-shared</span> cpppart.cpp <span class="nt">-lpolyglot-mock</span> <span class="nt">-o</span> cpppart
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Let’s look at <code class="highlighter-rouge">cpppart.cpp</code>, it is a standard C++ program that exports a function. It takes an array and its length as the arguments and returns a number</p>
-
-<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>Let’s look at <code class="highlighter-rouge">cpppart.cpp</code>, it is a standard C++ program that exports a function. It takes an array and its length as the arguments and returns a number</p><div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -655,13 +266,7 @@ gu <span class="nb">install </span>ruby
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h3 id="step-5-rust">Step 5: Rust</h3>
-
-<p>We are executing the <code class="highlighter-rouge">cube_root</code> function located in file <code class="highlighter-rouge">rustpart.bc</code>, compiled from <code class="highlighter-rouge">rustpart.rs</code>. We pass the result from C++ function here.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><h3 id="step-5-rust">Step 5: Rust</h3><p>We are executing the <code class="highlighter-rouge">cube_root</code> function located in file <code class="highlighter-rouge">rustpart.bc</code>, compiled from <code class="highlighter-rouge">rustpart.rs</code>. We pass the result from C++ function here.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -671,11 +276,7 @@ gu <span class="nb">install </span>ruby
 <span class="c1">// println! macro does not work from Rust when embedded, some issue with mangling</span>
 <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Rust =&gt; Find cube root of the number"</span><span class="o">);</span>
 <span class="nc">Double</span> <span class="n">cubeRoot</span> <span class="o">=</span> <span class="n">cubeRootFn</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">sum</span><span class="o">).</span><span class="na">asDouble</span><span class="o">();</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Let’s look at <code class="highlighter-rouge">rustpart.rs</code>, it is a standard Rust function that takes a number finds its cube root and returns it. But we do have to specify <code class="highlighter-rouge">#[no_mangle]</code> annotation and we cannot use any crates as well apparently. Simples functions with primitive args/output seem to work but more complex functions do not work when embedded.</p>
-
-<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>Let’s look at <code class="highlighter-rouge">rustpart.rs</code>, it is a standard Rust function that takes a number finds its cube root and returns it. But we do have to specify <code class="highlighter-rouge">#[no_mangle]</code> annotation and we cannot use any crates as well apparently. Simples functions with primitive args/output seem to work but more complex functions do not work when embedded.</p><div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -687,29 +288,15 @@ gu <span class="nb">install </span>ruby
 <span class="p">}</span>
 
 <span class="k">fn</span> <span class="nf">main</span><span class="p">(){}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>We compile the Rust source to binary code using <code class="highlighter-rouge">rustc</code> compiler with the <code class="highlighter-rouge">--emit=llvm-bc</code> flag</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>We compile the Rust source to binary code using <code class="highlighter-rouge">rustc</code> compiler with the <code class="highlighter-rouge">--emit=llvm-bc</code> flag</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 </pre></td><td class="rouge-code"><pre>rustc <span class="nt">--emit</span><span class="o">=</span>llvm-bc rustpart.rs
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<h3 id="step-6-ruby">Step 6: Ruby</h3>
-
-<p>We are executing the <code class="highlighter-rouge">factorial</code> function located in file <code class="highlighter-rouge">rubypart.rb</code>. We are passing the result from the Rust function here.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><h3 id="step-6-ruby">Step 6: Ruby</h3><p>We are executing the <code class="highlighter-rouge">factorial</code> function located in file <code class="highlighter-rouge">rubypart.rb</code>. We are passing the result from the Rust function here.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 </pre></td><td class="rouge-code"><pre><span class="cm">/* RUBY: Find factorial of the number */</span>
 <span class="nc">Value</span> <span class="n">factorialFn</span> <span class="o">=</span> <span class="n">loadSource</span><span class="o">(</span><span class="s">"ruby"</span><span class="o">,</span> <span class="s">"rubypart.rb"</span><span class="o">);</span>
 <span class="kt">long</span> <span class="n">out</span> <span class="o">=</span> <span class="n">factorialFn</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="n">cubeRoot</span><span class="o">).</span><span class="na">asLong</span><span class="o">();</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>Let’s look at <code class="highlighter-rouge">rubypart.rb</code>, it is a standard Ruby lambda function that takes a number and returns its factorial.</p>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>Let’s look at <code class="highlighter-rouge">rubypart.rb</code>, it is a standard Ruby lambda function that takes a number and returns its factorial.</p><div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -717,15 +304,7 @@ gu <span class="nb">install </span>ruby
     <span class="nb">puts</span> <span class="s2">"Ruby =&gt; Find factorial of the number"</span>
     <span class="p">(</span><span class="mi">1</span><span class="o">..</span><span class="n">num</span><span class="p">).</span><span class="nf">inject</span> <span class="p">{</span><span class="o">|</span><span class="n">product</span><span class="p">,</span> <span class="n">num</span><span class="o">|</span> <span class="n">product</span> <span class="o">*</span> <span class="n">num</span> <span class="p">}</span>
 <span class="p">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>And Finally, we print the outputs with Java.</p>
-
-<h3 id="run-the-program">Run the program</h3>
-
-<p>To run this program we need to compile the C++, Rust and Java files first, and then run it using the JVM provided by GraalVM. Below are the steps, you can save this as <code class="highlighter-rouge">run.sh</code> and execute it.</p>
-
-<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>And Finally, we print the outputs with Java.</p><h3 id="run-the-program">Run the program</h3><p>To run this program we need to compile the C++, Rust and Java files first, and then run it using the JVM provided by GraalVM. Below are the steps, you can save this as <code class="highlighter-rouge">run.sh</code> and execute it.</p><div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -737,302 +316,10 @@ gu <span class="nb">install </span>ruby
 </span>rustc <span class="nt">--emit</span><span class="o">=</span>llvm-bc rustpart.rs <span class="o">||</span> <span class="nb">exit
 
 </span>javac Polyglot.java <span class="o">&amp;&amp;</span> java Polyglot
-</pre></td></tr></tbody></table></code></pre></div></div>
-
-<p>It will produce the below output:</p>
-
-<p><img src="https://i.imgur.com/azYHYGy.png" alt="Command output" /></p>
-
-<hr />
-
-<h1 id="conclusion">Conclusion</h1>
-
-<p>Wasn’t this fun? So is such a polyglot capability useful? Well that depends, the polyglot capabilities of GraalVM are still not production-ready but it is still useful as it opens up the door for real language interoperability, imagine being able to use a library from any language from your program, this is already possible for many C, Ruby, R, JS and Java libraries with GraalVM but as support becomes better we would be able to break free from being limited to one language. GraalVM seems to be much faster for languages like Ruby than the standard CRuby or JRuby for example and that is promising as it would mean you wouldn’t have to worry much about overheads when embedding multiple languages in your program.</p>
-
-<p>GraalVM is one of the most revolutionary technologies I have encountered in recent times and I hope the polyglot language support becomes production-ready soon combined with its native image capabilities it would be a very powerful platform for truly polyglot applications.</p>
-
-<hr />
-
-<p>If you like this article, please leave a like or a comment.</p>
-
-<p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
-
-<p>Cover image credit: Based on official logos of respective projects.</p>
-
-<p><em>Also published on <a href="https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa">Dev.to</a></em></p>
-
-            </div>
-
-            <!-- Rating -->
-            
-
-
-            <!-- Post Categories -->
-            <div class="after-post-cats">
-                <ul class="tags mb-4">
-                    
-                    
-                </ul>
-            </div>
-            <!-- End Categories -->
-
-            <!-- Post Tags -->
-            <div class="after-post-tags">
-                <ul class="tags">
-                    
-                    
-                    <li>
-                        <a class="smoothscroll" href="/tags#java">#java</a>
-                    </li>
-                    
-                    <li>
-                        <a class="smoothscroll" href="/tags#javascript">#javascript</a>
-                    </li>
-                    
-                    <li>
-                        <a class="smoothscroll" href="/tags#python">#python</a>
-                    </li>
-                    
-                    <li>
-                        <a class="smoothscroll" href="/tags#rust">#rust</a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <!-- End Tags -->
-
-            <!-- Prev/Next -->
-            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
-            
-            <a class="prev d-block col-md-6" href="/memory-management-in-v8/"> &laquo; 🚀 Visualizing memory management in V8 Engine (JavaScript, NodeJS, Deno, WebAssembly)</a>
-            
-            
-            <div class="clearfix"></div>
-            </div>
-            <!-- End Categories -->
-
-        </div>
-        <!-- End Post -->
-
-    </div>
-</div>
-<!-- End Article
-================================================== -->
-
-<!-- Begin Comments
-================================================== -->
-
-    <div class="container">
-        <div id="comments" class="row justify-content-center mb-5">
-            <div class="col-md-8">
-                <section class="disqus">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-        var disqus_shortname = 'deepu-tech'; 
+</pre></td></tr></tbody></table></code></pre></div></div><p>It will produce the below output:</p><p><img src="https://i.imgur.com/azYHYGy.png" alt="Command output"></p><hr><h1 id="conclusion">Conclusion</h1><p>Wasn’t this fun? So is such a polyglot capability useful? Well that depends, the polyglot capabilities of GraalVM are still not production-ready but it is still useful as it opens up the door for real language interoperability, imagine being able to use a library from any language from your program, this is already possible for many C, Ruby, R, JS and Java libraries with GraalVM but as support becomes better we would be able to break free from being limited to one language. GraalVM seems to be much faster for languages like Ruby than the standard CRuby or JRuby for example and that is promising as it would mean you wouldn’t have to worry much about overheads when embedding multiple languages in your program.</p><p>GraalVM is one of the most revolutionary technologies I have encountered in recent times and I hope the polyglot language support becomes production-ready soon combined with its native image capabilities it would be a very powerful platform for truly polyglot applications.</p><hr><p>If you like this article, please leave a like or a comment.</p><p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p><p>Cover image credit: Based on official logos of respective projects.</p><p><em>Also published on <a href="https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa">Dev.to</a></em></p></div><div class="after-post-cats"><ul class="tags mb-4"></ul></div><div class="after-post-tags"><ul class="tags"><li><a class="smoothscroll" href="/tags#java">#java</a></li><li><a class="smoothscroll" href="/tags#javascript">#javascript</a></li><li><a class="smoothscroll" href="/tags#python">#python</a></li><li><a class="smoothscroll" href="/tags#rust">#rust</a></li></ul></div><div class="row PageNavigation d-flex justify-content-between font-weight-bold"><a class="prev d-block col-md-6" href="/memory-management-in-v8/">&laquo; 🚀 Visualizing memory management in V8 Engine (JavaScript, NodeJS, Deno, WebAssembly)</a><div class="clearfix"></div></div></div></div></div><div class="container"><div id="comments" class="row justify-content-center mb-5"><div class="col-md-8"><section class="disqus"><div id="disqus_thread"></div><script type="text/javascript">var disqus_shortname = 'deepu-tech'; 
         var disqus_developer = 0;
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
             dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-</section>
-
-            </div>
-        </div>
-    </div>
-
-<!--End Comments
-================================================== -->
-
-<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first:
-https://search.google.com/structured-data/testing-tool/u/0/
-================================================== -->
-
-
-</div>
-
-
-
-</div>
-
-<!-- Categories Jumbotron
-================================================== -->
-<div class="jumbotron fortags">
-	<div class="d-md-flex h-100">
-		<div class="col-md-4 transpdark align-self-center text-center h-100">
-            <div class="d-md-flex align-items-center justify-content-center h-100">
-                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
-            </div>
-		</div>
-		<div class="col-md-8 p-5 align-self-center text-center">
-            
-            
-                
-                    <a class="mt-1 mb-1" href="/tags#jhipster">jhipster (3)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#java">java (6)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#microservices">microservices (5)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#docker">docker (2)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#azure">azure (2)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#kubernetes">kubernetes (3)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#typescript">typescript (3)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#react">react (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#javascript">javascript (7)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#webdev">webdev (2)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#terraform">terraform (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#writing">writing (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#medium">medium (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#development">development (3)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#linux">linux (3)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#fedora">fedora (2)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#gnome">gnome (2)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#terminal">terminal (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#ohmyzsh">ohmyzsh (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#zsh">zsh (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#go">go (4)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#programming">programming (9)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#languages">languages (7)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (3)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#vscode">vscode (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#ide">ide (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#istio">istio (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#functional">functional (4)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#beginners">beginners (7)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#showdev">showdev (2)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#ruby">ruby (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#Jekyll">Jekyll (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#blogging">blogging (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#architecture">architecture (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#devops">devops (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#distributedsystems">distributedsystems (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#rust">rust (3)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#bash">bash (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#codenewbie">codenewbie (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#codequality">codequality (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#career">career (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#computerscience">computerscience (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#motivation">motivation (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#books">books (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#kotlin">kotlin (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#scala">scala (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#clojure">clojure (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#WebAssembly">WebAssembly (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#nodejs">nodejs (1)</a>
-                
-                    <a class="mt-1 mb-1" href="/tags#python">python (1)</a>
-                
-            
-            
-		</div>
-	</div>
-</div>
-
-<!-- Begin Footer
-================================================== -->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-sm-6 text-center text-lg-left">
-                Copyright © 2020 Deepu K Sasidharan
-                <br/>
-                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-                    <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
-                </a>
-                Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-            </div>
-            <div class="col-md-6 col-sm-6 text-center text-lg-right">
-                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net |
-                Domain by
-                <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
-                    <img src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo">
-                </a> |
-                Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a>
-            </div>
-        </div>
-    </div>
-</footer>
-<!-- End Footer
-================================================== -->
-
-</div> <!-- /.site-content -->
-
-<!-- Scripts
-================================================== -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-<script src="/assets/js/mediumish.js"></script>
-
-
-<script src="/assets/js/lazyload.js"></script>
-
-
-<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
-
-
-<script id="dsq-count-scr" src="//deepu-tech.disqus.com/count.js"></script>
-
-
-
-
-<!-- <script src="https://assets.digitalclimatestrike.net/widget.js" async></script> -->
-</body>
-</html>
+        })();</script><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></section></div></div></div></div></div><div class="jumbotron fortags"><div class="d-md-flex h-100"><div class="col-md-4 transpdark align-self-center text-center h-100"><div class="d-md-flex align-items-center justify-content-center h-100"><h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2></div></div><div class="col-md-8 p-5 align-self-center text-center"><a class="mt-1 mb-1" href="/tags#jhipster">jhipster (3)</a> <a class="mt-1 mb-1" href="/tags#java">java (6)</a> <a class="mt-1 mb-1" href="/tags#microservices">microservices (5)</a> <a class="mt-1 mb-1" href="/tags#docker">docker (2)</a> <a class="mt-1 mb-1" href="/tags#azure">azure (2)</a> <a class="mt-1 mb-1" href="/tags#kubernetes">kubernetes (3)</a> <a class="mt-1 mb-1" href="/tags#typescript">typescript (3)</a> <a class="mt-1 mb-1" href="/tags#react">react (1)</a> <a class="mt-1 mb-1" href="/tags#javascript">javascript (7)</a> <a class="mt-1 mb-1" href="/tags#webdev">webdev (2)</a> <a class="mt-1 mb-1" href="/tags#terraform">terraform (1)</a> <a class="mt-1 mb-1" href="/tags#writing">writing (1)</a> <a class="mt-1 mb-1" href="/tags#medium">medium (1)</a> <a class="mt-1 mb-1" href="/tags#development">development (3)</a> <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a> <a class="mt-1 mb-1" href="/tags#linux">linux (3)</a> <a class="mt-1 mb-1" href="/tags#fedora">fedora (2)</a> <a class="mt-1 mb-1" href="/tags#gnome">gnome (2)</a> <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a> <a class="mt-1 mb-1" href="/tags#terminal">terminal (1)</a> <a class="mt-1 mb-1" href="/tags#ohmyzsh">ohmyzsh (1)</a> <a class="mt-1 mb-1" href="/tags#zsh">zsh (1)</a> <a class="mt-1 mb-1" href="/tags#go">go (4)</a> <a class="mt-1 mb-1" href="/tags#programming">programming (9)</a> <a class="mt-1 mb-1" href="/tags#languages">languages (7)</a> <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (3)</a> <a class="mt-1 mb-1" href="/tags#vscode">vscode (1)</a> <a class="mt-1 mb-1" href="/tags#ide">ide (1)</a> <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a> <a class="mt-1 mb-1" href="/tags#istio">istio (1)</a> <a class="mt-1 mb-1" href="/tags#functional">functional (4)</a> <a class="mt-1 mb-1" href="/tags#beginners">beginners (7)</a> <a class="mt-1 mb-1" href="/tags#showdev">showdev (2)</a> <a class="mt-1 mb-1" href="/tags#ruby">ruby (1)</a> <a class="mt-1 mb-1" href="/tags#Jekyll">Jekyll (1)</a> <a class="mt-1 mb-1" href="/tags#blogging">blogging (1)</a> <a class="mt-1 mb-1" href="/tags#architecture">architecture (1)</a> <a class="mt-1 mb-1" href="/tags#devops">devops (1)</a> <a class="mt-1 mb-1" href="/tags#distributedsystems">distributedsystems (1)</a> <a class="mt-1 mb-1" href="/tags#rust">rust (3)</a> <a class="mt-1 mb-1" href="/tags#bash">bash (1)</a> <a class="mt-1 mb-1" href="/tags#codenewbie">codenewbie (1)</a> <a class="mt-1 mb-1" href="/tags#codequality">codequality (1)</a> <a class="mt-1 mb-1" href="/tags#career">career (1)</a> <a class="mt-1 mb-1" href="/tags#computerscience">computerscience (1)</a> <a class="mt-1 mb-1" href="/tags#motivation">motivation (1)</a> <a class="mt-1 mb-1" href="/tags#books">books (1)</a> <a class="mt-1 mb-1" href="/tags#kotlin">kotlin (1)</a> <a class="mt-1 mb-1" href="/tags#scala">scala (1)</a> <a class="mt-1 mb-1" href="/tags#clojure">clojure (1)</a> <a class="mt-1 mb-1" href="/tags#WebAssembly">WebAssembly (1)</a> <a class="mt-1 mb-1" href="/tags#nodejs">nodejs (1)</a> <a class="mt-1 mb-1" href="/tags#python">python (1)</a></div></div></div><footer class="footer"><div class="container"><div class="row"><div class="col-md-6 col-sm-6 text-center text-lg-left">Copyright © 2020 Deepu K Sasidharan<br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png"> </a>Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</div><div class="col-md-6 col-sm-6 text-center text-lg-right"><a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net | Domain by <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community"><img src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo"> </a>| Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a></div></div></div></footer></div><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script><script src="/assets/js/mediumish.js"></script><script src="/assets/js/lazyload.js"></script><script src="/assets/js/ie10-viewport-bug-workaround.js"></script><script id="dsq-count-scr" src="//deepu-tech.disqus.com/count.js"></script></body></html>
