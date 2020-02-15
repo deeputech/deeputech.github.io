@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 15 Feb 2020 20:34:08 +0100</pubDate>
-    <lastBuildDate>Sat, 15 Feb 2020 20:34:08 +0100</lastBuildDate>
+    <pubDate>Sat, 15 Feb 2020 20:51:44 +0100</pubDate>
+    <lastBuildDate>Sat, 15 Feb 2020 20:51:44 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -613,7 +613,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
             &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;e89e2e48a797417eb8692897dcada584&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
             &lt;noscript&gt;
                 &lt;a href=&quot;//speakerdeck.com/player/e89e2e48a797417eb8692897dcada584&quot;&gt;
-                &lt;img alt=&quot;Speakerdeck&quot; src=&quot;//speakerd.s3.amazonaws.com/presentations/e89e2e48a797417eb8692897dcada584/slide_0.jpg&quot; /&gt;
+                &lt;img alt=&quot;Speakerdeck&quot; data-src=&quot;//speakerd.s3.amazonaws.com/presentations/e89e2e48a797417eb8692897dcada584/slide_0.jpg&quot; /&gt;
                 &lt;/a&gt;
             &lt;/noscript&gt;
           &lt;/p&gt;
@@ -668,7 +668,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
             &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;5fff2548e55c4bb0a9c837c7eb598bee&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
             &lt;noscript&gt;
                 &lt;a href=&quot;//speakerdeck.com/player/5fff2548e55c4bb0a9c837c7eb598bee&quot;&gt;
-                &lt;img alt=&quot;Speakerdeck&quot; src=&quot;//speakerd.s3.amazonaws.com/presentations/5fff2548e55c4bb0a9c837c7eb598bee/slide_0.jpg&quot; /&gt;
+                &lt;img alt=&quot;Speakerdeck&quot; data-src=&quot;//speakerd.s3.amazonaws.com/presentations/5fff2548e55c4bb0a9c837c7eb598bee/slide_0.jpg&quot; /&gt;
                 &lt;/a&gt;
             &lt;/noscript&gt;
           &lt;/p&gt;
@@ -899,7 +899,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
             &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;9780d352c95f4361bd8c6fa164554afc&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
             &lt;noscript&gt;
                 &lt;a href=&quot;//speakerdeck.com/player/9780d352c95f4361bd8c6fa164554afc&quot;&gt;
-                &lt;img alt=&quot;Speakerdeck&quot; src=&quot;//speakerd.s3.amazonaws.com/presentations/9780d352c95f4361bd8c6fa164554afc/slide_0.jpg&quot; /&gt;
+                &lt;img alt=&quot;Speakerdeck&quot; data-src=&quot;//speakerd.s3.amazonaws.com/presentations/9780d352c95f4361bd8c6fa164554afc/slide_0.jpg&quot; /&gt;
                 &lt;/a&gt;
             &lt;/noscript&gt;
           &lt;/p&gt;
@@ -998,7 +998,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
             &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;f4783404769145f4b990154d0cc05629&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
             &lt;noscript&gt;
                 &lt;a href=&quot;//speakerdeck.com/player/f4783404769145f4b990154d0cc05629&quot;&gt;
-                &lt;img alt=&quot;Speakerdeck&quot; src=&quot;//speakerd.s3.amazonaws.com/presentations/f4783404769145f4b990154d0cc05629/slide_0.jpg&quot; /&gt;
+                &lt;img alt=&quot;Speakerdeck&quot; data-src=&quot;//speakerd.s3.amazonaws.com/presentations/f4783404769145f4b990154d0cc05629/slide_0.jpg&quot; /&gt;
                 &lt;/a&gt;
             &lt;/noscript&gt;
           &lt;/p&gt;
