@@ -3,10 +3,10 @@
   <channel>
     <title>Technorage</title>
     <description>Where I rage about technology and stuff!</description>
-    <link>/</link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 15 Feb 2020 20:25:10 +0100</pubDate>
-    <lastBuildDate>Sat, 15 Feb 2020 20:25:10 +0100</lastBuildDate>
+    <link>https://deepu.tech/</link>
+    <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Sat, 15 Feb 2020 20:34:08 +0100</pubDate>
+    <lastBuildDate>Sat, 15 Feb 2020 20:34:08 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -492,8 +492,8 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 06 Feb 2020 00:00:00 +0100</pubDate>
-        <link>/polyglot-showdown-with-graalvm/</link>
-        <guid isPermaLink="true">/polyglot-showdown-with-graalvm/</guid>
+        <link>https://deepu.tech/polyglot-showdown-with-graalvm/</link>
+        <guid isPermaLink="true">https://deepu.tech/polyglot-showdown-with-graalvm/</guid>
         
         <category>java</category>
         
@@ -755,8 +755,8 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 27 Jan 2020 00:00:00 +0100</pubDate>
-        <link>/memory-management-in-v8/</link>
-        <guid isPermaLink="true">/memory-management-in-v8/</guid>
+        <link>https://deepu.tech/memory-management-in-v8/</link>
+        <guid isPermaLink="true">https://deepu.tech/memory-management-in-v8/</guid>
         
         <category>javascript</category>
         
@@ -1073,8 +1073,8 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 23 Jan 2020 00:00:00 +0100</pubDate>
-        <link>/memory-management-in-jvm/</link>
-        <guid isPermaLink="true">/memory-management-in-jvm/</guid>
+        <link>https://deepu.tech/memory-management-in-jvm/</link>
+        <guid isPermaLink="true">https://deepu.tech/memory-management-in-jvm/</guid>
         
         <category>java</category>
         
@@ -1181,8 +1181,8 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/life-of-a-full-stack-developer-2og5&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 19 Jan 2020 00:00:00 +0100</pubDate>
-        <link>/life-of-a-full-stack-developer/</link>
-        <guid isPermaLink="true">/life-of-a-full-stack-developer/</guid>
+        <link>https://deepu.tech/life-of-a-full-stack-developer/</link>
+        <guid isPermaLink="true">https://deepu.tech/life-of-a-full-stack-developer/</guid>
         
         <category>webdev</category>
         
@@ -1332,8 +1332,8 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 08 Jan 2020 00:00:00 +0100</pubDate>
-        <link>/memory-management-in-programming/</link>
-        <guid isPermaLink="true">/memory-management-in-programming/</guid>
+        <link>https://deepu.tech/memory-management-in-programming/</link>
+        <guid isPermaLink="true">https://deepu.tech/memory-management-in-programming/</guid>
         
         <category>languages</category>
         
@@ -1624,8 +1624,8 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/7-languages-to-learn-in-2020-with-resources-to-get-started-1ieo&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 01 Jan 2020 00:00:00 +0100</pubDate>
-        <link>/languages-to-learn-in-2020/</link>
-        <guid isPermaLink="true">/languages-to-learn-in-2020/</guid>
+        <link>https://deepu.tech/languages-to-learn-in-2020/</link>
+        <guid isPermaLink="true">https://deepu.tech/languages-to-learn-in-2020/</guid>
         
         <category>languages</category>
         
@@ -1894,8 +1894,8 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/3-tips-for-clean-efficient-code-1ea8&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 16 Dec 2019 00:00:00 +0100</pubDate>
-        <link>/three-tips-for-clean-code/</link>
-        <guid isPermaLink="true">/three-tips-for-clean-code/</guid>
+        <link>https://deepu.tech/three-tips-for-clean-code/</link>
+        <guid isPermaLink="true">https://deepu.tech/three-tips-for-clean-code/</guid>
         
         <category>beginners</category>
         
@@ -2652,8 +2652,8 @@ In JavaScript, we can either;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-2-p3p&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 12 Dec 2019 00:00:00 +0100</pubDate>
-        <link>/golang-for-javascript-developers-part-2/</link>
-        <guid isPermaLink="true">/golang-for-javascript-developers-part-2/</guid>
+        <link>https://deepu.tech/golang-for-javascript-developers-part-2/</link>
+        <guid isPermaLink="true">https://deepu.tech/golang-for-javascript-developers-part-2/</guid>
         
         <category>go</category>
         
@@ -2752,8 +2752,8 @@ In JavaScript, we can either;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/how-to-clean-up-your-docker-environment-4jm4&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 06 Dec 2019 00:00:00 +0100</pubDate>
-        <link>/docker-env-cleanup/</link>
-        <guid isPermaLink="true">/docker-env-cleanup/</guid>
+        <link>https://deepu.tech/docker-env-cleanup/</link>
+        <guid isPermaLink="true">https://deepu.tech/docker-env-cleanup/</guid>
         
         <category>docker</category>
         
@@ -3523,8 +3523,8 @@ In JavaScript, we can either;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 04 Dec 2019 00:00:00 +0100</pubDate>
-        <link>/golang-for-javascript-developers-part-1/</link>
-        <guid isPermaLink="true">/golang-for-javascript-developers-part-1/</guid>
+        <link>https://deepu.tech/golang-for-javascript-developers-part-1/</link>
+        <guid isPermaLink="true">https://deepu.tech/golang-for-javascript-developers-part-1/</guid>
         
         <category>go</category>
         
