@@ -9,7 +9,7 @@ tags:
     - programming
     - computerscience
 canonical_url: "https://deepu.tech/memory-management-in-golang/"
-cover_image: "https://i.imgur.com/IFsYct8.gif"
+cover_image: https://i.imgur.com/ViNnj1v.jpg
 series: memory-management
 ---
 
@@ -53,7 +53,7 @@ The resident set is divided into pages of 8KB each and is managed by one global 
 
 `mheap` manages pages grouped into different constructs as below:
 
--   **mspan**: `mspan` is the most basic structure that manages the pages of memory in `mheap`. Its a double linked list that holds the address of the start page, span size class and the number of pages in the span. Like TCMalloc, Go also divides Memory Pages into a block of 67 different classes by size starting at 8 bytes up to 32 kilobytes as in the below image
+-   **mspan**: `mspan` is the most basic structure that manages the pages of memory in `mheap`. It's a double linked list that holds the address of the start page, span size class and the number of pages in the span. Like TCMalloc, Go also divides Memory Pages into a block of 67 different classes by size starting at 8 bytes up to 32 kilobytes as in the below image
 
     ![](https://i.imgur.com/IxjG2aF.png)
 
@@ -156,7 +156,7 @@ The Stack as you can see is automatically managed and is done so by the operatin
 
 # Go Memory management
 
-Go's memory management involves automatic allocation when memory is needed and garbage collection when memory is not needed anymore. Its done by the standard library. Unlike C/C++ the developer does not have to deal with it and the underlying management done by Go is well optimized and efficient.
+Go's memory management involves automatic allocation when memory is needed and garbage collection when memory is not needed anymore. It's done by the standard library. Unlike C/C++ the developer does not have to deal with it and the underlying management done by Go is well optimized and efficient.
 
 ## Memory Allocation
 
@@ -195,7 +195,7 @@ The process starts when a certain percentage(GC Percentage) of heap allocations 
 -   **Mark Termination** (Stop the world): Once marking is done every active Goroutine is paused and write barriers are turned off and clean up tasks are started. The GC also calculates the next GC goal here. Once this is done the reserved `P`s are released back to the application.
 -   **Sweeping** (Concurrent): Once the collection is done and allocations are attempted, the sweeping process starts to reclaim memory from the heap that is not marked alive. The amount of memory swept is synchronous to the amount being allocated.
 
-Let us see these in action for a single Goroutine. The number of objects are kept small for brevity. Click on the slides and move forward/backward using arrow keys to see the process:
+Let us see these in action for a single Goroutine. The number of objects is kept small for brevity. Click on the slides and move forward/backward using arrow keys to see the process:
 
 {% speakerdeck f162d0725e1940a69bdbb8c0cd9e302a %}
 
@@ -206,7 +206,7 @@ _Note: If the slides look cut off at edges, then click on the title of the slide
 3. When it reaches an object in a `noscan` span or when an object has no more pointers it finishes for the root and picks up next GC root object
 4. Once all GC roots are scanned, it picks up a grey object and continues to traverse its pointers in similar fashion
 5. If there are any pointer changes to an object when write barriers are on, the object gets colored grey so that GC re-scans it
-6. When there are no more grey objects left the mark process is complete and write barrier is turned off
+6. When there are no more grey objects left the marking process is complete and write barrier is turned off
 7. Sweeping will take place when allocations start
 
 This has some stop-the-world process but it's generally very fast that it is negligible most of the time. The coloring of objects takes place in the `gcmarkBits` attribute on the span.
@@ -215,7 +215,7 @@ This has some stop-the-world process but it's generally very fast that it is neg
 
 # Conclusion
 
-This post should give you an overview of the Go memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and the implementation details keeps changing from version to version. But for most Go developers this level of information would be sufficient and I hope it helps you write better code, considering these in mind, for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.
+This post should give you an overview of the Go memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and the implementation details keep changing from version to version. But for most Go developers this level of information would be sufficient and I hope it helps you write better code, considering these in mind, for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.
 
 I hope you had fun learning this, stay tuned for the next post in the series.
 
@@ -238,3 +238,5 @@ I hope you had fun learning this, stay tuned for the next post in the series.
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
+Cover image inspired by https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c
