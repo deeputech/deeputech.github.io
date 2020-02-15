@@ -7,7 +7,7 @@
                     <div class="wrapthumbnail">
                         <a href="{{ site.baseurl }}{{ post.url }}">
                             {% if site.lazyimages == "enabled" %}
-                            <img class="featured-box-img-cover lazyimg"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if post.cover_image contains "://" %}{{ post.cover_image }}{% else %}{{ site.baseurl }}/{{ post.cover_image }}{% endif %}">
+                            <img class="featured-box-img-cover lazyimg" data-src="{% if post.cover_image contains "://" %}{{ post.cover_image }}{% else %}{{ site.baseurl }}/{{ post.cover_image }}{% endif %}">
                             {% else %}
                             <img class="featured-box-img-cover" src="{% if post.cover_image contains "://" %}{{ post.cover_image }}{% else %}{{ site.baseurl }}/{{ post.cover_image }}{% endif %}">
                             {% endif %}
@@ -38,9 +38,9 @@
                                 {% if post.author %}
                                 <span class="meta-footer-thumb">
                                 {% if author.avatar %}
-                                <img class="author-thumb" src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
+                                <img class="author-thumb" data-src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
                                 {% else %}
-                                <img class="author-thumb" src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" alt="{{ author.display_name }}">
+                                <img class="author-thumb" data-src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" alt="{{ author.display_name }}">
                                 {% endif %}
                                 </span>
                                 <span class="author-meta">

@@ -14,7 +14,7 @@ module Jekyll
             <script async class="speakerdeck-embed" data-id="#{@id_stripped}" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
             <noscript>
                 <a href="//speakerdeck.com/player/#{@id_stripped}">
-                <img alt="Speakerdeck" src="//speakerd.s3.amazonaws.com/presentations/#{@id_stripped}/slide_0.jpg">
+                <img alt="Speakerdeck" data-src="//speakerd.s3.amazonaws.com/presentations/#{@id_stripped}/slide_0.jpg">
                 </a>
             </noscript>
           </p>)
