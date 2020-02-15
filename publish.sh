@@ -1,7 +1,5 @@
 #!/bin/bash
 
-rm -rf _site
-
 if [ -z "$(git status --porcelain)" ]; then
     echo ">>> Working directory clean"
     TMP_LOC=/tmp/deepu.github.io
@@ -16,7 +14,8 @@ if [ -z "$(git status --porcelain)" ]; then
 
     echo ">> Building site"
     bundle update listen || exit
-    bundle exec jekyll build || exit
+    JEKYLL_ENV=production bundle exec jekyll build || exit
+    npm run optimize || exit
 
 
     echo ">> Move site to temp folder"
