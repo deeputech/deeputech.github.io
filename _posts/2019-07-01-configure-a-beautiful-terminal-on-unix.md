@@ -129,7 +129,6 @@ Install a [Powerline font](https://github.com/bhilburn/powerlevel9k/wiki/Install
 
 Add the below configuration to the `~/.zshrc` file.
 
-{% raw %}
 ```bash
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -205,7 +204,7 @@ POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_COLOR=red
 POWERLEVEL9K_LOCK_ICON=$'\uf023'
 
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
-local p='%F{%(?.green.red)}${${${KEYMAP:-0}:#vicmd}:+❯}${${$((!${#${KEYMAP:-0}:#vicmd})):#0}:+❮}%f '
+local p='%F{ %(?.green.red)}${${${KEYMAP:-0}:#vicmd}:+❯}${${$((!${#${KEYMAP:-0}:#vicmd})):#0}:+❮}%f '
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="$p"
 
 POWERLEVEL9K_NVM_BACKGROUND=none
@@ -214,7 +213,6 @@ POWERLEVEL9K_NODE_ICON='%fvia %F{green}⬢'
 
 ############ END- POWERLEVEL THEME SETTINGS ##############
 ```
-{% endraw %}
 
 ### Enable plugins
 

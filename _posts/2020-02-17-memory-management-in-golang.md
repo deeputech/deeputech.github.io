@@ -2,7 +2,7 @@
 title: "\U0001F680 Visualizing memory management in Golang"
 published: false
 featured: false
-description: Let us take a look at how Golang manages memory.
+description: Let us take a closer look at how Golang manages memory.
 tags:
     - go
     - garbagecollection
