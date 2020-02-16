@@ -34,9 +34,9 @@ post_class: post-template
                 <div class="row post-top-meta">
                     <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
                         {% if author.avatar %}
-                        <img class="author-thumb" src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
+                        <img class="author-thumb lozad"  src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
                         {% else %}
-                        <img class="author-thumb" src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" alt="{{ author.display_name }}">
+                        <img class="author-thumb lozad"  src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" alt="{{ author.display_name }}">
                         {% endif %}
                     </div>
                     <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
@@ -72,7 +72,7 @@ post_class: post-template
                 <img 
                     data-src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}" 
                     alt="{{ page.title }}"
-                    class="featured-image img-fluid"
+                    class="featured-image img-fluid lozad" 
                     src="{{ site.baseurl }}/assets/images/placeholder.jpg"
                 >
             {% endif %}

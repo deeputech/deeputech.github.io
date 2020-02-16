@@ -99,7 +99,7 @@
             <!-- Bottom Alert Bar ================================================== -->
             <div class="alertbar">
                 <div class="container text-center">
-                    <span><img src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="{{ site.baseurl }}/{{ site.logo }}" alt="{{site.title}}"> &nbsp; Never miss a <b>story</b> from us, subscribe to our newsletter</span>
+                    <span><img class="lozad"  src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="{{ site.baseurl }}/{{ site.logo }}" alt="{{site.title}}"> &nbsp; Never miss a <b>story</b> from us, subscribe to our newsletter</span>
                     <form action="{{site.mailchimp-list}}" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate" target="_blank" novalidate>
                         <div class="mc-field-group">
                         <input type="email" placeholder="Email" name="EMAIL" class="required email" id="mce-EMAIL" autocomplete="on" required>
@@ -113,7 +113,7 @@
         </div>
 
         <!-- Categories Jumbotron ================================================== -->
-        <div class="jumbotron fortags">
+        <div class="jumbotron fortags lozad" data-background-image="{{ site.baseurl }}/assets/images/jumbotron.jpg">
             <div class="d-md-flex h-100">
                 <div class="col-md-4 transpdark align-self-center text-center h-100">
                     <div class="d-md-flex align-items-center justify-content-center h-100">
@@ -144,7 +144,7 @@
                         Copyright © {{ site.time | date: "%Y" }} Deepu K Sasidharan
                         <br/>
                         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-                            <img alt="Creative Commons License" style="border-width:0" src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+                            <img class="lozad" alt="Creative Commons License" style="border-width:0" src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
                         </a>
                         Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
                     </div>
@@ -152,7 +152,7 @@
                         <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net |
                         Domain by
                         <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community">
-                            <img src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo">
+                            <img src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo" class="lozad">
                         </a> |
                         Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a>
                     </div>
@@ -172,8 +172,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.14.0/lozad.min.js" integrity="sha256-hstwhDmGVwZjIwt6SlTG6sQBREWrWTBjVTik/JLlb1Y=" crossorigin="anonymous"></script>
     <script>
         // lazy loads images
-        const el = document.querySelectorAll('img');
-        const observer = lozad(el);
+        const observer = lozad()
         observer.observe();
     </script>
     {% endif %}
