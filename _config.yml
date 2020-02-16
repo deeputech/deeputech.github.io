@@ -44,6 +44,7 @@ defaults:
           type: "posts" # previously `post` in Jekyll 2.2.
       values:
           author: "deepu"
+          toc: true
 
 # Archives
 jekyll-archives:

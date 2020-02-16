@@ -1,7 +1,9 @@
-<div class="share sticky-top sticky-top-offset">
+<div class="share" {% if include.mini == true %} style="margin-top: 0;"{% endif %}>
+    {% if include.mini == false %}
     <p>
         Share
     </p>
+    {% endif %}
     <ul>
         <li class="ml-1 mr-1">
             <a target="_blank" href="https://twitter.com/intent/tweet?text={{ page.title }}&url=https://deepu.tech{{ page.url | absolute_url }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Twitter">
@@ -34,7 +36,8 @@
         </li>
 
     </ul>
-    {% if page.comments != false %}
+    {% if include.mini == false %}
+        {% if page.comments != false %}
     <div class="sep">
     </div>
     <ul>
@@ -42,6 +45,6 @@
         <a class="small smoothscroll" href="#disqus_thread"></a>
         </li>
     </ul>
+        {% endif %}
     {% endif %}
-
 </div>
