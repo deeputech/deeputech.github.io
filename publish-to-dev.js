@@ -2,6 +2,7 @@
 const axios = require("axios").default;
 const fs = require("fs");
 const editor = require("front-matter-editor");
+const json2yaml = require("json2yaml");
 
 const DEV_TO_API_URI = "https://dev.to/api/";
 const DEV_TO_ARTICLES = "articles";
@@ -41,8 +42,10 @@ async function processFiles() {
             try {
                 const parsedContent = editor.read(POSTS_DIR + filename);
                 const frontMatter = parsedContent.matter.data;
-                const body_markdown =
-                    parsedContent.matter.orig + `\n*Also published on [my blog](https://deepu.tech/${getBlogUrl(filename)}/)*`;
+                const body_markdown = `${json2yaml.stringify(
+                    frontMatter
+                )}\n---\n*Originally published on [my blog](https://deepu.tech/${getBlogUrl(filename)}/)*. ${parsedContent.matter.content}`;
+
                 if (frontMatter && (frontMatter.published || frontMatter.draft)) {
                     const payload = {
                         article: { body_markdown }
