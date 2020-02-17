@@ -3,9 +3,10 @@ layout: default
 title: Blogs
 permalink: /blogs
 pagination:
-  enabled: true
+    enabled: true
 comments: false
 ---
+
 <!-- Site Title
 ================================================== -->
 <div class="mainheading">
@@ -23,9 +24,9 @@ comments: false
     <div class="row">
         {% for post in site.posts %}
             {% if forloop.index == 1 %}
-            <div class="col-md-12 mb-30px">
-                {% include featuredbox.html %}
-            </div>
+        <div class="col-md-12 mb-30px">
+            {% include featuredbox.html %}
+        </div>
             {% endif %}
         {% endfor %}
     </div>
@@ -38,48 +39,32 @@ comments: false
         <h2><span>Featured</span></h2>
     </div>
     <div class="row">
-
-    {% for post in site.posts %}
-
-        {% if post.featured == true %}
-            <div class="col-md-6 mb-30px">
+        {% for post in site.posts %}
+            {% if post.featured == true %}
+        <div class="col-md-6 mb-30px">
             {% include featuredbox.html %}
-            </div>
-        {% endif %}
-
-    {% endfor %}
-
+        </div>
+            {% endif %}
+        {% endfor %}
     </div>
 </section>
 
 <!-- Posts Index
 ================================================== -->
 <section class="recent-posts">
-
     <div class="section-title">
-
         <h2><span>All Stories</span></h2>
-
     </div>
-
-    <div class="row listrecent">
-
-        {% for post in paginator.posts %}
-
-        {% include postbox.html %}
-
-        {% endfor %}
-
+    <div class="infinite-scroll">
+        <div class="row listrecent">
+            {% for post in paginator.posts %} {% include postbox.html %} {% endfor %}
+        </div>
+        <!-- Pagination
+        ================================================== -->
+        <div class="bottompagination">
+            <span class="navigation" role="navigation">
+                {% include pagination.html %}
+            </span>
+        </div>
     </div>
-
 </section>
-
-<!-- Pagination
-================================================== -->
-<div class="bottompagination">
-<div class="pointerup"><i class="fa fa-caret-up"></i></div>
-<span class="navigation" role="navigation">
-    {% include pagination.html %}
-</span>
-</div>
-
