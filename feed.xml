@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 17 Feb 2020 08:53:13 +0100</pubDate>
-    <lastBuildDate>Mon, 17 Feb 2020 08:53:13 +0100</lastBuildDate>
+    <pubDate>Mon, 17 Feb 2020 08:54:49 +0100</pubDate>
+    <lastBuildDate>Mon, 17 Feb 2020 08:54:49 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -1622,7 +1622,7 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/memory-management-in-jvm/&quot;&gt;Part 2: Memory management in JVM(Java, Kotlin, Scala, Groovy)&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/memory-management-in-v8/&quot;&gt;Part 3: Memory management in V8(JavaScript/WebAssembly)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Part 4: Memory management in Go&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/memory-management-in-golang/&quot;&gt;Part 4: Memory management in Go&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Part 5: Memory management in Rust&lt;/li&gt;
   &lt;li&gt;Part 6: Memory management in Python&lt;/li&gt;
   &lt;li&gt;Part 7: Memory management in C++&lt;/li&gt;
