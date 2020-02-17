@@ -2,15 +2,17 @@
 title: "\U0001F680 Visualizing memory management in Golang"
 published: true
 featured: false
-description: "Let us take a closer look at how Golang manages memory."
+description: Let us take a closer look at how Golang manages memory.
 tags:
-    - go
-    - garbagecollection
-    - programming
-    - computerscience
-canonical_url: "https://deepu.tech/memory-management-in-golang/"
-cover_image: https://i.imgur.com/ViNnj1v.jpg
+  - go
+  - garbagecollection
+  - programming
+  - computerscience
+canonical_url: 'https://deepu.tech/memory-management-in-golang/'
+cover_image: 'https://i.imgur.com/ViNnj1v.jpg'
 series: memory-management
+devto_id: 262942
+devto_url: 'https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa'
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know if something can be improved in the post.
@@ -240,3 +242,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image inspired by https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c
+
