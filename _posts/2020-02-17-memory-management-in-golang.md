@@ -9,7 +9,7 @@ tags:
   - programming
   - computerscience
 canonical_url: 'https://deepu.tech/memory-management-in-golang/'
-cover_image: 'https://i.imgur.com/ViNnj1v.jpg'
+cover_image: 'https://i.imgur.com/nYAy8Ox.jpg'
 series: memory-management
 devto_id: 262942
 devto_url: 'https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa'
@@ -241,5 +241,5 @@ If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
-Cover image inspired by https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c
+Cover image inspired by [a-journey-with-go](https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c)
 
