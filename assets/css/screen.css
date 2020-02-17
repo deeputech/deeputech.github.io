@@ -108,6 +108,7 @@ section.recent-posts {
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
     transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+    max-height: 300px;
 }
 
 .listfeaturedtag .wrapthumbnail {

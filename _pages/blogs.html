@@ -57,7 +57,11 @@ comments: false
     </div>
     <div class="infinite-scroll">
         <div class="row listrecent">
-            {% for post in paginator.posts %} {% include postbox.html %} {% endfor %}
+            {% for post in paginator.posts %}
+            <div class="col-md-4 mb-30px card-group">
+                {% include postbox.html %}
+            </div>
+            {% endfor %}
         </div>
         <!-- Pagination
         ================================================== -->
