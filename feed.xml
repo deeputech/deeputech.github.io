@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 17 Feb 2020 09:15:56 +0100</pubDate>
-    <lastBuildDate>Mon, 17 Feb 2020 09:15:56 +0100</lastBuildDate>
+    <pubDate>Mon, 17 Feb 2020 12:08:56 +0100</pubDate>
+    <lastBuildDate>Mon, 17 Feb 2020 12:08:56 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -313,7 +313,7 @@ temp/gc.go:28:13: main []interface {} literal does not escape
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Cover image inspired by https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c&lt;/p&gt;
+&lt;p&gt;Cover image inspired by &lt;a href=&quot;https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c&quot;&gt;a-journey-with-go&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
