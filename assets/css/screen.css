@@ -356,6 +356,7 @@ blockquote {
 
 .share {
     text-align: center;
+    margin-top: 1rem;
 }
 
 .share p {
@@ -391,6 +392,9 @@ blockquote {
 }
 
 @media (min-width:992px) {
+    .share {
+        margin-top: 0;
+    }
     .share ul li {
         display: block;
     }
@@ -816,17 +820,18 @@ iframe {
     margin-bottom: 30px;
 }
 
+@media (max-width: 400px) {
+    .h2, h2 {
+        font-size: 1.5rem  !important;
+        margin-bottom: 0;
+    }
+}
+
 .flex-first {
     -webkit-box-ordinal-group: 0;
     -webkit-order: -1;
     -ms-flex-order: -1;
     order: -1;
-}
-
-@media (min-width: 768px) {
-    .share {
-        margin-top: 30px;
-    }
 }
 
 @media (min-width: 992px) {
