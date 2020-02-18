@@ -309,14 +309,25 @@
     }
 }
 
+.ad-holder {
+    max-width: 100%;
+}
+
 @media screen and (min-width: 992px) {
-    #carbonads {
-        max-width: 135px;
-        .carbon-wrap {
-            flex-direction: column;
-            .carbon-img {
-                img {
-                    max-width: 100% !important;
+    .ad-holder {
+        max-width: 300px;
+    }
+}
+@media screen and (min-width: 992px) {
+    .ad-vertical-md {
+        #carbonads {
+            max-width: 135px;
+            .carbon-wrap {
+                flex-direction: column;
+                .carbon-img {
+                    img {
+                        max-width: 100% !important;
+                    }
                 }
             }
         }

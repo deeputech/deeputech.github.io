@@ -24,11 +24,14 @@ comments: false
     <div class="row">
         {% for post in site.posts %}
             {% if forloop.index == 1 %}
-        <div class="col-md-12 mb-30px">
+        <div class="col-md-12 col-lg-9 mb-30px">
             {% include featuredbox.html %}
         </div>
             {% endif %}
         {% endfor %}
+        <div class="col-md-12 col-lg-3 ad-holder">
+            {% include carbon-ad.html %}
+        </div>
     </div>
 </section>
 
@@ -58,7 +61,7 @@ comments: false
     <div class="infinite-scroll">
         <div class="row listrecent">
             {% for post in paginator.posts %}
-            <div class="col-md-4 mb-30px card-group">
+            <div class="col-lg-4 col-md-6 mb-30px card-group">
                 {% include postbox.html %}
             </div>
             {% endfor %}

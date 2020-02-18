@@ -9,17 +9,22 @@ comments: false
 
 ---
 
-<div>
-    <span><strong>Get it from:</strong></span><br>
-    <a href="https://www.packtpub.com/web-development/full-stack-development-with-jhipster-second-edition" target="_blank" class="book-company-logo">
-        <img width="100" class="lozad" data-src="{{ site.baseurl }}/assets/images/packt-publishing-vector-logo.svg"/>
-    </a>
-    <a href="https://smile.amazon.com/Full-Stack-Development-JHipster-microservices/dp/1838824987" target="_blank" class="book-company-logo">
-        <img width="100" class="lozad" data-src="{{ site.baseurl }}/assets/images/Amazon_logo.svg"/>
-    </a>
-    <a href="https://learning.oreilly.com/library/view/full-stack-development/9781838824983/" target="_blank" class="book-company-logo">
-        <img width="100" class="lozad" data-src="{{ site.baseurl }}/assets/images/Oreilly_safari_logo.png"/>
-    </a>
+<div class="d-flex justify-content-between mb-3">
+    <div>
+        <span><strong>Get it from:</strong></span><br>
+        <a href="https://www.packtpub.com/web-development/full-stack-development-with-jhipster-second-edition" target="_blank" class="book-company-logo">
+            <img width="100" class="lozad" data-src="{{ site.baseurl }}/assets/images/packt-publishing-vector-logo.svg"/>
+        </a>
+        <a href="https://smile.amazon.com/Full-Stack-Development-JHipster-microservices/dp/1838824987" target="_blank" class="book-company-logo">
+            <img width="100" class="lozad" data-src="{{ site.baseurl }}/assets/images/Amazon_logo.svg"/>
+        </a>
+        <a href="https://learning.oreilly.com/library/view/full-stack-development/9781838824983/" target="_blank" class="book-company-logo">
+            <img width="100" class="lozad" data-src="{{ site.baseurl }}/assets/images/Oreilly_safari_logo.png"/>
+        </a>
+    </div>
+    <div class="ad-holder d-none d-md-block">
+    {% include carbon-ad.html %}
+    </div>
 </div>
 
 **Follow on Twitter [@FullstackBook](https://twitter.com/FullstackBook)**
