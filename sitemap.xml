@@ -121,6 +121,10 @@
 <lastmod>2020-02-17T00:00:00+01:00</lastmod>
 </url>
 <url>
+<loc>https://deepu.tech/deno-runtime-for-typescript/</loc>
+<lastmod>2020-02-18T00:00:00+01:00</lastmod>
+</url>
+<url>
 <loc>https://deepu.tech/books</loc>
 </url>
 <url>
@@ -149,6 +153,9 @@
 </url>
 <url>
 <loc>https://deepu.tech/blogs/page/5/</loc>
+</url>
+<url>
+<loc>https://deepu.tech/blogs/page/6/</loc>
 </url>
 <url>
 <loc>https://deepu.tech/assets/images/go-gc/Go%20GC.pdf</loc>
@@ -184,10 +191,10 @@
 </url>
 <url>
 <loc>https://deepu.tech/svg-seq-diagram/</loc>
-<lastmod>2020-02-18T15:02:41+01:00</lastmod>
+<lastmod>2020-02-18T18:09:39+01:00</lastmod>
 </url>
 <url>
 <loc>https://deepu.tech/svg-seq-diagram/plantUML.html</loc>
-<lastmod>2020-02-18T15:02:41+01:00</lastmod>
+<lastmod>2020-02-18T18:09:39+01:00</lastmod>
 </url>
 </urlset>
