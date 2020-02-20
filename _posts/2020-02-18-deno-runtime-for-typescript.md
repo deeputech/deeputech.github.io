@@ -1,8 +1,6 @@
 ---
 title: Forget NodeJS! Build native TypeScript applications with Deno
-description: >-
-  Deno is a modern JavaScript/TypeScript runtime & scripting environment. It is
-  what NodeJS should have been according to Ryan Dahl who created both tools
+description: "Deno is a modern JavaScript/TypeScript runtime & scripting environment. It is what NodeJS should have been according to Ryan Dahl who created both tools"
 published: true
 featured: false
 tags:
@@ -14,8 +12,7 @@ series: null
 canonical_url: 'https://deepu.tech/deno-runtime-for-typescript/'
 cover_image: 'https://i.imgur.com/0FWtns5.jpg'
 devto_id: 265496
-devto_url: >-
-  https://dev.to/deepu105/forget-nodejs-build-native-typescript-applications-with-deno-kkb
+devto_url: "https://dev.to/deepu105/forget-nodejs-build-native-typescript-applications-with-deno-kkb"
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
