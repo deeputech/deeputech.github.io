@@ -1,5 +1,5 @@
 ---
-title: Forget NodeJS! Build native TypeScript applications with Deno
+title: Forget NodeJS! Build native TypeScript applications with Deno 🦖
 description: "Deno is a modern JavaScript/TypeScript runtime & scripting environment. It is what NodeJS should have been according to Ryan Dahl who created both tools"
 published: true
 featured: false
