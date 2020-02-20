@@ -35,7 +35,7 @@ Rust doesn't have a defined [memory model](https://doc.rust-lang.org/beta/refere
 
 Each Rust program process is allocated some virtual memory by the Operating System(OS), this is the total memory that the process has access to.
 
-![Rust Memory structure](https://i.imgur.com/vFtq3uj.png)
+![Rust Memory structure]()
 
 This is quite simple compared to the memory structure we saw in the previous chapters for [JVM](https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le), [V8](https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p) and [Go](). As you can see there is no generational memory here and no complex sub structures that help with GC. The reason for this is that Rust manages memory as part of program execution using the Ownership model rather than using any kind of GC.
 
@@ -59,7 +59,7 @@ Now that we are clear about how memory is organized let's see how Go uses Stack 
 
 Let's use the below Go program, the code is not optimized for correctness hence ignore issues like unnecessary intermediatory variables and such, the focus is to visualize stack and heap memory usage.
 
-```go
+```rust
 package main
 
 import "fmt"
@@ -124,7 +124,7 @@ Go's memory management involves automatic allocation when memory is needed and g
 
 ## Ownership
 
-## Borrow checker
+## Borrowing
 
 ## Lifetimes
 
