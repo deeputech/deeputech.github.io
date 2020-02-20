@@ -5,12 +5,12 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 20 Feb 2020 17:38:34 +0100</pubDate>
-    <lastBuildDate>Thu, 20 Feb 2020 17:38:34 +0100</lastBuildDate>
+    <pubDate>Thu, 20 Feb 2020 17:41:48 +0100</pubDate>
+    <lastBuildDate>Thu, 20 Feb 2020 17:41:48 +0100</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
-        <title>Forget NodeJS! Build native TypeScript applications with Deno</title>
+        <title>Forget NodeJS! Build native TypeScript applications with Deno 🦖</title>
         <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
 &lt;hr /&gt;
