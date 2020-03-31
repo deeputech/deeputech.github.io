@@ -178,6 +178,10 @@
 <lastmod>2020-01-23T18:23:03+01:00</lastmod>
 </url>
 <url>
+<loc>https://deepu.tech/assets/images/rust-mem/Rust%20memory%20use.pdf</loc>
+<lastmod>2020-03-29T16:14:03+02:00</lastmod>
+</url>
+<url>
 <loc>https://deepu.tech/assets/images/v8/V8%20memory%20use.pdf</loc>
 <lastmod>2020-01-26T20:41:33+01:00</lastmod>
 </url>
@@ -191,10 +195,10 @@
 </url>
 <url>
 <loc>https://deepu.tech/svg-seq-diagram/</loc>
-<lastmod>2020-02-20T17:42:03+01:00</lastmod>
+<lastmod>2020-03-01T14:04:04+01:00</lastmod>
 </url>
 <url>
 <loc>https://deepu.tech/svg-seq-diagram/plantUML.html</loc>
-<lastmod>2020-02-20T17:42:03+01:00</lastmod>
+<lastmod>2020-03-01T14:04:04+01:00</lastmod>
 </url>
 </urlset>
