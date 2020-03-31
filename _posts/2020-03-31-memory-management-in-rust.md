@@ -4,13 +4,15 @@ published: true
 featured: false
 description: Let us take a closer look at how Rust manages memory.
 tags:
-    - rust
-    - garbagecollection
-    - programming
-    - computerscience
-canonical_url: "https://deepu.tech/memory-management-in-rust/"
-cover_image: https://i.imgur.com/xolsOsW.jpg
+  - rust
+  - garbagecollection
+  - programming
+  - computerscience
+canonical_url: 'https://deepu.tech/memory-management-in-rust/'
+cover_image: 'https://i.imgur.com/xolsOsW.jpg'
 series: memory-management
+devto_id: 295607
+devto_url: 'https://dev.to/deepu105/visualizing-memory-management-in-rust-5898'
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know if something can be improved in the post.
@@ -279,3 +281,4 @@ You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](http
 Cover image inspired by [https://hacks.mozilla.org/2019/01/fearless-security-memory-safety/](https://hacks.mozilla.org/2019/01/fearless-security-memory-safety/)
 
 ---
+
