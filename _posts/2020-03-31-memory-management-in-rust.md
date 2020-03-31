@@ -1,6 +1,6 @@
 ---
 title: "\U0001F680 Visualizing memory management in Rust"
-published: false
+published: true
 featured: false
 description: Let us take a closer look at how Rust manages memory.
 tags:
