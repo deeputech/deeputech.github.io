@@ -102,7 +102,7 @@ fmt.Println(foo.message == bar.message) // prints "true"
 -   Variables assignments cannot use short-circuit expressions in Go.
 -   `var` has a shorthand syntax with `:=` inside Go functions.
 -   Go strictly doesn't let you have unused variables, any unused variable must be named as `_`, which is a reserved character.
--   JS does not have `private/public` access modifiers(There is a proposal to add it), In Go, however, you can modify that using the naming convention. Starting a filed, variable name with uppercase will make it public and lowercase will make it private.
+-   JS does not have `private/public` access modifiers(There is a proposal to add it), In Go, however, you can modify that using the naming convention. Starting a field, variable name with uppercase will make it public and lowercase will make it private.
 -   `const` in Go is not the same as in JavaScript. Only primitives like character, string, boolean, or numeric values can be assigned to constants in Go.
 -   Arrays in Go are different from JS as they are fixed length. JS arrays are dynamic and hence are more similar to Go slices which are slices of an array with dynamic length.
 
