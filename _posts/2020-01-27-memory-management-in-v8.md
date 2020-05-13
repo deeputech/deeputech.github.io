@@ -7,7 +7,7 @@ tags:
     - javascript
     - typescript
     - WebAssembly
-    - nodejs
+    - node
 canonical_url: "https://deepu.tech/memory-management-in-v8/"
 cover_image: "https://i.imgur.com/kSgatSL.png"
 series: memory-management

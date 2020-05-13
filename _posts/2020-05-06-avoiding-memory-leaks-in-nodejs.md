@@ -4,7 +4,7 @@ description: "Discover what memory leaks are and how to avoid them in your NodeJ
 published: true
 featured: false
 skip_devto: true
-tags: [javascript, nodejs, v8, memory-management]
+tags: [javascript, node, v8, memory-management]
 series: memory-management
 canonical_url: "https://blog.appsignal.com/2020/05/06/avoiding-memory-leaks-in-nodejs-best-practices-for-performance.html"
 cover_image: https://blog.appsignal.com/images/blog/2020-05/node-leak.jpg
