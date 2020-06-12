@@ -1,17 +1,17 @@
 ---
 title: My PC build for VR gaming
-description: 'I built a Windows PC for playing Half-Life: Alyx'
+description: "I built a Windows PC for playing Half-Life: Alyx"
 published: true
 featured: false
 tags:
-  - windows
-  - vr
-  - gaming
+    - windows
+    - vr
+    - gaming
 series: null
-canonical_url: 'https://deepu.tech/my-vr-gaming-pc-build/'
-cover_image: 'https://i.imgur.com/EuNcfsv.jpg'
+canonical_url: "https://deepu.tech/my-vr-gaming-pc-build/"
+cover_image: "https://i.imgur.com/EuNcfsv.jpg"
 devto_id: 353690
-devto_url: 'https://dev.to/deepu105/my-pc-build-for-vr-gaming-2n79'
+devto_url: "https://dev.to/deepu105/my-pc-build-for-vr-gaming-2n79"
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -92,6 +92,8 @@ IMO Quest is a great choice at this price point as you can use it for PC VR and 
 I tried to play PC VR using the included USB-C 2.0 cable and it was ok but I bought a 5-meter USB-C 3.0 cable for better bandwidth and it works quite well.
 I tried using [Virtual Desktop](https://www.vrdesktop.net/) to play PC VR wirelessly on Quest but since I'm on full WiFi which is shared with so many devices in my house the latency was quite bad, maybe I'll add a dedicated WiFi terminal for this in the future. A friend of mine was able to play Alyx on ultra settings through Virtual Desktop so its possible with proper network settings.
 
+**Edit**: Someone on Reddit pointed out that the Virtual Desktop issue could be due to an [AMD driver issue](https://www.reddit.com/r/OculusQuest/comments/gthnft/amd_driver_2051_doubles_virtual_desktop_latency/fscuuzz/), so I rolled back to the previous version of the driver and Virtual Desktop works better now, the latency is acceptable and I was able to play Alyx fine. Though the visual quality was still not as good as the Link cable, maybe if I'm on a wired LAN connection for the PC it could be better.
+
 ## Performance
 
 Now that I have finished the build and installed a fresh Windows 10 OS, its time for some benchmarks. I used standard benchmarking tools like [Cinebench](https://www.maxon.net/en-us/products/cinebench-r20-overview/), [3DMark](https://www.3dmark.com/), and so on. Here are the results.
@@ -131,4 +133,3 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 The Amazon links in the post are affiliate links and if you make a purchase using those I might get a referral fee.
-
