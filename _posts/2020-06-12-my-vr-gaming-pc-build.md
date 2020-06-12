@@ -1,12 +1,17 @@
 ---
 title: My PC build for VR gaming
-description: "I built a Windows PC for playing Half-Life: Alyx"
+description: 'I built a Windows PC for playing Half-Life: Alyx'
 published: true
 featured: false
-tags: [windows, vr, gaming]
-series:
-canonical_url: https://deepu.tech/my-vr-gaming-pc-build/
-cover_image: https://i.imgur.com/EuNcfsv.jpg
+tags:
+  - windows
+  - vr
+  - gaming
+series: null
+canonical_url: 'https://deepu.tech/my-vr-gaming-pc-build/'
+cover_image: 'https://i.imgur.com/EuNcfsv.jpg'
+devto_id: 353690
+devto_url: 'https://dev.to/deepu105/my-pc-build-for-vr-gaming-2n79'
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -126,3 +131,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 The Amazon links in the post are affiliate links and if you make a purchase using those I might get a referral fee.
+
