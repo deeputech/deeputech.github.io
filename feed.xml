@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 12 Jun 2020 11:00:43 +0200</pubDate>
-    <lastBuildDate>Fri, 12 Jun 2020 11:00:43 +0200</lastBuildDate>
+    <pubDate>Fri, 12 Jun 2020 17:09:35 +0200</pubDate>
+    <lastBuildDate>Fri, 12 Jun 2020 17:09:35 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -145,6 +145,8 @@
 
 &lt;p&gt;I tried to play PC VR using the included USB-C 2.0 cable and it was ok but I bought a 5-meter USB-C 3.0 cable for better bandwidth and it works quite well.
 I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Desktop&lt;/a&gt; to play PC VR wirelessly on Quest but since I’m on full WiFi which is shared with so many devices in my house the latency was quite bad, maybe I’ll add a dedicated WiFi terminal for this in the future. A friend of mine was able to play Alyx on ultra settings through Virtual Desktop so its possible with proper network settings.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Edit&lt;/strong&gt;: Someone on Reddit pointed out that the Virtual Desktop issue could be due to an &lt;a href=&quot;https://www.reddit.com/r/OculusQuest/comments/gthnft/amd_driver_2051_doubles_virtual_desktop_latency/fscuuzz/&quot;&gt;AMD driver issue&lt;/a&gt;, so I rolled back to the previous version of the driver and Virtual Desktop works better now, the latency is acceptable and I was able to play Alyx fine. Though the visual quality was still not as good as the Link cable, maybe if I’m on a wired LAN connection for the PC it could be better.&lt;/p&gt;
 
 &lt;h2 id=&quot;performance&quot;&gt;Performance&lt;/h2&gt;
 
