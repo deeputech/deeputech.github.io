@@ -5,9 +5,201 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 07 May 2020 12:46:34 +0200</pubDate>
-    <lastBuildDate>Thu, 07 May 2020 12:46:34 +0200</lastBuildDate>
+    <pubDate>Fri, 12 Jun 2020 10:01:39 +0200</pubDate>
+    <lastBuildDate>Fri, 12 Jun 2020 10:01:39 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
+    
+      <item>
+        <title>My PC build for VR gaming</title>
+        <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;I built my first PC when I was in high school, in 2003. It was an Intel Pentium 4 system, not high specs or anything, just whatever I could afford at that time. I loved that PC like a child and it served me quite well for the next few years. I used it for Photoshop, 3DS max, some light gaming, and so on.&lt;/p&gt;
+
+&lt;p&gt;Most importantly building that PC got me hooked to computers and allowed me to pursue that as a part-time business where I was building custom PCs for friends and others through word of mouth marketing. I was in college by then and this served as a channel of income for me. I probably built anywhere from 70 to 80 PCs in 4 years. I stopped building PCs when I started my IT career and moved onto using Windows Laptops and later to Linux Laptops.&lt;/p&gt;
+
+&lt;p&gt;Flash forward to 2020 and the PC landscape has changed quite a lot. I recently purchased an Oculus Quest VR headset and got hooked to VR gaming so as a natural progression I wanted to play the best VR game out there, yes &lt;a href=&quot;https://www.half-life.com/en/alyx/&quot;&gt;Half-Life: Alyx&lt;/a&gt;. But this meant I needed a Windows Gaming PC which I don’t have since my primary workstation is a Dell Precision running Fedora, you can read about that setup &lt;a href=&quot;https://deepu.tech/my-beautiful-linux-development-environment/&quot;&gt;here&lt;/a&gt;, and my work laptop is a MacBook. So I decided to awake the PC nerd in me and build myself a gaming PC 😁&lt;/p&gt;
+
+&lt;h2 id=&quot;configuration&quot;&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;Initially, I thought of building a budget machine for under 600€ since I was pretty sure I probably won’t use that machine for anything other than VR gaming but as usual, the PC nerd in me won and I ended up building a pretty good machine for around 1000€&lt;/p&gt;
+
+&lt;p&gt;So without further adieu, let’s jump into the configuration&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Item&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Model&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;Cost&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CPU&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://amzn.to/2YmNrTC&quot;&gt;AMD Ryzen 5 3600&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€169&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CPU Cooler&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://amzn.to/2Uv7r5m&quot;&gt;Arctic Freezer 34 eSports&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€27&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Motherboard&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://amzn.to/2BXaBsi&quot;&gt;ASRock B450M Steel Legend&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€89&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;RAM&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://amzn.to/37mjiYT&quot;&gt;Corsair CMK16 vengeance LPX 2x8GB&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€68&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GPU&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://amzn.to/3ffsVLo&quot;&gt;Gigabyte Radeon RX 5700 XT GAMING OC 8GB&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€449&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SSD&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Toshiba NVME M.2 512GB&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;HDD&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Seagate 500GB 2.5” SATA&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;-&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;WiFi&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;TP-Link WLAN Bluetooth AC7265&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€35&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Case&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://amzn.to/2BUkFlH&quot;&gt;Fractal Design Meshify C Mini Dark TG Micro ATX&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€90&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;PSU&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Cooler Master MWE Bronze 750 V2&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€85&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Fans&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Cooler master Masterfab MF120L x 2 &amp;amp; Sharkoon SHARK Blades RGB&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€20&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;VR Headset&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;&lt;a href=&quot;https://amzn.to/2YnPuGZ&quot;&gt;Oculus Quest 64GB&lt;/a&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;€453&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Here are the parts when they arrived&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/2BGgdWk.jpg&quot; alt=&quot;pc parts&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I already had an NVME SSD and a 2.5” SATA drive so I decided to use those, its just 1TB combined for now, but I’m planning to add a 2 or 4 TB SATA HDD later based on storage needs. I already have a 34” widescreen monitor as well. I also bought a windows 10 pro license and some rechargeable batteries for the Oculus controllers. The entire setup cost me around 1500€ and that is not including software and game license costs&lt;/p&gt;
+
+&lt;h2 id=&quot;build&quot;&gt;Build&lt;/h2&gt;
+
+&lt;p&gt;After almost a week of waiting for the components to arrive, I finally started the most exciting part of the process.&lt;/p&gt;
+
+&lt;h3 id=&quot;cpu--motherboard&quot;&gt;CPU &amp;amp; Motherboard&lt;/h3&gt;
+
+&lt;p&gt;I always liked AMD processors when I was building PCs back in the days, but then AMD started loosing out to Intel and I was sad to see that. Now AMD is back in the game and is the best choice when it comes to CPUs. The Ryzen series is just amazing, I would have never dreamed of the 64 core &lt;a href=&quot;https://www.amd.com/en/products/ryzen-threadripper&quot;&gt;Threadripper&lt;/a&gt; processors, let alone the 16 core Ryzen 9s. I decided to stick to the Budget-friendly Ryzen 5 series as they were powerful and provided the best value for money. Intel couldn’t even compete in that category IMO. I choose the 6 core &lt;strong&gt;Ryzen 5 3600&lt;/strong&gt; as it fit my needs perfectly. Originally I was planning to use the stock cooler, but after the build, I found the CPU temperature quite high on high load and the stock cooler fan was too loud so I changed it with an &lt;strong&gt;Arctic Freezer 34&lt;/strong&gt; tower cooler.&lt;/p&gt;
+
+&lt;p&gt;I choose &lt;strong&gt;ASRock B450M Steel Legend&lt;/strong&gt; as the motherboard as it was the best value for money option. It had excellent quality, a lot of ports, great reviews, and a great price. I considered getting an x570 chipset but then didn’t see enough value in spending 100€ more on that&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/7URLiJy.jpg&quot; alt=&quot;motherboard&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I choose to start with a dual-channel 16GB RAM from Corsair. I might add another 16GB later if needed. Since my workroom doesn’t have a LAN connection, I also bought a PCIe WiFi card from TP-Link which came with integrated Bluetooth 4.&lt;/p&gt;
+
+&lt;h3 id=&quot;graphics-card&quot;&gt;Graphics card&lt;/h3&gt;
+
+&lt;p&gt;The GPU is undoubtedly the most important part of a gaming machine and hence I decided to settle for one of the best GPU from AMD. I did consider some Nvidia cards but again the AMD RX 5700 XT was more value for money and can handle demanding games and VR perfectly fine for the next few years. It didn’t make sense to pay 50% more for a 10% performance increase from Nvidia.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/MJYrZR8.jpg&quot; alt=&quot;GPU&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I specifically got the &lt;strong&gt;Gigabyte Radeon RX 5700 XT GAMING OC 8GB&lt;/strong&gt; as it had the best reviews and great thermal efficiency. It is huge though compared to NVidia cards in the same category&lt;/p&gt;
+
+&lt;h3 id=&quot;case--psu&quot;&gt;Case &amp;amp; PSU&lt;/h3&gt;
+
+&lt;p&gt;For the PC case, I initially choose a Cooler Master Q300L but then found out it had some cooling issues and hence bought a &lt;strong&gt;Fractal Design Meshify C Mini&lt;/strong&gt;. It looks beautiful and I love the quality. It has good thermal efficiency, ample space, and great cable management. It also came with 2 fans.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/9WNj8xr.jpg&quot; alt=&quot;Case&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To power the RX 5700XT and Ryzen CPU, I choose to go with a 750W power supply from Cooler Master. It’s 150W more than the recommended 600W but I guess this gives me some space for expansion later on. I also bought 3 additional fans so that I can have 3 intake fans and two exhaust fans creating a positive pressure inside the case, which is good for cooling and avoids dust build-up. I’m not too much into RGB but was curious so I bought one RGB fan for the front intake and I quite liked the result.&lt;/p&gt;
+
+&lt;h3 id=&quot;vr-headset&quot;&gt;VR Headset&lt;/h3&gt;
+
+&lt;p&gt;So originally I bought the Oculus Quest 64GB, the 128GB is not worth the premium as the only advantage it offers is the memory bump which is not that important IMO, as I wanted a standalone headset without having to build a PC. I didn’t even look into the possibility of using it for PC VR. Then when I started considering PC VR, luckily Oculus also announced the Link support for Quest which lets you use a USB-C cable to connect it to a PC. It was great news and since then the Link support is getting better and better.&lt;/p&gt;
+
+&lt;p&gt;IMO Quest is a great choice at this price point as you can use it for PC VR and also for standalone games on the go. Of course, it might not be having the display quality of the Valve Index but it has very decent quality.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/Y9ecwmB.jpg&quot; alt=&quot;Oculus Quest&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I tried to play PC VR using the included USB-C 2.0 cable and it was ok but I bought a 5-meter USB-C 3.0 cable for better bandwidth and it works quite well.
+I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Desktop&lt;/a&gt; to play PC VR wirelessly on Quest but since I’m on full WiFi which is shared with so many devices in my house the latency was quite bad, maybe I’ll add a dedicated WiFi terminal for this in the future. A friend of mine was able to play Alyx on ultra settings through Virtual Desktop so its possible with proper network settings.&lt;/p&gt;
+
+&lt;h2 id=&quot;performance&quot;&gt;Performance&lt;/h2&gt;
+
+&lt;p&gt;Now that I have finished the build and installed a fresh Windows 10 OS, its time for some benchmarks. I used standard benchmarking tools like &lt;a href=&quot;https://www.maxon.net/en-us/products/cinebench-r20-overview/&quot;&gt;Cinebench&lt;/a&gt;, &lt;a href=&quot;https://www.3dmark.com/&quot;&gt;3DMark&lt;/a&gt;, and so on. Here are the results.&lt;/p&gt;
+
+&lt;p&gt;Cinebench R20 benchmark for CPU gave the best score of 3577 which is pretty good for the configuration and I’m happy with it&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/GdriMkJ.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I got a pretty good score for the configuration in 3DMark as well&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/6a8RKkX.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://store.steampowered.com/app/323910/SteamVR_Performance_Test/&quot;&gt;Steams VR performance test&lt;/a&gt; gave a high score as well&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/z0guVMU.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://benchmark.unigine.com/superposition&quot;&gt;Superposition benchmark&lt;/a&gt; for GPU has the below scores for 4k and VR gaming which is pretty good as well&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/leM8ZpR.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;vr-gameplay&quot;&gt;VR Gameplay&lt;/h2&gt;
+
+&lt;p&gt;Oculus Quest is perfectly fine for games like Beatsaber, Superhot, and Vader immortal and I prefer those in the standalone Quest version. I’m using the Quest tethered to the PC via a USB-3 cable for Half-Life: Alyx and oh boy its the best gaming experience I ever had and with this PC configuration I’m able to play both high and ultra display settings, though I mostly play with high settings as I get more frames and I don’t notice much difference in quality and also ultra settings cause some jitter once a while may be due to the USB cable length that reduces some bandwidth. Oculus link works great, though you might see a jitter or two rarely and that’s acceptable for me at this price point.&lt;/p&gt;
+
+&lt;p&gt;Once I’m done with Alyx, I’m planning to try PC VR titles like &lt;a href=&quot;https://store.steampowered.com/app/916840/The_Walking_Dead_Saints__Sinners/&quot;&gt;Walking Dead: Saints &amp;amp; Sinners&lt;/a&gt;, &lt;a href=&quot;https://www.oculus.com/asgards-wrath/?locale=en_US&quot;&gt;Asgard’s Wrath&lt;/a&gt; and &lt;a href=&quot;https://www.oculus.com/experiences/rift/1368187813209608/?locale=en_US&quot;&gt;Lone Echo&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I also played non-VR titles like Monster Hunter and Resident Evil 3 and even with the 34” 4k screen I’m getting pretty good frame rates and amazing graphics&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;So far I’m super happy with the build and it serves the purpose very well. I might add an extra hard disk later on and might also use the machine for Photo editing and maybe a little bit of video editing. I’m hoping there will be more VR games similar to Half-Life: Alyx that will justify me building a PC for that :P&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The Amazon links in the post are affiliate links and if you make a purchase using those I might get a referral fee.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/my-pc-build-for-vr-gaming-2n79&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 12 Jun 2020 00:00:00 +0200</pubDate>
+        <link>https://deepu.tech/my-vr-gaming-pc-build/</link>
+        <guid isPermaLink="true">https://deepu.tech/my-vr-gaming-pc-build/</guid>
+        
+        <category>windows</category>
+        
+        <category>vr</category>
+        
+        <category>gaming</category>
+        
+        
+      </item>
     
       <item>
         <title>Avoiding Memory Leaks in NodeJS: Best Practices for Performance</title>
@@ -31,7 +223,7 @@
         
         <category>javascript</category>
         
-        <category>nodejs</category>
+        <category>node</category>
         
         <category>v8</category>
         
@@ -2200,7 +2392,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
         
         <category>WebAssembly</category>
         
-        <category>nodejs</category>
+        <category>node</category>
         
         
       </item>
@@ -2738,8 +2930,7 @@ Stack used in JavaScript, objects are stored in Heap and referenced when needed.
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/memory-management-in-golang/&quot;&gt;Part 4: Memory management in Go&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/memory-management-in-rust/&quot;&gt;Part 5: Memory management in Rust&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Part 6: Memory management in Python&lt;/li&gt;
-  &lt;li&gt;Part 7: Memory management in C++&lt;/li&gt;
-  &lt;li&gt;Part 8: Memory management in C#&lt;/li&gt;
+  &lt;li&gt;Part 7: Memory management in C#&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
@@ -2776,298 +2967,6 @@ Ownership illustration: &lt;a href=&quot;https://hacks.mozilla.org/2018/12/rust-
         <category>programming</category>
         
         <category>computerscience</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>7 Languages to learn in 2020 with free resources to get started</title>
-        <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know if there is something that could be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;We are at the dawn of another decade and the software industry is becoming bigger than ever. If you have to bet on a career than it would be software development. If you are already a software developer then there is so much to learn out there in the next decade.&lt;/p&gt;
-
-&lt;p&gt;Let us start with programming Languages that you absolutely must learn if you haven’t already. These are the Languages that are on the rise and the ones that are not going away any time soon. My recommendations are also based on practicality and the advantage the language would you give you on the software development marketplace.&lt;/p&gt;
-
-&lt;p&gt;So let’s start in no particular order.&lt;/p&gt;
-
-&lt;h2 id=&quot;kotlin&quot;&gt;Kotlin&lt;/h2&gt;
-
-&lt;p&gt;Kotlin is one of the fastest-growing languages in the last few years and is an excellent choice for a JVM language. It has great interoperability with Java, has great features and is not very complex to learn.&lt;/p&gt;
-
-&lt;h3 id=&quot;why&quot;&gt;Why&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JVM is still one of the biggest and most used platforms, especially trusted and used in enterprises world over.&lt;/li&gt;
-  &lt;li&gt;JVM has a pretty great Job market and there is always a demand for JVM developers in the foreseeable future.&lt;/li&gt;
-  &lt;li&gt;Kotlin’s interoperability with Java helps with adopting it incrementally.&lt;/li&gt;
-  &lt;li&gt;Has simple and intuitive syntax, a great feature set and great concurrency and asynchronous programming support with Coroutines.&lt;/li&gt;
-  &lt;li&gt;It is the language of choice these days for Android programming and hence gives you a wider scope if you wish to dive into mobile application development.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;who-should-learn-it&quot;&gt;Who should learn it&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;If you are a &lt;strong&gt;Java programmer&lt;/strong&gt; and you are looking to learn a language that you can use without having to switch completely to a new stack.&lt;/li&gt;
-  &lt;li&gt;If you are interested in the JVM but you think Java is not cool anymore.&lt;/li&gt;
-  &lt;li&gt;Web application developers or full-stack developers who want to learn a new language.&lt;/li&gt;
-  &lt;li&gt;If you are interested in Android application development then Kotlin is the place to start.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;where-to-start&quot;&gt;Where to start&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The &lt;a href=&quot;https://play.kotlinlang.org/koans/overview&quot;&gt;official tutorial&lt;/a&gt; is a great place to start and its free with an interactive playground. The official getting started guides can be found &lt;a href=&quot;https://kotlinlang.org/docs/tutorials/&quot;&gt;here&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;This is a nice and free &lt;a href=&quot;https://android.jlelse.eu/learn-kotlin-while-developing-an-android-app-introduction-567e21ff9664&quot;&gt;tutorial&lt;/a&gt; on medium for Android development with Kotlin.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.udemy.com/course/kotlin-programming/&quot;&gt;This&lt;/a&gt; Udemy course is great if you want to focus on Android development with Kotlin. It’s not a free course though.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;golang&quot;&gt;Golang&lt;/h2&gt;
-
-&lt;p&gt;Golang is a simple language by design and has become hugely popular thanks to the marketing from google and early adoption by popular tools like Docker and Kubernetes. Here is my detailed review of the language.&lt;/p&gt;
-
-&lt;div class=&quot;link-container&quot;&gt;
-                &lt;a href=&quot;https://deepu.tech/reflection-on-golang/&quot;&gt;
-                    &lt;div class=&quot;ltag__link__content&quot;&gt;
-                        &lt;h3&gt;My reflections on Golang&lt;/h3&gt;
-                        &lt;p&gt;12-Jul-2019&lt;/p&gt;
-                        &lt;div class=&quot;ltag__link__taglist&quot;&gt;
-                            #go #programming #languages #thepragmaticprogrammer
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/a&gt;
-            &lt;/div&gt;
-
-&lt;h3 id=&quot;why-1&quot;&gt;Why&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;One of the simplest language to learn and a great community.&lt;/li&gt;
-  &lt;li&gt;It has pretty good performance and can be used as a general-purpose language if you are not bothered by the boilerplate.&lt;/li&gt;
-  &lt;li&gt;A great choice for use cases with heavy concurrency or parallelism requirements.&lt;/li&gt;
-  &lt;li&gt;It has a good demand in the job market and its adoption is only increasing with many big names using Golang for their main platforms.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;who-should-learn-it-1&quot;&gt;Who should learn it&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Developers working with languages like C, C++ would be at home with Go, while you might find the features limited, once you get used to it its a great language to have in your arsenal.&lt;/li&gt;
-  &lt;li&gt;System programmers looking to learn a new language will find Go pretty descent.&lt;/li&gt;
-  &lt;li&gt;DevOps engineers who are more on the Ops side looking to learn a language would find Go quite handy.&lt;/li&gt;
-  &lt;li&gt;If you are writing microservices than Golang is a good choice for that and you should learn it.&lt;/li&gt;
-  &lt;li&gt;If you are a front-end developer wishing to venture into web assembly, then Go is one of the easiest languages to start with as it supports web assembly.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;where-to-start-1&quot;&gt;Where to start&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The official &lt;a href=&quot;https://tour.golang.org/welcome/1&quot;&gt;tour of Go&lt;/a&gt; is a great place to start and its free with an interactive playground.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=YS4e4q9oBaU&quot;&gt;This&lt;/a&gt; freeCodeCamp video tutorial if you prefer videos.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;typescript&quot;&gt;TypeScript&lt;/h2&gt;
-
-&lt;p&gt;You like it or not JavaScript is here to stay as long as the internet is around. So if you are not already a fan why not embrace it in the form of TypeScript instead of hating it.&lt;/p&gt;
-
-&lt;div class=&quot;link-container&quot;&gt;
-                &lt;a href=&quot;https://deepu.tech/reflections-on-javascript/&quot;&gt;
-                    &lt;div class=&quot;ltag__link__content&quot;&gt;
-                        &lt;h3&gt;My love-hate relationship with JavaScript&lt;/h3&gt;
-                        &lt;p&gt;21-Nov-2019&lt;/p&gt;
-                        &lt;div class=&quot;ltag__link__taglist&quot;&gt;
-                            #javascript #programming #languages #thepragmaticprogrammer
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/a&gt;
-            &lt;/div&gt;
-
-&lt;h3 id=&quot;why-2&quot;&gt;Why&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JavaScript is the most used language and has the biggest ecosystem and TypeScript being a strict superset of JavaScript means you can make use of it any use case that JavaScript can handle.&lt;/li&gt;
-  &lt;li&gt;TypeScript is one of the rapidly growing languages and will help with some of the shortcomings in JavaScript.&lt;/li&gt;
-  &lt;li&gt;Demand for front-end engineers is never going away and with MVVM frameworks like Angular, React and Vue it’s only rising.&lt;/li&gt;
-  &lt;li&gt;The extent of the JavaScript/TypeScript ecosystem spreads from front-end to desktop to serverside to robotics. So you can say JavaScript is everywhere.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;who-should-learn-it-2&quot;&gt;Who should learn it&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JavaScript developers should learn TypeScript, it will make maintaining big JavaScript projects easier and will help you write better code.&lt;/li&gt;
-  &lt;li&gt;If you are coming from a strictly typed language background and you are thinking of exploring the world of frontend engineering then TypeScript is a great place to start.&lt;/li&gt;
-  &lt;li&gt;If you are Java developer and want to do front-end, then TypeScript is easier to start with due to its similarity to Java.&lt;/li&gt;
-  &lt;li&gt;You want to get your hands dirty with Angular, React or Vue but you hate JavaScript then TypeScript should be your logical choice.&lt;/li&gt;
-  &lt;li&gt;If you are planning to learn Angular framework then knowing TypeScript is a must.&lt;/li&gt;
-  &lt;li&gt;If you are considering a career in IT as a front-end developer, then JavaScript is the ultimate choice and once you learned JavaScript then TypeScript is a logical next step.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;where-to-start-2&quot;&gt;Where to start&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.javatpoint.com/typescript-tutorial&quot;&gt;This&lt;/a&gt; is a detailed tutorial on TypeScript and is free.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://tutorialzine.com/2016/07/learn-typescript-in-30-minutes&quot;&gt;This&lt;/a&gt; is a free quickstart guide if you don’t want to spend too much time.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=5roA60WTITw&amp;amp;list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK&amp;amp;index=9&amp;amp;t=0s&quot;&gt;This&lt;/a&gt; video tutorial from one of my conference deep dive session if you want to see advanced TypeScript features in action.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;python&quot;&gt;Python&lt;/h2&gt;
-
-&lt;p&gt;Python has been around for a while and in recent times it has seen a sudden increase in popularity. The popularity of data science and machine learning should be attributed to that as Python has become the go-to Language in those fields.&lt;/p&gt;
-
-&lt;h3 id=&quot;why-3&quot;&gt;Why&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Python is a general-purpose language and like JavaScript, it has a wide scope of application.&lt;/li&gt;
-  &lt;li&gt;It’s a dynamic language like JavaScript and hence great for scripting.&lt;/li&gt;
-  &lt;li&gt;It’s becoming the go-to language for machine learning and data science.&lt;/li&gt;
-  &lt;li&gt;It has a great job market and a huge community.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;who-should-learn-it-3&quot;&gt;Who should learn it&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;If you are looking to get into data science or machine learning, then Python is your language.&lt;/li&gt;
-  &lt;li&gt;DevOps engineers will find Python easy to start with and great for general-purpose scripting.&lt;/li&gt;
-  &lt;li&gt;If you are looking to learn a general-purpose language then Python is a great choice.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;where-to-start-3&quot;&gt;Where to start&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The official Python tutorial &lt;a href=&quot;https://docs.python.org/3/tutorial/&quot;&gt;here&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.learnpython.org/&quot;&gt;This&lt;/a&gt; free and interactive tutorial.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.w3schools.com/python/default.asp&quot;&gt;This&lt;/a&gt; w3school tutorial with interactive playground.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;rust&quot;&gt;Rust&lt;/h2&gt;
-
-&lt;p&gt;Rust is the most loved language according to the Stack Overflow developer survey last few years, not only this, the language is gaining momentum and is one of the fastest-growing languages. Here is my detailed review of Rust.&lt;/p&gt;
-
-&lt;div class=&quot;link-container&quot;&gt;
-                &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;
-                    &lt;div class=&quot;ltag__link__content&quot;&gt;
-                        &lt;h3&gt;My first impressions of Rust&lt;/h3&gt;
-                        &lt;p&gt;07-Nov-2019&lt;/p&gt;
-                        &lt;div class=&quot;ltag__link__taglist&quot;&gt;
-                            #rust #programming #languages #thepragmaticprogrammer
-                        &lt;/div&gt;
-                    &lt;/div&gt;
-                &lt;/a&gt;
-            &lt;/div&gt;
-
-&lt;h3 id=&quot;why-4&quot;&gt;Why&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;A great alternative to C/C++ with similar performance and better memory safety.&lt;/li&gt;
-  &lt;li&gt;Extremely memory safe, highly performant and flexible language.&lt;/li&gt;
-  &lt;li&gt;Suitable for low-level programming and hence a great choice for systems programming, concurrency and so on.&lt;/li&gt;
-  &lt;li&gt;It has web assembly support.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;who-should-learn-it-4&quot;&gt;Who should learn it&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;C/C++ programmers should consider learning Rust. Its a better alternative to C/C++ IMO and is more future proof.&lt;/li&gt;
-  &lt;li&gt;If you are a systems programmer, then you should learn Rust as it’s becoming a fast-growing choice in that space.&lt;/li&gt;
-  &lt;li&gt;If you are a front-end developer wishing to venture into web assembly, then Rust is a great choice as it supports web assembly. It might not be as easy as Golang to start with but definitely a great choice.&lt;/li&gt;
-  &lt;li&gt;If you are a developer writing low-level programs that requires extreme memory safety, performance and memory efficiency then Rust is a great choice with its memory safety guarantee, Ownership model and pointer support. You can tune your programs to be very memory efficient.&lt;/li&gt;
-  &lt;li&gt;If you are into concurrency and parallelism then Rust has great support for that with a pluggable multi-threading model which you can tune to your likeness. With libraries like Tokio, you can achieve great concurrency performance while maintaining memory safety.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;where-to-start-4&quot;&gt;Where to start&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The &lt;a href=&quot;https://doc.rust-lang.org/book/&quot;&gt;official Rust book&lt;/a&gt; is the best place to get started. It’s free and interactive.&lt;/li&gt;
-  &lt;li&gt;The &lt;a href=&quot;https://doc.rust-lang.org/rust-by-example/index.html&quot;&gt;official Rust by examples&lt;/a&gt; if you want to learn hands-on.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;java&quot;&gt;Java&lt;/h2&gt;
-
-&lt;p&gt;If you are a millennial you might think that Java is too old school and not cool anymore, but I assure you that Java will outlive a lot of languages that are considered new and cool. Java is one of the most mature languages out there and the with current release model of Java new features are being added twice a year closing the gap with other modern languages.&lt;/p&gt;
-
-&lt;h3 id=&quot;why-5&quot;&gt;Why&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JVM is still one of the biggest and most used platforms, especially trusted and used in enterprises world over.&lt;/li&gt;
-  &lt;li&gt;JVM has a pretty great Job market and there is always a demand for JVM developers in the foreseeable future.&lt;/li&gt;
-  &lt;li&gt;It has simple syntax, a great feature set, and a huge ecosystem and community.&lt;/li&gt;
-  &lt;li&gt;It is the language of choice for enterprises and has some of the most stable and trusted web application frameworks and libraries in the ecosystem.&lt;/li&gt;
-  &lt;li&gt;It has one of the best ecosystems around it for building web applications and especially enterprise web applications.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;who-should-learn-it-5&quot;&gt;Who should learn it&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;If you are a front end engineer and you want to become a full-stack engineer then JVM is a great choice as it has the best Job market for full-stack engineers.&lt;/li&gt;
-  &lt;li&gt;Web application developers or full-stack developers who want to learn a JVM language.&lt;/li&gt;
-  &lt;li&gt;If you are considering a career in IT as a backend developer, but you are unsure then JVM and Java is a safe bet and it has a great community and ecosystem to help you.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;where-to-start-5&quot;&gt;Where to start&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.w3schools.com/java/default.asp&quot;&gt;This&lt;/a&gt; w3school interactive tutorial to get a nice introduction.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.javatpoint.com/java-tutorial&quot;&gt;This&lt;/a&gt; interactive tutorial on JavaTpoint.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=eIrMbAQSU34&quot;&gt;This&lt;/a&gt; video tutorial.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;c&quot;&gt;C# &lt;/h2&gt;
-
-&lt;p&gt;C# is one of the popular languages in the programming world and is the go-to choice in the .NET world. It is a multiparadigm language suitable for different styles of programming. Like Java, JavaScript and Python it has retained its position in the top 10 languages in most of the language surveys.&lt;/p&gt;
-
-&lt;h3 id=&quot;why-6&quot;&gt;Why&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;It’s kind of a defacto choice for Windows programming and Windows is still the most used OS in the world.&lt;/li&gt;
-  &lt;li&gt;Well integrated with Windows and .NET platform with great support for enterprise applications.&lt;/li&gt;
-  &lt;li&gt;general-purpose language can be used for web applications, desktop applications, CLI tools and so on.&lt;/li&gt;
-  &lt;li&gt;It has a great Job market because Windows has a major market share in terms of OS usage and enterprise usage.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;who-should-learn-it-6&quot;&gt;Who should learn it&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;If you are thinking of programming applications for Windows or .NET then this should be your language of choice.&lt;/li&gt;
-  &lt;li&gt;If you are a Java developer and want to learn .NET then C# is the logical choice as it has a great syntax and concept resemblance to Java.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;where-to-start-6&quot;&gt;Where to start&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.w3schools.com/cs/default.asp&quot;&gt;This&lt;/a&gt; w3school interactive tutorial to get a nice introduction.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.javatpoint.com/c-sharp-tutorial&quot;&gt;This&lt;/a&gt; exhaustive tutorial on JavaTpoint.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image credit: Based on official logos.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/7-languages-to-learn-in-2020-with-resources-to-get-started-1ieo&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 01 Jan 2020 00:00:00 +0100</pubDate>
-        <link>https://deepu.tech/languages-to-learn-in-2020/</link>
-        <guid isPermaLink="true">https://deepu.tech/languages-to-learn-in-2020/</guid>
-        
-        <category>languages</category>
-        
-        <category>career</category>
-        
-        <category>programming</category>
         
         
       </item>
