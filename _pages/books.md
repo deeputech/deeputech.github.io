@@ -27,6 +27,8 @@ comments: false
     </div>
 </div>
 
+**Get 25% discount on E-books from Amazon and Packt using discount code "25JAVASILVER". Valid until 1st of July 2020**
+
 **Follow on Twitter [@FullstackBook](https://twitter.com/FullstackBook)**
 
 JHipster is an open source development platform that allows you to easily create web applications and microservices from scratch without spending time on wiring and integrating different technologies together. Updated to include JHipster 6, Java 11, Spring Boot 2.1, Vue.js, and Istio, this second edition of Full Stack Development with JHipster will help you build full stack applications and microservices seamlessly.
