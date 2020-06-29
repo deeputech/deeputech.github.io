@@ -1,12 +1,20 @@
 ---
 title: How to become an effective Polyglot Developer
-description: "What are the advantages and disadvantages of being a polyglot developer and how to be an effective polyglot developer"
+description: >-
+  What are the advantages and disadvantages of being a polyglot developer and
+  how to be an effective polyglot developer
 published: true
 featured: false
-tags: [programming, computerscience, languages, polyglot]
+tags:
+  - programming
+  - computerscience
+  - languages
+  - polyglot
 series: languages
-canonical_url: https://deepu.tech/how-to-be-an-effective-polyglot-developer/
-cover_image: https://i.imgur.com/3ereMQQ.jpg
+canonical_url: 'https://deepu.tech/how-to-be-an-effective-polyglot-developer/'
+cover_image: 'https://i.imgur.com/3ereMQQ.jpg'
+devto_id: 373867
+devto_url: 'https://dev.to/deepu105/how-to-become-an-effective-polyglot-developer-3moe'
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -102,3 +110,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Andrés Gómez](https://unsplash.com/@andresloquesea?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/juggling?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
