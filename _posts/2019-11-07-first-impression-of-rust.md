@@ -317,7 +317,7 @@ Things that I didn't like very much, in no particular order.
 
 ## Complexity
 
-I don't like it when a language offers multiples ways to do the same things. This is one think Golang does pretty well, there are no two ways to do the same thing and hence it is easier for people to work on larger codebases and to review code. Also, you don't have to always think of the best possible way to do something. Unfortunately, Rust does this and I'm not a fan of it. IMO it makes the language more complex.
+I don't like it when a language offers multiple ways to do the same things. This is one think Golang does pretty well, there are no two ways to do the same thing and hence it is easier for people to work on larger codebases and to review code. Also, you don't have to always think of the best possible way to do something. Unfortunately, Rust does this and I'm not a fan of it. IMO it makes the language more complex.
 
 -   Too many ways for iterations -> loops, while, for, iterators.
 -   Too many ways for creating procedures -> Functions, closures, macros
