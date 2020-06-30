@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 29 Jun 2020 14:02:29 +0200</pubDate>
-    <lastBuildDate>Mon, 29 Jun 2020 14:02:29 +0200</lastBuildDate>
+    <pubDate>Tue, 30 Jun 2020 12:23:02 +0200</pubDate>
+    <lastBuildDate>Tue, 30 Jun 2020 12:23:02 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -17,7 +17,7 @@
 
 &lt;p&gt;A polyglot developer is someone who can work with multiple languages with ease. In the strict interpretation, the vast majority of developers are polyglot as they would have worked with at least two languages in their lifetime, not counting markup/config/SQL languages. So in the IT industry when someone says s/he is a polyglot developer they mean they can work with a handful of languages at least and they don’t have any particular strong preference for a single language.&lt;/p&gt;
 
-&lt;p&gt;I started my career as a Java &amp;amp; JavaScript developer but I never considered myself a polyglot developer until a few years ago. Why the shift you may ask. Even as a Java &amp;amp; JavaScript developer, I had a strong &lt;a href=&quot;https://deepu.tech/reflections-on-javascript/&quot;&gt;affinity towards JavaScript&lt;/a&gt; as I used to enjoy building UI/UX. Later in my career, I started working a little bit with more languages like Groovy, Scala, TypeScript, Python. Even then I didn’t consider myself a polyglot developer as I didn’t dive deep into any of those languages, was mostly working on existing codebases where I had to do some work in that particular language and I always considered that a nuisance. Another reason was I naively believed that since I already knew JS and Java quite well, and since they are among the most popular languages, I didn’t need to learn anything else ar improve my skills further.&lt;/p&gt;
+&lt;p&gt;I started my career as a Java &amp;amp; JavaScript developer but I never considered myself a polyglot developer until a few years ago. Why the shift you may ask. Even as a Java &amp;amp; JavaScript developer, I had a strong &lt;a href=&quot;https://deepu.tech/reflections-on-javascript/&quot;&gt;affinity towards JavaScript&lt;/a&gt; as I used to enjoy building UI/UX. Later in my career, I started working a little bit with more languages like Groovy, Scala, TypeScript, Python. Even then I didn’t consider myself a polyglot developer as I didn’t dive deep into any of those languages, was mostly working on existing codebases where I had to do some work in that particular language and I always considered that a nuisance. Another reason was I naively believed that since I already knew JS and Java quite well, and since they are among the most popular languages, I didn’t need to learn anything else or improve my skills further.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;A programming language is a tool that has profound influence on our thinking habits.&lt;/p&gt;
