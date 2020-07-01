@@ -128,7 +128,7 @@ This type of GC keeps the young or new generation space compact and clean. Objec
 
 Let us look at the minor GC process:
 
-The new space is divided into two equal-sized semi-spaces: **to-space** and **from-space**. Most allocations are made in to-space (except certain kinds of objects, such as executable Codes which are always allocated in old-space). When to-space fills up the minor GC is triggered.
+The new space is divided into two equal-sized semi-spaces: **to-space** and **from-space**. Most allocations are made in from-space (except certain kinds of objects, such as executable Codes which are always allocated in old-space). When from-space fills up the minor GC is triggered.
 
 Click on the slides and move forward/backward using arrow keys to see the process:
 
@@ -136,18 +136,19 @@ Click on the slides and move forward/backward using arrow keys to see the proces
 
 _Note: If the slides look cut off at edges, then click on the title of the slide or [here](https://speakerdeck.com/deepu105/v8-minor-gc) to open it directly in SpeakerDeck._
 
-1. Let us assume that there are already objects on the “to-space” when we start(Blocks 01 to 06 marked as used memory)
+1. Let us assume that there are already objects on the "from-space” when we start(Blocks 01 to 06 marked as used memory)
 2. The process creates a new object(07)
-3. V8 tries to get required memory from to-space, but there is no free space in there to accommodate our object and hence V8 triggers minor GC
-4. Minor GC swaps the "to-space" and "from-space", all the objects are now in "from-space" and the "to-space" is empty
-5. Minor GC recursively traverses the object graph in "from-space" starting from stack pointers(GC roots) to find objects that are used or alive(Used memory). These objects are moved to a page in the "to-space". Any objects reference by these objects are also moved to this page in "to-space" and their pointers are updated. This is repeated until all the objects in "from-space" are scanned. By end of this, the "to-space" is automatically compacted reducing fragmentation
-6. Minor GC now empties the "from-space" as any remaining object here is garbage
-7. The new object is allocated memory in the "to-space"
-8. Let us assume that some time has passed and there are more objects on the "to-space" now(Blocks 07 to 09 marked as used memory)
+3. V8 tries to get required memory from from-space, but there is no free space in there to accommodate our object and hence V8 triggers minor GC
+4. Minor GC recursively traverses the object graph in "from-space" starting from stack pointers(GC roots) to find objects that are used or alive(Used memory). These objects are moved to a page in the "to-space". Any objects reference by these objects are also moved to this page in "to-space" and their pointers are updated. This is repeated until all the objects in "from-space" are scanned. By end of this, the "to-space" is automatically compacted reducing fragmentation
+5. Minor GC now empties the "from-space" as any remaining object here is garbage
+6. Minor GC swaps the "to-space" and "from-space", all the objects are now in "from-space" and the "to-space" is empty
+7. The new object is allocated memory in the "from-space"
+8. Let us assume that some time has passed and there are more objects on the "from-space" now(Blocks 07 to 09 marked as used memory)
 9. The application creates a new object(10)
-10. V8 tries to get required memory from "to-space", but there is no free space in there to accommodate our object and hence V8 triggers second minor GC
+10. V8 tries to get required memory from "from-space", but there is no free space in there to accommodate our object and hence V8 triggers second minor GC
 11. The above process is repeated and any alive objects that survived second minor GC is moved to the "Old space". First-time survivors are moved to the "to-space" and remaining garbage is cleared from "from-space"
-12. The new object is allocated memory in the "to-space"
+12. Minor GC swaps the "to-space" and "from-space", all the objects are now in "from-space" and the "to-space" is empty
+13. The new object is allocated memory in the "from-space"
 
 So we saw how minor GC reclaims space from the young generation and keeps it compact. It is a stop-the-world process but it's so fast and efficient that it is negligible most of the time. Since this process doesn't scan objects in the "old space" for any reference in the "new space" it uses a register of all pointers from old space to new space. This is recorded to the store buffer by a process called **[write barriers](https://www.memorymanagement.org/glossary/w.html#term-write-barrier)**.
 
