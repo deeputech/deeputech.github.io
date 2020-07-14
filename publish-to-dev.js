@@ -44,7 +44,7 @@ async function processFiles() {
                 const frontMatter = parsedContent.matter.data;
                 const body_markdown = `${json2yaml.stringify(
                     frontMatter
-                )}\n---\n*Originally published in [deepu.tech](https://deepu.tech/${getBlogUrl(filename)}/)*.\n\n${parsedContent.matter.content}`;
+                )}\n---\n*Originally published at [deepu.tech](https://deepu.tech/${getBlogUrl(filename)}/)*.\n\n${parsedContent.matter.content}`;
 
                 if (frontMatter && (frontMatter.published || frontMatter.draft) && !frontMatter.skip_devto) {
                     const payload = {

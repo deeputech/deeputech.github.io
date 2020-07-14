@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 01 Jul 2020 15:56:57 +0200</pubDate>
-    <lastBuildDate>Wed, 01 Jul 2020 15:56:57 +0200</lastBuildDate>
+    <pubDate>Tue, 14 Jul 2020 14:37:14 +0200</pubDate>
+    <lastBuildDate>Tue, 14 Jul 2020 14:37:14 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -127,7 +127,7 @@
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@andresloquesea?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Andrés Gómez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/juggling?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/how-to-become-an-effective-polyglot-developer-3moe&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/how-to-become-an-effective-polyglot-developer-3moe&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 29 Jun 2020 00:00:00 +0200</pubDate>
         <link>https://deepu.tech/how-to-be-an-effective-polyglot-developer/</link>
@@ -323,7 +323,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 
 &lt;p&gt;The Amazon links in the post are affiliate links and if you make a purchase using those I might get a referral fee.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/my-pc-build-for-vr-gaming-2n79&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/my-pc-build-for-vr-gaming-2n79&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Fri, 12 Jun 2020 00:00:00 +0200</pubDate>
         <link>https://deepu.tech/my-vr-gaming-pc-build/</link>
@@ -761,7 +761,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-rust-5898&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-rust-5898&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 31 Mar 2020 00:00:00 +0200</pubDate>
         <link>https://deepu.tech/memory-management-in-rust/</link>
@@ -1434,7 +1434,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 
 &lt;p&gt;Cover image credit: Random image from the internet&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/forget-nodejs-build-native-typescript-applications-with-deno-kkb&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/forget-nodejs-build-native-typescript-applications-with-deno-kkb&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Tue, 18 Feb 2020 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/deno-runtime-for-typescript/</link>
@@ -1757,7 +1757,7 @@ temp/gc.go:28:13: main []interface {} literal does not escape
 
 &lt;p&gt;Cover image inspired by &lt;a href=&quot;https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c&quot;&gt;a-journey-with-go&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 17 Feb 2020 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/memory-management-in-golang/</link>
@@ -2254,7 +2254,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;p&gt;Cover image credit: Based on official logos of respective projects.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 06 Feb 2020 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/polyglot-showdown-with-graalvm/</link>
@@ -2518,7 +2518,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Mon, 27 Jan 2020 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/memory-management-in-v8/</link>
@@ -2836,7 +2836,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Thu, 23 Jan 2020 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/memory-management-in-jvm/</link>
@@ -2944,7 +2944,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@arianismmm?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Arian Darvishi&lt;/a&gt; on Unsplash&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Also published on &lt;a href=&quot;https://dev.to/deepu105/life-of-a-full-stack-developer-2og5&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/life-of-a-full-stack-developer-2og5&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </description>
         <pubDate>Sun, 19 Jan 2020 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/life-of-a-full-stack-developer/</link>
