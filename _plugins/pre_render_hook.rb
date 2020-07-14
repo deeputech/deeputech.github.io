@@ -29,7 +29,7 @@ module Jekyll
             }
             #  Add a note at end of all posts
             if post.data && post.data['devto_url']
-                post.content = post.content.concat("\n*Also published on [Dev.to](#{post.data['devto_url']})*")
+                post.content = post.content.concat("\n*Also published at [Dev.to](#{post.data['devto_url']})*")
             end
         }
     end
