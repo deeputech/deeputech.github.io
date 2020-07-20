@@ -104,10 +104,9 @@ _Note: If the slides look cut off at edges, then click on the title of the slide
 
 As you can see:
 
--   **Static fields** are kept in a separate block on the Stack
 -   Every function call is added to the thread's stack memory as a frame-block
 -   All local variables including arguments and the return value is saved within the function frame-block on the Stack
--   All primitive types like `int` are stored directly on the Stack. This applies to static fields as well
+-   All primitive types like `int` are stored directly on the Stack
 -   All object types like `Employee`, `Integer`, `String` are created on the Heap and is referenced from the Stack using Stack pointers. This applies to static fields as well
 -   Functions called from the current function is pushed on top of the Stack
 -   When a function returns its frame is removed from the Stack
