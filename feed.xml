@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 14 Jul 2020 14:37:14 +0200</pubDate>
-    <lastBuildDate>Tue, 14 Jul 2020 14:37:14 +0200</lastBuildDate>
+    <pubDate>Mon, 20 Jul 2020 15:09:29 +0200</pubDate>
+    <lastBuildDate>Mon, 20 Jul 2020 15:09:29 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
     
       <item>
@@ -2675,10 +2675,9 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;p&gt;As you can see:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Static fields&lt;/strong&gt; are kept in a separate block on the Stack&lt;/li&gt;
   &lt;li&gt;Every function call is added to the thread’s stack memory as a frame-block&lt;/li&gt;
   &lt;li&gt;All local variables including arguments and the return value is saved within the function frame-block on the Stack&lt;/li&gt;
-  &lt;li&gt;All primitive types like &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt; are stored directly on the Stack. This applies to static fields as well&lt;/li&gt;
+  &lt;li&gt;All primitive types like &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt; are stored directly on the Stack&lt;/li&gt;
   &lt;li&gt;All object types like &lt;code class=&quot;highlighter-rouge&quot;&gt;Employee&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;Integer&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt; are created on the Heap and is referenced from the Stack using Stack pointers. This applies to static fields as well&lt;/li&gt;
   &lt;li&gt;Functions called from the current function is pushed on top of the Stack&lt;/li&gt;
   &lt;li&gt;When a function returns its frame is removed from the Stack&lt;/li&gt;
