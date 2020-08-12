@@ -2,7 +2,7 @@
 title: 'let''s face it, we have a broken technical interview process in our industry'
 description: >-
   How the current technical interview process followed by the majority of the
-  companies favor only a small subset.
+  companies favor only a small subset of developers.
 published: true
 featured: false
 tags:
