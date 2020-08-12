@@ -1,12 +1,21 @@
 ---
-title: let's face it, we have a broken technical interview process in our industry
-description: How the current technical interview process followed by the majority of the companies favor only a small subset.
+title: 'let''s face it, we have a broken technical interview process in our industry'
+description: >-
+  How the current technical interview process followed by the majority of the
+  companies favor only a small subset.
 published: true
 featured: false
-tags: [interview, career, womenintech, discuss]
-series:
-canonical_url: https://deepu.tech/the-problem-with-hiring-in-it/
-cover_image: https://i.imgur.com/BrwZzTc.jpg
+tags:
+  - interview
+  - career
+  - womenintech
+  - discuss
+series: null
+canonical_url: 'https://deepu.tech/the-problem-with-hiring-in-it/'
+cover_image: 'https://i.imgur.com/BrwZzTc.jpg'
+devto_id: 425684
+devto_url: >-
+  https://dev.to/deepu105/let-s-face-it-we-have-a-broken-technical-interview-process-in-our-industry-56j2
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -91,3 +100,4 @@ If you like this article, please leave a like. I would love to hear your thought
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Scott Graham](https://unsplash.com/@sctgrhm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/tech-interview?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
