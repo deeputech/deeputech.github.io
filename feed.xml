@@ -5,9 +5,125 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 20 Jul 2020 15:09:29 +0200</pubDate>
-    <lastBuildDate>Mon, 20 Jul 2020 15:09:29 +0200</lastBuildDate>
+    <pubDate>Wed, 12 Aug 2020 18:17:07 +0200</pubDate>
+    <lastBuildDate>Wed, 12 Aug 2020 18:17:07 +0200</lastBuildDate>
     <generator>Jekyll v2.0.0</generator>
+    
+      <item>
+        <title>let's face it, we have a broken technical interview process in our industry</title>
+        <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;This topic has been discussed and debated for a long time and there have been countless &lt;a href=&quot;http://they.whiteboarded.me/additional-resources.html&quot;&gt;articles&lt;/a&gt; written about it and even &lt;a href=&quot;http://they.whiteboarded.me/&quot;&gt;websites&lt;/a&gt; dedicated to it. But still, the problem remains.&lt;/p&gt;
+
+&lt;p&gt;I wanted to write about these for a while but was procrastinating on it. Today I decided to finally pick it up after seeing the below tweet&lt;/p&gt;
+
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;&amp;quot;Whiteboard technical interviews appear to favor men over women... no women successfully solved the problem in the public setting, whereas all women solved it correctly in the private setting&amp;quot;.&lt;br /&gt;&lt;br /&gt;Interesting findings from NCSU and Microsoft 🤔&lt;br /&gt; &lt;a href=&quot;https://t.co/CedqwKlquI&quot;&gt;https://t.co/CedqwKlquI&lt;/a&gt;&lt;/p&gt;&amp;mdash; Antonia Forster (@AntoniaRForster) &lt;a href=&quot;https://twitter.com/AntoniaRForster/status/1283671612794064897?ref_src=twsrc%5Etfw&quot;&gt;July 16, 2020&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;broken-process&quot;&gt;Broken process&lt;/h2&gt;
+
+&lt;p&gt;So I guess you got an idea of what I’m talking about. Yes, the technical interview process in the IT industry is broken. It is biased, it’s based on old mentality of how a software developer has to be and based on unrealistic expectations. I guess we are all partly to blame as we didn’t push back against this enough. Below are the most common practices during a technical interview these days&lt;/p&gt;
+
+&lt;h3 id=&quot;whiteboarding&quot;&gt;Whiteboarding&lt;/h3&gt;
+
+&lt;p&gt;Solving a problem on a whiteboard including writing pseudoscope or real code on a whiteboard or drawing process/technical diagrams.
+Most of the IT companies, including &lt;a href=&quot;http://they.whiteboarded.me/companies-that-whiteboard.html&quot;&gt;most of the big names&lt;/a&gt; out there follow this outdated process when evaluating someone’s technical credibility.&lt;/p&gt;
+
+&lt;h3 id=&quot;live-coding&quot;&gt;Live coding&lt;/h3&gt;
+
+&lt;p&gt;Coding on the spot while someone watches over you or via a remote session when someone monitors what you do. Most of the times these assignments are asked to be done in an IDE or environment that you are not familiar with.&lt;/p&gt;
+
+&lt;h3 id=&quot;coding-challenges&quot;&gt;Coding challenges&lt;/h3&gt;
+
+&lt;p&gt;Solving coding challenges on a platform like &lt;strong&gt;HackerRank&lt;/strong&gt; or &lt;strong&gt;Codility&lt;/strong&gt;. This normally requires you to complete some short coding problems within a given time and most of these platforms can track your step by step input and mostly will have automated tests that may not be visible to you. These often require you to work in environments that are not familiar to you. Coding challenges are not great as it can also cause anxiety and doesn’t have a lot of scopes to ask questions or to understand problems at hand but at least they are not as bad as whiteboarding and live coding as you still have the ability to do this at your convenience and use external resources to look up.&lt;/p&gt;
+
+&lt;h3 id=&quot;take-home-assignment&quot;&gt;Take home assignment&lt;/h3&gt;
+
+&lt;p&gt;You are given a small application or a problem to be solved at your own convenience, often with a max time limit. You might have back and forths with the company and you might have to explain your solution in an interview. While take-home assignments are better then other options in this list it still is time-intensive and if you are applying to multiple jobs that require this then you will be spending a lot of time doing assignments.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-is-whiteboarding--live-coding-bad&quot;&gt;Why is Whiteboarding &amp;amp; Live coding bad&lt;/h2&gt;
+
+&lt;p&gt;While coding challenges and take-home assignments are not particularly great they are not as bad and biased as whiteboarding and live coding. These require you to work in an unfamiliar environment without resources like an IDE or code editor. And most importantly you don’t have the best tools in a developers toolbelt, Google and Stack overflow :)&lt;/p&gt;
+
+&lt;p&gt;How many of us can honestly say that we can perform our best without our favorite IDE, tools, and Google. Like it or not this is the fact so why should a technical interview be any different.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Give your future employees the same comfort and tools that your current employees have access to when interviewing them as well. The results could be amazing.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;anxiety--pressure&quot;&gt;Anxiety &amp;amp; pressure&lt;/h3&gt;
+
+&lt;p&gt;These methods are designed to &lt;a href=&quot;https://news.ncsu.edu/2020/07/tech-job-interviews-anxiety/&quot;&gt;cause anxiety&lt;/a&gt; and pressure. Most people will not be comfortable to perform complex tasks in front of strangers who are evaluating your every move. Of course, there will be few who can ace these but what about the remaining? being able to perform under pressure is not a quality of a great programmer. You are not working as a hacker for an intelligence agency (Remember the popular NSFW scene from the movie Swordfish?).&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;You are not Hugh Jackman from Swordfish or a hacker working for an intelligence agency&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Most of us never work under such pressure and performance anxiety in real life (I’m only talking about the case of someone watching over your shoulder and judging you) you might be under unrelated anxiety and pressure and those are the times we won’t be able to do our work properly and we might take sick days and stuff, so what is the point of expecting someone to perform these tasks under pressure for a job.&lt;/p&gt;
+
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;An engineer is a problem solver not a fact memorizer. This is why I like coding assignments rather then whiteboarding.  &lt;a href=&quot;https://t.co/Z3KU1CWSNj&quot;&gt;https://t.co/Z3KU1CWSNj&lt;/a&gt;&lt;/p&gt;&amp;mdash; Deepu K Sasidharan ( ദീപു, தீபு, दीपू ) #BLM (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1167878288762519556?ref_src=twsrc%5Etfw&quot;&gt;August 31, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I generally do well in interviews and don’t have any issues solving coding challenges and stuff, once during a tech interview for a Developer Advocate position for a well-known company, the interviewer suddenly asked me to fix a factorial code snippet on the spot over zoom call without ever hinting beforehand that this will be part of the process. I have solved factorials a thousand times, hell I use them as examples for recursion all the time but still, I completely froze and my brain just shut down, I couldn’t even read the four lines of code and make any sense of it as my brain was just frozen and I was feeling so much anxiety and I started behaving like a 1st grader and was blurting nonsense for the next few minutes. The anxiety was so unbearable that I asked them to end the interview. I would have never accepted the interview if I had known that this was part of it as I don’t think putting myself through such pressure is not worth the job.&lt;/p&gt;
+
+&lt;h3 id=&quot;imposter-syndrome&quot;&gt;Imposter syndrome&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Impostor_syndrome&quot;&gt;Imposter syndrome&lt;/a&gt; is very common in the software industry and people who struggle with it are the worst hit from these outdated hiring practices. Having to do whiteboarding or live coding will only make the situation worse and if you happen to fail in those then it will make things even worse. You will lose confidence and will start to believe that you are not good enough. Often times this goes hand in hand with the above points about anxiety.&lt;/p&gt;
+
+&lt;h3 id=&quot;bias&quot;&gt;Bias&lt;/h3&gt;
+
+&lt;p&gt;A recent &lt;a href=&quot;http://chrisparnin.me/pdf/stress_FSE_20.pdf&quot;&gt;research&lt;/a&gt; from &lt;strong&gt;North Carolina State University&lt;/strong&gt; (NCSU) and &lt;strong&gt;Microsoft&lt;/strong&gt; suggests that whiteboard interviews favor men over women psychologically and are &lt;strong&gt;‘anti-women psychological stress examinations’&lt;/strong&gt;. These interview process test for stage fright rather than coding competency. Apparently these processes resemble ‘&lt;a href=&quot;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5314443/#&quot;&gt;Trier Social Stress Test&lt;/a&gt;’ a &lt;strong&gt;gold standard&lt;/strong&gt; procedure used by psychologists to induce stress. So the process is not just biased toward women, but also biased towards people susceptible to social or performance anxiety, imposter syndrome, and so on.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;In the beginning, I said we are partly to blame, why? because in most companies, still doing these interview techniques, it’s not something mandated by the company management or some standards, its mostly people who are in charge of hiring (hiring managers, developers, team leads) who decides the process. so if you are in a position to influence hiring practice and didn’t try to change this then you are part of the problem as well. So what can we do to change this?&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Talk to hiring managers and people in charge of hiring in your company, explain to them issues of whiteboarding and live coding interviews, pressure them to change the process. If you are team lead make sure your hiring process doesn’t have these&lt;/li&gt;
+  &lt;li&gt;Turn down interviews that have whiteboarding or live coding in their process and explain to them why you turned it down. I have done this numerous times in the past. Of course, this may not be practical if you are desperate for a job, in that case, ask them if they are willing to do something like a coding challenge or take-home assignment instead and explain why you are asking for that. If they still insist provide honest feedback on how it felt after the final hiring decision is made&lt;/li&gt;
+  &lt;li&gt;If you are in some position of power or influence in your company please voice out against these practices&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A company that treats an interviewee well is a company that will treat its employees better.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;resources&quot;&gt;Resources&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;http://they.whiteboarded.me/&lt;/li&gt;
+  &lt;li&gt;https://www.theregister.com/AMP/2020/07/15/it_hiring_whiteboard/&lt;/li&gt;
+  &lt;li&gt;https://news.ncsu.edu/2020/07/tech-job-interviews-anxiety/&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like. I would love to hear your thoughts and experiences in the comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@sctgrhm?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Scott Graham&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/tech-interview?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/let-s-face-it-we-have-a-broken-technical-interview-process-in-our-industry-56j2&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 12 Aug 2020 00:00:00 +0200</pubDate>
+        <link>https://deepu.tech/the-problem-with-hiring-in-it/</link>
+        <guid isPermaLink="true">https://deepu.tech/the-problem-with-hiring-in-it/</guid>
+        
+        <category>interview</category>
+        
+        <category>career</category>
+        
+        <category>womenintech</category>
+        
+        <category>discuss</category>
+        
+        
+      </item>
     
       <item>
         <title>How to become an effective Polyglot Developer</title>
@@ -2848,114 +2964,6 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
         <category>scala</category>
         
         <category>clojure</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Life of a Full-stack developer 😱 🤯 😱</title>
-        <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Hello friends, the second edition of my book &lt;strong&gt;“Full Stack Development with JHipster”&lt;/strong&gt;, co-authored with &lt;a href=&quot;https://dev.to/sendilkumarn&quot;&gt;Sendil Kumar N&lt;/a&gt;, is published this week and I thought of dedicating it to all the Full Stack Developers out there.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Disclaimer&lt;/strong&gt;: This article contains excerpts from my book &lt;a href=&quot;https://deepu.tech/books&quot;&gt;“Full Stack Development with JHipster – Second Edition”&lt;/a&gt; published by &lt;a href=&quot;https://www.packtpub.com/&quot;&gt;Packt&lt;/a&gt;.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;According to the &lt;a href=&quot;https:/​/insights.stackoverflow.​com/survey/2019#developer-​roles&quot;&gt;Stack Overflow developer survey 2019&lt;/a&gt;, &lt;strong&gt;full stack developer&lt;/strong&gt; is the most popular developer title. The software industry defines a full stack developer as someone who can work on different areas of an application stack. The term stack refers to the different components and tools that make up an application.&lt;/p&gt;
-
-&lt;p&gt;In terms of web application development, the stack can be broadly classified into two areas—frontend and backend stack, also known as the client-side and server-side stack. The term frontend generally refers to the part of the code that is responsible for rendering the user interface, and the term backend refers to the part that is responsible for the business logic, database interactions, user authentication, server configuration, and so on. There is also the DevOps part of the application, which includes continuous integration, production deployment, and so on. A full-stack Java web application developer is expected to work on both frontend and backend technologies, ranging from writing HTML/JavaScript for the user interface to writing Java class files for business logic and SQL queries for database operations. They are also expected to work on DevOps, ranging from production deployments to setting up continuous integration and continuous delivery (CI/CD) as required.&lt;/p&gt;
-
-&lt;p&gt;With an ever-evolving software architecture landscape, the scope of technologies that a full stack web developer is expected to work with has increased dramatically. It is no longer enough that we can write HTML and JavaScript to build a user interface — we are expected to know client-side frameworks, such as Angular, React, and Vue.js. It is also not enough that we are proficient in enterprise Java and SQL — we are expected to know server-side frameworks, such as Spring, Hibernate, Play, and Quarkus.&lt;/p&gt;
-
-&lt;h2 id=&quot;modern-full-stack-web-development&quot;&gt;Modern full-stack web development&lt;/h2&gt;
-
-&lt;p&gt;The life of a full stack developer would be worthy of a whole book by itself, so let’s leave that topic for another day.&lt;/p&gt;
-
-&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Expectations from &lt;a href=&quot;https://twitter.com/hashtag/java?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#java&lt;/a&gt; full stack developer these days..&lt;br /&gt;&lt;br /&gt;spring/&lt;a href=&quot;https://twitter.com/hashtag/quarkus?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#quarkus&lt;/a&gt;/micronaut&lt;br /&gt;sql/nosql&lt;a href=&quot;https://twitter.com/hashtag/react?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#react&lt;/a&gt;/angular/vue&lt;br /&gt;Webpack/bazel/rollup&lt;br /&gt;Js/ts, html, css/sass&lt;a href=&quot;https://twitter.com/hashtag/docker?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#docker&lt;/a&gt;, &lt;a href=&quot;https://twitter.com/hashtag/kubernetes?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#kubernetes&lt;/a&gt;&lt;br /&gt;aws/azure/gcp&lt;a href=&quot;https://twitter.com/hashtag/devops?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#devops&lt;/a&gt;, terraform/cloudformation&lt;br /&gt;Shell scripting, maven/gradle&lt;br /&gt;Milking a unicorn 🦄 &lt;a href=&quot;https://t.co/bCFYHsBbKs&quot;&gt;pic.twitter.com/bCFYHsBbKs&lt;/a&gt;&lt;/p&gt;&amp;mdash; Deepu K Sasidharan ( ദീപു, தீபு, दीपू ) #BLM (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1158404065593708545?ref_src=twsrc%5Etfw&quot;&gt;August 5, 2019&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Instead, let’s look at a user story from a full-stack Java web application and see what is involved.&lt;/p&gt;
-
-&lt;h3 id=&quot;what-a-day-looks-like&quot;&gt;What a day looks like&lt;/h3&gt;
-
-&lt;p&gt;Let’s use an example of developing a user management module for a typical Java web application. Let’s assume that you would be writing unit test cases for all of the code, and so we won’t look at it in detail here:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;You would start by designing the architecture for the feature. You would decide on the plugins and frameworks to use, patterns to follow, and so on.&lt;/li&gt;
-  &lt;li&gt;You will be modeling the domain model for the feature depending on the database technology used.&lt;/li&gt;
-  &lt;li&gt;Then, you would create server-side code and database queries to persist and fetch data from the database.&lt;/li&gt;
-  &lt;li&gt;Once the data is ready, you would implement the server-side code for any business logic.&lt;/li&gt;
-  &lt;li&gt;Then, you would implement an API that can be used to provide data for the presentation over an HTTP connection.&lt;/li&gt;
-  &lt;li&gt;You would write integration tests for the API.&lt;/li&gt;
-  &lt;li&gt;Since the backend is ready, you would start writing frontend code in JavaScript or similar technology.&lt;/li&gt;
-  &lt;li&gt;You would write client-side services to fetch data from the backend API.&lt;/li&gt;
-  &lt;li&gt;You would write client-side components to display the data on a web page.&lt;/li&gt;
-  &lt;li&gt;You would build the page and style it as per the design provided.&lt;/li&gt;
-  &lt;li&gt;You would write some automated end-to-end tests for the web page.&lt;/li&gt;
-  &lt;li&gt;You are not done yet. Once you have tested whether everything works locally, you would create pull requests or check the code into the version control system used.&lt;/li&gt;
-  &lt;li&gt;You would wait for the continuous integration process to verify everything and fix anything that is broken.&lt;/li&gt;
-  &lt;li&gt;Once everything is green and the code is accepted, you would typically start the deployment of this feature to a staging or acceptance environment, either on-premises or to a cloud provider using technologies like Docker and Kubernetes. If you choose the latter, you would be expected to be familiar with the cloud technologies used as well. You would also be upgrading the database schema as necessary and writing migration scripts when required.&lt;/li&gt;
-  &lt;li&gt;Once the feature is accepted, you might be responsible for deploying it into the production environment in a similar way, troubleshooting issues where necessary. In some teams, you might swap the steps with other team members so that you would be deploying a feature developed by your coworker while they deploy yours.&lt;/li&gt;
-  &lt;li&gt;You might also be responsible, along with your coworkers, for making sure that the production environment is up and running, including the database, virtual machines, and so on.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;As you can see, it is no easy task. The range of responsibilities spans from making stylesheet updates on the client-side to running database migration scripts on a virtual machine in the production cloud service. If you are not familiar enough with the setup, then this would be a herculean task, and you would soon be lost in the vast ocean of frameworks, technologies, and design patterns out there.&lt;/p&gt;
-
-&lt;h3 id=&quot;challenges&quot;&gt;Challenges&lt;/h3&gt;
-
-&lt;p&gt;Full-stack development is not for the faint-hearted. It takes a lot of time and effort to keep yourself up to date with the various technologies and patterns in multiple disciplines of software development. The following are some of the common problems you might face as a full stack Java developer:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Client-side development is not just about writing plain HTML and JavaScript anymore. It is becoming as complex as server-side development, with build tools, transpilers, frameworks, and patterns.&lt;/li&gt;
-  &lt;li&gt;There is a new framework almost every week in the JavaScript world, and if you are coming from outside a Java background, it could be very overwhelming for you.&lt;/li&gt;
-  &lt;li&gt;Container technologies such as Docker &amp;amp; Kubernetes revolutionized the software industry, but they also introduced a lot of new stuff to learn and keep track of, such as orchestration tools and container management tools.&lt;/li&gt;
-  &lt;li&gt;Cloud services are growing day by day. To stay on track, you would have to familiarize yourself with their APIs and related orchestration tools.&lt;/li&gt;
-  &lt;li&gt;Java server-side technologies have also undergone a major shift in recent times with the introduction of JVM languages, such as Scala, Groovy, and Kotlin, forcing you to keep yourself up to date with them. On the other side, server-side frameworks are becoming more feature-rich, and therefore more complex.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The most important thing of all is to make sure that all of these work well together when required. This task will need a lot of configuration, some glue code, and endless cups of coffee.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;It’s very easy to get lost here, and this is where technologies such as &lt;a href=&quot;https://www.jhipster.tech/&quot;&gt;JHipster&lt;/a&gt; and &lt;a href=&quot;https://spring.io/projects/spring-boot&quot;&gt;Spring Boot&lt;/a&gt; step in to help. They help by providing the wiring between moving parts so that you only need to concentrate on writing business code. JHipster also helps by providing the abstractions to deploy and manage the application to various cloud providers.&lt;/p&gt;
-
-&lt;p&gt;A full-stack developer is one of the toughest roles in our industry these days and I think it is one that is under-appreciated a lot. If you are a full stack developer be proud as it takes some courage to be one. You may not be an expert in a single technology or framework but you are a magician of sorts. You can juggle between so many technologies and frameworks without breaking a sweat. You are the real 10x developer, what the heck, you are a 100x developer, not because you use specific keys on your keyboard more than others, its because your job used to be something that required at least four people to work together. You may not get enough credits, though you deserve it just for the effort that is required to keep up, you are awesome.&lt;/p&gt;
-
-&lt;p&gt;Though the satisfaction of being able to work on all aspects of application development is rewarding, It is still a shame that we are not getting the salary that is the sum paid to four people who were needed to do this work 😉&lt;/p&gt;
-
-&lt;p&gt;So if you are a proud full stack developer let me know in the comments and tell us how your day looks like.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you liked this article you might like my &lt;a href=&quot;https://deepu.tech/books&quot;&gt;book&lt;/a&gt; as well. You can get it from &lt;a href=&quot;https://www.packtpub.com/web-development/full-stack-development-with-jhipster-second-edition&quot;&gt;Packt&lt;/a&gt; and &lt;a href=&quot;https://smile.amazon.com/Full-Stack-Development-JHipster-microservices/dp/1838824987&quot;&gt;Amazon&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/SSnzOvR.png&quot; alt=&quot;book cover&quot; /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@arianismmm?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Arian Darvishi&lt;/a&gt; on Unsplash&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/life-of-a-full-stack-developer-2og5&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-</description>
-        <pubDate>Sun, 19 Jan 2020 00:00:00 +0100</pubDate>
-        <link>https://deepu.tech/life-of-a-full-stack-developer/</link>
-        <guid isPermaLink="true">https://deepu.tech/life-of-a-full-stack-developer/</guid>
-        
-        <category>webdev</category>
-        
-        <category>showdev</category>
-        
-        <category>motivation</category>
-        
-        <category>books</category>
         
         
       </item>
