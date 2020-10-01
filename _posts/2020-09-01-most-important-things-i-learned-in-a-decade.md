@@ -3,10 +3,17 @@ title: 8 important things I learned as a software developer over a decade.
 description: Advice for beginners from my decade long development career
 published: true
 featured: false
-tags: [beginners, pragmatic, codequality, programming]
-series:
-canonical_url: https://deepu.tech/most-important-things-i-learned-in-a-decade/
-cover_image: https://i.imgur.com/eMIb5xp.jpeg
+tags:
+  - beginners
+  - pragmatic
+  - codequality
+  - programming
+series: null
+canonical_url: 'https://deepu.tech/most-important-things-i-learned-in-a-decade/'
+cover_image: 'https://i.imgur.com/eMIb5xp.jpeg'
+devto_id: 471389
+devto_url: >-
+  https://dev.to/deepu105/8-important-things-i-learned-as-a-software-developer-over-a-decade-4no3
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -74,3 +81,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Martin Katler](https://unsplash.com/@martinkatler?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/programmers-desk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyTex)
+
