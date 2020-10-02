@@ -4,16 +4,16 @@ description: Advice for beginners from my decade long development career
 published: true
 featured: false
 tags:
-  - beginners
-  - pragmatic
-  - codequality
-  - programming
+    - beginners
+    - pragmatic
+    - codequality
+    - programming
 series: null
-canonical_url: 'https://deepu.tech/most-important-things-i-learned-in-a-decade/'
-cover_image: 'https://i.imgur.com/eMIb5xp.jpeg'
+canonical_url: "https://deepu.tech/most-important-things-i-learned-in-a-decade/"
+cover_image: "https://i.imgur.com/eMIb5xp.jpeg"
 devto_id: 471389
 devto_url: >-
-  https://dev.to/deepu105/8-important-things-i-learned-as-a-software-developer-over-a-decade-4no3
+    https://dev.to/deepu105/8-important-things-i-learned-as-a-software-developer-over-a-decade-4no3
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -32,9 +32,9 @@ I hope this is beneficial especially to beginners and junior developers who are 
 
 This, in my humble opinion, is the most important thing to learn for anyone starting their career. Do not get married to a programming Language, Framework, or Methodology. Getting attached to a programming language or a framework or methodology like OOP/FP will do more harm than good in the long run. Try to be pragmatic and use technology as it was intended, as a tool in your tool belt. Change is the only constant and it fits the IT industry better than others. Languages will die out, Frameworks and methodologies will come and go but the Industry will remain and anyone who is not capable of adapting to the changes may not fare well so be smart and let go of things that are dying out and learn what seems like the future.
 
-## 2. Avoid being a fanboy
+## 2. Avoid being a fanboy/fangirl
 
-Throughout your career, you will encounter technology that is amazing and you will fall in love with some of them. That is perfectly fine but avoid being a fanboy and be ready to recognize something better might replace it in the future and when it does accept and move on. Trying to cling on to what you love blindly is not gonna do anyone any good. I still see fanboys of a dying language or framework making the effort to discredit the newer ones on the block, please don't be like them its counterproductive to you and the industry.
+Throughout your career, you will encounter technology that is amazing and you will fall in love with some of them. That is perfectly fine but avoid being a fanboy/fangirl and be ready to recognize something better might replace it in the future and when it does accept and move on. Trying to cling on to what you love blindly is not gonna do anyone any good. I still see fanboys of a dying language or framework making the effort to discredit the newer ones on the block, please don't be like them its counterproductive to you and the industry.
 
 ## 3. Learn the basics of programming and become a polyglot developer
 
@@ -58,7 +58,7 @@ Never discount the importance of writing good comments, documentation, and tests
 
 > There is always a better way to do something and someone smarter to figure it out
 
-I used to spend a lot of time polishing my code and rewriting stuff to make it perfect, but over years I started realizing that there is nothing called perfect code, there is always a better way to do something and there is always someone smarter than you who will figure it out. I lost count of times when someone has suggested better solutions to code that I thought was perfect. Hence solve the problem at hand and avoid premature optimizations and over-engineering. One good thing about our industry is that the source code is ever-evolving and there is always tomorrow to improve it if needed. I still polish my code when I feel something can be improved but I do not obsess about it or lose my sleep over it. I first get the problem solved and then if there is spare time and if an improvement helps to simplify the code or increase performance I do it. But mostly its when the polish makes code simpler.
+I used to spend a lot of time polishing my code and rewriting stuff to make it perfect, but over years I started realizing that there is nothing called perfect code, there is always a better way to do something and there is always someone smarter than you who will figure it out. I lost count of times when someone has suggested better solutions to code that I thought was perfect. Hence solve the problem at hand and avoid premature optimizations and over-engineering. One good thing about our industry is that the source code is ever-evolving and there is always tomorrow to improve it if needed. Don't get me wrong, I'm not saying you should write sub-par code, when I say solve the problem at hand, I mean writing code that solves the issue along with all edge cases that could be thrown at it and code that is secure and with acceptable performance. I still polish my code when I feel something can be improved but I do not obsess about it or lose my sleep over it. I first get the problem solved and then if there is spare time and if an improvement helps to simplify the code or increase performance I do it. But mostly its when the polish makes code simpler.
 
 ## 7. Don't fall for trends
 
@@ -80,5 +80,4 @@ If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
-Cover image credit: Photo by [Martin Katler](https://unsplash.com/@martinkatler?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/programmers-desk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyTex)
-
+Cover image credit: Photo by [Martin Katler](https://unsplash.com/@martinkatler?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/programmers-desk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyTex)
