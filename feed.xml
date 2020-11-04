@@ -5,9 +5,9 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 02 Oct 2020 13:39:38 +0200</pubDate>
-    <lastBuildDate>Fri, 02 Oct 2020 13:39:38 +0200</lastBuildDate>
-    <generator>Jekyll v2.0.0</generator>
+    <pubDate>Wed, 04 Nov 2020 13:39:27 +0100</pubDate>
+    <lastBuildDate>Wed, 04 Nov 2020 13:39:27 +0100</lastBuildDate>
+    <generator>Jekyll v4.1.1</generator>
     
       <item>
         <title>8 important things I learned as a software developer over a decade.</title>
@@ -159,7 +159,7 @@ Most of the IT companies, including &lt;a href=&quot;http://they.whiteboarded.me
 
 &lt;p&gt;Most of us never work under such pressure and performance anxiety in real life (I’m only talking about the case of someone watching over your shoulder and judging you) you might be under unrelated anxiety and pressure and those are the times we won’t be able to do our work properly and we might take sick days and stuff, so what is the point of expecting someone to perform these tasks under pressure for a job.&lt;/p&gt;
 
-&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;An engineer is a problem solver not a fact memorizer. This is why I like coding assignments rather then whiteboarding.  &lt;a href=&quot;https://t.co/Z3KU1CWSNj&quot;&gt;https://t.co/Z3KU1CWSNj&lt;/a&gt;&lt;/p&gt;&amp;mdash; Deepu K Sasidharan ( ദീപു, தீபு, दीपू ) #BLM (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1167878288762519556?ref_src=twsrc%5Etfw&quot;&gt;August 31, 2019&lt;/a&gt;&lt;/blockquote&gt;
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;An engineer is a problem solver not a fact memorizer. This is why I like coding assignments rather then whiteboarding.  &lt;a href=&quot;https://t.co/Z3KU1CWSNj&quot;&gt;https://t.co/Z3KU1CWSNj&lt;/a&gt;&lt;/p&gt;&amp;mdash; Deepu K Sasidharan ( ദീപു, தீபு, दीपू ) (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1167878288762519556?ref_src=twsrc%5Etfw&quot;&gt;August 31, 2019&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
 &lt;/div&gt;
 
@@ -296,7 +296,7 @@ Most of the IT companies, including &lt;a href=&quot;http://they.whiteboarded.me
 
 &lt;ul&gt;
   &lt;li&gt;Stick to simple constructs as much as possible. Write clean code. Use advanced language features only when required. What matters is you solve the problem at hand simply and understandably without sacrificing efficiency or causing bugs.&lt;/li&gt;
-  &lt;li&gt;Don’t fall into the paradigm trap, for example, do not try to go full functional on an OOP or imperative language. Use what gets the job done, remember, unlike what some people might say, there is no problem with doing OOP or imperative code. Most of the time a simple &lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt; loop is better than recursion.&lt;/li&gt;
+  &lt;li&gt;Don’t fall into the paradigm trap, for example, do not try to go full functional on an OOP or imperative language. Use what gets the job done, remember, unlike what some people might say, there is no problem with doing OOP or imperative code. Most of the time a simple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;for&lt;/code&gt; loop is better than recursion.&lt;/li&gt;
   &lt;li&gt;Choose the appropriate language for the situation. Don’t pick a language for a problem because it’s cool, pick based on the use -case, team composition, maintenance requirement, and business needs. Don’t impose a language on others in the team.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -617,7 +617,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 &lt;p&gt;This is where all dynamic data(any data for which size cannot be calculated at compile time) is stored. This is the biggest block of memory and the part managed by Rust’s Ownership model.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Box&lt;/strong&gt;: The &lt;a href=&quot;https://doc.rust-lang.org/stable/rust-by-example/std/box.html&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Box&lt;/code&gt;&lt;/a&gt; type is an abstraction for a heap-allocated value in Rust. Heap memory is allocated when &lt;code class=&quot;highlighter-rouge&quot;&gt;Box::new&lt;/code&gt; is called. A &lt;code class=&quot;highlighter-rouge&quot;&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; holds the smart-pointer to the heap memory allocated for type &lt;code class=&quot;highlighter-rouge&quot;&gt;T&lt;/code&gt; and the reference is saved on the Stack.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Box&lt;/strong&gt;: The &lt;a href=&quot;https://doc.rust-lang.org/stable/rust-by-example/std/box.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Box&lt;/code&gt;&lt;/a&gt; type is an abstraction for a heap-allocated value in Rust. Heap memory is allocated when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Box::new&lt;/code&gt; is called. A &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; holds the smart-pointer to the heap memory allocated for type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;T&lt;/code&gt; and the reference is saved on the Stack.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;stack&quot;&gt;Stack&lt;/h2&gt;
@@ -680,7 +680,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 
 &lt;span class=&quot;c&quot;&gt;// salary is borrowed&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_bonus_percentage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i32&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;percentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BONUS_PERCENTAGE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;percentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BONUS_PERCENTAGE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;percentage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
@@ -710,7 +710,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 
 &lt;ol&gt;
   &lt;li&gt;When the size of the value is unknown, i.e Structs like String which grows in size over time or any other dynamic value&lt;/li&gt;
-  &lt;li&gt;When you manually create a &lt;code class=&quot;highlighter-rouge&quot;&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; value like &lt;code class=&quot;highlighter-rouge&quot;&gt;Box::new(&quot;Hello&quot;)&lt;/code&gt;. A box is a smart pointer to a heap-allocated value of type T. When a box goes out of scope, its destructor is called, the inner object is destroyed, and the memory on the Heap is freed.&lt;/li&gt;
+  &lt;li&gt;When you manually create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Box&amp;lt;T&amp;gt;&lt;/code&gt; value like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Box::new(&quot;Hello&quot;)&lt;/code&gt;. A box is a smart pointer to a heap-allocated value of type T. When a box goes out of scope, its destructor is called, the inner object is destroyed, and the memory on the Heap is freed.&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;In both exception cases, the value will be allocated on Heap and its pointer will live on the Stack.&lt;/p&gt;
@@ -758,7 +758,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
   &lt;li&gt;When the owner goes out of scope the value will be dropped freeing the memory&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;The rules are applicable regardless of the value being in Stack or Heap memory. For example, in the below example the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt; is dropped as soon as the method execution completes and the value of &lt;code class=&quot;highlighter-rouge&quot;&gt;bar&lt;/code&gt; is dropped right after the block execution.&lt;/p&gt;
+&lt;p&gt;The rules are applicable regardless of the value being in Stack or Heap memory. For example, in the below example the value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo&lt;/code&gt; is dropped as soon as the method execution completes and the value of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bar&lt;/code&gt; is dropped right after the block execution.&lt;/p&gt;
 
 &lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -790,7 +790,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 
 &lt;p&gt;These rules are checked by the compiler at compile-time and the freeing of memory happens at runtime along with program execution and hence there is no additional overhead or pause times here. So by scoping variables carefully, we can make sure the memory usage is optimized and that is also why Rust lets you use block scope almost everywhere. This might sound simple but in practice, this concept has deep implications in how you write Rust programs and it takes some getting used to. The Rust compiler does a great job of helping you along the way as well.&lt;/p&gt;
 
-&lt;p&gt;Due to the strict ownership rules, Rust lets you change the ownership from one variable to another and is called a &lt;code class=&quot;highlighter-rouge&quot;&gt;move&lt;/code&gt;. This is automatically done when passing a variable into a function or when creating a new assignment. For static primitives, a copy is used instead of move.&lt;/p&gt;
+&lt;p&gt;Due to the strict ownership rules, Rust lets you change the ownership from one variable to another and is called a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;move&lt;/code&gt;. This is automatically done when passing a variable into a function or when creating a new assignment. For static primitives, a copy is used instead of move.&lt;/p&gt;
 
 &lt;p&gt;There are a few more concepts related to memory management that play along with Ownership to make it effective&lt;/p&gt;
 
@@ -932,7 +932,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 
 &lt;h2 id=&quot;smart-pointers&quot;&gt;Smart pointers&lt;/h2&gt;
 
-&lt;p&gt;Pointers are nothing but a reference to a memory address on the Heap. Rust has support for pointers and lets us reference and dereference them using &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;*&lt;/code&gt; operators. &lt;a href=&quot;https://doc.rust-lang.org/book/ch15-00-smart-pointers.html?highlight=smart#smart-pointers&quot;&gt;Smart pointers&lt;/a&gt; in Rust are like pointers but with additional metadata capabilities. Like RAII this is another concept taken from C++. Unlike pointers which are references that only borrow data, smart pointers own the data they point to. &lt;code class=&quot;highlighter-rouge&quot;&gt;Box&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;String&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;Vec&lt;/code&gt; are examples of smart pointers in Rust. You can also write your own smart pointers using structs.&lt;/p&gt;
+&lt;p&gt;Pointers are nothing but a reference to a memory address on the Heap. Rust has support for pointers and lets us reference and dereference them using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;amp;&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;*&lt;/code&gt; operators. &lt;a href=&quot;https://doc.rust-lang.org/book/ch15-00-smart-pointers.html?highlight=smart#smart-pointers&quot;&gt;Smart pointers&lt;/a&gt; in Rust are like pointers but with additional metadata capabilities. Like RAII this is another concept taken from C++. Unlike pointers which are references that only borrow data, smart pointers own the data they point to. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Box&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;String&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Vec&lt;/code&gt; are examples of smart pointers in Rust. You can also write your own smart pointers using structs.&lt;/p&gt;
 
 &lt;h1 id=&quot;ownership-visualization&quot;&gt;Ownership visualization&lt;/h1&gt;
 
@@ -1041,15 +1041,15 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
   &lt;li&gt;Supports only ES modules. Modules are cached globally and are immutable&lt;/li&gt;
   &lt;li&gt;Built-in tooling (format, lint, test, bundle and so on)&lt;/li&gt;
   &lt;li&gt;Deno applications can be browser compatible&lt;/li&gt;
-  &lt;li&gt;Promise based API(&lt;code class=&quot;highlighter-rouge&quot;&gt;async/await&lt;/code&gt; supported) and no callback hell&lt;/li&gt;
-  &lt;li&gt;Top-level &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt; support&lt;/li&gt;
+  &lt;li&gt;Promise based API(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;async/await&lt;/code&gt; supported) and no callback hell&lt;/li&gt;
+  &lt;li&gt;Top-level &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;await&lt;/code&gt; support&lt;/li&gt;
   &lt;li&gt;Sub-process using web workers&lt;/li&gt;
   &lt;li&gt;WebAssembly support&lt;/li&gt;
   &lt;li&gt;Lightweight multi-platform executable(~10MB)&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Deno does not use NPM for dependency management and hence there is no &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; hell to deal with, which IMO is a huge selling point&lt;/p&gt;
+  &lt;p&gt;Deno does not use NPM for dependency management and hence there is no &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; hell to deal with, which IMO is a huge selling point&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/0FWtns5.jpg&quot; alt=&quot;shut up and take my money&quot; /&gt;&lt;/p&gt;
@@ -1063,14 +1063,14 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 3
 4
 5
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Hello, &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;person&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;John&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Save this to &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.ts&lt;/code&gt; file and execute &lt;code class=&quot;highlighter-rouge&quot;&gt;deno hello.ts&lt;/code&gt;. You will see Deno compiles the file and executes it.&lt;/p&gt;
+&lt;p&gt;Save this to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hello.ts&lt;/code&gt; file and execute &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno hello.ts&lt;/code&gt;. You will see Deno compiles the file and executes it.&lt;/p&gt;
 
 &lt;p&gt;Deno supports the latest version of TypeScript and keeps the support up to date.&lt;/p&gt;
 
@@ -1098,7 +1098,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 
 &lt;p&gt;The available flags are:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -1117,7 +1117,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Please note that flags must be passed before the filename like &lt;code class=&quot;highlighter-rouge&quot;&gt;deno -A file.ts&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;deno run -A file.ts&lt;/code&gt;. Anything passed after the filename will be considered as program arguments.&lt;/p&gt;
+  &lt;p&gt;Please note that flags must be passed before the filename like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno -A file.ts&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno run -A file.ts&lt;/code&gt;. Anything passed after the filename will be considered as program arguments.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Let us see an example that creates a local HTTP server:&lt;/p&gt;
@@ -1140,7 +1140,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 
 &lt;p&gt;The snippet tries to use the network and hence when you run the program with Deno it will fail with an error&lt;/p&gt;
 
-&lt;p&gt;To avoid the error we need to pass the &lt;code class=&quot;highlighter-rouge&quot;&gt;--allow-net&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;--allow-all&lt;/code&gt; flag when running the program. You can also grant access to specific ports and domains as well using a whitelist. For example &lt;code class=&quot;highlighter-rouge&quot;&gt;deno --allow-net=:8000 security.ts&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;To avoid the error we need to pass the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-net&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--allow-all&lt;/code&gt; flag when running the program. You can also grant access to specific ports and domains as well using a whitelist. For example &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno --allow-net=:8000 security.ts&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/nVgPoIl.png&quot; alt=&quot;deno security no prompt&quot; /&gt;&lt;/p&gt;
 
@@ -1149,23 +1149,23 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;p&gt;Deno provides &lt;a href=&quot;https://deno.land/std/&quot;&gt;standard modules&lt;/a&gt; like NodeJS, Go or Rust. The list is growing as newer versions are released. Currently available modules are:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;archive&lt;/code&gt; - TAR archive handling&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;colors&lt;/code&gt; - ANSI colors on console&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;datetime&lt;/code&gt; - Datetime parse utilities&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;encoding&lt;/code&gt; - Encode/Decode CSV, YAML, HEX, Base32 &amp;amp; TOML&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;flags&lt;/code&gt; - CLI argument parser&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;fs&lt;/code&gt; - Filesystem API&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;http&lt;/code&gt; - HTTP server framework&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;log&lt;/code&gt; - Logging framework&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;media_types&lt;/code&gt; - Resolve media types&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;prettier&lt;/code&gt; - Prettier formatting API&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;strings&lt;/code&gt; - String utils&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;testing&lt;/code&gt; - Testing utils&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;uuid&lt;/code&gt; - UUID support&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ws&lt;/code&gt; - Websocket client/server&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;archive&lt;/code&gt; - TAR archive handling&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;colors&lt;/code&gt; - ANSI colors on console&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;datetime&lt;/code&gt; - Datetime parse utilities&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;encoding&lt;/code&gt; - Encode/Decode CSV, YAML, HEX, Base32 &amp;amp; TOML&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;flags&lt;/code&gt; - CLI argument parser&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fs&lt;/code&gt; - Filesystem API&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; - HTTP server framework&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;log&lt;/code&gt; - Logging framework&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;media_types&lt;/code&gt; - Resolve media types&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prettier&lt;/code&gt; - Prettier formatting API&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;strings&lt;/code&gt; - String utils&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;testing&lt;/code&gt; - Testing utils&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;uuid&lt;/code&gt; - UUID support&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ws&lt;/code&gt; - Websocket client/server&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;The standard modules are available under &lt;code class=&quot;highlighter-rouge&quot;&gt;https://deno.land/std&lt;/code&gt; namespace and are tagged in accordance with Deno releases.&lt;/p&gt;
+&lt;p&gt;The standard modules are available under &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://deno.land/std&lt;/code&gt; namespace and are tagged in accordance with Deno releases.&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;green&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;https://deno.land/std/fmt/colors.ts&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -1176,11 +1176,11 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;p&gt;Deno supports only &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules&quot;&gt;ES Modules&lt;/a&gt; using a remote or local URL. This keeps dependency management simple and light. Unlike NodeJS, Deno doesn’t try to be too smart here, which means:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;require()&lt;/code&gt; is not supported, so no confusion with import syntax&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;require()&lt;/code&gt; is not supported, so no confusion with import syntax&lt;/li&gt;
   &lt;li&gt;No “magical” module resolution&lt;/li&gt;
   &lt;li&gt;Third-party modules are imported by URL(Local and remote)&lt;/li&gt;
   &lt;li&gt;Remote code is fetched only once and cached globally for later use&lt;/li&gt;
-  &lt;li&gt;Remote code is considered immutable and never updated unless &lt;code class=&quot;highlighter-rouge&quot;&gt;--reload&lt;/code&gt; flag is used&lt;/li&gt;
+  &lt;li&gt;Remote code is considered immutable and never updated unless &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--reload&lt;/code&gt; flag is used&lt;/li&gt;
   &lt;li&gt;Dynamic imports are supported&lt;/li&gt;
   &lt;li&gt;Supports &lt;a href=&quot;https://deno.land/std/manual.md#import-maps&quot;&gt;import maps&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Third-party modules are available in &lt;a href=&quot;https://deno.land/x/&quot;&gt;https://deno.land/x/&lt;/a&gt;&lt;/li&gt;
@@ -1233,10 +1233,10 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 6
 7
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-    &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;imports&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://deno.land/std/http/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;fmt/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://raw.githubusercontent.com/denoland/deno/master/std/fmt/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
-        &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;lodash/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://unpkg.com/lodash-es@4.17.15/&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;imports&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;http/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://deno.land/std/http/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;fmt/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://raw.githubusercontent.com/denoland/deno/master/std/fmt/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;&quot;lodash/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;https://unpkg.com/lodash-es@4.17.15/&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
     &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
 &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1277,31 +1277,31 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Run this with the &lt;code class=&quot;highlighter-rouge&quot;&gt;--importmap&lt;/code&gt; flag &lt;code class=&quot;highlighter-rouge&quot;&gt;deno --allow-net=:8000 --importmap import-map.json server.ts&lt;/code&gt;. Please note that the flags should be before the filename. Now you can access &lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:8000&lt;/code&gt; to verify this.&lt;/p&gt;
+&lt;p&gt;Run this with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--importmap&lt;/code&gt; flag &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno --allow-net=:8000 --importmap import-map.json server.ts&lt;/code&gt;. Please note that the flags should be before the filename. Now you can access &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:8000&lt;/code&gt; to verify this.&lt;/p&gt;
 
 &lt;h2 id=&quot;built-in-tooling&quot;&gt;Built-in tooling&lt;/h2&gt;
 
 &lt;p&gt;Deno takes inspiration from Rust and Golang to provide built-in tooling, this IMO is great as it helps you get started without having to worry about setting up testing, linting and bundling frameworks. The below are tools currently available/planned&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Dependency inspector (&lt;code class=&quot;highlighter-rouge&quot;&gt;deno info&lt;/code&gt;): Provides information about cache and source files&lt;/li&gt;
-  &lt;li&gt;Bundler (&lt;code class=&quot;highlighter-rouge&quot;&gt;deno bundle&lt;/code&gt;): Bundle module and dependencies into a single JavaScript file&lt;/li&gt;
-  &lt;li&gt;Installer (&lt;code class=&quot;highlighter-rouge&quot;&gt;deno install&lt;/code&gt;): Install a Deno module globally, the equivalent of &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/denoland/deno/tree/master/std/testing&quot;&gt;Test runner&lt;/a&gt; (&lt;code class=&quot;highlighter-rouge&quot;&gt;deno test&lt;/code&gt;): Run tests using the Deno built-in test framework&lt;/li&gt;
-  &lt;li&gt;Type info (&lt;code class=&quot;highlighter-rouge&quot;&gt;deno types&lt;/code&gt;): Get the Deno TypeScript API reference&lt;/li&gt;
-  &lt;li&gt;Code formatter (&lt;code class=&quot;highlighter-rouge&quot;&gt;deno fmt&lt;/code&gt;): Format source code using Prettier&lt;/li&gt;
-  &lt;li&gt;Linter (planned) (&lt;code class=&quot;highlighter-rouge&quot;&gt;deno lint&lt;/code&gt;): Linting support for source code&lt;/li&gt;
-  &lt;li&gt;Debugger (planned) (&lt;code class=&quot;highlighter-rouge&quot;&gt;--debug&lt;/code&gt;): Debug support for Chrome Dev tools&lt;/li&gt;
+  &lt;li&gt;Dependency inspector (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno info&lt;/code&gt;): Provides information about cache and source files&lt;/li&gt;
+  &lt;li&gt;Bundler (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno bundle&lt;/code&gt;): Bundle module and dependencies into a single JavaScript file&lt;/li&gt;
+  &lt;li&gt;Installer (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno install&lt;/code&gt;): Install a Deno module globally, the equivalent of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;npm install&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/denoland/deno/tree/master/std/testing&quot;&gt;Test runner&lt;/a&gt; (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno test&lt;/code&gt;): Run tests using the Deno built-in test framework&lt;/li&gt;
+  &lt;li&gt;Type info (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno types&lt;/code&gt;): Get the Deno TypeScript API reference&lt;/li&gt;
+  &lt;li&gt;Code formatter (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno fmt&lt;/code&gt;): Format source code using Prettier&lt;/li&gt;
+  &lt;li&gt;Linter (planned) (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno lint&lt;/code&gt;): Linting support for source code&lt;/li&gt;
+  &lt;li&gt;Debugger (planned) (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--debug&lt;/code&gt;): Debug support for Chrome Dev tools&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;For example, with Deno, you can write test cases easily using provided utilities&lt;/p&gt;
 
-&lt;p&gt;Let’s say we have &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial.ts&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Let’s say we have &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;factorial.ts&lt;/code&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1338,12 +1338,12 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 
 &lt;ul&gt;
   &lt;li&gt;The program must are written completely in JavaScript and should not use the global Deno APIs&lt;/li&gt;
-  &lt;li&gt;If the program is written in Typescript, it must be bundled as JavaScript using &lt;code class=&quot;highlighter-rouge&quot;&gt;deno bundle&lt;/code&gt; and should not use the global Deno APIs&lt;/li&gt;
+  &lt;li&gt;If the program is written in Typescript, it must be bundled as JavaScript using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno bundle&lt;/code&gt; and should not use the global Deno APIs&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;For browser compatibility Deno also supports &lt;code class=&quot;highlighter-rouge&quot;&gt;window.load&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;window.unload&lt;/code&gt; events. &lt;code class=&quot;highlighter-rouge&quot;&gt;load&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;unload&lt;/code&gt; events can be used with &lt;code class=&quot;highlighter-rouge&quot;&gt;window.addEventListener&lt;/code&gt; as well.&lt;/p&gt;
+&lt;p&gt;For browser compatibility Deno also supports &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;window.load&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;window.unload&lt;/code&gt; events. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;load&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unload&lt;/code&gt; events can be used with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;window.addEventListener&lt;/code&gt; as well.&lt;/p&gt;
 
-&lt;p&gt;Let us see below sample, this can be run using &lt;code class=&quot;highlighter-rouge&quot;&gt;deno run&lt;/code&gt; or we can package it and execute in a browser&lt;/p&gt;
+&lt;p&gt;Let us see below sample, this can be run using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno run&lt;/code&gt; or we can package it and execute in a browser&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -1365,7 +1365,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;We can package this using &lt;code class=&quot;highlighter-rouge&quot;&gt;deno bundle example.ts browser_compatibility.js&lt;/code&gt; and use the &lt;code class=&quot;highlighter-rouge&quot;&gt;browser_compatibility.js&lt;/code&gt; in an HTML file and load it in a browser. Try it out and look at the browser console.&lt;/p&gt;
+&lt;p&gt;We can package this using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno bundle example.ts browser_compatibility.js&lt;/code&gt; and use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;browser_compatibility.js&lt;/code&gt; in an HTML file and load it in a browser. Try it out and look at the browser console.&lt;/p&gt;
 
 &lt;h2 id=&quot;promise-api&quot;&gt;Promise API&lt;/h2&gt;
 
@@ -1403,11 +1403,11 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;deno -A example.ts&lt;/code&gt; to see it in action, don’t forget to create the &lt;code class=&quot;highlighter-rouge&quot;&gt;dummyFile.txt&lt;/code&gt; with some content&lt;/p&gt;
+&lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno -A example.ts&lt;/code&gt; to see it in action, don’t forget to create the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dummyFile.txt&lt;/code&gt; with some content&lt;/p&gt;
 
-&lt;h2 id=&quot;top-level-await&quot;&gt;Top-level &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;top-level-await&quot;&gt;Top-level &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;await&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;The above code still uses a callback, what if we can use &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt; for that as well, luckily Deno has support for the &lt;a href=&quot;https://github.com/tc39/proposal-top-level-await&quot;&gt;top-level &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt;&lt;/a&gt; proposal(Not supported by TypeScript yet). With this, we can rewrite the above&lt;/p&gt;
+&lt;p&gt;The above code still uses a callback, what if we can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;await&lt;/code&gt; for that as well, luckily Deno has support for the &lt;a href=&quot;https://github.com/tc39/proposal-top-level-await&quot;&gt;top-level &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;await&lt;/code&gt;&lt;/a&gt; proposal(Not supported by TypeScript yet). With this, we can rewrite the above&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -1425,11 +1425,11 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;span class=&quot;nx&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Isn’t that neat? Run it as &lt;code class=&quot;highlighter-rouge&quot;&gt;deno -A example.ts dummyFile.txt&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Isn’t that neat? Run it as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno -A example.ts dummyFile.txt&lt;/code&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;subprocess-using-web-workers&quot;&gt;Subprocess using web workers&lt;/h2&gt;
 
-&lt;p&gt;Since Deno uses the V8 engine which is single-threaded, we have to use a sub-process like in NodeJS to spawn new threads(V8 instance). This is done using service workers in Deno. Here is an example, we are importing the code we used in the top-level &lt;code class=&quot;highlighter-rouge&quot;&gt;await&lt;/code&gt; example in the subprocess here.&lt;/p&gt;
+&lt;p&gt;Since Deno uses the V8 engine which is single-threaded, we have to use a sub-process like in NodeJS to spawn new threads(V8 instance). This is done using service workers in Deno. Here is an example, we are importing the code we used in the top-level &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;await&lt;/code&gt; example in the subprocess here.&lt;/p&gt;
 
 &lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -1475,7 +1475,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 
 &lt;p&gt;&lt;a href=&quot;https://webassembly.org/&quot;&gt;WebAssembly&lt;/a&gt; is one of the most innovative features to have landed on the JavaScript world. It lets us use programs written in any compatible language to be executed in a JS Engine. Deno has native support for WebAssembly. Let us see an example.&lt;/p&gt;
 
-&lt;p&gt;First, we need a WebAssembly(WASM) binary. Since we are focusing on Deno here, let’s use a simple C program. You can also use Rust, Go or any other &lt;a href=&quot;https://github.com/appcypher/awesome-wasm-langs&quot;&gt;supported language&lt;/a&gt;. In the end, you just need to provide a compiled &lt;code class=&quot;highlighter-rouge&quot;&gt;.wasm&lt;/code&gt; binary file.&lt;/p&gt;
+&lt;p&gt;First, we need a WebAssembly(WASM) binary. Since we are focusing on Deno here, let’s use a simple C program. You can also use Rust, Go or any other &lt;a href=&quot;https://github.com/appcypher/awesome-wasm-langs&quot;&gt;supported language&lt;/a&gt;. In the end, you just need to provide a compiled &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.wasm&lt;/code&gt; binary file.&lt;/p&gt;
 
 &lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -1501,7 +1501,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;deno -A example.ts&lt;/code&gt; and see the output from the C program.&lt;/p&gt;
+&lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno -A example.ts&lt;/code&gt; and see the output from the C program.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1510,7 +1510,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;p&gt;Now that we have an overview of Deno features, let’s build a Deno CLI app&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;deno --help&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;deno run --help&lt;/code&gt; to see all options that can be passed when you run a program. You can learn more about Deno features and API in the Deno &lt;a href=&quot;https://deno.land/&quot;&gt;website&lt;/a&gt; and &lt;a href=&quot;https://deno.land/std/manual.md&quot;&gt;manual&lt;/a&gt;&lt;/p&gt;
+  &lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno --help&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno run --help&lt;/code&gt; to see all options that can be passed when you run a program. You can learn more about Deno features and API in the Deno &lt;a href=&quot;https://deno.land/&quot;&gt;website&lt;/a&gt; and &lt;a href=&quot;https://deno.land/std/manual.md&quot;&gt;manual&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Let’s build a simple proxy server that can be installed as a CLI tool. This is a really simple proxy, but you can add more features to make it smarter if you like&lt;/p&gt;
@@ -1550,12 +1550,12 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;info&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;proxy server created!&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
 
 &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`Proxy listening on http://localhost:8000/ for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;green&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Proxy listening on http://localhost:8000/ for &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
         &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;reqUrl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`URL requested: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reqUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;yellow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;URL requested: &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reqUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
 
         &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;reqUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
         &lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;respond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -1563,7 +1563,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;span class=&quot;p&quot;&gt;})();&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;deno --allow-net deno_app.ts https://google.com&lt;/code&gt; and visit &lt;a href=&quot;http://localhost:8000/&quot;&gt;http://localhost:8000/&lt;/a&gt;. You can now see all the traffic on your console. You can use any URL you like instead of Google.&lt;/p&gt;
+&lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno --allow-net deno_app.ts https://google.com&lt;/code&gt; and visit &lt;a href=&quot;http://localhost:8000/&quot;&gt;http://localhost:8000/&lt;/a&gt;. You can now see all the traffic on your console. You can use any URL you like instead of Google.&lt;/p&gt;
 
 &lt;p&gt;Lets package and install the app.&lt;/p&gt;
 
@@ -1571,9 +1571,9 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;deno &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--allow-net&lt;/span&gt; my-proxy deno_app.ts
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;If you want to override the file use &lt;code class=&quot;highlighter-rouge&quot;&gt;deno install -f --allow-net my-proxy deno_app.ts&lt;/code&gt;. You can also publish the script to an HTTP URL and install it from there.&lt;/p&gt;
+&lt;p&gt;If you want to override the file use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deno install -f --allow-net my-proxy deno_app.ts&lt;/code&gt;. You can also publish the script to an HTTP URL and install it from there.&lt;/p&gt;
 
-&lt;p&gt;Now just run &lt;code class=&quot;highlighter-rouge&quot;&gt;my-proxy https://google.com&lt;/code&gt; and viola we have our own proxy app. Isn’t that simple and neat.&lt;/p&gt;
+&lt;p&gt;Now just run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;my-proxy https://google.com&lt;/code&gt; and viola we have our own proxy app. Isn’t that simple and neat.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1589,8 +1589,8 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
   &lt;li&gt;Easy to install - Single lightweight binary, built-in dependency management&lt;/li&gt;
   &lt;li&gt;Secure by default - Sandboxed, Fine-grained privileges and user-controlled&lt;/li&gt;
   &lt;li&gt;Simple ES module resolution - No smart(confusing) module system like NodeJS&lt;/li&gt;
-  &lt;li&gt;Decentralized and globally cached third-party modules - No &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; hell, efficient&lt;/li&gt;
-  &lt;li&gt;No dependency on package managers or package registries(No NPM, No Yarn, No &lt;code class=&quot;highlighter-rouge&quot;&gt;node_modules&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;Decentralized and globally cached third-party modules - No &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node_modules&lt;/code&gt; hell, efficient&lt;/li&gt;
+  &lt;li&gt;No dependency on package managers or package registries(No NPM, No Yarn, No &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node_modules&lt;/code&gt;)&lt;/li&gt;
   &lt;li&gt;Native TypeScript support&lt;/li&gt;
   &lt;li&gt;Follows web standards and modern language features&lt;/li&gt;
   &lt;li&gt;Browser compatibility - Ability to reuse modules in browser and Deno apps&lt;/li&gt;
@@ -1683,7 +1683,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;p&gt;First, let us see what the internal memory structure of Go is.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Go Runtime schedules Goroutines (&lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt;) onto Logical Processors (&lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;) for execution. Each &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt; has a machine (&lt;code class=&quot;highlighter-rouge&quot;&gt;M&lt;/code&gt;). We will use &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;M&lt;/code&gt; &amp;amp; &lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt; throughout this post. If you’re not familiar with the Go scheduler read &lt;a href=&quot;https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html&quot;&gt;Go scheduler: Ms, Ps &amp;amp; Gs&lt;/a&gt; first.&lt;/p&gt;
+  &lt;p&gt;Go Runtime schedules Goroutines (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt;) onto Logical Processors (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;) for execution. Each &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt; has a machine (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt;). We will use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt; &amp;amp; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt; throughout this post. If you’re not familiar with the Go scheduler read &lt;a href=&quot;https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html&quot;&gt;Go scheduler: Ms, Ps &amp;amp; Gs&lt;/a&gt; first.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/wThLAbQ.png&quot; alt=&quot;Go Scheduler&quot; /&gt;&lt;/p&gt;
@@ -1698,47 +1698,47 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 
 &lt;p&gt;Let us see what the different constructs are:&lt;/p&gt;
 
-&lt;h2 id=&quot;page-heapmheap&quot;&gt;Page Heap(&lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt;)&lt;/h2&gt;
+&lt;h2 id=&quot;page-heapmheap&quot;&gt;Page Heap(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;)&lt;/h2&gt;
 
 &lt;p&gt;This is where Go stores dynamic data(any data for which size cannot be calculated at compile time). This is the biggest block of memory and this is where &lt;strong&gt;Garbage Collection(GC)&lt;/strong&gt; takes place.&lt;/p&gt;
 
-&lt;p&gt;The resident set is divided into pages of 8KB each and is managed by one global &lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt; object.&lt;/p&gt;
+&lt;p&gt;The resident set is divided into pages of 8KB each and is managed by one global &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; object.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Large objects(Object of Size &amp;gt; 32kb) are allocated directly from &lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt;. These large requests come at an expense of central lock, so only one &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;’s request can be served at any given point of time.&lt;/p&gt;
+  &lt;p&gt;Large objects(Object of Size &amp;gt; 32kb) are allocated directly from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;. These large requests come at an expense of central lock, so only one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;’s request can be served at any given point of time.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt; manages pages grouped into different constructs as below:&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; manages pages grouped into different constructs as below:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;mspan&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;mspan&lt;/code&gt; is the most basic structure that manages the pages of memory in &lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt;. It’s a double linked list that holds the address of the start page, span size class and the number of pages in the span. Like TCMalloc, Go also divides Memory Pages into a block of 67 different classes by size starting at 8 bytes up to 32 kilobytes as in the below image&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;mspan&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt; is the most basic structure that manages the pages of memory in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;. It’s a double linked list that holds the address of the start page, span size class and the number of pages in the span. Like TCMalloc, Go also divides Memory Pages into a block of 67 different classes by size starting at 8 bytes up to 32 kilobytes as in the below image&lt;/p&gt;
 
     &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/IxjG2aF.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-    &lt;p&gt;Each span exists twice, one for objects with pointers (&lt;strong&gt;scan&lt;/strong&gt; classes) and one for objects with no pointers (&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;noscan&lt;/code&gt;&lt;/strong&gt; classes). This helps during GC as &lt;code class=&quot;highlighter-rouge&quot;&gt;noscan&lt;/code&gt; spans need not be traversed to look for live objects.&lt;/p&gt;
+    &lt;p&gt;Each span exists twice, one for objects with pointers (&lt;strong&gt;scan&lt;/strong&gt; classes) and one for objects with no pointers (&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt;&lt;/strong&gt; classes). This helps during GC as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt; spans need not be traversed to look for live objects.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;mcentral&lt;/strong&gt;: &lt;code class=&quot;highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; groups spans of same size class together. Each &lt;code class=&quot;highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; contains two &lt;code class=&quot;highlighter-rouge&quot;&gt;mspanList&lt;/code&gt;:&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;mcentral&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; groups spans of same size class together. Each &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; contains two &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspanList&lt;/code&gt;:&lt;/p&gt;
 
     &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;empty&lt;/strong&gt;: Double linked list of spans with no free objects or spans that are cached in a &lt;code class=&quot;highlighter-rouge&quot;&gt;mcache&lt;/code&gt;. When a span here is freed, it’s moved to the nonempty list.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;non-empty&lt;/strong&gt;: Double linked list of spans with a free object. When a new span is requested from &lt;code class=&quot;highlighter-rouge&quot;&gt;mcentral&lt;/code&gt;, it takes that from the nonempty list and moves it into the empty list.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;empty&lt;/strong&gt;: Double linked list of spans with no free objects or spans that are cached in a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt;. When a span here is freed, it’s moved to the nonempty list.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;non-empty&lt;/strong&gt;: Double linked list of spans with a free object. When a new span is requested from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt;, it takes that from the nonempty list and moves it into the empty list.&lt;/li&gt;
     &lt;/ul&gt;
 
-    &lt;p&gt;When &lt;code class=&quot;highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; doesn’t have any free span, it requests a new run of pages from &lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt;.&lt;/p&gt;
+    &lt;p&gt;When &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; doesn’t have any free span, it requests a new run of pages from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;arena&lt;/strong&gt;: The heap memory grows and shrinks as required within the virtual memory allocated. When more memory is needed, &lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt; pulls them from the virtual memory as a chunk of 64MB(for 64-bit architectures) called &lt;code class=&quot;highlighter-rouge&quot;&gt;arena&lt;/code&gt;. The pages are mapped to spans here.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;arena&lt;/strong&gt;: The heap memory grows and shrinks as required within the virtual memory allocated. When more memory is needed, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; pulls them from the virtual memory as a chunk of 64MB(for 64-bit architectures) called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arena&lt;/code&gt;. The pages are mapped to spans here.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;mcache&lt;/strong&gt;: This is a very interesting construct. &lt;code class=&quot;highlighter-rouge&quot;&gt;mcache&lt;/code&gt; is a cache of memory provided to a &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;(Logical Processor) to store small objects(Object size &amp;lt;=32Kb). Though this resembles the thread stack, it is part of the heap and is used for dynamic data. &lt;code class=&quot;highlighter-rouge&quot;&gt;mcache&lt;/code&gt; contains &lt;code class=&quot;highlighter-rouge&quot;&gt;scan&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;noscan&lt;/code&gt; types of &lt;code class=&quot;highlighter-rouge&quot;&gt;mspan&lt;/code&gt; for all class sizes. Goroutines can obtain memory from &lt;code class=&quot;highlighter-rouge&quot;&gt;mcache&lt;/code&gt; without any locks as a &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt; can have only one &lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt; at a time. Hence this is more efficient. &lt;code class=&quot;highlighter-rouge&quot;&gt;mcache&lt;/code&gt; requests new spans from &lt;code class=&quot;highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; when required.&lt;/p&gt;
+    &lt;p&gt;&lt;strong&gt;mcache&lt;/strong&gt;: This is a very interesting construct. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; is a cache of memory provided to a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;(Logical Processor) to store small objects(Object size &amp;lt;=32Kb). Though this resembles the thread stack, it is part of the heap and is used for dynamic data. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; contains &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scan&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt; types of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt; for all class sizes. Goroutines can obtain memory from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; without any locks as a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt; can have only one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt; at a time. Hence this is more efficient. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; requests new spans from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; when required.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;stack&quot;&gt;Stack&lt;/h2&gt;
 
-&lt;p&gt;This is the stack memory area and there is one stack per Goroutine(&lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt;). This is where static data including function frames, static structs, primitive values, and pointers to dynamic structs are stored. This is not same as &lt;code class=&quot;highlighter-rouge&quot;&gt;mcache&lt;/code&gt; which is assigned to a &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This is the stack memory area and there is one stack per Goroutine(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt;). This is where static data including function frames, static structs, primitive values, and pointers to dynamic structs are stored. This is not same as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; which is assigned to a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1809,9 +1809,9 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;One major difference Go has compared to many garbage collected languages is that many objects are allocated directly on the program stack. The Go compiler uses a process called &lt;a href=&quot;https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-escape-analysis.html&quot;&gt;escape analysis&lt;/a&gt; to find objects whose lifetime is known at compile-time and allocates them on the stack rather than in garbage-collected heap memory.
-During compilation Go does the escape analysis to determine what can go into Stack(static data) and what needs to go into Heap(dynamic data). We can see this details during compilation by running &lt;code class=&quot;highlighter-rouge&quot;&gt;go build&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;-gcflags '-m'&lt;/code&gt; flag. For the above code, it will output something like below:&lt;/p&gt;
+During compilation Go does the escape analysis to determine what can go into Stack(static data) and what needs to go into Heap(dynamic data). We can see this details during compilation by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go build&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-gcflags '-m'&lt;/code&gt; flag. For the above code, it will output something like below:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -1857,7 +1857,7 @@ temp/gc.go:28:13: main []interface {} literal does not escape
   &lt;li&gt;Every function call is added to the stack memory as a frame-block&lt;/li&gt;
   &lt;li&gt;All static variables including arguments and the return value is saved within the function frame-block on the Stack&lt;/li&gt;
   &lt;li&gt;All static values regardless of type are stored directly on the Stack. This applies to global scope as well&lt;/li&gt;
-  &lt;li&gt;All dynamic types created on the Heap and is referenced from the Stack using Stack pointers. Objects of size less than 32Kb go to the &lt;code class=&quot;highlighter-rouge&quot;&gt;mcache&lt;/code&gt; of the &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;. This applies to global scope as well&lt;/li&gt;
+  &lt;li&gt;All dynamic types created on the Heap and is referenced from the Stack using Stack pointers. Objects of size less than 32Kb go to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;. This applies to global scope as well&lt;/li&gt;
   &lt;li&gt;The struct with static data is kept on the stack until any dynamic value is added at that point the struct is moved to heap&lt;/li&gt;
   &lt;li&gt;Functions called from the current function is pushed on top of the Stack&lt;/li&gt;
   &lt;li&gt;When a function returns its frame is removed from the Stack&lt;/li&gt;
@@ -1874,21 +1874,21 @@ temp/gc.go:28:13: main []interface {} literal does not escape
 
 &lt;h2 id=&quot;memory-allocation&quot;&gt;Memory Allocation&lt;/h2&gt;
 
-&lt;p&gt;Many programming languages that employ Garbage collection uses a generational memory structure to make collection efficient along with compaction to reduce fragmentation. Go takes a different approach here, as we saw earlier, Go structures memory quite differently. Go employs a thread-local cache to speed up small object allocations and maintains &lt;code class=&quot;highlighter-rouge&quot;&gt;scan&lt;/code&gt;/&lt;code class=&quot;highlighter-rouge&quot;&gt;noscan&lt;/code&gt; spans to speed up GC. This structure along with the process avoids fragmentation to a great extent making compact unnecessary during GC. Let’s see how this allocation takes place.&lt;/p&gt;
+&lt;p&gt;Many programming languages that employ Garbage collection uses a generational memory structure to make collection efficient along with compaction to reduce fragmentation. Go takes a different approach here, as we saw earlier, Go structures memory quite differently. Go employs a thread-local cache to speed up small object allocations and maintains &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scan&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt; spans to speed up GC. This structure along with the process avoids fragmentation to a great extent making compact unnecessary during GC. Let’s see how this allocation takes place.&lt;/p&gt;
 
 &lt;p&gt;Go decides the allocation process of an object based on its size and is divided into three categories:&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Tiny(size &amp;lt; 16B)&lt;/strong&gt;: Objects of size less than 16 bytes are allocated using the &lt;code class=&quot;highlighter-rouge&quot;&gt;mcache&lt;/code&gt;’s tiny allocator. This is efficient and multiple tiny allocations are done on a single 16-byte block.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Tiny(size &amp;lt; 16B)&lt;/strong&gt;: Objects of size less than 16 bytes are allocated using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt;’s tiny allocator. This is efficient and multiple tiny allocations are done on a single 16-byte block.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/Kh26oVp.gif&quot; alt=&quot;Tiny allocation&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Small(size 16B ~ 32KB)&lt;/strong&gt;: Objects of size between 16 bytes and 32 Kilobytes are allocated on the corresponding size class(&lt;code class=&quot;highlighter-rouge&quot;&gt;mspan&lt;/code&gt;) on &lt;code class=&quot;highlighter-rouge&quot;&gt;mcache&lt;/code&gt; of the &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt; where the &lt;code class=&quot;highlighter-rouge&quot;&gt;G&lt;/code&gt; is running.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Small(size 16B ~ 32KB)&lt;/strong&gt;: Objects of size between 16 bytes and 32 Kilobytes are allocated on the corresponding size class(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt;) on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt; where the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt; is running.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/PY4pZhq.gif&quot; alt=&quot;Small allocation&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;In both tiny and small allocation if the &lt;code class=&quot;highlighter-rouge&quot;&gt;mspan&lt;/code&gt;’s list is empty the allocator will obtain a run of pages from the &lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt; to use for the &lt;code class=&quot;highlighter-rouge&quot;&gt;mspan&lt;/code&gt;. If the &lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt; is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.&lt;/p&gt;
+&lt;p&gt;In both tiny and small allocation if the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt;’s list is empty the allocator will obtain a run of pages from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; to use for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt;. If the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Large(size &amp;gt; 32KB)&lt;/strong&gt;: Objects of size greater than 32 kilobytes are allocated directly on the corresponding size class of &lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt;. If the &lt;code class=&quot;highlighter-rouge&quot;&gt;mheap&lt;/code&gt; is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Large(size &amp;gt; 32KB)&lt;/strong&gt;: Objects of size greater than 32 kilobytes are allocated directly on the corresponding size class of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;. If the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/uLhLZMm.gif&quot; alt=&quot;Large allocation&quot; /&gt;&lt;/p&gt;
 
@@ -1906,8 +1906,8 @@ temp/gc.go:28:13: main []interface {} literal does not escape
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Mark Setup&lt;/strong&gt; (Stop the world): When GC starts, the collector turns on &lt;strong&gt;&lt;a href=&quot;https://www.memorymanagement.org/glossary/w.html#term-write-barrier&quot;&gt;write barriers&lt;/a&gt;&lt;/strong&gt; so that data integrity can be maintained during the next concurrent phase. This step needs a very small pause as every running Goroutine is paused to enable this and then continues.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Marking&lt;/strong&gt; (Concurrent): Once write barriers are turned on the actual marking process is started in parallel to the application using 25% of the available CPU capacity. The corresponding &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;s are reserved until marking is complete. This is done using dedicated Goroutines. Here the GC marks values in the heap that is alive(referenced from the Stack of any active Goroutines). When collection takes longer the process may employ active Goroutine from application to assist in the marking process. this is called &lt;strong&gt;Mark Assist&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mark Termination&lt;/strong&gt; (Stop the world): Once marking is done every active Goroutine is paused and write barriers are turned off and clean up tasks are started. The GC also calculates the next GC goal here. Once this is done the reserved &lt;code class=&quot;highlighter-rouge&quot;&gt;P&lt;/code&gt;s are released back to the application.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Marking&lt;/strong&gt; (Concurrent): Once write barriers are turned on the actual marking process is started in parallel to the application using 25% of the available CPU capacity. The corresponding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;s are reserved until marking is complete. This is done using dedicated Goroutines. Here the GC marks values in the heap that is alive(referenced from the Stack of any active Goroutines). When collection takes longer the process may employ active Goroutine from application to assist in the marking process. this is called &lt;strong&gt;Mark Assist&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Mark Termination&lt;/strong&gt; (Stop the world): Once marking is done every active Goroutine is paused and write barriers are turned off and clean up tasks are started. The GC also calculates the next GC goal here. Once this is done the reserved &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;s are released back to the application.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Sweeping&lt;/strong&gt; (Concurrent): Once the collection is done and allocations are attempted, the sweeping process starts to reclaim memory from the heap that is not marked alive. The amount of memory swept is synchronous to the amount being allocated.&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -1927,14 +1927,14 @@ temp/gc.go:28:13: main []interface {} literal does not escape
 &lt;ol&gt;
   &lt;li&gt;We are looking at a single Goroutine, actual process does this for all active Goroutines. The write barriers are turned on first.&lt;/li&gt;
   &lt;li&gt;The marking process picks a GC root and colors it black and traverses pointers from it in a depth-first tree-like manner, it marks each object encountered grey&lt;/li&gt;
-  &lt;li&gt;When it reaches an object in a &lt;code class=&quot;highlighter-rouge&quot;&gt;noscan&lt;/code&gt; span or when an object has no more pointers it finishes for the root and picks up next GC root object&lt;/li&gt;
+  &lt;li&gt;When it reaches an object in a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt; span or when an object has no more pointers it finishes for the root and picks up next GC root object&lt;/li&gt;
   &lt;li&gt;Once all GC roots are scanned, it picks up a grey object and continues to traverse its pointers in similar fashion&lt;/li&gt;
   &lt;li&gt;If there are any pointer changes to an object when write barriers are on, the object gets colored grey so that GC re-scans it&lt;/li&gt;
   &lt;li&gt;When there are no more grey objects left the marking process is complete and write barrier is turned off&lt;/li&gt;
   &lt;li&gt;Sweeping will take place when allocations start&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;This has some stop-the-world process but it’s generally very fast that it is negligible most of the time. The coloring of objects takes place in the &lt;code class=&quot;highlighter-rouge&quot;&gt;gcmarkBits&lt;/code&gt; attribute on the span.&lt;/p&gt;
+&lt;p&gt;This has some stop-the-world process but it’s generally very fast that it is negligible most of the time. The coloring of objects takes place in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gcmarkBits&lt;/code&gt; attribute on the span.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -2040,7 +2040,7 @@ node &lt;span class=&quot;nt&quot;&gt;-v&lt;/span&gt;
 lli &lt;span class=&quot;nt&quot;&gt;--version&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The above will install GraalVM and set it up as &lt;code class=&quot;highlighter-rouge&quot;&gt;java&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;node&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;lli&lt;/code&gt; context. &lt;strong&gt;Please note&lt;/strong&gt;: If you start a new terminal session, you would have to run &lt;code class=&quot;highlighter-rouge&quot;&gt;sdk use java 19.3.1.r11-grl&lt;/code&gt; again.&lt;/p&gt;
+&lt;p&gt;The above will install GraalVM and set it up as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;node&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lli&lt;/code&gt; context. &lt;strong&gt;Please note&lt;/strong&gt;: If you start a new terminal session, you would have to run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sdk use java 19.3.1.r11-grl&lt;/code&gt; again.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;Install LLVM toolchain, Python and Ruby support&lt;/li&gt;
@@ -2073,7 +2073,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;p&gt;As a polyglot developer, GraalVM is quite interesting to me as I can use many languages I love together making use of the best parts from each. Let’s explore the polyglot capabilities offered by GraalVM, please note that support for Python, Ruby, R, and Rust are still in the experimental stage and hence your mileage may vary. We will build a program today using Java, JavaScript, Ruby, Rust, Python, and C++.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;I wanted to use Rust and Go as well. While Rust mostly works via the GraalVM &lt;code class=&quot;highlighter-rouge&quot;&gt;lli&lt;/code&gt; command line, it has a lot of limitations when embedded in polyglot mode. After a lot of fiddling around, I did manage to get it working. For Golang, it might be possible with &lt;a href=&quot;https://github.com/zegl/tre&quot;&gt;this&lt;/a&gt; Go LLVM compiler as shown &lt;a href=&quot;https://gist.github.com/eginez/d69e3e1c4045eb692a274bd2bd5d31d6&quot;&gt;here&lt;/a&gt;, but it’s having its own set of issues as well when I tried. So I have given up on Golang for now. Let me know if any of you got it working.&lt;/p&gt;
+  &lt;p&gt;I wanted to use Rust and Go as well. While Rust mostly works via the GraalVM &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;lli&lt;/code&gt; command line, it has a lot of limitations when embedded in polyglot mode. After a lot of fiddling around, I did manage to get it working. For Golang, it might be possible with &lt;a href=&quot;https://github.com/zegl/tre&quot;&gt;this&lt;/a&gt; Go LLVM compiler as shown &lt;a href=&quot;https://gist.github.com/eginez/d69e3e1c4045eb692a274bd2bd5d31d6&quot;&gt;here&lt;/a&gt;, but it’s having its own set of issues as well when I tried. So I have given up on Golang for now. Let me know if any of you got it working.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;We will have a simple(silly 😉) application written in Java that composes methods from different languages for each step from within Java&lt;/p&gt;
@@ -2091,7 +2091,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;h3 id=&quot;step-1-java&quot;&gt;Step 1: Java&lt;/h3&gt;
 
-&lt;p&gt;Let’s start with our Java wrapper program &lt;code class=&quot;highlighter-rouge&quot;&gt;Polyglot.java&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Let’s start with our Java wrapper program &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Polyglot.java&lt;/code&gt;&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2217,7 +2217,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;h3 id=&quot;step-2-python&quot;&gt;Step 2: Python&lt;/h3&gt;
 
-&lt;p&gt;We are executing the &lt;code class=&quot;highlighter-rouge&quot;&gt;getFibonacciNumbers&lt;/code&gt; function located in file &lt;code class=&quot;highlighter-rouge&quot;&gt;pythonpart.py&lt;/code&gt; and passing it our input array.&lt;/p&gt;
+&lt;p&gt;We are executing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getFibonacciNumbers&lt;/code&gt; function located in file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pythonpart.py&lt;/code&gt; and passing it our input array.&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2229,7 +2229,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fibNumbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getIntArrayFromValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getFibonacciNumbersFn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Let’s look at &lt;code class=&quot;highlighter-rouge&quot;&gt;pythonpart.py&lt;/code&gt;, it is a standard python program that takes an array and filters out the Fibonacci numbers from it and returns the resulting array.&lt;/p&gt;
+&lt;p&gt;Let’s look at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pythonpart.py&lt;/code&gt;, it is a standard python program that takes an array and filters out the Fibonacci numbers from it and returns the resulting array.&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2258,7 +2258,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;math&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isPerfectSquare&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;math&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;# Function to check if the number is in Fibonacci or not
@@ -2272,7 +2272,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isPerfectSquare&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;isPerfectSquare&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)):&lt;/span&gt;
 
-            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;append&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
             &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
 
     &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
@@ -2283,7 +2283,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;h3 id=&quot;step-3-javascript&quot;&gt;Step 3: JavaScript&lt;/h3&gt;
 
-&lt;p&gt;We are executing the &lt;code class=&quot;highlighter-rouge&quot;&gt;findCubeOfNumbers&lt;/code&gt; function located in file &lt;code class=&quot;highlighter-rouge&quot;&gt;jspart.js&lt;/code&gt; and passing the result from the Python function.&lt;/p&gt;
+&lt;p&gt;We are executing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;findCubeOfNumbers&lt;/code&gt; function located in file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jspart.js&lt;/code&gt; and passing the result from the Python function.&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2295,7 +2295,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqrNumbers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getIntArrayFromValue&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;findCubeOfNumbersFn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fibNumbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Let’s look at &lt;code class=&quot;highlighter-rouge&quot;&gt;jspart.js&lt;/code&gt;, it is a standard JavaScript function that takes an array and maps over the elements and returns the array. But we had to call &lt;code class=&quot;highlighter-rouge&quot;&gt;Array.prototype.map.call&lt;/code&gt; instead of just &lt;code class=&quot;highlighter-rouge&quot;&gt;array.map&lt;/code&gt; as the array passed by Java is not standard JS array.&lt;/p&gt;
+&lt;p&gt;Let’s look at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jspart.js&lt;/code&gt;, it is a standard JavaScript function that takes an array and maps over the elements and returns the array. But we had to call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Array.prototype.map.call&lt;/code&gt; instead of just &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;array.map&lt;/code&gt; as the array passed by Java is not standard JS array.&lt;/p&gt;
 
 &lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2311,7 +2311,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;h3 id=&quot;step-4-c&quot;&gt;Step 4: C++&lt;/h3&gt;
 
-&lt;p&gt;We are executing the &lt;code class=&quot;highlighter-rouge&quot;&gt;getSumOfArray&lt;/code&gt; function located in the &lt;code class=&quot;highlighter-rouge&quot;&gt;cpppart&lt;/code&gt; binary file. We pass the result from JS function and the length of the array here. We have to use compiled binary here unlike Python, Ruby, and JavaScript which are interpreted languages.&lt;/p&gt;
+&lt;p&gt;We are executing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getSumOfArray&lt;/code&gt; function located in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cpppart&lt;/code&gt; binary file. We pass the result from JS function and the length of the array here. We have to use compiled binary here unlike Python, Ruby, and JavaScript which are interpreted languages.&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2323,7 +2323,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSumOfArrayFn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sqrNumbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sqrNumbers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The source of the binary is in &lt;code class=&quot;highlighter-rouge&quot;&gt;cpppart.cpp&lt;/code&gt; file. Which is compiled using the below&lt;/p&gt;
+&lt;p&gt;The source of the binary is in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cpppart.cpp&lt;/code&gt; file. Which is compiled using the below&lt;/p&gt;
 
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2331,7 +2331,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;span class=&quot;nv&quot;&gt;$LLVM_TOOLCHAIN&lt;/span&gt;/clang++ &lt;span class=&quot;nt&quot;&gt;-shared&lt;/span&gt; cpppart.cpp &lt;span class=&quot;nt&quot;&gt;-lpolyglot-mock&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; cpppart
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Let’s look at &lt;code class=&quot;highlighter-rouge&quot;&gt;cpppart.cpp&lt;/code&gt;, it is a standard C++ program that exports a function. It takes an array and its length as the arguments and returns a number&lt;/p&gt;
+&lt;p&gt;Let’s look at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cpppart.cpp&lt;/code&gt;, it is a standard C++ program that exports a function. It takes an array and its length as the arguments and returns a number&lt;/p&gt;
 
 &lt;div class=&quot;language-c++ highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2365,7 +2365,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;h3 id=&quot;step-5-rust&quot;&gt;Step 5: Rust&lt;/h3&gt;
 
-&lt;p&gt;We are executing the &lt;code class=&quot;highlighter-rouge&quot;&gt;cube_root&lt;/code&gt; function located in file &lt;code class=&quot;highlighter-rouge&quot;&gt;rustpart.bc&lt;/code&gt;, compiled from &lt;code class=&quot;highlighter-rouge&quot;&gt;rustpart.rs&lt;/code&gt;. We pass the result from C++ function here.&lt;/p&gt;
+&lt;p&gt;We are executing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cube_root&lt;/code&gt; function located in file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rustpart.bc&lt;/code&gt;, compiled from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rustpart.rs&lt;/code&gt;. We pass the result from C++ function here.&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2379,7 +2379,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;span class=&quot;nc&quot;&gt;Double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cubeRoot&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cubeRootFn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asDouble&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Let’s look at &lt;code class=&quot;highlighter-rouge&quot;&gt;rustpart.rs&lt;/code&gt;, it is a standard Rust function that takes a number finds its cube root and returns it. But we do have to specify &lt;code class=&quot;highlighter-rouge&quot;&gt;#[no_mangle]&lt;/code&gt; annotation and we cannot use any crates as well apparently. Simples functions with primitive args/output seem to work but more complex functions do not work when embedded.&lt;/p&gt;
+&lt;p&gt;Let’s look at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rustpart.rs&lt;/code&gt;, it is a standard Rust function that takes a number finds its cube root and returns it. But we do have to specify &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;#[no_mangle]&lt;/code&gt; annotation and we cannot use any crates as well apparently. Simples functions with primitive args/output seem to work but more complex functions do not work when embedded.&lt;/p&gt;
 
 &lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2387,7 +2387,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 4
 5
 6
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;err&quot;&gt;#&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;no_mangle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nd&quot;&gt;#[no_mangle]&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cube_root&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;f64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;f64&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;arg&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.cbrt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -2395,7 +2395,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){}&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;We compile the Rust source to binary code using &lt;code class=&quot;highlighter-rouge&quot;&gt;rustc&lt;/code&gt; compiler with the &lt;code class=&quot;highlighter-rouge&quot;&gt;--emit=llvm-bc&lt;/code&gt; flag&lt;/p&gt;
+&lt;p&gt;We compile the Rust source to binary code using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rustc&lt;/code&gt; compiler with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--emit=llvm-bc&lt;/code&gt; flag&lt;/p&gt;
 
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;rustc &lt;span class=&quot;nt&quot;&gt;--emit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;llvm-bc rustpart.rs
@@ -2403,7 +2403,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;h3 id=&quot;step-6-ruby&quot;&gt;Step 6: Ruby&lt;/h3&gt;
 
-&lt;p&gt;We are executing the &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial&lt;/code&gt; function located in file &lt;code class=&quot;highlighter-rouge&quot;&gt;rubypart.rb&lt;/code&gt;. We are passing the result from the Rust function here.&lt;/p&gt;
+&lt;p&gt;We are executing the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;factorial&lt;/code&gt; function located in file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubypart.rb&lt;/code&gt;. We are passing the result from the Rust function here.&lt;/p&gt;
 
 &lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2413,7 +2413,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factorialFn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cubeRoot&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;asLong&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Let’s look at &lt;code class=&quot;highlighter-rouge&quot;&gt;rubypart.rb&lt;/code&gt;, it is a standard Ruby lambda function that takes a number and returns its factorial.&lt;/p&gt;
+&lt;p&gt;Let’s look at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rubypart.rb&lt;/code&gt;, it is a standard Ruby lambda function that takes a number and returns its factorial.&lt;/p&gt;
 
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2429,7 +2429,7 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 
 &lt;h3 id=&quot;run-the-program&quot;&gt;Run the program&lt;/h3&gt;
 
-&lt;p&gt;To run this program we need to compile the C++, Rust and Java files first, and then run it using the JVM provided by GraalVM. Below are the steps, you can save this as &lt;code class=&quot;highlighter-rouge&quot;&gt;run.sh&lt;/code&gt; and execute it.&lt;/p&gt;
+&lt;p&gt;To run this program we need to compile the C++, Rust and Java files first, and then run it using the JVM provided by GraalVM. Below are the steps, you can save this as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;run.sh&lt;/code&gt; and execute it.&lt;/p&gt;
 
 &lt;div class=&quot;language-sh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -2507,23 +2507,23 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
 &lt;p&gt;This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where &lt;strong&gt;Garbage Collection(GC)&lt;/strong&gt; takes place. The entire heap memory is not garbage collected, only the Young and Old space is managed by garbage collection. Heap is further divided into below:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;New Space&lt;/strong&gt;: New space or &lt;strong&gt;“Young generation”&lt;/strong&gt; is where new objects live and most of these objects are short-lived. This space is small and has two &lt;strong&gt;semi-space&lt;/strong&gt;, similar to &lt;strong&gt;S0&lt;/strong&gt; &amp;amp; &lt;strong&gt;S1&lt;/strong&gt; in JVM. This space is managed by the &lt;strong&gt;“Scavenger(Minor GC)”&lt;/strong&gt;, we will look at it later. The size of the new space can be controlled using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--min_semi_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;highlighter-rouge&quot;&gt;--max_semi_space_size&lt;/code&gt;(Max) V8 flags.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Old Space&lt;/strong&gt;: Old space or &lt;strong&gt;“Old generation”&lt;/strong&gt; is where objects that survived the “New space” for two minor GC cycles are moved to. This space is managed up by the &lt;strong&gt;Major GC(Mark-Sweep &amp;amp; Mark-Compact)”&lt;/strong&gt;, we will look at it later. The size of old space can be controlled using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--initial_old_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;highlighter-rouge&quot;&gt;--max_old_space_size&lt;/code&gt;(Max) V8 flags. This space is divided into two:
+  &lt;li&gt;&lt;strong&gt;New Space&lt;/strong&gt;: New space or &lt;strong&gt;“Young generation”&lt;/strong&gt; is where new objects live and most of these objects are short-lived. This space is small and has two &lt;strong&gt;semi-space&lt;/strong&gt;, similar to &lt;strong&gt;S0&lt;/strong&gt; &amp;amp; &lt;strong&gt;S1&lt;/strong&gt; in JVM. This space is managed by the &lt;strong&gt;“Scavenger(Minor GC)”&lt;/strong&gt;, we will look at it later. The size of the new space can be controlled using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--min_semi_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--max_semi_space_size&lt;/code&gt;(Max) V8 flags.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Old Space&lt;/strong&gt;: Old space or &lt;strong&gt;“Old generation”&lt;/strong&gt; is where objects that survived the “New space” for two minor GC cycles are moved to. This space is managed up by the &lt;strong&gt;Major GC(Mark-Sweep &amp;amp; Mark-Compact)”&lt;/strong&gt;, we will look at it later. The size of old space can be controlled using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--initial_old_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--max_old_space_size&lt;/code&gt;(Max) V8 flags. This space is divided into two:
     &lt;ul&gt;
       &lt;li&gt;&lt;strong&gt;Old pointer space&lt;/strong&gt;: Contains survived objects that have pointers to other objects.&lt;/li&gt;
       &lt;li&gt;&lt;strong&gt;Old data space&lt;/strong&gt;: Contains objects that just contain data(no pointer to other objects). Strings, boxed numbers, and arrays of unboxed doubles are moved here after surviving in “New space” for two minor GC cycles.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Large object space&lt;/strong&gt;: This is where objects which are larger than the size limits of other spaces live. Each object gets its own &lt;code class=&quot;highlighter-rouge&quot;&gt;[mmap](https://en.wikipedia.org/wiki/Mmap)'d&lt;/code&gt; region of memory. Large objects are never moved by the garbage collector.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Code-space&lt;/strong&gt;: This is where the &lt;strong&gt;Just In Time(JIT)&lt;/strong&gt; compiler stores compiled code Blocks. This is the only space with executable memory (although &lt;code class=&quot;highlighter-rouge&quot;&gt;Codes&lt;/code&gt; may be allocated in “Large object space”, and those are executable, too).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cell space, property cell space, and map space&lt;/strong&gt;: These spaces contain &lt;code class=&quot;highlighter-rouge&quot;&gt;Cells&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;PropertyCells&lt;/code&gt;, and &lt;code class=&quot;highlighter-rouge&quot;&gt;Maps&lt;/code&gt;, respectively. Each of these spaces contains objects which are all the same size and has some constraints on what kind of objects they point to, which simplifies collection.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Large object space&lt;/strong&gt;: This is where objects which are larger than the size limits of other spaces live. Each object gets its own &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[mmap](https://en.wikipedia.org/wiki/Mmap)'d&lt;/code&gt; region of memory. Large objects are never moved by the garbage collector.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Code-space&lt;/strong&gt;: This is where the &lt;strong&gt;Just In Time(JIT)&lt;/strong&gt; compiler stores compiled code Blocks. This is the only space with executable memory (although &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Codes&lt;/code&gt; may be allocated in “Large object space”, and those are executable, too).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cell space, property cell space, and map space&lt;/strong&gt;: These spaces contain &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cells&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PropertyCells&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Maps&lt;/code&gt;, respectively. Each of these spaces contains objects which are all the same size and has some constraints on what kind of objects they point to, which simplifies collection.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Each of these spaces is composed of a set of pages. A Page is a contiguous chunk of memory allocated from the operating system with &lt;code class=&quot;highlighter-rouge&quot;&gt;mmap&lt;/code&gt; (or &lt;code class=&quot;highlighter-rouge&quot;&gt;[MapViewOfFile](https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile)&lt;/code&gt; on Windows). Each page is 1MB in size, except for Large object space.&lt;/p&gt;
+&lt;p&gt;Each of these spaces is composed of a set of pages. A Page is a contiguous chunk of memory allocated from the operating system with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap&lt;/code&gt; (or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[MapViewOfFile](https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile)&lt;/code&gt; on Windows). Each page is 1MB in size, except for Large object space.&lt;/p&gt;
 
 &lt;h2 id=&quot;stack&quot;&gt;Stack&lt;/h2&gt;
 
-&lt;p&gt;This is the stack memory area and there is one stack per V8 process. This is where static data including method/function frames, primitive values, and pointers to objects are stored. The stack memory limit can be set using the &lt;code class=&quot;highlighter-rouge&quot;&gt;--stack_size&lt;/code&gt; V8 flag.&lt;/p&gt;
+&lt;p&gt;This is the stack memory area and there is one stack per V8 process. This is where static data including method/function frames, primitive values, and pointers to objects are stored. The stack memory limit can be set using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--stack_size&lt;/code&gt; V8 flag.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -2602,8 +2602,8 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
   &lt;li&gt;&lt;strong&gt;Global scope&lt;/strong&gt; is kept in a “Global frame” on the Stack&lt;/li&gt;
   &lt;li&gt;Every function call is added to the stack memory as a frame-block&lt;/li&gt;
   &lt;li&gt;All local variables including arguments and the return value is saved within the function frame-block on the Stack&lt;/li&gt;
-  &lt;li&gt;All primitive types like &lt;code class=&quot;highlighter-rouge&quot;&gt;int&lt;/code&gt; &amp;amp; &lt;code class=&quot;highlighter-rouge&quot;&gt;string&lt;/code&gt; are stored directly on the Stack. This applies to global scope as well and yes String is a primitive type in JavaScript&lt;/li&gt;
-  &lt;li&gt;All object types like &lt;code class=&quot;highlighter-rouge&quot;&gt;Employee&lt;/code&gt; &amp;amp; &lt;code class=&quot;highlighter-rouge&quot;&gt;Function&lt;/code&gt; are created on the Heap and is referenced from the Stack using Stack pointers. Functions are just objects in JavaScript. This applies to global scope as well&lt;/li&gt;
+  &lt;li&gt;All primitive types like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt; &amp;amp; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;string&lt;/code&gt; are stored directly on the Stack. This applies to global scope as well and yes String is a primitive type in JavaScript&lt;/li&gt;
+  &lt;li&gt;All object types like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Employee&lt;/code&gt; &amp;amp; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Function&lt;/code&gt; are created on the Heap and is referenced from the Stack using Stack pointers. Functions are just objects in JavaScript. This applies to global scope as well&lt;/li&gt;
   &lt;li&gt;Functions called from the current function is pushed on top of the Stack&lt;/li&gt;
   &lt;li&gt;When a function returns its frame is removed from the Stack&lt;/li&gt;
   &lt;li&gt;Once the main process is complete, the objects on the Heap do not have any more pointers from Stack and becomes orphan&lt;/li&gt;
