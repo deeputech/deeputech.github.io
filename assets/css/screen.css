@@ -354,6 +354,9 @@ span.post-read-more a:hover {
     /* white-space: pre-wrap; */
 }
 
+.separator {
+  color: #e4e0e0 !important;
+}
 
 blockquote {
     border-left: 4px solid #00ab6b;

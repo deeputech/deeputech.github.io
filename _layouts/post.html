@@ -64,6 +64,7 @@ post_class: post-template
 
                         <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
                         <!-- <span class="author-description">{{ author.description }}</span> -->
+                        <span class="separator d-none d-md-inline-block"> | </span>
                         <!-- Post Date -->
                         <span class="author-description">
                             <small>
@@ -71,9 +72,10 @@ post_class: post-template
                                 {% if page.last_modified_at %}
                                 (Updated: <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">{{ page.last_modified_at | date: "%b %-d, %Y" }}</time>)
                                 {% endif %}
-                            </small> |
+                            </small>
+                            <span class="separator d-inline-block"> | </span>
                             <small>{{ page.content | reading_time }}</small>
-                            <span class="d-inline-block d-lg-none"> | </span>
+                            <span class="separator d-inline-block d-lg-none"> | </span>
                             <span class="d-inline-block d-lg-none">{% include share.html mini=true %}</span>
                         </span>
                     </div>
