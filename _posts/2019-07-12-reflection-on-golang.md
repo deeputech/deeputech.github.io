@@ -13,27 +13,27 @@ series: languages
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
 
-----
- 
-Do I like [Go](https://golang.org/)? Yes. Would I use it for every use case I have? Definitely not. 
+---
+
+Do I like [Go](https://golang.org/)? Yes. Would I use it for every use case I have? Definitely not.
 
 {% twitter 1103546225851277313 %}
 
-Don't get me wrong, I like **Go** for what it is but like every other programming language, it is always a love-hate relationship. No programming language is perfect and all of them have their own merits and use cases. I hate it when I see people overusing something and I see that pattern with Go these days. To be fair, I have done my fair share of overusing in my career as well (mostly with JavaScript) and I can see why people do it. This is not gonna be a blog bashing Go or praising Go, it is just what I think of it after using it for over 9 months. Before I start a rant on the good and bad of Go, here is some background. 
+Don't get me wrong, I like **Go** for what it is but like every other programming language, it is always a love-hate relationship. No programming language is perfect and all of them have their own merits and use cases. I hate it when I see people overusing something and I see that pattern with Go these days. To be fair, I have done my fair share of overusing in my career as well (mostly with JavaScript) and I can see why people do it. This is not gonna be a blog bashing Go or praising Go, it is just what I think of it after using it for over 9 months. Before I start a rant on the good and bad of Go, here is some background.
 
-After being in the tech industry for over 10 years, I would like to think of myself as a pragmatic programmer or at least as someone getting closer to that - that should be a programmer's [Nirvana](https://www.britannica.com/topic/nirvana-religion). I didn't even plan to be a programmer, if you ask the 18-year-old self of me, he would say that he wanted to be an astrophysicist or a robotics engineer(Yes building space robots were my dream). Like most teenage dreams, it didn't happen and I ended up in tech instead. 
+After being in the tech industry for over 10 years, I would like to think of myself as a pragmatic programmer or at least as someone getting closer to that - that should be a programmer's [Nirvana](https://www.britannica.com/topic/nirvana-religion). I didn't even plan to be a programmer, if you ask the 18-year-old self of me, he would say that he wanted to be an astrophysicist or a robotics engineer(Yes building space robots were my dream). Like most teenage dreams, it didn't happen and I ended up in tech instead.
 
-Though landing an IT Job was an accident, programming wasn't alien to me. I did learn some C/C++ when I was in high school to help my girlfriend with her project and did dabble in some PHP, JavaScript, HTML and Flash(ActionScript) during my early college years for personal projects and blogs. So when I got a real IT job without having an IT background, I did what many in that situation did, I started learning the language that I stumbled upon first based on the task I was given, which happened to be Java. Being a quick learner and having some idea of programming concepts from C/C++ Java wasn't that hard to learn and I was a pretty decent Java programmer in a few months. Then I was tasked with building some Web UI and I dived deep into the world of HTML, CSS, and JavaScript and honestly fell in love with JavaScript due to its flexibility and ease. I mastered JQuery and soon become the go-to guy for front end stuff in the office. 
+Though landing an IT Job was an accident, programming wasn't alien to me. I did learn some C/C++ when I was in high school to help my girlfriend with her project and did dabble in some PHP, JavaScript, HTML and Flash(ActionScript) during my early college years for personal projects and blogs. So when I got a real IT job without having an IT background, I did what many in that situation did, I started learning the language that I stumbled upon first based on the task I was given, which happened to be Java. Being a quick learner and having some idea of programming concepts from C/C++ Java wasn't that hard to learn and I was a pretty decent Java programmer in a few months. Then I was tasked with building some Web UI and I dived deep into the world of HTML, CSS, and JavaScript and honestly fell in love with JavaScript due to its flexibility and ease. I mastered JQuery and soon become the go-to guy for front end stuff in the office.
 
-I was anything but pragmatic back then, I was preaching JavaScript to everyone and would vehemently debate anyone who thought JS was a bad language. 
+I was anything but pragmatic back then, I was preaching JavaScript to everyone and would vehemently debate anyone who thought JS was a bad language.
 
 Fast forward to now and if I look back I have done projects in C/C++, PHP, JavaScript, TypeScript, HTML, CSS, Java, Groovy, Scala, Python and recently Go. I think this exposure probably helped me become more pragmatic as I have started to look at programming languages as tools and each of them has their own strengths and weaknesses. Well, there is more to this story but that's for another time, the point is to set a baseline for the below reflections so that I don't sound like someone just trying **Go** and going on a rant.
 
-----
+---
 
 Go is the latest language I learned and worked with, I have worked on a CLI project built with Go for over 9 months now, building a powerful scaffolding engine with my team(Yes, pretty much like [JHipster](https://www.jhipster.tech/)) that uses Go templates where you could create what we call [blueprints](https://github.com/xebialabs/blueprints) at [XebiaLabs](https://xebialabs.com/). So yes I have done much more than a hello world app with Go.
 
-Without wasting more time on unrelated things here is what I like about Go and what I don't like. 
+Without wasting more time on unrelated things here is what I like about Go and what I don't like.
 
 ## What I like about Go
 
@@ -114,12 +114,12 @@ As mentioned earlier Go provides standard tooling for formatting, linting and so
 
 Go doesn't need a runtime like JVM or NodeJS, Go applications can be compiled into an executable cross-platform binary using the [standard Go tooling](https://golang.org/pkg/go/build/). This makes Go applications portable and platform-independent.
 
-
 ## What I don't like about Go
 
 ### Simplicity
 
 This is where the love-hate relationship starts, Go is a simple language which is nice but at times it feels too simple & verbose and coming from Java/JavaScript ecosystem you are spoiled with some nice features & syntax sugars which IMO makes the code more expressive and helps to keep it DRY. The things that I miss the most are
+
 - Generics: This is currently [being considered](https://go.googlesource.com/proposal/+/master/design/go2draft-generics-overview.md) in the next major iteration of Go, but until then this just makes you repeat code unnecessarily. I have lost count of the number of times I had to repeat the same block of code for different types where Generics would have kept it nice and simple. This is also one reason you don't see libraries like Lodash for Go.
 - Standard error handling: This also seems to be [coming](https://go.googlesource.com/proposal/+/master/design/go2draft-error-handling-overview.md) in the next major iteration of Go but until it lands I can complain. Anyone writing Go will remember doing `if err != nil` uncountable times in your code. Removing those might cut the codebase in size by at least 20%
 - Default values: I would love to see this in Go, this is quite useful. Maybe I'm just spoiled by JS.
@@ -146,7 +146,7 @@ Go has pretty good pointer support and the default behavior is to pass an object
 This is more of a nitpick. Structs are what you would use to create data structures in Go. It might look like an object but they are not exactly objects. While structs are fine functionally, in many cases you will end up with structs that look like the ugly brother of JSON. In real-world projects, you always will end up creating complex structs, especially if the application is doing some generic json or yaml parsing and soon your code will start to look like this. This is not that big of a concern but it just hurts my eyes every time I debug something or write tests.
 
 ```go
-	func main() {
+func main() {
 	type MyYamlDoc struct {
 		foo []map[interface{}][]map[interface{}]interface{}
 		bar interface{}
@@ -188,6 +188,7 @@ This is more of a nitpick. Structs are what you would use to create data structu
 ```
 
 ### Weird interface construct
+
 The interface concept in Go is weird. These are the only implicit construct in Go. If you come from other languages that have interfaces then this will feel weird. The fact that they are implicit means its really easy to mess things up. Refactoring is messy unless you have a smart IDE, and you can accidentally implement someone's interface by just naming your method a certain way. While implicit interfaces certainly help with polymorphism and decoupling code I personally would still prefer interfaces that are explicit.
 
 Another interface Gotcha is nil value checks, in Go, an interface is made up of two parts a type and a value, so an interface is `nil` only when both type and value are nil, this means you can't just simply do nil checks on interfaces. This is so confusing the Go has a specific [FAQ](https://golang.org/doc/faq#nil_error) for this. Below article explains this in more detail
@@ -213,7 +214,6 @@ Having worked with many major languages I can't just use Go for every use case b
 - Networking applications or web servers, especially with async workloads, can greatly benefit from Go. But to be fair you can do these in Java, Python, JS, etc as well but Go in the end will provide better efficiency and would be easier to implement.
 - System programming. While Rust or C is a much better choice for this but if those are not in your arsenal then Go is the next best thing. With decent support for pointers and its standard library its easier for system programs than other mainstream languages. Many popular system tools like Docker, Kubernetes, etc are indeed written in Go.
 
-
 ### Where I wouldn't use Go?
 
 - Complex web application: I would choose Java with a framework like [Spring](https://spring.io/) or [Micronaut](https://micronaut.io/) as its much more maintainable and battle-tested and you would focus more on business logic than writing boilerplate infrastructure code. One [common argument](https://medium.com/@norwood.john.m/hashbash-a-comparison-of-cpu-and-io-bound-applications-in-go-and-java-across-multiple-metrics-d358df6e03b1) against this stack is its memory footprint but it is possible to get lower memory footprint with Spring and frameworks like Micronaut and [Quarkus](https://quarkus.io/) actually promises that OOB.
@@ -227,7 +227,7 @@ But then you can always choose to fasten a screw using a hammer.
 
 {% twitter 1142967056150728708 %}
 
-----
+---
 
 If you like this article, please leave a like or a comment.
 

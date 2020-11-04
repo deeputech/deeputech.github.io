@@ -8,7 +8,6 @@ title_image: "assets/images/logo.png"
 google_analytics: "UA-74370272-6"
 disqus: "deepu-tech"
 # mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b'
-include: ["_pages"]
 permalink: /:title/
 url: "https://deepu.tech" # the base hostname & protocol for your site
 
@@ -66,12 +65,13 @@ pagination:
 
 # Other
 markdown: kramdown
-
+highlighter: rouge
 kramdown:
     input: GFM
     syntax_highlighter: rouge
     syntax_highlighter_opts:
         block:
+            guess_lang: true
             line_numbers: true
 
 # Adsense (change to "enabled" to activate, also your client id and ad slot. Create a new ad unit from your Adsense account to get the slot.)
@@ -82,6 +82,7 @@ adsense: "disabled"
 # Lazy Images ("enabled" or "disabled")
 lazyimages: "enabled"
 
+include: ["_pages"]
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.

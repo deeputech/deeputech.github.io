@@ -11,8 +11,8 @@ require "digest"
 # Adapted from https://github.com/rob-murray/jekyll-twitter-plugin
 #
 module Jekyll
-  VERSION = "2.0.0".freeze
-  LIBRARY_VERSION   = "jekyll-twitter-plugin-v#{VERSION}".freeze
+  PL_VERSION = "2.0.0".freeze
+  LIBRARY_VERSION   = "jekyll-twitter-plugin-v#{PL_VERSION}".freeze
   REQUEST_HEADERS   = { "User-Agent" => LIBRARY_VERSION }.freeze
 
   # Wrapper around an API

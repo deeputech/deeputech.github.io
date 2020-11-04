@@ -50,19 +50,20 @@ post_class: post-template
 
         <div class="col-lg-9 flex-first flex-lg-unordered">
             <div class="mainheading">
+                <!-- Post Title -->
+                <h1 class="posttitle">{{ page.title }}</h1>
                 <!-- Author Box -->
                 {% if page.author %}
                 <div class="row post-top-meta">
-                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                    <div class="col-12 text-center text-md-left mb-4 mb-md-0">
                         {% if author.avatar %}
                         <img class="author-thumb lozad"  src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
                         {% else %}
                         <img class="author-thumb lozad"  src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" alt="{{ author.display_name }}">
                         {% endif %}
-                    </div>
-                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+
                         <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
-                        <span class="author-description">{{ author.description }}</span>
+                        <!-- <span class="author-description">{{ author.description }}</span> -->
                         <!-- Post Date -->
                         <span class="author-description">
                             <small>
@@ -78,10 +79,16 @@ post_class: post-template
                     </div>
                 </div>
                 {% endif %}
-
-                <!-- Post Title -->
-                <h1 class="posttitle">{{ page.title }}</h1>
-
+                <!-- Post Featured Image -->
+                {% if page.cover_image %}
+                <img
+                    data-src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}"
+                    alt="{{ page.title }}"
+                    class="featured-image img-fluid lozad"
+                    src="{{ site.baseurl }}/assets/images/placeholder.jpg"
+                >
+                {% endif %}
+                <!-- End Featured Image -->
             </div>
 
             <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
@@ -89,17 +96,6 @@ post_class: post-template
                 {% include adsense-under-header.html %}
             {% endif %}
             <!-- End Adsense -->
-
-            <!-- Post Featured Image -->
-            {% if page.cover_image %}
-                <img
-                    data-src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}"
-                    alt="{{ page.title }}"
-                    class="featured-image img-fluid lozad"
-                    src="{{ site.baseurl }}/assets/images/placeholder.jpg"
-                >
-            {% endif %}
-            <!-- End Featured Image -->
 
             <!-- Post series -->
             {% if page.series %}

@@ -8,7 +8,7 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 3.8.6"
+gem "jekyll", "~> 4.1.1"
 
 # If you have any plugins, put them here!
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
@@ -20,5 +20,5 @@ group :jekyll_plugins do
     gem 'jekyll-archives'
     gem 'kramdown'
     gem 'rouge'
-    gem 'octokit', '~> 4.2'
+    gem 'octokit', '~> 4.19'
 end
