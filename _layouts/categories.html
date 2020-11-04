@@ -13,7 +13,9 @@ permalink: "/categories.html"
 {% for post in pages_list %}
 {% if post.title != null %}
 {% if group == null or group == post.group %}
-{% include postbox.html %}
+  <div class="col-lg-4 col-md-6 mb-30px card-group">
+  {% include postbox.html %}
+  </div>
 {% endif %}
 {% endif %}
 {% endfor %}
