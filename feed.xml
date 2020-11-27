@@ -5,9 +5,123 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 05 Nov 2020 14:08:18 +0100</pubDate>
-    <lastBuildDate>Thu, 05 Nov 2020 14:08:18 +0100</lastBuildDate>
+    <pubDate>Fri, 27 Nov 2020 12:33:32 +0100</pubDate>
+    <lastBuildDate>Fri, 27 Nov 2020 12:33:32 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>Concurrency in modern programming languages: Introduction</title>
+        <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I’ll try to publish them weekly.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Introduction&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in Rust&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in Golang&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in JavaScript with NodeJS&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in TypeScript with Deno&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
+  &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;what-is-concurrency&quot;&gt;What is concurrency&lt;/h2&gt;
+
+&lt;p&gt;Concurrency is the ability where multiple tasks can be executed in overlapping time periods, in no specific order without affecting the final outcome. Concurrency is a very broad term and can be achieved by any of the below mechanisms.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/glpIttD.jpeg&quot; alt=&quot;concurrency&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To simplify this we can say that concurrency is the problem and multi-threading, parallelism &amp;amp; asynchronous processing are the solutions for that problem.&lt;/p&gt;
+
+&lt;h3 id=&quot;parallelism&quot;&gt;Parallelism&lt;/h3&gt;
+
+&lt;p&gt;Parallelism is when multiple tasks or several parts of a unique task literally run at the same time, e.g. on a multi-core processor. True parallelism is not possible on single-core processors. Applications running in multi-core processors can achieve concurrency by parallelism as well. Multi-threading and parallelism can work together and when doing multi-threading in multi-core environments the operating system can provide parallelism depending on resource usage.&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-threading&quot;&gt;Multi-threading&lt;/h3&gt;
+
+&lt;p&gt;Multi-threading is when a program appears to be doing several things at the same time even when it’s running on a single-core machine. Within a single-core, this is done by context switching or interleaving (only one thread gets CPU time at any given moment). On multi-core processors, multi-threading can work similarly to parallelism at the discretion of the operating system and hence can be more efficient. Most modern multi-core processors offer two threads per core hence enabling both multi-threading and parallelism. This is how concurrency is commonly achieved in multi-threaded languages like Java.&lt;/p&gt;
+
+&lt;p&gt;If you are interested in learning more about how resources are used in threads check out this blog series&lt;/p&gt;
+
+&lt;div class=&quot;link-container&quot;&gt;
+                &lt;a href=&quot;https://deepu.tech/memory-management-in-programming/&quot;&gt;
+                    &lt;div class=&quot;ltag__link__content&quot;&gt;
+                        &lt;h3&gt;🚀 Demystifying memory management in modern programming languages&lt;/h3&gt;
+                        &lt;p&gt;08-Jan-2020&lt;/p&gt;
+                        &lt;div class=&quot;ltag__link__taglist&quot;&gt;
+                            #languages #programming #computerscience
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+
+&lt;h3 id=&quot;asynchronous-processing&quot;&gt;Asynchronous processing&lt;/h3&gt;
+
+&lt;p&gt;Asynchronous processing means that your program performs non-blocking operations and can provide some level of concurrency though not as efficient as parallelism or multi-threading for some use cases. This is how concurrency is mainly achieved in single-threaded languages like JavaScript. Asynchronous programming in a multi-core, multi-threaded environment is a way to achieve parallelism. The asynchronous process can be spawned in separate threads in multi-threaded applications.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/uBvs9JJ.jpg&quot; alt=&quot;Asynchronous&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Though this might look similar to concurrency and parallelism the main difference is that concurrency and parallelism are ways tasks are executed and synchronous and asynchronous are programming models.&lt;/p&gt;
+
+&lt;h2 id=&quot;benchmarking&quot;&gt;Benchmarking&lt;/h2&gt;
+
+&lt;p&gt;We will be building a very simple web server using out of the box language features as much as possible. The web server will support concurrent requests. If the language supports both asynchronous and multi-threaded concurrency we will try both and a combination of both and pick the best performer. The complexity of the application will hence depend on language features and language complexity. We will try to use whatever the language provides to make concurrency performance as good as possible without over-complicating stuff. The web server will just serve one endpoint and it will add a sleep of two seconds on every tenth request. This will simulate a more realistic load, IMO.&lt;/p&gt;
+
+&lt;p&gt;We will use promises, thread pools, and workers if required, and if the language supports it. We won’t use any unnecessary I/O in the application.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Disclaimer&lt;/em&gt;&lt;/strong&gt;: I’m not claiming this to be an accurate scientific method or the best benchmark for concurrency. I’m pretty sure different use cases will have different results and real-world web servers will have more complexity that requires communication between concurrent processes affecting performance. I’m just trying to provide some simple base comparisons for a simple use case. Also, my knowledge of some languages is better than others so I might miss some optimizations here and there. So please don’t shout at me. If you think the code for a particular language can be improved out of the box to improve concurrency performance let me know. If you think this benchmark is useless, well, please suggest a better one :)&lt;/p&gt;
+
+&lt;h3 id=&quot;conditions&quot;&gt;Conditions&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The latest versions of language/runtimes available are used.&lt;/li&gt;
+  &lt;li&gt;We will be using external dependencies only if that is the standard recommended way in the language.&lt;/li&gt;
+  &lt;li&gt;We are not gonna look at improving concurrency performance using any configuration tweaks&lt;/li&gt;
+  &lt;li&gt;We will use ApacheBench for the benchmarks with a concurrency factor of 100 requests and 10000 total requests. The benchmark will be done 5 times for each language and the best result will be used.&lt;/li&gt;
+  &lt;li&gt;All the benchmarks are run on the same machine running Fedora 32 on a quad-core Xeon processor with 8 threads.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So stay tuned for the remaining blog posts.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/4844637/what-is-the-difference-between-concurrency-parallelism-and-asynchronous-methods&quot;&gt;Stack Overflow question&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://softwareengineering.stackexchange.com/questions/190719/the-difference-between-concurrent-and-parallel-execution&quot;&gt;Stack Overflow question&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://stackoverflow.com/questions/748175/asynchronous-vs-synchronous-execution-what-does-it-really-mean&quot;&gt;Stack Overflow question&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@mbeero?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Matt Bero&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/multitasking?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
+        <link>https://deepu.tech/concurrency-in-modern-languages/</link>
+        <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages/</guid>
+        
+        <category>languages</category>
+        
+        <category>concurrency</category>
+        
+        <category>async</category>
+        
+        <category>multithreading</category>
+        
+        
+      </item>
     
       <item>
         <title>8 important things I learned as a software developer over a decade.</title>
@@ -2478,270 +2592,6 @@ gu &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ruby
         <category>javascript</category>
         
         <category>rust</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>🚀 Visualizing memory management in V8 Engine (JavaScript, NodeJS, Deno, WebAssembly)</title>
-        <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know if something can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management.&lt;/p&gt;
-
-&lt;p&gt;In this chapter, we will look at the memory management of the &lt;strong&gt;&lt;a href=&quot;https://v8.dev/&quot;&gt;V8 Engine&lt;/a&gt;&lt;/strong&gt; for &lt;a href=&quot;https://tc39.es/ecma262/&quot;&gt;ECMAScript&lt;/a&gt; and &lt;a href=&quot;https://webassembly.github.io/spec/core/&quot;&gt;WebAssembly&lt;/a&gt;, used by runtimes like NodeJS, Deno &amp;amp; Electron and web browsers like Chrome, Chromium, Brave, Opera, and Microsoft Edge. Since JavaScript is an interpreted language, it needs an engine to interpret and execute code. The V8 engine interprets JavaScript and compiles it down to native machine code. V8 is written in C++ and can be embedded in any C++ application.&lt;/p&gt;
-
-&lt;p&gt;If you haven’t read the &lt;a href=&quot;https://deepu.tech/memory-management-in-programming/&quot;&gt;first part&lt;/a&gt; of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.&lt;/p&gt;
-
-&lt;h1 id=&quot;v8-memory-structure&quot;&gt;V8 memory structure&lt;/h1&gt;
-
-&lt;p&gt;First, let us see what the memory structure of the V8 engine is. Since JavaScript is single-threaded V8 also uses a single process per JavaScript context and hence if you use service workers it will spawn a new V8 process per worker. A running program is always represented by some allocated memory in the V8 process and this is called &lt;strong&gt;Resident Set&lt;/strong&gt;. This is further divided into different segments as below:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/kSgatSL.png&quot; alt=&quot;V8 Memory structure&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is slightly similar to the JVM memory structure we saw in the &lt;a href=&quot;https://deepu.tech/memory-management-in-jvm/&quot;&gt;previous chapter&lt;/a&gt;. Let us see what the different segments are for:&lt;/p&gt;
-
-&lt;h2 id=&quot;heap-memory&quot;&gt;Heap Memory&lt;/h2&gt;
-
-&lt;p&gt;This is where V8 stores objects or dynamic data. This is the biggest block of memory area and this is where &lt;strong&gt;Garbage Collection(GC)&lt;/strong&gt; takes place. The entire heap memory is not garbage collected, only the Young and Old space is managed by garbage collection. Heap is further divided into below:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;New Space&lt;/strong&gt;: New space or &lt;strong&gt;“Young generation”&lt;/strong&gt; is where new objects live and most of these objects are short-lived. This space is small and has two &lt;strong&gt;semi-space&lt;/strong&gt;, similar to &lt;strong&gt;S0&lt;/strong&gt; &amp;amp; &lt;strong&gt;S1&lt;/strong&gt; in JVM. This space is managed by the &lt;strong&gt;“Scavenger(Minor GC)”&lt;/strong&gt;, we will look at it later. The size of the new space can be controlled using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--min_semi_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--max_semi_space_size&lt;/code&gt;(Max) V8 flags.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Old Space&lt;/strong&gt;: Old space or &lt;strong&gt;“Old generation”&lt;/strong&gt; is where objects that survived the “New space” for two minor GC cycles are moved to. This space is managed up by the &lt;strong&gt;Major GC(Mark-Sweep &amp;amp; Mark-Compact)”&lt;/strong&gt;, we will look at it later. The size of old space can be controlled using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--initial_old_space_size&lt;/code&gt;(Initial) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--max_old_space_size&lt;/code&gt;(Max) V8 flags. This space is divided into two:
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Old pointer space&lt;/strong&gt;: Contains survived objects that have pointers to other objects.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Old data space&lt;/strong&gt;: Contains objects that just contain data(no pointer to other objects). Strings, boxed numbers, and arrays of unboxed doubles are moved here after surviving in “New space” for two minor GC cycles.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Large object space&lt;/strong&gt;: This is where objects which are larger than the size limits of other spaces live. Each object gets its own &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[mmap](https://en.wikipedia.org/wiki/Mmap)'d&lt;/code&gt; region of memory. Large objects are never moved by the garbage collector.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Code-space&lt;/strong&gt;: This is where the &lt;strong&gt;Just In Time(JIT)&lt;/strong&gt; compiler stores compiled code Blocks. This is the only space with executable memory (although &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Codes&lt;/code&gt; may be allocated in “Large object space”, and those are executable, too).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cell space, property cell space, and map space&lt;/strong&gt;: These spaces contain &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cells&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PropertyCells&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Maps&lt;/code&gt;, respectively. Each of these spaces contains objects which are all the same size and has some constraints on what kind of objects they point to, which simplifies collection.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Each of these spaces is composed of a set of pages. A Page is a contiguous chunk of memory allocated from the operating system with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mmap&lt;/code&gt; (or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;[MapViewOfFile](https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-mapviewoffile)&lt;/code&gt; on Windows). Each page is 1MB in size, except for Large object space.&lt;/p&gt;
-
-&lt;h2 id=&quot;stack&quot;&gt;Stack&lt;/h2&gt;
-
-&lt;p&gt;This is the stack memory area and there is one stack per V8 process. This is where static data including method/function frames, primitive values, and pointers to objects are stored. The stack memory limit can be set using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--stack_size&lt;/code&gt; V8 flag.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;v8-memory-usage-stack-vs-heap&quot;&gt;V8 memory usage (Stack vs Heap)&lt;/h1&gt;
-
-&lt;p&gt;Now that we are clear about how memory is organized let’s see how the most important parts of it are used when a program is executed.&lt;/p&gt;
-
-&lt;p&gt;Let’s use the below JavaScript program, the code is not optimized for correctness hence ignore issues like unnecessary intermediatory variables and such, the focus is to visualize stack and heap memory usage.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Employee&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sales&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;salary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sales&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sales&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BONUS_PERCENTAGE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getBonusPercentage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;percentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;salary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;BONUS_PERCENTAGE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;percentage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;findEmployeeBonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;noOfSales&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bonusPercentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getBonusPercentage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bonus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bonusPercentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;noOfSales&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;bonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;john&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Employee&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;John&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;john&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bonus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;findEmployeeBonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;john&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;john&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sales&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;john&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Click on the slides and move forward/backward using arrow keys to see how the above program is executed and how the stack and heap memory is used:&lt;/p&gt;
-
-&lt;p&gt;
-            &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;e89e2e48a797417eb8692897dcada584&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
-            &lt;noscript&gt;
-                &lt;a href=&quot;//speakerdeck.com/player/e89e2e48a797417eb8692897dcada584&quot;&gt;
-                &lt;img alt=&quot;Speakerdeck&quot; class=&quot;lozad&quot; src=&quot;{{ site.baseurl }}/assets/images/placeholder.jpg&quot; data-src=&quot;//speakerd.s3.amazonaws.com/presentations/e89e2e48a797417eb8692897dcada584/slide_0.jpg&quot; /&gt;
-                &lt;/a&gt;
-            &lt;/noscript&gt;
-          &lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Note: If the slides look cut off at edges, then click on the title of the slide or &lt;a href=&quot;https://speakerdeck.com/deepu105/v8-memory-usage-stack-and-heap&quot;&gt;here&lt;/a&gt; to open it directly in SpeakerDeck.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Global scope&lt;/strong&gt; is kept in a “Global frame” on the Stack&lt;/li&gt;
-  &lt;li&gt;Every function call is added to the stack memory as a frame-block&lt;/li&gt;
-  &lt;li&gt;All local variables including arguments and the return value is saved within the function frame-block on the Stack&lt;/li&gt;
-  &lt;li&gt;All primitive types like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;int&lt;/code&gt; &amp;amp; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;string&lt;/code&gt; are stored directly on the Stack. This applies to global scope as well and yes String is a primitive type in JavaScript&lt;/li&gt;
-  &lt;li&gt;All object types like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Employee&lt;/code&gt; &amp;amp; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Function&lt;/code&gt; are created on the Heap and is referenced from the Stack using Stack pointers. Functions are just objects in JavaScript. This applies to global scope as well&lt;/li&gt;
-  &lt;li&gt;Functions called from the current function is pushed on top of the Stack&lt;/li&gt;
-  &lt;li&gt;When a function returns its frame is removed from the Stack&lt;/li&gt;
-  &lt;li&gt;Once the main process is complete, the objects on the Heap do not have any more pointers from Stack and becomes orphan&lt;/li&gt;
-  &lt;li&gt;Unless you make a copy explicitly, all object references within other objects are done using reference pointers&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The Stack as you can see is automatically managed and is done so by the operating system rather than V8 itself. Hence we do not have to worry much about the Stack. The Heap, on the other hand, is not automatically managed by the OS and since its the biggest memory space and holds dynamic data, it could grow exponentially causing our program to run out of memory over time. It also becomes fragmented over time slowing down applications. This is where garbage collection comes in.&lt;/p&gt;
-
-&lt;p&gt;Distinguishing pointers and data on the heap is important for garbage collection and V8 uses the &lt;strong&gt;“Tagged pointers”&lt;/strong&gt; approach for this - in this approach, it reserves a bit at the end of each word to indicate whether it is pointer or data. This approach requires limited compiler support, but it’s simple to implement while being fairly efficient.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;v8-memory-management-garbage-collection&quot;&gt;V8 Memory management: Garbage collection&lt;/h1&gt;
-
-&lt;p&gt;Now that we know how V8 allocates memory, let us see how it automatically manages the Heap memory which is very important for the performance of an application. When a program tries to allocate more memory on the Heap than that is freely available(depending on the V8 flags set) we encounter &lt;strong&gt;out of memory errors&lt;/strong&gt;. An incorrectly managed heap could also cause a memory leak.&lt;/p&gt;
-
-&lt;p&gt;V8 manages the heap memory by garbage collection. In simple terms, it frees the memory used by orphan objects, i.e, objects that are no longer referenced from the Stack directly or indirectly(via a reference in another object) to make space for new object creation.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;Orinoco&lt;/strong&gt; is the codename of the V8 GC project to make use of parallel, incremental and concurrent techniques for garbage collection, to free the main thread.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The garbage collector in V8 is responsible for reclaiming the unused memory for reuse by the V8 process.&lt;/p&gt;
-
-&lt;p&gt;V8 garbage collectors are generational(Objects in Heap are grouped by their age and cleared at different stages). There are two stages and three different algorithms used for garbage collection by V8:&lt;/p&gt;
-
-&lt;h2 id=&quot;minor-gc-scavenger&quot;&gt;Minor GC (Scavenger)&lt;/h2&gt;
-
-&lt;p&gt;This type of GC keeps the young or new generation space compact and clean. Objects are allocated in new-space, which is fairly small (between 1 and 8 MB, depending on behavior heuristics). Allocation in “new space” is very cheap: there is an allocation pointer which we increment whenever we want to reserve space for a new object. When the allocation pointer reaches the end of the new space, minor GC is triggered. This process is also called &lt;strong&gt;Scavenger&lt;/strong&gt; and it implements &lt;a href=&quot;http://en.wikipedia.org/wiki/Cheney's_algorithm&quot;&gt;Cheney’s algorithm&lt;/a&gt;. It occurs frequently and uses parallel helper threads and is very fast.&lt;/p&gt;
-
-&lt;p&gt;Let us look at the minor GC process:&lt;/p&gt;
-
-&lt;p&gt;The new space is divided into two equal-sized semi-spaces: &lt;strong&gt;to-space&lt;/strong&gt; and &lt;strong&gt;from-space&lt;/strong&gt;. Most allocations are made in from-space (except certain kinds of objects, such as executable Codes which are always allocated in old-space). When from-space fills up the minor GC is triggered.&lt;/p&gt;
-
-&lt;p&gt;Click on the slides and move forward/backward using arrow keys to see the process:&lt;/p&gt;
-
-&lt;p&gt;
-            &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;5fff2548e55c4bb0a9c837c7eb598bee&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
-            &lt;noscript&gt;
-                &lt;a href=&quot;//speakerdeck.com/player/5fff2548e55c4bb0a9c837c7eb598bee&quot;&gt;
-                &lt;img alt=&quot;Speakerdeck&quot; class=&quot;lozad&quot; src=&quot;{{ site.baseurl }}/assets/images/placeholder.jpg&quot; data-src=&quot;//speakerd.s3.amazonaws.com/presentations/5fff2548e55c4bb0a9c837c7eb598bee/slide_0.jpg&quot; /&gt;
-                &lt;/a&gt;
-            &lt;/noscript&gt;
-          &lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Note: If the slides look cut off at edges, then click on the title of the slide or &lt;a href=&quot;https://speakerdeck.com/deepu105/v8-minor-gc&quot;&gt;here&lt;/a&gt; to open it directly in SpeakerDeck.&lt;/em&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Let us assume that there are already objects on the “from-space” when we start(Blocks 01 to 06 marked as used memory)&lt;/li&gt;
-  &lt;li&gt;The process creates a new object(07)&lt;/li&gt;
-  &lt;li&gt;V8 tries to get required memory from from-space, but there is no free space in there to accommodate our object and hence V8 triggers minor GC&lt;/li&gt;
-  &lt;li&gt;Minor GC recursively traverses the object graph in “from-space” starting from stack pointers(GC roots) to find objects that are used or alive(Used memory). These objects are moved to a page in the “to-space”. Any objects reference by these objects are also moved to this page in “to-space” and their pointers are updated. This is repeated until all the objects in “from-space” are scanned. By end of this, the “to-space” is automatically compacted reducing fragmentation&lt;/li&gt;
-  &lt;li&gt;Minor GC now empties the “from-space” as any remaining object here is garbage&lt;/li&gt;
-  &lt;li&gt;Minor GC swaps the “to-space” and “from-space”, all the objects are now in “from-space” and the “to-space” is empty&lt;/li&gt;
-  &lt;li&gt;The new object is allocated memory in the “from-space”&lt;/li&gt;
-  &lt;li&gt;Let us assume that some time has passed and there are more objects on the “from-space” now(Blocks 07 to 09 marked as used memory)&lt;/li&gt;
-  &lt;li&gt;The application creates a new object(10)&lt;/li&gt;
-  &lt;li&gt;V8 tries to get required memory from “from-space”, but there is no free space in there to accommodate our object and hence V8 triggers second minor GC&lt;/li&gt;
-  &lt;li&gt;The above process is repeated and any alive objects that survived second minor GC is moved to the “Old space”. First-time survivors are moved to the “to-space” and remaining garbage is cleared from “from-space”&lt;/li&gt;
-  &lt;li&gt;Minor GC swaps the “to-space” and “from-space”, all the objects are now in “from-space” and the “to-space” is empty&lt;/li&gt;
-  &lt;li&gt;The new object is allocated memory in the “from-space”&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;So we saw how minor GC reclaims space from the young generation and keeps it compact. It is a stop-the-world process but it’s so fast and efficient that it is negligible most of the time. Since this process doesn’t scan objects in the “old space” for any reference in the “new space” it uses a register of all pointers from old space to new space. This is recorded to the store buffer by a process called &lt;strong&gt;&lt;a href=&quot;https://www.memorymanagement.org/glossary/w.html#term-write-barrier&quot;&gt;write barriers&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;major-gc&quot;&gt;Major GC&lt;/h2&gt;
-
-&lt;p&gt;This type of GC keeps the old generation space compact and clean. This is triggered when V8 decides there is not enough old space, based on a dynamically computed limit, as it gets filled up from minor GC cycles.&lt;/p&gt;
-
-&lt;p&gt;The Scavenger algorithm is perfect for small data size but is impractical for large heap, as the old space, as it has memory overhead and hence major GC is done using the &lt;strong&gt;Mark-Sweep-Compact&lt;/strong&gt; algorithm. It uses a &lt;strong&gt;tri-color&lt;/strong&gt;(white-grey-black) marking system. Hence major GC is a three-step process and the third step is executed depending on a fragmentation heuristic.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/rcjSZ0T.gif&quot; alt=&quot;Mark-sweep-compact GC&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Marking&lt;/strong&gt;: First step, common for both algorithms, where garbage collector identifies which objects are in use and which ones are not in use. The objects in use or reachable from GC roots(Stack pointers) recursively are marked as alive. It’s technically a depth-first-search of the heap which can be considered as a directed graph&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Sweeping&lt;/strong&gt;: The garbage collector traverses the heap and makes note of the memory address of any object that is not marked alive. This space is now marked as free in the free-list and can be used to store other objects&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Compacting&lt;/strong&gt;: After sweeping, if required, all the survived objects will be moved to be together. This will decrease fragmentation and increase the performance of allocation of memory to newer objects&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This type of GC is also referred to us stop-the-world GC as they introduce pause-times in the process while performing GC. To avoid this V8 uses techniques like&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://v8.dev/_img/trash-talk/09.svg&quot; alt=&quot;The major GC&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Incremental GC&lt;/strong&gt;: GC is done in multiple incremental steps instead of one.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Concurrent marking&lt;/strong&gt;: Marking is done concurrently using multiple helper threads without affecting the main JavaScript thread. Write barriers are used to keep track of new references between objects that JavaScript creates while the helpers are marking concurrently.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Concurrent sweeping/compacting&lt;/strong&gt;: Sweeping and compacting are done in helper threads concurrently without affecting the main JavaScript thread.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Lazy sweeping&lt;/strong&gt;. Lazy sweeping involves delaying the deletion of garbage in pages until the memory is required.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Let us look at the major GC process:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Let us assume that many minor GC cycles have passed and the old space is almost full and V8 decides to trigger a “Major GC”&lt;/li&gt;
-  &lt;li&gt;Major GC recursively traverses the object graph starting from stack pointers to mark objects that are used as alive(Used memory) and remaining objects as garbage(Orphans) in the old space. This is done using multiple concurrent helper threads and each helper follows a pointer. This does not affect the main JS thread.&lt;/li&gt;
-  &lt;li&gt;When concurrent marking is done or if memory limit is reached the GC does a mark finalization step using the main thread. This introduces a small pause-time.&lt;/li&gt;
-  &lt;li&gt;Major GC now marks all orphan object’s memory as free using concurrent sweep threads. Parallel compaction tasks are also triggered to move related blocks of memory to the same page to avoid fragmentation. Pointers are updated during these steps.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;This post should give you an overview of the V8 memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and you can learn about them from &lt;a href=&quot;https://v8.dev/blog/trash-talk&quot;&gt;v8.dev&lt;/a&gt;. But for most JS/WebAssembly developers this level of information would be sufficient and I hope it helps you write better code, considering these in mind, for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.&lt;/p&gt;
-
-&lt;p&gt;I hope you had fun learning about the V8 internals, stay tuned for the next post in the series.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://v8.dev/blog/trash-talk&quot;&gt;v8.dev/blog/trash-talk&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://jayconrod.com/posts/55/a-tour-of-v8-garbage-collection&quot;&gt;jayconrod.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.codeship.com/understanding-garbage-collection-in-node-js/&quot;&gt;blog.codeship.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management&quot;&gt;developer.mozilla.org&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec&quot;&gt;blog.sessionstack.com&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 27 Jan 2020 00:00:00 +0100</pubDate>
-        <link>https://deepu.tech/memory-management-in-v8/</link>
-        <guid isPermaLink="true">https://deepu.tech/memory-management-in-v8/</guid>
-        
-        <category>javascript</category>
-        
-        <category>typescript</category>
-        
-        <category>WebAssembly</category>
-        
-        <category>node</category>
         
         
       </item>
