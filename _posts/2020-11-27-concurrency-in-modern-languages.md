@@ -24,7 +24,7 @@ Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let 
 
 This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I'll try to publish them weekly.
 
-1. Introduction
+1. **Introduction**
 1. Concurrent web server in Rust
 1. Concurrent web server in Golang
 1. Concurrent web server in JavaScript with NodeJS
