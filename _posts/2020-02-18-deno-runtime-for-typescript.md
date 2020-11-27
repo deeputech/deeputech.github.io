@@ -84,7 +84,7 @@ Deno supports the latest version of TypeScript and keeps the support up to date.
 
 With Deno, you can run a local or remote script quite easily. Just point to the file or HTTP URL of the script and Deno will download and execute it
 
-```sh
+```bash
 deno https://deno.land/std/examples/welcome.ts
 ```
 
