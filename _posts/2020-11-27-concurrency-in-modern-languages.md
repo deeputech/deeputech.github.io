@@ -71,17 +71,17 @@ Though this might look similar to concurrency and parallelism the main differenc
 
 Concurrency has its pros and cons and hence is better to be implemented when there is a use case for it. The advantages of concurrency are faster processing times, better performance & throughput, and better load handling. Now knowing when to use concurrency is very important. Some of the common use cases are as below and can serve as a baseline:
 
-- Web servers & web services: These should be able to handle multiple requests at the same time and is a prime candidate for concurrency and asynchronous processing. Every popular web frameworks in every language will provide a concurrent implementation for this.
-- Large computation problems: CPU intensive algorithms, data processing, data science, aggregations and Map-reduce like workload can benefit from concurrency
-- I/O intensive problems: When there is a lot of I/O(disk, DB, network, terminal, etc) involved, depending on the specific use case concurrency can help to speed it up. For example, writing a file can be offloaded to a thread or asynchronous process while the main program can read the next file or do some other calculation.
-- Distributed use cases: Message queues, pub-sub kind of use cases, running tests are best suited for concurrency and asynchronous processing
+- **Web servers & web services**: These should be able to handle multiple requests at the same time and is a prime candidate for concurrency and asynchronous processing. Every popular web frameworks in every language will provide a concurrent implementation for this.
+- **Large computation problems**: CPU intensive algorithms, data processing, data science, aggregations and Map-reduce like workload can benefit from concurrency
+- **I/O intensive problems**: When there is a lot of I/O(disk, DB, network, terminal, etc) involved, depending on the specific use case concurrency can help to speed it up. For example, writing a file can be offloaded to a thread or asynchronous process while the main program can read the next file or do some other calculation.
+- **Distributed use cases**: Message queues, pub-sub kind of use cases, running tests are best suited for concurrency and asynchronous processing
 
 ## When concurrency should be avoided
 
 The disadvantages of concurrency is the complexity introduced in code and more computing resources being used. hence it's also important to know when not to use it. Some cases where it should be avoided are:
 
-- Speed up small computation problems: The complexity introduced in splitting up a small function to be concurrent is not worth the increase in performance if any, which in most cases will be negligible for small computations and the cost of initializing resources for synchronization will end up being costlier in many cases.
-- When you don't understand how concurrency and other related principles work: There is no shame in this. Concurrency is one of the most complex aspects of programming and depending on your language of choice the complexity can be anywhere from "that looks confusing" to "what black magic is this". So trying to split a problem using concurrency without understanding can do more harm than good. Some of the common problems you might face are race conditions, memory leaks, data corruption, locks, and so on.
+- **Speed up small computation problems**: The complexity introduced in splitting up a small function to be concurrent is not worth the increase in performance if any, which in most cases will be negligible for small computations and the cost of initializing resources for synchronization will end up being costlier in many cases.
+- **When you don't understand how concurrency and other related principles work**: There is no shame in this. Concurrency is one of the most complex aspects of programming and depending on your language of choice the complexity can be anywhere from "that looks confusing" to "what black magic is this". So trying to split a problem using concurrency without understanding can do more harm than good. Some of the common problems you might face are race conditions, memory leaks, data corruption, locks, and so on.
 
 ## Benchmarking & comparison
 
