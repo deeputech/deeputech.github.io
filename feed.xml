@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 27 Nov 2020 12:33:32 +0100</pubDate>
-    <lastBuildDate>Fri, 27 Nov 2020 12:33:32 +0100</lastBuildDate>
+    <pubDate>Fri, 27 Nov 2020 12:35:14 +0100</pubDate>
+    <lastBuildDate>Fri, 27 Nov 2020 12:35:14 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -18,7 +18,7 @@
 &lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I’ll try to publish them weekly.&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Introduction&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Rust&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Golang&lt;/li&gt;
   &lt;li&gt;Concurrent web server in JavaScript with NodeJS&lt;/li&gt;
