@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 Dec 2020 10:58:54 +0100</pubDate>
-    <lastBuildDate>Thu, 24 Dec 2020 10:58:54 +0100</lastBuildDate>
+    <pubDate>Thu, 24 Dec 2020 11:00:03 +0100</pubDate>
+    <lastBuildDate>Thu, 24 Dec 2020 11:00:03 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -622,7 +622,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Rust&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Concurrent web server in Rust&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Golang&lt;/li&gt;
   &lt;li&gt;Concurrent web server in JavaScript with NodeJS&lt;/li&gt;
   &lt;li&gt;Concurrent web server in TypeScript with Deno&lt;/li&gt;
