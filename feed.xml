@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 Dec 2020 11:00:03 +0100</pubDate>
-    <lastBuildDate>Thu, 24 Dec 2020 11:00:03 +0100</lastBuildDate>
+    <pubDate>Wed, 20 Jan 2021 16:38:33 +0100</pubDate>
+    <lastBuildDate>Wed, 20 Jan 2021 16:38:33 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -58,7 +58,7 @@
 
 &lt;h2 id=&quot;benchmarking&quot;&gt;Benchmarking&lt;/h2&gt;
 
-&lt;p&gt;Now that we have some basic understanding of concurrency features in Rust, let us build a simple concurrent webserver in Rust. Since Rust offers multiple ways to achieve this we’ll be building three sample applications and comparing them. The rust version used is the latest (1.48.0) at the time of writing.&lt;/p&gt;
+&lt;p&gt;Now that we have some basic understanding of concurrency features in Rust, let us build a simple concurrent webserver in Rust. Since Rust offers multiple ways to achieve this we’ll be building three sample applications and comparing them. The Rust version used is the latest (1.48.0) at the time of writing.&lt;/p&gt;
 
 &lt;h3 id=&quot;multi-threaded-concurrent-webserver&quot;&gt;Multi-threaded concurrent webserver&lt;/h3&gt;
 
