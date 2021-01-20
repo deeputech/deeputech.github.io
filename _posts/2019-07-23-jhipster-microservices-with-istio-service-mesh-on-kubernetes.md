@@ -219,7 +219,7 @@ $ gcloud compute firewall-rules list --filter="name~k8s-fw-[0-9a-z]*" --format=j
 Now update this rule to add the needed port using the command below, replace the name with the actual name of the rule you fetched above, and add all the original ports to the list
 
 ```
-gcloud compute firewall-rules update <firewall rule name> --allow tcp:15017;tcp:80,tcp:443,<append all other protocol:port comma separated>
+gcloud compute firewall-rules update <firewall rule name> --allow tcp:15017,tcp:80,tcp:443,<append all other protocol:port comma separated>
 ```
 
 Now our Kubernetes cluster is ready for Istio. 🎉
