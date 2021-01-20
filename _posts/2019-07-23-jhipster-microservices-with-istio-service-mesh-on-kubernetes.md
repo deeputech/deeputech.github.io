@@ -10,11 +10,12 @@ devto_id: 147191
 series: Microservices with JHipster
 ---
 
-Originally published at [Medium](https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3) on 17-Nov-2018. This post has been updated since to work with the latest version of JHipster(6.3.0) and Istio(1.3.0).
+Originally published at [Medium](https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3) on 17-Nov-2018.
+This post has been updated on Jan-2020 to work with the latest version of JHipster(7.0.0-beta.1) and Istio(1.8.2).
 
 ---
 
-Istio is the coolest kid on the DevOps and Cloud block now. For those of you who aren’t following close enough — [Istio](https://istio.io/docs/concepts/what-is-istio/) is a service mesh for distributed application architectures, especially the ones that you run on the cloud with Kubernetes. Istio plays extremely nice with Kubernetes, so nice that you might think that it’s part of the Kubernetes platform.
+Istio is the coolest kid on the DevOps and Cloud block now. For those of you who aren’t following close enough — [Istio](https://istio.io/docs/concepts/what-is-istio/) is a service mesh for distributed application architectures, especially the ones that you run on the cloud with Kubernetes. Istio plays extremely nice with Kubernetes, so nice that you might think that it’s part of the Kubernetes platform. Platforms like Google Cloud even provide it out of the box when you use the Google Kubernetes Engine.
 
 If you are still wondering, what the heck is a service mesh or Istio? then let's have an overview of Istio.
 
@@ -22,17 +23,17 @@ If you are still wondering, what the heck is a service mesh or Istio? then let's
 
 Istio provides the following functionality in a distributed application architecture:
 
--   Service discovery — Traditionally provided by platforms like [Netflix Eureka ](https://github.com/Netflix/eureka/wiki)or [Consul](https://www.consul.io/).
+- Service discovery — Traditionally provided by platforms like [Netflix Eureka ](https://github.com/Netflix/eureka/wiki)or [Consul](https://www.consul.io/).
 
--   Automatic load balancing — You might have used [Netflix Zuul](https://github.com/Netflix/zuul/wiki) for this.
+- Automatic load balancing — You might have used [Netflix Zuul](https://github.com/Netflix/zuul/wiki) for this.
 
--   Routing, circuit breaking, retries, fail-overs, fault injection — Think of [Netflix Ribbon](https://github.com/Netflix/ribbon/wiki), [Hytrix](https://github.com/Netflix/Hystrix) and so on.
+- Routing, circuit breaking, retries, fail-overs, fault injection — Think of [Netflix Ribbon](https://github.com/Netflix/ribbon/wiki), [Hytrix](https://github.com/Netflix/Hystrix) and so on.
 
--   Policy enforcement for access control, rate limiting, A/B testing, traffic splits, and quotas — Again you might have used Zuul to do some of these.
+- Policy enforcement for access control, rate limiting, A/B testing, traffic splits, and quotas — Again you might have used Zuul to do some of these.
 
--   Metrics, logs, and traces — Think of [ELK](https://www.elastic.co/elk-stack) or [Stack driver](https://cloud.google.com/stackdriver/)
+- Metrics, logs, and traces — Think of [ELK](https://www.elastic.co/elk-stack) or [Stack driver](https://cloud.google.com/stackdriver/)
 
--   Secure service-to-service communication
+- Secure service-to-service communication
 
 Below is the architecture of Istio.
 
@@ -44,7 +45,7 @@ It can be classified into 2 distinct planes.
 
 **Control plane**: It uses Pilot to manages and configure the proxies to route traffic. It also configures Mixer to enforce policies and to collect telemetry. It also has other components like Citadel, to manage security, and Galley, to manage configurations.
 
-Istio can also configure an instance of [Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/), [Jaeger](https://www.jaegertracing.io/), and [Kiali](https://www.kiali.io/) for Monitoring and Observability. You can use this or use your existing monitoring stack as well if you wish to do so.
+You can also configure [Grafana](https://grafana.com/), [Prometheus](https://prometheus.io/), [Jaeger](https://www.jaegertracing.io/)/[Zipkin](https://zipkin.io/), and [Kiali](https://www.kiali.io/) for Monitoring and Observability as they work well with Istio. You can use this or use your existing monitoring stack as well if you wish to do so. If you use the demo profile that comes with Istio, it preconfigures dashboards and configurations for Grafana, Kiali, and so on.
 
 I hope this provides an overview of Istio, now let's focus on the goal of this article.
 
@@ -54,9 +55,7 @@ First, let us prepare a Kubernetes cluster to deploy Istio and our application c
 
 ### Prerequisites
 
-We will be using [Helm](https://helm.sh/) to install Istio on the Kubernetes cluster and [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) for deploying the applications.
-
-[**Helm**](https://github.com/helm/helm): The Kubernetes package manager. [Install](https://github.com/helm/helm#install) it.
+We will be using [istioctl](https://istio.io/latest/docs/reference/commands/istioctl/) to install Istio on the Kubernetes cluster and [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) for deploying the applications.
 
 [**kubectl**](https://kubernetes.io/docs/reference/kubectl/kubectl/): The command-line tool to interact with Kubernetes. [Install](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and configure it.
 
@@ -77,14 +76,14 @@ $ az aks create \
   --resource-group eCommerceCluster \
   --name eCommerceCluster \
   --node-count 4 \
-  --kubernetes-version 1.13.7 \
+  --kubernetes-version 1.15 \
   --enable-addons monitoring \
   --generate-ssh-keys
 ```
 
-The `node-count` flag is important as the setup requires at least four nodes with the default CPU to run everything. You can try to use a higher `kubernetes-version` if it is supported, else stick to 1.13
+The `node-count` flag is important as the setup requires at least four nodes with the default CPU to run everything. You can try to use a higher `kubernetes-version` if it is supported, else stick to 1.15
 
-The cluster creation could take while so sit back and relax. 🍹
+The cluster creation could take a while so sit back and relax. 🍹
 
 Once the cluster is created, fetch its credentials to be used from kubectl by running the below command. It automatically injects the credentials to your kubectl configuration under **_~/.kube/config_**
 
@@ -108,37 +107,38 @@ Proceed to the **[Install and setup Istio](#install-and-setup-istio)** section.
 
 If you are going to use Google Cloud Platform(GCP) then install [**Gcloud CLI**](https://cloud.google.com/sdk/docs/) to interact with GCP. Install and login with your GCP account (you can create a [free account](https://console.cloud.google.com/freetrial) if you don’t have one already).
 
-You can set a region and zone using below commands or you can pass the zone option while executing each command.
+You can set a region and zone using the below commands or you can pass the zone option while executing each command.
 
 ```bash
 $ gcloud config set compute/region europe-west1
 $ gcloud config set compute/zone europe-west1-b
 ```
 
-First, we need a GCP project, you can either use an existing project that you have or create a new one using GCloud CLI with below command:
+First, we need a GCP project, you can either use an existing project that you have or create a new one using GCloud CLI with the below command:
 
 ```bash
 $ gcloud projects create jhipster-demo-deepu
 ```
 
-Set the project you want to use as the default project:
+Set the project you want to use as the default project and enable the container API. You also need to enable billing for the project via the [Google Cloud Console](https://console.cloud.google.com/)
 
 ```bash
 $ gcloud config set project jhipster-demo-deepu
+$ gcloud services enable container.googleapis.com
 ```
 
 Now let us create a cluster for our application with the below command:
 
 ```bash
 $ gcloud container clusters create hello-hipster \
-    --cluster-version 1.13 \
+    --cluster-version latest \
     --num-nodes 4 \
     --machine-type n1-standard-2
 ```
 
-The `num-nodes` and `machine-type` flags are important as the setup requires at least four nodes with a bigger CPU to run everything. You can try to use a higher `cluster-version` if it is supported, else stick to 1.13.
+The `num-nodes` and `machine-type` flags are important as the setup requires at least four nodes with a bigger CPU to run everything. You can try to use the latest `cluster-version` if it is supported, else stick to 1.17.
 
-The cluster creation could take while so sit back and relax. 🍹
+The cluster creation could take a while so sit back and relax. 🍹
 
 Once the cluster is created, fetch its credentials to be used from kubectl by running the below command. It automatically injects the credentials to your kubectl configuration under **_~/.kube/config_**
 
@@ -161,45 +161,27 @@ Install Istio on your local machine by following these steps:
 ```bash
 $ cd ~/
 
-$ export ISTIO_VERSION=1.3.0
+$ export ISTIO_VERSION=1.8.2
 
-$ curl -L https://git.io/getLatestIstio | sh -
+$ curl -L https://istio.io/downloadIstio | sh -
 
 $ ln -sf istio-$ISTIO_VERSION istio
 
 $ export PATH=~/istio/bin:$PATH
 ```
 
-First, create a role binding on the Kubernetes cluster for Istio.
+Now let us install Istio on our Kubernetes cluster using the provided charts from Istio.
 
 ```bash
-$ kubectl create clusterrolebinding cluster-admin-binding \
-  --clusterrole=cluster-admin \
-  --user="$(gcloud config get-value core/account)"
+# Install the Istio CRDs and components from the Demo profile
+$ istioctl install --set profile=demo -y
 
-```
-
-Let us create a namespace for Istio.
-
-```bash
-$ kubectl create namespace istio-system
-```
-
-Now let us install Istio on our Kubernetes cluster using the provided helm charts from Istio.
-
-```bash
-$ cd ~/istio-$ISTIO_VERSION
-
-# Install the Istio CRDs
-$ helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system | kubectl apply -f -
-
-# Run this to verify all CRDs are installed. It should output 23 for this version of Istio.
-$ kubectl get crds | grep 'istio.io\|certmanager.k8s.io' | wc -l
-
-# Install the Istio demo set up so that we get Grafana, Jaeger & Kiali set up as well.
-# For production, use the Istio default setup. Refer https://istio.io/docs/setup/kubernetes/install/helm/
-$ helm template install/kubernetes/helm/istio --name istio --namespace istio-system \
-    --values install/kubernetes/helm/istio/values-istio-demo.yaml | kubectl apply -f -
+# Install Addons like Grfana, Prometheus, Kiali and Zipkin
+$ cd ~/istio
+$ kubectl apply -f samples/addons/grafana.yaml
+$ kubectl apply -f samples/addons/prometheus.yaml
+$ kubectl apply -f samples/addons/kiali.yaml
+$ kubectl apply -f samples/addons/extras/zipkin.yaml
 ```
 
 Wait for the pods to run, these will be deployed to the `istio-system` namespace.
@@ -226,6 +208,18 @@ $ export \
   INGRESS_IP=$(kubectl -n istio-system get svc \
   istio-ingressgateway \
   -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+```
+
+There is an additional step that you need to do here for Istio. The automatically created firewall rule does not open port 15017. This Pilot discovery validation webhook needs this so we need to add that. First, fetch the firewall rules added by Istio for the project by running the below command. If there is more than one, just pick anyone. If you can't find any run the command without filter and look for a rule with Istio in the description.
+
+```bash
+$ gcloud compute firewall-rules list --filter="name~k8s-fw-[0-9a-z]*" --format=json
+```
+
+Now update this rule to add the needed port using the command below, replace the name with the actual name of the rule you fetched above, and add all the original ports to the list
+
+```
+gcloud compute firewall-rules update <firewall rule name> --allow tcp:15017;tcp:80,tcp:443,<append all other protocol:port comma separated>
 ```
 
 Now our Kubernetes cluster is ready for Istio. 🎉
@@ -289,7 +283,7 @@ Now that our JDL is ready, let us scaffold our applications and Kubernetes manif
 
 ```bash
 $ mkdir istio-demo && cd istio-demo
-$ jhipster import-jdl app-istio.jdl
+$ jhipster import-jdl app-istio.jdl --fork --force
 ```
 
 This will generate all the applications and install the required NPM dependencies in each of them. Once the applications are generated the deployment manifests will be generated and some useful instruction will be printed to the console.
@@ -324,7 +318,7 @@ Once the images are pushed, navigate into the generated Kubernetes directory and
 
 ```bash
 $ cd kubernetes
-$ ./kubectl-apply.sh
+$ ./kubectl-apply.sh -f
 ```
 
 Run `watch kubectl get pods -n jhipster` to monitor the status.
@@ -335,7 +329,7 @@ Once all the pods are in running status we can explore the deployed applications
 
 ### Application gateway
 
-The store gateway application is the entry point for our microservices. Get the URL for the store app by running `echo store.jhipster.$INGRESS_IP.nip.io`, we already stored the `INGRESS_IP` to environment variables while creating the Istio setup. The URLs are also printed on console by the `kubectl-apply.sh` script. Visit the URL in your favorite browser and explore the application. Try creating some entities for the microservices:
+The store gateway application is the entry point for our microservices. Get the URL for the store app by running `echo store.jhipster.$INGRESS_IP.nip.io`, we already stored the `INGRESS_IP` to environment variables while creating the Istio setup. The URLs are also printed on the console by the `kubectl-apply.sh` script. Visit the URL in your favorite browser and explore the application. Try creating some entities for the microservices:
 
 ![Store gateway application](https://thepracticaldev.s3.amazonaws.com/i/cyd7foljtf7qkm6amgjj.png)_Store gateway application_
 
@@ -343,37 +337,31 @@ The store gateway application is the entry point for our microservices. Get the 
 
 Istio setup includes Grafana and Prometheus configured to collect and show metrics from our containers. Let's take a look.
 
-Let us look at Grafana by visiting the provided URL. Get it by running `echo grafana.istio-system.$INGRESS_IP.nip.io`:
+Let us look at Grafana by visiting the provided URL. Get it by running `istioctl dashboard grafana`:
 
 ![Grafana dashboard for the Store application](https://thepracticaldev.s3.amazonaws.com/i/x7ck1zidvch5m75tqimp.png)_Grafana dashboard for the Store application_
 
-Grafana uses the metrics scraped by Prometheus. By default, only Grafana is exposed to external IP and hence we will use kubectl port forwarding to set up a secure tunnel to Prometheus available on [localhost:9090](localhost:9090):
-
-```bash
-$ kubectl -n istio-system \
-    port-forward $(kubectl -n istio-system get pod -l \
-    app=prometheus -o jsonpath='{.items[0].metadata.name}') 9090:9090
-```
+Grafana uses the metrics scraped by Prometheus. You can view the Prometheus instance by running `istioctl dashboard prometheus`
 
 ![Prometheus dashboard](https://cdn-images-1.medium.com/max/2554/0*W4obHNne_wQJfAuU)_Prometheus dashboard_
 
 ### Observability
 
-Istio configures Jaeger for distributed tracing and Kiali for service observability. Let us take a look at them.
+Istio configures Zipkin for distributed tracing and Kiali for service observability. Let us take a look at them.
 
-Get the Jaeger URL by running `echo jaeger.istio-system.$INGRESS_IP.nip.io`:
+Get the Zipkin URL by running `istioctl dashboard zipkin`:
 
-![Jaeger tracing dashboard](https://thepracticaldev.s3.amazonaws.com/i/jifcfkspq5ojpein913w.png)_Jaeger tracing dashboard_
+![Zipkin tracing dashboard](https://thepracticaldev.s3.amazonaws.com/i/jifcfkspq5ojpein913w.png)_Zipkin tracing dashboard_
 
-You can make some requests in the application and find it in the tracing dashboard by querying for the service. Click on any request to see tracing details.
+You can make some requests in the application and find them in the tracing dashboard by querying for the service. Click on any request to see tracing details.
 
-Let us now look at Kiali. Get the URL by running `echo kiali.istio-system.$INGRESS_IP.nip.io`, use the credentials user: _admin_, password: _admin_ to log in:
+Let us now look at Kiali. Get the URL by running `istioctl dashboard kiali`, use the credentials user: _admin_, password: _admin_ to log in:
 
 ![Kiali service graph](https://thepracticaldev.s3.amazonaws.com/i/w9r30s3q4rmctjzejdwp.png)_Kiali service graph_
 
 ## Conclusion
 
-Istio provides building blocks to build distributed microservices in a more Kubernetes-native way and takes the complexity and responsibility of maintaining those blocks away from you. This means you do not have to worry about maintaining the code or deployments for service discovery, tracing and so on.
+Istio provides building blocks to build distributed microservices in a more Kubernetes-native way and takes the complexity and responsibility of maintaining those blocks away from you. This means you do not have to worry about maintaining the code or deployments for service discovery, tracing, and so on.
 
 Istio documentation says
 

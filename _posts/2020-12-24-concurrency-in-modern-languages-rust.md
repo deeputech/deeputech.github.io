@@ -58,7 +58,7 @@ Technically asynchronous programming is not part of concurrency but in practice,
 
 ## Benchmarking
 
-Now that we have some basic understanding of concurrency features in Rust, let us build a simple concurrent webserver in Rust. Since Rust offers multiple ways to achieve this we'll be building three sample applications and comparing them. The rust version used is the latest (1.48.0) at the time of writing.
+Now that we have some basic understanding of concurrency features in Rust, let us build a simple concurrent webserver in Rust. Since Rust offers multiple ways to achieve this we'll be building three sample applications and comparing them. The Rust version used is the latest (1.48.0) at the time of writing.
 
 ### Multi-threaded concurrent webserver
 
