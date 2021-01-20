@@ -351,7 +351,7 @@ Istio configures Zipkin for distributed tracing and Kiali for service observabil
 
 Get the Zipkin URL by running `istioctl dashboard zipkin`:
 
-![Zipkin tracing dashboard](https://thepracticaldev.s3.amazonaws.com/i/jifcfkspq5ojpein913w.png)_Zipkin tracing dashboard_
+![Zipkin tracing dashboard](https://i.imgur.com/9no999M.png)_Zipkin tracing dashboard_
 
 You can make some requests in the application and find them in the tracing dashboard by querying for the service. Click on any request to see tracing details.
 
