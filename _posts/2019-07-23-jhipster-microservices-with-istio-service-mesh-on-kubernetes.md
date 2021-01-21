@@ -279,11 +279,11 @@ The `kubernetesServiceType` is set as `Ingress`, which is very important as Isti
 
 ### Generate the applications and deployment manifests
 
-Now that our JDL is ready, let us scaffold our applications and Kubernetes manifests. Create a new directory and save the above JDL in the directory. Let us name it **_app-istio.jdl_** and then run the import-jdl command.
+Now that our JDL is ready, let us scaffold our applications and Kubernetes manifests. Create a new directory and save the above JDL in the directory. Let us name it **_app-istio.jdl_** and then run the jdl command.
 
 ```bash
 $ mkdir istio-demo && cd istio-demo
-$ jhipster import-jdl app-istio.jdl --fork --force
+$ jhipster jdl app-istio.jdl --fork
 ```
 
 This will generate all the applications and install the required NPM dependencies in each of them. Once the applications are generated the deployment manifests will be generated and some useful instruction will be printed to the console.
