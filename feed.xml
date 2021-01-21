@@ -5,9 +5,420 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 21 Jan 2021 11:53:16 +0100</pubDate>
-    <lastBuildDate>Thu, 21 Jan 2021 11:53:16 +0100</lastBuildDate>
+    <pubDate>Thu, 21 Jan 2021 15:45:05 +0100</pubDate>
+    <lastBuildDate>Thu, 21 Jan 2021 15:45:05 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>Concurrency in modern programming languages: Golang</title>
+        <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I’ll try to publish them weekly.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Concurrent web server in Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Concurrent web server in Golang&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in JavaScript with NodeJS&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in TypeScript with Deno&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
+  &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;concurrency-in-go&quot;&gt;Concurrency in Go&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Do not communicate by sharing memory; instead, share memory by communicating.&lt;/p&gt;
+
+  &lt;p&gt;– Go docs&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Go supports concurrency as a first-class citizen with its &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;goroutines&lt;/code&gt;. Go takes the concept of coroutines to a whole new level by making it much simpler and the preferred way of doing almost anything in Go. The semantic and syntax are made so easy that even a Go newbie will be able to start using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;goroutines&lt;/code&gt; from the get-go easily. All this without sacrificing performance.&lt;/p&gt;
+
+&lt;p&gt;While languages like Rust offers &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;flexibility and power&lt;/a&gt; over simplicity, Go focuses on simplicity and performance. While languages like Rust provide you with building blocks required for concurrency Go provides implementations that can be used easily to achieve most of the concurrency use cases. The Go standard library also uses goroutines where ever possible. This allows us to use goroutines and improve performance even for trivial use cases as there is not much overhead from the complexity of using concurrency semantics.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The default for concurrency in Go is an asynchronous programming model and hence there are no explicit language features like async/await. Using concurrency with synchronous programming would be way more difficult in Go&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;With Go, it’s possible to do multi-threaded concurrency and parallelization with goroutines and goroutines work in an asynchronous way hence making use of both multi-threading and asynchronous programming efficiently. It’s not as flexible as Rust as we saw in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;previous chapter&lt;/a&gt;, but still, you can achieve almost everything that is possible in Rust and still get the best possible performance for those use case.&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-threading&quot;&gt;&lt;a href=&quot;https://golang.org/doc/effective_go.html#goroutines&quot;&gt;Multi-threading&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Multi-threading is achieved with goroutines that provide green threads (virtual threads that are scheduled by a runtime or virtual machine and not managed by the operating system) and there are no ways to use OS threads directly like in Rust for example. Go also provides implementations required for message-passing concurrency using &lt;a href=&quot;https://golang.org/doc/effective_go.html#channels&quot;&gt;channels&lt;/a&gt; and shared-state concurrency using mutexes and WaitGroups, though Go discourages shared state concurrency. Parallelization is also possible using goroutines.&lt;/p&gt;
+
+&lt;h3 id=&quot;asynchronous-processing&quot;&gt;&lt;a href=&quot;https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html&quot;&gt;Asynchronous processing&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Technically asynchronous programming is not part of concurrency but in practice, it goes hand in hand for many use cases and improves performance, and makes resource usage more efficient. This is the default behavior in Go when using goroutines and hence there is no special syntax around these so synchronous programming with goroutines is not commonly done and would require using WaitGroups and such.&lt;/p&gt;
+
+&lt;h2 id=&quot;benchmarking&quot;&gt;Benchmarking&lt;/h2&gt;
+
+&lt;p&gt;Now that we have some basic understanding of concurrency features in Golang, let us build a simple concurrent web server in Go. Since goroutines are the only way to achieve this we’ll build two sample applications using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; package and plain &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tcp&lt;/code&gt;. The Go version used is the latest (1.15.6) at the time of writing.&lt;/p&gt;
+
+&lt;h3 id=&quot;tcp-concurrent-webserver&quot;&gt;TCP concurrent webserver&lt;/h3&gt;
+
+&lt;p&gt;This example is closer to the Rust Asynchronous example we built in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;previous chapter&lt;/a&gt;. I have omitted import statements for brevity. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/gows_tcp&quot;&gt;GitHub here&lt;/a&gt;. We are not using any external dependency in this case.&lt;/p&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
+
+	&lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Listen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;tcp&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;127.0.0.1:8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// set listen port&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fatal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error listening: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;defer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// close connection when done&lt;/span&gt;
+
+	&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;
+		&lt;span class=&quot;c&quot;&gt;// Listen for an incoming connection.&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Accept&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fatal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error accepting: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;c&quot;&gt;// Handle connections in a new goroutine.&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;go&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handleConnection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handleConnection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Close the connection when you're done with it.&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;defer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Read the incoming connection into a buffer.&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fatal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error reading:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;c&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;nb&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adding delay. Count: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ioutil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ReadFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// read html file&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Send a response back&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;`
+HTTP/1.0 200 OK
+Connection: keep-alive
+Content-Length: 174
+Content-Type: text/html; charset=utf-8
+	`&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;%s&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;%s&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see we bind a TCP listener to port 8080 and listen to all incoming requests in an endless loop. Each request is processed in a new goroutine by using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go&lt;/code&gt; statement.&lt;/p&gt;
+
+&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
+
+This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
+...
+
+Document Path:          /
+Document Length:        174 bytes
+
+Concurrency Level:      100
+Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   20.208 seconds
+Complete requests:      10000
+Failed requests:        0
+Total transferred:      2780000 bytes
+HTML transferred:       1740000 bytes
+Requests per second:    494.86 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
+Time per request:       202.075 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Time per request:       2.021 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Transfer rate:          134.35 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
+
+Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.0      0       9
+Processing:     0  201 600.0      0    2012
+Waiting:        0  201 600.0      0    2011
+Total:          0  201 600.0      0    2015
+
+Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  50%      0
+  66%      1
+  75%      2
+  80%      3
+  90%   2000
+  95%   2001
+  98%   2001
+  99%   2002
+ 100%   2015 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s see if there is a difference in performance when using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; package.&lt;/p&gt;
+
+&lt;h3 id=&quot;http-concurrent-webserver&quot;&gt;HTTP concurrent webserver&lt;/h3&gt;
+
+&lt;p&gt;This example is quite similar to the previous one except that we are using an HTTP server here and we are not invoking goroutines directly instead we pass a callback function to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http.HandleFunc&lt;/code&gt; and it internally executes it as a goroutine. I have omitted import statements for brevity. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/gows&quot;&gt;GitHub here&lt;/a&gt;. We are not using any external dependency in this case as well and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; is part of the Go standard library.&lt;/p&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// set router&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;HandleFunc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ResponseWriter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;defer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Body&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;handleConnection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// set listen port&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ListenAndServe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;:8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;nil&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fatal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;ListenAndServe: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handleConnection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ResponseWriter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;nb&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adding delay. Count: &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Second&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ioutil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ReadFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// read html file&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Connection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;keep-alive&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WriteHeader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;           &lt;span class=&quot;c&quot;&gt;// 200 OK&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Fprintf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;html&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// send data to client side&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see we created an HTTP server bound to port 8080 and listen to all incoming requests. We assign a callback function to handle each request which internally calls the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;handleConnection&lt;/code&gt; method. The code here is much more clean and concise compared to the previous one.&lt;/p&gt;
+
+&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
+
+This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
+...
+
+Document Path:          /
+Document Length:        174 bytes
+
+Concurrency Level:      100
+Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   20.232 seconds
+Complete requests:      10000
+Failed requests:        0
+Total transferred:      2910000 bytes
+HTML transferred:       1740000 bytes
+Requests per second:    494.27 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
+Time per request:       202.319 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Time per request:       2.023 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Transfer rate:          140.46 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
+
+Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+              min  mean[+/-sd] median   max
+Connect:        0    1   0.9      0       6
+Processing:     0  201 600.0      1    2013
+Waiting:        0  201 600.0      0    2013
+Total:          0  202 600.0      1    2018
+WARNING: The median and mean &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the initial connection &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;are not within a normal deviation
+        These results are probably not that reliable.
+
+Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  50%      1
+  66%      1
+  75%      2
+  80%      3
+  90%   2000
+  95%   2001
+  98%   2002
+  99%   2003
+ 100%   2018 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We got almost identical results here. So it might be preferable to just use the HTTP package for such use cases as it’s cleaner.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;As I explained in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;first part&lt;/a&gt; of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It’s a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Golang. And for this particular use case, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; package provided by the standard library does seem to be the best choice.&lt;/p&gt;
+
+&lt;p&gt;So stay tuned for the next post where we will look at concurrency in NodeJS and build the same use case in JavaScript.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@damithadayananda/golang-vs-java-concurrency-a-comparative-study-b0aea90f5fd7&quot;&gt;medium.com/@damithadayananda&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://medium.com/@gauravsingharoy/asynchronous-programming-with-go-546b96cd50c1&quot;&gt;medium.com/@gauravsingharoy&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@instagramfotografin?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Peggy Anke&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/juggle?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 21 Jan 2021 00:00:00 +0100</pubDate>
+        <link>https://deepu.tech/concurrency-in-modern-languages-go/</link>
+        <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages-go/</guid>
+        
+        <category>languages</category>
+        
+        <category>concurrency</category>
+        
+        <category>async</category>
+        
+        <category>golang</category>
+        
+        
+      </item>
     
       <item>
         <title>Concurrency in modern programming languages: Rust</title>
@@ -2418,329 +2829,6 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
         <category>nodejs</category>
         
         <category>deno</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>🚀 Visualizing memory management in Golang</title>
-        <description>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know if something can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management.&lt;/p&gt;
-
-&lt;p&gt;In this chapter, we will look at the memory management of the &lt;strong&gt;&lt;a href=&quot;https://golang.org/&quot;&gt;Go&lt;/a&gt;&lt;/strong&gt; programming language(Golang). Go is a statically typed &amp;amp; compiled language like C/C++ and Rust. Hence Go does not need a VM and Go application binaries include a small runtime embedded in them to take care of language features like Garbage collection, scheduling &amp;amp; concurrency.&lt;/p&gt;
-
-&lt;p&gt;If you haven’t read the &lt;a href=&quot;https://deepu.tech/memory-management-in-programming/&quot;&gt;first part&lt;/a&gt; of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This post is based on Go 1.13 default official implementation and concept details might change in the future versions of Go&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h1 id=&quot;go-internal-memory-structure&quot;&gt;Go internal memory structure&lt;/h1&gt;
-
-&lt;p&gt;First, let us see what the internal memory structure of Go is.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Go Runtime schedules Goroutines (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt;) onto Logical Processors (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;) for execution. Each &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt; has a machine (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt;). We will use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;M&lt;/code&gt; &amp;amp; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt; throughout this post. If you’re not familiar with the Go scheduler read &lt;a href=&quot;https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part2.html&quot;&gt;Go scheduler: Ms, Ps &amp;amp; Gs&lt;/a&gt; first.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/wThLAbQ.png&quot; alt=&quot;Go Scheduler&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Each Go program process is allocated some virtual memory by the Operating System(OS), this is the total memory that the process has access to. The actual memory that is used within the virtual memory is called &lt;strong&gt;Resident Set&lt;/strong&gt;. This space is managed by the internal memory constructs as below:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/vFtq3uj.png&quot; alt=&quot;Go Memory structure&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This is a simplified view based on the internal objects used by Go, In reality, Go divides and groups memory into pages as described in &lt;a href=&quot;https://blog.learngoprogramming.com/a-visual-guide-to-golang-memory-allocator-from-ground-up-e132258453ed&quot;&gt;this great article&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;This is quite different from the memory structure we saw in the previous chapters for &lt;a href=&quot;https://deepu.tech/memory-management-in-jvm/&quot;&gt;JVM&lt;/a&gt; and &lt;a href=&quot;https://deepu.tech/memory-management-in-v8/&quot;&gt;V8&lt;/a&gt;. As you can see there is no generational memory here. The main reason for this is the &lt;a href=&quot;http://goog-perftools.sourceforge.net/doc/tcmalloc.html&quot;&gt;&lt;strong&gt;TCMalloc&lt;/strong&gt;&lt;/a&gt;(Thread-Caching Malloc), which is what Go’s own memory allocator was modeled upon.&lt;/p&gt;
-
-&lt;p&gt;Let us see what the different constructs are:&lt;/p&gt;
-
-&lt;h2 id=&quot;page-heapmheap&quot;&gt;Page Heap(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;)&lt;/h2&gt;
-
-&lt;p&gt;This is where Go stores dynamic data(any data for which size cannot be calculated at compile time). This is the biggest block of memory and this is where &lt;strong&gt;Garbage Collection(GC)&lt;/strong&gt; takes place.&lt;/p&gt;
-
-&lt;p&gt;The resident set is divided into pages of 8KB each and is managed by one global &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; object.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Large objects(Object of Size &amp;gt; 32kb) are allocated directly from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;. These large requests come at an expense of central lock, so only one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;’s request can be served at any given point of time.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; manages pages grouped into different constructs as below:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;mspan&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt; is the most basic structure that manages the pages of memory in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;. It’s a double linked list that holds the address of the start page, span size class and the number of pages in the span. Like TCMalloc, Go also divides Memory Pages into a block of 67 different classes by size starting at 8 bytes up to 32 kilobytes as in the below image&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/IxjG2aF.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-    &lt;p&gt;Each span exists twice, one for objects with pointers (&lt;strong&gt;scan&lt;/strong&gt; classes) and one for objects with no pointers (&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt;&lt;/strong&gt; classes). This helps during GC as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt; spans need not be traversed to look for live objects.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;mcentral&lt;/strong&gt;: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; groups spans of same size class together. Each &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; contains two &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspanList&lt;/code&gt;:&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;empty&lt;/strong&gt;: Double linked list of spans with no free objects or spans that are cached in a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt;. When a span here is freed, it’s moved to the nonempty list.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;non-empty&lt;/strong&gt;: Double linked list of spans with a free object. When a new span is requested from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt;, it takes that from the nonempty list and moves it into the empty list.&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;When &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; doesn’t have any free span, it requests a new run of pages from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;arena&lt;/strong&gt;: The heap memory grows and shrinks as required within the virtual memory allocated. When more memory is needed, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; pulls them from the virtual memory as a chunk of 64MB(for 64-bit architectures) called &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;arena&lt;/code&gt;. The pages are mapped to spans here.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;mcache&lt;/strong&gt;: This is a very interesting construct. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; is a cache of memory provided to a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;(Logical Processor) to store small objects(Object size &amp;lt;=32Kb). Though this resembles the thread stack, it is part of the heap and is used for dynamic data. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; contains &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scan&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt; types of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt; for all class sizes. Goroutines can obtain memory from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; without any locks as a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt; can have only one &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt; at a time. Hence this is more efficient. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; requests new spans from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcentral&lt;/code&gt; when required.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;stack&quot;&gt;Stack&lt;/h2&gt;
-
-&lt;p&gt;This is the stack memory area and there is one stack per Goroutine(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt;). This is where static data including function frames, static structs, primitive values, and pointers to dynamic structs are stored. This is not same as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; which is assigned to a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;go-memory-usage-stack-vs-heap&quot;&gt;Go memory usage (Stack vs Heap)&lt;/h1&gt;
-
-&lt;p&gt;Now that we are clear about how memory is organized let’s see how Go uses Stack and Heap when a program is executed.&lt;/p&gt;
-
-&lt;p&gt;Let’s use the below Go program, the code is not optimized for correctness hence ignore issues like unnecessary intermediatory variables and such, the focus is to visualize stack and heap memory usage.&lt;/p&gt;
-
-&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;type&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Employee&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;   &lt;span class=&quot;kt&quot;&gt;string&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;sales&lt;/span&gt;  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;bonus&lt;/span&gt;  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BONUS_PERCENTAGE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getBonusPercentage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;percentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BONUS_PERCENTAGE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;percentage&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findEmployeeBonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;noOfSales&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;bonusPercentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getBonusPercentage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;bonus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bonusPercentage&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;noOfSales&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bonus&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;john&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Employee&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;John&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;john&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bonus&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;findEmployeeBonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;john&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;salary&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;john&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sales&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-	&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;john&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bonus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;One major difference Go has compared to many garbage collected languages is that many objects are allocated directly on the program stack. The Go compiler uses a process called &lt;a href=&quot;https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-escape-analysis.html&quot;&gt;escape analysis&lt;/a&gt; to find objects whose lifetime is known at compile-time and allocates them on the stack rather than in garbage-collected heap memory.
-During compilation Go does the escape analysis to determine what can go into Stack(static data) and what needs to go into Heap(dynamic data). We can see this details during compilation by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go build&lt;/code&gt; with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-gcflags '-m'&lt;/code&gt; flag. For the above code, it will output something like below:&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;❯ go build -gcflags '-m' gc.go
-# command-line-arguments
-temp/gc.go:14:6: can inline getBonusPercentage
-temp/gc.go:19:6: can inline findEmployeeBonus
-temp/gc.go:20:39: inlining call to getBonusPercentage
-temp/gc.go:27:32: inlining call to findEmployeeBonus
-temp/gc.go:27:32: inlining call to getBonusPercentage
-temp/gc.go:28:13: inlining call to fmt.Println
-temp/gc.go:28:18: john.bonus escapes to heap
-temp/gc.go:28:13: io.Writer(os.Stdout) escapes to heap
-temp/gc.go:28:13: main []interface {} literal does not escape
-&amp;lt;autogenerated&amp;gt;:1: os.(*File).close .this does not escape
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Let us visualize this. Click on the slides and move forward/backward using arrow keys to see how the above program is executed and how the stack and heap memory is used:&lt;/p&gt;
-
-&lt;p&gt;
-            &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;c237c60018de490fa71e34cef7a50f0f&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
-            &lt;noscript&gt;
-                &lt;a href=&quot;//speakerdeck.com/player/c237c60018de490fa71e34cef7a50f0f&quot;&gt;
-                &lt;img alt=&quot;Speakerdeck&quot; class=&quot;lozad&quot; src=&quot;{{ site.baseurl }}/assets/images/placeholder.jpg&quot; data-src=&quot;//speakerd.s3.amazonaws.com/presentations/c237c60018de490fa71e34cef7a50f0f/slide_0.jpg&quot; /&gt;
-                &lt;/a&gt;
-            &lt;/noscript&gt;
-          &lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Note: If the slides look cut off at edges, then click on the title of the slide or &lt;a href=&quot;https://speakerdeck.com/deepu105/golang-memory-usage-stack-vs-heap&quot;&gt;here&lt;/a&gt; to open it directly in SpeakerDeck.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Main&lt;/strong&gt; function is kept in a “main frame” on the Stack&lt;/li&gt;
-  &lt;li&gt;Every function call is added to the stack memory as a frame-block&lt;/li&gt;
-  &lt;li&gt;All static variables including arguments and the return value is saved within the function frame-block on the Stack&lt;/li&gt;
-  &lt;li&gt;All static values regardless of type are stored directly on the Stack. This applies to global scope as well&lt;/li&gt;
-  &lt;li&gt;All dynamic types created on the Heap and is referenced from the Stack using Stack pointers. Objects of size less than 32Kb go to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;. This applies to global scope as well&lt;/li&gt;
-  &lt;li&gt;The struct with static data is kept on the stack until any dynamic value is added at that point the struct is moved to heap&lt;/li&gt;
-  &lt;li&gt;Functions called from the current function is pushed on top of the Stack&lt;/li&gt;
-  &lt;li&gt;When a function returns its frame is removed from the Stack&lt;/li&gt;
-  &lt;li&gt;Once the main process is complete, the objects on the Heap do not have any more pointers from Stack and becomes orphan&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The Stack as you can see is automatically managed and is done so by the operating system rather than Go itself. Hence we do not have to worry much about the Stack. The Heap, on the other hand, is not automatically managed by the OS and since its the biggest memory space and holds dynamic data, it could grow exponentially causing our program to run out of memory over time. It also becomes fragmented over time slowing down applications. This is where garbage collection comes in.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;go-memory-management&quot;&gt;Go Memory management&lt;/h1&gt;
-
-&lt;p&gt;Go’s memory management involves automatic allocation when memory is needed and garbage collection when memory is not needed anymore. It’s done by the standard library. Unlike C/C++ the developer does not have to deal with it and the underlying management done by Go is well optimized and efficient.&lt;/p&gt;
-
-&lt;h2 id=&quot;memory-allocation&quot;&gt;Memory Allocation&lt;/h2&gt;
-
-&lt;p&gt;Many programming languages that employ Garbage collection uses a generational memory structure to make collection efficient along with compaction to reduce fragmentation. Go takes a different approach here, as we saw earlier, Go structures memory quite differently. Go employs a thread-local cache to speed up small object allocations and maintains &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;scan&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt; spans to speed up GC. This structure along with the process avoids fragmentation to a great extent making compact unnecessary during GC. Let’s see how this allocation takes place.&lt;/p&gt;
-
-&lt;p&gt;Go decides the allocation process of an object based on its size and is divided into three categories:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Tiny(size &amp;lt; 16B)&lt;/strong&gt;: Objects of size less than 16 bytes are allocated using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt;’s tiny allocator. This is efficient and multiple tiny allocations are done on a single 16-byte block.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/Kh26oVp.gif&quot; alt=&quot;Tiny allocation&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Small(size 16B ~ 32KB)&lt;/strong&gt;: Objects of size between 16 bytes and 32 Kilobytes are allocated on the corresponding size class(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt;) on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mcache&lt;/code&gt; of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt; where the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;G&lt;/code&gt; is running.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/PY4pZhq.gif&quot; alt=&quot;Small allocation&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In both tiny and small allocation if the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt;’s list is empty the allocator will obtain a run of pages from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; to use for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mspan&lt;/code&gt;. If the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Large(size &amp;gt; 32KB)&lt;/strong&gt;: Objects of size greater than 32 kilobytes are allocated directly on the corresponding size class of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt;. If the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;mheap&lt;/code&gt; is empty or has no page runs large enough then it allocates a new group of pages (at least 1MB) from the OS.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/uLhLZMm.gif&quot; alt=&quot;Large allocation&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Note: You can find the above GIF images as slideshow &lt;a href=&quot;https://speakerdeck.com/deepu105/go-memory-allocation&quot;&gt;here&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;garbage-collection&quot;&gt;Garbage collection&lt;/h2&gt;
-
-&lt;p&gt;Now that we know how Go allocates memory, let us see how it automatically collects the Heap memory which is very important for the performance of an application. When a program tries to allocate more memory on the Heap than that is freely available we encounter &lt;strong&gt;out of memory errors&lt;/strong&gt;. An incorrectly managed heap could also cause a memory leak.&lt;/p&gt;
-
-&lt;p&gt;Go manages the heap memory by garbage collection. In simple terms, it frees the memory used by orphan objects, i.e, objects that are no longer referenced from the Stack directly or indirectly(via a reference in another object) to make space for new object creation.&lt;/p&gt;
-
-&lt;p&gt;As of version 1.12, the Golang uses a non-generational concurrent tri-color mark and sweep collector. The collection process roughly looks like the below, I don’t want to go into details as it changes from version to version. However, if you are interested in those, then I recommend &lt;a href=&quot;https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html&quot;&gt;this&lt;/a&gt; great series.&lt;/p&gt;
-
-&lt;p&gt;The process starts when a certain percentage(GC Percentage) of heap allocations are done and the collector does different phases of work:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Mark Setup&lt;/strong&gt; (Stop the world): When GC starts, the collector turns on &lt;strong&gt;&lt;a href=&quot;https://www.memorymanagement.org/glossary/w.html#term-write-barrier&quot;&gt;write barriers&lt;/a&gt;&lt;/strong&gt; so that data integrity can be maintained during the next concurrent phase. This step needs a very small pause as every running Goroutine is paused to enable this and then continues.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Marking&lt;/strong&gt; (Concurrent): Once write barriers are turned on the actual marking process is started in parallel to the application using 25% of the available CPU capacity. The corresponding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;s are reserved until marking is complete. This is done using dedicated Goroutines. Here the GC marks values in the heap that is alive(referenced from the Stack of any active Goroutines). When collection takes longer the process may employ active Goroutine from application to assist in the marking process. this is called &lt;strong&gt;Mark Assist&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Mark Termination&lt;/strong&gt; (Stop the world): Once marking is done every active Goroutine is paused and write barriers are turned off and clean up tasks are started. The GC also calculates the next GC goal here. Once this is done the reserved &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;P&lt;/code&gt;s are released back to the application.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Sweeping&lt;/strong&gt; (Concurrent): Once the collection is done and allocations are attempted, the sweeping process starts to reclaim memory from the heap that is not marked alive. The amount of memory swept is synchronous to the amount being allocated.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Let us see these in action for a single Goroutine. The number of objects is kept small for brevity. Click on the slides and move forward/backward using arrow keys to see the process:&lt;/p&gt;
-
-&lt;p&gt;
-            &lt;script async=&quot;&quot; class=&quot;speakerdeck-embed&quot; data-id=&quot;f162d0725e1940a69bdbb8c0cd9e302a&quot; data-ratio=&quot;1.77777777777778&quot; src=&quot;//speakerdeck.com/assets/embed.js&quot;&gt;&lt;/script&gt;
-            &lt;noscript&gt;
-                &lt;a href=&quot;//speakerdeck.com/player/f162d0725e1940a69bdbb8c0cd9e302a&quot;&gt;
-                &lt;img alt=&quot;Speakerdeck&quot; class=&quot;lozad&quot; src=&quot;{{ site.baseurl }}/assets/images/placeholder.jpg&quot; data-src=&quot;//speakerd.s3.amazonaws.com/presentations/f162d0725e1940a69bdbb8c0cd9e302a/slide_0.jpg&quot; /&gt;
-                &lt;/a&gt;
-            &lt;/noscript&gt;
-          &lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Note: If the slides look cut off at edges, then click on the title of the slide or &lt;a href=&quot;https://speakerdeck.com/deepu105/go-gc-visualized&quot;&gt;here&lt;/a&gt; to open it directly in SpeakerDeck.&lt;/em&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;We are looking at a single Goroutine, actual process does this for all active Goroutines. The write barriers are turned on first.&lt;/li&gt;
-  &lt;li&gt;The marking process picks a GC root and colors it black and traverses pointers from it in a depth-first tree-like manner, it marks each object encountered grey&lt;/li&gt;
-  &lt;li&gt;When it reaches an object in a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;noscan&lt;/code&gt; span or when an object has no more pointers it finishes for the root and picks up next GC root object&lt;/li&gt;
-  &lt;li&gt;Once all GC roots are scanned, it picks up a grey object and continues to traverse its pointers in similar fashion&lt;/li&gt;
-  &lt;li&gt;If there are any pointer changes to an object when write barriers are on, the object gets colored grey so that GC re-scans it&lt;/li&gt;
-  &lt;li&gt;When there are no more grey objects left the marking process is complete and write barrier is turned off&lt;/li&gt;
-  &lt;li&gt;Sweeping will take place when allocations start&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This has some stop-the-world process but it’s generally very fast that it is negligible most of the time. The coloring of objects takes place in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;gcmarkBits&lt;/code&gt; attribute on the span.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;This post should give you an overview of the Go memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and the implementation details keep changing from version to version. But for most Go developers this level of information would be sufficient and I hope it helps you write better code, considering these in mind, for more performant applications and keeping these in mind would help you to avoid the next memory leak issue you might encounter otherwise.&lt;/p&gt;
-
-&lt;p&gt;I hope you had fun learning this, stay tuned for the next post in the series.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.learngoprogramming.com/a-visual-guide-to-golang-memory-allocator-from-ground-up-e132258453ed&quot;&gt;blog.learngoprogramming.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.ardanlabs.com/blog/2018/12/garbage-collection-in-go-part1-semantics.html&quot;&gt;www.ardanlabs.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://povilasv.me/go-memory-management/&quot;&gt;povilasv.me&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/a-journey-with-go/go-memory-management-and-allocation-a7396d430f44&quot;&gt;medium.com/a-journey-with-go&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/a-journey-with-go/go-how-does-the-garbage-collector-mark-the-memory-72cfc12c6976&quot;&gt;medium.com/a-journey-with-go&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hub.packtpub.com/implementing-memory-management-with-golang-garbage-collector/&quot;&gt;hub.packtpub.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://making.pusher.com/golangs-real-time-gc-in-theory-and-practice/&quot;&gt;making.pusher.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://segment.com/blog/allocation-efficiency-in-high-performance-go-services/&quot;&gt;segment.com/blog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://go101.org/article/memory-block.html&quot;&gt;go101.org&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image inspired by &lt;a href=&quot;https://medium.com/a-journey-with-go/go-discovery-of-the-trace-package-e5a821743c3c&quot;&gt;a-journey-with-go&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-</description>
-        <pubDate>Mon, 17 Feb 2020 00:00:00 +0100</pubDate>
-        <link>https://deepu.tech/memory-management-in-golang/</link>
-        <guid isPermaLink="true">https://deepu.tech/memory-management-in-golang/</guid>
-        
-        <category>go</category>
-        
-        <category>garbagecollection</category>
-        
-        <category>programming</category>
-        
-        <category>computerscience</category>
         
         
       </item>
