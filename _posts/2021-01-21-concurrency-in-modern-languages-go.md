@@ -1,12 +1,21 @@
 ---
-title: "Concurrency in modern programming languages: Golang"
-description: Building a concurrent web server in Golang to compare concurrency performance with Rust, JS, TS, Kotlin, and Java
+title: 'Concurrency in modern programming languages: Golang'
+description: >-
+  Building a concurrent web server in Golang to compare concurrency performance
+  with Rust, JS, TS, Kotlin, and Java
 published: true
 featured: false
-tags: [languages, concurrency, async, golang]
+tags:
+  - languages
+  - concurrency
+  - async
+  - golang
 series: concurrency in modern programming languages
-canonical_url: https://deepu.tech/concurrency-in-modern-languages-go/
-cover_image: https://i.imgur.com/ZTfXUBU.jpg
+canonical_url: 'https://deepu.tech/concurrency-in-modern-languages-go/'
+cover_image: 'https://i.imgur.com/ZTfXUBU.jpg'
+devto_id: 578413
+devto_url: >-
+  https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -250,3 +259,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Peggy Anke](https://unsplash.com/@instagramfotografin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/juggle?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
