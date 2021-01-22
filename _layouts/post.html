@@ -52,6 +52,16 @@ post_class: post-template
             <div class="mainheading">
                 <!-- Post Title -->
                 <h1 class="posttitle">{{ page.title }}</h1>
+                <!-- Post Featured Image -->
+                {% if page.cover_image %}
+                <img
+                    data-src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}"
+                    alt="{{ page.title }}"
+                    class="featured-image img-fluid lozad"
+                    src="{{ site.baseurl }}/assets/images/placeholder.jpg"
+                >
+                {% endif %}
+                <!-- End Featured Image -->
                 <!-- Author Box -->
                 {% if page.author %}
                 <div class="row post-top-meta">
@@ -81,16 +91,6 @@ post_class: post-template
                     </div>
                 </div>
                 {% endif %}
-                <!-- Post Featured Image -->
-                {% if page.cover_image %}
-                <img
-                    data-src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}"
-                    alt="{{ page.title }}"
-                    class="featured-image img-fluid lozad"
-                    src="{{ site.baseurl }}/assets/images/placeholder.jpg"
-                >
-                {% endif %}
-                <!-- End Featured Image -->
             </div>
 
             <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
