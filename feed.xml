@@ -17,7 +17,7 @@ layout: null
         <description>{{ post.description | xml_escape }} | &lt;a href=&quot;{{ post.url | prepend: site.baseurl | prepend: site.url }}&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>{{ site.authors[post.author].display_name | xml_escape }}</author>
         <content:encoded>{{ post.content | xml_escape }}</content:encoded>
-        <media:content>{{ post.cover_image | xml_escape }}</media:content>
+        <media:content url="{{ post.cover_image | xml_escape }}" medium="image">{{ post.cover_image | xml_escape }}</media:content>
         <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
         <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
         <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
