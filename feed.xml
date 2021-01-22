@@ -5,13 +5,13 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 22 Jan 2021 12:34:31 +0100</pubDate>
-    <lastBuildDate>Fri, 22 Jan 2021 12:34:31 +0100</lastBuildDate>
+    <pubDate>Fri, 22 Jan 2021 13:00:13 +0100</pubDate>
+    <lastBuildDate>Fri, 22 Jan 2021 13:00:13 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
         <title>Concurrency in modern programming languages: Golang</title>
-        <description>Building a concurrent web server in Golang to compare concurrency performance with Rust, JS, TS, Kotlin, and Java | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>Building a concurrent web server in Golang to compare concurrency performance with Rust, JS, TS, Kotlin, and Java | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
@@ -425,7 +425,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
     
       <item>
         <title>Concurrency in modern programming languages: Rust</title>
-        <description>Building a concurrent web server in Rust to compare concurrency performance with Go, JS, TS, Kotlin, and Java | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>Building a concurrent web server in Rust to compare concurrency performance with Go, JS, TS, Kotlin, and Java | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
@@ -1031,7 +1031,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
     
       <item>
         <title>Concurrency in modern programming languages: Introduction</title>
-        <description>Building a concurrent web server in Rust, Go, JS, TS, Kotlin, and Java to compare concurrency performance | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>Building a concurrent web server in Rust, Go, JS, TS, Kotlin, and Java to compare concurrency performance | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
@@ -1191,7 +1191,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
     
       <item>
         <title>8 important things I learned as a software developer over a decade.</title>
-        <description>Advice for beginners from my decade long development career | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>Advice for beginners from my decade long development career | &lt;a href=&quot;https://deepu.tech/most-important-things-i-learned-in-a-decade/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
@@ -1289,7 +1289,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
     
       <item>
         <title>Let's face it, we have a broken technical interview process in our industry</title>
-        <description>How the current technical interview process followed by the majority of the companies favor only a small subset of developers. | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>How the current technical interview process followed by the majority of the companies favor only a small subset of developers. | &lt;a href=&quot;https://deepu.tech/the-problem-with-hiring-in-it/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
@@ -1408,7 +1408,7 @@ Most of the IT companies, including &lt;a href=&quot;http://they.whiteboarded.me
     
       <item>
         <title>How to become an effective Polyglot Developer</title>
-        <description>What are the advantages and disadvantages of being a polyglot developer and how to be an effective polyglot developer | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>What are the advantages and disadvantages of being a polyglot developer and how to be an effective polyglot developer | &lt;a href=&quot;https://deepu.tech/how-to-be-an-effective-polyglot-developer/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
@@ -1546,7 +1546,7 @@ Most of the IT companies, including &lt;a href=&quot;http://they.whiteboarded.me
     
       <item>
         <title>My PC build for VR gaming</title>
-        <description>I built a Windows PC for playing Half-Life: Alyx | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>I built a Windows PC for playing Half-Life: Alyx | &lt;a href=&quot;https://deepu.tech/my-vr-gaming-pc-build/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
@@ -1743,7 +1743,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
     
       <item>
         <title>Avoiding Memory Leaks in NodeJS: Best Practices for Performance</title>
-        <description>Discover what memory leaks are and how to avoid them in your NodeJS application. | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>Discover what memory leaks are and how to avoid them in your NodeJS application. | &lt;a href=&quot;https://deepu.tech/avoiding-memory-leaks-in-nodejs/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;This is a post by me originally published in &lt;a href=&quot;https://blog.appsignal.com/2020/05/06/avoiding-memory-leaks-in-nodejs-best-practices-for-performance.html&quot;&gt;AppSignal blog&lt;/a&gt; as a guest author. This is just a excerpt from the same.&lt;/p&gt;
 
@@ -1777,7 +1777,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
     
       <item>
         <title>🚀 Visualizing memory management in Rust</title>
-        <description>Let us take a closer look at how Rust manages memory. | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>Let us take a closer look at how Rust manages memory. | &lt;a href=&quot;https://deepu.tech/memory-management-in-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know if something can be improved in the post.&lt;/p&gt;
 
@@ -2189,7 +2189,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
     
       <item>
         <title>Forget NodeJS! Build native TypeScript applications with Deno 🦖</title>
-        <description>Deno is a modern JavaScript/TypeScript runtime &amp; scripting environment. It is what NodeJS should have been according to Ryan Dahl who created both tools | https://deepu.tech">Read the full article on deepu.tech</a>' | xml_escape }}</description>
+        <description>Deno is a modern JavaScript/TypeScript runtime &amp; scripting environment. It is what NodeJS should have been according to Ryan Dahl who created both tools | &lt;a href=&quot;https://deepu.tech/deno-runtime-for-typescript/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
