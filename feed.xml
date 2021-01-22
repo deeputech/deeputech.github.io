@@ -14,7 +14,7 @@ layout: null
     {% for post in site.posts limit:10 %}
       <item>
         <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.description | xml_escape }} | {{ "<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">Read the full article on deepu.tech</a>" | xml_escape }}</description>
+        <description>{{ post.description | xml_escape }} | {{ '<a href="{{ post.url | prepend: site.baseurl | prepend: site.url }}">Read the full article on deepu.tech</a>' | xml_escape }}</description>
         <author>{{ site.authors[post.author].display_name | xml_escape }}</author>
         <content:encoded>{{ post.content | xml_escape }}</content:encoded>
         <media:content>{{ post.cover_image | xml_escape }}</media:content>
