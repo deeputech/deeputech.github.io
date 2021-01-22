@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 22 Jan 2021 13:00:13 +0100</pubDate>
-    <lastBuildDate>Fri, 22 Jan 2021 13:00:13 +0100</lastBuildDate>
+    <pubDate>Fri, 22 Jan 2021 13:03:50 +0100</pubDate>
+    <lastBuildDate>Fri, 22 Jan 2021 13:03:50 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -407,7 +407,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 
 &lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://i.imgur.com/ZTfXUBU.jpg</media:content>
+        <media:content url="https://i.imgur.com/ZTfXUBU.jpg" medium="image">https://i.imgur.com/ZTfXUBU.jpg</media:content>
         <pubDate>Thu, 21 Jan 2021 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/concurrency-in-modern-languages-go/</link>
         <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages-go/</guid>
@@ -1013,7 +1013,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 
 &lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://i.imgur.com/XalVFUX.jpg</media:content>
+        <media:content url="https://i.imgur.com/XalVFUX.jpg" medium="image">https://i.imgur.com/XalVFUX.jpg</media:content>
         <pubDate>Thu, 24 Dec 2020 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/concurrency-in-modern-languages-rust/</link>
         <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages-rust/</guid>
@@ -1173,7 +1173,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 
 &lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://i.imgur.com/anGGYRi.jpg</media:content>
+        <media:content url="https://i.imgur.com/anGGYRi.jpg" medium="image">https://i.imgur.com/anGGYRi.jpg</media:content>
         <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/concurrency-in-modern-languages/</link>
         <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages/</guid>
@@ -1271,7 +1271,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 
 &lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/8-important-things-i-learned-as-a-software-developer-over-a-decade-4no3&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://i.imgur.com/eMIb5xp.jpeg</media:content>
+        <media:content url="https://i.imgur.com/eMIb5xp.jpeg" medium="image">https://i.imgur.com/eMIb5xp.jpeg</media:content>
         <pubDate>Tue, 01 Sep 2020 00:00:00 +0200</pubDate>
         <link>https://deepu.tech/most-important-things-i-learned-in-a-decade/</link>
         <guid isPermaLink="true">https://deepu.tech/most-important-things-i-learned-in-a-decade/</guid>
@@ -1390,7 +1390,7 @@ Most of the IT companies, including &lt;a href=&quot;http://they.whiteboarded.me
 
 &lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/let-s-face-it-we-have-a-broken-technical-interview-process-in-our-industry-56j2&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://i.imgur.com/BrwZzTc.jpg</media:content>
+        <media:content url="https://i.imgur.com/BrwZzTc.jpg" medium="image">https://i.imgur.com/BrwZzTc.jpg</media:content>
         <pubDate>Wed, 12 Aug 2020 00:00:00 +0200</pubDate>
         <link>https://deepu.tech/the-problem-with-hiring-in-it/</link>
         <guid isPermaLink="true">https://deepu.tech/the-problem-with-hiring-in-it/</guid>
@@ -1528,7 +1528,7 @@ Most of the IT companies, including &lt;a href=&quot;http://they.whiteboarded.me
 
 &lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/how-to-become-an-effective-polyglot-developer-3moe&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://i.imgur.com/3ereMQQ.jpg</media:content>
+        <media:content url="https://i.imgur.com/3ereMQQ.jpg" medium="image">https://i.imgur.com/3ereMQQ.jpg</media:content>
         <pubDate>Mon, 29 Jun 2020 00:00:00 +0200</pubDate>
         <link>https://deepu.tech/how-to-be-an-effective-polyglot-developer/</link>
         <guid isPermaLink="true">https://deepu.tech/how-to-be-an-effective-polyglot-developer/</guid>
@@ -1727,7 +1727,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 
 &lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/my-pc-build-for-vr-gaming-2n79&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://i.imgur.com/EuNcfsv.jpg</media:content>
+        <media:content url="https://i.imgur.com/EuNcfsv.jpg" medium="image">https://i.imgur.com/EuNcfsv.jpg</media:content>
         <pubDate>Fri, 12 Jun 2020 00:00:00 +0200</pubDate>
         <link>https://deepu.tech/my-vr-gaming-pc-build/</link>
         <guid isPermaLink="true">https://deepu.tech/my-vr-gaming-pc-build/</guid>
@@ -1759,7 +1759,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 
 &lt;p&gt;Cover image credit: &lt;a href=&quot;https://blog.appsignal.com/images/blog/2020-05/node-leak.jpg&quot;&gt;AppSignal&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://blog.appsignal.com/images/blog/2020-05/node-leak.jpg</media:content>
+        <media:content url="https://blog.appsignal.com/images/blog/2020-05/node-leak.jpg" medium="image">https://blog.appsignal.com/images/blog/2020-05/node-leak.jpg</media:content>
         <pubDate>Wed, 06 May 2020 00:00:00 +0200</pubDate>
         <link>https://deepu.tech/avoiding-memory-leaks-in-nodejs/</link>
         <guid isPermaLink="true">https://deepu.tech/avoiding-memory-leaks-in-nodejs/</guid>
@@ -2171,7 +2171,7 @@ I tried using &lt;a href=&quot;https://www.vrdesktop.net/&quot;&gt;Virtual Deskt
 
 &lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/visualizing-memory-management-in-rust-5898&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://i.imgur.com/xolsOsW.jpg</media:content>
+        <media:content url="https://i.imgur.com/xolsOsW.jpg" medium="image">https://i.imgur.com/xolsOsW.jpg</media:content>
         <pubDate>Tue, 31 Mar 2020 00:00:00 +0200</pubDate>
         <link>https://deepu.tech/memory-management-in-rust/</link>
         <guid isPermaLink="true">https://deepu.tech/memory-management-in-rust/</guid>
@@ -2847,7 +2847,7 @@ choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;deno
 
 &lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/forget-nodejs-build-native-typescript-applications-with-deno-kkb&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
-        <media:content>https://i.imgur.com/0FWtns5.jpg</media:content>
+        <media:content url="https://i.imgur.com/0FWtns5.jpg" medium="image">https://i.imgur.com/0FWtns5.jpg</media:content>
         <pubDate>Tue, 18 Feb 2020 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/deno-runtime-for-typescript/</link>
         <guid isPermaLink="true">https://deepu.tech/deno-runtime-for-typescript/</guid>
