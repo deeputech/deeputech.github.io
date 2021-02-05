@@ -22,7 +22,7 @@ Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let 
 
 ---
 
-This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I'll try to publish them weekly.
+This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.
 
 1. [Introduction](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk)
 1. [Concurrent web server in Rust](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co)
@@ -53,7 +53,7 @@ With Go, it's possible to do multi-threaded concurrency and parallelization with
 
 Multi-threading is achieved with goroutines that provide green threads (virtual threads that are scheduled by a runtime or virtual machine and not managed by the operating system) and there are no ways to use OS threads directly like in Rust for example. Go also provides implementations required for message-passing concurrency using [channels](https://golang.org/doc/effective_go.html#channels) and shared-state concurrency using mutexes and WaitGroups, though Go discourages shared state concurrency. Parallelization is also possible using goroutines.
 
-### [Asynchronous processing](https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html)
+### Asynchronous processing
 
 Technically asynchronous programming is not part of concurrency but in practice, it goes hand in hand for many use cases and improves performance, and makes resource usage more efficient. This is the default behavior in Go when using goroutines and hence there is no special syntax around these so synchronous programming with goroutines is not commonly done and would require using WaitGroups and such.
 
