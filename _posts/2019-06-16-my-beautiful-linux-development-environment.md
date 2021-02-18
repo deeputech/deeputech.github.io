@@ -102,7 +102,7 @@ Now, these are mostly objective choices and really doesn't matter as long as you
 
 ![](https://thepracticaldev.s3.amazonaws.com/i/flq8pew1hr6l1hwj6egw.png)
 
-**Integrated development environment(IDE)**: [IntelliJ IDEA ultimate](https://www.jetbrains.com/idea/) - I use this only for Java & other JVM language Development
+**Integrated development environment(IDE)**: [IntelliJ IDEA Ultimate](https://www.jetbrains.com/idea/) - I use this for Java & other JVM language Development
 
 **Code Editors**: [Visual Studio Code](https://code.visualstudio.com/) - My go-to editor. I love it. I use VSCode for web development, Go, Python, JS development, DevOps and everything other than JVM languages. A VSCode setup is never complete without some good plugins. [Here](https://gist.github.com/deepu105/4599d3b381218b9d1a63119fbf9ca537) are the plugins that I'm using. You can run the script to install those.
 

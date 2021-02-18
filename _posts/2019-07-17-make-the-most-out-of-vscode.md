@@ -14,14 +14,14 @@ Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
 
 ----
  
-[Visual Studio Code](https://code.visualstudio.com/)(I like the sound of VS Code better), I just love it. It is my primary IDE. 
+[Visual Studio Code](https://code.visualstudio.com/)(I like the sound of VS Code better), I just love it. It is my primary code editor. 
 
 I always loved lightweight editors over IDEs. Many years ago I was using Eclipse for development and [Notepad++](https://notepad-plus-plus.org/) with some plugins for all other lightweight stuff. Then I discovered sublime text and was using it for a while. I still was finding Eclipse too heavyweight when I was doing web development. Then came [Brackets](http://brackets.io/) from Adobe. It was a fairly nice editor especially for web development and I started using it heavily for web development. But Brackets was bit slow back then on a large codebase. Then came [Atom](https://atom.io/) which revolutionized the NodeJS desktop application landscape by introducing the Atom shell which ultimately became [Electron](https://electronjs.org/). So I switched to Atom and loved its slick interface and nice pluggable features. It became my primary editor for all web development. 
 
-So Electron paved the way for VS Code and though at first, I was skeptical due to the association with Visual Studio, I tried it out and was amazed by its speed and user experience. There was no turning back now. I slowly started using VS Code for most of my day to day development, except for Java which I was using IntelliJ by now. Fast forward now below are the editor/IDE I use for development.
+So Electron paved the way for VS Code and though at first, I was skeptical due to the association with Visual Studio, I tried it out and was amazed by its speed and user experience. There was no turning back now. I slowly started using VS Code for most of my day to day development, except for JVM development which I was using IntelliJ Ultimate by now and it is hard to beat IntelliJ for JVM development. Fast forward now below are the editor/IDE I use for development.
 
-- **VS Code**: JavaScript, TypeScript, EJS, HTML, CSS, Golang, Python, Ruby, Shell, Docker, Kubernetes, Terraform and everything in between including writing this blog post.
-- **IntelliJ Idea**: Java, Scala, Kotlin (Though I use VS Code for minor edits and to read the code, etc)
+- **VS Code**: JavaScript, TypeScript, EJS, HTML, CSS, Golang, Rust, Python, Ruby, Shell, Docker, Kubernetes, Terraform and everything in between including writing this blog post.
+- **IntelliJ Idea**: Java, Scala, Kotlin, Groovy
 - **VIM**: For quick edits from the command line.
 
 # Plugins

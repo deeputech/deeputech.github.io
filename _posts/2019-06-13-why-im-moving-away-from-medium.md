@@ -60,7 +60,7 @@ When I was trying to find a different platform, some of the most important aspec
 
 * **Community**: A community without paywall and a community were your blogs get visibility and get traffic.
 
-* **Ease of authoring**: Authoring experience was important, hence at minimum Markdown support was a must. This way I can author posts in my favorite IDE(VsCode in this case) and doesn’t have to be restricted with the platform's capability. Also, this ensures that I can easily move my posts to another platform in the future if needed.
+* **Ease of authoring**: Authoring experience was important, hence at minimum Markdown support was a must. This way I can author posts in my favorite editor(VsCode in this case) and doesn’t have to be restricted with the platform's capability. Also, this ensures that I can easily move my posts to another platform in the future if needed.
 
 Dev.to satisfied these needs and provided a nice and clean UI and descent publishing experience on top.
 
