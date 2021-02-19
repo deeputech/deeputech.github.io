@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Feb 2021 17:58:58 +0100</pubDate>
-    <lastBuildDate>Thu, 18 Feb 2021 17:58:58 +0100</lastBuildDate>
+    <pubDate>Fri, 19 Feb 2021 21:05:57 +0100</pubDate>
+    <lastBuildDate>Fri, 19 Feb 2021 21:05:57 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -32,7 +32,7 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&quot;concurrency-in-javascript&quot;&gt;Concurrency in JavaScript&lt;/h2&gt;
+&lt;h2 id=&quot;concurrency-in-javascript--nodejs&quot;&gt;Concurrency in JavaScript &amp;amp; NodeJS&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;JavaScript has a concurrency model based on an event loop, which is responsible for executing the code, collecting and processing events, and executing queued sub-tasks. This model is quite different from models in other languages like C and Java.&lt;/p&gt;
