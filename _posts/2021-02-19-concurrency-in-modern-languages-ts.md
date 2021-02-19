@@ -1,6 +1,8 @@
 ---
-title: "Concurrency in modern programming languages: TypeScript on Deno"
-description: "Building a concurrent web server in TypeScript on Deno to compare concurrency performance with Rust, Go, JS, Kotlin, and Java"
+title: 'Concurrency in modern programming languages: TypeScript on Deno'
+description: >-
+  Building a concurrent web server in TypeScript on Deno to compare concurrency
+  performance with Rust, Go, JS, Kotlin, and Java
 published: true
 featured: false
 tags:
@@ -9,8 +11,11 @@ tags:
   - javascript
   - typescript
 series: concurrency in modern programming languages
-canonical_url: "https://deepu.tech/concurrency-in-modern-languages-ts/"
-cover_image: "https://i.imgur.com/zIc76rV.jpg"
+canonical_url: 'https://deepu.tech/concurrency-in-modern-languages-ts/'
+cover_image: 'https://i.imgur.com/zIc76rV.jpg'
+devto_id: 612247
+devto_url: >-
+  https://dev.to/deepu105/concurrency-in-modern-programming-languages-typescript-on-deno-hkb
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -193,3 +198,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Jeffrey Brandjes](https://unsplash.com/@jeffreyfotografie?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
