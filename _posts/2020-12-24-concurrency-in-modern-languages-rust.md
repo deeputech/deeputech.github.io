@@ -1,5 +1,5 @@
 ---
-title: 'Concurrency in modern programming languages: Rust'
+title: "Concurrency in modern programming languages: Rust"
 description: >-
   Building a concurrent web server in Rust to compare concurrency performance
   with Go, JS, TS, Kotlin, and Java
@@ -11,10 +11,10 @@ tags:
   - async
   - rust
 series: concurrency in modern programming languages
-canonical_url: 'https://deepu.tech/concurrency-in-modern-languages-rust/'
-cover_image: 'https://i.imgur.com/XalVFUX.jpg'
+canonical_url: "https://deepu.tech/concurrency-in-modern-languages-rust/"
+cover_image: "https://i.imgur.com/XalVFUX.jpg"
 devto_id: 551615
-devto_url: 'https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co'
+devto_url: "https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co"
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -256,7 +256,9 @@ This example uses an async `ThreadPool`. I have omitted import statements for br
 fn main() {
     let listener = TcpListener::bind("127.0.0.1:8080").unwrap(); // bind listener
 
-    let pool = ThreadPool::new().expect("couldn't create threadpool");
+    let mut pool_builder = ThreadPoolBuilder::new();
+    pool_builder.pool_size(100);
+    let pool = pool_builder.create().expect("couldn't create threadpool");
     let mut count = 0; // count used to introduce delays
 
     // Listen for an incoming connection.
@@ -344,6 +346,96 @@ Percentage of the requests served within a certain time (ms)
 
 It does seem slightly faster by some milliseconds compared to previous solutions.
 
+### Asynchronous multi-threaded concurrent webserver with Tokio
+
+This is another version of asynchronous multi-threaded webserver using [Tokio](https://github.com/tokio-rs/tokio) and it was contributed by [Remco Bloemen](https://github.com/Recmo). I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/rustws_async_tokio).
+
+```rust
+#[tokio::main()] // Tokio uses a threadpool sized for number of cpus by default
+async fn main() {
+    let listener = TcpListener::bind("127.0.0.1:8080").await.unwrap();  // bind listener
+    let mut count = 0; // count used to introduce delays
+
+    // Listen for an incoming connection.
+    loop {
+        count = count + 1;
+        let (socket, _) = listener.accept().await.unwrap();
+        // spawning each connection in a new tokio thread asynchronously
+        tokio::spawn(async move { handle_connection(socket, Box::new(count)).await });
+    }
+}
+
+async fn handle_connection(mut stream: TcpStream, count: Box<i64>) {
+    // Read the first 1024 bytes of data from the stream
+    let mut buffer = [0; 1024];
+    stream.read(&mut buffer).await.unwrap();
+
+    // add 2 second delay to every 10th request
+    if (*count % 10) == 0 {
+        println!("Adding delay. Count: {}", count);
+        sleep(Duration::from_secs(2)).await;
+    }
+
+    let header = "
+    HTTP/1.0 200 OK
+    Connection: keep-alive
+    Content-Length: 174
+    Content-Type: text/html; charset=utf-8
+        ";
+
+    let contents = read_to_string("hello.html").await.unwrap();
+
+    let response = format!("{}\r\n\r\n{}", header, contents);
+
+    stream.write_all(response.as_bytes()).await.unwrap(); // write response
+}
+```
+
+This is very similar to the previous example but works with less number of thread pools and uses async invocation. We do not have the bottleneck from the previous thread pool example in this case.
+
+Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.
+
+```shell
+ab -c 100 -n 10000 http://127.0.0.1:8080/
+
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+...
+
+Document Path:          /
+Document Length:        176 bytes
+
+Concurrency Level:      100
+Time taken for tests:   20.569 seconds
+Complete requests:      10000
+Failed requests:        0
+Total transferred:      3030000 bytes
+HTML transferred:       1760000 bytes
+Requests per second:    486.17 [#/sec] (mean)
+Time per request:       205.688 [ms] (mean)
+Time per request:       2.057 [ms] (mean, across all concurrent requests)
+Transfer rate:          143.86 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   2.4      0      22
+Processing:     0  202 600.3      1    2013
+Waiting:        0  202 600.3      1    2012
+Total:          0  203 600.3      2    2029
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      3
+  75%      5
+  80%      7
+  90%   2000
+  95%   2003
+  98%   2006
+  99%   2008
+ 100%   2029 (longest request)
+```
+
+It does seem slightly slower by some milliseconds compared to previous solution.
+
 ## Conclusion
 
 As I explained in the [first part](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Rust. And for this particular use case, asynchronous solutions do seem to be the best choice.
@@ -366,4 +458,3 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Jacob Mejicanos](https://unsplash.com/@jacobmejicanos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-
