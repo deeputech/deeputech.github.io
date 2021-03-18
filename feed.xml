@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 18 Mar 2021 12:12:03 +0100</pubDate>
-    <lastBuildDate>Thu, 18 Mar 2021 12:12:03 +0100</lastBuildDate>
+    <pubDate>Thu, 18 Mar 2021 18:04:04 +0100</pubDate>
+    <lastBuildDate>Thu, 18 Mar 2021 18:04:04 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -225,7 +225,7 @@
 
 &lt;p&gt;Being a compiler, it is easy to change output targets without having to change your component’s code. For example, Svelte supports server-side rendering out of the box by providing a compiler mode for it (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dom&lt;/code&gt; vs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssr&lt;/code&gt;). There is even a &lt;a href=&quot;https://github.com/halfnelson/svelte-native&quot;&gt;NativeScript integration&lt;/a&gt; for Svelte that makes use of this flexibility to produce targets beyond &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dom&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssr&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;There is also the &lt;a href=&quot;https://svelte.dev/blog/sapper-towards-the-ideal-web-app-framework&quot;&gt;new Sapper framework&lt;/a&gt; from Svelte, which is similar to &lt;a href=&quot;https://learnnextjs.com/&quot;&gt;Next.js&lt;/a&gt; but optimized to work with Svelte’s philosophy. Sapper supports SSR, Progressive Web Apps, code-splitting, and so on.&lt;/p&gt;
+&lt;p&gt;There is also the &lt;a href=&quot;https://svelte.dev/blog/sapper-towards-the-ideal-web-app-framework&quot;&gt;Sapper framework&lt;/a&gt;, soon to be &lt;a href=&quot;https://github.com/sveltejs/kit&quot;&gt;SvelteKit&lt;/a&gt;, from Svelte team, which is similar to &lt;a href=&quot;https://learnnextjs.com/&quot;&gt;Next.js&lt;/a&gt; but optimized to work with Svelte’s philosophy. Sapper supports SSR, Progressive Web Apps, code-splitting, and so on.&lt;/p&gt;
 
 &lt;h3 id=&quot;disadvantages&quot;&gt;Disadvantages&lt;/h3&gt;
 
@@ -235,7 +235,7 @@
 
 &lt;p&gt;Svelte is very young and that means it is not as battle-tested as React or Angular and you might run into some walls at times. This means it’s probably not suitable for very complex or mission-critical applications that are expected to scale.&lt;/p&gt;
 
-&lt;p&gt;This might not be a long-term problem as the framework is exploding in popularity and the introduction of Sapper would help with the scaling concerns.&lt;/p&gt;
+&lt;p&gt;This might not be a long-term problem as the framework is exploding in popularity and the introduction of Sapper has helped with the scaling concerns. Though, the &lt;a href=&quot;https://svelte.dev/blog/whats-the-deal-with-sveltekit&quot;&gt;confusion&lt;/a&gt; around Sapper vs SvelteKit could have been avoided, in my opinion.&lt;/p&gt;
 
 &lt;h4 id=&quot;smaller-community-and-ecosystem&quot;&gt;Smaller community and ecosystem&lt;/h4&gt;
 
