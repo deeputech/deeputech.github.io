@@ -8,10 +8,10 @@ tags:
   - javascript
   - web
   - react
-canonical_url: 'https://deepu.tech/what-about-svelte/'
-cover_image: 'https://i.imgur.com/YZca3NW.jpg'
+canonical_url: "https://deepu.tech/what-about-svelte/"
+cover_image: "https://i.imgur.com/YZca3NW.jpg"
 devto_id: 638352
-devto_url: 'https://dev.to/deepu105/what-about-svelte-should-you-care-ni1'
+devto_url: "https://dev.to/deepu105/what-about-svelte-should-you-care-ni1"
 ---
 
 _Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what you think about Svelte in the comments._
@@ -168,7 +168,7 @@ Let's see an example of a writable store:
 
 Being a compiler, it is easy to change output targets without having to change your component's code. For example, Svelte supports server-side rendering out of the box by providing a compiler mode for it (`dom` vs `ssr`). There is even a [NativeScript integration](https://github.com/halfnelson/svelte-native) for Svelte that makes use of this flexibility to produce targets beyond `dom` and `ssr`.
 
-There is also the [new Sapper framework](https://svelte.dev/blog/sapper-towards-the-ideal-web-app-framework) from Svelte, which is similar to [Next.js](https://learnnextjs.com/) but optimized to work with Svelte's philosophy. Sapper supports SSR, Progressive Web Apps, code-splitting, and so on.
+There is also the [Sapper framework](https://svelte.dev/blog/sapper-towards-the-ideal-web-app-framework), soon to be [SvelteKit](https://github.com/sveltejs/kit), from Svelte team, which is similar to [Next.js](https://learnnextjs.com/) but optimized to work with Svelte's philosophy. Sapper supports SSR, Progressive Web Apps, code-splitting, and so on.
 
 ### Disadvantages
 
@@ -178,7 +178,7 @@ All those advantages we saw above don't mean there are no downsides, every frame
 
 Svelte is very young and that means it is not as battle-tested as React or Angular and you might run into some walls at times. This means it's probably not suitable for very complex or mission-critical applications that are expected to scale.
 
-This might not be a long-term problem as the framework is exploding in popularity and the introduction of Sapper would help with the scaling concerns.
+This might not be a long-term problem as the framework is exploding in popularity and the introduction of Sapper has helped with the scaling concerns. Though the [confusion](https://svelte.dev/blog/whats-the-deal-with-sveltekit) around Sapper vs SvelteKit could have been avoided, in my opinion.
 
 #### Smaller community and ecosystem
 
@@ -225,4 +225,3 @@ So keep Svelte in your mind and consider giving it a chance for your next greenf
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
-
