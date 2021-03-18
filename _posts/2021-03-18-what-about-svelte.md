@@ -1,7 +1,7 @@
 ---
 title: What about Svelte? Should you care!
 description: Learn why Svelte matters and if you should you care about it
-published: false
+published: true
 featured: false
 tags: [svelte, javascript, web, react]
 canonical_url: https://deepu.tech/what-about-svelte/
