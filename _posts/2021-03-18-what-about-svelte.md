@@ -178,7 +178,7 @@ All those advantages we saw above don't mean there are no downsides, every frame
 
 Svelte is very young and that means it is not as battle-tested as React or Angular and you might run into some walls at times. This means it's probably not suitable for very complex or mission-critical applications that are expected to scale.
 
-This might not be a long-term problem as the framework is exploding in popularity and the introduction of Sapper has helped with the scaling concerns. Though the [confusion](https://svelte.dev/blog/whats-the-deal-with-sveltekit) around Sapper vs SvelteKit could have been avoided, in my opinion.
+This might not be a long-term problem as the framework is exploding in popularity and the introduction of Sapper has helped with the scaling concerns. Though, the [confusion](https://svelte.dev/blog/whats-the-deal-with-sveltekit) around Sapper vs SvelteKit could have been avoided, in my opinion.
 
 #### Smaller community and ecosystem
 
