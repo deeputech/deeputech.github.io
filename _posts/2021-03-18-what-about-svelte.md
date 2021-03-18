@@ -3,9 +3,15 @@ title: What about Svelte? Should you care!
 description: Learn why Svelte matters and if you should you care about it
 published: true
 featured: false
-tags: [svelte, javascript, web, react]
-canonical_url: https://deepu.tech/what-about-svelte/
-cover_image: https://i.imgur.com/YZca3NW.jpg
+tags:
+  - svelte
+  - javascript
+  - web
+  - react
+canonical_url: 'https://deepu.tech/what-about-svelte/'
+cover_image: 'https://i.imgur.com/YZca3NW.jpg'
+devto_id: 638352
+devto_url: 'https://dev.to/deepu105/what-about-svelte-should-you-care-ni1'
 ---
 
 _Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what you think about Svelte in the comments._
@@ -219,3 +225,4 @@ So keep Svelte in your mind and consider giving it a chance for your next greenf
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
