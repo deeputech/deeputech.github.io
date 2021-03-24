@@ -6,7 +6,8 @@
   "scripts": {
     "publish-to-dev": "node publish-to-dev.js",
     "optimize": "gulp",
-    "optimize-img": "gulp images"
+    "optimize-img": "gulp images",
+    "start": "bundle exec jekyll serve --incremental --watch --drafts --unpublished --livereload"
   },
   "repository": {
     "type": "git",
