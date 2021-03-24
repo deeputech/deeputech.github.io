@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 24 Mar 2021 14:07:29 +0100</pubDate>
-    <lastBuildDate>Wed, 24 Mar 2021 14:07:29 +0100</lastBuildDate>
+    <pubDate>Wed, 24 Mar 2021 15:07:42 +0100</pubDate>
+    <lastBuildDate>Wed, 24 Mar 2021 15:07:42 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -148,7 +148,7 @@
   &lt;li&gt;&lt;a href=&quot;https://news.lenovo.com/pressroom/press-releases/lenovo-launches-linux-ready-thinkpad-and-thinkstation-pcs-preinstalled-with-ubuntu/&quot;&gt;Lenovo ThinkPad&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;✅ The availability of pre-installed Linux laptops is still not that great and choices are very limited. But if you are Ok to do the installation yourself then there is a plethora of hardware to choose from and with the support of an amazing community, you can get up and running in few hours.&lt;/p&gt;
+&lt;p&gt;✅ The availability of pre-installed Linux laptops is still not that great and choices are very limited. But if you are Ok to do the installation yourself then there is a plethora of modern hardware to choose from and with the support of an amazing community, you can get up and running in few hours.&lt;/p&gt;
 
 &lt;h3 id=&quot;support&quot;&gt;Support&lt;/h3&gt;
 
@@ -189,6 +189,8 @@
   &lt;li&gt;&lt;a href=&quot;https://elementary.io/&quot;&gt;Elementary OS&lt;/a&gt;: If you come from macOS, you will feel at home with elementary. It’s Ubuntu-based and hence is super stable and user-friendly.&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;&lt;strong&gt;Tip&lt;/strong&gt;: You can find all the officially supported laptops/desktops for Ubuntu &lt;a href=&quot;https://certification.ubuntu.com/desktop&quot;&gt;here&lt;/a&gt;. They should work for all Ubuntu derivatives as well.&lt;/p&gt;
+
 &lt;h3 id=&quot;for-developers&quot;&gt;For developers&lt;/h3&gt;
 
 &lt;p&gt;For developers, who want a fast and productive operating system for anything from web development to kernel development the below are a great choice&lt;/p&gt;
@@ -197,6 +199,8 @@
   &lt;li&gt;&lt;a href=&quot;https://getfedora.org/&quot;&gt;Fedora&lt;/a&gt;: Provides a stable OS with shorter release cycles thus keeping libraries and tools up to date. Has great community and software support. Comes with required toolchain for most languages pre-installed. I have been using Fedora for over 4 years and I’m very happy with it. Fun fact, &lt;a href=&quot;https://en.wikipedia.org/wiki/Linus_Torvalds&quot;&gt;Linus Torvalds&lt;/a&gt; also uses Fedora. It comes with Gnome DE as default and you can choose from different &lt;a href=&quot;https://spins.fedoraproject.org/&quot;&gt;variants&lt;/a&gt; if you like KDE or Xfce DE instead&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://manjaro.org/&quot;&gt;Manjaro&lt;/a&gt;: If you don’t mind living on the edge then Manjaro can be a good option as well, but beware that it’s Arch-based and hence does rolling updates which could break something from time to time. But since it’s Arch-based, it’s also extremely flexible and powerful. You can find Manjaro with all popular DE options. If you are a computer science student, I would also recommend Manjaro as you can learn a lot from an Arch-based rolling distribution.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Tip&lt;/strong&gt;: You can find some OOB Manjaro hardware &lt;a href=&quot;https://manjaro.org/hardware/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;for-designers-and-multimedia-professionals&quot;&gt;For designers and multimedia professionals&lt;/h3&gt;
 
