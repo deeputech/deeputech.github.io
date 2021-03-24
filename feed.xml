@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 24 Mar 2021 15:07:42 +0100</pubDate>
-    <lastBuildDate>Wed, 24 Mar 2021 15:07:42 +0100</lastBuildDate>
+    <pubDate>Wed, 24 Mar 2021 15:11:44 +0100</pubDate>
+    <lastBuildDate>Wed, 24 Mar 2021 15:11:44 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -147,6 +147,8 @@
   &lt;li&gt;&lt;a href=&quot;https://www.dell.com/en-us/work/shop/overview/cp/linuxsystems&quot;&gt;Dell XPS/Precision developer editions&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://news.lenovo.com/pressroom/press-releases/lenovo-launches-linux-ready-thinkpad-and-thinkstation-pcs-preinstalled-with-ubuntu/&quot;&gt;Lenovo ThinkPad&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.linuxjournal.com/supportedhardware&quot;&gt;This list&lt;/a&gt; is a good source to find if your existing hardware works for your distro of choice.&lt;/p&gt;
 
 &lt;p&gt;✅ The availability of pre-installed Linux laptops is still not that great and choices are very limited. But if you are Ok to do the installation yourself then there is a plethora of modern hardware to choose from and with the support of an amazing community, you can get up and running in few hours.&lt;/p&gt;
 
