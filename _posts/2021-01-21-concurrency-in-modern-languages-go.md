@@ -1,5 +1,5 @@
 ---
-title: 'Concurrency in modern programming languages: Golang'
+title: "Concurrency in modern programming languages: Golang"
 description: >-
   Building a concurrent web server in Golang to compare concurrency performance
   with Rust, JS, TS, Kotlin, and Java
@@ -11,8 +11,8 @@ tags:
   - async
   - golang
 series: concurrency in modern programming languages
-canonical_url: 'https://deepu.tech/concurrency-in-modern-languages-go/'
-cover_image: 'https://i.imgur.com/ZTfXUBU.jpg'
+canonical_url: "https://deepu.tech/concurrency-in-modern-languages-go/"
+cover_image: "https://i.imgur.com/ZTfXUBU.jpg"
 devto_id: 578413
 devto_url: >-
   https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i
@@ -27,8 +27,8 @@ This is a multi-part series where I'll be talking about concurrency in modern pr
 1. [Introduction](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk)
 1. [Concurrent web server in Rust](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co)
 1. **Concurrent web server in Golang**
-1. Concurrent web server in JavaScript with NodeJS
-1. Concurrent web server in TypeScript with Deno
+1. [Concurrent web server in JavaScript with NodeJS](https://dev.to/deepu105/concurrency-in-modern-programming-languages-javascript-on-nodejs-epo)
+1. [Concurrent web server in TypeScript with Deno](https://dev.to/deepu105/concurrency-in-modern-programming-languages-typescript-on-deno-hkb)
 1. Concurrent web server in Java with JVM
 1. Concurrent web server in Kotlin with JVM
 1. Comparison and conclusion of benchmarks
@@ -259,4 +259,3 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Peggy Anke](https://unsplash.com/@instagramfotografin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/juggle?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-

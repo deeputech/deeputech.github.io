@@ -25,9 +25,9 @@ This is a multi-part series where I'll be talking about concurrency in modern pr
 
 1. [Introduction](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk)
 1. **Concurrent web server in Rust**
-1. Concurrent web server in Golang
-1. Concurrent web server in JavaScript with NodeJS
-1. Concurrent web server in TypeScript with Deno
+1. [Concurrent web server in Golang](https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i)
+1. [Concurrent web server in JavaScript with NodeJS](https://dev.to/deepu105/concurrency-in-modern-programming-languages-javascript-on-nodejs-epo)
+1. [Concurrent web server in TypeScript with Deno](https://dev.to/deepu105/concurrency-in-modern-programming-languages-typescript-on-deno-hkb)
 1. Concurrent web server in Java with JVM
 1. Concurrent web server in Kotlin with JVM
 1. Comparison and conclusion of benchmarks
