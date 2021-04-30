@@ -1,8 +1,8 @@
 ---
-title: "Concurrency in modern programming languages: Java"
+title: 'Concurrency in modern programming languages: Java'
 description: >-
-  Building a concurrent web server in Java to compare concurrency
-  performance with Rust, Go, JS, TS, and Kotlin
+  Building a concurrent web server in Java to compare concurrency performance
+  with Rust, Go, JS, TS, and Kotlin
 published: true
 featured: false
 tags:
@@ -11,8 +11,10 @@ tags:
   - jvm
   - languages
 series: concurrency in modern programming languages
-canonical_url: "https://deepu.tech/concurrency-in-modern-languages-java/"
-cover_image: "https://i.imgur.com/I3qwqQs.jpeg"
+canonical_url: 'https://deepu.tech/concurrency-in-modern-languages-java/'
+cover_image: 'https://i.imgur.com/I3qwqQs.jpeg'
+devto_id: 683566
+devto_url: 'https://dev.to/deepu105/concurrency-in-modern-programming-languages-java-3l2c'
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -344,3 +346,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Evgeniya Litovchenko](https://unsplash.com/@grape_eve) on [Unsplash](https://unsplash.com)
+
