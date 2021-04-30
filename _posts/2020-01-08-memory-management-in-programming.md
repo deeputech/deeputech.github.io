@@ -107,7 +107,6 @@ Stay tuned for upcoming parts of this series:
 -   [Part 4: Memory management in Go](https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa)
 -   [Part 5: Memory management in Rust](https://dev.to/deepu105/visualizing-memory-management-in-rust-5898)
 -   Part 6: Memory management in Python
--   Part 7: Memory management in C#
 
 # References
 
