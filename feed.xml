@@ -5,9 +5,584 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 30 Apr 2021 10:26:16 +0200</pubDate>
-    <lastBuildDate>Fri, 30 Apr 2021 10:26:16 +0200</lastBuildDate>
+    <pubDate>Fri, 30 Apr 2021 13:42:26 +0200</pubDate>
+    <lastBuildDate>Fri, 30 Apr 2021 13:42:26 +0200</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>Concurrency in modern programming languages: Java</title>
+        <description>Building a concurrent web server in Java to compare concurrency performance with Rust, Go, JS, TS, and Kotlin | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Concurrent web server in Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Concurrent web server in Java with JVM&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
+  &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;concurrency-in-java&quot;&gt;Concurrency in Java&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The Java programming language and the Java virtual machine (JVM) have been designed to support concurrent programming, and all execution takes place in the context of threads&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;Wikipedia&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Java had support for concurrent programming from its early days. Prior to Java 1.1 it even had support for green threads (virtual threads). Spoiler Alert! It’s coming back again with &lt;a href=&quot;https://wiki.openjdk.java.net/display/loom/Main&quot;&gt;Project Loom&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Concurrent programming has always been at the core of Java as it was aimed at multi-threaded and multi-core CPUs. While not as simple as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;goroutines&lt;/code&gt; to use, it was powerful and flexible for almost any use case. While powerful, it’s also quite complex especially when you have to access data between threads since the default mechanism in Java, due to its OOP roots, is to use shared state concurrency by synchronizing the threads.&lt;/p&gt;
+
+&lt;p&gt;Threads are at the core of concurrent &amp;amp; asynchronous programming in Java. From JDK 1.1 onwards these threads would map 1:1 to OS threads. Due to its early inception, the ecosystem has really mature libraries as well, from HTTP servers to concurrent message processors and so on. Asynchronous programming caught up a bit late in Java, the building blocks were there but it was practically useable only from Java 8, but it has matured as well and now has a great ecosystem with support for reactive programming and asynchronous concurrency.&lt;/p&gt;
+
+&lt;p&gt;Java 8 bought a lot of improvements and simplifications to make it easier to do concurrency. For example, standard Java APIs like the Stream API even provides a way to do &lt;a href=&quot;https://docs.oracle.com/javase/tutorial/collections/streams/parallelism.html&quot;&gt;parallel processing&lt;/a&gt; easily by just invoking a method call on complex and CPU intensive pipelines.&lt;/p&gt;
+
+&lt;p&gt;With Java, it’s possible to do multi-threaded concurrency or parallel programming as well as asynchronous programming. This means as we saw in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;first chapter&lt;/a&gt;, we can mix and match these models to get the best possible performance for any use case.&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-threading&quot;&gt;Multi-threading&lt;/h3&gt;
+
+&lt;p&gt;Java provides building blocks to create and manage OS threads as part of the standard library and it also provides implementations required for &lt;a href=&quot;https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html&quot;&gt;shared-state concurrency&lt;/a&gt; using locks and synchronization. Message-passing concurrency is not provided by default but can be done using external libraries like &lt;a href=&quot;https://akka.io/&quot;&gt;Akka&lt;/a&gt; or using an &lt;a href=&quot;https://en.wikipedia.org/wiki/Actor_model&quot;&gt;Actor model&lt;/a&gt; implementation. However, due to the memory model, it’s up to the developer to ensure there are no data races or memory leaks in the concurrent program.&lt;/p&gt;
+
+&lt;p&gt;In order to make multi-threading even more efficient, Java provides ways to create thread pools and reuse those threads to increase throughput. This will become even better once Project loom is released, hopefully with Java 17 or 18. Technically Java has one of the most mature ecosystems when it comes to multi-threading and most Java frameworks that you would end up using will be making use of it internally for performance improvements.&lt;/p&gt;
+
+&lt;h3 id=&quot;asynchronous-processing&quot;&gt;Asynchronous processing&lt;/h3&gt;
+
+&lt;p&gt;Technically asynchronous programming is not part of concurrency but in practice, it goes hand in hand for many use cases and improves performance, and makes resource usage more efficient. In Java asynchronous programming is achieved using the same building blocks as concurrent/parallel programming. a.k.a, Threads. This wasn’t very popular in Java before Java 8 due to complexity and, let’s be honest, the lack of things like lambdas, functional programming support, CompletableFuture, and so on.&lt;/p&gt;
+
+&lt;p&gt;The latest versions of Java provide the building blocks required for asynchronous programming with standard interfaces and implementations. But do keep in mind that using an asynchronous programming model increases the overall complexity and the ecosystem is still evolving. There are also many popular libraries and frameworks like Spring and RxJava that support asynchronous/reactive programming.&lt;/p&gt;
+
+&lt;p&gt;Java still doesn’t have any syntax sugar for async/await though but there are alternatives like the &lt;a href=&quot;https://github.com/electronicarts/ea-async&quot;&gt;EA Async&lt;/a&gt; library that’s close enough.&lt;/p&gt;
+
+&lt;h2 id=&quot;benchmarking&quot;&gt;Benchmarking&lt;/h2&gt;
+
+&lt;p&gt;Now that we have some basic understanding of concurrency features in Java, let us build a simple concurrent web server in Java. Since Java offers multiple ways to achieve this we’ll be building two sample applications and comparing them. The Java version used is the latest (16.0.1) at the time of writing.&lt;/p&gt;
+
+&lt;h3 id=&quot;multi-threaded-concurrent-webserver&quot;&gt;Multi-threaded concurrent webserver&lt;/h3&gt;
+
+&lt;p&gt;This example is closer to the Rust multi-threaded example we built in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;rust chapter&lt;/a&gt;, I have omitted import statements for brevity. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws&quot;&gt;GitHub here&lt;/a&gt;. We use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.net.ServerSocket&lt;/code&gt; for this. We are not using any external dependency in this case.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JavaHTTPServer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// count used to introduce delays&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// bind listener&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;serverSocket&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServerSocket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Server is listening on port 8080&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// listen to all incoming requests and spawn each connection in a new thread&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ServerThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serverSocket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Server exception: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ServerThread&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Socket&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ServerThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Socket&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;socket&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello.html&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// get the input stream&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BufferedReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InputStreamReader&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()));&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// get character output stream to client (for headers)&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;PrintWriter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// get binary output stream to client (for requested data)&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataOut&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BufferedOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getOutputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileIn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adding delay. Count: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;c1&quot;&gt;// read the request first to avoid connection reset errors&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requestLine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;readLine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;requestLine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requestLine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;c1&quot;&gt;// read the HTML file&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileLength&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileLength&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;fileIn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentMimeType&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;text/html&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// send HTTP Headers&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;HTTP/1.1 200 OK&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Content-type: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contentMimeType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Content-length: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileLength&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Connection: keep-alive&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// blank line between headers and content, very important!&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// flush character output stream buffer&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;dataOut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileLength&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// write the file data to output stream&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;dataOut&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;flush&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;err&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Error with exception : &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see we bind a TCP listener using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ServerSocket&lt;/code&gt; to port 8080 and listen to all incoming requests. Each request is processed in a new thread.&lt;/p&gt;
+
+&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;❯ ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
+This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
+...
+
+Document Path:          /
+Document Length:        176 bytes
+
+Concurrency Level:      100
+Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   20.326 seconds
+Complete requests:      10000
+Failed requests:        0
+Total transferred:      2600000 bytes
+HTML transferred:       1760000 bytes
+Requests per second:    491.98 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
+Time per request:       203.262 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Time per request:       2.033 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Transfer rate:          124.92 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
+
+Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+              min  mean[+/-sd] median   max
+Connect:        0    1   1.5      0      13
+Processing:     0  201 600.0      1    2023
+Waiting:        0  201 600.0      0    2023
+Total:          0  202 600.0      1    2025
+
+Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  50%      1
+  66%      2
+  75%      4
+  80%      6
+  90%   2000
+  95%   2001
+  98%   2003
+  99%   2006
+ 100%   2025 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see the request handler thread sleeps for 2 seconds for every 10th request. In a real-world scenario, the thread pool itself could become the bottleneck and you may not be able to set so many threads as the OS may not be able to provide so many thus creating increased resource usage and bottleneck. In this simple use case, since each thread spawns and processes the request really fast we won’t encounter an issue.&lt;/p&gt;
+
+&lt;p&gt;So let’s see if we can have another solution without such a bottleneck.&lt;/p&gt;
+
+&lt;h3 id=&quot;asynchronous-concurrent-webserver&quot;&gt;Asynchronous concurrent webserver&lt;/h3&gt;
+
+&lt;p&gt;This example is closer to the asynchronous example from the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;rust chapter&lt;/a&gt;, I have omitted import statements for brevity. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws&quot;&gt;GitHub here&lt;/a&gt;. Notice that we are using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.nio.channels.AsynchronousServerSocketChannel&lt;/code&gt;here and no external dependencies.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;JavaAsyncHTTPServer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;JavaAsyncHTTPServer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;currentThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Wait forever&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// we shouldn't use try with resource here as it will kill the stream&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AsynchronousServerSocketChannel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InetSocketAddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;127.0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// bind listener&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;StandardSocketOptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SO_REUSEADDR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Server is listening on port 8080&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;};&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// count used to introduce delays&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// listen to all incoming requests&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;CompletionHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;completed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AsynchronousSocketChannel&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attachment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isOpen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]++;&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;handleAcceptConnection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+            &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;failed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Throwable&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attachment&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isOpen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;accept&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Connection handler error: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleAcceptConnection&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AsynchronousSocketChannel&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;File&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello.html&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileIn&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FileInputStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adding delay. Count: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isOpen&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// Read the first 1024 bytes of data from the stream&lt;/span&gt;
+                &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ByteBuffer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ByteBuffer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;allocate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// read the request fully to avoid connection reset errors&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+                &lt;span class=&quot;c1&quot;&gt;// read the HTML file&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileLength&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileLength&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;fileIn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+                &lt;span class=&quot;c1&quot;&gt;// send HTTP Headers&lt;/span&gt;
+                &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;message&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;HTTP/1.1 200 OK\n&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+                        &lt;span class=&quot;s&quot;&gt;&quot;Connection: keep-alive\n&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+                        &lt;span class=&quot;s&quot;&gt;&quot;Content-length: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fileLength&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;\n&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+                        &lt;span class=&quot;s&quot;&gt;&quot;Content-Type: text/html; charset=utf-8\r\n\r\n&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;
+                        &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fileData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StandardCharsets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;UTF_8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBytes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+                &lt;span class=&quot;c1&quot;&gt;// write the to output stream&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;ByteBuffer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;wrap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+                &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ExecutionException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Connection handler error: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see we bind an asynchronous listener to port 8080 and listen to all incoming requests. Each request is processed in a new task provided by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AsynchronousServerSocketChannel&lt;/code&gt;. We are not using any thread pools here and all the incoming requests are processed asynchronously and hence we don’t have a bottleneck for maximum connections. But one thing you may immediately notice is that the code is much more complex now.&lt;/p&gt;
+
+&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
+
+This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
+...
+
+Document Path:          /
+Document Length:        176 bytes
+
+Concurrency Level:      100
+Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   20.243 seconds
+Complete requests:      10000
+Failed requests:        0
+Total transferred:      2770000 bytes
+HTML transferred:       1760000 bytes
+Requests per second:    494.00 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
+Time per request:       202.431 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Time per request:       2.024 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Transfer rate:          133.63 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
+
+Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.6      0       5
+Processing:     0  201 600.0      0    2026
+Waiting:        0  201 600.0      0    2026
+Total:          0  202 600.0      0    2026
+
+Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  50%      0
+  66%      1
+  75%      3
+  80%      4
+  90%   2000
+  95%   2001
+  98%   2002
+  99%   2003
+ 100%   2026 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We got almost identical results here, this one is even faster by 100ms. Hence this version seems much more efficient than the multi-threaded version for this particular use case. However at the cost of added complexity.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;As I explained in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;first part&lt;/a&gt; of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It’s a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Java. And for this particular use case, asynchronous solutions do seem to be the best choice.&lt;/p&gt;
+
+&lt;p&gt;So stay tuned for the next post where we will look at concurrency in Kotlin and build the same use case in Kotlin.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blogs.oracle.com/javamagazine/going-inside-javas-project-loom-and-virtual-threads&quot;&gt;blogs.oracle.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dzone.com/articles/java-concurrency-evolution&quot;&gt;dzone.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.vogella.com/tutorials/JavaConcurrency/article.html&quot;&gt;www.vogella.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dzone.com/articles/a-birds-eye-view-on-java-concurrency-frameworks-1&quot;&gt;dzone.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.baeldung.com/java-asynchronous-programming&quot;&gt;www.baeldung.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dzone.com/articles/async-await-in-java&quot;&gt;dzone.com&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.baeldung.com/akka-actors-java&quot;&gt;www.baeldung.com&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@grape_eve&quot;&gt;Evgeniya Litovchenko&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-java-3l2c&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+</content:encoded>
+        <media:content url="https://i.imgur.com/I3qwqQs.jpeg" medium="image">https://i.imgur.com/I3qwqQs.jpeg</media:content>
+        <pubDate>Fri, 30 Apr 2021 00:00:00 +0200</pubDate>
+        <link>https://deepu.tech/concurrency-in-modern-languages-java/</link>
+        <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages-java/</guid>
+        
+        <category>concurrency</category>
+        
+        <category>java</category>
+        
+        <category>jvm</category>
+        
+        <category>languages</category>
+        
+        
+      </item>
     
       <item>
         <title>The state of Linux as a daily use OS in 2021</title>
@@ -2941,144 +3516,6 @@ Most of the IT companies, including &lt;a href=&quot;http://they.whiteboarded.me
         <category>womenintech</category>
         
         <category>discuss</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>How to become an effective Polyglot Developer</title>
-        <description>What are the advantages and disadvantages of being a polyglot developer and how to be an effective polyglot developer | &lt;a href=&quot;https://deepu.tech/how-to-be-an-effective-polyglot-developer/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;A polyglot developer is someone who can work with multiple languages with ease. In the strict interpretation, the vast majority of developers are polyglot as they would have worked with at least two languages in their lifetime, not counting markup/config/SQL languages. So in the IT industry when someone says s/he is a polyglot developer they mean they can work with a handful of languages at least and they don’t have any particular strong preference for a single language.&lt;/p&gt;
-
-&lt;p&gt;I started my career as a Java &amp;amp; JavaScript developer but I never considered myself a polyglot developer until a few years ago. Why the shift you may ask. Even as a Java &amp;amp; JavaScript developer, I had a strong &lt;a href=&quot;https://deepu.tech/reflections-on-javascript/&quot;&gt;affinity towards JavaScript&lt;/a&gt; as I used to enjoy building UI/UX. Later in my career, I started working a little bit with more languages like Groovy, Scala, TypeScript, Python. Even then I didn’t consider myself a polyglot developer as I didn’t dive deep into any of those languages, was mostly working on existing codebases where I had to do some work in that particular language and I always considered that a nuisance. Another reason was I naively believed that since I already knew JS and Java quite well, and since they are among the most popular languages, I didn’t need to learn anything else or improve my skills further.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A programming language is a tool that has profound influence on our thinking habits.&lt;/p&gt;
-
-  &lt;p&gt;‒ E. Dijkstra&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Things changed when I started working fulltime on a project written in Go and &lt;a href=&quot;https://deepu.tech/reflection-on-golang/&quot;&gt;I started learning Go&lt;/a&gt;, which was extremely easy to learn, I realized how easy it was to learn a new language and enjoy working in it when I slightly changed my mindset and approach towards a programming language. Then I went on to learn, &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;still learning&lt;/a&gt;, Rust, Kotlin, and so on. I now consider myself a polyglot developer and I can comfortably work in Java, Kotlin, Groovy, JS/TS, Go, and Rust. I can also get by in Python, Scala, Bash, Ruby, and C#. Now I love deep diving into languages and enjoy working with various languages simultaneously and in this post, I’m gonna share how my change in mindset helped and how you can also be an effective polyglot developer.&lt;/p&gt;
-
-&lt;h2 id=&quot;advantages--disadvantages-of-being-polyglot&quot;&gt;Advantages &amp;amp; Disadvantages of being polyglot&lt;/h2&gt;
-
-&lt;p&gt;Before we proceed lets quickly see the advantages and disadvantages of being polyglot&lt;/p&gt;
-
-&lt;h3 id=&quot;advantages&quot;&gt;Advantages&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;You are not married to a single language and hence you have a bigger tool-belt with a more appropriate solution for the problem at hand&lt;/li&gt;
-  &lt;li&gt;Wider Job market and options to choose from. Hence you have multiple career path and opportunities&lt;/li&gt;
-  &lt;li&gt;Less fanboyism (Trust me its a good thing). You also become less biased. You also won’t get bored with one language &amp;amp; its community&lt;/li&gt;
-  &lt;li&gt;You don’t have to worry about your favorite language dying out and you losing your job as you are not too invested in one ecosystem&lt;/li&gt;
-  &lt;li&gt;You become more pragmatic and opt for simplicity as you are not trying to use every fancy feature of a language. And in the end, you will become a better developer as you become better at concepts and semantics rather than syntax and you will get rid of programming habits more common to people working predominantly in a single language.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;disadvantages&quot;&gt;Disadvantages&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;You probably won’t be expert in one particular language as you switch between languages&lt;/li&gt;
-  &lt;li&gt;Some jobs might require a long time experience in one particular language&lt;/li&gt;
-  &lt;li&gt;You might have to refer lang docs (let’s be honest, Google it) more often than usual as you might not remember details of language APIs or certain syntax&lt;/li&gt;
-  &lt;li&gt;Developer fatigue. More things to learn and keep up to, if you consider that sort thing a disadvantage&lt;/li&gt;
-  &lt;li&gt;Mixing concepts from one language to another&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;how-to-approach-a-language&quot;&gt;How to approach a language&lt;/h2&gt;
-
-&lt;p&gt;Most programming languages are quite similar at their core. Any mainstream Turing complete language will have some basic semantic features like objects, conditionals, loops, variables, functions, and operations. When you encounter a new language, the best way to learn it would be to learn semantics rather than syntax. This is where your pattern recognition skills are needed. When you start learning the semantics of a language you quickly realize how similar it is to another language you already know, you start to see patterns. Once you familiarize yourself and understand that, learning the syntax becomes easier and in many cases, syntax might change and you will end up looking up syntax anyway.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Programming is an art of seeing patterns in the world, the same pattern recognition can be applied to programming languages to transfer your knowledge from one language to another.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;So when learning a new language I follow the below approach&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Learn the goal and purpose of the language, so that you know when to use this language, this helps with making you more pragmatic. You stop treating a language like a hammer and every problem as a nail.&lt;/li&gt;
-  &lt;li&gt;Learn semantics. See what basic features the language offers and compare it with what you already know. For example, I start by looking at how variables work, how are conditionals designed, how loops and iterators work and finally how functions work&lt;/li&gt;
-  &lt;li&gt;Learn about additional features that might be unique to the language. Sometimes they are a variation of a feature you are familiar with, like Goroutines &amp;amp; coroutines or something unique like the Ownership model in Rust. Learn the similarities and differences of these features compared to languages you already know.&lt;/li&gt;
-  &lt;li&gt;If the language uses a programming paradigm that you are not familiar with, learn that so that you can do justice to the language. No point using a pure functional language and trying to emulate OOP or imperative style with it. Even if the language is multi-paradigm, it is still beneficial to learn different paradigms and mix them based on the use-case.&lt;/li&gt;
-  &lt;li&gt;Learn about &lt;a href=&quot;https://deepu.tech/memory-management-in-programming/&quot;&gt;memory management and memory model&lt;/a&gt; of the language as it will help you have a deeper understanding. You will be surprised how similar the concepts are between languages.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;One thing not to do is learning a language by learning a particular framework, for example, learning Ruby on Rails rather than learning Ruby or Learning Spring rather than Java or learning React rather than JavaScript. This will do more harm than good as you will be learning the semantics of the framework more than the language.&lt;/p&gt;
-
-&lt;h2 id=&quot;being-effective-in-a-language&quot;&gt;Being effective in a language&lt;/h2&gt;
-
-&lt;p&gt;Now, learning a language and being effective in a language are two different things. One issue is that you might unconsciously try to emulate something from one language in another when the other language might have a better way to do it. For example, when I started with Go, I was trying to emulate JS callbacks in Go, instead of using Goroutines which can do a better job. One way to avoid this is to keep things as simple as possible.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Any fool can write code that a computer can understand. Good programmers write code that humans can understand.&lt;/p&gt;
-
-  &lt;p&gt;‒ Martin Fowler&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Some of the things you can try are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Stick to simple constructs as much as possible. Write clean code. Use advanced language features only when required. What matters is you solve the problem at hand simply and understandably without sacrificing efficiency or causing bugs.&lt;/li&gt;
-  &lt;li&gt;Don’t fall into the paradigm trap, for example, do not try to go full functional on an OOP or imperative language. Use what gets the job done, remember, unlike what some people might say, there is no problem with doing OOP or imperative code. Most of the time a simple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;for&lt;/code&gt; loop is better than recursion.&lt;/li&gt;
-  &lt;li&gt;Choose the appropriate language for the situation. Don’t pick a language for a problem because it’s cool, pick based on the use -case, team composition, maintenance requirement, and business needs. Don’t impose a language on others in the team.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Using the wrong tool for the job. &lt;a href=&quot;https://twitter.com/hashtag/programming?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#programming&lt;/a&gt; &lt;a href=&quot;https://t.co/5RdVqGuZoj&quot;&gt;pic.twitter.com/5RdVqGuZoj&lt;/a&gt;&lt;/p&gt;&amp;mdash; Rory Preddy🥑 (@rorypreddy) &lt;a href=&quot;https://twitter.com/rorypreddy/status/1142967056150728708?ref_src=twsrc%5Etfw&quot;&gt;June 24, 2019&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;h2 id=&quot;keeping-up&quot;&gt;keeping up&lt;/h2&gt;
-
-&lt;p&gt;One of the issues with being a polyglot developer is keeping up with multiple language trends and communities. You might end up with Developer fatigue. It is important to keep up but it doesn’t mean that you have to keep up with stuff like frameworks and libraries in a language.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Googling something doesn’t make you a bad developer, blindly copy-pasting from the first result does.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Here are some tips that could help&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Learn programming basics. Learn about objects, collections, memory models, concurrency, and data structures. This knowledge can be applied to almost every language and the concepts around these don’t change that often.&lt;/li&gt;
-  &lt;li&gt;Use a good IDE/Editor/Plugins to take care of language syntax and style for you. A programmer shouldn’t be worrying about inserting semicolons and commas or adding the right amount of tabs or spaces. Its 2020, these things should be the least of your concerns, let the IDEs or tools like prettier &amp;amp; linters take care of those. For the last time, it friggin doesn’t matter if you use tab or space.&lt;/li&gt;
-  &lt;li&gt;Before you start any project, choose the language you are going to use and spend few hours catching up on what is new in the language and what are the reliable frameworks/libraries that you might need.&lt;/li&gt;
-  &lt;li&gt;Docs, Google, and forums are your friend. There is no shame in googling something when you are in doubt or when you have a bad memory like me. Trust me everyone does it and the ones who say they don’t are lying. I still, almost always end up googling for array/string methods in almost all the languages I work with. The only thing to keep in mind is not to blindly copy the code from the first result. Read and compare at least two or three results from google. If its a stack overflow answer, read the entire thread, don’t just read the answer. If its a blog, spend a few minutes and read it fully.&lt;/li&gt;
-  &lt;li&gt;Contribute to some OSS projects if you have spare time or if your employer allows it during work hours. It is a great way to learn and keep up without having to actively track it.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A good programmer writes great code in a language. A great programmer is language independent.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;As the saying goes don’t keep all your eggs in a single basket. There are considerable efforts and some disadvantages in being a polyglot developer. But the advantages outweigh the disadvantages and knowing more than one programming language does more good than bad. IMO the effort is worth it. Most of you are already polyglot developers even if you don’t realize it, so just stop hating the other language you often use and instead embrace it and appreciate the good parts, keep in mind the bad parts and use the language when it is a good fit for a use case. The IT landscape is changing fast. New languages are being invented more rapidly languages are also dying out faster. Being polyglot will be a very valuable skill in the future. So don’t fight it, come to the dark side.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@andresloquesea?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Andrés Gómez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/juggling?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/how-to-become-an-effective-polyglot-developer-3moe&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
-</content:encoded>
-        <media:content url="https://i.imgur.com/3ereMQQ.jpg" medium="image">https://i.imgur.com/3ereMQQ.jpg</media:content>
-        <pubDate>Mon, 29 Jun 2020 00:00:00 +0200</pubDate>
-        <link>https://deepu.tech/how-to-be-an-effective-polyglot-developer/</link>
-        <guid isPermaLink="true">https://deepu.tech/how-to-be-an-effective-polyglot-developer/</guid>
-        
-        <category>programming</category>
-        
-        <category>computerscience</category>
-        
-        <category>languages</category>
-        
-        <category>polyglot</category>
         
         
       </item>
