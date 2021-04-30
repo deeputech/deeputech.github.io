@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 30 Apr 2021 10:14:33 +0200</pubDate>
-    <lastBuildDate>Fri, 30 Apr 2021 10:14:33 +0200</lastBuildDate>
+    <pubDate>Fri, 30 Apr 2021 10:26:16 +0200</pubDate>
+    <lastBuildDate>Fri, 30 Apr 2021 10:26:16 +0200</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -883,7 +883,7 @@ since there is no clean way to do a multi-threaded server in Deno the &lt;code c
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Concurrent web server in Rust&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Concurrent web server in JavaScript with NodeJS&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in TypeScript with Deno&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
   &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
@@ -1396,8 +1396,8 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Concurrent web server in Rust&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Concurrent web server in Golang&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in JavaScript with NodeJS&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in TypeScript with Deno&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
   &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
@@ -1809,9 +1809,9 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Concurrent web server in Rust&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Golang&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in JavaScript with NodeJS&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in TypeScript with Deno&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
   &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
@@ -2581,9 +2581,9 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;ol&gt;
   &lt;li&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Concurrent web server in Rust&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Golang&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in JavaScript with NodeJS&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in TypeScript with Deno&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
   &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
