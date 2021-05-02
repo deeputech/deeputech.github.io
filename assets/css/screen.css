@@ -352,6 +352,7 @@ span.post-read-more a:hover {
     background-color: #333f48;
     border-radius: 8px;
     white-space: pre-wrap;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas,"Liberation Mono", "Courier New", monospace;
 }
 
 .separator {
