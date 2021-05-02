@@ -7,7 +7,6 @@ tags:
     - windows
     - vr
     - gaming
-series: null
 canonical_url: "https://deepu.tech/my-vr-gaming-pc-build/"
 cover_image: "https://i.imgur.com/EuNcfsv.jpg"
 devto_id: 353690

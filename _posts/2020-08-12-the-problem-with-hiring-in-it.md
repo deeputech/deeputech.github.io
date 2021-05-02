@@ -10,7 +10,6 @@ tags:
   - career
   - womenintech
   - discuss
-series: null
 canonical_url: 'https://deepu.tech/the-problem-with-hiring-in-it/'
 cover_image: 'https://i.imgur.com/BrwZzTc.jpg'
 devto_id: 425684

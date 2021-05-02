@@ -8,7 +8,6 @@ tags:
     - pragmatic
     - codequality
     - programming
-series: null
 canonical_url: "https://deepu.tech/most-important-things-i-learned-in-a-decade/"
 cover_image: "https://i.imgur.com/eMIb5xp.jpeg"
 devto_id: 471389

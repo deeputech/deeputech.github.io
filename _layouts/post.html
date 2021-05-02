@@ -101,20 +101,35 @@ post_class: post-template
 
             <!-- Post series -->
             {% if page.series %}
-            <div class="panel series-wrapper">
+            <div class="panel">
                 <p>
-                    <strong>Part of "{{page.series}}" series</strong>
+                    <strong>This is part of my "{{page.series}}" series</strong>
                 </p>
-                <div class="article-collection">
-                {% assign count = '0' %}
-                {% for post in site.posts reversed %}
-                {% if post.series == page.series %}
-                    {% capture count %}{{ count | plus: '1' }}{% endcapture %}
-                    <a href="{{post.url}}" title="Part {{count}}: {{post.title}}" {% if page.url == post.url %}class="current-article"{% endif %}></a>
-                    </a>
+                <!-- <div class="article-collection">
+                  {% assign count = '0' %}
+                  {% for post in site.posts reversed %}
+                  {% if post.series == page.series %}
+                      {% capture count %}{{ count | plus: '1' }}{% endcapture %}
+                      <a href="{{post.url}}" title="Part {{count}}: {{post.title}}" {% if page.url == post.url %}class="current-article"{% endif %}></a>
+                      </a>
+                  {% endif %}
+                  {% endfor %}
+                </div> -->
+                <ol>
+                  {% assign series-posts = site.posts | reverse | where: 'series', page.series %}
+                  {% for post in series-posts %}
+                  <li>
+                    {% if post.url == page.url %}
+                    <strong>{{ post.title }}</strong>
+                    {% else %}
+                    <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                    {% endif %}
+                  </li>
+                  {% endfor %}
+                </ol>
+                {% if series-posts.size == 1 %}
+                <p>More posts coming soon!</p>
                 {% endif %}
-                {% endfor %}
-                </div>
             </div>
             {% endif %}
             <!-- End series -->
@@ -123,7 +138,7 @@ post_class: post-template
             <div class="article-post">
                 {{content}}
             </div>
-
+            <hr/>
             <!-- Rating -->
             {% if page.rating %}
             <div class="rating mb-4 d-flex align-items-center">
@@ -131,6 +146,34 @@ post_class: post-template
             </div>
             {% endif %}
 
+            <!-- Post series links -->
+            {% if page.series %}
+              {% assign series-posts = site.posts | reverse | where: 'series', page.series %}
+              {% for post in series-posts %}
+                {% if post.url == page.url %}
+                  {% assign prev_post_index = forloop.index | minus: 1 %}
+                  {% assign curr_post_index = forloop.index %}
+                  {% assign next_post_index = forloop.index | plus: 1 %}
+                {% endif %}
+              {% endfor %}
+
+              <p>Post <strong>{{ curr_post_index }}</strong> of <strong>{{ series-posts.size }}</strong> in series <strong>"{{page.series}}"</strong>.</p>
+              <p>{% if series-posts.size == 1 %}More posts coming soon!{% endif %}</p>
+
+              <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+              {% for post in series-posts %}
+                {% if prev_post_index == forloop.index %}
+                  <a class="prev d-block col-md-6" rel="prev" href="{{ site.baseurl }}{{ post.url }}">&laquo; Prev post in series</a>
+                {% endif %}
+
+                {% if next_post_index == forloop.index %}
+                  <a class="prev d-block col-md-6 text-right" rel="next" href="{{ site.baseurl }}{{ post.url }}">Next post in series &raquo;</a>
+                {% endif %}
+              {% endfor %}
+                <div class="clearfix"></div>
+              </div>
+            {% endif %}
+            <!-- End series links -->
 
             <!-- Post Categories -->
             <div class="after-post-cats">
@@ -169,7 +212,7 @@ post_class: post-template
             <div class="clearfix"></div>
             </div>
             <!-- End Categories -->
-
+            <hr/>
         </div>
         <!-- End Post -->
 

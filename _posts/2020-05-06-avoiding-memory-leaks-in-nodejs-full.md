@@ -4,7 +4,6 @@ description:
 published: false
 featured: false
 tags: [javascript, nodejs, v8, memory-management]
-series:
 canonical_url:
 cover_image: https://res.cloudinary.com/practicaldev/image/fetch/s--5Lizik8I--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/popb4kspmpt3xghy61be.jpg
 ---

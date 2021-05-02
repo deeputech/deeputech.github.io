@@ -4,7 +4,6 @@ description: 3 tips that can make your code cleaner, more efficient and easy to 
 published: true
 featured: false
 tags: [beginners, codenewbie, codequality, programming]
-series:
 canonical_url: https://deepu.tech/three-tips-for-clean-code/
 devto_url: https://dev.to/deepu105/3-tips-for-clean-efficient-code-1ea8
 devto_id: 220308

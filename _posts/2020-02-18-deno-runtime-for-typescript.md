@@ -8,7 +8,6 @@ tags:
   - javascript
   - nodejs
   - deno
-series: null
 canonical_url: 'https://deepu.tech/deno-runtime-for-typescript/'
 cover_image: 'https://i.imgur.com/0FWtns5.jpg'
 devto_id: 265496

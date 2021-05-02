@@ -1,0 +1,44 @@
+---
+title: "Series"
+layout: default
+permalink: "/series.html"
+---
+<section class="recent-posts">
+  <div class="row listrecent">
+    <div class="section-title col-md-12 mt-3">
+      <h2 class="mt-2"><span class="text-capitalize">Blog series index</span></h2>
+    </div>
+    <ul>
+      {% for series in site.data.series %}
+        {% assign series-posts = site.posts | reverse | where: 'series', series.id %}
+        {% if series-posts.size > 0 %}
+          <li><a href="#{{ series.id | replace: " ","-" }}">{{ series.title}} ({{ series-posts.size }})</a></li>
+        {% endif %}
+        {% assign series-posts = nil %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="row listrecent">
+  {% for series in site.data.series %}
+  {% assign series-posts = site.posts | reverse | where: 'series', series.id %}
+    {% if series-posts.size > 0 %}
+    <div class="tag-title section-title col-md-12 mt-4">
+      <h2 id="{{ series.id | replace: " ","-" }}"><span class="text-capitalize">{{ series.title }}</span></h2>
+      <p>{{ series.description }}</p>
+    </div>
+    {% for post in series-posts %}
+      {% if post.title != null %}
+        {% if group == null or group == post.group %}
+          <div class="col-lg-4 col-md-6 mb-30px card-group">
+          {% include postbox.html %}
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% assign group = nil %}
+    {% endif %}
+    {% assign series-posts = nil %}
+  {% endfor %}
+  </div>
+</div>

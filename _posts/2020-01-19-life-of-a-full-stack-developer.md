@@ -4,7 +4,6 @@ description: The life of a Full-stack developer in a nutshell
 published: true
 featured: false
 tags: [webdev, showdev, motivation, books]
-series:
 canonical_url: https://deepu.tech/life-of-a-full-stack-developer/
 devto_url: https://dev.to/deepu105/life-of-a-full-stack-developer-2og5
 devto_id: 239348
