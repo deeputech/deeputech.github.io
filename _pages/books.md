@@ -27,7 +27,7 @@ comments: false
     </div>
 </div>
 
-**Get 25% discount on E-books from Amazon and Packt using discount code "25JAVASILVER". Valid until 1st of July 2020**
+<!-- **Get 25% discount on E-books from Amazon and Packt using discount code "25JAVASILVER". Valid until 1st of July 2020** -->
 
 **Follow on Twitter [@FullstackBook](https://twitter.com/FullstackBook)**
 
