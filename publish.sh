@@ -1,8 +1,6 @@
 #!/bin/bash
 
-
-local publishDev=true
-OPTIND=1
+publishDev=true
 
 while getopts 's' opt; do
     case $opt in
@@ -11,9 +9,8 @@ while getopts 's' opt; do
             exit 1
     esac
 done
-shift "$(( OPTIND - 1 ))"
 
-# if [ -z "$(git status --porcelain)" ]; then
+if [ -z "$(git status --porcelain)" ]; then
     echo ">>> Working directory clean"
     TMP_LOC=/tmp/deepu.github.io
 
@@ -21,7 +18,7 @@ shift "$(( OPTIND - 1 ))"
     /bin/rm -rf $TMP_LOC || exit
 
     if "$publishDev"; then
-        echo ">> Publish to Dev.to and update slugs"
+        echo ">> Publish to Dev.to and update slugs (pass -s to skip)"
         npm run publish-to-dev || exit
         git add --all || exit
         git commit --allow-empty -am "Updated posts with Dev.to slug" || exit
@@ -51,8 +48,7 @@ shift "$(( OPTIND - 1 ))"
     echo ">> $now: Published changes to GitHub"
 
     git checkout site_src
-# else
-#     echo ">> Working directory is not clean. Commit changes!"
-#     exit
-# fi
-
+else
+    echo ">> Working directory is not clean. Commit changes!"
+    exit
+fi

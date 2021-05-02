@@ -193,6 +193,9 @@
 <loc>https://deepu.tech/</loc>
 </url>
 <url>
+<loc>https://deepu.tech/series</loc>
+</url>
+<url>
 <loc>https://deepu.tech/tags</loc>
 </url>
 <url>
@@ -257,10 +260,10 @@
 </url>
 <url>
 <loc>https://deepu.tech/svg-seq-diagram/</loc>
-<lastmod>2021-05-02T11:32:22+02:00</lastmod>
+<lastmod>2021-05-02T11:47:45+02:00</lastmod>
 </url>
 <url>
 <loc>https://deepu.tech/svg-seq-diagram/plantUML.html</loc>
-<lastmod>2021-05-02T11:32:22+02:00</lastmod>
+<lastmod>2021-05-02T11:47:45+02:00</lastmod>
 </url>
 </urlset>
