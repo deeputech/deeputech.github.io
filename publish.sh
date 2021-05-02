@@ -1,5 +1,15 @@
 #!/bin/bash
 
+publishDev=true
+
+while getopts 's' opt; do
+    case $opt in
+        s) publishDev=false ;;
+        *) echo 'Error in command line parsing' >&2
+            exit 1
+    esac
+done
+
 if [ -z "$(git status --porcelain)" ]; then
     echo ">>> Working directory clean"
     TMP_LOC=/tmp/deepu.github.io
@@ -7,10 +17,12 @@ if [ -z "$(git status --porcelain)" ]; then
     /bin/rm -rf _site || exit
     /bin/rm -rf $TMP_LOC || exit
 
-    echo ">> Publish to Dev.to and update slugs"
-    npm run publish-to-dev || exit
-    git add --all || exit
-    git commit --allow-empty -am "Updated posts with Dev.to slug" || exit
+    if "$publishDev"; then
+        echo ">> Publish to Dev.to and update slugs (pass -s to skip)"
+        npm run publish-to-dev || exit
+        git add --all || exit
+        git commit --allow-empty -am "Updated posts with Dev.to slug" || exit
+    fi
 
     echo ">> Building site"
     bundle update listen || exit
