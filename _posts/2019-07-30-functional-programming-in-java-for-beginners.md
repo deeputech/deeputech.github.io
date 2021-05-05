@@ -120,7 +120,7 @@ public class ClosureSample {
     Function<Integer, Integer> add(final int x) {
         // this is a closure, i.e, a variable holding an anonymous inner class instance of the Function interface
         // which uses variables from the outer scope
-        Function<Integer, Integer> partial = new Function<Integer, Integer>() {
+        var partial = new Function<Integer, Integer>() {
             @Override
             public Integer apply(Integer y) {
                 // variable x is obtained from the outer scope of this method which is declared as final
@@ -135,9 +135,9 @@ public class ClosureSample {
         ClosureSample sample = new ClosureSample();
 
         // we are currying the add method to create more variations
-        Function<Integer, Integer> add10 = sample.add(10);
-        Function<Integer, Integer> add20 = sample.add(20);
-        Function<Integer, Integer> add30 = sample.add(30);
+        var add10 = sample.add(10);
+        var add20 = sample.add(20);
+        var add30 = sample.add(30);
 
         System.out.println(add10.apply(5)); // 15
         System.out.println(add20.apply(5)); // 25
@@ -161,9 +161,9 @@ public class ClosureSample {
         ClosureSample sample = new ClosureSample();
 
         // we are currying the add method to create more variations
-        Function<Integer, Integer> add10 = sample.add(10);
-        Function<Integer, Integer> add20 = sample.add(20);
-        Function<Integer, Integer> add30 = sample.add(30);
+        var add10 = sample.add(10);
+        var add20 = sample.add(20);
+        var add30 = sample.add(30);
 
         System.out.println(add10.apply(5));
         System.out.println(add20.apply(5));
@@ -338,12 +338,12 @@ We can use lambda expressions and higher-order-functions to rewrite this into a 
 public class LazySample {
     public static void main(String[] args) {
         // This is a lambda expression behaving as a closure
-        Function<Integer, Integer> add = t -> {
+        UnaryOperator<Integer> add = t -> {
             System.out.println("executing add");
             return t + t;
         };
         // This is a lambda expression behaving as a closure
-        Function<Integer, Integer> multiply = t -> {
+        UnaryOperator<Integer> multiply = t -> {
             System.out.println("executing multiply");
             return t * t;
         };
@@ -414,9 +414,9 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 This is just an introduction for those who are trying to apply some functional programming techniques in Java. There are lot more that can be done in Java and Java 8 added a lot of API to make it easy to do functional programming in Java, like the stream API, Optional interface, functional interfaces and so on. As I said earlier functional programming is not a silver bullet but it offers a lot of useful techniques for more understandable, maintainable and testable code. It can co-exist perfectly well with imperative and object-oriented programming styles. In fact, we all should be using the best of everything.
 
-This video from [Venkat Subramaniam](https://twitter.com/venkat_s) is a great resource to dive deep into functional programming in Java
+Here is a video of from a meetup I presented covering this content.
 
-{% youtube 15X0qFtBqiQ %}
+{% youtube 5dBw4madIpo %}
 
 ---
 
