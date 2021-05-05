@@ -34,6 +34,7 @@ Now in 2021, I'm still using [Fedora as my daily driver](https://deepu.tech/my-b
 Ok, now that I have nerded out about my fascination with computers, let's get into the actual topic and see if Linux is good enough as a daily driver even for regular users who just wants a working computer and are not tech-savvy and never want to visit the terminal. Throughout the article, I'll be making some comparisons with the world's most popular OS, Microsoft Windows, and Apple's macOS which, IMO, is unavoidable.
 
 ## State of Linux
+## State of Linux
 
 Linux has come a long way. For those of you, who still think of a terminal and an outdated UI(I know people who still love those UI) when you hear the word Linux, I think you probably haven't seen or worked on a Linux distro in the last 10 years.
 
@@ -163,7 +164,7 @@ When it comes to Linux distributions they can be grouped into families based on 
   - Ubuntu and derivatives like Pop!\_OS, Kubuntu, Lubuntu, Xubuntu, KDE Neon, Elementary OS, Linux Mint, and so on
   - Kali Linux, PureOS, Deepin, and so on
 - **Pacman-based**: Arch Linux, Manjaro, Garuda, BlackArch and so on
-- **Gentoo-based**: Chrome OS and other Gentoo derivatives
+- **Gentoo-based**: Gentoo other Gentoo derivatives
 
 Distro hopping is a term popular with Linux enthusiasts, but it's not for everyone. Average users just need a working OS and having so many options will only cause decision fatigue. I'm not gonna go into the debate of, if it's good or bad to have so many distros, instead I'll make some personal suggestions for newcomers to Linux so it might help with a decision
 
