@@ -175,7 +175,7 @@ public class ClosureSample {
 There are also many built-in higher-order-functions in Java for example here is the sort method from `java.util.Collections`
 
 ```java
-List<String> list = Arrays.asList("Apple", "Orange", "Banana", "Grape");
+var list = Arrays.asList("Apple", "Orange", "Banana", "Grape");
 
 // This can be simplified as "Collections.sort(list, Comparator.naturalOrder());", I'm writing the expanded version for readability
 Collections.sort(list, (String a, String b) -> {
@@ -414,7 +414,7 @@ Hence maps are better than arrays or hash sets in functional programming as data
 
 This is just an introduction for those who are trying to apply some functional programming techniques in Java. There are lot more that can be done in Java and Java 8 added a lot of API to make it easy to do functional programming in Java, like the stream API, Optional interface, functional interfaces and so on. As I said earlier functional programming is not a silver bullet but it offers a lot of useful techniques for more understandable, maintainable and testable code. It can co-exist perfectly well with imperative and object-oriented programming styles. In fact, we all should be using the best of everything.
 
-Here is a video of from a meetup I presented covering this content.
+Here is a video from a meetup, I presented, covering this content.
 
 {% youtube 5dBw4madIpo %}
 
