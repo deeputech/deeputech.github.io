@@ -8,7 +8,7 @@ canonical_url: https://deepu.tech/first-impression-of-rust/
 devto_url: https://dev.to/deepu105/my-first-impressions-of-rust-1a8o
 devto_id: 201962
 series: languages
-featured: true
+featured: false
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates.

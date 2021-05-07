@@ -14,7 +14,7 @@ There is a lot of hype around functional programming(FP) and a lot of cool kids 
 
 If you are looking for functional programming in Java, Golang or TypeScript check other posts in the series.
 
-I'm not gonna dive into all functional programming concepts in detail, instead, I'm gonna focus on things that you can do in Rust which are in line with functional programming concepts. I'm also not gonna discuss the pros and cons of functional programming in general.
+I'm not gonna dive into all functional programming concepts in detail, instead, I'm gonna focus on things that you can do in Rust that are in line with functional programming concepts. I'm also not gonna discuss the pros and cons of functional programming in general.
 
 Please note that some introductions in this post are repeated from my other posts in the series for your ease of reading.
 
@@ -28,36 +28,36 @@ As per Wikipedia,
 
 Hence in functional programming, there are two very important rules
 
--   **No Data mutations**: It means a data object should not be changed after it is created.
--   **No implicit state**: Hidden/Implicit state should be avoided. In functional programming state is not eliminated, instead, its made visible and explicit
+- **No Data mutations**: It means a data object should not be changed after it is created.
+- **No implicit state**: Hidden/Implicit state should be avoided. In functional programming state is not eliminated, instead, its made visible and explicit
 
 This means:
 
--   **No side effects**: A function or operation should not change any state outside of its functional scope. I.e, A function should only return a value to the invoker and should not affect any external state. This means programs are easier to understand.
--   **Pure functions only**: Functional code is idempotent. A function should return values only based on the arguments passed and should not affect(side-effect) or depend on the global state. Such functions always produce the same result for the same arguments.
+- **No side effects**: A function or operation should not change any state outside of its functional scope. I.e, A function should only return a value to the invoker and should not affect any external state. This means programs are easier to understand.
+- **Pure functions only**: Functional code is idempotent. A function should return values only based on the arguments passed and should not affect(side-effect) or depend on the global state. Such functions always produce the same result for the same arguments.
 
 Apart from these there are functional programming concepts below that can be applied in Rust, we will touch upon these further down.
 
--   [Higher-order-functions](https://en.wikipedia.org/wiki/Higher-order_function)
--   [Closures](<https://en.wikipedia.org/wiki/Closure_(computer_programming)>)
--   [Currying](https://en.wikipedia.org/wiki/Currying)
--   [Recursion](<https://en.wikipedia.org/wiki/Recursion_(computer_science)>)
--   [Lazy evaluations](https://en.wikipedia.org/wiki/Evaluation_strategy)
--   [Referential transparency](https://en.wikipedia.org/wiki/Referential_transparency)
+- [Higher-order-functions](https://en.wikipedia.org/wiki/Higher-order_function)
+- [Closures](<https://en.wikipedia.org/wiki/Closure_(computer_programming)>)
+- [Currying](https://en.wikipedia.org/wiki/Currying)
+- [Recursion](<https://en.wikipedia.org/wiki/Recursion_(computer_science)>)
+- [Lazy evaluations](https://en.wikipedia.org/wiki/Evaluation_strategy)
+- [Referential transparency](https://en.wikipedia.org/wiki/Referential_transparency)
 
-Using functional programming doesn't mean its all or nothing, you can always use functional programming concepts to complement Object-oriented or imperative concepts in Rust. The benefits of functional programming can be utilized whenever possible regardless of the paradigm or language you use. And that is exactly what we are going to see.
+Using functional programming doesn't mean it's all or nothing, you can always use functional programming concepts to complement Object-oriented or imperative concepts in Rust. The benefits of functional programming can be utilized whenever possible regardless of the paradigm or language you use. And that is exactly what we are going to see.
 
 ---
 
 ## Functional programming in Rust
 
-Rust is primarily geared towards procedural/imperative style of programming but it also lets you do a little bit of functional and object-oriented style of programming as well. And that is my favorite kind of mix. So let us see how we can apply some of the functional programming concepts above in Rust using the language features.
+Rust is primarily geared towards the procedural/imperative style of programming but it also lets you do the functional and object-oriented style of programming as well. And that is my favorite kind of mix. So let us see how we can apply some of the functional programming concepts above in Rust using the language features.
 
 ### First-class and higher-order functions
 
-First-class functions(function as a first-class citizen) means you can assign functions to variables, pass a function as an argument to another function or return a function from another. Functions in Rust are a bit more complex than other languages, it's not as straightforward as in Go or JavaScript. There are different kinds of functions and two different ways of writing them. The first one is a function that cannot memoize its outer context and the second one is closures which can memoize its outer context. Hence concepts like currying and higher-order-functions are possible in Rust but may not be as easy to wrap your head around as in other languages. Also, functions that accept a closure can also accept a pointer to a function depending on the context. In many places, Rust functions and closures can be interchangeable. It would have been nicer if functions were simple and we could do all the below without having to rely on closures. But Rust chose these compromises for better memory safety and performance.
+First-class functions(function as a first-class citizen) mean you can assign functions to variables, pass a function as an argument to another function or return a function from another. Functions in Rust are a bit more complex than other languages, it's not as straightforward as in Go or JavaScript. There are different kinds of functions and two different ways of writing them. The first one is a function that cannot memoize its outer context and the second one is closures which can memoize its outer context. Hence concepts like currying and higher-order functions are possible in Rust but may not be as easy to wrap your head around as in other languages. Also, functions that accept a closure can accept a pointer to a function depending on the context. In many places, Rust functions and closures can be interchangeable. It would have been nicer if functions were simple and we could do all the below without having to rely on closures. But Rust chose these compromises for better memory safety and performance.
 
-A function can be considered as a higher-order-function only if it takes one or more functions as parameters or if it returns another function as a result.
+A function can be considered as a higher-order function only if it takes one or more functions as parameters or if it returns another function as a result.
 In Rust, this is quite easy to do with closures, it might look a bit verbose but if you are familiar with Rust then you should be fine.
 
 ```rust
@@ -111,7 +111,7 @@ fn map_for_each<A, B>(list: Vec<A>, fun: fn(&A) -> B) -> Vec<B> {
 }
 ```
 
-But then we could also simply do it this way using built-in functional methods like map, fold(reduce) and so on which is much less verbose. Rust provides a lot of useful functional style methods for working on collections like `map`, `fold`, `for_each`, `filter` and so on.
+But then we could also simply do it this way using built-in functional methods like map, fold(reduce) and so on which is much less verbose. Rust provides a lot of useful functional style methods for working on collections like `map`, `fold`, `for_each`, `filter`, and so on.
 
 ```rust
 fn main() {
@@ -124,7 +124,7 @@ fn main() {
 }
 ```
 
-Closures in Rust can memorize and mutate its outer context but due to the concept of ownership in Rust, you cannot have multiple closures mutating the same variables in the outer context. Currying is also possible in Rust but again due to ownership and lifetime concepts, it might feel a bit more verbose.
+Closures in Rust can memorize and mutate their outer context but due to the concept of ownership in Rust, you cannot have multiple closures mutating the same variables in the outer context. Currying is also possible in Rust but again due to ownership and lifetime concepts, it might feel a bit more verbose.
 
 ```rust
 fn main() {
@@ -158,7 +158,7 @@ fn sum(a: usize, b: usize) -> usize {
 }
 ```
 
-But since Rust variables are immutable by default, unless specified a function cannot mutate any variables passed to it and cannot capture any variable in its context. So if we try to affect external state like below the compiler will complain "can't capture dynamic environment in a fn item"
+But since Rust variables are immutable by default, unless specified a function cannot mutate any variables passed to it and cannot capture any variable in its context. So if we try to affect external state like below the compiler will complain "can't capture the dynamic environment in an fn item"
 
 ```rust
 use std::collections::HashMap;
@@ -174,7 +174,7 @@ fn main() {
 }
 ```
 
-In Rust, in order to capture external state, we would have to use closures, so we can rewrite the above as
+In Rust, to capture external state, we would have to use closures, so we can rewrite the above as
 
 ```rust
 use std::collections::HashMap;
@@ -192,18 +192,19 @@ fn main() {
 }
 ```
 
-But the compilation will still fail with the message "cannot borrow `sum` as mutable, as it is not declared as mutable". So in order to do external state mutation, we would have to explicitly specify the function as mutable like `let mut sum = ...`
+But the compilation will still fail with the message "cannot borrow `sum` as mutable, as it is not declared as mutable". So to do external state mutation, we would have to explicitly specify the function as mutable like `let mut sum = ...`
 
 So Rust will help you keep your functions pure and simple by default. Of course, that doesn't mean you can avoid side effects that don't involve variable mutations, for those you have to take care of it yourself.
 
 ### Recursion
 
-Functional programming favors recursion over looping. Let us see an example for calculating the factorial of a number.
+Functional programming favors recursion over looping. Let us see an example for calculating the factorial of a number. I did some benchmarks and added the ns/op results inline as a comment
 
 In traditional iterative approach:
 
 ```rust
 fn main() {
+     // Average  8.5858 ns/op
     fn factorial(mut num: usize) -> usize {
         let mut result = 1;
         while num > 0 {
@@ -217,10 +218,11 @@ fn main() {
 }
 ```
 
-The same can be done using recursion as below which is favored in functional programming -- But recursion is not the solution always, for some cases a simple loop is more readable.
+The same can be done using recursion as below which is favored in functional programming -- But recursion is not the solution always, for some cases a simple loop is more readable in my personal opinion.
 
 ```rust
 fn main() {
+     // Average  8.6150 ns/op
     fn factorial(num: usize) -> usize {
         return match num {
             0 => 1,
@@ -232,13 +234,46 @@ fn main() {
 }
 ```
 
-The downside of the recursive approach is that it will be slower compared to an iterative approach most of the times(The advantage we are aiming for is code simplicity and readability) and might result in stack overflow errors since every function call needs to be saved as a frame to the stack. To avoid this tail recursion is preferred, especially when the recursion is done too many times. In tail recursion, the recursive call is the last thing executed by the function and hence the functions stack frame need not be saved by the compiler. Most compilers can optimize the tail recursion code the same way iterative code is optimized hence avoiding the performance penalty. But unfortunately, Rust does not support this yet.
+The downside of the recursive approach, in general, is that it might result in stack overflow errors since every function call needs to be saved as a frame to the stack. To avoid this tail recursion is preferred, especially when the recursion is done too many times. In tail recursion, the recursive call is the last thing executed by the function and hence the functions stack frame need not be saved by the compiler. Most compilers can optimize the tail recursion code the same way iterative code is optimized hence avoiding the performance penalty. In Rust this mostly is not an issue due to Rust's [zero-cost abstractions](https://deepu.tech/my-second-impression-of-rust/) as both the imperative and recursive code will be compiled down to [same assembly](https://godbolt.org/z/v593nhKoh) in most cases.
 
-Consider using recursion when writing Rust code for readability and immutability, but if performance is critical or if the number of iterations will be huge use the standard iterative approach.
+Rust also does tail-call optimizations but it's not always guaranteed. The same use-case with the tail call will look like this.
+
+```rust
+fn main() {
+     // Average  8.6869 ns/op
+    fn factorial(num: usize) -> usize {
+        factorial_inner(1, num)
+    }
+
+    fn factorial_inner(acc: usize, val: usize) -> usize {
+        return match val {
+            1 => acc,
+            _ => factorial_tail_inner(acc * val, val - 1),
+        };
+    }
+
+    println!("{}", factorial(20)); // 2432902008176640000
+}
+```
+
+For factorials, there is an even better way using iterators which performs the best
+
+```rust
+fn main() {
+     // Average 6.6387 ns/op
+    fn factorial(num: usize) -> usize {
+        (1..num).fold(1, |n1, n2| n1 * n2)
+    }
+
+    println!("{}", factorial(20)); // 2432902008176640000
+}
+```
+
+Consider using recursion when writing Rust code for readability and immutability and due to Rust's zero-cost abstractions we don't have to worry about performance.
 
 ### Lazy evaluation
 
-Lazy evaluation or non-strict evaluation is the process of delaying the evaluation of an expression until it is needed. In general, Rust does strict/eager evaluation. We can utilize higher-order-functions, closures, and [memoization](https://en.wikipedia.org/wiki/Memoization) techniques to do lazy evaluations.
+Lazy evaluation or non-strict evaluation is the process of delaying the evaluation of an expression until it is needed. In general, Rust does strict/eager evaluations. We can utilize higher-order functions, closures, and [memoization](https://en.wikipedia.org/wiki/Memoization) techniques to do lazy evaluations.
 
 Take this example where Rust eagerly evaluates everything.
 
@@ -374,7 +409,7 @@ executing multiply
 
 These may not look that elegant especially to seasoned Rust programmers. Fortunately, most of the functional APIs, like the iterators, provided by Rust do lazy evaluations and there are libraries like [rust-lazy](https://github.com/reem/rust-lazy) and [Thunk](https://docs.rs/thunk/0.3.0/thunk/) which can be used to make functions lazy. Also, Rust provides some advanced types with which lazy evaluations can be implemented.
 
-Doing Lazy evaluations in Rust might not be worth the code complexity some of the times, but if the functions in question are heavy in terms of processing then it is absolutely worth it to lazy evaluate them.
+Doing Lazy evaluations in Rust might not be worth the code complexity some of the times, but if the functions in question are heavy in terms of processing then it is worth it to lazy evaluate them.
 
 ### Type system
 
@@ -386,7 +421,7 @@ From Wikipedia:
 
 > Functional programs do not have assignment statements, that is, the value of a variable in a functional program never changes once defined. This eliminates any chances of side effects because any variable can be replaced with its actual value at any point of execution. So, functional programs are referentially transparent.
 
-Rust has great ways to ensure referential transparency, variables in Rust are immutable by default and even reference passing is immutable by default. So you would have to explicitly mark variables or references as mutable to do so. So in Rust, it is actually quite easy to avoid mutations.
+Rust has great ways to ensure referential transparency, variables in Rust are immutable by default and even reference passing is immutable by default. So you would have to explicitly mark variables or references as mutable to do so. So in Rust, it is quite easy to avoid mutations.
 
 For example, the below will produce an error
 
@@ -419,7 +454,7 @@ fn main() {
 }
 ```
 
-In order to compile these, we would have to riddle it with `mut` keywords
+To compile these, we would have to riddle it with `mut` keywords
 
 ```rust
 fn main() {
@@ -451,7 +486,7 @@ When using functional programming techniques it is encouraged to use data types 
 
 ## Conclusion
 
-This is just an introduction for those who are trying to apply some functional programming techniques in Rust. There are a lot more that can be done in Rust. As I said earlier functional programming is not a silver bullet but it offers a lot of useful techniques for more understandable, maintainable and testable code. It can co-exist perfectly well with imperative and object-oriented programming styles. In fact, we all should be using the best of everything to solve the problem at hand instead of getting too obsessed about a single methodology.
+This is just an introduction for those who are trying to apply some functional programming techniques in Rust. There are a lot more that can be done in Rust. As I said earlier functional programming is not a silver bullet but it offers a lot of useful techniques for more understandable, maintainable, and testable code. It can co-exist perfectly well with imperative and object-oriented programming styles. In fact, we all should be using the best of everything to solve the problem at hand instead of getting too obsessed with a single methodology.
 
 ---
 
