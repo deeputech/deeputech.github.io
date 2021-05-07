@@ -306,8 +306,8 @@ fn main() {
 
 ## Ability to use unsafe features if required
 
--   Useful in advanced use-cases where you know what you are doing. A necessary evil IMO. I like it since its doable only within an `unsafe { }` block making it very explicit. I would have moved this to the dislike section if that was not the case.
--   When you use these, the Rust compiler cannot guarantee memory and runtime safety and you are on your own to get this right. So definitely for advanced and experienced users.
+- Useful in advanced use-cases where you know what you are doing. A necessary evil IMO. I like it since its doable only within an `unsafe { }` block making it very explicit. I would have moved this to the dislike section if that was not the case.
+- When you use these, the Rust compiler cannot guarantee memory and runtime safety and you are on your own to get this right. So definitely for advanced and experienced users.
 
 ---
 
@@ -319,8 +319,8 @@ Things that I didn't like very much, in no particular order.
 
 I don't like it when a language offers multiple ways to do the same things. This is one think Golang does pretty well, there are no two ways to do the same thing and hence it is easier for people to work on larger codebases and to review code. Also, you don't have to always think of the best possible way to do something. Unfortunately, Rust does this and I'm not a fan of it. IMO it makes the language more complex.
 
--   Too many ways for iterations -> loops, while, for, iterators.
--   Too many ways for creating procedures -> Functions, closures, macros
+- Too many ways for iterations -> loops, while, for, iterators.
+- Too many ways for creating procedures -> Functions, closures, macros
 
 **Edit:** Based on discussions here and on [Reddit](https://www.reddit.com/r/rust/comments/dua0qv/my_first_impressions_of_rust/), I say my perception of complexity only have increased. It seems like once you get past all the niceties there are a lot of things that would take some time to wrap your head around. I'm pretty sure if you are experienced in Rust, it would be a cakewalk for you but the language indeed is quite complex, especially the ways functions and closures behave in different contexts, lifetimes in structs and stuff.
 
@@ -337,10 +337,10 @@ So Rust lets you do this
 }
 ```
 
--   Kind of beats being immutable by default(I understand the reasoning of being able to perform transformations on an immutable variable, especially when passing references to a function and getting it back)
--   IMO lets people practice bad practices unintentionally, I would have rather marked the variable mutable as I consider the above mutation as well.
--   You can as easily accidentally shadow a variable as you would accidentally mutate one in Languages like JavaScript
--   Gives people a gun to shoot in the foot
+- Kind of beats being immutable by default(I understand the reasoning of being able to perform transformations on an immutable variable, especially when passing references to a function and getting it back)
+- IMO lets people practice bad practices unintentionally, I would have rather marked the variable mutable as I consider the above mutation as well.
+- You can as easily accidentally shadow a variable as you would accidentally mutate one in Languages like JavaScript
+- Gives people a gun to shoot in the foot
 
 **Edit:** I saw a lot of comments here and on [Reddit](https://www.reddit.com/r/rust/comments/dua0qv/my_first_impressions_of_rust/) explaining why this is good. While I agree that it is useful in many scenarios, so is the ability of mutation. I think it would have been perfectly fine not to have this and people would have still loved Rust and all of them would have defended the decision not have this. So my opinion on this hasn't changed.
 
@@ -360,10 +360,10 @@ I'm not a fan of implicit stuff as its easier to abuse this and harder to read. 
 
 Finally some stuff I still don't like but I don't consider them a big deal.
 
--   ~~I don't see the point of having the `const` keyword when `let` is immutable by default. It seems more like syntax sugar for the old school constants concept.~~ [Diane](https://dev.to/artemis) [pointed out](https://dev.to/artemis/comment/hf2c) the difference `const` provides and that makes sense.
--   The block expression and implicit return style are a bit error-prone and confusing to get used to, I would have preferred explicit return. Also, it's not that readable IMO.
--   If you have read my other post about Go, you might know that I'm not a fan of structs. Structs in Rust is very similar to structs in Golang. So like in Go, it would be easy to achieve unreadable struct structures. But fortunately, the structs in Rust seem much nicer than Go as you have functions, can use spread operator, shorthand syntax and so on here. Also, you can make structs which are Tuples. The structs in Rust are more like Java POJOs. I would have moved this to the liked section if having optional fields in structs where easier. Currently, you would have to wrap stuff in an `Optional` enum to do this. Also lifetimes :(
--   Given strings are the most used data types, it would have been nice to have a simpler way of working with strings(like in Golang) rather than working with the Vector types for mutable strings or slice types for immutable string literals. This makes code more verbose than it needs to be. This is more likely a compromise due to the fact that Rust is not garbage collected and has a concept of ownership to manage memory. https://doc.rust-lang.org/rust-by-example/std/str.html - **Edit**: _I have moved this point to nitpicks rather than dislikes after a [discussion](https://dev.to/robertorojasr/comment/hf27) on the comments with [robertorojasr](https://dev.to/robertorojasr)_
+- ~~I don't see the point of having the `const` keyword when `let` is immutable by default. It seems more like syntax sugar for the old school constants concept.~~ [Diane](https://dev.to/artemis) [pointed out](https://dev.to/artemis/comment/hf2c) the difference `const` provides and that makes sense.
+- The block expression and implicit return style are a bit error-prone and confusing to get used to, I would have preferred explicit return. Also, it's not that readable IMO.
+- If you have read my other post about Go, you might know that I'm not a fan of structs. Structs in Rust is very similar to structs in Golang. So like in Go, it would be easy to achieve unreadable struct structures. But fortunately, the structs in Rust seem much nicer than Go as you have functions, can use spread operator, shorthand syntax and so on here. Also, you can make structs which are Tuples. The structs in Rust are more like Java POJOs. I would have moved this to the liked section if having optional fields in structs where easier. Currently, you would have to wrap stuff in an `Optional` enum to do this. Also lifetimes :(
+- Given strings are the most used data types, it would have been nice to have a simpler way of working with strings(like in Golang) rather than working with the Vector types for mutable strings or slice types for immutable string literals. This makes code more verbose than it needs to be. This is more likely a compromise due to the fact that Rust is not garbage collected and has a concept of ownership to manage memory. https://doc.rust-lang.org/rust-by-example/std/str.html - **Edit**: _I have moved this point to nitpicks rather than dislikes after a [discussion](https://dev.to/robertorojasr/comment/hf27) on the comments with [robertorojasr](https://dev.to/robertorojasr)_
 
 ---
 
@@ -379,7 +379,7 @@ So far I can say that I like Rust more than Golang even without implementing a r
 
 Note: Some of my opinions have changed after using Rust more. Checkout my new post about the same
 
-
+{% link https://dev.to/deepu105/my-second-impression-of-rust-and-why-i-think-it-s-the-best-general-purpose-language-31jh %}
 
 ---
 
