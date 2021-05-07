@@ -1,12 +1,23 @@
 ---
-title: My second impression of Rust and why I think it's the best general-purpose language!
-description: My second impression of Rust after building a real-life use case with it and my thoughts on why it is the best general-purpose language for the future.
+title: >-
+  My second impression of Rust and why I think it's the best general-purpose
+  language!
+description: >-
+  My second impression of Rust after building a real-life use case with it and
+  my thoughts on why it is the best general-purpose language for the future.
 published: true
 featured: true
-tags: [rust, programming, languages, webassembly]
-cover_image: https://i.imgur.com/QHH8hev.png
-canonical_url: https://deepu.tech/my-second-impression-of-rust/
+tags:
+  - rust
+  - programming
+  - languages
+  - webassembly
+cover_image: 'https://i.imgur.com/QHH8hev.png'
+canonical_url: 'https://deepu.tech/my-second-impression-of-rust/'
 series: languages
+devto_id: 691156
+devto_url: >-
+  https://dev.to/deepu105/my-second-impression-of-rust-and-why-i-think-it-s-the-best-general-purpose-language-31jh
 ---
 
 Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
@@ -270,3 +281,4 @@ I would finish off by saying this: You won't appreciate Rust unless you spend fe
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
