@@ -379,7 +379,7 @@ So far I can say that I like Rust more than Golang even without implementing a r
 
 Note: Some of my opinions have changed after using Rust more. Checkout my new post about the same
 
-{% link https://deepu.tech/my-second-impression-of-rust/ %}
+
 
 ---
 
