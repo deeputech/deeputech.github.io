@@ -377,7 +377,7 @@ But don't be fooled by what you see over the hood, Rust is definitely not someth
 
 So far I can say that I like Rust more than Golang even without implementing a real project with it and might choose Rust over Go for system programming use cases and for high-performance requirements.
 
-Note: Some of my opinions have changed after using Rust more. Checkout my new post about the same
+**Note**: Some of my opinions have changed after using Rust more. Checkout my new post about the same
 
 {% link https://dev.to/deepu105/my-second-impression-of-rust-and-why-i-think-it-s-the-best-general-purpose-language-31jh %}
 
