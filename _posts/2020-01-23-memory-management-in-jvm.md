@@ -15,7 +15,7 @@ Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let 
 
 ---
 
-In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management. In this chapter, we will look at the memory management of the **Java Virtual Machine(JVM)** used by languages like Java, Kotlin, Scala, Clojure, JRuby and so on.
+In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management. In this chapter, we will look at the memory management of the **Java Virtual Machine(JVM)** used by languages like Java, Kotlin, Scala, Clojure, Groovy, and so on.
 
 If you haven't read the [first part](https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd) of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.
 
@@ -29,7 +29,7 @@ This is the native memory allocated by the OS and the amount depends on OS, proc
 
 ## Heap Memory
 
-This is where JVM stores objects or dynamic data. This is the biggest block of memory area and this is where **Garbage Collection(GC)** takes place. The size of heap memory can be controlled using the `Xms`(Initial) and `Xmx`(Max) flags. The entire heap memory is not committed to the **Virtual Machine(VM)** as some of it is reserved as virtual space and the heap can grow to use this. Heap is further divided into **"Young"** and **"Old"** generation space.
+This is where JVM stores object or dynamic data. This is the biggest block of memory area and this is where **Garbage Collection(GC)** takes place. The size of heap memory can be controlled using the `Xms`(Initial) and `Xmx`(Max) flags. The entire heap memory is not committed to the **Virtual Machine(VM)** as some of it is reserved as virtual space and the heap can grow to use this. Heap is further divided into **"Young"** and **"Old"** generation space.
 
 -   **Young generation**: Young generation or "New Space" is where new objects live and is further divided into "Eden Space" and "Survivor Space". This space is managed by **"Minor GC"** also sometimes called "Young GC"
     -   **Eden Space**: This is where new objects are created. When we create a new object, memory is allocated here.
@@ -42,7 +42,7 @@ This is the stack memory area and there is one stack memory per thread in the pr
 
 ## Meta Space
 
-This is part of the native memory and doesn't have an upper limit by default. This is what used to be **Permanent Generation(PermGen) Space** in earlier versions of JVM. This space is used by the class loaders to store class definitions. If this space keeps growing, the OS might move data stored here from RAM to virtual memory which might slow down the application. To avoid that its possible to set a limit on meta-space used with the `XX:MetaspaceSize` and `-XX:MaxMetaspaceSize` flag in which case application might just throw out of memory errors.
+This is part of the native memory and doesn't have an upper limit by default. This is what used to be **Permanent Generation(PermGen) Space** in earlier versions of JVM. This space is used by the class loaders to store class definitions. If this space keeps growing, the OS might move data stored here from RAM to virtual memory which might slow down the application. To avoid that it's possible to set a limit on meta-space used with the `XX:MetaspaceSize` and `-XX:MaxMetaspaceSize` flag in which case the application might just throw out of memory errors.
 
 ## Code Cache
 
@@ -50,7 +50,7 @@ This is where the **Just In Time(JIT)** compiler stores compiled code blocks tha
 
 ## Shared Libraries
 
-This is where native code for any shared libraries used are stored. This is loaded only once per process by the OS.
+This is where native code for any shared libraries used is stored. This is loaded only once per process by the OS.
 
 ---
 
@@ -58,7 +58,7 @@ This is where native code for any shared libraries used are stored. This is load
 
 Now that we are clear about how memory is organized let's see how the most important parts of it are used when a program is executed.
 
-Let's use the below Java program, the code is not optimized for correctness hence ignore issues like unnecessary intermediatory variables, improper modifiers and such, the focus is to visualize stack and heap memory usage.
+Let's use the below Java program, the code is not optimized for correctness hence ignore issues like unnecessary intermediatory variables, improper modifiers, and such, the focus is to visualize stack and heap memory usage.
 
 ```java
 class Employee {
@@ -113,7 +113,7 @@ As you can see:
 -   Once the main process is complete the objects on the Heap do not have any more pointers from Stack and becomes orphan
 -   Unless you make a copy explicitly, all object references within other objects are done using pointers
 
-The Stack as you can see is automatically managed and is done so by the operating system rather than JVM itself. Hence we do not have to worry much about the Stack. The Heap, on the other hand, is not automatically managed by the OS and since its the biggest memory space and holds dynamic data, it could grow exponentially causing our program to run out of memory over time. It also becomes fragmented over time slowing down applications. This is where the JVM helps. It manages the Heap automatically using the garbage collection process.
+The Stack as you can see is automatically managed and is done so by the operating system rather than JVM itself. Hence we do not have to worry much about the Stack. The Heap, on the other hand, is not automatically managed by the OS and since it's the biggest memory space and holds dynamic data, it could grow exponentially causing our program to run out of memory over time. It also becomes fragmented over time slowing down applications. This is where the JVM helps. It manages the Heap automatically using the garbage collection process.
 
 ---
 
@@ -144,7 +144,7 @@ JVM uses a separate daemon thread that runs in the background for garbage collec
 -   **Sweeping**: The garbage collector traverses the heap and removes any object that is not marked alive. This space is now marked as free.
 -   **Compacting**: After deleting unused objects, all the survived objects will be moved to be together. This will decrease fragmentation and increase the performance of allocation of memory to newer objects
 
-This type of GC is also referred to us stop-the-world GC as they introduce pause-times in the application while performing GC.
+This type of GC is also referred to as stop-the-world GC as they introduce pause-times in the application while performing GC.
 
 JVM offers few different algorithms to choose from when it comes to GC and there might be few more options available depending on the JDK vendor you use(Like the [Shenandoah GC](https://wiki.openjdk.java.net/display/shenandoah/Main), available on OpenJDK). The different implementations focus on different goals like:
 
@@ -156,10 +156,10 @@ JVM offers few different algorithms to choose from when it comes to GC and there
 
 As of JDK 11, which is the current LTE version, the below garbage collectors are available and the default used is chosen by JVM based on hardware and OS used. We can always specify the GC to be used with the `-XX` switch as well.
 
--   **Serial Collector**: It uses a single thread for GC and is efficient for applications with small data sets and is most suitable for single-processor machines. This can be enabled using `-XX:+UseSerialGC` switch.
--   **Parallel Collector**: This one is focused on high throughput and uses multiple threads to speed up the GC process. This is intended for applications with medium to large data sets running on multi-threaded/multi-processor hardware. This can be enabled using `-XX:+UseParallelGC` switch.
--   **Garbage-First(G1) Collector**: The G1 collector is a mostly concurrent collector(Means only expensive work is done concurrently). This is for multi-processor machines with a large amount of memory and is enabled as default on most modern machines and OS. It has a focus on low pause-times and high throughput. This can be enabled using `-XX:+UseG1GC` switch.
--   **Z Garbage Collector**: This is a new experimental GC introduced in JDK11. It is a scalable low-latency collector. It's concurrent and does not stop the execution of application threads, hence no stop-the-world. It is intended for applications that require low latency and/or use a very large heap(multi-terabytes). This can be enabled using `-XX:+UseZGC` switch.
+-   **Serial Collector**: It uses a single thread for GC and is efficient for applications with small data sets and is most suitable for single-processor machines. This can be enabled using the `-XX:+UseSerialGC` switch.
+-   **Parallel Collector**: This one is focused on high throughput and uses multiple threads to speed up the GC process. This is intended for applications with medium to large data sets running on multi-threaded/multi-processor hardware. This can be enabled using the `-XX:+UseParallelGC` switch.
+-   **Garbage-First(G1) Collector**: The G1 collector is mostly concurrent (Means only expensive work is done concurrently). This is for multi-processor machines with a large amount of memory and is enabled as default on most modern machines and OS. It has a focus on low pause times and high throughput. This can be enabled using the `-XX:+UseG1GC` switch.
+-   **Z Garbage Collector**: This is a new experimental GC introduced in JDK11. It is a scalable low-latency collector. It's concurrent and does not stop the execution of application threads, hence no stop-the-world. It is intended for applications that require low latency and/or use a very large heap(multi-terabytes). This can be enabled using the `-XX:+UseZGC` switch.
 
 ## GC process
 
@@ -167,7 +167,7 @@ Regardless of the collector used, JVM has two types of GC process depending on w
 
 ### Minor GC
 
-This type of GC keeps the young generation space compact and clean. This is triggered when below conditions are met:
+This type of GC keeps the young generation space compact and clean. This is triggered when the below conditions are met:
 
 -   JVM is not able to get the required memory from the Eden space to allocate a new object
 
@@ -183,15 +183,15 @@ _Note: If the slides look cut off at edges, then click on the title of the slide
 
 1.  Let us assume that there are already objects on the Eden space when we start(Blocks 01 to 06 marked as used memory)
 2.  The application creates a new object(07)
-3.  JVM tries to get required memory from Eden space, but there is no free space in Eden to accommodate our object and hence JVM triggers minor GC
+3.  JVM tries to get the required memory from Eden space, but there is no free space in Eden to accommodate our object and hence JVM triggers minor GC
 4.  The GC recursively traverses the object graph starting from stack pointers to mark objects that are used as alive(Used memory) and remaining objects as garbage(Orphans)
 5.  JVM chooses one random block from S0 and S1 as the "To Space", let's assume it was S0. The GC now moves all the alive objects into the "To Space", S0, which was empty when we started and increments their age by one.
 6.  The GC now empties the Eden space and the new object is allocated memory in the Eden space
 7.  Let us assume that some time has passed and there are more objects on the Eden space now(Blocks 07 to 13 marked as used memory)
 8.  The application creates a new object(14)
-9.  JVM tries to get required memory from Eden space, but there is no free space in Eden to accommodate our object and hence JVM triggers second minor GC
+9.  JVM tries to get the required memory from Eden space, but there is no free space in Eden to accommodate our object and hence JVM triggers a second minor GC
 10. The mark phase is repeated and alive/orphan objects are marked including the ones in survivor space "To Space"
-11. JVM chooses the free S1 as the "To Space" now and S0 becomes "From Space". The GC now moves all the alive objects from Eden space and the "From Space", S0, into the "To Space", S1, which was empty when we started and increments their age by one. Since some objects don't fit here, they are moved to the "Tenured Space" as the survivor space cannot grow and this process is called premature promotion. This can happen even if one of the survivor space is free
+11. JVM chooses the free S1 as the "To Space" now and S0 becomes "From Space". The GC now moves all the alive objects from Eden space and the "From Space", S0, into the "To Space", S1, which was empty when we started, and increments their age by one. Since some objects don't fit here, they are moved to the "Tenured Space" as the survivor space cannot grow and this process is called premature promotion. This can happen even if one of the survivor space is free
 12. The GC now empties the Eden space and the "From Space", S0, and the new object is allocated memory in the Eden space
 13. This keeps on repeating for each minor GC and the survivors are shifted between S0 and S1 and their age is incremented. Once the age reaches the "max-age threshold", 15 by default, the object is moved to the "Tenured space"
 
@@ -199,7 +199,7 @@ So we saw how minor GC reclaims space from the young generation. It is a stop-th
 
 ### Major GC
 
-This type of GC keeps the old generation(Tenured) space compact and clean. This is triggered when below conditions are met:
+This type of GC keeps the old generation(Tenured) space compact and clean. This is triggered when the below conditions are met:
 
 -   Developer calls `System.gc()`, or `Runtime.getRunTime().gc()` from the program.
 -   JVM decides there is not enough tenured space as it gets filled up from minor GC cycles.
