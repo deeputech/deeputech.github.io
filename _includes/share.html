@@ -42,7 +42,11 @@
     </div>
     <ul>
         <li>
-        <a class="small smoothscroll" href="#disqus_thread"></a>
+          <script type="text/javascript">
+              var HYVOR_TALK_WEBSITE = 4123;
+          </script>
+          <script async type="text/javascript" src="//talk.hyvor.com/web-api/count/"></script>
+          <span data-talk-id="{{ page.url | absolute_url }}"></span>
         </li>
     </ul>
         {% endif %}
