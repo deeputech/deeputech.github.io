@@ -98,8 +98,8 @@ These will be some of the conditions I'll be using for benchmark
 - The latest versions of language/runtimes available are used.
 - We will be using external dependencies only if that is the standard recommended way in the language.
 - We are not gonna look at improving concurrency performance using any configuration tweaks
-- We will use ApacheBench for the benchmarks with a concurrency factor of 100 requests and 10000 total requests. The benchmark will be done 5 times for each language and the best result will be used.
-- All the benchmarks are run on the same machine running Fedora 32 on a quad-core Xeon processor with 8 threads.
+- We will use ApacheBench for the benchmarks with a concurrency factor of 100 requests and 10000 total requests. The benchmark will be done 5 times for each language with and without warmup and the best result will be used.
+- All the benchmarks are run on the same machine running Fedora 32 on a quad-core Xeon processor with 8 threads and 32GB memory.
 
 ### Comparison parameters
 

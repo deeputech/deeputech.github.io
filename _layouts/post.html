@@ -225,6 +225,15 @@ post_class: post-template
 ================================================== -->
 {% if page.comments != false %}
     <div class="container">
+      <div id="hyvor-talk-view"></div>
+      <script type="text/javascript">
+          var HYVOR_TALK_WEBSITE = 4123; // DO NOT CHANGE THIS
+          var HYVOR_TALK_CONFIG = {
+              url: '{{ page.url | absolute_url }}',
+              id: '{{page.id}}'
+          };
+      </script>
+      <script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script>
         <div id="comments" class="row justify-content-center mb-5">
             <div class="col-md-8">
                 {% include disqus.html %}
