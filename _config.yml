@@ -10,8 +10,11 @@ disqus: "deepu-tech"
 mailchimp-list: 'https://tech.us7.list-manage.com/subscribe/post?u=00729f6c6d6bb180801b9484e&amp;id=f521dede4b'
 permalink: /:title/
 url: "https://deepu.tech" # the base hostname & protocol for your site
-
+repository: "deeputech/deeputech.github.io"
 twitter_username: "deepu105"
+# Staticman comments (full configuration in staticman.yml)
+staticman:
+  branch: "site_src"
 
 # Authors
 authors:
