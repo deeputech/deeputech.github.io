@@ -1,0 +1,409 @@
+I"kq<p>Please follow me on <a href="https://twitter.com/deepu105">Twitter</a> for updates and let me know if something can be improved in the post.</p>
+
+<hr />
+
+<p>In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management.</p>
+
+<p>In this chapter, we will look at the memory management of the <strong><a href="https://www.python.org/">Python</a></strong> programming language. Python is a dynamically typed &amp; interpreted high-level programming language like JavaScript and Ruby. While there are many implementations of Python, <a href="https://en.wikipedia.org/wiki/CPython">CPython</a>, written in C, is the de-facto and most used implementation. It is also the reference implementation.</p>
+
+<p>If you haven’t read the <a href="https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd">first part</a> of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.</p>
+
+<blockquote>
+  <p>This post is based on Python 3, CPython reference implementation</p>
+</blockquote>
+
+<p>Compared to other garbage collected languages we saw until now in this series, Python is the only one that uses a Reference counting GC.</p>
+
+<h1 id="python-internal-memory-structure">Python internal memory structure</h1>
+
+<p>First, let us take a look at the internal memory structure of Python.</p>
+
+<p>Each Python program process is allocated some virtual memory by the Operating System(OS), this is the total memory that the process has access to.</p>
+
+<p>//TODO
+<img src="https://i.imgur.com/mUOasWj.png" alt="Python Memory structure" /></p>
+
+<p>This is quite simple compared to the memory structure we saw in the previous chapters for <a href="https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le">JVM</a>, <a href="https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p">V8</a> and <a href="https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa">Go</a>. As you can see there is no generational memory or any complex substructures. The reason for this is that Python manages memory using a cycle detecting reference counting GC which doesn’t need a complex generational structure.</p>
+
+<p>Let us see what the different memory are:</p>
+
+<h2 id="heap">Heap</h2>
+
+<p>This is where all dynamic data(any data for which size cannot be calculated at compile time) is stored. This is the biggest block of memory and the part managed by Python’s Ownership model.</p>
+
+<ul>
+  <li><strong>Box</strong>: The <a href="https://doc.rust-lang.org/stable/rust-by-example/std/box.html"><code class="language-plaintext highlighter-rouge">Box</code></a> type is an abstraction for a heap-allocated value in Python. Heap memory is allocated when <code class="language-plaintext highlighter-rouge">Box::new</code> is called. A <code class="language-plaintext highlighter-rouge">Box&lt;T&gt;</code> holds the smart-pointer to the heap memory allocated for type <code class="language-plaintext highlighter-rouge">T</code> and the reference is saved on the Stack.</li>
+</ul>
+
+<h2 id="stack">Stack</h2>
+
+<p>This is the Stack memory area and there is one Stack per thread. This is where static values are allocated by default. Static data(data size known at compile time) includes function frames, primitive values, Structs and pointers to dynamic data in Heap.</p>
+
+<hr />
+
+<h1 id="python-memory-usage-stack-vs-heap">Python memory usage (Stack vs Heap)</h1>
+
+<p>Now that we are clear about how memory is organized let’s see how Python uses Stack and Heap when a program is executed.</p>
+
+<p>Let’s use the below Python program, the code is not optimized for correctness hence ignore issues like unnecessary intermediatory variables and such, the focus is to visualize Stack and Heap memory usage.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="rouge-code"><pre><span class="k">struct</span> <span class="n">Employee</span><span class="o">&lt;</span><span class="nv">'a</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c">// The 'a defines the lifetime of the struct. Here it means the reference of `name` field must outlive the `Employee`</span>
+    <span class="n">name</span><span class="p">:</span> <span class="o">&amp;</span><span class="nv">'a</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">salary</span><span class="p">:</span> <span class="nb">i32</span><span class="p">,</span>
+    <span class="n">sales</span><span class="p">:</span> <span class="nb">i32</span><span class="p">,</span>
+    <span class="n">bonus</span><span class="p">:</span> <span class="nb">i32</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">const</span> <span class="n">BONUS_PERCENTAGE</span><span class="p">:</span> <span class="nb">i32</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+<span class="c">// salary is borrowed</span>
+<span class="k">fn</span> <span class="nf">get_bonus_percentage</span><span class="p">(</span><span class="n">salary</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">i32</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">i32</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">percentage</span> <span class="o">=</span> <span class="p">(</span><span class="n">salary</span> <span class="o">*</span> <span class="n">BONUS_PERCENTAGE</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">percentage</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c">// salary is borrowed while no_of_sales is copied</span>
+<span class="k">fn</span> <span class="nf">find_employee_bonus</span><span class="p">(</span><span class="n">salary</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">i32</span><span class="p">,</span> <span class="n">no_of_sales</span><span class="p">:</span> <span class="nb">i32</span><span class="p">)</span> <span class="k">-&gt;</span> <span class="nb">i32</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">bonus_percentage</span> <span class="o">=</span> <span class="nf">get_bonus_percentage</span><span class="p">(</span><span class="n">salary</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">bonus</span> <span class="o">=</span> <span class="n">bonus_percentage</span> <span class="o">*</span> <span class="n">no_of_sales</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">bonus</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// variable is declared as mutable</span>
+    <span class="k">let</span> <span class="k">mut</span> <span class="n">john</span> <span class="o">=</span> <span class="n">Employee</span> <span class="p">{</span>
+        <span class="n">name</span><span class="p">:</span> <span class="o">&amp;</span><span class="nd">format!</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="s">"John"</span><span class="p">),</span> <span class="c">// explicitly making the value dynamic</span>
+        <span class="n">salary</span><span class="p">:</span> <span class="mi">5000</span><span class="p">,</span>
+        <span class="n">sales</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">bonus</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">};</span>
+
+    <span class="c">// salary is borrowed while sales is copied since i32 is a primitive</span>
+    <span class="n">john</span><span class="py">.bonus</span> <span class="o">=</span> <span class="nf">find_employee_bonus</span><span class="p">(</span><span class="o">&amp;</span><span class="n">john</span><span class="py">.salary</span><span class="p">,</span> <span class="n">john</span><span class="py">.sales</span><span class="p">);</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Bonus for {} is {}"</span><span class="p">,</span> <span class="n">john</span><span class="py">.name</span><span class="p">,</span> <span class="n">john</span><span class="py">.bonus</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>All values in Python are allocated on the Stack by default. There are two exceptions to this:</p>
+
+<ol>
+  <li>When the size of the value is unknown, i.e Structs like String which grows in size over time or any other dynamic value</li>
+  <li>When you manually create a <code class="language-plaintext highlighter-rouge">Box&lt;T&gt;</code> value like <code class="language-plaintext highlighter-rouge">Box::new("Hello")</code>. A box is a smart pointer to a heap-allocated value of type T. When a box goes out of scope, its destructor is called, the inner object is destroyed, and the memory on the Heap is freed.</li>
+</ol>
+
+<p>In both exception cases, the value will be allocated on Heap and its pointer will live on the Stack.</p>
+
+<p>Let us visualize this. Click on the slides and move forward/backward using arrow keys to see how the above program is executed and how the Stack and Heap memory is used:</p>
+
+<p>
+            <script async="" class="speakerdeck-embed" data-id="760299e421d649f985d5b04952dcc4f2" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+            <noscript>
+                <a href="//speakerdeck.com/player/760299e421d649f985d5b04952dcc4f2">
+                <img alt="Speakerdeck" class="lozad" src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="//speakerd.s3.amazonaws.com/presentations/760299e421d649f985d5b04952dcc4f2/slide_0.jpg" />
+                </a>
+            </noscript>
+          </p>
+
+<p><em>Note: If the slides look cut off at edges, then click on the title of the slide or <a href="https://speakerdeck.com/deepu105/rust-stack-vs-heap-usage">here</a> to open it directly in SpeakerDeck.</em></p>
+
+<p>As you can see:</p>
+
+<ul>
+  <li><strong>Main</strong> function is kept in a “main frame” on the Stack</li>
+  <li>Every function call is added to the Stack memory as a frame-block</li>
+  <li>All static variables including arguments and the return value is saved within the function frame-block on the Stack</li>
+  <li>All static values regardless of type are stored directly on the Stack. This applies to global scope as well</li>
+  <li>All dynamic types created on the Heap and is referenced from the Stack using smart pointers. This applies to the global scope as well. Here we explicitly made the name dynamic to avoid it going to the Stack as having a fixed-length string value will do that</li>
+  <li>The struct with static data is kept on the Stack and any dynamic value in it is kept on the Heap and is referenced via pointers</li>
+  <li>Functions called from the current function is pushed on top of the Stack</li>
+  <li>When a function returns its frame is removed from the Stack</li>
+  <li>Unlike Garbage collected languages, once the main process is complete, the objects on the Heap are destroyed as well, we will see more about this in the following sections</li>
+</ul>
+
+<p>The Stack as you can see is automatically managed and is done so by the operating system rather than Python itself. Hence we do not have to worry much about the Stack. The Heap, on the other hand, is not automatically managed by the OS and since its the biggest memory space and holds dynamic data, it could grow exponentially causing our program to run out of memory over time. It also becomes fragmented over time slowing down applications. This is where Python’s ownership model steps in to automatically manage the Heap memory</p>
+
+<p><em>Note: you can find the code I used to identify where a value ends up <a href="https://gist.github.com/deepu105/3e49702d6ffac025eb8b8ca9539d7f67">here</a></em></p>
+
+<hr />
+
+<h1 id="python-memory-management-ownership">Python Memory management: Ownership</h1>
+
+<p>Python has one of the most unique ways of managing Heap memory and that is what makes Python special. It uses a concept called <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">ownership</a> to manage memory. It is defined by a set of rules</p>
+
+<ol>
+  <li>Every value in Python must have a variable as its owner</li>
+  <li>There must be only one owner for a variable at any given time</li>
+  <li>When the owner goes out of scope the value will be dropped freeing the memory</li>
+</ol>
+
+<p>The rules are applicable regardless of the value being in Stack or Heap memory. For example, in the below example the value of <code class="language-plaintext highlighter-rouge">foo</code> is dropped as soon as the method execution completes and the value of <code class="language-plaintext highlighter-rouge">bar</code> is dropped right after the block execution.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="n">foo</span> <span class="o">=</span> <span class="s">"value"</span><span class="p">;</span> <span class="c">// owner is foo and is valid within this method</span>
+    <span class="c">// bar is not valid here as its not declared yet</span>
+
+    <span class="p">{</span>
+        <span class="k">let</span> <span class="n">bar</span> <span class="o">=</span> <span class="s">"bar value"</span><span class="p">;</span> <span class="c">// owner is bar and is valid within this block scope</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"value of bar is {}"</span><span class="p">,</span> <span class="n">bar</span><span class="p">);</span> <span class="c">// bar is valid here</span>
+        <span class="nd">println!</span><span class="p">(</span><span class="s">"value of foo is {}"</span><span class="p">,</span> <span class="n">foo</span><span class="p">);</span> <span class="c">// foo is valid here</span>
+    <span class="p">}</span>
+
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"value of foo is {}"</span><span class="p">,</span> <span class="n">foo</span><span class="p">);</span> <span class="c">// foo is valid here</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"value of bar is {}"</span><span class="p">,</span> <span class="n">bar</span><span class="p">);</span> <span class="c">// bar is not valid here as its out of scope</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>These rules are checked by the compiler at compile-time and the freeing of memory happens at runtime along with program execution and hence there is no additional overhead or pause times here. So by scoping variables carefully, we can make sure the memory usage is optimized and that is also why Python lets you use block scope almost everywhere. This might sound simple but in practice, this concept has deep implications in how you write Python programs and it takes some getting used to. The Python compiler does a great job of helping you along the way as well.</p>
+
+<p>Due to the strict ownership rules, Python lets you change the ownership from one variable to another and is called a <code class="language-plaintext highlighter-rouge">move</code>. This is automatically done when passing a variable into a function or when creating a new assignment. For static primitives, a copy is used instead of move.</p>
+
+<p>There are a few more concepts related to memory management that play along with Ownership to make it effective</p>
+
+<h2 id="raii">RAII</h2>
+
+<p><a href="https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization">RAII</a> stands for Resource acquisition is initialization. This is not new in Python, this is borrowed from C++. Python enforces RAII so that when a value is initialized the variable owns the resources associated and its destructor is called when the variable goes out of scope freeing the resources. This ensures that we will never have to manually free memory or worry about memory leaks. Here is an example</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre></td><td class="rouge-code"><pre><span class="k">fn</span> <span class="nf">create_box</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">u32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c">// Allocate a string on the heap</span>
+    <span class="k">let</span> <span class="mi">_</span><span class="n">var_i</span> <span class="o">=</span> <span class="nn">Box</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="nd">format!</span><span class="p">(</span><span class="s">"Hello {}"</span><span class="p">,</span> <span class="n">i</span><span class="p">));</span>
+    <span class="c">// `_var_i` is destroyed here, and memory gets freed</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// Allocate an integer on the heap</span>
+    <span class="k">let</span> <span class="mi">_</span><span class="n">var_1</span> <span class="o">=</span> <span class="nn">Box</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">5u32</span><span class="p">);</span>
+    <span class="c">// A nested scope:</span>
+    <span class="p">{</span>
+        <span class="c">// Allocate a string on the heap</span>
+        <span class="k">let</span> <span class="mi">_</span><span class="n">var_2</span> <span class="o">=</span> <span class="nn">Box</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="s">"Hello 2"</span><span class="p">);</span>
+        <span class="c">// `_var_2` is destroyed here, and memory gets freed</span>
+    <span class="p">}</span>
+
+    <span class="c">// Creating lots of boxes</span>
+    <span class="c">// There's no need to manually free memory!</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="n">in</span> <span class="mi">0u32</span><span class="o">..</span><span class="mi">1_000</span> <span class="p">{</span>
+        <span class="nf">create_box</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c">// `_var_1` is destroyed here, and memory gets freed</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="borrowing--borrow-checker">Borrowing &amp; Borrow checker</h2>
+
+<p>In Python we can pass a variable by either value or by reference and passing a variable by reference is called borrowing. Since we can have only one owner for a resource at a time, we have to borrow a resource to use it without taking ownership of it. Python compiler has a borrow checker that statically ensures that references point to valid objects and ownership rules are not violated. Here is a simplified version of the Python official example.</p>
+
+<div class="language-rust highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="rouge-code"><pre><span class="c">// This function takes ownership of the passed value</span>
+<span class="k">fn</span> <span class="nf">take_ownership</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">Box</span><span class="o">&lt;</span><span class="nb">i32</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"Destroying box that contains {}"</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c">// This function borrows the value by reference</span>
+<span class="k">fn</span> <span class="nf">borrow</span><span class="p">(</span><span class="n">reference</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">i32</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nd">println!</span><span class="p">(</span><span class="s">"This is: {}"</span><span class="p">,</span> <span class="n">reference</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c">// Create a boxed and a stacked variable</span>
+    <span class="k">let</span> <span class="n">boxed</span> <span class="o">=</span> <span class="nn">Box</span><span class="p">::</span><span class="nf">new</span><span class="p">(</span><span class="mi">5_i32</span><span class="p">);</span>
+    <span class="k">let</span> <span class="n">stacked</span> <span class="o">=</span> <span class="mi">6_i32</span><span class="p">;</span>
+
+    <span class="c">// Borrow the contents of the box. Ownership is not taken,</span>
+    <span class="c">// so the contents can be borrowed again.</span>
+    <span class="nf">borrow</span><span class="p">(</span><span class="o">&amp;</span><span class="n">boxed</span><span class="p">);</span>
+    <span class="nf">borrow</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stacked</span><span class="p">);</span>
+
+    <span class="p">{</span>
+        <span class="c">// Take a reference to the data contained inside the box</span>
+        <span class="k">let</span> <span class="mi">_</span><span class="n">ref_to_boxed</span><span class="p">:</span> <span class="o">&amp;</span><span class="nb">i32</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">boxed</span><span class="p">;</span>
+
+        <span class="c">// Error!</span>
+        <span class="c">// Can't destroy `boxed` while the inner value is borrowed later in scope.</span>
+        <span class="nf">take_ownership</span><span class="p">(</span><span class="n">boxed</span><span class="p">);</span>
+
+        <span class="c">// Attempt to borrow `_ref_to_boxed` after inner value is destroyed</span>
+        <span class="nf">borrow</span><span class="p">(</span><span class="mi">_</span><span class="n">ref_to_boxed</span><span class="p">);</span>
+        <span class="c">// `_ref_to_boxed` goes out of scope and is no longer borrowed.</span>
+    <span class="p">}</span>
+
+    <span class="c">// `boxed` can now give up ownership to `take_ownership` method and be destroyed</span>
+    <span class="nf">take_ownership</span><span class="p">(</span><span class="n">boxed</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="variable-lifetimes">Variable Lifetimes</h2>
+
+<p>The lifetime of variables is another very important concept to make the ownership model work. It is a construct used by the borrow checker in order to ensure that all references to an object is valid. This is checked during compile time. The lifetime of a variable begins when its initialized and ends when it is destroyed. Lifetime is not the same as the scope.</p>
+
+<p>This might sound straight forward but lifetimes get much more complex once functions and structs with references come into play and once they do then we would need to start using <a href="https://doc.rust-lang.org/stable/rust-by-example/scope/lifetime/explicit.html">lifetime annotations</a> to let the borrow checker know how long references are valid. Sometimes the compiler can <a href="https://doc.rust-lang.org/stable/rust-by-example/scope/lifetime/elision.html">infer lifetimes</a>, but not always. I’m not going to details here as its not in the scope of this article</p>
+
+<h2 id="smart-pointers">Smart pointers</h2>
+
+<p>Pointers are nothing but a reference to a memory address on the Heap. Python has support for pointers and lets us reference and dereference them using <code class="language-plaintext highlighter-rouge">&amp;</code> and <code class="language-plaintext highlighter-rouge">*</code> operators. <a href="https://doc.rust-lang.org/book/ch15-00-smart-pointers.html?highlight=smart#smart-pointers">Smart pointers</a> in Python are like pointers but with additional metadata capabilities. Like RAII this is another concept taken from C++. Unlike pointers which are references that only borrow data, smart pointers own the data they point to. <code class="language-plaintext highlighter-rouge">Box</code>, <code class="language-plaintext highlighter-rouge">String</code> and <code class="language-plaintext highlighter-rouge">Vec</code> are examples of smart pointers in Python. You can also write your own smart pointers using structs.</p>
+
+<h1 id="ownership-visualization">Ownership visualization</h1>
+
+<p>Now that we have seen different concepts used for Ownership, let us visualize it, unlike other languages where we visualized the data in Heap, here it is much easier if we look at the <a href="https://gist.github.com/deepu105/681462673576bea16802c74252867323">code itself</a>.</p>
+
+<p><img src="https://i.imgur.com/mVIAoZg.jpg" alt="Lifetime of variables" /></p>
+
+<hr />
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This post should give you an overview of the Python memory structure and memory management. This is not exhaustive, there are a lot more advanced concepts and the implementation details keep changing from version to version. Unlike Garbage collected languages, where you need not understand the memory management model to use the language, in Python, it is required to understand how Ownership works in order to write programs. This post is just a starting step, I recommend that you dive into the Python documentation to learn more about these concepts.</p>
+
+<p>I hope you had fun learning this, stay tuned for the next post in the series.</p>
+
+<hr />
+
+<h1 id="references">References</h1>
+
+<ul>
+  <li>https://realpython.com/python-memory-management/</li>
+  <li>https://docs.python.org/3/c-api/memory.html</li>
+</ul>
+
+<h1 id="series-part-7-memory-management-in-c-or-c">Series part 7: Memory management in C++ or C</h1>
+
+<p>https://www.gamefromscratch.com/post/2013/04/02/CPP-memory-management-isnt-the-boogie-man-you-may-think-it-is.aspx</p>
+
+<p>https://medium.com/c-programming/c-memory-management-part-3-garbage-collection-18faf118cbf1?</p>
+
+<p>https://www.hboehm.info/gc/</p>
+
+<h1 id="csharp">Csharp</h1>
+
+<p>https://www.codeproject.com/Articles/76153/Six-important-NET-concepts-Stack-heap-value-types
+https://www.youtube.com/watch?v=clOUdVDDzIM&amp;spfreload=5</p>
+
+<h1 id="references-1">References</h1>
+
+<ul>
+  <li>http://homepages.inf.ed.ac.uk/stg/teaching/apl/handouts/memory.pdf</li>
+  <li>https://javarevisited.blogspot.com/2013/01/difference-between-stack-and-heap-java.html?m=1</li>
+  <li>http://net-informations.com/faq/net/stack-heap.htm</li>
+  <li>https://gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html</li>
+  <li>https://medium.com/computed-comparisons/garbage-collection-vs-automatic-reference-counting-a420bd4c7c81</li>
+  <li>https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)</li>
+  <li>https://en.wikipedia.org/wiki/Automatic_Reference_Counting</li>
+</ul>
+
+<hr />
+
+<p>If you like this article, please leave a like or a comment.</p>
+
+<p>You can follow me on <a href="https://twitter.com/deepu105">Twitter</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p>
+
+<p>Cover image inspired by <a href="https://hacks.mozilla.org/2019/01/fearless-security-memory-safety/">https://hacks.mozilla.org/2019/01/fearless-security-memory-safety/</a></p>
+
+<hr />
+:ET
