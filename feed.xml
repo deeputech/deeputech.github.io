@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 14 May 2021 19:53:18 +0200</pubDate>
-    <lastBuildDate>Fri, 14 May 2021 19:53:18 +0200</lastBuildDate>
+    <pubDate>Thu, 20 May 2021 15:04:56 +0200</pubDate>
+    <lastBuildDate>Thu, 20 May 2021 15:04:56 +0200</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -3606,8 +3606,8 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;li&gt;The latest versions of language/runtimes available are used.&lt;/li&gt;
   &lt;li&gt;We will be using external dependencies only if that is the standard recommended way in the language.&lt;/li&gt;
   &lt;li&gt;We are not gonna look at improving concurrency performance using any configuration tweaks&lt;/li&gt;
-  &lt;li&gt;We will use ApacheBench for the benchmarks with a concurrency factor of 100 requests and 10000 total requests. The benchmark will be done 5 times for each language and the best result will be used.&lt;/li&gt;
-  &lt;li&gt;All the benchmarks are run on the same machine running Fedora 32 on a quad-core Xeon processor with 8 threads.&lt;/li&gt;
+  &lt;li&gt;We will use ApacheBench for the benchmarks with a concurrency factor of 100 requests and 10000 total requests. The benchmark will be done 5 times for each language with and without warmup and the best result will be used.&lt;/li&gt;
+  &lt;li&gt;All the benchmarks are run on the same machine running Fedora 32 on a quad-core Xeon processor with 8 threads and 32GB memory.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;comparison-parameters&quot;&gt;Comparison parameters&lt;/h3&gt;
