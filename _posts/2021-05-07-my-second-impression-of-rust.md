@@ -1,10 +1,10 @@
 ---
 title: >-
-  My second impression of Rust and why I think it's the best general-purpose
+  My second impression of Rust and why I think it's a great general-purpose
   language!
 description: >-
-  My second impression of Rust after building a real-life use case with it and
-  my thoughts on why it is the best general-purpose language for the future.
+  My second impression of Rust, after building a real-life use case with it and
+  my thoughts on why it is a great general-purpose language for the future.
 published: true
 featured: true
 tags:
