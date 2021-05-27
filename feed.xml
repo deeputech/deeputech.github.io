@@ -5,13 +5,13 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 27 May 2021 12:06:32 +0200</pubDate>
-    <lastBuildDate>Thu, 27 May 2021 12:06:32 +0200</lastBuildDate>
+    <pubDate>Thu, 27 May 2021 13:35:48 +0200</pubDate>
+    <lastBuildDate>Thu, 27 May 2021 13:35:48 +0200</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
-        <title>My second impression of Rust and why I think it's the best general-purpose language!</title>
-        <description>My second impression of Rust after building a real-life use case with it and my thoughts on why it is the best general-purpose language for the future. | &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <title>My second impression of Rust and why I think it's a great general-purpose language!</title>
+        <description>My second impression of Rust, after building a real-life use case with it and my thoughts on why it is a great general-purpose language for the future. | &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
 
