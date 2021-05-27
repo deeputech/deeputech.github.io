@@ -20,9 +20,9 @@ Comments that we find to be hateful, inflammatory, or harassing may be removed. 
 
 #### Always strive to add value to every interaction and discussion you participate in
 
-There are a lot of discussions that happen every day on Disqus. Before joining in a discussion, browse through some of the most recent and active discussions happening in the community, especially if you’re new there.  
+There are a lot of discussions that happen every day. Before joining in a discussion, browse through some of the most recent and active discussions happening in the community, especially if you’re new there.  
    
- If you are not sure your post adds to the conversation, think over what you want to say and try again later.
+If you are not sure your post adds to the conversation, think over what you want to say and try again later.
 
 #### Keep it tidy
 
@@ -37,7 +37,7 @@ Help make moderators’ lives easier by taking a moment to ensure that what you�
 
 Moderators are at the forefront of combatting spam, mediating disputes and enforcing community guidelines and, so are you.  
    
- If you see an issue, [contact the moderators](https://help.disqus.com/customer/en/portal/articles/1462592-site-moderators#contact-moderators) if possible or flag any comments for review. If you believe someone has violated the Basic Rules, report it to Disqus by [flagging the user's profile](https://help.disqus.com/customer/en/portal/articles/1518428-how-to-report-abuse).
+ If you see an issue, [contact the site owner](https://twitter.com/deepu105) if possible or flag any comments for review. If you believe someone has violated the Basic Rules, report it to us by flagging the user's profile.
 
 **No Self-promotion**
 
@@ -57,6 +57,4 @@ If you didn’t write it, or haven’t properly cited the article you’re quoti
 
 **English Only**
 
-We currently only support English-only discussions on Disqus channels. Non-English comments and discussions will be removed.
-
-#### Related: [Guide to building community guidelines](http://help.disqus.com/customer/portal/articles/1450364-guide-to-building-community-guidelines)
+We currently only support English-only discussions.

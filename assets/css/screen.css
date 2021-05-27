@@ -53,8 +53,8 @@ pre {
 
 .site-content {
   min-height: 60vh;
-  padding-top: 1.5rem;
-  margin-top: 57px;
+  padding-top: 2rem;
+  margin-top: 70px;
   transition: all 0.4s;
 }
 
@@ -307,8 +307,14 @@ span.post-read-more a:hover {
   margin-right: 5px;
 }
 
-.mainheading h1.sitetitle {
-  font-family: Righteous;
+h2.sitetitle {
+  font-family: Righteous, Roboto !important;
+  margin-bottom: 0;
+}
+
+small.sitetitlesub {
+  font-size: 0.7em;
+
 }
 
 .mainheading h1.posttitle {

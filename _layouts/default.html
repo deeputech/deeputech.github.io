@@ -40,8 +40,14 @@
 
             <!-- Begin Logo -->
             <a class="navbar-brand" href="{{ site.baseurl }}/">
-                <h2>Deepu K Sasidharan</h2>
+                <h2 class="sitetitle">{{ site.name }}</h2>
+                <small class="sitetitlesub">
+                    {{ site.description }}
+                </small>
             </a>
+            <!-- <div class="mainheading">
+              <h1 class="sitetitle">{{ site.name }}</h1>
+            </div> -->
             <!-- End Logo -->
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish"                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,17 +131,13 @@
                         <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
                     </div>
                 </div>
-                <div class="col-md-8 p-5 align-self-center text-center">
-                    {% assign tags_list = site.tags %}
-                    {% if tags_list.first[0] == null %}
-                        {% for tag in tags_list %}
-                            <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ tag | url_escape | strip | replace: ' ', '-' }}">{{ tag | camelcase }} ({{ site.tags[tag].size }})</a>
-                        {% endfor %}
-                    {% else %}
-                        {% for tag in tags_list %}
-                            <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ tag[0] | url_escape | strip | replace: ' ', '-' }}">{{ tag[0] | camelcase }} ({{ tag[1].size }})</a>
-                        {% endfor %}
-                    {% endif %}
+                <div class="col-md-8 pt-1 ph-2 align-self-center text-center h-100">
+                    {% assign tags_list = site.tags | sort_tags_by_posts_count %}
+
+                    {% for tag in tags_list %}
+                        <a class="mt-1 mb-1" href="{{site.baseurl}}/tags#{{ tag[0] | url_escape | strip | replace: ' ', '-' }}">{{ tag[0] }} ({{ tag[1] }})</a>
+                    {% endfor %}
+
                     {% assign tags_list = nil %}
                 </div>
             </div>
