@@ -75,7 +75,7 @@ post_class: post-template
                                 {% endif %}
                             </small>
                             <span class="separator d-inline-block"> | </span>
-                            <small>{{ page.content | reading_time }}</small>
+                            <small>{% include reading-time.html content=content %}</small>
                             <span class="separator d-inline-block d-lg-none"> | </span>
                             <span class="d-inline-block d-lg-none">{% include share.html mini=true %}</span>
                         </span>
