@@ -163,7 +163,7 @@ When it comes to Linux distributions they can be grouped into families based on 
   - Ubuntu and derivatives like Pop!\_OS, Kubuntu, Lubuntu, Xubuntu, KDE Neon, Elementary OS, Linux Mint, and so on
   - Kali Linux, PureOS, Deepin, and so on
 - **Pacman-based**: Arch Linux, Manjaro, Garuda, BlackArch and so on
-- **Gentoo-based**: Gentoo other Gentoo derivatives
+- **Gentoo-based**: Gentoo and its derivatives
 
 Distro hopping is a term popular with Linux enthusiasts, but it's not for everyone. Average users just need a working OS and having so many options will only cause decision fatigue. I'm not gonna go into the debate of, if it's good or bad to have so many distros, instead I'll make some personal suggestions for newcomers to Linux so it might help with a decision
 
