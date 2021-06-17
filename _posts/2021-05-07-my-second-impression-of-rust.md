@@ -257,7 +257,9 @@ Rust is rapidly gaining popularity. That's impressive given its just 5 years old
 
 Unlike many general-purpose languages, which are not appropriate for some use cases due to the tradeoffs they make, Rust is uniquely positioned to work across the spectrum without any major disadvantage and be the general-purpose language for any use case, from client-side to systems programming.
 
-C/C++ and Go might be the ones to be displaced most in the short term by Rust in my opinion. I think Java/JS/TS/Python etc are safe for a long while due to their massive presence in large-scale applications and due to the migration cost.
+C/C++ and Go might be the ones to be displaced most in the short term by Rust in my opinion. I think Java/JS/TS/Python etc are safe for a long while due to their massive presence in large-scale applications, the maturity of the ecosystem and due to the migration cost.
+
+IMO, the only thing holding back Rust is the maturity of the library ecosystem which is only a matter of time to get better.
 
 I would finish off by saying this: You won't appreciate Rust unless you spend few weeks building something in it. The initial steep learning curve could be frustrating or challenging depending on how you see it, but once past that it's hard not to love it. It's a toddler with superpowers after all 💗
 
