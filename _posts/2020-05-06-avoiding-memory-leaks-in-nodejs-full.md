@@ -16,7 +16,7 @@ In this blog post, we will look at what memory leaks are and how you can avoid t
 
 ## Memory Management in JavaScript
 
-To understand memory leaks, we first need to understand how memory is managed in NodeJS. This means understanding how memory is managed by the JavaScript engine used by NodeJS. NodeJS uses the **[V8 Engine](https://v8.dev/)** for JavaScript. You should check out [Visualizing memory management in V8 Engine](https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p) to get a better understanding of how memory is structured and utilized by JavaScript in V8.
+To understand memory leaks, we first need to understand how memory is managed in NodeJS. This means understanding how memory is managed by the JavaScript engine used by NodeJS. NodeJS uses the **[V8 Engine](https://v8.dev/)** for JavaScript. You should check out [Visualizing memory management in V8 Engine](https://deepu.tech/memory-management-in-v8/) to get a better understanding of how memory is structured and utilized by JavaScript in V8.
 
 Let's do a short recap from the above-mentioned post:
 

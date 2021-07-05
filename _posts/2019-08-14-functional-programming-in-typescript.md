@@ -340,7 +340,7 @@ list.push("Saturn"); // will mutate the list
 
 `const` keyword allows the internal state of referenced variables to be mutated and hence from a functional programming perspective `const` keyword is useful only for primitive constants and to catch reassignments.
 
-However, with TypeScript, we can use special mapped types to make objects read-only and hence avoiding accidental data mutations which are caught during compile time. Thanks to @stereobooster and @juliang for pointing it out. Read my post about mapped and conditional types [here](https://dev.to/deepu105/react-components-done-right-with-typescript-mapped-and-conditional-types-420l) to learn more.
+However, with TypeScript, we can use special mapped types to make objects read-only and hence avoiding accidental data mutations which are caught during compile time. Thanks to @stereobooster and @juliang for pointing it out. Read my post about mapped and conditional types [here](https://deepu.tech/react-done-right-with-typescript) to learn more.
 
 ```typescript
 const list: Readonly<string[]> = ["Apple", "Orange", "Banana", "Grape"];

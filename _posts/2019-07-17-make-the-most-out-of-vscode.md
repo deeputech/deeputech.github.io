@@ -213,7 +213,7 @@ Aggregate TODO, FIXME, etc in a tree view in explorer.
 
 # Terminal setup
 
-If you are using Zsh shell with Oh-my-zsh like me as explained [here](https://dev.to/deepu105/configure-a-beautiful-terminal-on-unix-with-zsh-4mcb), you might want to do the below to get the same terminal experience in the integrated VSCode terminal as well.
+If you are using Zsh shell with Oh-my-zsh like me as explained [here](https://deepu.tech/configure-a-beautiful-terminal-on-unix/), you might want to do the below to get the same terminal experience in the integrated VSCode terminal as well.
 
 ![](https://thepracticaldev.s3.amazonaws.com/i/ae6wi9anly8clq12z9na.png)
 
@@ -238,7 +238,7 @@ Replace `linux` with `osx` if you are on a Mac.
 
 # Conclusion
 
-This might seem like too many plugins but on [my configuration](https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc) VS Code is lightning fast and loads up immediately and is faster then IntelliJ to load and work with. The beauty of VS Code is that you don't need all the plugin all the time, you can disable the ones not required per workspace to make it even faster.
+This might seem like too many plugins but on [my configuration](https://deepu.tech/my-beautiful-linux-development-environment) VS Code is lightning fast and loads up immediately and is faster then IntelliJ to load and work with. The beauty of VS Code is that you don't need all the plugin all the time, you can disable the ones not required per workspace to make it even faster.
 
 Many people [ask](https://www.reddit.com/r/linux/comments/c42kpk/my_beautiful_linux_development_environment/erum9sf/) me why I use VS Code when I have IntelliJ and my answer have been always the same. IntelliJ is great but its also quite heavy. While all those advanced features are needed for Java, Scala or Kotlin development, VS Code is perfectly capable of giving a nice developer experience for lightweight languages like JS, TS, Go, Python, Rust, Ruby, etc.
 

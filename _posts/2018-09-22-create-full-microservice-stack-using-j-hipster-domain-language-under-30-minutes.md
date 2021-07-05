@@ -4,7 +4,7 @@ description: Create full Microservice stack using JHipster Domain Language under
 tags: [jhipster, java, microservices, docker]
 published: true
 cover_image: https://cdn-images-1.medium.com/max/1000/1*b4krMVZ-mqjxAIh_EM1jhQ.png
-canonical_url: https://medium.com/jhipster/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-ecc6e7fc3f77
+canonical_url: https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes
 devto_url: https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele
 devto_id: 122882
 series: Microservices with JHipster
@@ -620,8 +620,8 @@ You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](http
 
 My other related posts:
 
-1. [Deploying JHipster Microservices on Azure Kubernetes Service (AKS)](https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d)
+1. [Deploying JHipster Microservices on Azure Kubernetes Service (AKS)](https://deepu.tech/deploying-jhipster-microservices-on-azure-kubernetes-service-aks)
 
-1. [JHipster microservices with Istio service mesh on Kubernetes](https://dev.to/deepu105/how-to-set-up-java-microservices-with-istio-service-mesh-on-kubernetes-5bkn)
+1. [JHipster microservices with Istio service mesh on Kubernetes](https://deepu.tech/jhipster-microservices-with-istio-service-mesh-on-kubernetes)
 
 Originally published in [Medium](https://medium.com/jhipster/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-ecc6e7fc3f77) on Sep 22, 2018

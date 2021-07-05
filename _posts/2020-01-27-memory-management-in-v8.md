@@ -19,7 +19,7 @@ In this multi-part series, I aim to demystify the concepts behind memory managem
 
 In this chapter, we will look at the memory management of the **[V8 Engine](https://v8.dev/)** for [ECMAScript](https://tc39.es/ecma262/) and [WebAssembly](https://webassembly.github.io/spec/core/), used by runtimes like NodeJS, Deno & Electron and web browsers like Chrome, Chromium, Brave, Opera, and Microsoft Edge. Since JavaScript is an interpreted language, it needs an engine to interpret and execute code. The V8 engine interprets JavaScript and compiles it down to native machine code. V8 is written in C++ and can be embedded in any C++ application.
 
-If you haven't read the [first part](https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd) of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.
+If you haven't read the [first part](https://deepu.tech/memory-management-in-programming/) of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.
 
 # V8 memory structure
 
@@ -27,7 +27,7 @@ First, let us see what the memory structure of the V8 engine is. Since JavaScrip
 
 ![V8 Memory structure](https://i.imgur.com/kSgatSL.png)
 
-This is slightly similar to the JVM memory structure we saw in the [previous chapter](https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le). Let us see what the different segments are for:
+This is slightly similar to the JVM memory structure we saw in the [previous chapter](https://deepu.tech/memory-management-in-jvm/). Let us see what the different segments are for:
 
 ## Heap Memory
 

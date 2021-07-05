@@ -14,7 +14,7 @@ If you are a JavaScript developer thinking about learning another programming la
 
 This post is not a comparison of the languages or is stating that they are very similar. Its a guide for JavaScript developers to grasp Golang quickly. There are many aspects of Go that are entirely different from JavaScript. We will touch upon that as well.
 
-In the previous [part](https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je) of this series, we learned about things that are more similar between JS and Go. We touched upon:
+In the previous [part](https://deepu.tech/golang-for-javascript-developers-part-1/) of this series, we learned about things that are more similar between JS and Go. We touched upon:
 
 - Functions
 - Scope
@@ -444,7 +444,7 @@ func fetchConcurrent() {
 
 # Conclusion
 
-Someone asked me in the comments of the previous [part](https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je) in the series that why should a JS developer choose Go among all the available options. In my [opinion](https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66), JS is not a perfect language and hence learning few other languages will greatly benefit a JS developer to use JS more pragmatically and would help to cement her/his knowledge of fundamental programming concepts better. There are of course many options out there like Rust, Go, Haskel, Kotlin and so on, but I think Go is a great place to start as its one of the simplest among all the available options and has wide adoption. My second choice would be Kotlin or [Rust](https://dev.to/deepu105/my-first-impressions-of-rust-1a8o).
+Someone asked me in the comments of the previous [part](https://deepu.tech/golang-for-javascript-developers-part-1/) in the series that why should a JS developer choose Go among all the available options. In my [opinion](https://deepu.tech/reflections-on-javascript/), JS is not a perfect language and hence learning few other languages will greatly benefit a JS developer to use JS more pragmatically and would help to cement her/his knowledge of fundamental programming concepts better. There are of course many options out there like Rust, Go, Haskel, Kotlin and so on, but I think Go is a great place to start as its one of the simplest among all the available options and has wide adoption. My second choice would be Kotlin or [Rust](https://deepu.tech/first-impression-of-rust/).
 
 # References:
 

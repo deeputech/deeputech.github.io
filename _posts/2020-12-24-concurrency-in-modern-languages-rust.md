@@ -19,12 +19,12 @@ devto_url: "https://dev.to/deepu105/concurrency-in-modern-programming-languages-
 
 This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I'll try to publish them weekly.
 
-1. [Introduction](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk)
+1. [Introduction](https://deepu.tech/concurrency-in-modern-languages/)
 1. **Concurrent web server in Rust**
-1. [Concurrent web server in Golang](https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i)
-1. [Concurrent web server in JavaScript with NodeJS](https://dev.to/deepu105/concurrency-in-modern-programming-languages-javascript-on-nodejs-epo)
-1. [Concurrent web server in TypeScript with Deno](https://dev.to/deepu105/concurrency-in-modern-programming-languages-typescript-on-deno-hkb)
-1. Concurrent web server in Java with JVM
+1. [Concurrent web server in Golang](https://deepu.tech/concurrency-in-modern-languages-go/)
+1. [Concurrent web server in JavaScript with NodeJS](https://deepu.tech/concurrency-in-modern-languages-js/)
+1. [Concurrent web server in TypeScript with Deno](https://deepu.tech/concurrency-in-modern-languages-ts/)
+1. [Concurrent web server in Java with JVM](https://deepu.tech/concurrency-in-modern-languages-java/)
 1. Concurrent web server in Kotlin with JVM
 1. Comparison and conclusion of benchmarks
 
@@ -42,7 +42,7 @@ Efficient and memory safe concurrency is one of the major goals of Rust and thes
 
 There are other languages like Go, which offers simpler and equally performant solutions for concurrency but they aren't as powerful as Rust due to the flexibility offered by Rust. Basically, Rust provides you with building blocks required for concurrent, parallel, and asynchronous programming and you can extend or implement different solutions as you see fit or use a solution offered by the community. This allows for one to use the best possible solution for the use case rather than using the same hammer for all jobs.
 
-With Rust, it's possible to do multi-threaded concurrency or parallel programming as well as asynchronous programming. This means as we saw in the [previous chapter](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk), we can mix and match these models to get the best possible performance for any use case.
+With Rust, it's possible to do multi-threaded concurrency or parallel programming as well as asynchronous programming. This means as we saw in the [previous chapter](https://deepu.tech/concurrency-in-modern-languages/), we can mix and match these models to get the best possible performance for any use case.
 
 ### [Multi-threading](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 
@@ -434,7 +434,7 @@ It does seem slightly slower by some milliseconds compared to previous solution.
 
 ## Conclusion
 
-As I explained in the [first part](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Rust. And for this particular use case, asynchronous solutions do seem to be the best choice.
+As I explained in the [first part](https://deepu.tech/concurrency-in-modern-languages/) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Rust. And for this particular use case, asynchronous solutions do seem to be the best choice.
 
 So stay tuned for the next post where we will look at concurrency in Golang and build the same use case in Go.
 

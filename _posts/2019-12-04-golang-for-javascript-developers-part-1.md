@@ -12,7 +12,7 @@ series: Golang for JavaScript developers
 
 If you are a JavaScript developer thinking about learning another programming language, then Golang is a great choice. It is simple, has a lot of momentum, very performant and has some similarities to JavaScript.
 
-**Edit**: Someone asked me in the comments that why should a JS developer choose Go among all the available options. In my [opinion](https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66), JS is not a perfect language and hence learning few other languages will greatly benefit a JS developer to use JS more pragmatically and would help to cement her/his knowledge of fundamental programming concepts better. There are of course many options out there like Rust, Go, Haskel, Kotlin and so on, but I think Go is a great place to start as its one of the simplest among all the available options and has wide adoption. My second choice would be Kotlin or [Rust](https://dev.to/deepu105/my-first-impressions-of-rust-1a8o).
+**Edit**: Someone asked me in the comments that why should a JS developer choose Go among all the available options. In my [opinion](https://deepu.tech/reflections-on-javascript/), JS is not a perfect language and hence learning few other languages will greatly benefit a JS developer to use JS more pragmatically and would help to cement her/his knowledge of fundamental programming concepts better. There are of course many options out there like Rust, Go, Haskel, Kotlin and so on, but I think Go is a great place to start as its one of the simplest among all the available options and has wide adoption. My second choice would be Kotlin or [Rust](https://deepu.tech/first-impression-of-rust/).
 
 This post is not a comparison of the languages or is stating that they are very similar. Its a guide for JavaScript developers to grasp Golang quickly. There are many aspects of Go that are entirely different from JavaScript we will touch upon that as well.
 
@@ -433,7 +433,7 @@ Memory management is also quite similar except for details in both JS and Go.
 
 In this part, we saw concepts that are similar in both languages. In the next part of the series, we will see things that are more different between JS and Go. There are more things in the next part, that are different, than this, but please also note that some differences are quite subtle so it would be easy to digest for a JavaScript developer.
 
-In the [next chapter](https://dev.to/deepu105/golang-for-javascript-developers-part-2-p3p) we will see:
+In the [next chapter](https://deepu.tech/golang-for-javascript-developers-part-2/) we will see:
 
 - Types & Variables
 - Error handling

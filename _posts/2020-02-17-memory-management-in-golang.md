@@ -19,7 +19,7 @@ In this multi-part series, I aim to demystify the concepts behind memory managem
 
 In this chapter, we will look at the memory management of the **[Go](https://golang.org/)** programming language(Golang). Go is a statically typed & compiled language like C/C++ and Rust. Hence Go does not need a VM and Go application binaries include a small runtime embedded in them to take care of language features like Garbage collection, scheduling & concurrency.
 
-If you haven't read the [first part](https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd) of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.
+If you haven't read the [first part](https://deepu.tech/memory-management-in-programming/) of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.
 
 > This post is based on Go 1.13 default official implementation and concept details might change in the future versions of Go
 
@@ -37,7 +37,7 @@ Each Go program process is allocated some virtual memory by the Operating System
 
 This is a simplified view based on the internal objects used by Go, In reality, Go divides and groups memory into pages as described in [this great article](https://blog.learngoprogramming.com/a-visual-guide-to-golang-memory-allocator-from-ground-up-e132258453ed).
 
-This is quite different from the memory structure we saw in the previous chapters for [JVM](https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le) and [V8](https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p). As you can see there is no generational memory here. The main reason for this is the [**TCMalloc**](http://goog-perftools.sourceforge.net/doc/tcmalloc.html)(Thread-Caching Malloc), which is what Go's own memory allocator was modeled upon.
+This is quite different from the memory structure we saw in the previous chapters for [JVM](https://deepu.tech/memory-management-in-jvm/) and [V8](https://deepu.tech/memory-management-in-v8/). As you can see there is no generational memory here. The main reason for this is the [**TCMalloc**](http://goog-perftools.sourceforge.net/doc/tcmalloc.html)(Thread-Caching Malloc), which is what Go's own memory allocator was modeled upon.
 
 Let us see what the different constructs are:
 

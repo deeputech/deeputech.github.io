@@ -12,7 +12,7 @@ devto_id: 127938
 
 I'm a sucker for nice polished UI and great UX. While there are a lot of Linux Desktop environments out there providing great UX and UI, I found [GNOME](https://www.gnome.org/) to be the perfect one for my liking. Yes, I have seen/tried a few others. I also found some which are more polished and providing a better default UX out of the box than GNOME like [Deepin](https://www.deepin.org/en/dde/) and [Elementary](https://elementary.io/). But below plugins bridge that gap and hence I choose to stick with GNOME which is the default in Fedora, hence quite stable, unless I had a compelling reason to switch.
 
-So if you like me are a GNOME fan then below are some of the GNOME plugins you must try if you haven't already. I have listed the plugins I use in my earlier [post](https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc) in the series. here I detail the ones that are a must-have.
+So if you like me are a GNOME fan then below are some of the GNOME plugins you must try if you haven't already. I have listed the plugins I use in my earlier [post](https://deepu.tech/my-beautiful-linux-development-environment) in the series. here I detail the ones that are a must-have.
 
 #### [GNOME Tweaks](https://wiki.gnome.org/Apps/Tweaks)
 This nifty tool lets you tweak/configure a lot of GNOME configuration and should have been included by default in every distro shipping with GNOME. You can customize the appearance, install extensions, configure mouse & keyboard and so on. It can be found in the software center of your distro. Search for "Tweaks". 

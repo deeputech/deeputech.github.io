@@ -20,12 +20,12 @@ devto_url: >-
 
 This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.
 
-1. [Introduction](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk)
-1. [Concurrent web server in Rust](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co)
+1. [Introduction](https://deepu.tech/concurrency-in-modern-languages/)
+1. [Concurrent web server in Rust](https://deepu.tech/concurrency-in-modern-languages-rust/)
 1. **Concurrent web server in Golang**
-1. [Concurrent web server in JavaScript with NodeJS](https://dev.to/deepu105/concurrency-in-modern-programming-languages-javascript-on-nodejs-epo)
-1. [Concurrent web server in TypeScript with Deno](https://dev.to/deepu105/concurrency-in-modern-programming-languages-typescript-on-deno-hkb)
-1. Concurrent web server in Java with JVM
+1. [Concurrent web server in JavaScript with NodeJS](https://deepu.tech/concurrency-in-modern-languages-js/)
+1. [Concurrent web server in TypeScript with Deno](https://deepu.tech/concurrency-in-modern-languages-ts/)
+1. [Concurrent web server in Java with JVM](https://deepu.tech/concurrency-in-modern-languages-java/)
 1. Concurrent web server in Kotlin with JVM
 1. Comparison and conclusion of benchmarks
 
@@ -39,11 +39,11 @@ This is a multi-part series where I'll be talking about concurrency in modern pr
 
 Go supports concurrency as a first-class citizen with its `goroutines`. Go takes the concept of coroutines to a whole new level by making it much simpler and the preferred way of doing almost anything in Go. The semantic and syntax are made so easy that even a Go newbie will be able to start using `goroutines` from the get-go easily. All this without sacrificing performance.
 
-While languages like Rust offers [flexibility and power](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co) over simplicity, Go focuses on simplicity and performance. While languages like Rust provide you with building blocks required for concurrency Go provides implementations that can be used easily to achieve most of the concurrency use cases. The Go standard library also uses goroutines where ever possible. This allows us to use goroutines and improve performance even for trivial use cases as there is not much overhead from the complexity of using concurrency semantics.
+While languages like Rust offers [flexibility and power](https://deepu.tech/concurrency-in-modern-languages-rust/) over simplicity, Go focuses on simplicity and performance. While languages like Rust provide you with building blocks required for concurrency Go provides implementations that can be used easily to achieve most of the concurrency use cases. The Go standard library also uses goroutines where ever possible. This allows us to use goroutines and improve performance even for trivial use cases as there is not much overhead from the complexity of using concurrency semantics.
 
 > The default for concurrency in Go is an asynchronous programming model and hence there are no explicit language features like async/await. Using concurrency with synchronous programming would be way more difficult in Go
 
-With Go, it's possible to do multi-threaded concurrency and parallelization with goroutines and goroutines work in an asynchronous way hence making use of both multi-threading and asynchronous programming efficiently. It's not as flexible as Rust as we saw in the [previous chapter](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co), but still, you can achieve almost everything that is possible in Rust and still get the best possible performance for those use case.
+With Go, it's possible to do multi-threaded concurrency and parallelization with goroutines and goroutines work in an asynchronous way hence making use of both multi-threading and asynchronous programming efficiently. It's not as flexible as Rust as we saw in the [previous chapter](https://deepu.tech/concurrency-in-modern-languages-rust/), but still, you can achieve almost everything that is possible in Rust and still get the best possible performance for those use case.
 
 ### [Multi-threading](https://golang.org/doc/effective_go.html#goroutines)
 
@@ -59,7 +59,7 @@ Now that we have some basic understanding of concurrency features in Golang, let
 
 ### TCP concurrent webserver
 
-This example is closer to the Rust Asynchronous example we built in the [previous chapter](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co). I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/gows_tcp). We are not using any external dependency in this case.
+This example is closer to the Rust Asynchronous example we built in the [previous chapter](https://deepu.tech/concurrency-in-modern-languages-rust/). I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/gows_tcp). We are not using any external dependency in this case.
 
 ```go
 func main() {
@@ -237,7 +237,7 @@ We got almost identical results here. So it might be preferable to just use the 
 
 ## Conclusion
 
-As I explained in the [first part](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Golang. And for this particular use case, the `http` package provided by the standard library does seem to be the best choice.
+As I explained in the [first part](https://deepu.tech/concurrency-in-modern-languages/) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Golang. And for this particular use case, the `http` package provided by the standard library does seem to be the best choice.
 
 So stay tuned for the next post where we will look at concurrency in NodeJS and build the same use case in JavaScript.
 

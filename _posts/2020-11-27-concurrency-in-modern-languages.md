@@ -21,11 +21,11 @@ devto_url: >-
 This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I'll try to publish them weekly.
 
 1. **Introduction**
-1. [Concurrent web server in Rust](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co)
-1. [Concurrent web server in Golang](https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i)
-1. [Concurrent web server in JavaScript with NodeJS](https://dev.to/deepu105/concurrency-in-modern-programming-languages-javascript-on-nodejs-epo)
-1. [Concurrent web server in TypeScript with Deno](https://dev.to/deepu105/concurrency-in-modern-programming-languages-typescript-on-deno-hkb)
-1. Concurrent web server in Java with JVM
+1. [Concurrent web server in Rust](https://deepu.tech/concurrency-in-modern-languages-rust/)
+1. [Concurrent web server in Golang](https://deepu.tech/concurrency-in-modern-languages-go/)
+1. [Concurrent web server in JavaScript with NodeJS](https://deepu.tech/concurrency-in-modern-languages-js/)
+1. [Concurrent web server in TypeScript with Deno](https://deepu.tech/concurrency-in-modern-languages-ts/)
+1. [Concurrent web server in Java with JVM](https://deepu.tech/concurrency-in-modern-languages-java/)
 1. Concurrent web server in Kotlin with JVM
 1. Comparison and conclusion of benchmarks
 

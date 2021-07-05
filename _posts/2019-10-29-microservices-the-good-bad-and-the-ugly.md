@@ -163,9 +163,9 @@ If you like this article, please leave a like or a comment.
 
 If you do decide to build microservices checkout JHipster and my below articles don't forget to give it a star on [Github](https://github.com/jhipster/generator-jhipster).
 
-1. [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele)
-2. [Deploying JHipster Microservices on Azure Kubernetes Service (AKS)](https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d)
-3. [JHipster microservices with Istio service mesh on Kubernetes](https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d)
+1. [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes)
+2. [Deploying JHipster Microservices on Azure Kubernetes Service (AKS)](https://deepu.tech/deploying-jhipster-microservices-on-azure-kubernetes-service-aks)
+3. [JHipster microservices with Istio service mesh on Kubernetes](https://deepu.tech/deploying-jhipster-microservices-on-azure-kubernetes-service-aks)
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 

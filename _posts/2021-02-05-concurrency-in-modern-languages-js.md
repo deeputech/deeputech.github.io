@@ -20,12 +20,12 @@ devto_url: >-
 
 This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.
 
-1. [Introduction](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk)
-1. [Concurrent web server in Rust](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co)
-1. [Concurrent web server in Golang](https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i)
+1. [Introduction](https://deepu.tech/concurrency-in-modern-languages/)
+1. [Concurrent web server in Rust](https://deepu.tech/concurrency-in-modern-languages-rust/)
+1. [Concurrent web server in Golang](https://deepu.tech/concurrency-in-modern-languages-go/)
 1. **Concurrent web server in JavaScript with NodeJS**
-1. [Concurrent web server in TypeScript with Deno](https://dev.to/deepu105/concurrency-in-modern-programming-languages-typescript-on-deno-hkb)
-1. Concurrent web server in Java with JVM
+1. [Concurrent web server in TypeScript with Deno](https://deepu.tech/concurrency-in-modern-languages-ts/)
+1. [Concurrent web server in Java with JVM](https://deepu.tech/concurrency-in-modern-languages-java/)
 1. Concurrent web server in Kotlin with JVM
 1. Comparison and conclusion of benchmarks
 
@@ -37,11 +37,11 @@ This is a multi-part series where I'll be talking about concurrency in modern pr
 >
 > -- MDN Web Docs
 
-Concurrency in JavaScript is quite different from other languages we are looking at. The biggest difference is that JavaScript is single-threaded and hence multi-threading and parallelism is out of the question -- at least not traditional multi-threading or parallelism like in other languages, we will come to that later. But concurrency on the other hand is the heart and soul of the JavaScript event loop. It is how JavaScript is able to bridge the gap of multi-threading making JavaScript a serious contender in an arena filled with multi-threaded languages like Java, Go, Python, Rust, and so on. Read the [introduction chapter](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk) to see why the difference matters.
+Concurrency in JavaScript is quite different from other languages we are looking at. The biggest difference is that JavaScript is single-threaded and hence multi-threading and parallelism is out of the question -- at least not traditional multi-threading or parallelism like in other languages, we will come to that later. But concurrency on the other hand is the heart and soul of the JavaScript event loop. It is how JavaScript is able to bridge the gap of multi-threading making JavaScript a serious contender in an arena filled with multi-threaded languages like Java, Go, Python, Rust, and so on. Read the [introduction chapter](https://deepu.tech/concurrency-in-modern-languages/) to see why the difference matters.
 
 The JavaScript event loop relies on message passing concurrency to execute items on its stack in a non-blocking way, more like, it gives a perception of being non-blocking, because, in reality, it does block for a short moment since its single-threaded and execution is interleaved. This makes it perfect for most of the concurrency use cases you would encounter and you will rarely miss having multi-threading and true parallelism support and in many use cases, you can go head to head with a fully multi-threaded language.
 
-While languages like Rust offer [flexibility and power](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co) and Go [offers simplicity and performance](https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i), JavaScript was never meant for concurrency but that didn't stop the awesome people behind NodeJS to come up with a platform that was fully focused on concurrency and non-blocking I/O. While JavaScript event loop already paved the way for it, NodeJS made JS a truly viable option for server-side concurrency. All this is made possible thanks to the [event loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop), [Callbacks](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function), [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and [Async/Await](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await) support in JavaScript.
+While languages like Rust offer [flexibility and power](https://deepu.tech/concurrency-in-modern-languages-rust/) and Go [offers simplicity and performance](https://deepu.tech/concurrency-in-modern-languages-go/), JavaScript was never meant for concurrency but that didn't stop the awesome people behind NodeJS to come up with a platform that was fully focused on concurrency and non-blocking I/O. While JavaScript event loop already paved the way for it, NodeJS made JS a truly viable option for server-side concurrency. All this is made possible thanks to the [event loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop), [Callbacks](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function), [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and [Async/Await](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await) support in JavaScript.
 
 Unlike in many other languages, maybe except Go, concurrency is used a lot in JavaScript by developers, sometimes without even realizing it, especially in NodeJS applications. It's due to the programming model followed by NodeJS which relies heavily on callbacks and Promises and also because it is extremely easy to do so due to the flexible nature of JavaScript. The NodeJS standard library also uses concurrency where ever possible and there is no much overhead in doing so.
 
@@ -95,7 +95,7 @@ Now that we have some basic understanding of concurrency features in JavaScript 
 
 ### Async HTTP concurrent webserver
 
-This example is closer to the Rust Asynchronous example we built in the [second chapter](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co). You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/jsws). We are not using any external dependency in this case.
+This example is closer to the Rust Asynchronous example we built in the [second chapter](https://deepu.tech/concurrency-in-modern-languages-rust/). You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/jsws). We are not using any external dependency in this case.
 
 ```js
 const http = require("http");
@@ -295,7 +295,7 @@ We got almost identical results here. If you look close, the multi-threaded one 
 
 ## Conclusion
 
-As I explained in the [first part](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in JavaScript specifically on NodeJS. And for this particular use case, an asynchronous server using the `http` module provided by the standard library does seem to be the best choice.
+As I explained in the [first part](https://deepu.tech/concurrency-in-modern-languages/) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in JavaScript specifically on NodeJS. And for this particular use case, an asynchronous server using the `http` module provided by the standard library does seem to be the best choice.
 
 So stay tuned for the next post where we will look at concurrency in [Deno](https://deno.land/) and build the same use case in TypeScript.
 

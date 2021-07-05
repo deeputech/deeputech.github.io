@@ -20,12 +20,12 @@ devto_url: >-
 
 This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.
 
-1. [Introduction](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk)
-1. [Concurrent web server in Rust](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co)
-1. [Concurrent web server in Golang](https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i)
-1. [Concurrent web server in JavaScript with NodeJS](https://dev.to/deepu105/concurrency-in-modern-programming-languages-javascript-on-nodejs-epo)
+1. [Introduction](https://deepu.tech/concurrency-in-modern-languages/)
+1. [Concurrent web server in Rust](https://deepu.tech/concurrency-in-modern-languages-rust/)
+1. [Concurrent web server in Golang](https://deepu.tech/concurrency-in-modern-languages-go/)
+1. [Concurrent web server in JavaScript with NodeJS](https://deepu.tech/concurrency-in-modern-languages-js/)
 1. **Concurrent web server in TypeScript with Deno**
-1. Concurrent web server in Java with JVM
+1. [Concurrent web server in Java with JVM](https://deepu.tech/concurrency-in-modern-languages-java/)
 1. Concurrent web server in Kotlin with JVM
 1. Comparison and conclusion of benchmarks
 
@@ -83,7 +83,7 @@ Now that we have some basic understanding of concurrency features in Deno for Ty
 
 ### Async HTTP concurrent webserver
 
-This example is closer to the Rust Asynchronous example we built in the [second chapter](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co). You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/tsws). We are only using standard Deno modules in this case.
+This example is closer to the Rust Asynchronous example we built in the [second chapter](https://deepu.tech/concurrency-in-modern-languages-rust/). You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/tsws). We are only using standard Deno modules in this case.
 
 ```ts
 import { serve, ServerRequest } from "https://deno.land/std/http/server.ts";
@@ -175,7 +175,7 @@ One minor thing to note is that I had to pass the `-k` flag to ApacheBench for t
 
 ## Conclusion
 
-As I explained in the [first part](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in JavaScript/TypeScript specifically on Deno. And for this particular use case,
+As I explained in the [first part](https://deepu.tech/concurrency-in-modern-languages/) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in JavaScript/TypeScript specifically on Deno. And for this particular use case,
 since there is no clean way to do a multi-threaded server in Deno the `http` module provided by the standard library with asynchronous programming seems to be the way to go.
 
 So stay tuned for the next post where we will look at concurrency in JVM and build the same use case in Java.

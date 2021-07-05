@@ -98,10 +98,10 @@ We have just scratched the surface of memory management. Each programming langua
 
 Stay tuned for upcoming parts of this series:
 
-- [Part 2: Memory management in JVM(Java, Kotlin, Scala, Groovy)](https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le)
-- [Part 3: Memory management in V8(JavaScript/WebAssembly)](https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p)
-- [Part 4: Memory management in Go](https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa)
-- [Part 5: Memory management in Rust](https://dev.to/deepu105/visualizing-memory-management-in-rust-5898)
+- [Part 2: Memory management in JVM(Java, Kotlin, Scala, Groovy)](https://deepu.tech/memory-management-in-jvm/)
+- [Part 3: Memory management in V8(JavaScript/WebAssembly)](https://deepu.tech/memory-management-in-v8/)
+- [Part 4: Memory management in Go](https://deepu.tech/memory-management-in-golang/)
+- [Part 5: Memory management in Rust](https://deepu.tech/memory-management-in-rust/)
 - Part 6: Memory management in Python
 
 # References

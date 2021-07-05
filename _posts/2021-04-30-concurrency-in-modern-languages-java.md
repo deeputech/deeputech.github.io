@@ -19,11 +19,11 @@ devto_url: "https://dev.to/deepu105/concurrency-in-modern-programming-languages-
 
 This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.
 
-1. [Introduction](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk)
-1. [Concurrent web server in Rust](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co)
-1. [Concurrent web server in Golang](https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i)
-1. [Concurrent web server in JavaScript with NodeJS](https://dev.to/deepu105/concurrency-in-modern-programming-languages-javascript-on-nodejs-epo)
-1. [Concurrent web server in TypeScript with Deno](https://dev.to/deepu105/concurrency-in-modern-programming-languages-typescript-on-deno-hkb)
+1. [Introduction](https://deepu.tech/concurrency-in-modern-languages/)
+1. [Concurrent web server in Rust](https://deepu.tech/concurrency-in-modern-languages-rust/)
+1. [Concurrent web server in Golang](https://deepu.tech/concurrency-in-modern-languages-go/)
+1. [Concurrent web server in JavaScript with NodeJS](https://deepu.tech/concurrency-in-modern-languages-js/)
+1. [Concurrent web server in TypeScript with Deno](https://deepu.tech/concurrency-in-modern-languages-ts/)
 1. **Concurrent web server in Java with JVM**
 1. Concurrent web server in Kotlin with JVM
 1. Comparison and conclusion of benchmarks
@@ -44,7 +44,7 @@ Threads are at the core of concurrent & asynchronous programming in Java. From J
 
 Java 8 bought a lot of improvements and simplifications to make it easier to do concurrency. For example, standard Java APIs like the Stream API even provides a way to do [parallel processing](https://docs.oracle.com/javase/tutorial/collections/streams/parallelism.html) easily by just invoking a method call on complex and CPU intensive pipelines.
 
-With Java, it's possible to do multi-threaded concurrency or parallel programming as well as asynchronous programming. This means as we saw in the [first chapter](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk), we can mix and match these models to get the best possible performance for any use case.
+With Java, it's possible to do multi-threaded concurrency or parallel programming as well as asynchronous programming. This means as we saw in the [first chapter](https://deepu.tech/concurrency-in-modern-languages/), we can mix and match these models to get the best possible performance for any use case.
 
 ### Multi-threading
 
@@ -66,7 +66,7 @@ Now that we have some basic understanding of concurrency features in Java, let u
 
 ### Multi-threaded concurrent webserver
 
-This example is closer to the Rust multi-threaded example we built in the [rust chapter](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co), I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws). We use `java.net.ServerSocket` for this. We are not using any external dependency in this case.
+This example is closer to the Rust multi-threaded example we built in the [rust chapter](https://deepu.tech/concurrency-in-modern-languages-rust/), I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws). We use `java.net.ServerSocket` for this. We are not using any external dependency in this case.
 
 ```java
 public class JavaHTTPServer {
@@ -193,7 +193,7 @@ So let's see if we can have another solution without such a bottleneck.
 
 ### Asynchronous concurrent webserver
 
-This example is closer to the asynchronous example from the [rust chapter](https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co), I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws). Notice that we are using `java.nio.channels.AsynchronousServerSocketChannel`here and no external dependencies.
+This example is closer to the asynchronous example from the [rust chapter](https://deepu.tech/concurrency-in-modern-languages-rust/), I have omitted import statements for brevity. You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/javaws). Notice that we are using `java.nio.channels.AsynchronousServerSocketChannel`here and no external dependencies.
 
 ```java
 public class JavaAsyncHTTPServer {
@@ -319,7 +319,7 @@ We got almost identical results here, this one is even faster by 100ms. Hence th
 
 ## Conclusion
 
-As I explained in the [first part](https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Java. And for this particular use case, asynchronous solutions do seem to be the best choice.
+As I explained in the [first part](https://deepu.tech/concurrency-in-modern-languages/) of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It's a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Java. And for this particular use case, asynchronous solutions do seem to be the best choice.
 
 So stay tuned for the next post where we will look at concurrency in Kotlin and build the same use case in Kotlin.
 

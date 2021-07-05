@@ -11,7 +11,7 @@ series: languages
 featured: false
 ---
 
-So I started learning Rust a while ago and since my post about what [I thought of Go](https://dev.to/deepu105/my-reflections-on-golang-38jk) was popular, I decided to write about what my first impressions of Rust were as well.
+So I started learning Rust a while ago and since my post about what [I thought of Go](https://deepu.tech/reflection-on-golang/) was popular, I decided to write about what my first impressions of Rust were as well.
 
 But unlike Go, I actually didn't build any real-world application in Rust, so my opinions here are purely personal and some might not be accurate as I might have misunderstood something. So do give me the consideration of a Rust newbie. If you find something I said here is inaccurate please do let me know. Also, my impressions might actually change once I start using the language more. If it does, I'll make sure to update the post.
 
@@ -365,7 +365,7 @@ Finally some stuff I still don't like but I don't consider them a big deal.
 
 # Conclusion
 
-I like programming languages that focus more on simplicity rather than fancy syntax sugars and complex features. In my post ["My reflections on Golang"](https://dev.to/deepu105/my-reflections-on-golang-38jk), I explain why I consider Golang to be too simple for my taste. Rust, on the other hand, is leaning towards the other side of the spectrum. While it is not as complex as Scala it is not as simple as Go as well. So its somewhere in between, not exactly the sweet spot but almost near that quite close to where JavaScript is maybe.
+I like programming languages that focus more on simplicity rather than fancy syntax sugars and complex features. In my post ["My reflections on Golang"](https://deepu.tech/reflection-on-golang/), I explain why I consider Golang to be too simple for my taste. Rust, on the other hand, is leaning towards the other side of the spectrum. While it is not as complex as Scala it is not as simple as Go as well. So its somewhere in between, not exactly the sweet spot but almost near that quite close to where JavaScript is maybe.
 
 So overall I can say that there are more things in Rust for me to like than to dislike which is what I would expect from a nice programming language. Also, bear in mind that I'm not saying Rust should do anything differently or that there are better ways to do things that I complained about. I'm just saying that I don't like those things but I can live with it given the overall advantages. Also, I fully understand why some of those concepts are the way they are, those are mostly tradeoffs to focus on memory safety and performance.
 

@@ -4,7 +4,7 @@ published: true
 description: Learn how to write efficient and concise react components using TypeScript.
 tags: [typescript, react, javascript, webdev]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/4eaahfl09brz9ozacdg1.jpeg
-canonical_url: https://medium.com/free-code-camp/make-react-components-great-again-with-typescript-mapped-and-conditional-types-fa729bfc1a79
+canonical_url: https://deepu.tech/react-done-right-with-typescript
 devto_url: https://dev.to/deepu105/react-components-done-right-with-typescript-mapped-and-conditional-types-420l
 devto_id: 140105
 ---

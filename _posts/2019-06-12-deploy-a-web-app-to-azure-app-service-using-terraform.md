@@ -260,7 +260,7 @@ You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](http
 
 My other related posts:
 
-- [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele)
-- [Deploying JHipster Microservices on Azure Kubernetes Service (AKS)](https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d)
-- [How to set up JHipster microservices with Istio service mesh on Kubernetes](https://dev.to/deepu105/how-to-set-up-java-microservices-with-istio-service-mesh-on-kubernetes-5bkn)
+- [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes)
+- [Deploying JHipster Microservices on Azure Kubernetes Service (AKS)](https://deepu.tech/deploying-jhipster-microservices-on-azure-kubernetes-service-aks)
+- [How to set up JHipster microservices with Istio service mesh on Kubernetes](https://deepu.tech/jhipster-microservices-with-istio-service-mesh-on-kubernetes)
 - [Continuous delivery of Microservices with XebiaLabs — a.k.a DevOps as Code](https://medium.com/xebialabs/continuous-delivery-of-microservices-with-xebialabs-a-k-a-devops-as-code-b5f0c3b2b1c8)

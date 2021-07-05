@@ -57,7 +57,7 @@ Object.values(functions).forEach((fn) => {
 
 ## Multiparadigm
 
-JavaScript started as an imperative scripting language and later added features to make OOP possible and due to a lot of features it has you can [use it as a functional programming language](https://dev.to/deepu105/easy-functional-programming-techniques-in-typescript-for-everyone-1bl2) as well. I like this in a language as you can use the best of all paradigms to get your work done efficiently.
+JavaScript started as an imperative scripting language and later added features to make OOP possible and due to a lot of features it has you can [use it as a functional programming language](https://deepu.tech/functional-programming-in-typescript/) as well. I like this in a language as you can use the best of all paradigms to get your work done efficiently.
 
 ## Functions as first-class citizens
 

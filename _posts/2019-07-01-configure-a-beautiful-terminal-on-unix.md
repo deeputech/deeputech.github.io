@@ -10,7 +10,7 @@ devto_url: https://dev.to/deepu105/configure-a-beautiful-terminal-on-unix-with-z
 devto_id: 126019
 ---
 
-I was a long-time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I'm not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup [here](https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc)
+I was a long-time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I'm not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup [here](https://deepu.tech/my-beautiful-linux-development-environment)
 
 As a senior developer and open source community lead, I spent a lot of time on the terminal and a terminal with a nice developer experience instantly makes you happier and more productive. The default bash terminal is good for beginners but if you really want a powerful terminal you need something more than bash.
 

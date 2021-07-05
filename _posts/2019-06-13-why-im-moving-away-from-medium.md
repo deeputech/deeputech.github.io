@@ -4,7 +4,7 @@ description: I moved to Dev from Medium and here are the reasons.
 tags: [writing, medium, development, tech]
 published: true
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/8cexsumefdxmrhqb6nto.jpg
-canonical_url: https://medium.com/@deepu105/why-im-moving-away-from-medium-f9153a01247e
+canonical_url: https://deepu.tech/why-im-moving-away-from-medium
 devto_url: https://dev.to/deepu105/why-i-m-moving-away-from-medium-13ki
 devto_id: 123275
 ---

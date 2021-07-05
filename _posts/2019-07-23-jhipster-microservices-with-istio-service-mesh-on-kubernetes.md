@@ -4,7 +4,7 @@ description: How to set up JHipster microservices with Istio service mesh on Kub
 tags: [microservices, java, kubernetes, istio]
 published: true
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/lb5p4gnuof61zxyi6byx.jpg
-canonical_url: https://medium.com/free-code-camp/jhipster-microservices-with-istio-service-mesh-on-kubernetes-a7d0158ba9a3
+canonical_url: https://deepu.tech/jhipster-microservices-with-istio-service-mesh-on-kubernetes
 devto_url: https://dev.to/deepu105/how-to-set-up-java-microservices-with-istio-service-mesh-on-kubernetes-5bkn
 devto_id: 147191
 series: Microservices with JHipster
@@ -228,7 +228,7 @@ _For advanced Istio setup options refer to [https://istio.io/docs/setup/kubernet
 
 ## Creating the microservice application stack
 
-In one of my [previous posts](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele), I showcased how to create a full-stack microservice architecture using **JHipster** and **JDL**. You can read the post [here](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele) if you want to learn more details about it. For this exercise, we will use the same application but we will not use the Eureka service discovery option we used earlier. Also, note that the store application is further split into Gateway and Product applications.
+In one of my [previous posts](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes), I showcased how to create a full-stack microservice architecture using **JHipster** and **JDL**. You can read the post [here](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes) if you want to learn more details about it. For this exercise, we will use the same application but we will not use the Eureka service discovery option we used earlier. Also, note that the store application is further split into Gateway and Product applications.
 
 ### Architecture
 
@@ -240,7 +240,7 @@ It has a gateway application and three microservice applications. Each of them h
 
 The Ingress gateway from Istio is the only entry point for traffic and it routes traffic to all microservices accordingly. Telemetry is collected from all the containers running in the cluster, including the applications, databases, and Istio components.
 
-Compared to the architecture of the original application [here](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele), you can clearly see that we replaced the JHipster registry and Netflix OSS components with Istio. The ELK monitoring stack is replaced with Prometheus, Grafana and Jaeger configured by Istio. Here is the original architecture diagram without Istio for a quick visual comparison.
+Compared to the architecture of the original application [here](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes), you can clearly see that we replaced the JHipster registry and Netflix OSS components with Istio. The ELK monitoring stack is replaced with Prometheus, Grafana and Jaeger configured by Istio. Here is the original architecture diagram without Istio for a quick visual comparison.
 
 ![Microservice architecture with Netflix OSS](https://cdn-images-1.medium.com/max/2162/1*H-6_dz1-aYXQ-fzWEuJcRw.png)_Microservice architecture with Netflix OSS_
 

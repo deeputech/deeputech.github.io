@@ -13,7 +13,7 @@ devto_url: https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kot
 
 In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management. In this chapter, we will look at the memory management of the **Java Virtual Machine(JVM)** used by languages like Java, Kotlin, Scala, Clojure, Groovy, and so on.
 
-If you haven't read the [first part](https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd) of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.
+If you haven't read the [first part](https://deepu.tech/memory-management-in-programming/) of this series, please read it first as I explained the difference between the Stack and Heap memory there which would be useful to understand this chapter.
 
 # JVM memory structure
 

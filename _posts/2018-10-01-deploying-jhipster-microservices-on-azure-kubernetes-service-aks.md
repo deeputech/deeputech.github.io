@@ -4,7 +4,7 @@ description: Deploying JHipster Microservices on Azure Kubernetes Service (AKS)
 tags: [azure, kubernetes, jhipster, microservices]
 published: true
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/zvmxe2mqyft5qa6vajgd.png
-canonical_url: https://medium.com/jhipster/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-fb46991746ba
+canonical_url: https://deepu.tech/deploying-jhipster-microservices-on-azure-kubernetes-service-aks
 devto_url: https://dev.to/deepu105/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-2g6d
 devto_id: 127515
 series: Microservices with JHipster
@@ -23,7 +23,7 @@ Azure Kubernetes Service(AKS) is the managed Kubernetes platform offering from M
 
 ### Creating the microservice application
 
-In one of my [previous posts](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele), I showcased how to create a full stack microservice architecture using **JHipster** and **JDL**, read the post [here](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele) if you want to learn more details about it. For this exercise, we will use the same application.
+In one of my [previous posts](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes), I showcased how to create a full stack microservice architecture using **JHipster** and **JDL**, read the post [here](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes) if you want to learn more details about it. For this exercise, we will use the same application.
 
 Let us recap the steps required.
 
@@ -36,7 +36,7 @@ Now create a directory called **ecommerce** and navigate into it. Run the JHipst
     $ mkdir ecommerce && cd ecommerce
     $ jhipster import-jdl app.jdl
 
-Once the JHipster process is complete, you will see that we have our store gateway, invoice service and notification service created and ready for us. The process until this is explained in more detail in my previous post [here](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele) and you can deploy the application locally using Docker as explained in that post. If you haven’t done that before I strongly suggest that step so that you get an idea of the application and you also can make sure it works locally on your machine.
+Once the JHipster process is complete, you will see that we have our store gateway, invoice service and notification service created and ready for us. The process until this is explained in more detail in my previous post [here](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes) and you can deploy the application locally using Docker as explained in that post. If you haven’t done that before I strongly suggest that step so that you get an idea of the application and you also can make sure it works locally on your machine.
 
 ### Generating the Kubernetes configuration
 
@@ -305,8 +305,8 @@ You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](http
 
 My other related posts:
 
-1. [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://dev.to/deepu105/create-full-microservice-stack-using-jhipster-domain-language-under-30-minutes-4ele)
+1. [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes)
 
-1. [JHipster microservices with Istio service mesh on Kubernetes](https://dev.to/deepu105/how-to-set-up-java-microservices-with-istio-service-mesh-on-kubernetes-5bkn)
+1. [JHipster microservices with Istio service mesh on Kubernetes](https://deepu.tech/jhipster-microservices-with-istio-service-mesh-on-kubernetes)
 
 Originally published in [Medium](https://medium.com/jhipster/deploying-jhipster-microservices-on-azure-kubernetes-service-aks-fb46991746ba) on Oct 01, 2018
