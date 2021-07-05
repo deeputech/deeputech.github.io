@@ -5,19 +5,15 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 17 Jun 2021 12:07:31 +0200</pubDate>
-    <lastBuildDate>Thu, 17 Jun 2021 12:07:31 +0200</lastBuildDate>
+    <pubDate>Mon, 05 Jul 2021 18:37:21 +0200</pubDate>
+    <lastBuildDate>Mon, 05 Jul 2021 18:37:21 +0200</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
         <title>My second impression of Rust and why I think it's a great general-purpose language!</title>
         <description>My second impression of Rust, after building a real-life use case with it and my thoughts on why it is a great general-purpose language for the future. | &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;I wrote about &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;my first impression of Rust&lt;/a&gt; in November 2019. After that, I dabbled with it few times, but mostly on very simple code, and while I liked using Rust I wasn’t too amazed. On the surface, it kind of felt more or less like many other languages I have dabbled with.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;I wrote about &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;my first impression of Rust&lt;/a&gt; in November 2019. After that, I dabbled with it few times, but mostly on very simple code, and while I liked using Rust I wasn’t too amazed. On the surface, it kind of felt more or less like many other languages I have dabbled with.&lt;/p&gt;
 
 &lt;p&gt;All that changed last month when I finally decided to build a realistic use case with Rust. Since I was quite invested in cloud computing and containers, I decided to build a terminal UI to monitor Kubernetes clusters with Rust. I know it was quite ambitious for a Rust newbie. But looking back, it was absolutely worth it and I have &lt;a href=&quot;https://github.com/kdash-rs/kdash&quot;&gt;KDash&lt;/a&gt; to show for it.&lt;/p&gt;
 
@@ -349,8 +345,6 @@ There were few instances where I ended up using the same name for different cont
 &lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/my-second-impression-of-rust-and-why-i-think-it-s-the-best-general-purpose-language-31jh&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/QHH8hev.png" medium="image">https://i.imgur.com/QHH8hev.png</media:content>
         <pubDate>Fri, 07 May 2021 00:00:00 +0200</pubDate>
@@ -372,11 +366,7 @@ There were few instances where I ended up using the same name for different cont
         <title>Concurrency in modern programming languages: Java</title>
         <description>Building a concurrent web server in Java to compare concurrency performance with Rust, Go, JS, TS, and Kotlin | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
@@ -924,8 +914,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@grape_eve&quot;&gt;Evgeniya Litovchenko&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-java-3l2c&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/I3qwqQs.jpeg" medium="image">https://i.imgur.com/I3qwqQs.jpeg</media:content>
         <pubDate>Fri, 30 Apr 2021 00:00:00 +0200</pubDate>
@@ -947,11 +935,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <title>The state of Linux as a daily use OS in 2021</title>
         <description>Let's see what is the state of Linux, for daily use, in 2021 is and if its a viable alternative to  Windows and macOS | &lt;a href=&quot;https://deepu.tech/the-state-of-linux-on-desktops/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what are your thoughts on Linux in the comments.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;I got my first PC when I was in high school, in 2003. It was a DIY Intel Pentium 4 PC with 512MB of RAM, running Windows XP. This got me hooked to computers and I even started assembling PCs for others and selling my service as a Windows OS installer (pirated, of course, the middle class in India back then couldn’t afford to buy software).&lt;/p&gt;
+        <content:encoded>&lt;p&gt;I got my first PC when I was in high school, in 2003. It was a DIY Intel Pentium 4 PC with 512MB of RAM, running Windows XP. This got me hooked to computers and I even started assembling PCs for others and selling my service as a Windows OS installer (pirated, of course, the middle class in India back then couldn’t afford to buy software).&lt;/p&gt;
 
 &lt;p&gt;This also made me quite an expert in the Windows XP OS which I loved. I used to get occasional bootable CDs of a Linux distro from my Chip magazine subscription which I would try then forget as they weren’t as compelling or user-friendly as Windows back then.&lt;/p&gt;
 
@@ -1178,8 +1162,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: &lt;a href=&quot;https://www.youtube.com/watch?v=qTF9Nmt3iXY&amp;amp;t=34s&quot;&gt;Linux Scoop&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/the-state-of-linux-as-a-daily-use-os-in-2021-1gm6&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/sO0DY6V.jpeg" medium="image">https://i.imgur.com/sO0DY6V.jpeg</media:content>
         <pubDate>Wed, 24 Mar 2021 00:00:00 +0100</pubDate>
@@ -1201,11 +1183,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <title>What about Svelte? Should you care!</title>
         <description>Learn why Svelte matters and if you should you care about it | &lt;a href=&quot;https://deepu.tech/what-about-svelte/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;&lt;em&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what you think about Svelte in the comments.&lt;/em&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://svelte.dev/&quot;&gt;Svelte&lt;/a&gt; is one of the latest cool-and-shiny client-side frameworks in the JavaScript world. Svelte lets you write blazing fast web applications with minimal boilerplate, reduced complexity, and smaller bundle size.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;&lt;a href=&quot;https://svelte.dev/&quot;&gt;Svelte&lt;/a&gt; is one of the latest cool-and-shiny client-side frameworks in the JavaScript world. Svelte lets you write blazing fast web applications with minimal boilerplate, reduced complexity, and smaller bundle size.&lt;/p&gt;
 
 &lt;p&gt;Yes, we have heard the same promise many times before as well from other cool-and-shiny projects like Angular, React, Vue, and &lt;a href=&quot;https://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks&quot;&gt;others&lt;/a&gt;.&lt;/p&gt;
 
@@ -1472,8 +1450,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/what-about-svelte-should-you-care-ni1&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/YZca3NW.jpg" medium="image">https://i.imgur.com/YZca3NW.jpg</media:content>
         <pubDate>Thu, 18 Mar 2021 00:00:00 +0100</pubDate>
@@ -1495,11 +1471,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <title>Concurrency in modern programming languages: TypeScript on Deno</title>
         <description>Building a concurrent web server in TypeScript on Deno to compare concurrency performance with Rust, Go, JS, Kotlin, and Java | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
@@ -1507,7 +1479,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Concurrent web server in TypeScript with Deno&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrent web server in Java with JVM&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
   &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
 &lt;/ol&gt;
@@ -1783,8 +1755,6 @@ since there is no clean way to do a multi-threaded server in Deno the &lt;code c
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@jeffreyfotografie?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Jeffrey Brandjes&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-typescript-on-deno-hkb&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/zIc76rV.jpg" medium="image">https://i.imgur.com/zIc76rV.jpg</media:content>
         <pubDate>Fri, 19 Feb 2021 00:00:00 +0100</pubDate>
@@ -1806,11 +1776,7 @@ since there is no clean way to do a multi-threaded server in Deno the &lt;code c
         <title>Concurrency in modern programming languages: JavaScript on NodeJS</title>
         <description>Building a concurrent web server in JavaScript on NodeJS to compare concurrency performance with Rust, Go, TS, Kotlin, and Java | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
@@ -1818,7 +1784,7 @@ since there is no clean way to do a multi-threaded server in Deno the &lt;code c
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Concurrent web server in JavaScript with NodeJS&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrent web server in Java with JVM&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
   &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
 &lt;/ol&gt;
@@ -2297,8 +2263,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@mparzuchowski?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Michał Parzuchowski&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-javascript-on-nodejs-epo&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/PABMBDP.jpg" medium="image">https://i.imgur.com/PABMBDP.jpg</media:content>
         <pubDate>Fri, 05 Feb 2021 00:00:00 +0100</pubDate>
@@ -2320,11 +2284,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <title>Concurrency in modern programming languages: Golang</title>
         <description>Building a concurrent web server in Golang to compare concurrency performance with Rust, JS, TS, Kotlin, and Java | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
@@ -2332,7 +2292,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;li&gt;&lt;strong&gt;Concurrent web server in Golang&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrent web server in Java with JVM&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
   &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
 &lt;/ol&gt;
@@ -2711,8 +2671,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@instagramfotografin?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Peggy Anke&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/juggle?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-golang-439i&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/ZTfXUBU.jpg" medium="image">https://i.imgur.com/ZTfXUBU.jpg</media:content>
         <pubDate>Thu, 21 Jan 2021 00:00:00 +0100</pubDate>
@@ -2734,11 +2692,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <title>Concurrency in modern programming languages: Rust</title>
         <description>Building a concurrent web server in Rust to compare concurrency performance with Go, JS, TS, Kotlin, and Java | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I’ll try to publish them weekly.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I’ll try to publish them weekly.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
@@ -2746,7 +2700,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrent web server in Java with JVM&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
   &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
 &lt;/ol&gt;
@@ -3483,8 +3437,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@jacobmejicanos?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Jacob Mejicanos&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-19co&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/XalVFUX.jpg" medium="image">https://i.imgur.com/XalVFUX.jpg</media:content>
         <pubDate>Thu, 24 Dec 2020 00:00:00 +0100</pubDate>
@@ -3506,11 +3458,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <title>Concurrency in modern programming languages: Introduction</title>
         <description>Building a concurrent web server in Rust, Go, JS, TS, Kotlin, and Java to compare concurrency performance | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I’ll try to publish them weekly.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I’ll try to publish them weekly.&lt;/p&gt;
 
 &lt;ol&gt;
   &lt;li&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/li&gt;
@@ -3518,7 +3466,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Java with JVM&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrent web server in Java with JVM&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
   &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
 &lt;/ol&gt;
@@ -3643,8 +3591,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@mbeero?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Matt Bero&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/multitasking?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/concurrency-in-modern-programming-languages-introduction-ckk&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/anGGYRi.jpg" medium="image">https://i.imgur.com/anGGYRi.jpg</media:content>
         <pubDate>Fri, 27 Nov 2020 00:00:00 +0100</pubDate>
@@ -3666,11 +3612,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <title>8 important things I learned as a software developer over a decade.</title>
         <description>Advice for beginners from my decade long development career | &lt;a href=&quot;https://deepu.tech/most-important-things-i-learned-in-a-decade/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Please follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; for updates and let me know what can be improved in the post.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;I started my IT career, accidentally as I don’t have a Computer Science background and instead got an engineering degree in Electrical and Electronics, in March of 2010 and this year marks my 10th anniversary.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;I started my IT career, accidentally as I don’t have a Computer Science background and instead got an engineering degree in Electrical and Electronics, in March of 2010 and this year marks my 10th anniversary.&lt;/p&gt;
 
 &lt;p&gt;Before I start giving out any advice let me try to justify my background. In a decade-long professional software development career, I have worn several hats like Jr./Sr./Principal Developer, Tech Lead, Project Manager, Business Analyst, Pre-sales Engineer, DevOps Engineer, Cloud Engineer, OSS contributor, and finally Developer Advocate. I have also had the pleasure of co-leading an amazing open-source community behind &lt;a href=&quot;https://www.jhipster.tech/&quot;&gt;JHipster&lt;/a&gt; over the past 5 years. During this period I started out as a Java/JavaScript developer and went on to work with many other languages like Go, Rust, Python, Kotlin, C#, and so on and I now consider myself a polyglot developer. I have built web applications, enterprise apps, Microservices, Cloud Native apps, CLIs, System tools, Libraries, Android and Hybrid mobile apps, and so on. Hence I hope this gives me enough experience to talk about some of the important things I learned and practiced over the last decade.&lt;/p&gt;
 
@@ -3741,8 +3683,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@martinkatler?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Martin Katler&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/programmers-desk?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyTex&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Also published at &lt;a href=&quot;https://dev.to/deepu105/8-important-things-i-learned-as-a-software-developer-over-a-decade-4no3&quot;&gt;Dev.to&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/eMIb5xp.jpeg" medium="image">https://i.imgur.com/eMIb5xp.jpeg</media:content>
         <pubDate>Tue, 01 Sep 2020 00:00:00 +0200</pubDate>
