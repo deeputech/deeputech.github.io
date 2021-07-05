@@ -4,18 +4,14 @@ description: "Let's test drive GraalVM with a program that uses many languages t
 published: true
 featured: false
 tags:
-    - java
-    - python
-    - javascript
-    - rust
+  - java
+  - python
+  - javascript
+  - rust
 canonical_url: "https://deepu.tech/polyglot-showdown-with-graalvm/"
 cover_image: "https://i.imgur.com/SHMvb6A.jpg"
 devto_id: 256804
 devto_url: "https://dev.to/deepu105/polyglot-inception-with-graalvm-why-because-it-s-fun-aa"
----
-
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
 ---
 
 Have you heard of [GraalVM](https://www.graalvm.org/)? If you haven't you should check it out. It is an exciting technology, you know the kind that gets a polyglot developer going 😉
@@ -30,12 +26,12 @@ So what are the capabilities of GraalVM? Let us take a quick look
 
 ## GraalVM features
 
--   [Drop in JDK replacement](https://www.graalvm.org/docs/why-graal/#for-java-programs) - Some benchmarks show GraalVM to be faster and less memory hungry than other JDK vendors, I haven't personally run any benchmarks
--   [Drop in NodeJS replacement](https://www.graalvm.org/docs/why-graal/#for-nodejs-programs) - Uses GraalVM instead of V8 as the engine for NodeJS
--   Faster runtime for [Ruby](https://pragtob.wordpress.com/2017/01/24/benchmarking-a-go-ai-in-ruby-cruby-vs-rubinius-vs-jruby-vs-truffle-a-year-later/) and [R](https://medium.com/graalvm/faster-r-with-fastr-4b8db0e0dceb) than the default implementations
--   [Ahead-of-time(AOT) compiled native images](https://www.graalvm.org/docs/why-graal/#for-microservices-frameworks)
--   [Polyglot capabilities](https://www.graalvm.org/docs/why-graal/#for-ruby-r-or-python) - Java(Any JVM language), JavaScript, Ruby, Python, R, C/C++/Rust(LLVM) along with language interoperability
--   [The Truffle Language Implementation framework](https://www.graalvm.org/docs/why-graal/#for-your-languages-and-tools) to implement third-party language support
+- [Drop in JDK replacement](https://www.graalvm.org/docs/why-graal/#for-java-programs) - Some benchmarks show GraalVM to be faster and less memory hungry than other JDK vendors, I haven't personally run any benchmarks
+- [Drop in NodeJS replacement](https://www.graalvm.org/docs/why-graal/#for-nodejs-programs) - Uses GraalVM instead of V8 as the engine for NodeJS
+- Faster runtime for [Ruby](https://pragtob.wordpress.com/2017/01/24/benchmarking-a-go-ai-in-ruby-cruby-vs-rubinius-vs-jruby-vs-truffle-a-year-later/) and [R](https://medium.com/graalvm/faster-r-with-fastr-4b8db0e0dceb) than the default implementations
+- [Ahead-of-time(AOT) compiled native images](https://www.graalvm.org/docs/why-graal/#for-microservices-frameworks)
+- [Polyglot capabilities](https://www.graalvm.org/docs/why-graal/#for-ruby-r-or-python) - Java(Any JVM language), JavaScript, Ruby, Python, R, C/C++/Rust(LLVM) along with language interoperability
+- [The Truffle Language Implementation framework](https://www.graalvm.org/docs/why-graal/#for-your-languages-and-tools) to implement third-party language support
 
 ## Install GraalVM
 
@@ -214,9 +210,9 @@ Let's look at `jspart.js`, it is a standard JavaScript function that takes an ar
 
 ```js
 function findCubeOfNumbers(array) {
-    console.log("JS => Getting cube of numbers in the array");
+  console.log("JS => Getting cube of numbers in the array");
 
-    return Array.prototype.map.call(array, it => Math.pow(it, 3));
+  return Array.prototype.map.call(array, (it) => Math.pow(it, 3));
 }
 ```
 

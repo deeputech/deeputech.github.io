@@ -4,19 +4,15 @@ description: Advice for beginners from my decade long development career
 published: true
 featured: false
 tags:
-    - beginners
-    - pragmatic
-    - codequality
-    - programming
+  - beginners
+  - pragmatic
+  - codequality
+  - programming
 canonical_url: "https://deepu.tech/most-important-things-i-learned-in-a-decade/"
 cover_image: "https://i.imgur.com/eMIb5xp.jpeg"
 devto_id: 471389
 devto_url: >-
-    https://dev.to/deepu105/8-important-things-i-learned-as-a-software-developer-over-a-decade-4no3
----
-
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
+  https://dev.to/deepu105/8-important-things-i-learned-as-a-software-developer-over-a-decade-4no3
 ---
 
 I started my IT career, accidentally as I don't have a Computer Science background and instead got an engineering degree in Electrical and Electronics, in March of 2010 and this year marks my 10th anniversary.

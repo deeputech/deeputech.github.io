@@ -10,10 +10,6 @@ devto_url: https://dev.to/deepu105/configure-a-beautiful-terminal-on-unix-with-z
 devto_id: 126019
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
-
-----
- 
 I was a long-time Windows user, a fairly happy one, but as a developer, there were a lot of things that were missing for me and one of the main was the terminal experience. I'm not a fan of the closed ecosystem of Apple so Linux was an easy choice for me and I switched to Linux almost 3 years ago. I did start out with Ubuntu and later switched to Fedora which is my primary OS now. You can read about my setup [here](https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc)
 
 As a senior developer and open source community lead, I spent a lot of time on the terminal and a terminal with a nice developer experience instantly makes you happier and more productive. The default bash terminal is good for beginners but if you really want a powerful terminal you need something more than bash.
@@ -29,11 +25,12 @@ Below are the tools we would need for this.
 [Zsh](https://www.zsh.org/) is one of the most feature-rich shells for Unix. It works on Linux, Mac, [WSL](https://docs.microsoft.com/en-us/windows/wsl/about), and BSD. There are alternatives like [Fish](https://fishshell.com/) which also offers similar features but I personally like Zsh.
 
 1. Check if Zsh is already installed by running `zsh --version` on your terminal. If not found, install it using your package manager.
-    - Fedora: `sudo dnf install zsh`
-    - Mac: `brew install zsh zsh-completions`
-    - RHEL/CentOS: `sudo yum update && sudo yum -y install zsh`
-    - Ubuntu/Debian: `sudo apt install zsh`
-    - For other platform refer [this](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH#how-to-install-zsh-in-many-platforms)
+
+   - Fedora: `sudo dnf install zsh`
+   - Mac: `brew install zsh zsh-completions`
+   - RHEL/CentOS: `sudo yum update && sudo yum -y install zsh`
+   - Ubuntu/Debian: `sudo apt install zsh`
+   - For other platform refer [this](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH#how-to-install-zsh-in-many-platforms)
 
 2. Now make Zsh your default shell by running `chsh -s $(which zsh)`.
 3. Log out and log in back again to use your new default shell.
@@ -44,7 +41,7 @@ Note: If you have installed Zsh for the first time and launch the shell it would
 
 ## Oh-My-Zsh
 
-[Oh-My-Zsh](https://ohmyz.sh/) gives the Zsh shell superpowers. Its a framework to manage Zsh configuration. It has plugins and themes for Zsh(A lot of them). 
+[Oh-My-Zsh](https://ohmyz.sh/) gives the Zsh shell superpowers. Its a framework to manage Zsh configuration. It has plugins and themes for Zsh(A lot of them).
 
 From their Github page:
 
@@ -58,9 +55,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 ## Terminal emulator/multiplexer
 
-Optionally you can use a Terminal emulator that can manage windows and panes for you. 
+Optionally you can use a Terminal emulator that can manage windows and panes for you.
 
-For Linux I would recommend using [Tilix](https://gnunn1.github.io/tilix-web/), I have been using it for 3 years and its just amazing. 
+For Linux I would recommend using [Tilix](https://gnunn1.github.io/tilix-web/), I have been using it for 3 years and its just amazing.
 
 For Mac, you can use [iTerm2](https://iterm2.com/index.html) which is very popular.
 
@@ -71,24 +68,30 @@ Alternatively, you can also use [tmux](https://github.com/tmux/tmux) if you want
 This is the fun part. Let us make the terminal awesome.
 
 ### Install plugins
+
 First, let us install some additional plugins that are not bundled with Oh-My-Zsh.
 
 #### [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
-Provides auto completion for shell commands. 
+
+Provides auto completion for shell commands.
 
 Run `git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions` to install
+
 #### [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
-Provides syntax highlighting on the shell. 
+
+Provides syntax highlighting on the shell.
 
 Run `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting` to install
 
 #### [autojump](https://github.com/wting/autojump)
+
 Provides a smarter directory navigation system.
 Install autojump for your OS following instructions [here](https://github.com/wting/autojump#automatic).
 
 Now let us configure the `~/.zshrc` file with some settings. [Here](https://gist.github.com/deepu105/9723cb70032eca98ff09d110369af67a) is my full `.zshrc` file. Your mileage may vary.
 
 ### Add exports
+
 We will start with some exports.
 
 ```bash
@@ -121,9 +124,9 @@ DISABLE_UNTRACKED_FILES_DIRTY=true
 
 ### Zsh theme
 
-Now, Let's set up a nice theme. I'm using [**powerlevel10k**](https://github.com/romkatv/powerlevel10k) as my current theme and it's fast and looks great. You can use the default or you can choose any theme you like from the list [here](https://github.com/robbyrussell/oh-my-zsh/wiki/Themes). If you like my theme then follow these instructions. Thanks to [Roman Perepelitsa](https://github.com/romkatv) for some [cool tips](https://github.com/romkatv/powerlevel10k/issues/90#issuecomment-503599702) 
+Now, Let's set up a nice theme. I'm using [**powerlevel10k**](https://github.com/romkatv/powerlevel10k) as my current theme and it's fast and looks great. You can use the default or you can choose any theme you like from the list [here](https://github.com/robbyrussell/oh-my-zsh/wiki/Themes). If you like my theme then follow these instructions. Thanks to [Roman Perepelitsa](https://github.com/romkatv) for some [cool tips](https://github.com/romkatv/powerlevel10k/issues/90#issuecomment-503599702)
 
-Run `git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k` to install the theme. 
+Run `git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k` to install the theme.
 
 Install a [Powerline font](https://github.com/bhilburn/powerlevel9k/wiki/Install-Instructions#step-2-install-a-powerline-font). I use [Adobe Source Code Pro](https://github.com/adobe-fonts/source-code-pro)
 
@@ -230,6 +233,7 @@ And that's it we are ready. Start a new terminal session and enjoy.
 ### Issues & workarounds
 
 If you use Tilix as your terminal emulator, then this might be required for proper pane splitting. Add this to your `~/.zshrc`
+
 ```bash
 if [[ $TILIX_ID ]]; then
         source /etc/profile.d/vte.sh
@@ -270,9 +274,11 @@ If you are using VSCode like me, you might want to do the below to get the same 
 ![](https://thepracticaldev.s3.amazonaws.com/i/ae6wi9anly8clq12z9na.png)
 
 Follow these steps
+
 - Download and install a [patched font](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Medium/complete/Sauce%20Code%20Pro%20Medium%20Nerd%20Font%20Complete%20Mono.ttf).
 - On Linux, run `fc-cache -f -v` to refresh font cache.
 - On VSCode, open Preferences → Settings and click on the `{}` icon to open JSON mode and set the below
+
 ```json
     "terminal.integrated.shell.linux": "/usr/bin/zsh",
     "terminal.integrated.fontFamily": "'SauceCodePro Nerd Font Mono','Source Code Pro'",
@@ -281,9 +287,10 @@ Follow these steps
     "terminal.integrated.cursorStyle": "underline",
     "terminal.integrated.cursorBlinking": true
 ```
+
 Replace `linux` with `osx` if you are on a Mac.
- 
-----
+
+---
 
 I hope you like it. If you have any questions or if you think I missed something please add a comment.
 

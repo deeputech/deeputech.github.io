@@ -10,10 +10,6 @@ devto_id: 220308
 cover_image: https://i.imgur.com/GKIsoGc.jpg
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
----
-
 One of the most important aspect of software engineering is code quality and one of the most important criteria should be readability and maintainability of your code, especially when working in teams where others have to read and understand your code. The best code in my opinion is that doesn't need any explanation or even documentation and that even a complete beginner can read and understand.
 
 > It is easy to write complex and cryptic piece of code. It is much harder to write simple and readable code.
@@ -30,19 +26,19 @@ Consider the below function, let us use JavaScript on NodeJS for simplicity. Not
 
 ```js
 function processFile(filePath) {
-    if (fs.existsSync(filePath)) {
-        // check if file exists
-        var fileContent = fs.readFileSync(filePath, "utf8"); // read the file content
+  if (fs.existsSync(filePath)) {
+    // check if file exists
+    var fileContent = fs.readFileSync(filePath, "utf8"); // read the file content
 
-        if (fileContent !== "") {
-            console.log("Content found");
-            // do stuff
-        } else {
-            throw Error("No content found on file!");
-        }
+    if (fileContent !== "") {
+      console.log("Content found");
+      // do stuff
     } else {
-        throw Error("File not found!");
+      throw Error("No content found on file!");
     }
+  } else {
+    throw Error("File not found!");
+  }
 }
 ```
 
@@ -50,19 +46,19 @@ We are fetching the given file and doing some processing on it, if the file is n
 
 ```js
 function processFile(filePath) {
-    if (!fs.existsSync(filePath)) {
-        // check if file does not exist
-        throw Error("File not found!");
-    }
+  if (!fs.existsSync(filePath)) {
+    // check if file does not exist
+    throw Error("File not found!");
+  }
 
-    var fileContent = fs.readFileSync(filePath, "utf8"); // read the file content
+  var fileContent = fs.readFileSync(filePath, "utf8"); // read the file content
 
-    if (fileContent === "") {
-        throw Error("No content found on file!");
-    }
+  if (fileContent === "") {
+    throw Error("No content found on file!");
+  }
 
-    console.log("Content found");
-    // do stuff
+  console.log("Content found");
+  // do stuff
 }
 ```
 
@@ -152,12 +148,12 @@ function processFile(filePath) {
 
 Having smaller focused functions helps with following
 
--   Unit testing becomes easier.
--   Functions become reuseable and composable.
--   Easier to focus and read, without having to build a mental model of the entire logic
--   Easier to change something in a small function than in a huge one, as you will have less cases to worry about.
--   Easier to debug and easier to spot bugs.
--   reduces side effects as the function does something very focused.
+- Unit testing becomes easier.
+- Functions become reuseable and composable.
+- Easier to focus and read, without having to build a mental model of the entire logic
+- Easier to change something in a small function than in a huge one, as you will have less cases to worry about.
+- Easier to debug and easier to spot bugs.
+- reduces side effects as the function does something very focused.
 
 ## Bonus: Write pure functions
 

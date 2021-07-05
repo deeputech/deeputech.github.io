@@ -17,10 +17,6 @@ devto_id: 644327
 devto_url: "https://dev.to/deepu105/the-state-of-linux-as-a-daily-use-os-in-2021-1gm6"
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what are your thoughts on Linux in the comments.
-
----
-
 I got my first PC when I was in high school, in 2003. It was a DIY Intel Pentium 4 PC with 512MB of RAM, running Windows XP. This got me hooked to computers and I even started assembling PCs for others and selling my service as a Windows OS installer (pirated, of course, the middle class in India back then couldn't afford to buy software).
 
 This also made me quite an expert in the Windows XP OS which I loved. I used to get occasional bootable CDs of a Linux distro from my Chip magazine subscription which I would try then forget as they weren't as compelling or user-friendly as Windows back then.

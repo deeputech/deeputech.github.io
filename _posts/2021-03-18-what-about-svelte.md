@@ -14,10 +14,6 @@ devto_id: 638352
 devto_url: "https://dev.to/deepu105/what-about-svelte-should-you-care-ni1"
 ---
 
-_Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what you think about Svelte in the comments._
-
----
-
 [Svelte](https://svelte.dev/) is one of the latest cool-and-shiny client-side frameworks in the JavaScript world. Svelte lets you write blazing fast web applications with minimal boilerplate, reduced complexity, and smaller bundle size.
 
 Yes, we have heard the same promise many times before as well from other cool-and-shiny projects like Angular, React, Vue, and [others](https://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks).

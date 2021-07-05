@@ -15,10 +15,6 @@ devto_id: 249077
 devto_url: https://dev.to/deepu105/visualizing-memory-management-in-v8-engine-javascript-nodejs-deno-webassembly-105p
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know if something can be improved in the post.
-
----
-
 In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management.
 
 In this chapter, we will look at the memory management of the **[V8 Engine](https://v8.dev/)** for [ECMAScript](https://tc39.es/ecma262/) and [WebAssembly](https://webassembly.github.io/spec/core/), used by runtimes like NodeJS, Deno & Electron and web browsers like Chrome, Chromium, Brave, Opera, and Microsoft Edge. Since JavaScript is an interpreted language, it needs an engine to interpret and execute code. The V8 engine interprets JavaScript and compiles it down to native machine code. V8 is written in C++ and can be embedded in any C++ application.

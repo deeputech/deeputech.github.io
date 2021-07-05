@@ -12,16 +12,12 @@ tags:
   - programming
   - languages
   - webassembly
-cover_image: 'https://i.imgur.com/QHH8hev.png'
-canonical_url: 'https://deepu.tech/my-second-impression-of-rust/'
+cover_image: "https://i.imgur.com/QHH8hev.png"
+canonical_url: "https://deepu.tech/my-second-impression-of-rust/"
 series: languages
 devto_id: 691156
 devto_url: >-
   https://dev.to/deepu105/my-second-impression-of-rust-and-why-i-think-it-s-the-best-general-purpose-language-31jh
----
-
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
 ---
 
 I wrote about [my first impression of Rust](https://deepu.tech/first-impression-of-rust/) in November 2019. After that, I dabbled with it few times, but mostly on very simple code, and while I liked using Rust I wasn't too amazed. On the surface, it kind of felt more or less like many other languages I have dabbled with.
@@ -283,4 +279,3 @@ I would finish off by saying this: You won't appreciate Rust unless you spend fe
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
-

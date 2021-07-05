@@ -10,20 +10,16 @@ cover_image: https://thepracticaldev.s3.amazonaws.com/i/eu6knwm6llwmgjr6yx59.png
 series: Golang for JavaScript developers
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
----
-
 If you are a JavaScript developer thinking about learning another programming language, then Golang is a great choice. It is simple, has a lot of momentum, is very performant and has some similarities to JavaScript.
 
 This post is not a comparison of the languages or is stating that they are very similar. Its a guide for JavaScript developers to grasp Golang quickly. There are many aspects of Go that are entirely different from JavaScript. We will touch upon that as well.
 
 In the previous [part](https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je) of this series, we learned about things that are more similar between JS and Go. We touched upon:
 
--   Functions
--   Scope
--   Flow control
--   Memory management
+- Functions
+- Scope
+- Flow control
+- Memory management
 
 In this part of the series, we will touch upon things that are more different between JS and Go. If you haven't read the previous part please read it first.
 
@@ -39,7 +35,7 @@ This is one of the main differences. JavaScript is dynamic and loosely typed and
 
 ```js
 var foo = {
-    message: "hello"
+  message: "hello",
 };
 
 var bar = foo;
@@ -50,7 +46,7 @@ console.log(foo.message === bar.message); // prints 'true'
 
 // reassign
 bar = {
-    message: "mars"
+  message: "mars",
 };
 console.log(foo.message === bar.message); // prints 'false'
 ```
@@ -91,20 +87,20 @@ fmt.Println(foo.message == bar.message) // prints "true"
 
 ### Similarities
 
--   There is no much similarity other than the name of keywords `var` and `const`. `var` keyword in Go is closer to `let` keyword in JS in terms of behavior.
--   Multiple `var` can be declared together like `var a, foo, bar int;` similar to JS. But in Go, you can go further and initialize them as well like `var a, foo, bar = true, 10, "hello"`. In JS you can do a destructuring assignment for similar effect like `var [a, foo, bar] = [true, 10, "hello"]`
+- There is no much similarity other than the name of keywords `var` and `const`. `var` keyword in Go is closer to `let` keyword in JS in terms of behavior.
+- Multiple `var` can be declared together like `var a, foo, bar int;` similar to JS. But in Go, you can go further and initialize them as well like `var a, foo, bar = true, 10, "hello"`. In JS you can do a destructuring assignment for similar effect like `var [a, foo, bar] = [true, 10, "hello"]`
 
 ### Differences
 
--   Go needs type information at compile time either by specified type or from type inference.
--   Go has value types(primitives, arrays, and structs), reference types(slice, map & channels) and pointers. JS has value types(primitives) and reference types(objects, arrays, functions).
--   The type of a variable cannot be changed after the declaration in Go.
--   Variables assignments cannot use short-circuit expressions in Go.
--   `var` has a shorthand syntax with `:=` inside Go functions.
--   Go strictly doesn't let you have unused variables, any unused variable must be named as `_`, which is a reserved character.
--   JS does not have `private/public` access modifiers(There is a proposal to add it), In Go, however, you can modify that using the naming convention. Starting a field, variable name with uppercase will make it public and lowercase will make it private.
--   `const` in Go is not the same as in JavaScript. Only primitives like character, string, boolean, or numeric values can be assigned to constants in Go.
--   Arrays in Go are different from JS as they are fixed length. JS arrays are dynamic and hence are more similar to Go slices which are slices of an array with dynamic length.
+- Go needs type information at compile time either by specified type or from type inference.
+- Go has value types(primitives, arrays, and structs), reference types(slice, map & channels) and pointers. JS has value types(primitives) and reference types(objects, arrays, functions).
+- The type of a variable cannot be changed after the declaration in Go.
+- Variables assignments cannot use short-circuit expressions in Go.
+- `var` has a shorthand syntax with `:=` inside Go functions.
+- Go strictly doesn't let you have unused variables, any unused variable must be named as `_`, which is a reserved character.
+- JS does not have `private/public` access modifiers(There is a proposal to add it), In Go, however, you can modify that using the naming convention. Starting a field, variable name with uppercase will make it public and lowercase will make it private.
+- `const` in Go is not the same as in JavaScript. Only primitives like character, string, boolean, or numeric values can be assigned to constants in Go.
+- Arrays in Go are different from JS as they are fixed length. JS arrays are dynamic and hence are more similar to Go slices which are slices of an array with dynamic length.
 
 **JavaScript**
 
@@ -133,19 +129,19 @@ foo = foo[:n]     // remove the last element
 
 ```
 
--   JavaScript has Object, Map/Set and WeakMap/WeakSet that can be used as dictionaries and sets. Go has only a simple Map which is more similar to JavaScript Object and hence serves the purpose. Also, note that maps in Go are not ordered.
+- JavaScript has Object, Map/Set and WeakMap/WeakSet that can be used as dictionaries and sets. Go has only a simple Map which is more similar to JavaScript Object and hence serves the purpose. Also, note that maps in Go are not ordered.
 
 **JavaScript**
 
 ```js
 const dict = {
-    key1: 10,
-    key2: "hello"
+  key1: 10,
+  key2: "hello",
 };
 
 const stringMap = {
-    key1: "hello",
-    key2: "world"
+  key1: "hello",
+  key2: "world",
 };
 ```
 
@@ -177,11 +173,11 @@ We saw some mutability in action in the above section, let's see a bit more
 
 ```js
 let foo = {
-    msg: "hello"
+  msg: "hello",
 };
 
 function mutate(arg) {
-    arg.msg = "world";
+  arg.msg = "world";
 }
 mutate(foo);
 console.log(foo.msg); // prints 'world'
@@ -216,8 +212,8 @@ The only similarity in terms of error handling between Go and JS is that errors 
 Apart from the above error handling are quite different in both.
 In JavaScript, we can either;
 
--   use a `try/catch` mechanism to catch errors from synchronous functions and asynchronous functions that use `async/await`
--   handle errors by passing them to callback functions or using promises for asynchronous functions.
+- use a `try/catch` mechanism to catch errors from synchronous functions and asynchronous functions that use `async/await`
+- handle errors by passing them to callback functions or using promises for asynchronous functions.
 
 In Go there is no `try/catch` mechanism, the only way to handle the error is by returning it as a value from a function or by halting execution with a `panic` function or using the `recover` function in a `defer` block to [rescue the execution](https://blog.golang.org/defer-panic-and-recover). This makes error handling quite verbose in Go and you will often see the famous `if err != nil` statement in Go.
 
@@ -225,15 +221,15 @@ In Go there is no `try/catch` mechanism, the only way to handle the error is by 
 
 ```js
 function errorCausingFunction() {
-    throw Error("Oops");
+  throw Error("Oops");
 }
 
 try {
-    errorCausingFunction();
+  errorCausingFunction();
 } catch (err) {
-    console.error(`Error: ${err}`);
+  console.error(`Error: ${err}`);
 } finally {
-    console.log(`Done`);
+  console.log(`Done`);
 }
 // prints
 // Error: Error: Oops
@@ -242,18 +238,18 @@ try {
 // or the async way
 
 function asyncFn() {
-    try {
-        errorCausingFunction();
-        return Promise.resolve();
-    } catch (err) {
-        return Promise.reject(err);
-    }
+  try {
+    errorCausingFunction();
+    return Promise.resolve();
+  } catch (err) {
+    return Promise.reject(err);
+  }
 }
 
 asyncFn()
-    .then(res => console.log(`:)`))
-    .catch(err => console.error(`Error: ${err}`))
-    .finally(res => console.log(`Done`));
+  .then((res) => console.log(`:)`))
+  .catch((err) => console.error(`Error: ${err}`))
+  .finally((res) => console.log(`Done`));
 // prints
 // Error: Error: Oops
 // Done
@@ -302,24 +298,24 @@ In JavaScript, we can use inheritance to extend or share behavior while Go choos
 
 ```js
 class Animal {
-    species;
-    constructor(species) {
-        this.species = species;
-    }
-    species() {
-        return this.species;
-    }
+  species;
+  constructor(species) {
+    this.species = species;
+  }
+  species() {
+    return this.species;
+  }
 }
 
 class Person extends Animal {
-    name;
-    constructor(name) {
-        super("human");
-        this.name = name;
-    }
-    name() {
-        return this.name;
-    }
+  name;
+  constructor(name) {
+    super("human");
+    this.name = name;
+  }
+  name() {
+    return this.name;
+  }
 }
 
 var tom = new Person("Tom");
@@ -375,26 +371,23 @@ Concurrency is one of the most important features of Golang and this is where it
 ```js
 // Sequential
 async function fetchSequential() {
-    const a = await fetch("http://google.com/");
-    console.log(a.status);
-    await a.text();
+  const a = await fetch("http://google.com/");
+  console.log(a.status);
+  await a.text();
 
-    const b = await fetch("http://twitter.com/");
-    console.log(b.status);
-    await b.text();
+  const b = await fetch("http://twitter.com/");
+  console.log(b.status);
+  await b.text();
 }
 
 // Concurrent but not multi threaded
 async function fetchConcurrent() {
-    const values = await Promise.all([
-        fetch("http://google.com/"),
-        fetch("http://twitter.com/")
-    ]);
+  const values = await Promise.all([fetch("http://google.com/"), fetch("http://twitter.com/")]);
 
-    values.forEach(async resp => {
-        console.log(resp.status);
-        await resp.text();
-    });
+  values.forEach(async (resp) => {
+    console.log(resp.status);
+    await resp.text();
+  });
 }
 ```
 
@@ -455,8 +448,8 @@ Someone asked me in the comments of the previous [part](https://dev.to/deepu105/
 
 # References:
 
--   [http://www.pazams.com/Go-for-Javascript-Developers/](http://www.pazams.com/Go-for-Javascript-Developers/)
--   [https://github.com/miguelmota/golang-for-nodejs-developers](https://github.com/miguelmota/golang-for-nodejs-developers)
+- [http://www.pazams.com/Go-for-Javascript-Developers/](http://www.pazams.com/Go-for-Javascript-Developers/)
+- [https://github.com/miguelmota/golang-for-nodejs-developers](https://github.com/miguelmota/golang-for-nodejs-developers)
 
 ---
 

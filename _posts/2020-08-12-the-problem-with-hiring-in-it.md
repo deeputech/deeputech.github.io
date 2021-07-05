@@ -1,5 +1,5 @@
 ---
-title: 'Let''s face it, we have a broken technical interview process in our industry'
+title: "Let's face it, we have a broken technical interview process in our industry"
 description: >-
   How the current technical interview process followed by the majority of the
   companies favor only a small subset of developers.
@@ -10,15 +10,11 @@ tags:
   - career
   - womenintech
   - discuss
-canonical_url: 'https://deepu.tech/the-problem-with-hiring-in-it/'
-cover_image: 'https://i.imgur.com/BrwZzTc.jpg'
+canonical_url: "https://deepu.tech/the-problem-with-hiring-in-it/"
+cover_image: "https://i.imgur.com/BrwZzTc.jpg"
 devto_id: 425684
 devto_url: >-
   https://dev.to/deepu105/let-s-face-it-we-have-a-broken-technical-interview-process-in-our-industry-56j2
----
-
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
 ---
 
 This topic has been discussed and debated for a long time and there have been countless [articles](http://they.whiteboarded.me/additional-resources.html) written about it and even [websites](http://they.whiteboarded.me/) dedicated to it. But still, the problem remains.
@@ -80,17 +76,17 @@ A recent [research](http://chrisparnin.me/pdf/stress_FSE_20.pdf) from **North Ca
 
 In the beginning, I said we are partly to blame, why? because in most companies, still doing these interview techniques, it's not something mandated by the company management or some standards, its mostly people who are in charge of hiring (hiring managers, developers, team leads) who decides the process. so if you are in a position to influence hiring practice and didn't try to change this then you are part of the problem as well. So what can we do to change this?
 
--   Talk to hiring managers and people in charge of hiring in your company, explain to them issues of whiteboarding and live coding interviews, pressure them to change the process. If you are team lead make sure your hiring process doesn't have these
--   Turn down interviews that have whiteboarding or live coding in their process and explain to them why you turned it down. I have done this numerous times in the past. Of course, this may not be practical if you are desperate for a job, in that case, ask them if they are willing to do something like a coding challenge or take-home assignment instead and explain why you are asking for that. If they still insist provide honest feedback on how it felt after the final hiring decision is made
--   If you are in some position of power or influence in your company please voice out against these practices
+- Talk to hiring managers and people in charge of hiring in your company, explain to them issues of whiteboarding and live coding interviews, pressure them to change the process. If you are team lead make sure your hiring process doesn't have these
+- Turn down interviews that have whiteboarding or live coding in their process and explain to them why you turned it down. I have done this numerous times in the past. Of course, this may not be practical if you are desperate for a job, in that case, ask them if they are willing to do something like a coding challenge or take-home assignment instead and explain why you are asking for that. If they still insist provide honest feedback on how it felt after the final hiring decision is made
+- If you are in some position of power or influence in your company please voice out against these practices
 
 > A company that treats an interviewee well is a company that will treat its employees better.
 
 # Resources
 
--   http://they.whiteboarded.me/
--   https://www.theregister.com/AMP/2020/07/15/it_hiring_whiteboard/
--   https://news.ncsu.edu/2020/07/tech-job-interviews-anxiety/
+- http://they.whiteboarded.me/
+- https://www.theregister.com/AMP/2020/07/15/it_hiring_whiteboard/
+- https://news.ncsu.edu/2020/07/tech-job-interviews-anxiety/
 
 ---
 
@@ -99,4 +95,3 @@ If you like this article, please leave a like. I would love to hear your thought
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Scott Graham](https://unsplash.com/@sctgrhm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/tech-interview?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-

@@ -15,10 +15,6 @@ devto_id: 262942
 devto_url: "https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa"
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know if something can be improved in the post.
-
----
-
 In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management.
 
 In this chapter, we will look at the memory management of the **[Go](https://golang.org/)** programming language(Golang). Go is a statically typed & compiled language like C/C++ and Rust. Hence Go does not need a VM and Go application binaries include a small runtime embedded in them to take care of language features like Garbage collection, scheduling & concurrency.

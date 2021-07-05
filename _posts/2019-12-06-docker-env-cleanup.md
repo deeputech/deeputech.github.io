@@ -10,10 +10,6 @@ devto_id: 216187
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/tbwh49ldicoxvo57bklg.jpg
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
----
-
 # Cleanup your Docker setup
 
 If you are using Docker on your PC or Mac, over time it is gonna accumulate a lot of Junk, the majority of which being dangling images and orphan volumes. It could take up a lot of space in your machine.
@@ -58,11 +54,12 @@ docker image rm $(docker images -q -f dangling=true);
 
 # Clean up everything
 
-**Update:** Seems like docker provides a native command to clean up everything. 
+**Update:** Seems like docker provides a native command to clean up everything.
 
 ```sh
 docker system prune --volumes
 ```
+
 You can run this to achieve the same result as below command and a bit more. Thanks to [cyberjack](https://dev.to/cyberjack) for pointing it out. I'll leave the below for educational purposes.
 
 Now we can add these commands as a handy bash function so that we can do this cleanup with a single command like I always do. It frees up a lot of disk space and helps when I'm having some weird cache issues with docker-compose 😉.

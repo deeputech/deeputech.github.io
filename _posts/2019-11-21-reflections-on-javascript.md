@@ -10,10 +10,6 @@ devto_id: 209286
 series: languages
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
----
-
 There are three types of programmers, the ones who love JavaScript, the ones who hate JavaScript and the ones who do both. JavaScript is the second language(First was C/C++) I learned when I was trying to run my Wordpress blog. It was even before I started my career. When I started my engineering career I started as a Java Web app developer, which meant I had the chance to work on JavaScript as well for the front-end part. I was pretty good at JS/HTML/CSS and soon I was doing a lot of front-end focused Java Web apps. I also learned JQuery and fell in love with it.
 
 During the initial years of my career, JavaScript was undoubtedly the language I loved the most as I found it insanely flexible and easy, especially when I wanted to hack something together fast, even though I was doing an equal amount of coding in Java as well. My former immature self even used to believe that JavaScript was the best programming language in the world and I used to vehemently debate anyone who thought JavaScript wasn't good, I mean I did have some good reasons to think so. Fast forward to now and I think I know better and in my attempts at being more pragmatic, I started looking at languages and frameworks more objectively and without bias. Now I wouldn't say JavaScript is the best language out there, but its a very important one, I know its flaws and there are things I dislike in the JS ecosystem which now I'm mature enough to admit.
@@ -46,14 +42,11 @@ For example, you can do the below in JavaScript to build dynamic functions
 const functions = {};
 
 for (let i = 0; i < 10; i++) {
-    functions[`myAwesomeFunc${i}`] = new Function(
-        "fnName",
-        `console.log('Hello world from ' + fnName + ' fn created by index ${i}');`
-    );
+  functions[`myAwesomeFunc${i}`] = new Function("fnName", `console.log('Hello world from ' + fnName + ' fn created by index ${i}');`);
 }
 
-Object.values(functions).forEach(fn => {
-    fn(fn.name);
+Object.values(functions).forEach((fn) => {
+  fn(fn.name);
 });
 
 // prints
@@ -72,7 +65,7 @@ Functions in JavaScript are first-class citizens and they don't differ from any 
 
 ```javascript
 function foo(msg) {
-    console.log(`Hello world! ${msg}`);
+  console.log(`Hello world! ${msg}`);
 }
 
 foo.bar = "Yo";
@@ -148,12 +141,7 @@ There is a whole repo dedicated to documenting this https://github.com/denysdovh
 Here is a sample, don't even try to understand what happens here.
 
 ```javascript
-console.log(
-    (![] + [])[+[]] +
-        (![] + [])[+!+[]] +
-        ([![]] + [][[]])[+!+[] + [+[]]] +
-        (![] + [])[!+[] + !+[]]
-);
+console.log((![] + [])[+[]] + (![] + [])[+!+[]] + ([![]] + [][[]])[+!+[] + [+[]]] + (![] + [])[!+[] + !+[]]);
 // prints 'fail'
 ```
 

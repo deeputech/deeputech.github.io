@@ -11,10 +11,6 @@ devto_id: 135373
 series: languages
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
-
----
-
 Do I like [Go](https://golang.org/)? Yes. Would I use it for every use case I have? Definitely not.
 
 {% twitter 1103546225851277313 %}

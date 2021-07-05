@@ -12,10 +12,6 @@ devto_url: https://dev.to/deepu105/my-beautiful-linux-development-environment-2a
 devto_id: 124647
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
-
-----
-
 One of the questions that I get quite often after a conference talk is weirdly not about what I presented but about my Linux desktop environment. People are more curious about that beautiful distro rather than the awesome presentation I just did 😂
 
 Not that I'm complaining, I love my desktop setup. I love it so much that I was afraid of getting a new PC when I was due for one. I was afraid that I would mess things up(I have done that many times in the past, I think Linux users can relate to me)
@@ -25,6 +21,7 @@ So I decided to capture the most important aspects of my distro for anyone inter
 ![](https://thepracticaldev.s3.amazonaws.com/i/3zajm5va5xplo9mg7804.png)
 
 This is not just my work laptop, it's my primary machine which I use for all of the below
+
 - Java, JS, TS, Go, Python & web development
 - JHipster development
 - Running multiple web applications locally
@@ -38,10 +35,9 @@ This is not just my work laptop, it's my primary machine which I use for all of 
 - Blogging
 - Youtube & Social media
 
-
 ## Machine configuration
 
-The configuration of the machine is also quite important for any development setup. So my laptop is a Dell Precision 5530 Mobile Workstation. I had the exact same setup with my old Dell 5510 as well, which is quite a similar configuration to 5530. I still have it as a backup Laptop, its 2 years old now but can still give most of the top-end laptops today a run for its money. 
+The configuration of the machine is also quite important for any development setup. So my laptop is a Dell Precision 5530 Mobile Workstation. I had the exact same setup with my old Dell 5510 as well, which is quite a similar configuration to 5530. I still have it as a backup Laptop, its 2 years old now but can still give most of the top-end laptops today a run for its money.
 
 I used the [custom configuration](https://www.dell.com/nl-nl/work/shop/isv-gecertificeerd-en-geoptimaliseerd-workstation/precision-5530/spd/precision-15-5530-laptop/xctop5530emea?selectionState=eyJGUHJpY2UiOjMwODcuNDUsIklVUHJpY2UiOjMwODcuNDUsIk9DIjoieGN0b3A1NTMwZW1lYSIsIlF0eSI6MSwiUHJTdCI6IiIsIk1vZHMiOlt7IklkIjoxNDYsIk9wdHMiOlt7IklkIjoiR0NCV1pVMiJ9XX0seyJJZCI6MTEsIk9wdHMiOlt7IklkIjoiR1JFUEZVMiJ9XX0seyJJZCI6MTQ5LCJPcHRzIjpbeyJJZCI6Ikc1R0FJQzgifV19LHsiSWQiOjYsIk9wdHMiOlt7IklkIjoiRzBTTVk1OSJ9XX0seyJJZCI6MywiT3B0cyI6W3siSWQiOiJHSk1TVDRLIn1dfSx7IklkIjo4LCJPcHRzIjpbeyJJZCI6IkdSMlNHSkgifV19LHsiSWQiOjM3MiwiT3B0cyI6W3siSWQiOiJHM1c1QzZIIn1dfSx7IklkIjoxMDAyLCJPcHRzIjpbeyJJZCI6IkdFODBUOVcifV19LHsiSWQiOjc0OSwiT3B0cyI6W3siSWQiOiJHOEJYV1lJIn1dfSx7IklkIjo1NSwiT3B0cyI6W3siSWQiOiJHSkVWUDNYIn1dfSx7IklkIjoxMTIsIk9wdHMiOlt7IklkIjoiR1c5SUs3RiJ9XX0seyJJZCI6MTAwMywiT3B0cyI6W3siSWQiOiJHNlE1WFo0In1dfSx7IklkIjoyMDAwNzYsIk9wdHMiOlt7IklkIjoiR1cyRVNBNyJ9XX0seyJJZCI6MzAsIk9wdHMiOlt7IklkIjoiODI3ODc1In1dfV19&cartItemId=c4d9c6f5-9956-4c6f-87ac-d0472018ad78) option from Dell to get the best possible setup at that time. it's not cheap but my company, [XebiaLabs](https://xebialabs.com/), provided a handsome budget and I think it is worth every penny. This, in my opinion, is one of the best Laptops for developers. So here is what I have.
 
@@ -72,6 +68,7 @@ What good is a desktop without a nice theme right? GNOME is great when it comes 
 ![](https://thepracticaldev.s3.amazonaws.com/i/h6w1qmxd2mvs88bl0ki7.png)
 
 Of course, it won't be complete without some nice GNOME plugins. Below are the plugins that I use.
+
 - [Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)
 - [Always Zoom Workspaces](https://extensions.gnome.org/extension/503/always-zoom-workspaces/)
 - [Auto Move Windows](https://extensions.gnome.org/extension/16/auto-move-windows/)
@@ -90,7 +87,6 @@ Of course, it won't be complete without some nice GNOME plugins. Below are the p
 - [Todo.txt](https://extensions.gnome.org/extension/570/todotxt/)
 - [TopIcons Plus](https://extensions.gnome.org/extension/1031/topicons/)
 - [User Themes](https://extensions.gnome.org/extension/19/user-themes/)
-
 
 ## Development tools
 

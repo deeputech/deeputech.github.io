@@ -8,14 +8,10 @@ tags:
   - javascript
   - nodejs
   - deno
-canonical_url: 'https://deepu.tech/deno-runtime-for-typescript/'
-cover_image: 'https://i.imgur.com/0FWtns5.jpg'
+canonical_url: "https://deepu.tech/deno-runtime-for-typescript/"
+cover_image: "https://i.imgur.com/0FWtns5.jpg"
 devto_id: 265496
 devto_url: "https://dev.to/deepu105/forget-nodejs-build-native-typescript-applications-with-deno-kkb"
----
-
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
 ---
 
 Have you heard of [Deno](https://deno.land/)? If not you should check it out. Deno is a modern JavaScript/TypeScript runtime & scripting environment. Deno is what NodeJS should have been according to Ryan Dahl who created NodeJS. Deno was also created by Ryan Dahl in 2018 and is built with [V8](https://v8.dev/), [Rust](https://www.rust-lang.org/) and [Tokio](https://github.com/tokio-rs/tokio) with a focus on security, performance, and ease of use. Deno takes many inspirations from Go and Rust.
@@ -46,18 +42,18 @@ Now that we have Deno installed, let us look at its features.
 
 # Features
 
--   TypeScript supported out of the box without any transpiling setup
--   Can execute remote scripts
--   Secure by default. No file, network, or environment access by default unless explicitly enabled
--   Provides curated standard modules
--   Supports only ES modules. Modules are cached globally and are immutable
--   Built-in tooling (format, lint, test, bundle and so on)
--   Deno applications can be browser compatible
--   Promise based API(`async/await` supported) and no callback hell
--   Top-level `await` support
--   Sub-process using web workers
--   WebAssembly support
--   Lightweight multi-platform executable(~10MB)
+- TypeScript supported out of the box without any transpiling setup
+- Can execute remote scripts
+- Secure by default. No file, network, or environment access by default unless explicitly enabled
+- Provides curated standard modules
+- Supports only ES modules. Modules are cached globally and are immutable
+- Built-in tooling (format, lint, test, bundle and so on)
+- Deno applications can be browser compatible
+- Promise based API(`async/await` supported) and no callback hell
+- Top-level `await` support
+- Sub-process using web workers
+- WebAssembly support
+- Lightweight multi-platform executable(~10MB)
 
 > Deno does not use NPM for dependency management and hence there is no `node_modules` hell to deal with, which IMO is a huge selling point
 
@@ -69,7 +65,7 @@ Deno has native support for TypeScript and JavaScript. You can write Deno applic
 
 ```typescript
 function hello(person: string) {
-    return "Hello, " + person;
+  return "Hello, " + person;
 }
 
 console.log(hello("John"));
@@ -93,9 +89,9 @@ This means you can just point to a raw GitHub URL to execute a script, no hassle
 
 By default, a script run with Deno cannot access the file system, network, sub-process, or environment. This creates a sandbox for the script and the user has to explicitly provide permissions. This puts control in the hands of the end-user.
 
--   Granular permissions
--   Permissions can be revoked
--   Permissions whitelist support
+- Granular permissions
+- Permissions can be revoked
+- Permissions whitelist support
 
 The permissions can be provided via command-line flags during execution or programmatically when using sub-processes.
 
@@ -136,20 +132,20 @@ To avoid the error we need to pass the `--allow-net` or `--allow-all` flag when 
 
 Deno provides [standard modules](https://deno.land/std/) like NodeJS, Go or Rust. The list is growing as newer versions are released. Currently available modules are:
 
--   `archive` - TAR archive handling
--   `colors` - ANSI colors on console
--   `datetime` - Datetime parse utilities
--   `encoding` - Encode/Decode CSV, YAML, HEX, Base32 & TOML
--   `flags` - CLI argument parser
--   `fs` - Filesystem API
--   `http` - HTTP server framework
--   `log` - Logging framework
--   `media_types` - Resolve media types
--   `prettier` - Prettier formatting API
--   `strings` - String utils
--   `testing` - Testing utils
--   `uuid` - UUID support
--   `ws` - Websocket client/server
+- `archive` - TAR archive handling
+- `colors` - ANSI colors on console
+- `datetime` - Datetime parse utilities
+- `encoding` - Encode/Decode CSV, YAML, HEX, Base32 & TOML
+- `flags` - CLI argument parser
+- `fs` - Filesystem API
+- `http` - HTTP server framework
+- `log` - Logging framework
+- `media_types` - Resolve media types
+- `prettier` - Prettier formatting API
+- `strings` - String utils
+- `testing` - Testing utils
+- `uuid` - UUID support
+- `ws` - Websocket client/server
 
 The standard modules are available under `https://deno.land/std` namespace and are tagged in accordance with Deno releases.
 
@@ -161,15 +157,15 @@ import { green } from "https://deno.land/std/fmt/colors.ts";
 
 Deno supports only [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) using a remote or local URL. This keeps dependency management simple and light. Unlike NodeJS, Deno doesn't try to be too smart here, which means:
 
--   `require()` is not supported, so no confusion with import syntax
--   No "magical" module resolution
--   Third-party modules are imported by URL(Local and remote)
--   Remote code is fetched only once and cached globally for later use
--   Remote code is considered immutable and never updated unless `--reload` flag is used
--   Dynamic imports are supported
--   Supports [import maps](https://deno.land/std/manual.md#import-maps)
--   Third-party modules are available in [https://deno.land/x/](https://deno.land/x/)
--   NPM modules can be used, if required, as simple local file URL or from [jspm.io](https://jspm.io/) or [pika.dev](https://www.pika.dev/)
+- `require()` is not supported, so no confusion with import syntax
+- No "magical" module resolution
+- Third-party modules are imported by URL(Local and remote)
+- Remote code is fetched only once and cached globally for later use
+- Remote code is considered immutable and never updated unless `--reload` flag is used
+- Dynamic imports are supported
+- Supports [import maps](https://deno.land/std/manual.md#import-maps)
+- Third-party modules are available in [https://deno.land/x/](https://deno.land/x/)
+- NPM modules can be used, if required, as simple local file URL or from [jspm.io](https://jspm.io/) or [pika.dev](https://www.pika.dev/)
 
 Hence we can any import any library that is available from a URL. Let's build on our HTTP server example
 
@@ -185,10 +181,10 @@ console.info(green(capitalize("server created!")));
 const body = new TextEncoder().encode("Hello there\n");
 
 (async () => {
-    console.log(green("Listening on http://localhost:8000/"));
-    for await (const req of server) {
-        req.respond({ body });
-    }
+  console.log(green("Listening on http://localhost:8000/"));
+  for await (const req of server) {
+    req.respond({ body });
+  }
 })();
 ```
 
@@ -196,11 +192,11 @@ The import paths can be made nicer by using an import map below
 
 ```json
 {
-    "imports": {
-        "http/": "https://deno.land/std/http/",
-        "fmt/": "https://raw.githubusercontent.com/denoland/deno/master/std/fmt/",
-        "lodash/": "https://unpkg.com/lodash-es@4.17.15/"
-    }
+  "imports": {
+    "http/": "https://deno.land/std/http/",
+    "fmt/": "https://raw.githubusercontent.com/denoland/deno/master/std/fmt/",
+    "lodash/": "https://unpkg.com/lodash-es@4.17.15/"
+  }
 }
 ```
 
@@ -218,10 +214,10 @@ console.info(green(capitalize("server created!")));
 const body = new TextEncoder().encode("Hello there\n");
 
 (async () => {
-    console.log(green("Listening on http://localhost:8000/"));
-    for await (const req of server) {
-        req.respond({ body });
-    }
+  console.log(green("Listening on http://localhost:8000/"));
+  for await (const req of server) {
+    req.respond({ body });
+  }
 })();
 ```
 
@@ -231,14 +227,14 @@ Run this with the `--importmap` flag `deno --allow-net=:8000 --importmap import-
 
 Deno takes inspiration from Rust and Golang to provide built-in tooling, this IMO is great as it helps you get started without having to worry about setting up testing, linting and bundling frameworks. The below are tools currently available/planned
 
--   Dependency inspector (`deno info`): Provides information about cache and source files
--   Bundler (`deno bundle`): Bundle module and dependencies into a single JavaScript file
--   Installer (`deno install`): Install a Deno module globally, the equivalent of `npm install`
--   [Test runner](https://github.com/denoland/deno/tree/master/std/testing) (`deno test`): Run tests using the Deno built-in test framework
--   Type info (`deno types`): Get the Deno TypeScript API reference
--   Code formatter (`deno fmt`): Format source code using Prettier
--   Linter (planned) (`deno lint`): Linting support for source code
--   Debugger (planned) (`--debug`): Debug support for Chrome Dev tools
+- Dependency inspector (`deno info`): Provides information about cache and source files
+- Bundler (`deno bundle`): Bundle module and dependencies into a single JavaScript file
+- Installer (`deno install`): Install a Deno module globally, the equivalent of `npm install`
+- [Test runner](https://github.com/denoland/deno/tree/master/std/testing) (`deno test`): Run tests using the Deno built-in test framework
+- Type info (`deno types`): Get the Deno TypeScript API reference
+- Code formatter (`deno fmt`): Format source code using Prettier
+- Linter (planned) (`deno lint`): Linting support for source code
+- Debugger (planned) (`--debug`): Debug support for Chrome Dev tools
 
 For example, with Deno, you can write test cases easily using provided utilities
 
@@ -246,7 +242,7 @@ Let's say we have `factorial.ts`
 
 ```typescript
 export function factorial(n: number): number {
-    return n == 0 ? 1 : n * factorial(n - 1);
+  return n == 0 ? 1 : n * factorial(n - 1);
 }
 ```
 
@@ -258,11 +254,11 @@ import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 import { factorial } from "./factorial.ts";
 
 test(function testFactorial(): void {
-    assertEquals(factorial(5), 120);
+  assertEquals(factorial(5), 120);
 });
 
 test(function t2(): void {
-    assertEquals("world", "worlds");
+  assertEquals("world", "worlds");
 });
 ```
 
@@ -270,8 +266,8 @@ test(function t2(): void {
 
 Deno programs or modules can be run on a browser as well if they satisfy the below conditions
 
--   The program must are written completely in JavaScript and should not use the global Deno APIs
--   If the program is written in Typescript, it must be bundled as JavaScript using `deno bundle` and should not use the global Deno APIs
+- The program must are written completely in JavaScript and should not use the global Deno APIs
+- If the program is written in Typescript, it must be bundled as JavaScript using `deno bundle` and should not use the global Deno APIs
 
 For browser compatibility Deno also supports `window.load` and `window.unload` events. `load` and `unload` events can be used with `window.addEventListener` as well.
 
@@ -281,11 +277,11 @@ Let us see below sample, this can be run using `deno run` or we can package it a
 import capitalize from "https://unpkg.com/lodash-es@4.17.15/capitalize.js";
 
 export function main() {
-    console.log(capitalize("hello from the web browser"));
+  console.log(capitalize("hello from the web browser"));
 }
 
 window.onload = () => {
-    console.info(capitalize("module loaded!"));
+  console.info(capitalize("module loaded!"));
 };
 ```
 
@@ -299,9 +295,9 @@ Another great thing about Deno is that all of its API is [Promise](https://devel
 const filePromise: Promise<Deno.File> = Deno.open("dummyFile.txt");
 
 filePromise.then((file: Deno.File) => {
-    Deno.copy(Deno.stdout, file).then(() => {
-        file.close();
-    });
+  Deno.copy(Deno.stdout, file).then(() => {
+    file.close();
+  });
 });
 ```
 
@@ -311,8 +307,8 @@ But we said no callbacks right, the good thing about Promise API is that we can 
 const filePromise: Promise<Deno.File> = Deno.open("dummyFile.txt");
 
 filePromise.then(async (file: Deno.File) => {
-    await Deno.copy(Deno.stdout, file);
-    file.close();
+  await Deno.copy(Deno.stdout, file);
+  file.close();
 });
 ```
 
@@ -340,20 +336,20 @@ Since Deno uses the V8 engine which is single-threaded, we have to use a sub-pro
 
 ```typescript
 const p = Deno.run({
-    args: ["deno", "run", "--allow-read", "top_level_await.ts", "dummyFile.txt"],
-    stdout: "piped",
-    stderr: "piped"
+  args: ["deno", "run", "--allow-read", "top_level_await.ts", "dummyFile.txt"],
+  stdout: "piped",
+  stderr: "piped",
 });
 
 const { code } = await p.status();
 
 if (code === 0) {
-    const rawOutput = await p.output();
-    await Deno.stdout.write(rawOutput);
+  const rawOutput = await p.output();
+  await Deno.stdout.write(rawOutput);
 } else {
-    const rawError = await p.stderrOutput();
-    const errorString = new TextDecoder().decode(rawError);
-    console.log(errorString);
+  const rawError = await p.stderrOutput();
+  const errorString = new TextDecoder().decode(rawError);
+  console.log(errorString);
 }
 
 Deno.exit(code);
@@ -378,7 +374,7 @@ We can convert this to WASM binary using the online converter [here](https://was
 ```typescript
 const mod = new WebAssembly.Module(await Deno.readFile("fact_c.wasm"));
 const {
-    exports: { factorial }
+  exports: { factorial },
 } = new WebAssembly.Instance(mod);
 
 console.log(factorial(10));
@@ -409,16 +405,16 @@ const url = Deno.args[0] || "https://deepu.tech";
 console.info(green("proxy server created!"));
 
 (async () => {
-    console.log(green(`Proxy listening on http://localhost:8000/ for ${url}`));
+  console.log(green(`Proxy listening on http://localhost:8000/ for ${url}`));
 
-    for await (const req of server) {
-        let reqUrl = req.url.startsWith("http") ? req.url : `${url}${req.url}`;
+  for await (const req of server) {
+    let reqUrl = req.url.startsWith("http") ? req.url : `${url}${req.url}`;
 
-        console.log(yellow(`URL requested: ${reqUrl}`));
+    console.log(yellow(`URL requested: ${reqUrl}`));
 
-        const res = await fetch(reqUrl);
-        req.respond(res);
-    }
+    const res = await fetch(reqUrl);
+    req.respond(res);
+  }
 })();
 ```
 
@@ -444,45 +440,45 @@ Let us see how Deno compares against NodeJS and why I believe it has great poten
 
 I consider Deno to be better than NodeJS for the following reasons. The creator of NodeJS thinks the same I guess
 
--   Easy to install - Single lightweight binary, built-in dependency management
--   Secure by default - Sandboxed, Fine-grained privileges and user-controlled
--   Simple ES module resolution - No smart(confusing) module system like NodeJS
--   Decentralized and globally cached third-party modules - No `node_modules` hell, efficient
--   No dependency on package managers or package registries(No NPM, No Yarn, No `node_modules`)
--   Native TypeScript support
--   Follows web standards and modern language features
--   Browser compatibility - Ability to reuse modules in browser and Deno apps
--   Remote script runner - Neat installation of scripts and tools
--   Built-in tooling - No hassle of setting up tooling, bundlers and so on
+- Easy to install - Single lightweight binary, built-in dependency management
+- Secure by default - Sandboxed, Fine-grained privileges and user-controlled
+- Simple ES module resolution - No smart(confusing) module system like NodeJS
+- Decentralized and globally cached third-party modules - No `node_modules` hell, efficient
+- No dependency on package managers or package registries(No NPM, No Yarn, No `node_modules`)
+- Native TypeScript support
+- Follows web standards and modern language features
+- Browser compatibility - Ability to reuse modules in browser and Deno apps
+- Remote script runner - Neat installation of scripts and tools
+- Built-in tooling - No hassle of setting up tooling, bundlers and so on
 
 ## Why does it matter
 
 Why does it matter, why do we need another scripting environment? Isn't JavaScript ecosystem already bloated enough
 
--   NodeJS ecosystem has become too heavy and bloated and we need something to break the monopoly and force constructive improvements
--   Dynamic languages are still important especially in the below domains
-    -   Data science
-    -   Scripting
-    -   Tooling
-    -   CLI
--   Many Python/NodeJS/Bash use cases can be replaced with TypeScript using Deno
-    -   TypeScript provides better developer experience
-    -   Consistent and documentable API
-    -   Easier to build and distribute
-    -   Does not download the internet all the time
-    -   More secure
+- NodeJS ecosystem has become too heavy and bloated and we need something to break the monopoly and force constructive improvements
+- Dynamic languages are still important especially in the below domains
+  - Data science
+  - Scripting
+  - Tooling
+  - CLI
+- Many Python/NodeJS/Bash use cases can be replaced with TypeScript using Deno
+  - TypeScript provides better developer experience
+  - Consistent and documentable API
+  - Easier to build and distribute
+  - Does not download the internet all the time
+  - More secure
 
 ## Challenges
 
 This is not without challenges, for Deno to succeed it still has to overcome these issues
 
--   Fragmentation of libraries and modules
--   Not compatible with many of the NPM modules already out there
--   Library authors would have to publish a Deno compatible build(Not difficult but en extra step)
--   Migrating existing NodeJS apps will not be easy due to incompatible API
--   Bundles are not optimized so might need tooling or improvements there
--   Stability, since Deno is quite new (NodeJS is battle-tested)
--   Not production-ready
+- Fragmentation of libraries and modules
+- Not compatible with many of the NPM modules already out there
+- Library authors would have to publish a Deno compatible build(Not difficult but en extra step)
+- Migrating existing NodeJS apps will not be easy due to incompatible API
+- Bundles are not optimized so might need tooling or improvements there
+- Stability, since Deno is quite new (NodeJS is battle-tested)
+- Not production-ready
 
 ---
 
@@ -491,4 +487,3 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Random image from the internet
-

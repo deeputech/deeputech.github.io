@@ -11,10 +11,6 @@ series: languages
 featured: false
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
-
----
-
 So I started learning Rust a while ago and since my post about what [I thought of Go](https://dev.to/deepu105/my-reflections-on-golang-38jk) was popular, I decided to write about what my first impressions of Rust were as well.
 
 But unlike Go, I actually didn't build any real-world application in Rust, so my opinions here are purely personal and some might not be accurate as I might have misunderstood something. So do give me the consideration of a Rust newbie. If you find something I said here is inaccurate please do let me know. Also, my impressions might actually change once I start using the language more. If it does, I'll make sure to update the post.

@@ -10,9 +10,7 @@ devto_id: 239348
 cover_image: https://i.imgur.com/G2ygcmv.jpg
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
 
----
 
 Hello friends, the second edition of my book **"Full Stack Development with JHipster"**, co-authored with [Sendil Kumar N](https://dev.to/sendilkumarn), is published this week and I thought of dedicating it to all the Full Stack Developers out there.
 

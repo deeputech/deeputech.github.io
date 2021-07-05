@@ -1,5 +1,5 @@
 ---
-title: 'Concurrency in modern programming languages: JavaScript on NodeJS'
+title: "Concurrency in modern programming languages: JavaScript on NodeJS"
 description: >-
   Building a concurrent web server in JavaScript on NodeJS to compare
   concurrency performance with Rust, Go, TS, Kotlin, and Java
@@ -11,15 +11,11 @@ tags:
   - nodejs
   - javascript
 series: concurrency in modern programming languages
-canonical_url: 'https://deepu.tech/concurrency-in-modern-languages-js/'
-cover_image: 'https://i.imgur.com/PABMBDP.jpg'
+canonical_url: "https://deepu.tech/concurrency-in-modern-languages-js/"
+cover_image: "https://i.imgur.com/PABMBDP.jpg"
 devto_id: 592869
 devto_url: >-
   https://dev.to/deepu105/concurrency-in-modern-programming-languages-javascript-on-nodejs-epo
----
-
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
 ---
 
 This is a multi-part series where I'll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.
@@ -321,4 +317,3 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Michał Parzuchowski](https://unsplash.com/@mparzuchowski?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-

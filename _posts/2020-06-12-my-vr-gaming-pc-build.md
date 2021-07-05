@@ -4,17 +4,13 @@ description: "I built a Windows PC for playing Half-Life: Alyx"
 published: true
 featured: false
 tags:
-    - windows
-    - vr
-    - gaming
+  - windows
+  - vr
+  - gaming
 canonical_url: "https://deepu.tech/my-vr-gaming-pc-build/"
 cover_image: "https://i.imgur.com/EuNcfsv.jpg"
 devto_id: 353690
 devto_url: "https://dev.to/deepu105/my-pc-build-for-vr-gaming-2n79"
----
-
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know what can be improved in the post.
-
 ---
 
 I built my first PC when I was in high school, in 2003. It was an Intel Pentium 4 system, not high specs or anything, just whatever I could afford at that time. I loved that PC like a child and it served me quite well for the next few years. I used it for Photoshop, 3DS max, some light gaming, and so on.

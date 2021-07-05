@@ -10,13 +10,9 @@ devto_url: https://dev.to/deepu105/my-vs-code-setup-making-the-most-out-of-vs-co
 devto_id: 141925
 ---
 
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates.
+[Visual Studio Code](https://code.visualstudio.com/)(I like the sound of VS Code better), I just love it. It is my primary code editor.
 
-----
- 
-[Visual Studio Code](https://code.visualstudio.com/)(I like the sound of VS Code better), I just love it. It is my primary code editor. 
-
-I always loved lightweight editors over IDEs. Many years ago I was using Eclipse for development and [Notepad++](https://notepad-plus-plus.org/) with some plugins for all other lightweight stuff. Then I discovered sublime text and was using it for a while. I still was finding Eclipse too heavyweight when I was doing web development. Then came [Brackets](http://brackets.io/) from Adobe. It was a fairly nice editor especially for web development and I started using it heavily for web development. But Brackets was bit slow back then on a large codebase. Then came [Atom](https://atom.io/) which revolutionized the NodeJS desktop application landscape by introducing the Atom shell which ultimately became [Electron](https://electronjs.org/). So I switched to Atom and loved its slick interface and nice pluggable features. It became my primary editor for all web development. 
+I always loved lightweight editors over IDEs. Many years ago I was using Eclipse for development and [Notepad++](https://notepad-plus-plus.org/) with some plugins for all other lightweight stuff. Then I discovered sublime text and was using it for a while. I still was finding Eclipse too heavyweight when I was doing web development. Then came [Brackets](http://brackets.io/) from Adobe. It was a fairly nice editor especially for web development and I started using it heavily for web development. But Brackets was bit slow back then on a large codebase. Then came [Atom](https://atom.io/) which revolutionized the NodeJS desktop application landscape by introducing the Atom shell which ultimately became [Electron](https://electronjs.org/). So I switched to Atom and loved its slick interface and nice pluggable features. It became my primary editor for all web development.
 
 So Electron paved the way for VS Code and though at first, I was skeptical due to the association with Visual Studio, I tried it out and was amazed by its speed and user experience. There was no turning back now. I slowly started using VS Code for most of my day to day development, except for JVM development which I was using IntelliJ Ultimate by now and it is hard to beat IntelliJ for JVM development. Fast forward now below are the editor/IDE I use for development.
 
@@ -75,21 +71,27 @@ The Java support indeed is getting better and better, so I hope one day I can co
 ![](https://thepracticaldev.s3.amazonaws.com/i/64sf9ht3f35lsipzafmu.png)
 
 - [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) - Adds Docker support(view and manage containers) and support for Docker, docker-compose files.
+
   > `code --install-extension ms-azuretools.vscode-docker`
 
 - [Jenkinsfile Support](https://marketplace.visualstudio.com/items?itemName=secanis.jenkinsfile-support) - Adds syntax highlighting support for Jenkinsfile's.
+
   > `code --install-extension secanis.jenkinsfile-support`
 
 - [Terraform](https://marketplace.visualstudio.com/items?itemName=mauve.terraform) - Adds support for Terraform files.
+
   > `code --install-extension mauve.terraform`
 
 - [Markdown all in one](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) - Full markdown support with live preview, keyboard shortcuts, etc.
+
   > `code --install-extension yzhang.markdown-all-in-one`
 
 - [PlantUML](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml) - Rich [PlantUML](http://plantuml.com/) support with live preview.
+
   > `code --install-extension jebbs.plantuml`
 
 - [Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode) - Adds AI assisted intellisense support for multiple languages.
+
   > `code --install-extension VisualStudioExptTeam.vscodeintellicode`
 
 - [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml) - Adds YAML support.
@@ -99,97 +101,114 @@ The Java support indeed is getting better and better, so I hope one day I can co
 
 ![](https://thepracticaldev.s3.amazonaws.com/i/8xsddvbrq5e1mco28vsc.png)
 
-
 #### [Dark++ Italic](https://marketplace.visualstudio.com/items?itemName=idbartosz.darkpp-italic)
 
 My default theme. Similar to VS Code default dark theme but has support for [FiraCode](https://github.com/tonsky/FiraCode) and [Operator Mono](https://www.typography.com/fonts/operator/styles) fonts. I personally use FiraCode.
+
 > `code --install-extension idbartosz.darkpp-italic`
 
 #### [Material icon theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
 
 A nice icon theme based on material icons.
+
 > `code --install-extension PKief.material-icon-theme`
 
 #### [Peacock](https://marketplace.visualstudio.com/items?itemName=johnpapa.vscode-peacock)
 
 Subtly changes the workspace color of your workspace. Helpful to identify when you have many windows open.
+
 > `code --install-extension johnpapa.vscode-peacock`
 
 ## Tools
 
 #### [Auto rename tag](https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag)
 
-Automatically rename paired HTML/XML tags 
+Automatically rename paired HTML/XML tags
+
 > `code --install-extension formulahendry.auto-rename-tag`
 
 #### [Bracket pair colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2)
 
-Marks matching bracket pairs with unique colors. This really makes reading code nicer 
+Marks matching bracket pairs with unique colors. This really makes reading code nicer
+
 > `code --install-extension CoenraadS.bracket-pair-colorizer-2`
 
 #### [Change case](https://marketplace.visualstudio.com/items?itemName=wmaurer.change-case)
 
-Convert between different cases. Trust me this is so handy 
+Convert between different cases. Trust me this is so handy
+
 > `code --install-extension wmaurer.change-case`
 
 #### [Code spell checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)
 
-Fairly useful for spell checking within code. Takes cameCase etc into account 
+Fairly useful for spell checking within code. Takes cameCase etc into account
+
 > `code --install-extension streetsidesoftware.code-spell-checker`
 
 #### [Easy snippet maker](https://marketplace.visualstudio.com/items?itemName=tariky.easy-snippet-maker)
 
-Useful to store re usable snippets. 
+Useful to store re usable snippets.
+
 > `code --install-extension tariky.easy-snippet-maker`
 
 #### [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 
-Add support for [EditorConfig](https://editorconfig.org/). 
+Add support for [EditorConfig](https://editorconfig.org/).
+
 > `code --install-extension EditorConfig.EditorConfig`
 
 #### [Git History](https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory)
 
-Enable viewing Git history within VS Code. 
+Enable viewing Git history within VS Code.
+
 > `code --install-extension donjayamanne.githistory`
 
 #### [Gitignore](https://marketplace.visualstudio.com/items?itemName=codezombiech.gitignore)
 
-Makes it easy to work with `.gitignore` files. 
+Makes it easy to work with `.gitignore` files.
+
 > `code --install-extension codezombiech.gitignore`
 
 #### [Hide gitignored](https://marketplace.visualstudio.com/items?itemName=npxms.hide-gitignored)
 
 Hides patterns defined in `.gitignore` from the editors explorer.
+
 > `code --install-extension npxms.hide-gitignored`
 
 #### [Mark as excluded](https://marketplace.visualstudio.com/items?itemName=jcmordan.mark-as-excluded)
 
 Exclude stuff right from the explorer tree.
+
 > `code --install-extension jcmordan.mark-as-excluded`
 
 #### [Toggle Excluded Files](https://marketplace.visualstudio.com/items?itemName=eamodio.toggle-excluded-files)
 
 Easily toggle between showing and hiding excluded files/folders.
+
 > `code --install-extension eamodio.toggle-excluded-files`
 
 #### [IntelliJ IDEA Keybindings](https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings)
 
 I have bad muscle memory so wanted to use the same keyboard shortcuts as IntelliJ. There are mappings available for Sublime, Atom and so on.
+
 > `code --install-extension k--kato.intellij-idea-keybindings`
 
 #### [Sort JSON](https://marketplace.visualstudio.com/items?itemName=richie5um2.vscode-sort-json)
 
 Sorts JSON object keys.
+
 > `code --install-extension richie5um2.vscode-sort-json`
 
 #### [Test Explorer UI](https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer)
 
 Adds an explorer panel for running tests. Supports multiple languages and testing frameworks.
+
 > `code --install-extension hbenl.vscode-test-explorer`
 
 #### [Todo Tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)
 
 Aggregate TODO, FIXME, etc in a tree view in explorer.
+
 > `code --install-extension Gruntfuggly.todo-tree`
 
 # Terminal setup
@@ -199,9 +218,11 @@ If you are using Zsh shell with Oh-my-zsh like me as explained [here](https://de
 ![](https://thepracticaldev.s3.amazonaws.com/i/ae6wi9anly8clq12z9na.png)
 
 Follow these steps
+
 - Download and install a [patched font](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Medium/complete/Sauce%20Code%20Pro%20Medium%20Nerd%20Font%20Complete%20Mono.ttf).
 - On Linux, run `fc-cache -f -v` to refresh font cache.
 - On VSCode, open Preferences → Settings and click on the `{}` icon to open JSON mode and set the below
+
 ```json
     "terminal.integrated.shell.linux": "/usr/bin/zsh",
     "terminal.integrated.fontFamily": "'SauceCodePro Nerd Font Mono','Source Code Pro'",
@@ -210,19 +231,20 @@ Follow these steps
     "terminal.integrated.cursorStyle": "underline",
     "terminal.integrated.cursorBlinking": true
 ```
+
 Replace `linux` with `osx` if you are on a Mac.
- 
-----
+
+---
 
 # Conclusion
 
 This might seem like too many plugins but on [my configuration](https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc) VS Code is lightning fast and loads up immediately and is faster then IntelliJ to load and work with. The beauty of VS Code is that you don't need all the plugin all the time, you can disable the ones not required per workspace to make it even faster.
 
-Many people [ask](https://www.reddit.com/r/linux/comments/c42kpk/my_beautiful_linux_development_environment/erum9sf/) me why I use VS Code when I have IntelliJ and my answer have been always the same. IntelliJ is great but its also quite heavy. While all those advanced features are needed for Java, Scala or Kotlin development, VS Code is perfectly capable of giving a nice developer experience for lightweight languages like JS, TS, Go, Python, Rust, Ruby, etc. 
+Many people [ask](https://www.reddit.com/r/linux/comments/c42kpk/my_beautiful_linux_development_environment/erum9sf/) me why I use VS Code when I have IntelliJ and my answer have been always the same. IntelliJ is great but its also quite heavy. While all those advanced features are needed for Java, Scala or Kotlin development, VS Code is perfectly capable of giving a nice developer experience for lightweight languages like JS, TS, Go, Python, Rust, Ruby, etc.
 
 As a regular user of both IntelliJ and VS Code, I prefer VS Code as much as possible. The user experience is much nicer for my taste. In fact, I like the developer experience in VS Code better for JavaScript, TypeScript, Web, Python, and Golang. Also switching between them for JVM projects and others don't feel weird for me as I have the same keyboard mappings for both. The only time I fire up IntelliJ these days is when I want to do full-fledged Java development. For everything else, I use VS Code.
 
-----
+---
 
 I hope you find this useful. If you have any questions or if you think I missed something please add a comment.
 

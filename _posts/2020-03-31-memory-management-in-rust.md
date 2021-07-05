@@ -8,15 +8,11 @@ tags:
   - garbagecollection
   - programming
   - computerscience
-canonical_url: 'https://deepu.tech/memory-management-in-rust/'
-cover_image: 'https://i.imgur.com/xolsOsW.jpg'
+canonical_url: "https://deepu.tech/memory-management-in-rust/"
+cover_image: "https://i.imgur.com/xolsOsW.jpg"
 series: memory-management
 devto_id: 295607
-devto_url: 'https://dev.to/deepu105/visualizing-memory-management-in-rust-5898'
----
-
-Please follow me on [Twitter](https://twitter.com/deepu105) for updates and let me know if something can be improved in the post.
-
+devto_url: "https://dev.to/deepu105/visualizing-memory-management-in-rust-5898"
 ---
 
 In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management.
@@ -47,7 +43,7 @@ Let us see what the different memory are:
 
 This is where all dynamic data(any data for which size cannot be calculated at compile time) is stored. This is the biggest block of memory and the part managed by Rust's Ownership model.
 
--   **Box**: The [`Box`](https://doc.rust-lang.org/stable/rust-by-example/std/box.html) type is an abstraction for a heap-allocated value in Rust. Heap memory is allocated when `Box::new` is called. A `Box<T>` holds the smart-pointer to the heap memory allocated for type `T` and the reference is saved on the Stack.
+- **Box**: The [`Box`](https://doc.rust-lang.org/stable/rust-by-example/std/box.html) type is an abstraction for a heap-allocated value in Rust. Heap memory is allocated when `Box::new` is called. A `Box<T>` holds the smart-pointer to the heap memory allocated for type `T` and the reference is saved on the Stack.
 
 ## Stack
 
@@ -115,15 +111,15 @@ _Note: If the slides look cut off at edges, then click on the title of the slide
 
 As you can see:
 
--   **Main** function is kept in a "main frame" on the Stack
--   Every function call is added to the Stack memory as a frame-block
--   All static variables including arguments and the return value is saved within the function frame-block on the Stack
--   All static values regardless of type are stored directly on the Stack. This applies to global scope as well
--   All dynamic types created on the Heap and is referenced from the Stack using smart pointers. This applies to the global scope as well. Here we explicitly made the name dynamic to avoid it going to the Stack as having a fixed-length string value will do that
--   The struct with static data is kept on the Stack and any dynamic value in it is kept on the Heap and is referenced via pointers
--   Functions called from the current function is pushed on top of the Stack
--   When a function returns its frame is removed from the Stack
--   Unlike Garbage collected languages, once the main process is complete, the objects on the Heap are destroyed as well, we will see more about this in the following sections
+- **Main** function is kept in a "main frame" on the Stack
+- Every function call is added to the Stack memory as a frame-block
+- All static variables including arguments and the return value is saved within the function frame-block on the Stack
+- All static values regardless of type are stored directly on the Stack. This applies to global scope as well
+- All dynamic types created on the Heap and is referenced from the Stack using smart pointers. This applies to the global scope as well. Here we explicitly made the name dynamic to avoid it going to the Stack as having a fixed-length string value will do that
+- The struct with static data is kept on the Stack and any dynamic value in it is kept on the Heap and is referenced via pointers
+- Functions called from the current function is pushed on top of the Stack
+- When a function returns its frame is removed from the Stack
+- Unlike Garbage collected languages, once the main process is complete, the objects on the Heap are destroyed as well, we will see more about this in the following sections
 
 The Stack as you can see is automatically managed and is done so by the operating system rather than Rust itself. Hence we do not have to worry much about the Stack. The Heap, on the other hand, is not automatically managed by the OS and since its the biggest memory space and holds dynamic data, it could grow exponentially causing our program to run out of memory over time. It also becomes fragmented over time slowing down applications. This is where Rust's ownership model steps in to automatically manage the Heap memory
 
@@ -264,13 +260,13 @@ I hope you had fun learning this, stay tuned for the next post in the series.
 
 # References
 
--   [doc.rust-lang.org](https://doc.rust-lang.org)
--   [www.youtube.com](https://www.youtube.com/watch?v=2IxQgXQl_Ws)
--   [pcwalton.github.io](https://pcwalton.github.io/2013/03/18/an-overview-of-memory-management-in-rust.html)
--   [zee-nix.blogspot.com](http://zee-nix.blogspot.com/2017/05/rust-memory-management.html)
--   [hacks.mozilla.org](https://hacks.mozilla.org/2019/01/fearless-security-memory-safety/)
--   [os.phil-opp.com/heap-allocation](https://os.phil-opp.com/heap-allocation/)
--   [msrc-blog.microsoft.com](https://msrc-blog.microsoft.com/2019/07/22/why-rust-for-safe-systems-programming/)
+- [doc.rust-lang.org](https://doc.rust-lang.org)
+- [www.youtube.com](https://www.youtube.com/watch?v=2IxQgXQl_Ws)
+- [pcwalton.github.io](https://pcwalton.github.io/2013/03/18/an-overview-of-memory-management-in-rust.html)
+- [zee-nix.blogspot.com](http://zee-nix.blogspot.com/2017/05/rust-memory-management.html)
+- [hacks.mozilla.org](https://hacks.mozilla.org/2019/01/fearless-security-memory-safety/)
+- [os.phil-opp.com/heap-allocation](https://os.phil-opp.com/heap-allocation/)
+- [msrc-blog.microsoft.com](https://msrc-blog.microsoft.com/2019/07/22/why-rust-for-safe-systems-programming/)
 
 ---
 
@@ -281,4 +277,3 @@ You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](http
 Cover image inspired by [https://hacks.mozilla.org/2019/01/fearless-security-memory-safety/](https://hacks.mozilla.org/2019/01/fearless-security-memory-safety/)
 
 ---
-
