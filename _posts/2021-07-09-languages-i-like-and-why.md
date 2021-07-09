@@ -1,7 +1,8 @@
 ---
 title: The programming languages I like and why I like them
 description: >-
-  Being a polyglot developer, there would be some language you like over others and here are mine.
+  Being a polyglot developer, there would be some language you like over others
+  and here are mine.
 published: true
 featured: false
 tags:
@@ -10,8 +11,11 @@ tags:
   - golang
   - javascript
 series: languages
-canonical_url: "https://deepu.tech/languages-i-like-and-why/"
-cover_image: "https://i.imgur.com/FOpUG38.jpeg"
+canonical_url: 'https://deepu.tech/languages-i-like-and-why/'
+cover_image: 'https://i.imgur.com/FOpUG38.jpeg'
+devto_id: 754627
+devto_url: >-
+  https://dev.to/deepu105/the-programming-languages-i-like-and-why-i-like-them-385o
 ---
 
 Being a polyglot developer is fun. You are not married to a single language/ecosystem and you have a diverse tool-belt to choose from based on the issue at hand.
@@ -160,3 +164,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Photo by [Peter Herrmann](https://unsplash.com/@tama66) on [Unsplash](https://unsplash.com/s/photos/old-computer)
+
