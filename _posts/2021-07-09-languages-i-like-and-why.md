@@ -8,7 +8,6 @@ tags:
   - java
   - rust
   - golang
-  - typescript
   - javascript
 series: languages
 canonical_url: "https://deepu.tech/languages-i-like-and-why/"
