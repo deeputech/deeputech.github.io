@@ -5,9 +5,195 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 05 Jul 2021 18:37:21 +0200</pubDate>
-    <lastBuildDate>Mon, 05 Jul 2021 18:37:21 +0200</lastBuildDate>
+    <pubDate>Fri, 09 Jul 2021 13:19:13 +0200</pubDate>
+    <lastBuildDate>Fri, 09 Jul 2021 13:19:13 +0200</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>The programming languages I like and why I like them</title>
+        <description>Being a polyglot developer, there would be some language you like over others and here are mine. | &lt;a href=&quot;https://deepu.tech/languages-i-like-and-why/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;Being a polyglot developer is fun. You are not married to a single language/ecosystem and you have a diverse tool-belt to choose from based on the issue at hand.
+But still, you are going to have favorites based on your experience with different languages and their ecosystem.&lt;/p&gt;
+
+&lt;p&gt;In my career, spanning 11+ years, I have worked with many programming languages.
+The first programming language I encountered was Basic when I was in school, but I won’t count that since I didn’t pay any attention and I didn’t understand it back then.&lt;/p&gt;
+
+&lt;p&gt;Later when I was in college I had a mandatory computer science class, I was doing Electrical and Electronic Engineering, and there I first came across C, C++, and Java. But again It was just basics and I wasn’t very interested and I just studied enough to clear the paper.&lt;/p&gt;
+
+&lt;p&gt;Later, I was running a blog about motorcycles and I started dabbling with WordPress, Flash, ActionScript, and JavaScript.&lt;/p&gt;
+
+&lt;p&gt;I first programming language I actually learned with an interest was &lt;a href=&quot;https://en.wikipedia.org/wiki/Scheme_(programming_language)&quot;&gt;Scheme&lt;/a&gt;, It was a training language used in my first job as an IT Intern/Trainee and that got me hooked and in few months I started learning Java and JavaScript.&lt;/p&gt;
+
+&lt;p&gt;I became quite good at Java and JS and really was enjoying working with those and If you have asked me back then, I would have said that Java and JS were the greatest languages out there.&lt;/p&gt;
+
+&lt;p&gt;So for a pretty good part of my career, I was coding in Java and JavaScript and later TypeScript. I did work with a bit of Groovy, Python, and Scala but I didn’t like those languages much and I had no interest in learning any new languages at that point.&lt;/p&gt;
+
+&lt;p&gt;A few years ago when Golang was all the rage, I moved to a project that was built in Go and hence started looking into Go. It was extremely easy to learn and I really liked working with it (for a while).&lt;/p&gt;
+
+&lt;p&gt;Rust was quite new at that point and I wanted to try it out but got around to it only a year later and I was in love with it.&lt;/p&gt;
+
+&lt;p&gt;In the past two years, I also worked with Kotlin, PHP, Ruby, and C# as well occasionally. But I wasn’t very impressed with Ruby and PHP.&lt;/p&gt;
+
+&lt;p&gt;So without further adieu, these are my favorite programming languages in order.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-rust&quot;&gt;1. Rust&lt;/h1&gt;
+
+&lt;p&gt;Rust is currently my most favorite language. It’s so much fun to work with and I love the challenge of rethinking how you write code. You know, as they say, it sparks joy when you work with it. Rust is truly a modern and powerful programming language.&lt;/p&gt;
+
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;&lt;a href=&quot;https://twitter.com/hashtag/java?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#java&lt;/a&gt;: I&amp;#39;ll provide you memory safety but you must pay performance penalty for abstractions and the runtime&lt;a href=&quot;https://twitter.com/hashtag/C?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#C&lt;/a&gt;++: I&amp;#39;ll provide you zero cost abstractions, but you must pay with memory safety&lt;a href=&quot;https://twitter.com/hashtag/Rust?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Rust&lt;/a&gt;: hold my 🍺&lt;/p&gt;&amp;mdash; Deepu K Sasidharan ( ദീപു, தீபு, दीपू ) (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1413259371472109573?ref_src=twsrc%5Etfw&quot;&gt;July 8, 2021&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Rust would be my go-to for systems programming, embedded, CLIs, OS tools, WebAssembly, and so on. I guess the only place I won’t use Rust would be serious monolithic web application development as the ecosystem is not mature for that yet.&lt;/p&gt;
+
+&lt;p&gt;I wrote in detail about what I like and dislike about Rust in &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;this post&lt;/a&gt;, but I’ll summarize it here for the casual skimmers.&lt;/p&gt;
+
+&lt;h2 id=&quot;-likes&quot;&gt;😍 Likes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/#safety&quot;&gt;&lt;strong&gt;Safe by default&lt;/strong&gt;&lt;/a&gt;: Rust is memory safe, thread-safe, type-safe, and null safe&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/#zero-cost-abstractions&quot;&gt;&lt;strong&gt;Zero cost abstractions&lt;/strong&gt;&lt;/a&gt;: Write in any programming style without worrying about the added performance penalty&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/#fearless-concurrency&quot;&gt;&lt;strong&gt;Awesome concurrency&lt;/strong&gt;&lt;/a&gt;: Great support for multi-threading, parallelism, and asynchronous programming&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/#community-tooling--ecosystem&quot;&gt;&lt;strong&gt;Great tooling out of the box&lt;/strong&gt;&lt;/a&gt;: Cargo, Clippy, Rustfmt, and so on. It’s the best tooling ecosystem I have come across. Testing, building, bootstrapping, benchmarking, linting and more included out of the box.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Immutable by default&lt;/strong&gt;: You need to declare mutable operations explicitly&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Built-in functional programming abstractions&lt;/strong&gt;: Monad like iterators, optional, chaining, and so on&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/#typesofmacrosinrust&quot;&gt;&lt;strong&gt;Macros&lt;/strong&gt;&lt;/a&gt;: Powerful metaprogramming that can be used to define custom language features, code reusability, and so on&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Excellent community&lt;/strong&gt;: Fast-growing, active, and really supportive community&lt;/li&gt;
+  &lt;li&gt;Superfast, as fast as or sometimes even faster than C/C++&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;No heavy runtime&lt;/strong&gt;: No garbage collection and so on. There is a very small runtime for panics and stuff, but IMO it’s negligible&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Excellent language features&lt;/strong&gt;: Pattern matching, generics, iterators, traits, expressions, and so on&lt;/li&gt;
+  &lt;li&gt;Hands down the best compiler out there. You have to try it to appreciate it.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fast growing and being widely adopted&lt;/strong&gt;: Rust is going places. There are a lot of big names(Google, Microsoft, AWS, Apple, and so on) adopting it and hence cementing its place. It’s also finding footing outside of systems programming like embedded, web assembly, web development, game development, and so on. Once the ecosystems for different use cases mature, I see great potential for Rust to be a great general-purpose language without any major compromise.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Native images&lt;/strong&gt;: It’s so easy to build native images with Rust, no special setup required. Cargo supports building for your favorite platform out of the box.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-dislikes&quot;&gt;😩 Dislikes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/first-impression-of-rust/#complexity&quot;&gt;&lt;strong&gt;Complexity&lt;/strong&gt;&lt;/a&gt;: Being an amalgamation of many languages, Rust does feel more complex than many other languages. I especially would have preferred to not have multiple ways to do the same thing.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Learning curve&lt;/strong&gt;: Rust is not the easiest language to learn, especially if you are a beginner or if you are used to working only in one language like Java, C#, or Python. But if you are polyglot and already familiar with a few languages like C/C++, Java, TS, and Go, you will feel quite at home with Rust. There are some advanced concepts like borrowing and lifetimes that take some getting used to and practice to grasp.&lt;/li&gt;
+  &lt;li&gt;Ecosystem is not mature enough for many use cases. I would love to use Rust for web application development but the ecosystem for that is still very young and you are gonna have a hard time compared to something like Java or C#&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;2-java&quot;&gt;2. Java&lt;/h1&gt;
+
+&lt;p&gt;Java isn’t cool like Rust or feature-rich like JavaScript but it makes up for all that by having one of the most stable, battle-tested, and rich ecosystems.
+So if I would start my own company with a web application as the product, I would 100% go with JVM on the backend with either Java or Kotlin, and of course I will build it using &lt;a href=&quot;https://www.jhipster.tech/&quot;&gt;JHipster&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you like Java, it’s hard not to like Kotlin. It feels like a modern version of Java and building Android apps using Kotlin was a nice experience. Unlike Scala, Kotlin doesn’t go overboard with all the complexity and implicit stuff.&lt;/p&gt;
+
+&lt;p&gt;I might choose Kotlin over Java if building a new web app and if the team has experience with Kotlin.&lt;/p&gt;
+
+&lt;p&gt;Also, Java is close to my heart as it’s the programming language that jump-started my career.&lt;/p&gt;
+
+&lt;p&gt;Here is what I like and dislike about Java&lt;/p&gt;
+
+&lt;h2 id=&quot;-likes-1&quot;&gt;😍 Likes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Ecosystem&lt;/strong&gt;: The biggest strength of Java is its ecosystem. There are great frameworks and libraries for everything you can think of and most of these solutions are extremely stable with a lot of community and support. In reality, the ecosystem is whats keeping Java popular and growing.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Experienced community&lt;/strong&gt;: Java has a very mature and experienced community so even if you are a beginner there is a lot of resources to help you&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Great tooling&lt;/strong&gt;: There are a lot of great tools out there for Java. IDEs like IntelliJ, Eclipse, NetBeans offer some of the best developer experiences, and build tools like Gradle and Maven are so powerful and feature-rich. There are also profilers, linters, and so on.&lt;/li&gt;
+  &lt;li&gt;Built-in &lt;a href=&quot;https://deepu.tech/functional-programming-in-java-for-beginners/&quot;&gt;functional programming abstractions&lt;/a&gt;: Monad like iterators, streams, optional, functional interfaces, and so on&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fairly easy to learn&lt;/strong&gt;: Java is not very complex and hence is fairly easy to learn and get started even with its boilerplate.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-dislikes-1&quot;&gt;😩 Dislikes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Boilerplate&lt;/strong&gt;: Java needs too much boilerplate. There is no nice way to say this. Compared to other languages in its league, Java feels too verbose. Lambdas have made it more digestible but there are other JVM languages like Kotlin or Scala that have got this part right. I really wish Java gets there one day where you don’t have to write 20 lines of code to read a file.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Not so modern&lt;/strong&gt;: Language features in Java are, let’s just say it doesn’t spark joy, it’s improving but if you are used to few other languages, then there is a lot to wish for, and compared to its peers Java feels old even though its just as old as JS, Ruby or Python&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Baggage&lt;/strong&gt;: Java has great backward compatibility but that also means baggage. there is a lot of such baggage in Java and it’s holding the language back in my humble opinion.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Virtual machine&lt;/strong&gt;: JVM was a great idea when Java was introduced as portability was not easy back then but in today’s IT landscape containers and native images have made portability easy and that makes a Java Virtual Machine redundant. JVM still provides a lot of valuable features but it also takes up resources and space whereas languages like Go or Rust can just build tiny native binaries that can be deployed using docker to get better performance with less resource usage than a Java app running on JVM.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;3-typescriptjavascript&quot;&gt;3. TypeScript/JavaScript&lt;/h1&gt;
+
+&lt;p&gt;Most Java developers hate JavaScript but I have a &lt;a href=&quot;https://deepu.tech/reflections-on-javascript/&quot;&gt;love-hate relationship&lt;/a&gt; with it. JavaScript is one of the quirkiest languages around and like it or not it’s the de-facto for the web and it gets the job done.&lt;/p&gt;
+
+&lt;p&gt;I like TypeScript a lot more than JavaScript and find it way nicer to work with than JS. So TS and by extension JS would tie with Java for the second spot for me.&lt;/p&gt;
+
+&lt;p&gt;TS/JS is still my go-to for quick scripting and building client-side apps and mobile apps (ReactNative/PWA)&lt;/p&gt;
+
+&lt;p&gt;I wrote in detail about what I like and dislike about JS in this post, here is the summary&lt;/p&gt;
+
+&lt;h2 id=&quot;-likes-2&quot;&gt;😍 Likes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#dynamic--extremely-flexible&quot;&gt;&lt;strong&gt;Flexible&lt;/strong&gt;&lt;/a&gt;: The dynamic nature of JS/TS makes it extremely flexible and powerful. It’s also very forgiving language. If you know what you are doing, there is literally nothing you cant get done. Of course, the flexibility comes with its own price.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#biggest-community&quot;&gt;&lt;strong&gt;Community&lt;/strong&gt;&lt;/a&gt;: JavaScript has the biggest community among programming languages. It’s active, mature, and thriving. It’s a huge strength as it helps beginners and experts alike in solving problems and improving the ecosystem on the whole.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ecosystem&lt;/strong&gt;: JS has a huge ecosystem with a lot of libraries and frameworks. You will find anything you could imagine as a library. The ecosystem is so big that it has started to become an issue in terms of “yet another framework syndrome”.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Asynchronous programming&lt;/strong&gt;: JS has one of the best ecosystems for asynchronous programming. It’s so easy to write async code with Promises and async/await and it has become the de-facto way of programming in JS these days.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Great tooling&lt;/strong&gt;: JS has great tooling, thanks to NodeJS and its ecosystem. IDEs like VS Code, Atom, Webstorm, and so on provide great JS support. There are also so many wonderful tools like Webpack, Rollup, Jest, and so on.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/functional-programming-in-typescript/&quot;&gt;&lt;strong&gt;Functional programming&lt;/strong&gt;&lt;/a&gt;: JS is multi-paradigm and has a lot of support for functional programming. It’s a great fit for functional programming.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#beginner-friendly-but-also-powerful&quot;&gt;&lt;strong&gt;Easy to learn&lt;/strong&gt;&lt;/a&gt;: JS is a simple language to learn and get started. It’s one of the most beginner-friendly languages and communities out there. Of course, there is complex stuff in JS but you don’t need to know that to get started.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;NodeJS&lt;/strong&gt;: NodeJS was the best thing to happen for software development. It not just revolutionized the JS world but also inspired other languages to take note and be more developer-friendly and build easy-to-use tooling and ecosystem. You can see this inspiration in Rust, Golang, and so on.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;TypeScript&lt;/strong&gt;: TS is another best thing that happened to JS. It provides an answer to a lot of JS issues that bother people and makes it possible to use JS in a more developer-friendly way on a huge codebase.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-dislikes-2&quot;&gt;😩 Dislikes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#fragmentation-browser-implementations-version-compatibility&quot;&gt;&lt;strong&gt;Fragmentation&lt;/strong&gt;&lt;/a&gt;: This is the biggest issue with JS. There are standards and there is vendors and that’s the perfect recipe for disaster. Most of the time a JS developer spends used to be to make it work across different browsers and platforms. The demise of IE has made this better but hey I heard Safari is the next IE so there is that.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#error-prone-a-side-effect-of-flexibility&quot;&gt;&lt;strong&gt;Error-prone&lt;/strong&gt;&lt;/a&gt;: This is the side effect of being too flexible. JS code is extremely error-prone and unmanageable in huge code bases. TypeScript makes this much much better but still, it’s so easy to shoot in your own foot with JS.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#yet-another-framework-syndrome&quot;&gt;&lt;strong&gt;Framework overload&lt;/strong&gt;&lt;/a&gt;: Too many frameworks for the same thing, too many libraries for the same thing, and libraries for doing extremely trivial stuff like left-padding :( Competition is good but IMO what we have in the JS ecosystem is just too much. It causes mental drain and unnecessary fragmentation in the community.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Over-engineering in the ecosystem&lt;/strong&gt;: I have been doing JS for over 11 years now and I’m noticing a clear trend of over-engineering in the ecosystem. Look at the JS build tooling for example it has been over-engineered to the extend that setting that up feels like a project in itself.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;4-go&quot;&gt;4. Go&lt;/h1&gt;
+
+&lt;p&gt;Go is the simplest language I have worked with and the easiest to learn. I like Golang for quickly putting something together and Go code is quite easy to read. But I would choose Rust over go for large codebase since Go becomes annoying due to its limited features after a while especially on large codebases. IMO go is still ideal for building small system utilities and microservices.&lt;/p&gt;
+
+&lt;p&gt;I wrote in detail about what I like and dislike about Go in &lt;a href=&quot;https://deepu.tech/reflection-on-golang/&quot;&gt;this post&lt;/a&gt;, here is the summary&lt;/p&gt;
+
+&lt;h2 id=&quot;-likes-3&quot;&gt;😍 Likes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#simplicity&quot;&gt;&lt;strong&gt;Simplicity&lt;/strong&gt;&lt;/a&gt;: Go is extremely simple. You could technically learn it in a day or two. It’s easy to get started and be productive in Go. It’s also easy to read and debug as there is only one way of doing anything so you know what is going on without having to ask the person who wrote the code. It’s the easiest language for beginners as well.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#tooling&quot;&gt;&lt;strong&gt;Built-in tooling and style guide&lt;/strong&gt;&lt;/a&gt;: Go provides built-in tooling for all the basic stuff like dependency management, testing, build and so on. It also has an opinionated formatter that saves a lot of time.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#goroutines--channels&quot;&gt;&lt;strong&gt;Goroutines&lt;/strong&gt;&lt;/a&gt;: Goroutines are awesome. It’s so easy to use and intuitive and the best concurrency experience you can find.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Native images&lt;/strong&gt;: It’s so easy to build native images with Go, no special setup required. It supports building for your favorite platform out of the box.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-dislikes-3&quot;&gt;😩 Dislikes&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#simplicity-1&quot;&gt;&lt;strong&gt;Simplicity&lt;/strong&gt;&lt;/a&gt;: Go’s simplicity is really nice when you are getting started but it starts to feel like an annoyance once you start writing more Go code. If you come from another language, you soon start to yearn for features like generics, error handling, default values, and so on. Keeping code DRY is a challenge in Go due to the lack of generics. IMO Go would be a great language if it had generics. Also, I dread writing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if err != nil&lt;/code&gt; in Go.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Boilerplate&lt;/strong&gt;: Side effect of Go being too simple. In large codebases, you would be repeating stuff like finding an item from an array or map so many times that the boilerplate is just too much after a while.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#weird-interface-construct&quot;&gt;&lt;strong&gt;Implicit interfaces&lt;/strong&gt;&lt;/a&gt;: May it’s just me. I don’t like implicit interface implementations. It just feels wrong and confusing to me.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;These are my personal favorites among programming languages and doesn’t mean the likes and dislikes would apply to anyone. make your own conclusions but do use the language before making a judgment about it.&lt;/p&gt;
+
+&lt;p&gt;In today’s IT landscape, being a polyglot developer is becoming a requirement. And personally, I believe that being a polyglot makes you a better programmer and software engineer. I previously wrote about &lt;a href=&quot;https://deepu.tech/how-to-be-an-effective-polyglot-developer/&quot;&gt;how to be an effective polyglot developer&lt;/a&gt;, do check it out if you are interested.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Photo by &lt;a href=&quot;https://unsplash.com/@tama66&quot;&gt;Peter Herrmann&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/old-computer&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+
+</content:encoded>
+        <media:content url="https://i.imgur.com/FOpUG38.jpeg" medium="image">https://i.imgur.com/FOpUG38.jpeg</media:content>
+        <pubDate>Fri, 09 Jul 2021 00:00:00 +0200</pubDate>
+        <link>https://deepu.tech/languages-i-like-and-why/</link>
+        <guid isPermaLink="true">https://deepu.tech/languages-i-like-and-why/</guid>
+        
+        <category>java</category>
+        
+        <category>rust</category>
+        
+        <category>golang</category>
+        
+        <category>javascript</category>
+        
+        
+      </item>
     
       <item>
         <title>My second impression of Rust and why I think it's a great general-purpose language!</title>
@@ -3604,98 +3790,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <category>async</category>
         
         <category>multithreading</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>8 important things I learned as a software developer over a decade.</title>
-        <description>Advice for beginners from my decade long development career | &lt;a href=&quot;https://deepu.tech/most-important-things-i-learned-in-a-decade/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;I started my IT career, accidentally as I don’t have a Computer Science background and instead got an engineering degree in Electrical and Electronics, in March of 2010 and this year marks my 10th anniversary.&lt;/p&gt;
-
-&lt;p&gt;Before I start giving out any advice let me try to justify my background. In a decade-long professional software development career, I have worn several hats like Jr./Sr./Principal Developer, Tech Lead, Project Manager, Business Analyst, Pre-sales Engineer, DevOps Engineer, Cloud Engineer, OSS contributor, and finally Developer Advocate. I have also had the pleasure of co-leading an amazing open-source community behind &lt;a href=&quot;https://www.jhipster.tech/&quot;&gt;JHipster&lt;/a&gt; over the past 5 years. During this period I started out as a Java/JavaScript developer and went on to work with many other languages like Go, Rust, Python, Kotlin, C#, and so on and I now consider myself a polyglot developer. I have built web applications, enterprise apps, Microservices, Cloud Native apps, CLIs, System tools, Libraries, Android and Hybrid mobile apps, and so on. Hence I hope this gives me enough experience to talk about some of the important things I learned and practiced over the last decade.&lt;/p&gt;
-
-&lt;p&gt;I hope this is beneficial especially to beginners and junior developers who are starting out their careers.&lt;/p&gt;
-
-&lt;h2 id=&quot;1-do-not-get-married-to-a-technology&quot;&gt;1. Do not get married to a technology&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;When you marry a technology you start living with it in a bubble and you miss out on all those smart alternatives out there&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This, in my humble opinion, is the most important thing to learn for anyone starting their career. Do not get married to a programming Language, Framework, or Methodology. Getting attached to a programming language or a framework or methodology like OOP/FP will do more harm than good in the long run. Try to be pragmatic and use technology as it was intended, as a tool in your tool belt. Change is the only constant and it fits the IT industry better than others. Languages will die out, Frameworks and methodologies will come and go but the Industry will remain and anyone who is not capable of adapting to the changes may not fare well so be smart and let go of things that are dying out and learn what seems like the future.&lt;/p&gt;
-
-&lt;h2 id=&quot;2-avoid-being-a-fanboyfangirl&quot;&gt;2. Avoid being a fanboy/fangirl&lt;/h2&gt;
-
-&lt;p&gt;Throughout your career, you will encounter technology that is amazing and you will fall in love with some of them. That is perfectly fine but avoid being a fanboy/fangirl and be ready to recognize something better might replace it in the future and when it does accept and move on. Trying to cling on to what you love blindly is not gonna do anyone any good. I still see fanboys of a dying language or framework making the effort to discredit the newer ones on the block, please don’t be like them its counterproductive to you and the industry.&lt;/p&gt;
-
-&lt;h2 id=&quot;3-learn-the-basics-of-programming-and-become-a-polyglot-developer&quot;&gt;3. Learn the basics of programming and become a polyglot developer&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A good programmer writes great code in a language. A great programmer is language independent.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;When learning a language learn its semantics rather than syntax. Learn programming basics. Learn about objects, collections, memory models, concurrency, and data structures. This knowledge can be applied to almost every language and the concepts around these don’t change that often. This will help you to become a true polyglot developer &lt;a href=&quot;https://deepu.tech/how-to-be-an-effective-polyglot-developer/&quot;&gt;which has its own merits&lt;/a&gt; and this will help you follow the above two points as well and trust me it will make you a better developer.&lt;/p&gt;
-
-&lt;h2 id=&quot;4-write-for-humans&quot;&gt;4. Write for humans&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Any fool can write code that a computer can understand. Good programmers write code that humans can understand.&lt;/p&gt;
-
-  &lt;p&gt;‒ Martin Fowler&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Write &lt;a href=&quot;https://deepu.tech/three-tips-for-clean-code/&quot;&gt;simple and clean code&lt;/a&gt; and avoid showing off how smart you are in code. I know that it is tempting, especially when you are starting your career, to show off that fancy new language construct or functional magic in your code so that your colleagues can see how smart you are but trust me writing simple and easy to understand code will take you further than writing smart and complex code. Always choose the simplest solution for a problem. The best programmers are those who write the simplest code&lt;/p&gt;
-
-&lt;h2 id=&quot;5-write-docs-comments-and-tests&quot;&gt;5. Write docs, comments, and tests&lt;/h2&gt;
-
-&lt;p&gt;Never discount the importance of writing good comments, documentation, and tests for your code. I know you might be tired of hearing this but I cannot stress the importance of this enough, not because I always do this but because it’s not easy to do always and I end up sacrificing this sometimes and every time I do that I have regretted that in the future. Again this is not easy but you don’t have to be 100% perfect you just need to try your best at least&lt;/p&gt;
-
-&lt;h2 id=&quot;6-there-is-no-perfect-code&quot;&gt;6. There is no perfect code&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;There is always a better way to do something and someone smarter to figure it out&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I used to spend a lot of time polishing my code and rewriting stuff to make it perfect, but over years I started realizing that there is nothing called perfect code, there is always a better way to do something and there is always someone smarter than you who will figure it out. I lost count of times when someone has suggested better solutions to code that I thought was perfect. Hence solve the problem at hand and avoid premature optimizations and over-engineering. One good thing about our industry is that the source code is ever-evolving and there is always tomorrow to improve it if needed. Don’t get me wrong, I’m not saying you should write sub-par code, when I say solve the problem at hand, I mean writing code that solves the issue along with all edge cases that could be thrown at it and code that is secure and with acceptable performance. I still polish my code when I feel something can be improved but I do not obsess about it or lose my sleep over it. I first get the problem solved and then if there is spare time and if an improvement helps to simplify the code or increase performance I do it. But mostly its when the polish makes code simpler.&lt;/p&gt;
-
-&lt;h2 id=&quot;7-dont-fall-for-trends&quot;&gt;7. Don’t fall for trends&lt;/h2&gt;
-
-&lt;p&gt;We are all guilty of this, especially in our junior years. We see a hype or a trend and we get on that bandwagon without thinking through. For example, if you have React or Angular app, there is no justifiable reason IMO to switch to Vue. The same goes for many such choices which are purely based on trends, hype, or personal preferences. Don’t do something just because it’s hyped or is trendy, do what makes sense for your problem and remember something that works for a specific team need not work for another. Most companies build fancy frameworks to solve their own problem and doesn’t mean you have to blindly adapt it for no reason.&lt;/p&gt;
-
-&lt;h2 id=&quot;8-do-not-reinvent-the-wheel-without-a-good-reason&quot;&gt;8. Do not reinvent the wheel without a good reason&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Not invented here (NIH) syndrome is common in IT companies and it does more harm than good&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Last but not the least make use of the collective wisdom from the industry, make use of OSS frameworks and libraries instead of building everything from scratch. There is an abundance of OSS libraries, frameworks, and tools out there for your language/platform of choice so make use of them for complex problems. Sometimes it’s better to slightly change your approach to fit a library than developing a huge library in-house just to fit your minor deviation in solution. Having said that there is also a time when you should avoid using a library, for example, it’s better to just write few lines of code as util rather than using a library for simple stuff like &lt;a href=&quot;https://blog.npmjs.org/post/141577284765/kik-left-pad-and-npm&quot;&gt;left pad&lt;/a&gt; or trim. If you want to use utils from a library go for a util library like Lodash which provides multiple utilities.&lt;/p&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;There are many other things I learned over the years that have helped me but these are the important ones. Some are more common sense but its hard to recognize them especially in your initial years. The root idea is being pragmatic and using the right tools for the right job.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@martinkatler?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Martin Katler&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/programmers-desk?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyTex&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-</content:encoded>
-        <media:content url="https://i.imgur.com/eMIb5xp.jpeg" medium="image">https://i.imgur.com/eMIb5xp.jpeg</media:content>
-        <pubDate>Tue, 01 Sep 2020 00:00:00 +0200</pubDate>
-        <link>https://deepu.tech/most-important-things-i-learned-in-a-decade/</link>
-        <guid isPermaLink="true">https://deepu.tech/most-important-things-i-learned-in-a-decade/</guid>
-        
-        <category>beginners</category>
-        
-        <category>pragmatic</category>
-        
-        <category>codequality</category>
-        
-        <category>programming</category>
         
         
       </item>
