@@ -18,11 +18,9 @@ devto_url: >-
   https://dev.to/deepu105/the-programming-languages-i-like-and-why-i-like-them-385o
 ---
 
-Being a polyglot developer is fun. You are not married to a single language/ecosystem and you have a diverse tool-belt to choose from based on the issue at hand.
-But still, you are going to have favorites based on your experience with different languages and their ecosystem.
+Being a polyglot developer is fun. You are not married to a single language/ecosystem and you have a diverse tool-belt to choose from based on the issue at hand. But still, you are going to have favorites based on your experience with different languages and their ecosystem.
 
-In my career, spanning 11+ years, I have worked with many programming languages.
-The first programming language I encountered was Basic when I was in school, but I won't count that since I didn't pay any attention and I didn't understand it back then.
+In my career, spanning 11+ years, I have worked with many programming languages. The first programming language I encountered was Basic when I was in school, but I won't count that since I didn't pay any attention and I didn't understand it back then.
 
 Later when I was in college I had a mandatory computer science class, I was doing Electrical and Electronic Engineering, and there I first came across C, C++, and Java. But again It was just basics and I wasn't very interested and I just studied enough to clear the paper.
 
@@ -78,6 +76,7 @@ I wrote in detail about what I like and dislike about Rust in [this post](https:
 # 2. Java
 
 Java isn't cool like Rust or feature-rich like JavaScript but it makes up for all that by having one of the most stable, battle-tested, and rich ecosystems.
+
 So if I would start my own company with a web application as the product, I would 100% go with JVM on the backend with either Java or Kotlin, and of course I will build it using [JHipster](https://www.jhipster.tech/).
 
 If you like Java, it's hard not to like Kotlin. It feels like a modern version of Java and building Android apps using Kotlin was a nice experience. Unlike Scala, Kotlin doesn't go overboard with all the complexity and implicit stuff.
@@ -134,7 +133,9 @@ I wrote in detail about what I like and dislike about JS in this post, here is t
 
 # 4. Go
 
-Go is the simplest language I have worked with and the easiest to learn. I like Golang for quickly putting something together and Go code is quite easy to read. But I would choose Rust over go for large codebase since Go becomes annoying due to its limited features after a while especially on large codebases. IMO go is still ideal for building small system utilities and microservices.
+Go is the simplest language I have worked with and the easiest to learn. I like Golang for quickly putting something together and Go code is quite easy to read. 
+
+But I would choose Rust over go for large codebase since Go becomes annoying due to its limited features after a while especially on large codebases. IMO go is still ideal for building small system utilities and microservices.
 
 I wrote in detail about what I like and dislike about Go in [this post](https://deepu.tech/reflection-on-golang/), here is the summary
 
