@@ -5,19 +5,17 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Jul 2021 13:19:13 +0200</pubDate>
-    <lastBuildDate>Fri, 09 Jul 2021 13:19:13 +0200</lastBuildDate>
+    <pubDate>Fri, 09 Jul 2021 13:21:58 +0200</pubDate>
+    <lastBuildDate>Fri, 09 Jul 2021 13:21:58 +0200</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
         <title>The programming languages I like and why I like them</title>
         <description>Being a polyglot developer, there would be some language you like over others and here are mine. | &lt;a href=&quot;https://deepu.tech/languages-i-like-and-why/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Being a polyglot developer is fun. You are not married to a single language/ecosystem and you have a diverse tool-belt to choose from based on the issue at hand.
-But still, you are going to have favorites based on your experience with different languages and their ecosystem.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;Being a polyglot developer is fun. You are not married to a single language/ecosystem and you have a diverse tool-belt to choose from based on the issue at hand. But still, you are going to have favorites based on your experience with different languages and their ecosystem.&lt;/p&gt;
 
-&lt;p&gt;In my career, spanning 11+ years, I have worked with many programming languages.
-The first programming language I encountered was Basic when I was in school, but I won’t count that since I didn’t pay any attention and I didn’t understand it back then.&lt;/p&gt;
+&lt;p&gt;In my career, spanning 11+ years, I have worked with many programming languages. The first programming language I encountered was Basic when I was in school, but I won’t count that since I didn’t pay any attention and I didn’t understand it back then.&lt;/p&gt;
 
 &lt;p&gt;Later when I was in college I had a mandatory computer science class, I was doing Electrical and Electronic Engineering, and there I first came across C, C++, and Java. But again It was just basics and I wasn’t very interested and I just studied enough to clear the paper.&lt;/p&gt;
 
@@ -78,8 +76,9 @@ The first programming language I encountered was Basic when I was in school, but
 
 &lt;h1 id=&quot;2-java&quot;&gt;2. Java&lt;/h1&gt;
 
-&lt;p&gt;Java isn’t cool like Rust or feature-rich like JavaScript but it makes up for all that by having one of the most stable, battle-tested, and rich ecosystems.
-So if I would start my own company with a web application as the product, I would 100% go with JVM on the backend with either Java or Kotlin, and of course I will build it using &lt;a href=&quot;https://www.jhipster.tech/&quot;&gt;JHipster&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Java isn’t cool like Rust or feature-rich like JavaScript but it makes up for all that by having one of the most stable, battle-tested, and rich ecosystems.&lt;/p&gt;
+
+&lt;p&gt;So if I would start my own company with a web application as the product, I would 100% go with JVM on the backend with either Java or Kotlin, and of course I will build it using &lt;a href=&quot;https://www.jhipster.tech/&quot;&gt;JHipster&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;If you like Java, it’s hard not to like Kotlin. It feels like a modern version of Java and building Android apps using Kotlin was a nice experience. Unlike Scala, Kotlin doesn’t go overboard with all the complexity and implicit stuff.&lt;/p&gt;
 
@@ -143,7 +142,9 @@ So if I would start my own company with a web application as the product, I woul
 
 &lt;h1 id=&quot;4-go&quot;&gt;4. Go&lt;/h1&gt;
 
-&lt;p&gt;Go is the simplest language I have worked with and the easiest to learn. I like Golang for quickly putting something together and Go code is quite easy to read. But I would choose Rust over go for large codebase since Go becomes annoying due to its limited features after a while especially on large codebases. IMO go is still ideal for building small system utilities and microservices.&lt;/p&gt;
+&lt;p&gt;Go is the simplest language I have worked with and the easiest to learn. I like Golang for quickly putting something together and Go code is quite easy to read.&lt;/p&gt;
+
+&lt;p&gt;But I would choose Rust over go for large codebase since Go becomes annoying due to its limited features after a while especially on large codebases. IMO go is still ideal for building small system utilities and microservices.&lt;/p&gt;
 
 &lt;p&gt;I wrote in detail about what I like and dislike about Go in &lt;a href=&quot;https://deepu.tech/reflection-on-golang/&quot;&gt;this post&lt;/a&gt;, here is the summary&lt;/p&gt;
 
