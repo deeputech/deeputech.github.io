@@ -26,7 +26,7 @@ Later when I was in college I had a mandatory computer science class, I was doin
 
 Later, I was running a blog about motorcycles and I started dabbling with WordPress, Flash, ActionScript, and JavaScript.
 
-I first programming language I actually learned with an interest was [Scheme](<https://en.wikipedia.org/wiki/Scheme_(programming_language)>), It was a training language used in my first job as an IT Intern/Trainee and that got me hooked and in few months I started learning Java and JavaScript.
+The first programming language I actually learned with an interest was [Scheme](<https://en.wikipedia.org/wiki/Scheme_(programming_language)>), It was a training language used in my first job as an IT Intern/Trainee and that got me hooked and in few months I started learning Java and JavaScript.
 
 I became quite good at Java and JS and really was enjoying working with those and If you have asked me back then, I would have said that Java and JS were the greatest languages out there.
 
