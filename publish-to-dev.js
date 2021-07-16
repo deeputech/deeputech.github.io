@@ -42,9 +42,10 @@ async function processFiles() {
       try {
         const parsedContent = editor.read(POSTS_DIR + filename);
         const frontMatter = parsedContent.matter.data;
-        const body_markdown = `${json2yaml.stringify(
-          frontMatter
-        )}\n---\n*Originally published at [deepu.tech](https://deepu.tech/${getBlogUrl(filename)}/)*.\n\n${parsedContent.matter.content}`;
+        const note = `*Originally published at [deepu.tech](https://deepu.tech/${getBlogUrl(filename)}/)*.\n`;
+        const body_markdown = `${json2yaml.stringify(frontMatter)}\n---\n${frontMatter.canonical_url && frontMatter.canonical_url.includes("deepu.tech") ? note : ""}\n${
+          parsedContent.matter.content
+        }`;
 
         if (frontMatter && (frontMatter.published || frontMatter.draft) && !frontMatter.skip_devto) {
           const payload = {
