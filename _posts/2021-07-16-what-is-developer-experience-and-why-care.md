@@ -3,7 +3,7 @@ title: What is Developer Experience and why should we care?
 description: Let's bust some myths around developer experience and see why it's important.
 published: true
 featured: false
-tags: [devrel, developer-experience, engineering]
+tags: [devrel, developerexperience, engineering, discuss]
 series:
 canonical_url: https://deepu.tech/what-is-developer-experience-and-why-care/
 cover_image: https://i.imgur.com/NDimrjE.jpeg
