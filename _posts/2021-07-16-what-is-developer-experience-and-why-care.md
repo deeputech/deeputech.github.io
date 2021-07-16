@@ -9,7 +9,7 @@ tags:
   - engineering
   - discuss
 series: null
-canonical_url: 'https://deepu.tech/what-is-developer-experience-and-why-care/'
+canonical_url: 'https://dev.to/deepu105/what-is-developer-experience-and-why-should-we-care-1k9i'
 cover_image: 'https://i.imgur.com/NDimrjE.jpeg'
 devto_id: 761174
 devto_url: >-
