@@ -3,10 +3,17 @@ title: What is Developer Experience and why should we care?
 description: Let's bust some myths around developer experience and see why it's important.
 published: true
 featured: false
-tags: [devrel, developerexperience, engineering, discuss]
-series:
-canonical_url: https://deepu.tech/what-is-developer-experience-and-why-care/
-cover_image: https://i.imgur.com/NDimrjE.jpeg
+tags:
+  - devrel
+  - developerexperience
+  - engineering
+  - discuss
+series: null
+canonical_url: 'https://deepu.tech/what-is-developer-experience-and-why-care/'
+cover_image: 'https://i.imgur.com/NDimrjE.jpeg'
+devto_id: 761174
+devto_url: >-
+  https://dev.to/deepu105/what-is-developer-experience-and-why-should-we-care-1k9i
 ---
 
 Information Technology (IT) is undoubtedly one of the most important industries today and one that is ever-growing. Every company is becoming an IT company these days. From Taxis to food delivery to banking, every industry is dominated by companies that are IT companies first and domain second. With that growth, the demand for software and tools used by other developers also grows.
@@ -127,3 +134,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Photo by [Nubelson Fernandes](https://unsplash.com/@nublson) on [Unsplash](https://unsplash.com/s/photos/developer)
+
