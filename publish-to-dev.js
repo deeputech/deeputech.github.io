@@ -43,7 +43,7 @@ async function processFiles() {
         const parsedContent = editor.read(POSTS_DIR + filename);
         const frontMatter = parsedContent.matter.data;
         const note = `*Originally published at [deepu.tech](https://deepu.tech/${getBlogUrl(filename)}/)*.\n`;
-        const body_markdown = `${json2yaml.stringify(frontMatter)}\n---\n${frontMatter.canonical_url.includes("deepu.tech") ? note : ""}\n${
+        const body_markdown = `${json2yaml.stringify(frontMatter)}\n---\n${frontMatter.canonical_url && frontMatter.canonical_url.includes("deepu.tech") ? note : ""}\n${
           parsedContent.matter.content
         }`;
 
