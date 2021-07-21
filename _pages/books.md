@@ -5,7 +5,7 @@ permalink: /books
 comments: false
 ---
 
-#### Full Stack Development with JHipster - second edition
+##### Full Stack Development with JHipster - second edition
 
 ---
 
@@ -43,7 +43,7 @@ By the end of the book, you'll be able to leverage the best tools available to b
 
 ---
 
-#### Full Stack Development with JHipster
+##### Full Stack Development with JHipster
 
 ---
 

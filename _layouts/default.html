@@ -83,12 +83,12 @@
                         <a class="nav-link" href="{{ site.baseurl }}/books"><i class="fas fa-book"></i> Books</a>
                     </li>
 
+                    {% if page.url == "/appearances" %}
+                    <li class="nav-item active">
+                    {% else %}
                     <li class="nav-item">
-                        <a target="_blank" class="nav-link" href="https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK"><i class="fab fa-youtube"></i> Videos</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a target="_blank" class="nav-link" href="https://speakerdeck.com/deepu105"><i class="fab fa-speaker-deck"></i> Presentations</a>
+                    {% endif %}
+                        <a class="nav-link" href="{{ site.baseurl }}/appearances"><i class="fas fa-chalkboard-teacher"></i> Appearances</a>
                     </li>
 
                     {% include search-lunr.html %}
