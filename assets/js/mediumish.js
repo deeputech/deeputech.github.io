@@ -19,7 +19,7 @@ jQuery(document).ready(function ($) {
     });
   }
 
-  $(".navbar button.navbar-toggler").on("click", () => {
+  $(".navbar button.navbar-toggler").on("click", function () {
     $("div#navbarMediumish").toggleClass("collapse");
   });
 
