@@ -23,7 +23,7 @@ post_class: post-template
                             {% endif %}
                             <div class="toc lead">
                                 <h3 class="font-weight-bold">Summary</h3>
-                                {% include toc.html html=content %}
+                                {% include toc.html html=content h_max=3 %}
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@ post_class: post-template
                         <img class="author-thumb lozad"  src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" alt="{{ author.display_name }}">
                         {% endif %}
 
-                        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
+                        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.twitter }}" class="btn follow"><i class="fab fa-twitter"></i> Follow</a>
                         <!-- <span class="author-description">{{ author.description }}</span> -->
                         <span class="separator d-none d-md-inline-block"> | </span>
                         <!-- Post Date -->
