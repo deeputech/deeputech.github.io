@@ -98,7 +98,7 @@ fn main() {
 
 All values in Rust are allocated on the Stack by default. There are two exceptions to this:
 
-1. When the size of the value is unknown, i.e Structs like String which grows in size over time or any other dynamic value
+1. When the size of the value is unknown, i.e Structs like String and Vectors which grows in size over time or any other dynamic value
 2. When you manually create a `Box<T>` value like `Box::new("Hello")`. A box is a smart pointer to a heap-allocated value of type T. When a box goes out of scope, its destructor is called, the inner object is destroyed, and the memory on the Heap is freed.
 
 In both exception cases, the value will be allocated on Heap and its pointer will live on the Stack.
