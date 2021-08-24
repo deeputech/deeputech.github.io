@@ -1,2 +1,2 @@
-<!-- - [CodeMotion, Berlin](https://events.codemotion.com/conferences/berlin/2019/): November 12-13th - [Microservices with Istio, JHipster and Kubernetes](https://events.codemotion.com/conferences/berlin/2019/speaker/3135/)
-- [Devoxx, Kyiv, Ukraine](https://devoxx.com.ua/): November 1-2 - [Building Native TypeScript applications using Deno runtime](https://devoxx.com.ua/speaker-details/?id=9301) -->
+- [Silesia JUG](https://www.meetup.com/Silesia-JUG): September 23rd - [Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?](https://www.meetup.com/Silesia-JUG/events/280291159/)
+- [Japan JUG ](https://www.java-users.jp/): September 29th - Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?

@@ -31,6 +31,8 @@ To choose a GC, these are the general steps that you could follow
 
 ![GC selection guide](https://i.imgur.com/QmWavbJ.jpeg)
 
+**Note**: Shenandoah is not available on Oracle JDK builds.
+
 This is the easy part, now we can start fine-tuning the memory usage. But before that it would be nice to understand what causes issues with memory and what consumes a lot of memory.
 
 ## Memory consumption
