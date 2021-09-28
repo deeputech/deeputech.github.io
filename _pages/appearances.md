@@ -9,6 +9,46 @@ comments: false
 
 ---
 
+##### Silesia JUG
+
+Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
+
+<small>September 2021</small>
+
+[video](https://www.youtube.com/watch?v=Sh8eXMChTTs), [slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
+
+---
+
+##### ING Tech meetup
+
+Can Rust be the language of the future?
+
+<small>September 2021</small>
+
+[slides](https://speakerdeck.com/deepu105/can-rust-be-the-language-of-the-future)
+
+---
+
+##### Global Adyen Developer Events and Meetups
+
+Casual chat about Developer Experience and Developer Relations
+
+<small>September 2021</small>
+
+[meetup](https://www.meetup.com/us-adyen-developer-events/events/280507834/)
+
+---
+
+##### The Relicans - Polyglot podcast
+
+What Is Developer Experience and Why Should We Care?
+
+<small>August 2021</small>
+
+[podcast](https://www.therelicans.com/polyglot/what-is-developer-experience-and-why-should-we-care-with-deepu-k-sasidharan), [transcript](https://www.therelicans.com/mandymoore/what-is-developer-experience-and-why-should-we-care-with-deepu-k-sasidharan-43fj)
+
+---
+
 ##### Global Adyen Developer Events and Meetups
 
 Functional programming in Java
