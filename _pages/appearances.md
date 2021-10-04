@@ -9,6 +9,16 @@ comments: false
 
 ---
 
+##### Japan JUG
+
+Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
+
+<small>September 2021</small>
+
+[video](https://www.youtube.com/watch?v=eKKv39xni6Y), [slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
+
+---
+
 ##### Silesia JUG
 
 Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
