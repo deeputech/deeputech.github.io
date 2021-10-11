@@ -1,3 +1,3 @@
-
-- [Foojay Virtual OpenJDK 17 Tour](https://foojay.io/today/schedule-for-foojay-virtual-openjdk-17-jug-tour/) 
+- [Foojay Virtual OpenJDK 17 Tour](https://foojay.io/today/schedule-for-foojay-virtual-openjdk-17-jug-tour/)
   - [JavaBin Oslo](https://www.meetup.com/javaBin/): October 20th - [Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?](https://www.meetup.com/javaBin/events/280886128/)
+- [DevOpStars’21](https://geekle.us/devops): November 24-25th - Building a Kubernetes monitoring dashboard in Rust. Why not?
