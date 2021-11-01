@@ -6,11 +6,13 @@ tags: [linux, fedora, development, gnome]
 image: https://thepracticaldev.s3.amazonaws.com/i/8ap820z2y55e423dta8h.png
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/8ap820z2y55e423dta8h.png
 series: Linux environment for developers
-featured: true
+featured: false
 canonical_url: https://deepu.tech/my-beautiful-linux-development-environment
 devto_url: https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc
 devto_id: 124647
 ---
+
+> There is a new version of this post where I wrote about my current setup. [Check it out here](https://deepu.tech/my-beautiful-linux-development-environment-2021).
 
 One of the questions that I get quite often after a conference talk is weirdly not about what I presented but about my Linux desktop environment. People are more curious about that beautiful distro rather than the awesome presentation I just did 😂
 

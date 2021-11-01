@@ -134,6 +134,7 @@ Thankfully this situation has started to change. When I switched to Linux in 201
 - [System76](https://system76.com/) - They make highly configurable and performant PCs and Laptops specifically for Linux that come with Pop!\_OS or Ubuntu
 - [Tuxedo](https://www.tuxedocomputers.com/), [Clevo](https://laptopmetlinux.nl/) - They make highly configurable Laptops and PCs for Linux and can pre-install Ubuntu
 - [Slimbook](https://slimbook.es/en/) - They make highly configurable Ultrabooks and PCs for Linux and can pre-install Ubuntu, Kubuntu, Ubuntu Mate, Debian, Elementary, Mint, Manjaro, Zorin, and KDE Neon. They even do dual boot setup with Windows.
+- [Kubuntu Focus](https://kfocus.org/) - They make highly performant Linux Laptops with long term premium support option for Kubuntu.
 - [Purism](https://puri.sm/) - They make PCs, Laptops, and Mobile phones that comes with PureOS, a privacy-focused Linux distro
 - [Dell XPS/Precision developer editions](https://www.dell.com/en-us/work/shop/overview/cp/linuxsystems)
 - [Lenovo ThinkPad](https://news.lenovo.com/pressroom/press-releases/lenovo-launches-linux-ready-thinkpad-and-thinkstation-pcs-preinstalled-with-ubuntu/)

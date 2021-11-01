@@ -22,3 +22,5 @@ group :jekyll_plugins do
     gem 'rouge'
     gem 'octokit', '~> 4.19'
 end
+
+gem "webrick", "~> 1.7"
