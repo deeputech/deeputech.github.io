@@ -1,12 +1,19 @@
 ---
-title: "My sleek and modern Linux development machine in 2021"
+title: My sleek and modern Linux development machine in 2021
 description: My 2021 Linux development machine explained
 published: true
-tags: [linux, fedora, development, kde]
-cover_image: https://i.imgur.com/LIn8i4h.jpeg
+tags:
+  - linux
+  - fedora
+  - development
+  - kde
+cover_image: 'https://i.imgur.com/LIn8i4h.jpeg'
 series: Linux environment for developers
 featured: true
-canonical_url: https://deepu.tech/my-beautiful-linux-development-environment-2021
+canonical_url: 'https://deepu.tech/my-beautiful-linux-development-environment-2021'
+devto_id: 883882
+devto_url: >-
+  https://dev.to/deepu105/my-sleek-and-modern-linux-development-machine-in-2021-2d8f
 ---
 
 One of my most popular posts of all time was when I wrote about [my beautiful Linux development machine in 2019](https://deepu.tech/my-beautiful-linux-development-environment/). Since I got a new machine and a new setup, it naturally calls for a follow-up.
@@ -130,3 +137,4 @@ I hope you find this inspires you to give Linux a chance. If you have any questi
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
