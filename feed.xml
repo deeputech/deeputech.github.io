@@ -5,13 +5,162 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Oct 2021 17:16:22 +0200</pubDate>
-    <lastBuildDate>Mon, 04 Oct 2021 17:16:22 +0200</lastBuildDate>
+    <pubDate>Mon, 01 Nov 2021 11:59:58 +0100</pubDate>
+    <lastBuildDate>Mon, 01 Nov 2021 11:59:58 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
+        <title>My sleek and modern Linux development machine in 2021</title>
+        <description>My 2021 Linux development machine explained | &lt;a href=&quot;https://deepu.tech/my-beautiful-linux-development-environment-2021/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;One of my most popular posts of all time was when I wrote about &lt;a href=&quot;https://deepu.tech/my-beautiful-linux-development-environment/&quot;&gt;my beautiful Linux development machine in 2019&lt;/a&gt;. Since I got a new machine and a new setup, it naturally calls for a follow-up.&lt;/p&gt;
+
+&lt;p&gt;By now, I’m a die-hard Linux user. It’s been five years since I’m using Linux as my primary OS. I would take a Linux machine any day over macOS or Windows. I own a Windows gaming PC and a Macbook pro from work. Still, they are nowhere near the Linux experience, personally for me. My primary driver is my Linux laptop, and I can’t be any happier with it (well, I can, I’ll come to that at the end of the post).&lt;/p&gt;
+
+&lt;p&gt;So a Dell Precision from 2016 was my primary device until last month, and it is still going good. Fedora runs smoothly on it for most parts. There is some minor glitch now and then but nothing that bothers me. What is a Linux experience without glitches, right? 😉&lt;/p&gt;
+
+&lt;p&gt;But that setup is almost five years old now, and sometimes it shows from the increased CPU load and fan noise. Applications like Chrome, Slack, and VSCode aren’t becoming any lighter in CPU and memory usage. So when I had a chance to get a Linux machine from my new job, thank you &lt;a href=&quot;https://www.okta.com/&quot;&gt;Okta&lt;/a&gt;, I went all in and got myself a Dell XPS 15 9510.&lt;/p&gt;
+
+&lt;p&gt;So here I’m detailing essential aspects of my setup and hoping it will inspire more people to use Linux. I also wrote about the &lt;a href=&quot;https://deepu.tech/the-state-of-linux-on-desktops/&quot;&gt;state of Linux on the desktop&lt;/a&gt;. Check it out if you are interested in Linux. You might be surprised.&lt;/p&gt;
+
+&lt;p&gt;So when I was choosing a new laptop, I narrowed my options down to either &lt;a href=&quot;https://www.dell.com/nl-nl/shop/bekijk-alle-laptops-ultrabooks-tablets/nieuw-xps-15/spd/xps-15-9510-laptop/cn95103cc&quot;&gt;Dell XPS 15&lt;/a&gt; or &lt;a href=&quot;https://www.tuxedocomputers.com/en/Linux-Hardware/Linux-Notebooks/15-16-inch/TUXEDO-Book-Pulse-15-Gen1.tuxedo&quot;&gt;Tuxedo Pulse 15&lt;/a&gt;. Form factor, CPU, and memory was the most important factors for me since my work involves working with Docker and Kubernetes, polyglot development and travel. In the end, I chose Dell since Tuxedo had some issues with multiple monitors via USB-C as it didn’t have thunderbolt support.&lt;/p&gt;
+
+&lt;p&gt;This is not just my work laptop; it’s my primary machine for all of the below.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Java, Rust, JS, TS, Go and web development (and everything in between)&lt;/li&gt;
+  &lt;li&gt;Running multiple web applications locally&lt;/li&gt;
+  &lt;li&gt;Running Docker containers and local Kubernetes clusters&lt;/li&gt;
+  &lt;li&gt;Kubernetes, Terraform, CloudFormation development and deployments&lt;/li&gt;
+  &lt;li&gt;VirtualBox for Windows testing and other VM stuff&lt;/li&gt;
+  &lt;li&gt;Azure, AWS, and GCP deployments using required CLI tools&lt;/li&gt;
+  &lt;li&gt;Heavy browser usage&lt;/li&gt;
+  &lt;li&gt;E-mail, chat, and video conferencing&lt;/li&gt;
+  &lt;li&gt;Plex media server&lt;/li&gt;
+  &lt;li&gt;Writing, presentations, and illustrations&lt;/li&gt;
+  &lt;li&gt;YouTube and Social media&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;machine-configuration&quot;&gt;Machine configuration&lt;/h2&gt;
+
+&lt;p&gt;The configuration of the machine is also quite crucial for any development setup.&lt;/p&gt;
+
+&lt;p&gt;I selected a &lt;a href=&quot;https://www.dell.com/nl-nl/shop/bekijk-alle-laptops-ultrabooks-tablets/nieuw-xps-15/spd/xps-15-9510-laptop/cn95103cc&quot;&gt;custom configuration&lt;/a&gt; from Dell to get the best possible setup at that time. It’s not cheap, but my company, &lt;a href=&quot;https://www.okta.com/&quot;&gt;Okta&lt;/a&gt;, provided a handsome budget. But I do think it can be a lot more competitive in pricing like Tuxedo and the like. This, in my opinion, is one of the best Laptops for developers. So here is what I have.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/DoyiLTS.png&quot; alt=&quot;Konsole running neofetch&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Processor&lt;/strong&gt;: Intel® Core™ i9-11900H CPU @ 4.9GHz (8 cores, 16 threads)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Memory&lt;/strong&gt;: 64GB, DDR4-3200MHz SDRAM, 2 DIMMS, non-ECC&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;HDD&lt;/strong&gt;: 1TB M.2 NVMe SSD&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Graphics&lt;/strong&gt;: NVIDIA GeForce RTX 3050Ti with 4 GB GDDR6 memory &amp;amp; Intel® UHD Graphics&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Wireless&lt;/strong&gt;: Killer Wifi 6 (2x2) + BT 5.1&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Keyboard&lt;/strong&gt;: English QWERTY US, backlit&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Display&lt;/strong&gt;: 15.6” FHD 1920x1080, matte, non-touch&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Battery&lt;/strong&gt;: 6-cell (86Wh)&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Ports&lt;/strong&gt;: 2 x Thunderbolt 4 USB-C, 1 x USB-C 3.2 Gen2,&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/x5A39eu.jpeg&quot; alt=&quot;Work from home setup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I use the laptop mostly with my home office, which consists of a &lt;a href=&quot;https://iiyama.com/gl_en/products/prolite-xub3493wqsu-b1/&quot;&gt;34 inch&lt;/a&gt; and a &lt;a href=&quot;https://www.msi.com/Business-Productivity-Monitor/PRO-MP271QP&quot;&gt;27 inch&lt;/a&gt; monitor. A &lt;a href=&quot;https://www.keychron.com/products/keychron-k2-wireless-mechanical-keyboard?variant=31063869718617&quot;&gt;Keychron K2&lt;/a&gt; keyboard, &lt;a href=&quot;https://www.logitech.com/en-us/products/mice/mx-vertical-ergonomic-mouse.910-005447.html&quot;&gt;Logitech MX Vertical&lt;/a&gt; mouse, &lt;a href=&quot;https://www.razer.com/streaming-cameras/razer-kiyo-pro/RZ19-03640100-R3U1&quot;&gt;Razer Kiyo&lt;/a&gt; webcam, &lt;a href=&quot;https://www.elgato.com/en/key-light-air&quot;&gt;Elgato Keylight&lt;/a&gt;, &lt;a href=&quot;https://fifinemicrophone.com/collections/microphones/products/fifine-k780-usb-microphone-kit-with-scissors-arm-stand-shock-mount-and-pop-filter&quot;&gt;Fifine&lt;/a&gt; mic and a &lt;a href=&quot;https://www.dell.com/nl-nl/work/shop/dell-thunderbolt-dock-wd19tbs/apd/210-azbv/pc-accessoires&quot;&gt;Dell Thunderbolt dock&lt;/a&gt; that drives all my peripherals and monitors while powering the laptop all using a single USB-C cable. I have an old Sony Bluetooth headset and a cheap custom amplifier running a pair of old bookshelves and a subwoofer for audio.&lt;/p&gt;
+
+&lt;h2 id=&quot;operating-system-and-desktop-environment&quot;&gt;Operating system and desktop environment&lt;/h2&gt;
+
+&lt;p&gt;Switching to Fedora was a great decision I made sometime in 2017, and I’m so happy with it. Updates are butter smooth. I don’t have to worry about stuff breaking all the time from rolling releases. At the same time, new stuff lands every six months, and packages are updated frequently, keeping everything running smoothly. For a developer, that is an excellent combination, in my opinion. So naturally, I choose to stick to Fedora; why fix something that isn’t broken, right?&lt;/p&gt;
+
+&lt;p&gt;So I’m running Fedora 34. I have been using Gnome for the past five years, but recently KDE caught my eyes, and I decided to give it a shot. So I went with the &lt;a href=&quot;https://spins.fedoraproject.org/kde/&quot;&gt;KDE spin of Fedora&lt;/a&gt;. KDE has been great so far. I love the amount of customization you can do on it, and top of all, it looks super sleek, and there is an excellent selection of themes and styles to choose from. I’m definitely not missing Gnome.&lt;/p&gt;
+
+&lt;p&gt;What good is a desktop without a nice theme, right? KDE has a great collection of themes, and I went with &lt;a href=&quot;https://store.kde.org/p/1464321/&quot;&gt;Ant-Dark&lt;/a&gt; theme for now, and it looks gorgeous with transparency and blur effects. While KDE themes are self-sufficient with icons, cursors, and lock screens, I switched from default icons to icons from &lt;a href=&quot;https://store.kde.org/p/1307867/&quot;&gt;KDE-Story theme&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/D5wlea4.png&quot; alt=&quot;KDE Settings for appearance&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I use many plugins in Gnome, but in KDE, all those came out of the box, like clipboard manager, notepad, system monitor, etc. Another reason I’m enjoying KDE.&lt;/p&gt;
+
+&lt;p&gt;With the new installation, I also went with the BTRFS filesystem, which is fantastic. Snapshots and backups are so fast. Though setting up snapshots and backup was a challenge initially.&lt;/p&gt;
+
+&lt;h2 id=&quot;development-tools&quot;&gt;Development tools&lt;/h2&gt;
+
+&lt;p&gt;These are mostly objective choices and really don’t matter as long as you are comfortable with your chosen tools. Below are my choices for some of the important categories for development.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Shell&lt;/strong&gt;: This is one of the most important for a developer. I use &lt;a href=&quot;https://www.zsh.org/&quot;&gt;ZSH&lt;/a&gt; along with the awesome &lt;a href=&quot;https://starship.rs/&quot;&gt;Starship prompt&lt;/a&gt; as my shell. I tried to switch to &lt;a href=&quot;https://fishshell.com/&quot;&gt;Fish&lt;/a&gt;, but it was quite annoying due to its difference with bash/ZSH, and I gave up on it. I went with the default theme and settings from Starship as it was very close to my earlier setup with Oh My ZSH. I also use &lt;a href=&quot;https://github.com/zsh-users/zsh-autosuggestions&quot;&gt;zsh-autosuggestions&lt;/a&gt; and &lt;a href=&quot;https://github.com/zsh-users/zsh-syntax-highlighting&quot;&gt;zsh-syntax-highlighting&lt;/a&gt; plugins for ZSH and &lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;fzf&lt;/a&gt; for search.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Terminal&lt;/strong&gt;: What good is a nice shell without a good terminal. Fortunately, the default KDE shell, Konsole, is great, and KDE also has &lt;a href=&quot;https://apps.kde.org/yakuake/&quot;&gt;Yakuake&lt;/a&gt;, which is one of the best terminal applications out there. It has workspaces, tabs, split windows, Quake mode, etc. I mostly use Yakuake, which is bound to &lt;kbd&gt;Ctrl+`&lt;/kbd&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/S3cpjzW.png&quot; alt=&quot;Yakuake on KDE&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;IDE&lt;/strong&gt;: &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt; - My go-to editor. I love it. I use VSCode for web development, Rust, Go, JS development, DevOps, and everything other than JVM languages. A VSCode setup is never complete without some good plugins. &lt;a href=&quot;https://gist.github.com/deepu105/4599d3b381218b9d1a63119fbf9ca537&quot;&gt;Here&lt;/a&gt; are the plugins that I’m using. You can run the script to install those. For Java development, I use &lt;a href=&quot;https://www.jetbrains.com/idea/&quot;&gt;IntelliJ IDEA Ultimate&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Other notable development tools I use are &lt;a href=&quot;https://www.gitkraken.com/&quot;&gt;GitKraken&lt;/a&gt; for Git repo management, &lt;a href=&quot;https://www.scootersoftware.com&quot;&gt;Beyond Compare&lt;/a&gt; for code comparisons, &lt;a href=&quot;https://www.virtualbox.org/&quot;&gt;VirtualBox&lt;/a&gt;, &lt;a href=&quot;https://github.com/nvm-sh/nvm&quot;&gt;NVM&lt;/a&gt; for Node.js version management and &lt;a href=&quot;https://sdkman.io&quot;&gt;SDKMan&lt;/a&gt; for JDK version management.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Toolchains&lt;/strong&gt;: Node.js and NPM, Rust toolchain, Golang, JVM, Deno, Ruby toolchain, and Python toolchain. I also ran &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo dnf groupinstall &quot;Development Tools&quot; &quot;Development Libraries&quot;&lt;/code&gt; to install the toolchains required for compiling Linux applications.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;DevOps&lt;/strong&gt;: Docker, kubectl, Terraform, k3d, and so on&lt;/p&gt;
+
+&lt;h2 id=&quot;productivity-tools&quot;&gt;Productivity tools&lt;/h2&gt;
+
+&lt;p&gt;Productivity tools are also quite necessary, and below are my choices.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Browser&lt;/strong&gt;: Google Chrome is my primary browser. I also use Firefox sometimes. I use the &lt;a href=&quot;https://bitwarden.com/&quot;&gt;Bitwarden&lt;/a&gt; plugin for password management.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;E-mail&lt;/strong&gt;: I use &lt;a href=&quot;https://getmailspring.com/&quot;&gt;Mailspring&lt;/a&gt; as my e-mail client. It’s a fairly decent mail client with nice themes and a simple UI.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Office suite&lt;/strong&gt;: I mostly use Google Docs, but when I have to work on something on my desktop I use &lt;a href=&quot;https://www.libreoffice.org/&quot;&gt;LibreOffice&lt;/a&gt;, which is a good office suite and even handles Microsoft Office &amp;amp; Keynote formats.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Communication&lt;/strong&gt;: Of course I use &lt;a href=&quot;https://slack.com&quot;&gt;Slack&lt;/a&gt; and for video conference I use &lt;a href=&quot;https://www.zoom.us/&quot;&gt;Zoom&lt;/a&gt;. I also have Telegram and Signal installed.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Screen capture&lt;/strong&gt;: I use this nifty tool called &lt;a href=&quot;https://github.com/phw/peek&quot;&gt;Peek&lt;/a&gt; for screen recording and &lt;a href=&quot;https://github.com/flameshot-org/flameshot&quot;&gt;Flameshot&lt;/a&gt; for screenshots.&lt;/p&gt;
+
+&lt;h2 id=&quot;streaming--media&quot;&gt;Streaming &amp;amp; Media&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;Streaming&lt;/strong&gt;: I think &lt;a href=&quot;https://obsproject.com/&quot;&gt;OBS Studio&lt;/a&gt; is the default choice here and is one of the best options for streaming and screen recording.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Image editing and processing&lt;/strong&gt;: &lt;a href=&quot;https://www.gimp.org/&quot;&gt;Gimp&lt;/a&gt; for photo editing, &lt;a href=&quot;https://inkscape.org/&quot;&gt;Inkscape&lt;/a&gt; for vector editing, and &lt;a href=&quot;https://app.diagrams.net/&quot;&gt;Draw.io&lt;/a&gt; for illustrations. KDE also has some default apps for photo management, which is quite good.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Video editing&lt;/strong&gt;: &lt;a href=&quot;https://kdenlive.org/&quot;&gt;Kdenlive&lt;/a&gt; is a great choice for video editing on Linux.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Video player&lt;/strong&gt;: &lt;a href=&quot;https://www.smplayer.info/en/downloads&quot;&gt;SMPlayer&lt;/a&gt; is my go-to video player.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;There are many other small and nifty utilities that I use; most are command-line utilities. There are some notable mentions like &lt;a href=&quot;https://github.com/teejee2008/timeshift&quot;&gt;Timeshift&lt;/a&gt;, which is nice for backing up your machine.&lt;/p&gt;
+
+&lt;p&gt;Of course, not everything is perfect in the Linux world, but it is the same with every OS from my experience. Before switching to Linux, I was a long-time Windows user, and last year, I spent more than a year using macOS now and then, so issues are everywhere. So like every Linux user, I have from time to time messed things up(With great power comes great responsibility, Peter). There are some minor annoyances with this new setup, but there is nothing that bothers me much. Some of the most annoying issues I have currently are below, and I’ll probably fix them if it bothers me.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;New Intel platforms do not support deep sleep, and hence laptop does lose power over time, even in Idle.&lt;/li&gt;
+  &lt;li&gt;Hibernation doesn’t work out of the box. It’s easy to fix, but at the moment doesn’t bother me.&lt;/li&gt;
+  &lt;li&gt;Some random crashes from KDE settings. Not a big deal as it’s a rare occurrence.&lt;/li&gt;
+  &lt;li&gt;KDE remembers open apps on a restart, but when on multiple monitors, it doesn’t remember which screen it was in.&lt;/li&gt;
+  &lt;li&gt;Biometrics is a bit tricky in Linux. The built-in fingerprint sensor doesn’t have a proper driver for Fedora yet, there is one for Ubuntu, and I probably can &lt;a href=&quot;https://aboutcher.co.uk/2020/10/goodix-fingerprint-reader-on-fedora-linux/&quot;&gt;get it working&lt;/a&gt;. For face recognition, there is &lt;a href=&quot;https://github.com/boltgolt/howdy&quot;&gt;Howdy&lt;/a&gt;, but for some reason, I couldn’t get it working and hence probably need to &lt;a href=&quot;https://github.com/boltgolt/howdy/issues/604&quot;&gt;do some digging&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I hope you find this inspires you to give Linux a chance. If you have any questions, please ask in the comments.&lt;/p&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+</content:encoded>
+        <media:content url="https://i.imgur.com/LIn8i4h.jpeg" medium="image">https://i.imgur.com/LIn8i4h.jpeg</media:content>
+        <pubDate>Mon, 01 Nov 2021 00:00:00 +0100</pubDate>
+        <link>https://deepu.tech/my-beautiful-linux-development-environment-2021/</link>
+        <guid isPermaLink="true">https://deepu.tech/my-beautiful-linux-development-environment-2021/</guid>
+        
+        <category>linux</category>
+        
+        <category>fedora</category>
+        
+        <category>development</category>
+        
+        <category>kde</category>
+        
+        
+      </item>
+    
+      <item>
         <title>What is Developer Experience and why should we care?</title>
-        <description>Let's bust some myths around developer experience and see why it's important. | &lt;a href=&quot;https://deepu.tech/what-is-developer-experience-and-why-care/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <description>Let&apos;s bust some myths around developer experience and see why it&apos;s important. | &lt;a href=&quot;https://deepu.tech/what-is-developer-experience-and-why-care/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Information Technology (IT) is undoubtedly one of the most important industries today and one that is ever-growing. Every company is becoming an IT company these days. From Taxis to food delivery to banking, every industry is dominated by companies that are IT companies first and domain second. With that growth, the demand for software and tools used by other developers also grows.&lt;/p&gt;
 
@@ -356,7 +505,7 @@
       </item>
     
       <item>
-        <title>My second impression of Rust and why I think it's a great general-purpose language!</title>
+        <title>My second impression of Rust and why I think it&apos;s a great general-purpose language!</title>
         <description>My second impression of Rust, after building a real-life use case with it and my thoughts on why it is a great general-purpose language for the future. | &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;I wrote about &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;my first impression of Rust&lt;/a&gt; in November 2019. After that, I dabbled with it few times, but mostly on very simple code, and while I liked using Rust I wasn’t too amazed. On the surface, it kind of felt more or less like many other languages I have dabbled with.&lt;/p&gt;
@@ -1084,7 +1233,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
     &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// we shouldn't use try with resource here as it will kill the stream&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// we shouldn&apos;t use try with resource here as it will kill the stream&lt;/span&gt;
         &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AsynchronousServerSocketChannel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InetSocketAddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;127.0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// bind listener&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;StandardSocketOptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SO_REUSEADDR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
@@ -1279,7 +1428,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
     
       <item>
         <title>The state of Linux as a daily use OS in 2021</title>
-        <description>Let's see what is the state of Linux, for daily use, in 2021 is and if its a viable alternative to  Windows and macOS | &lt;a href=&quot;https://deepu.tech/the-state-of-linux-on-desktops/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <description>Let&apos;s see what is the state of Linux, for daily use, in 2021 is and if its a viable alternative to  Windows and macOS | &lt;a href=&quot;https://deepu.tech/the-state-of-linux-on-desktops/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;I got my first PC when I was in high school, in 2003. It was a DIY Intel Pentium 4 PC with 512MB of RAM, running Windows XP. This got me hooked to computers and I even started assembling PCs for others and selling my service as a Windows OS installer (pirated, of course, the middle class in India back then couldn’t afford to buy software).&lt;/p&gt;
 
@@ -1407,6 +1556,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;li&gt;&lt;a href=&quot;https://system76.com/&quot;&gt;System76&lt;/a&gt; - They make highly configurable and performant PCs and Laptops specifically for Linux that come with Pop!_OS or Ubuntu&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.tuxedocomputers.com/&quot;&gt;Tuxedo&lt;/a&gt;, &lt;a href=&quot;https://laptopmetlinux.nl/&quot;&gt;Clevo&lt;/a&gt; - They make highly configurable Laptops and PCs for Linux and can pre-install Ubuntu&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://slimbook.es/en/&quot;&gt;Slimbook&lt;/a&gt; - They make highly configurable Ultrabooks and PCs for Linux and can pre-install Ubuntu, Kubuntu, Ubuntu Mate, Debian, Elementary, Mint, Manjaro, Zorin, and KDE Neon. They even do dual boot setup with Windows.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kfocus.org/&quot;&gt;Kubuntu Focus&lt;/a&gt; - They make highly performant Linux Laptops with long term premium support option for Kubuntu.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://puri.sm/&quot;&gt;Purism&lt;/a&gt; - They make PCs, Laptops, and Mobile phones that comes with PureOS, a privacy-focused Linux distro&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.dell.com/en-us/work/shop/overview/cp/linuxsystems&quot;&gt;Dell XPS/Precision developer editions&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://news.lenovo.com/pressroom/press-releases/lenovo-launches-linux-ready-thinkpad-and-thinkstation-pcs-preinstalled-with-ubuntu/&quot;&gt;Lenovo ThinkPad&lt;/a&gt;&lt;/li&gt;
@@ -1897,13 +2047,13 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 7
 8
 9
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;// sequential (you don't need to wrap this in an async function in Deno)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;// sequential (you don&apos;t need to wrap this in an async function in Deno)&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;users&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getUsers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;posts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPosts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;messages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getMessages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;// do stuff&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// concurrent (you don't need to wrap this in an async function in Deno)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// concurrent (you don&apos;t need to wrap this in an async function in Deno)&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;messages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getUsers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPosts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getMessages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()]);&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;// do stuff&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -1980,7 +2130,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;respond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// send data to client side&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// sleep function since NodeJS doesn't provide one&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// sleep function since NodeJS doesn&apos;t provide one&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -2487,7 +2637,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// send data to client side&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// sleep function since NodeJS doesn't provide one&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// sleep function since NodeJS doesn&apos;t provide one&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
@@ -2747,7 +2897,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handleConnection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;net&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Conn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-	&lt;span class=&quot;c&quot;&gt;// Close the connection when you're done with it.&lt;/span&gt;
+	&lt;span class=&quot;c&quot;&gt;// Close the connection when you&apos;re done with it.&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;defer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;conn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Close&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
 	&lt;span class=&quot;c&quot;&gt;// Read the incoming connection into a buffer.&lt;/span&gt;
 	&lt;span class=&quot;n&quot;&gt;buf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([]&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -3030,772 +3180,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <category>async</category>
         
         <category>golang</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Concurrency in modern programming languages: Rust</title>
-        <description>Building a concurrent web server in Rust to compare concurrency performance with Go, JS, TS, Kotlin, and Java | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below and I’ll try to publish them weekly.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Concurrent web server in Rust&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrent web server in Java with JVM&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
-  &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;concurrency-in-rust&quot;&gt;Concurrency in Rust&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Handling concurrent programming safely and efficiently is another of Rust’s major goals.&lt;/p&gt;
-
-  &lt;p&gt;– Rust docs&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Efficient and memory safe concurrency is one of the major goals of Rust and these are not just plain words, the language offers great features for concurrent programming and when combined with the best in class memory safety model makes it a great choice for concurrency use cases. As with everything else in Rust, the idea is that you spend more time upfront (read compile-time) fixing issues rather than spending time fixing issues in production (read runtime). So if you are new to Rust it might look like more time spent on writing code but it will considerable effort later on by avoiding a lot of issues that generally pop up in languages with not-so-great memory safety. The Rust team calls this &lt;strong&gt;“fearless concurrency”&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;As with everything else in Rust the idea is that you spend more time upfront (read compile-time) fixing issues rather than spending time fixing issues in production (read runtime).&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;There are other languages like Go, which offers simpler and equally performant solutions for concurrency but they aren’t as powerful as Rust due to the flexibility offered by Rust. Basically, Rust provides you with building blocks required for concurrent, parallel, and asynchronous programming and you can extend or implement different solutions as you see fit or use a solution offered by the community. This allows for one to use the best possible solution for the use case rather than using the same hammer for all jobs.&lt;/p&gt;
-
-&lt;p&gt;With Rust, it’s possible to do multi-threaded concurrency or parallel programming as well as asynchronous programming. This means as we saw in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;previous chapter&lt;/a&gt;, we can mix and match these models to get the best possible performance for any use case.&lt;/p&gt;
-
-&lt;h3 id=&quot;multi-threading&quot;&gt;&lt;a href=&quot;https://doc.rust-lang.org/book/ch16-00-concurrency.html&quot;&gt;Multi-threading&lt;/a&gt;&lt;/h3&gt;
-
-&lt;p&gt;Rust provides building blocks to create and manage OS threads as part of the standard library and it also provides implementations required for &lt;a href=&quot;https://doc.rust-lang.org/book/ch16-02-message-passing.html&quot;&gt;message-passing concurrency&lt;/a&gt; (similar to Go) using channels and &lt;a href=&quot;https://doc.rust-lang.org/book/ch16-03-shared-state.html#using-mutexes-to-allow-access-to-data-from-one-thread-at-a-time&quot;&gt;shared-state concurrency&lt;/a&gt; using Mutexes and Smart pointers. Rust’s type system and ownership model helps to avoid common concurrency issues like data race, locks, etc.&lt;/p&gt;
-
-&lt;h3 id=&quot;asynchronous-processing&quot;&gt;&lt;a href=&quot;https://rust-lang.github.io/async-book/01_getting_started/01_chapter.html&quot;&gt;Asynchronous processing&lt;/a&gt;&lt;/h3&gt;
-
-&lt;p&gt;Technically asynchronous programming is not part of concurrency but in practice, it goes hand in hand for many use cases and improves performance, and makes resource usage more efficient. The latest versions of Rust provides building blocks and language features required for asynchronous programming with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;async/.await&lt;/code&gt; syntax. But do keep in mind that using an asynchronous programming model increases the overall complexity and the ecosystem is still evolving. While Rust provides the language features required the standard library doesn’t provide any implementations needed and hence you would have to use an external crate like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Futures&lt;/code&gt; to be able to use the asynchronous programming model effectively.&lt;/p&gt;
-
-&lt;h2 id=&quot;benchmarking&quot;&gt;Benchmarking&lt;/h2&gt;
-
-&lt;p&gt;Now that we have some basic understanding of concurrency features in Rust, let us build a simple concurrent webserver in Rust. Since Rust offers multiple ways to achieve this we’ll be building three sample applications and comparing them. The Rust version used is the latest (1.48.0) at the time of writing.&lt;/p&gt;
-
-&lt;h3 id=&quot;multi-threaded-concurrent-webserver&quot;&gt;Multi-threaded concurrent webserver&lt;/h3&gt;
-
-&lt;p&gt;This example is closer to the example from the official &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-02-multithreaded.html&quot;&gt;Rust book&lt;/a&gt;, I have omitted import statements for brevity. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/rustws&quot;&gt;GitHub here&lt;/a&gt;. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadPool&lt;/code&gt; struct is exactly the same as in the Rust book. We are not using any external dependency in this case.&lt;/p&gt;
-
-&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;TcpListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;127.0.0.1:8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// bind listener&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ThreadPool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// same number as max concurrent requests&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// count used to introduce delays&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;// listen to all incoming request streams&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.incoming&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;pool&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nf&quot;&gt;handle_connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// spawning each connection in a new thread&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handle_connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TcpStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;// Read the first 1024 bytes of data from the stream&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adding delay. Count: {}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nn&quot;&gt;thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_secs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;
-HTTP/1.0 200 OK
-Connection: keep-alive
-Content-Length: 174
-Content-Type: text/html; charset=utf-8
-    &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;read_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;format!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.as_bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// write response&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see we bind a TCP listener to port 8080 and listen to all incoming requests. Each request is processed in a new thread provided by a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadPool&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
-
-This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
-...
-
-Document Path:          /
-Document Length:        176 bytes
-
-Concurrency Level:      100
-Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   20.173 seconds
-Complete requests:      10000
-Failed requests:        0
-Total transferred:      2830000 bytes
-HTML transferred:       1760000 bytes
-Requests per second:    495.72 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
-Time per request:       201.726 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Time per request:       2.017 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Transfer rate:          137.00 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
-
-Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-              min  mean[+/-sd] median   max
-Connect:        0    0   0.9      0       7
-Processing:     0  201 600.0      0    2014
-Waiting:        0  200 600.0      0    2013
-Total:          0  201 600.0      0    2017
-
-Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-  50%      0
-  66%      1
-  75%      1
-  80%      3
-  90%   2000
-  95%   2001
-  98%   2001
-  99%   2002
- 100%   2017 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see the request handler sleeps for 2 seconds for every 10th request hence if we set a realistic thread pool number of 8 for example it will limit us to a maximum of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;(8 x 10) / 2 = 40&lt;/code&gt; requests per second and hence we set a thread pool of 100 here to match the maximum concurrent requests, setting a value higher would not make any difference. I guess you can already see the problem here. The thread pool itself becomes the bottleneck. In a real use case, you may not be able to set so many threads as the OS may not be able to provide so many thus creating increased resource usage and bottleneck. In this simple use case, since each thread spawns and processes the request really fast we won’t encounter an issue.&lt;/p&gt;
-
-&lt;p&gt;So let’s see if we can have another solution without such a bottleneck.&lt;/p&gt;
-
-&lt;h3 id=&quot;asynchronous-concurrent-webserver&quot;&gt;Asynchronous concurrent webserver&lt;/h3&gt;
-
-&lt;p&gt;This example is closer to the example from the &lt;a href=&quot;https://rust-lang.github.io/async-book/09_example/00_intro.html&quot;&gt;Rust async docs&lt;/a&gt;, I have omitted import statements for brevity. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/rustws_async&quot;&gt;GitHub here&lt;/a&gt;. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TcpListener&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TcpStream&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;task&lt;/code&gt; are from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;async_std&lt;/code&gt; crate and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;async-std&lt;/code&gt; is the only external dependency used in this case.&lt;/p&gt;
-
-&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nd&quot;&gt;#[async_std::main]&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;TcpListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;127.0.0.1:8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// bind listener&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// count used to introduce delays&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;loop&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;c&quot;&gt;// Listen for an incoming connection.&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.accept&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;c&quot;&gt;// spawn a new task to handle the connection&lt;/span&gt;
-        &lt;span class=&quot;nn&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;spawn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;handle_connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handle_connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TcpStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;i64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;// Read the first 1024 bytes of data from the stream&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adding delay. Count: {}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nn&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_secs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;
-HTTP/1.0 200 OK
-Connection: keep-alive
-Content-Length: 174
-Content-Type: text/html; charset=utf-8
-    &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;read_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;format!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.as_bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// write response&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see we bind an asynchronous TCP listener to port 8080 and listen to all incoming requests. Each request is processed in a new task provided by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;async_std&lt;/code&gt;. We are not using any thread pools here and all the incoming requests are processed asynchronously and hence we don’t have a bottleneck for maximum connections.&lt;/p&gt;
-
-&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
-
-This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
-...
-
-Document Path:          /
-Document Length:        176 bytes
-
-Concurrency Level:      100
-Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   20.186 seconds
-Complete requests:      10000
-Failed requests:        0
-Total transferred:      2830000 bytes
-HTML transferred:       1760000 bytes
-Requests per second:    495.38 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
-Time per request:       201.863 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Time per request:       2.019 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Transfer rate:          136.91 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
-
-Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-              min  mean[+/-sd] median   max
-Connect:        0    1   0.8      0       6
-Processing:     0  201 600.0      0    2010
-Waiting:        0  201 600.0      0    2010
-Total:          0  201 600.0      1    2014
-WARNING: The median and mean &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;the initial connection &lt;span class=&quot;nb&quot;&gt;time &lt;/span&gt;are not within a normal deviation
-        These results are probably not that reliable.
-
-Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-  50%      1
-  66%      1
-  75%      2
-  80%      3
-  90%   2000
-  95%   2001
-  98%   2001
-  99%   2003
- 100%   2014 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We got almost identical results here. Hence this version seems much more efficient than the multi-threaded version for this particular use case. Similar solutions can be built using other crates like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;smol&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hyper&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tokio&lt;/code&gt;, and so on. You can find some of them in this &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks&quot;&gt;repo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Let’s see if we can combine the two to create an asynchronous multi-threaded version.&lt;/p&gt;
-
-&lt;h3 id=&quot;asynchronous-multi-threaded-concurrent-webserver&quot;&gt;Asynchronous multi-threaded concurrent webserver&lt;/h3&gt;
-
-&lt;p&gt;This example uses an async &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadPool&lt;/code&gt;. I have omitted import statements for brevity. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/rustws_async_thread&quot;&gt;GitHub here&lt;/a&gt;. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ThreadPool&lt;/code&gt; struct is from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;futures&lt;/code&gt; crate and it’s the only external dependency used in this case.&lt;/p&gt;
-
-&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;TcpListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;127.0.0.1:8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// bind listener&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pool_builder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;ThreadPoolBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;pool_builder&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.pool_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pool_builder&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;couldn't create threadpool&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// count used to introduce delays&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;// Listen for an incoming connection.&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.incoming&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count_n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-        &lt;span class=&quot;c&quot;&gt;// spawning each connection in a new thread asynchronously&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;pool&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.spawn_ok&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-            &lt;span class=&quot;nf&quot;&gt;handle_connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count_n&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handle_connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TcpStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;i64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;// Read the first 1024 bytes of data from the stream&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adding delay. Count: {}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nn&quot;&gt;thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_secs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;
-    HTTP/1.0 200 OK
-    Connection: keep-alive
-    Content-Length: 174
-    Content-Type: text/html; charset=utf-8
-        &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;read_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;format!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.as_bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// write response&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.flush&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This is very similar to the first &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Threadpool&lt;/code&gt; example except for the async invocation. Unfortunately, we have the same bottleneck from the thread pool in this case as well hence we set a thread pool of 100 here to match the maximum concurrent requests.&lt;/p&gt;
-
-&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
-
-This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
-...
-
-Document Path:          /
-Document Length:        176 bytes
-
-Concurrency Level:      100
-Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   20.161 seconds
-Complete requests:      10000
-Failed requests:        0
-Total transferred:      3030000 bytes
-HTML transferred:       1760000 bytes
-Requests per second:    496.00 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
-Time per request:       201.615 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Time per request:       2.016 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Transfer rate:          146.76 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
-
-Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-              min  mean[+/-sd] median   max
-Connect:        0    0   0.8      0       5
-Processing:     0  201 600.0      0    2007
-Waiting:        0  200 600.0      0    2007
-Total:          0  201 600.0      0    2010
-
-Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-  50%      0
-  66%      1
-  75%      2
-  80%      2
-  90%   2000
-  95%   2000
-  98%   2001
-  99%   2002
- 100%   2010 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It does seem slightly faster by some milliseconds compared to previous solutions.&lt;/p&gt;
-
-&lt;h3 id=&quot;asynchronous-multi-threaded-concurrent-webserver-with-tokio&quot;&gt;Asynchronous multi-threaded concurrent webserver with Tokio&lt;/h3&gt;
-
-&lt;p&gt;This is another version of asynchronous multi-threaded webserver using &lt;a href=&quot;https://github.com/tokio-rs/tokio&quot;&gt;Tokio&lt;/a&gt; and it was contributed by &lt;a href=&quot;https://github.com/Recmo&quot;&gt;Remco Bloemen&lt;/a&gt;. I have omitted import statements for brevity. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/rustws_async_tokio&quot;&gt;GitHub here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nd&quot;&gt;#[tokio::main()]&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// Tokio uses a threadpool sized for number of cpus by default&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;TcpListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;127.0.0.1:8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;  &lt;span class=&quot;c&quot;&gt;// bind listener&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// count used to introduce delays&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;// Listen for an incoming connection.&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;loop&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;_&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;listener&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.accept&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-        &lt;span class=&quot;c&quot;&gt;// spawning each connection in a new tokio thread asynchronously&lt;/span&gt;
-        &lt;span class=&quot;nn&quot;&gt;tokio&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;spawn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;move&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handle_connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;socket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handle_connection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TcpStream&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;i64&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;c&quot;&gt;// Read the first 1024 bytes of data from the stream&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1024&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;buffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;c&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;nd&quot;&gt;println!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Adding delay. Count: {}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-        &lt;span class=&quot;nf&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nn&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;from_secs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;
-    HTTP/1.0 200 OK
-    Connection: keep-alive
-    Content-Length: 174
-    Content-Type: text/html; charset=utf-8
-        &quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;read_to_string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;hello.html&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;format!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{}&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\r\n\r\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;{}&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;stream&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.write_all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.as_bytes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;.await&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.unwrap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;// write response&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;This is very similar to the previous example but works with less number of thread pools and uses async invocation. We do not have the bottleneck from the previous thread pool example in this case.&lt;/p&gt;
-
-&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
-
-This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
-...
-
-Document Path:          /
-Document Length:        176 bytes
-
-Concurrency Level:      100
-Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   20.569 seconds
-Complete requests:      10000
-Failed requests:        0
-Total transferred:      3030000 bytes
-HTML transferred:       1760000 bytes
-Requests per second:    486.17 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
-Time per request:       205.688 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Time per request:       2.057 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Transfer rate:          143.86 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
-
-Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-              min  mean[+/-sd] median   max
-Connect:        0    1   2.4      0      22
-Processing:     0  202 600.3      1    2013
-Waiting:        0  202 600.3      1    2012
-Total:          0  203 600.3      2    2029
-
-Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-  50%      2
-  66%      3
-  75%      5
-  80%      7
-  90%   2000
-  95%   2003
-  98%   2006
-  99%   2008
- 100%   2029 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;It does seem slightly slower by some milliseconds compared to previous solution.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;As I explained in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;first part&lt;/a&gt; of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It’s a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in Rust. And for this particular use case, asynchronous solutions do seem to be the best choice.&lt;/p&gt;
-
-&lt;p&gt;So stay tuned for the next post where we will look at concurrency in Golang and build the same use case in Go.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://klau.si/blog/benchmarking-a-rust-web-application/&quot;&gt;klau.si&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://hackmd.io/@lbernick/SkgO7bCMw&quot;&gt;hackmd.io&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;doc.rust-lang.org&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://rust-lang.github.io/async-book&quot;&gt;rust-lang.github.io&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@jacobmejicanos?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Jacob Mejicanos&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-</content:encoded>
-        <media:content url="https://i.imgur.com/XalVFUX.jpg" medium="image">https://i.imgur.com/XalVFUX.jpg</media:content>
-        <pubDate>Thu, 24 Dec 2020 00:00:00 +0100</pubDate>
-        <link>https://deepu.tech/concurrency-in-modern-languages-rust/</link>
-        <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages-rust/</guid>
-        
-        <category>languages</category>
-        
-        <category>concurrency</category>
-        
-        <category>async</category>
-        
-        <category>rust</category>
         
         
       </item>
