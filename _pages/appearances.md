@@ -9,7 +9,27 @@ comments: false
 
 ---
 
-##### Japan JUG
+##### Amsterdam Java User Group
+
+State of pattern matching in Java
+
+<small>October 2021</small>
+
+[slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
+
+---
+
+##### JavaBin Oslo
+
+Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
+
+<small>October 2021</small>
+
+[video](https://www.youtube.com/watch?v=w-WdjPrO4GE), [slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
+
+---
+
+##### Japan Java User Group
 
 Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
 
@@ -19,7 +39,7 @@ Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
 
 ---
 
-##### Silesia JUG
+##### Silesia Java User Group
 
 Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
 
