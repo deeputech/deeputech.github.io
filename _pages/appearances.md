@@ -9,6 +9,16 @@ comments: false
 
 ---
 
+##### Tech Lead Journal
+
+Being an Effective Generalist & Building Good Developer Experience
+
+<small>November 2021</small>
+
+[podcast](https://techleadjournal.dev/episodes/63/)
+
+---
+
 ##### Amsterdam Java User Group
 
 State of pattern matching in Java
