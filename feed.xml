@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Dec 2021 16:15:53 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Dec 2021 16:15:53 +0100</lastBuildDate>
+    <pubDate>Thu, 23 Dec 2021 16:21:35 +0100</pubDate>
+    <lastBuildDate>Thu, 23 Dec 2021 16:21:35 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -334,19 +334,7 @@
 
 &lt;p&gt;Permitted classes can be defined either as simple inner classes or in separate class files using the new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;permits&lt;/code&gt; keyword.&lt;/p&gt;
 
-&lt;p&gt;“`java
-public abstract sealed class Shape
-permits Circle, Rectangle, Square { … }&lt;/p&gt;
-
-&lt;p&gt;// Or&lt;/p&gt;
-
-&lt;p&gt;public abstract sealed class Shape {
-final class Circle extends Shape { … }
-final class Square extends Shape { … }
-final class Rectangle extends Shape { … }
-}&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -357,57 +345,65 @@ final class Rectangle extends Shape { … }
 9
 10
 11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;
-A sealed class imposes three constraints on its permitted sub-classes.
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;permits&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Circle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Rectangle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Square&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
-1. A Sealed class and its permitted subclasses must be in the same module or the same package in case of an unnamed module.
-2. Every permitted subclass must directly extend the sealed class.
-3. Every permitted subclass must use a modifier to describe the propagation of sealing. Allowed modifiers are `final`, `sealed`, and `non-sealed`.
-   - Final subclasses cannot further be extended. Hence the class hierarchy ends with them. Records are implicitly final and hence do not need the keyword.
-   - A Sealed subclass can further restrict class hierarchy with its own permitted subclasses, and the same three rules apply all over again for them
-   - A Non-sealed subclass is a bit different. As the keyword suggests, it reverts to being open for extension by any class and breaks the class hierarchy rules set by the parent sealed class. Non-sealed sub-classes are still valid children and work well with other concepts. We will see that later.
+&lt;span class=&quot;c1&quot;&gt;// Or&lt;/span&gt;
 
-&amp;gt; A fun fact, `non-sealed` is the first hyphenated keyword in Java.
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Circle&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Square&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Rectangle&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
-Here is how it would look in practice. Sealed classes can also be used with Records. Here the `Shape` interface is sealed, and it permits `Circle`, `Rectangle`, `Square`, and `WeirdShape` as subclasses.
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-`Circle` is implicitly final as it's a record. `Square` is declared as final. And hence both cannot be extended further, and their hierarchy ends here.
+&lt;p&gt;A sealed class imposes three constraints on its permitted sub-classes.&lt;/p&gt;
 
-`Rectangle` is declared as sealed and permits only `TransparentRectangle` and `FilledRectangle` as subclasses. Hence Rectangle's class hierarchy can extend further, and `TransparentRectangle` and `FilledRectangle` can even define their own hierarchy.
+&lt;ol&gt;
+  &lt;li&gt;A Sealed class and its permitted subclasses must be in the same module or the same package in case of an unnamed module.&lt;/li&gt;
+  &lt;li&gt;Every permitted subclass must directly extend the sealed class.&lt;/li&gt;
+  &lt;li&gt;Every permitted subclass must use a modifier to describe the propagation of sealing. Allowed modifiers are &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;final&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sealed&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;non-sealed&lt;/code&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;Final subclasses cannot further be extended. Hence the class hierarchy ends with them. Records are implicitly final and hence do not need the keyword.&lt;/li&gt;
+      &lt;li&gt;A Sealed subclass can further restrict class hierarchy with its own permitted subclasses, and the same three rules apply all over again for them&lt;/li&gt;
+      &lt;li&gt;A Non-sealed subclass is a bit different. As the keyword suggests, it reverts to being open for extension by any class and breaks the class hierarchy rules set by the parent sealed class. Non-sealed sub-classes are still valid children and work well with other concepts. We will see that later.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
 
-`WeirdShape` is declared as non-sealed and hence can be extended by any other class or record. Here the class hierarchy is wide open, and subclasses of a `WeirdClass` do not have to follow the rules of a sealed class. All instances of subclasses of `WeirdShape` will also be an instance of `WeirdShape,` and hence any code that checks for exhaustiveness of subtypes of `Shape` will still be valid.
+&lt;blockquote&gt;
+  &lt;p&gt;A fun fact, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;non-sealed&lt;/code&gt; is the first hyphenated keyword in Java.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&quot;`java
-public sealed interface Shape
-   permits Circle, Rectangle, Square, WeirdShape { ... }
+&lt;p&gt;Here is how it would look in practice. Sealed classes can also be used with Records. Here the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Shape&lt;/code&gt; interface is sealed, and it permits &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Circle&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Rectangle&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Square&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WeirdShape&lt;/code&gt; as subclasses.&lt;/p&gt;
 
-public record Circle(int r) implements Shape { ... }
-public final class Square implements Shape { ... }
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Circle&lt;/code&gt; is implicitly final as it’s a record. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Square&lt;/code&gt; is declared as final. And hence both cannot be extended further, and their hierarchy ends here.&lt;/p&gt;
 
-public sealed class Rectangle implements Shape
-   permits TransparentRectangle, FilledRectangle { ... }
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Rectangle&lt;/code&gt; is declared as sealed and permits only &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TransparentRectangle&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FilledRectangle&lt;/code&gt; as subclasses. Hence Rectangle’s class hierarchy can extend further, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;TransparentRectangle&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FilledRectangle&lt;/code&gt; can even define their own hierarchy.&lt;/p&gt;
 
-public non-sealed class WeirdShape implements Shape { ... }
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WeirdShape&lt;/code&gt; is declared as non-sealed and hence can be extended by any other class or record. Here the class hierarchy is wide open, and subclasses of a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WeirdClass&lt;/code&gt; do not have to follow the rules of a sealed class. All instances of subclasses of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WeirdShape&lt;/code&gt; will also be an instance of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WeirdShape,&lt;/code&gt; and hence any code that checks for exhaustiveness of subtypes of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Shape&lt;/code&gt; will still be valid.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;permits&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Circle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Rectangle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Square&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WeirdShape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;record&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Circle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Square&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Rectangle&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;permits&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TransparentRectangle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FilledRectangle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;non&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WeirdShape&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;A sealed class can be abstract and can have abstract members, and similarly, sealed interfaces can have default implementations and so on. But abstract subclasses should be sealed or non-sealed and not final.&lt;/p&gt;

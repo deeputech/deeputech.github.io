@@ -186,7 +186,7 @@
        <span class="k">default</span>                            <span class="o">-&gt;</span> <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Not a string"</span><span class="o">);</span>
    <span class="o">}</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div><p>While it’s not as flexible as in Rust or OCaml, it’s a good start, in my opinion.</p><h3 id="pattern-exhaustion-with-sealed-classes">Pattern exhaustion with Sealed classes</h3><p>We need to understand another new feature in Java 17, Sealed classes, to understand pattern exhaustion.</p><h4 id="sealed-classes">Sealed classes</h4><p>A sealed class lets you control which class can extend it. The same applies to sealed interfaces as well.</p><p>Permitted classes can be defined either as simple inner classes or in separate class files using the new <code class="language-plaintext highlighter-rouge">permits</code> keyword.</p><p>“`java public abstract sealed class Shape permits Circle, Rectangle, Square { … }</p><p>// Or</p><p>public abstract sealed class Shape { final class Circle extends Shape { … } final class Square extends Shape { … } final class Rectangle extends Shape { … } }</p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>While it’s not as flexible as in Rust or OCaml, it’s a good start, in my opinion.</p><h3 id="pattern-exhaustion-with-sealed-classes">Pattern exhaustion with Sealed classes</h3><p>We need to understand another new feature in Java 17, Sealed classes, to understand pattern exhaustion.</p><h4 id="sealed-classes">Sealed classes</h4><p>A sealed class lets you control which class can extend it. The same applies to sealed interfaces as well.</p><p>Permitted classes can be defined either as simple inner classes or in separate class files using the new <code class="language-plaintext highlighter-rouge">permits</code> keyword.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -197,57 +197,37 @@
 9
 10
 11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-</pre></td><td class="rouge-code"><pre>
-A sealed class imposes three constraints on its permitted sub-classes.
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">abstract</span> <span class="n">sealed</span> <span class="kd">class</span> <span class="nc">Shape</span>
+<span class="n">permits</span> <span class="nc">Circle</span><span class="o">,</span> <span class="nc">Rectangle</span><span class="o">,</span> <span class="nc">Square</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 
-1. A Sealed class and its permitted subclasses must be in the same module or the same package in case of an unnamed module.
-2. Every permitted subclass must directly extend the sealed class.
-3. Every permitted subclass must use a modifier to describe the propagation of sealing. Allowed modifiers are `final`, `sealed`, and `non-sealed`.
-   - Final subclasses cannot further be extended. Hence the class hierarchy ends with them. Records are implicitly final and hence do not need the keyword.
-   - A Sealed subclass can further restrict class hierarchy with its own permitted subclasses, and the same three rules apply all over again for them
-   - A Non-sealed subclass is a bit different. As the keyword suggests, it reverts to being open for extension by any class and breaks the class hierarchy rules set by the parent sealed class. Non-sealed sub-classes are still valid children and work well with other concepts. We will see that later.
+<span class="c1">// Or</span>
 
-&gt; A fun fact, `non-sealed` is the first hyphenated keyword in Java.
+<span class="kd">public</span> <span class="kd">abstract</span> <span class="n">sealed</span> <span class="kd">class</span> <span class="nc">Shape</span> <span class="o">{</span>
+<span class="kd">final</span> <span class="kd">class</span> <span class="nc">Circle</span> <span class="kd">extends</span> <span class="nc">Shape</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="kd">final</span> <span class="kd">class</span> <span class="nc">Square</span> <span class="kd">extends</span> <span class="nc">Shape</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="kd">final</span> <span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">extends</span> <span class="nc">Shape</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="o">}</span>
 
-Here is how it would look in practice. Sealed classes can also be used with Records. Here the `Shape` interface is sealed, and it permits `Circle`, `Rectangle`, `Square`, and `WeirdShape` as subclasses.
+</pre></td></tr></tbody></table></code></pre></div></div><p>A sealed class imposes three constraints on its permitted sub-classes.</p><ol><li>A Sealed class and its permitted subclasses must be in the same module or the same package in case of an unnamed module.</li><li>Every permitted subclass must directly extend the sealed class.</li><li>Every permitted subclass must use a modifier to describe the propagation of sealing. Allowed modifiers are <code class="language-plaintext highlighter-rouge">final</code>, <code class="language-plaintext highlighter-rouge">sealed</code>, and <code class="language-plaintext highlighter-rouge">non-sealed</code>.<ul><li>Final subclasses cannot further be extended. Hence the class hierarchy ends with them. Records are implicitly final and hence do not need the keyword.</li><li>A Sealed subclass can further restrict class hierarchy with its own permitted subclasses, and the same three rules apply all over again for them</li><li>A Non-sealed subclass is a bit different. As the keyword suggests, it reverts to being open for extension by any class and breaks the class hierarchy rules set by the parent sealed class. Non-sealed sub-classes are still valid children and work well with other concepts. We will see that later.</li></ul></li></ol><blockquote><p>A fun fact, <code class="language-plaintext highlighter-rouge">non-sealed</code> is the first hyphenated keyword in Java.</p></blockquote><p>Here is how it would look in practice. Sealed classes can also be used with Records. Here the <code class="language-plaintext highlighter-rouge">Shape</code> interface is sealed, and it permits <code class="language-plaintext highlighter-rouge">Circle</code>, <code class="language-plaintext highlighter-rouge">Rectangle</code>, <code class="language-plaintext highlighter-rouge">Square</code>, and <code class="language-plaintext highlighter-rouge">WeirdShape</code> as subclasses.</p><p><code class="language-plaintext highlighter-rouge">Circle</code> is implicitly final as it’s a record. <code class="language-plaintext highlighter-rouge">Square</code> is declared as final. And hence both cannot be extended further, and their hierarchy ends here.</p><p><code class="language-plaintext highlighter-rouge">Rectangle</code> is declared as sealed and permits only <code class="language-plaintext highlighter-rouge">TransparentRectangle</code> and <code class="language-plaintext highlighter-rouge">FilledRectangle</code> as subclasses. Hence Rectangle’s class hierarchy can extend further, and <code class="language-plaintext highlighter-rouge">TransparentRectangle</code> and <code class="language-plaintext highlighter-rouge">FilledRectangle</code> can even define their own hierarchy.</p><p><code class="language-plaintext highlighter-rouge">WeirdShape</code> is declared as non-sealed and hence can be extended by any other class or record. Here the class hierarchy is wide open, and subclasses of a <code class="language-plaintext highlighter-rouge">WeirdClass</code> do not have to follow the rules of a sealed class. All instances of subclasses of <code class="language-plaintext highlighter-rouge">WeirdShape</code> will also be an instance of <code class="language-plaintext highlighter-rouge">WeirdShape,</code> and hence any code that checks for exhaustiveness of subtypes of <code class="language-plaintext highlighter-rouge">Shape</code> will still be valid.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="kd">public</span> <span class="n">sealed</span> <span class="kd">interface</span> <span class="nc">Shape</span>
+   <span class="n">permits</span> <span class="nc">Circle</span><span class="o">,</span> <span class="nc">Rectangle</span><span class="o">,</span> <span class="nc">Square</span><span class="o">,</span> <span class="nc">WeirdShape</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 
-`Circle` is implicitly final as it's a record. `Square` is declared as final. And hence both cannot be extended further, and their hierarchy ends here.
+<span class="kd">public</span> <span class="n">record</span> <span class="nf">Circle</span><span class="o">(</span><span class="kt">int</span> <span class="n">r</span><span class="o">)</span> <span class="kd">implements</span> <span class="nc">Shape</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="kd">public</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">Square</span> <span class="kd">implements</span> <span class="nc">Shape</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 
-`Rectangle` is declared as sealed and permits only `TransparentRectangle` and `FilledRectangle` as subclasses. Hence Rectangle's class hierarchy can extend further, and `TransparentRectangle` and `FilledRectangle` can even define their own hierarchy.
+<span class="kd">public</span> <span class="n">sealed</span> <span class="kd">class</span> <span class="nc">Rectangle</span> <span class="kd">implements</span> <span class="nc">Shape</span>
+   <span class="n">permits</span> <span class="nc">TransparentRectangle</span><span class="o">,</span> <span class="nc">FilledRectangle</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 
-`WeirdShape` is declared as non-sealed and hence can be extended by any other class or record. Here the class hierarchy is wide open, and subclasses of a `WeirdClass` do not have to follow the rules of a sealed class. All instances of subclasses of `WeirdShape` will also be an instance of `WeirdShape,` and hence any code that checks for exhaustiveness of subtypes of `Shape` will still be valid.
-
-"`java
-public sealed interface Shape
-   permits Circle, Rectangle, Square, WeirdShape { ... }
-
-public record Circle(int r) implements Shape { ... }
-public final class Square implements Shape { ... }
-
-public sealed class Rectangle implements Shape
-   permits TransparentRectangle, FilledRectangle { ... }
-
-public non-sealed class WeirdShape implements Shape { ... }
+<span class="kd">public</span> <span class="n">non</span><span class="o">-</span><span class="n">sealed</span> <span class="kd">class</span> <span class="nc">WeirdShape</span> <span class="kd">implements</span> <span class="nc">Shape</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div><p>A sealed class can be abstract and can have abstract members, and similarly, sealed interfaces can have default implementations and so on. But abstract subclasses should be sealed or non-sealed and not final.</p><p>Extending a non-permitted class with a sealed class will be a compile-time error.</p><blockquote><p>Another fun fact: A combination of sealed classes and records is nothing but algebraic data types. (type formed by combining others, ex, Tuples, Records, unions)</p></blockquote><h4 id="pattern-exhaustion">Pattern exhaustion</h4><p>Remember pattern exhaustion we talked about? The java compiler cannot check for all possible variations for normal classes and hence would require us to add a default case to avoid missing paths in a switch expression, as switch expressions do not fall through and must be exhaustive in Java. That does not apply to switch statements as we can choose not to have a default case for them as they fall through.</p><p>But with sealed classes, the compiler knows exactly what the expected variants are. We can use this for exhaustive pattern matching. In that case, the compiler will warn when we miss a variant in the check without adding a default case. This is a much less error-prone and clearer approach. Even if the subclasses are non-sealed, the compiler will still do the exhaustiveness check.</p><p>See this example; if we use the same sealed classes we saw earlier in the first sample, we will get a compile-time error as we are not checking all variants of <code class="language-plaintext highlighter-rouge">Shape</code>, and there is no default case. In the second example, however, there is no error even without a default case as the compiler knows all possible variants of <code class="language-plaintext highlighter-rouge">Shape</code> have been accounted for. If we remove the <code class="language-plaintext highlighter-rouge">sealed</code> keyword for <code class="language-plaintext highlighter-rouge">Shape</code>, then the second sample will have the same error as there is no default case, and the compiler doesn’t know about all variants of <code class="language-plaintext highlighter-rouge">Shape</code>.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
