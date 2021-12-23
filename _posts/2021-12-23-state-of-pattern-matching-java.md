@@ -9,10 +9,10 @@ tags:
   - jdk
   - openjdk
 series: null
-canonical_url: 'https://deepu.tech/state-of-pattern-matching-java/'
-cover_image: 'https://i.imgur.com/DK0pANn.jpeg'
+canonical_url: "https://deepu.tech/state-of-pattern-matching-java/"
+cover_image: "https://i.imgur.com/DK0pANn.jpeg"
 devto_id: 934767
-devto_url: 'https://dev.to/deepu105/the-state-of-pattern-matching-in-java-17-1c9m'
+devto_url: "https://dev.to/deepu105/the-state-of-pattern-matching-in-java-17-1c9m"
 ---
 
 So what exactly is pattern matching?
@@ -233,14 +233,14 @@ Permitted classes can be defined either as simple inner classes or in separate c
 
 ```java
 public abstract sealed class Shape
-permits Circle, Rectangle, Square { ... }
+  permits Circle, Rectangle, Square { ... }
 
 // Or
 
 public abstract sealed class Shape {
-final class Circle extends Shape { ... }
-final class Square extends Shape { ... }
-final class Rectangle extends Shape { ... }
+  final class Circle extends Shape { ... }
+  final class Square extends Shape { ... }
+  final class Rectangle extends Shape { ... }
 }
 
 ```
@@ -416,4 +416,3 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Meme from [makeameme.org](https://makeameme.org/meme/patterns-patterns-everywhere-5c0a75)
-
