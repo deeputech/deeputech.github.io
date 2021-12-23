@@ -3,7 +3,7 @@ title: The state of pattern matching in Java 17
 description: Let us see how pattern matching is evolving in Java
 published: true
 featured: false
-tags: [java, pattern-matching, jdk, openjdk]
+tags: [java, patternmatching, jdk, openjdk]
 series:
 canonical_url: https://deepu.tech/state-of-pattern-matching-java/
 cover_image: https://i.imgur.com/DK0pANn.jpeg
