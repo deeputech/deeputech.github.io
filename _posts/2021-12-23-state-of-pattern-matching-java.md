@@ -231,7 +231,7 @@ A sealed class lets you control which class can extend it. The same applies to s
 
 Permitted classes can be defined either as simple inner classes or in separate class files using the new `permits` keyword.
 
-"`java
+```java
 public abstract sealed class Shape
 permits Circle, Rectangle, Square { ... }
 
@@ -264,7 +264,7 @@ Here is how it would look in practice. Sealed classes can also be used with Reco
 
 `WeirdShape` is declared as non-sealed and hence can be extended by any other class or record. Here the class hierarchy is wide open, and subclasses of a `WeirdClass` do not have to follow the rules of a sealed class. All instances of subclasses of `WeirdShape` will also be an instance of `WeirdShape,` and hence any code that checks for exhaustiveness of subtypes of `Shape` will still be valid.
 
-"`java
+```java
 public sealed interface Shape
    permits Circle, Rectangle, Square, WeirdShape { ... }
 
