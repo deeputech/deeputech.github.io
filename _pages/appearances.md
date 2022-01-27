@@ -5,7 +5,31 @@ permalink: /appearances
 comments: false
 ---
 
+#### 2022
+
+---
+
+##### DevOpStars’22
+
+Building a Kubernetes monitoring dashboard in Rust. Why not?
+
+<small>January 2022</small>
+
+[slides](https://speakerdeck.com/deepu105/why-did-i-build-a-kubernetes-dashboard-in-rust)
+
+---
+
 #### 2021
+
+---
+
+##### iDev Enterprise Integration Summit
+
+Low code microservice on the cloud with JHipster, Istio, and Kubernetes
+
+<small>December 2021</small>
+
+[video](https://www.youtube.com/watch?v=zGpnIhRgMaM)
 
 ---
 
