@@ -79,25 +79,18 @@ const [users, posts, messages] = await Promise.all([getUsers(), getPosts(), getM
 
 ## Benchmarking
 
-Now that we have some basic understanding of concurrency features in Deno for TypeScript, let us build a simple concurrent web server in TypeScript. Since asynchronous concurrency is the best way to achieve this in Deno we'll build a sample application using the standard `http` module. The Deno version used is the latest (1.7.4) at the time of writing.
+Now that we have some basic understanding of concurrency features in Deno for TypeScript, let us build a simple concurrent web server in TypeScript. Since asynchronous concurrency is the best way to achieve this in Deno we'll build a sample application using the standard `http` module. The Deno version used is the latest (1.18.1) at the time of writing.
 
 ### Async HTTP concurrent webserver
 
 This example is closer to the Rust Asynchronous example we built in the [second chapter](https://deepu.tech/concurrency-in-modern-languages-rust/). You can find the full example on [GitHub here](https://github.com/deepu105/concurrency-benchmarks/tree/main/tsws). We are only using standard Deno modules in this case.
 
 ```ts
-import { serve, ServerRequest } from "https://deno.land/std/http/server.ts";
+import { serve } from "https://deno.land/std/http/server.ts";
 
 let count = 0;
 
-// set listen port
-const server = serve({ hostname: "0.0.0.0", port: 8080 });
-console.log(`HTTP webserver running at:  http://localhost:8080/`);
-
-// listen to all incoming requests
-for await (const request of server) handleRequest(request);
-
-async function handleRequest(request: ServerRequest) {
+const handleRequest = async (request: Request): Promise<Response> => {
   count++;
   // add 2 second delay to every 10th request
   if (count % 10 === 0) {
@@ -108,12 +101,11 @@ async function handleRequest(request: ServerRequest) {
   const body = await Deno.readTextFile("./hello.html");
   const res = {
     status: 200,
-    body,
     headers: new Headers(),
   };
   res.headers.set("Connection", "keep-alive");
-  request.respond(res); // send data to client side
-}
+  return new Response(body, res); // send data to client side
+};
 
 // sleep function since NodeJS doesn't provide one
 function sleep(ms: number) {
@@ -121,6 +113,10 @@ function sleep(ms: number) {
     setTimeout(resolve, ms);
   });
 }
+
+// set listen port and listen to all incoming requests
+await serve(handleRequest, { hostname: "0.0.0.0", port: 8080 });
+console.log(`HTTP webserver running at:  http://localhost:8080/`);
 ```
 
 As you can see we create an HTTP server and bind it to port 8080 and listen to all incoming requests in a for await loop. Each request is processed in a function that internally uses `async/await`.
@@ -141,34 +137,33 @@ Document Path:          /
 Document Length:        174 bytes
 
 Concurrency Level:      100
-Time taken for tests:   21.160 seconds
+Time taken for tests:   20.393 seconds
 Complete requests:      10000
 Failed requests:        0
-Keep-Alive requests:    10000
-Total transferred:      2380000 bytes
+Total transferred:      3150000 bytes
 HTML transferred:       1740000 bytes
-Requests per second:    472.59 [#/sec] (mean)
-Time per request:       211.600 [ms] (mean)
-Time per request:       2.116 [ms] (mean, across all concurrent requests)
-Transfer rate:          109.84 [Kbytes/sec] received
+Requests per second:    490.37 [#/sec] (mean)
+Time per request:       203.927 [ms] (mean)
+Time per request:       2.039 [ms] (mean, across all concurrent requests)
+Transfer rate:          150.85 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
-Connect:        0    0   0.7      0      11
-Processing:     0  207 600.7      5    2250
-Waiting:        0  207 600.7      5    2250
-Total:          0  207 600.7      5    2254
+Connect:        0    0   0.3      0       5
+Processing:     0  202 600.3      1    2029
+Waiting:        0  202 600.3      1    2029
+Total:          0  202 600.3      1    2029
 
 Percentage of the requests served within a certain time (ms)
-  50%      5
-  66%      8
-  75%     11
-  80%     13
+  50%      1
+  66%      1
+  75%      2
+  80%      3
   90%   2001
-  95%   2006
-  98%   2012
-  99%   2017
- 100%   2254 (longest request)
+  95%   2002
+  98%   2002
+  99%   2003
+ 100%   2029 (longest request)
 ```
 
 One minor thing to note is that I had to pass the `-k` flag to ApacheBench for this to run all requests. I still couldn't figure out why it behaves this way. A very similar implementation in every other language worked fine without the flag. So if someone has an idea let me know.
