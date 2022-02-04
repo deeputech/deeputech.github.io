@@ -1,5 +1,7 @@
 ---
-title: "Concurrency in modern programming languages: Rust vs Go vs Java vs Node.js vs Deno"
+title: >-
+  Concurrency in modern programming languages: Rust vs Go vs Java vs Node.js vs
+  Deno
 description: >-
   Building a concurrent web server in Rust, Go, JS, TS, Kotlin, and Java to
   compare concurrency performance
@@ -11,8 +13,11 @@ tags:
   - go
   - jvm
 series: concurrency in modern programming languages
-canonical_url: "https://deepu.tech/concurrency-in-modern-languages-final/"
-cover_image: "https://i.imgur.com/NAMPHmu.png"
+canonical_url: 'https://deepu.tech/concurrency-in-modern-languages-final/'
+cover_image: 'https://i.imgur.com/NAMPHmu.png'
+devto_id: 978487
+devto_url: >-
+  https://dev.to/deepu105/concurrency-in-modern-programming-languages-rust-vs-go-vs-java-vs-nodejs-vs-deno-36gg
 ---
 
 This is a multi-part series where I'll discuss concurrency in modern programming languages. I will be building and benchmarking a concurrent web server, inspired by the example from the [Rust book](https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html), in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin, and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.
@@ -120,3 +125,4 @@ Rust has the best ecosystem for concurrency, in my opinion, followed by Java and
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
