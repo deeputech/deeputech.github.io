@@ -26,8 +26,7 @@ This is a multi-part series where I'll be talking about concurrency in modern pr
 1. [Concurrent web server in JavaScript with NodeJS](https://deepu.tech/concurrency-in-modern-languages-js/)
 1. [Concurrent web server in TypeScript with Deno](https://deepu.tech/concurrency-in-modern-languages-ts/)
 1. [Concurrent web server in Java with JVM](https://deepu.tech/concurrency-in-modern-languages-java/)
-1. Concurrent web server in Kotlin with JVM
-1. Comparison and conclusion of benchmarks
+1. [Comparison and conclusion of benchmarks](https://deepu.tech/concurrency-in-modern-languages-final/)
 
 ---
 
