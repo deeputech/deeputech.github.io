@@ -5,9 +5,153 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 31 Jan 2022 12:15:31 +0530</pubDate>
-    <lastBuildDate>Mon, 31 Jan 2022 12:15:31 +0530</lastBuildDate>
+    <pubDate>Fri, 04 Feb 2022 15:41:58 +0530</pubDate>
+    <lastBuildDate>Fri, 04 Feb 2022 15:41:58 +0530</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>Concurrency in modern programming languages: Rust vs Go vs Java vs Node.js vs Deno</title>
+        <description>Building a concurrent web server in Rust, Go, JS, TS, Kotlin, and Java to compare concurrency performance | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-final/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;This is a multi-part series where I’ll discuss concurrency in modern programming languages. I will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin, and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Concurrent web server in Rust&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrent web server in Java with JVM&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Comparison and conclusion of benchmarks&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;what-is-concurrency&quot;&gt;What is concurrency&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Concurrency is one of the most complex aspects of programming, and depending on your language of choice, the complexity can be anywhere from “that looks confusing” to “what black magic is this”.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Concurrency is the ability where multiple tasks can be executed in overlapping time periods, in no specific order without affecting the final outcome. Concurrency is a very broad term and can be achieved by multi-threading, parallelism, and/or asynchronous processing.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/glpIttD.jpeg&quot; alt=&quot;concurrency&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;First, I suggest you read the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;introduction post&lt;/a&gt; to understand this post better.&lt;/p&gt;
+
+&lt;h2 id=&quot;benchmarking--comparison&quot;&gt;Benchmarking &amp;amp; comparison&lt;/h2&gt;
+
+&lt;p&gt;In the previous posts, I built a simple web server in Rust, Go, Node.js, Deno, and Java. I kept it as simple as possible without using external dependencies as much as possible. I also kept the code similar across languages. In this final post, we will compare the performance of all these implementations to see which language offers the best performance for a concurrent web server.&lt;/p&gt;
+
+&lt;p&gt;If the language supports both asynchronous and multi-threaded concurrency, we will try both and a combination of both and pick the best performer for the comparison. The complexity of the application will hence depend on language features and language complexity. We will use whatever the language provides to make concurrency performance as good as possible without over-complicating stuff. The web server will just serve one endpoint, and it will add a sleep of two seconds on every tenth request. This will simulate a more realistic load, IMO.&lt;/p&gt;
+
+&lt;p&gt;We will use promises, thread pools, and workers if required and if the language supports it. We won’t use any unnecessary I/O in the application.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Disclaimer&lt;/em&gt;&lt;/strong&gt;: I’m not claiming this to be an accurate scientific method or the best benchmark for concurrency. I’m pretty sure different use cases will have different results, and real-world web servers will have more complexity that requires communication between concurrent processes affecting performance. I’m just trying to provide some simple base comparisons for a simple use case. Also, my knowledge of some languages is better than others; hence I might miss some optimizations here and there. So please don’t shout at me. If you think the code for a particular language can be improved out of the box to enhance concurrency performance, let me know. If you think this benchmark is useless, well, please suggest a better one :)&lt;/p&gt;
+
+&lt;p&gt;All the implementations used in this comparison can be found in &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks&quot;&gt;this GitHub repository&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;benchmarking-conditions&quot;&gt;Benchmarking conditions&lt;/h3&gt;
+
+&lt;p&gt;These will be some of the conditions I’ll be using for the benchmark.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The latest stable release versions of language/runtimes available are used, and as of writing, those are:
+    &lt;ul&gt;
+      &lt;li&gt;Rust: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.58.1-Stable&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Go: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.17.6&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Java: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;OpenJDK 17.0.2&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Node.js: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;17.4.0&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Deno: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1.18.1&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We will be using external dependencies only if that is the standard recommended way in the language.
+    &lt;ul&gt;
+      &lt;li&gt;latest versions of such dependencies as of writing will be used&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We are not going to look at improving concurrency performance using any configuration tweaks&lt;/li&gt;
+  &lt;li&gt;We will use ApacheBench for the benchmarks with the below settings:
+    &lt;ul&gt;
+      &lt;li&gt;Concurrency factor of 100 requests&lt;/li&gt;
+      &lt;li&gt;10000 total requests&lt;/li&gt;
+      &lt;li&gt;The benchmark will be done ten times for each language with a warmup round, and the mean values will be used.&lt;/li&gt;
+      &lt;li&gt;ApacheBench version on Fedora: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;httpd-tools-2.4.52-1.fc35.x86_64&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Command used: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ab -c 100 -n 10000 http://localhost:8080/&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;All the benchmarks are run on the same machine running Fedora 35 on an Intel i9-11900H (8 core/16 thread) processor with 64GB memory.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;comparison-parameters&quot;&gt;Comparison parameters&lt;/h3&gt;
+
+&lt;p&gt;I’ll be comparing the below aspects related to concurrency as well.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Performance, based on benchmark results&lt;/li&gt;
+  &lt;li&gt;Community consensus&lt;/li&gt;
+  &lt;li&gt;Ease of use and simplicity, especially for complex use cases&lt;/li&gt;
+  &lt;li&gt;External libraries and ecosystem for concurrency&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Based on the benchmark results, these are my observations.&lt;/p&gt;
+
+&lt;h3 id=&quot;benchmark-results&quot;&gt;Benchmark results&lt;/h3&gt;
+
+&lt;p&gt;The average values for different metrics across ten benchmark runs are as below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/qZk44zJ.png&quot; alt=&quot;Average values&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, there isn’t any significant difference between the languages when it comes to total time taken for 10k requests which means for a real-world use case the language choice isn’t going to be a huge factor for concurrency performance. But of course, if you want the best possible performance, then Rust clearly is faster than other languages as it gives you the highest throughput, followed by Java and Golang. JavaScript and TypeScript are behind them, but not by a considerable margin. The Go version using the built-in HTTP server is the slowest of the bunch due to inconsistent performance across runs, probably due to garbage collection (GC) kicking in, causing spikes. Also interesting is to see the difference between the multi-threaded and asynchronous approaches. While for Rust, multi-threaded implementation performs the best by a slight margin, the asynchronous version performs slightly better for Java and JavaScript. But none of the differences is significant enough to justify suggesting one approach over another for this particular case. But in general, I would recommend using the asynchronous approach if available as it’s more flexible without some of the limitations you might encounter with threads.&lt;/p&gt;
+
+&lt;p&gt;Here are the best results out of all the runs.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/Pqh5f9J.png&quot; alt=&quot;Best values&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can find the results used in the &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/results&quot;&gt;GitHub repo&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;community-concensus&quot;&gt;Community concensus&lt;/h3&gt;
+
+&lt;p&gt;The community consensus when it comes to concurrency performance is quite split. For example, both Rust and Go communities claim to be the best in concurrency performance. From personal experience, I find them relatively close in performance, with Rust having a slight lead over Go. The Node.js ecosystem was built over the promise of asynchronous concurrency performance, and there are testimonials of huge performance improvements when switching to Node.js. Java also boasts of real-world projects serving millions of concurrent requests without any issues; hence it’s hard to take a side here.&lt;/p&gt;
+
+&lt;p&gt;Another general observation is that Rust was quite consistent in terms of performance across runs while all other languages had some variance, especially when GC kicks in.&lt;/p&gt;
+
+&lt;h3 id=&quot;simplicity&quot;&gt;Simplicity&lt;/h3&gt;
+
+&lt;p&gt;While performance is quite similar between different languages and implementations, ease of use and simplicity is a whole different matter. I think it’s also important to differentiate between asynchronous and multi-threaded approaches.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Asynchronous&lt;/strong&gt;: I personally find Node.js and Deno the simplest and easy-to-use platforms for async concurrency. Golang would be my second choice as it’s also easy to use and simple without compromising on features or performance. Rust follows it as it is a bit more complex as it has more features and needs getting used to. I would rate Java last as it requires much more boilerplate, and doing asynchronous programming is more complex than in others. I hope project Loom fixes that for Java.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Multi-threaded&lt;/strong&gt;: For multi-threaded concurrency, I will put Rust first as it’s packed with features, and doing multi-threading is easy and worry-free in Rust. I’ll put Java second here as it has a mature ecosystem for multi-threading and is not too difficult to use. Go is very easy to use, but you don’t have a lot of control over OS threads else I would rate Go higher than Java. Finally, there are multi-threading capabilities in Node.js and Deno, but they are not as flexible as other languages; hence I’ll put them last.&lt;/p&gt;
+
+&lt;h3 id=&quot;ecosystem&quot;&gt;Ecosystem&lt;/h3&gt;
+
+&lt;p&gt;Rust has the best ecosystem for concurrency, in my opinion, followed by Java and Golang, which have matured options. Node.js and Deno, while not as good as others, offers a descent ecosystem as well&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+</content:encoded>
+        <media:content url="https://i.imgur.com/NAMPHmu.png" medium="image">https://i.imgur.com/NAMPHmu.png</media:content>
+        <pubDate>Fri, 04 Feb 2022 00:00:00 +0530</pubDate>
+        <link>https://deepu.tech/concurrency-in-modern-languages-final/</link>
+        <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages-final/</guid>
+        
+        <category>rust</category>
+        
+        <category>js</category>
+        
+        <category>go</category>
+        
+        <category>jvm</category>
+        
+        
+      </item>
     
       <item>
         <title>The state of pattern matching in Java 17</title>
@@ -1468,8 +1612,7 @@ There were few instances where I ended up using the same name for different cont
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Concurrent web server in Java with JVM&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
-  &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-final/&quot;&gt;Comparison and conclusion of benchmarks&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;hr /&gt;
@@ -2574,8 +2717,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Concurrent web server in JavaScript with NodeJS&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Concurrent web server in TypeScript with Deno&lt;/strong&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrent web server in Java with JVM&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
-  &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-final/&quot;&gt;Comparison and conclusion of benchmarks&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;If you are new to &lt;a href=&quot;https://deno.land/&quot;&gt;Deno&lt;/a&gt;, check this post out to get an idea.&lt;/p&gt;
@@ -2658,7 +2800,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 
 &lt;h2 id=&quot;benchmarking&quot;&gt;Benchmarking&lt;/h2&gt;
 
-&lt;p&gt;Now that we have some basic understanding of concurrency features in Deno for TypeScript, let us build a simple concurrent web server in TypeScript. Since asynchronous concurrency is the best way to achieve this in Deno we’ll build a sample application using the standard &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; module. The Deno version used is the latest (1.7.4) at the time of writing.&lt;/p&gt;
+&lt;p&gt;Now that we have some basic understanding of concurrency features in Deno for TypeScript, let us build a simple concurrent web server in TypeScript. Since asynchronous concurrency is the best way to achieve this in Deno we’ll build a sample application using the standard &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; module. The Deno version used is the latest (1.18.1) at the time of writing.&lt;/p&gt;
 
 &lt;h3 id=&quot;async-http-concurrent-webserver&quot;&gt;Async HTTP concurrent webserver&lt;/h3&gt;
 
@@ -2695,22 +2837,11 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 29
 30
 31
-32
-33
-34
-35
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;serve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ServerRequest&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;https://deno.land/std/http/server.ts&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;serve&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;https://deno.land/std/http/server.ts&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;// set listen port&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;serve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;hostname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;0.0.0.0&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;HTTP webserver running at:  http://localhost:8080/&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// listen to all incoming requests&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;handleRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;handleRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ServerRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;handleRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;c1&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -2721,12 +2852,11 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
   &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Deno&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readTextFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;./hello.html&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
   &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
     &lt;span class=&quot;na&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
   &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;set&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Connection&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;keep-alive&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;respond&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// send data to client side&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;body&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// send data to client side&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 
 &lt;span class=&quot;c1&quot;&gt;// sleep function since NodeJS doesn't provide one&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kr&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
@@ -2734,6 +2864,10 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
     &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
   &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// set listen port and listen to all incoming requests&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;serve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;handleRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;hostname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;0.0.0.0&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;HTTP webserver running at:  http://localhost:8080/&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;As you can see we create an HTTP server and bind it to port 8080 and listen to all incoming requests in a for await loop. Each request is processed in a function that internally uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;async/await&lt;/code&gt;.&lt;/p&gt;
@@ -2780,7 +2914,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
 38
 39
 40
-41
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-k&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
 
 This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
@@ -2794,34 +2927,33 @@ Document Path:          /
 Document Length:        174 bytes
 
 Concurrency Level:      100
-Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   21.160 seconds
+Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   20.393 seconds
 Complete requests:      10000
 Failed requests:        0
-Keep-Alive requests:    10000
-Total transferred:      2380000 bytes
+Total transferred:      3150000 bytes
 HTML transferred:       1740000 bytes
-Requests per second:    472.59 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
-Time per request:       211.600 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Time per request:       2.116 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Transfer rate:          109.84 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
+Requests per second:    490.37 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
+Time per request:       203.927 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Time per request:       2.039 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+Transfer rate:          150.85 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
 
 Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
               min  mean[+/-sd] median   max
-Connect:        0    0   0.7      0      11
-Processing:     0  207 600.7      5    2250
-Waiting:        0  207 600.7      5    2250
-Total:          0  207 600.7      5    2254
+Connect:        0    0   0.3      0       5
+Processing:     0  202 600.3      1    2029
+Waiting:        0  202 600.3      1    2029
+Total:          0  202 600.3      1    2029
 
 Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-  50%      5
-  66%      8
-  75%     11
-  80%     13
+  50%      1
+  66%      1
+  75%      2
+  80%      3
   90%   2001
-  95%   2006
-  98%   2012
-  99%   2017
- 100%   2254 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+  95%   2002
+  98%   2002
+  99%   2003
+ 100%   2029 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;One minor thing to note is that I had to pass the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-k&lt;/code&gt; flag to ApacheBench for this to run all requests. I still couldn’t figure out why it behaves this way. A very similar implementation in every other language worked fine without the flag. So if someone has an idea let me know.&lt;/p&gt;
@@ -2862,514 +2994,6 @@ since there is no clean way to do a multi-threaded server in Deno the &lt;code c
         <category>javascript</category>
         
         <category>typescript</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Concurrency in modern programming languages: JavaScript on NodeJS</title>
-        <description>Building a concurrent web server in JavaScript on NodeJS to compare concurrency performance with Rust, Go, TS, Kotlin, and Java | &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-js/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the &lt;a href=&quot;https://doc.rust-lang.org/book/ch20-00-final-project-a-web-server.html&quot;&gt;Rust book&lt;/a&gt;, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms. The chapters of this series are as below.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;Concurrent web server in Rust&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;Concurrent web server in Golang&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Concurrent web server in JavaScript with NodeJS&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-ts/&quot;&gt;Concurrent web server in TypeScript with Deno&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrent web server in Java with JVM&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Concurrent web server in Kotlin with JVM&lt;/li&gt;
-  &lt;li&gt;Comparison and conclusion of benchmarks&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;concurrency-in-javascript--nodejs&quot;&gt;Concurrency in JavaScript &amp;amp; NodeJS&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;JavaScript has a concurrency model based on an event loop, which is responsible for executing the code, collecting and processing events, and executing queued sub-tasks. This model is quite different from models in other languages like C and Java.&lt;/p&gt;
-
-  &lt;p&gt;– MDN Web Docs&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Concurrency in JavaScript is quite different from other languages we are looking at. The biggest difference is that JavaScript is single-threaded and hence multi-threading and parallelism is out of the question – at least not traditional multi-threading or parallelism like in other languages, we will come to that later. But concurrency on the other hand is the heart and soul of the JavaScript event loop. It is how JavaScript is able to bridge the gap of multi-threading making JavaScript a serious contender in an arena filled with multi-threaded languages like Java, Go, Python, Rust, and so on. Read the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;introduction chapter&lt;/a&gt; to see why the difference matters.&lt;/p&gt;
-
-&lt;p&gt;The JavaScript event loop relies on message passing concurrency to execute items on its stack in a non-blocking way, more like, it gives a perception of being non-blocking, because, in reality, it does block for a short moment since its single-threaded and execution is interleaved. This makes it perfect for most of the concurrency use cases you would encounter and you will rarely miss having multi-threading and true parallelism support and in many use cases, you can go head to head with a fully multi-threaded language.&lt;/p&gt;
-
-&lt;p&gt;While languages like Rust offer &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;flexibility and power&lt;/a&gt; and Go &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;offers simplicity and performance&lt;/a&gt;, JavaScript was never meant for concurrency but that didn’t stop the awesome people behind NodeJS to come up with a platform that was fully focused on concurrency and non-blocking I/O. While JavaScript event loop already paved the way for it, NodeJS made JS a truly viable option for server-side concurrency. All this is made possible thanks to the &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop&quot;&gt;event loop&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Glossary/Callback_function&quot;&gt;Callbacks&lt;/a&gt;, &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise&quot;&gt;Promises&lt;/a&gt;, and &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await&quot;&gt;Async/Await&lt;/a&gt; support in JavaScript.&lt;/p&gt;
-
-&lt;p&gt;Unlike in many other languages, maybe except Go, concurrency is used a lot in JavaScript by developers, sometimes without even realizing it, especially in NodeJS applications. It’s due to the programming model followed by NodeJS which relies heavily on callbacks and Promises and also because it is extremely easy to do so due to the flexible nature of JavaScript. The NodeJS standard library also uses concurrency where ever possible and there is no much overhead in doing so.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;The default for concurrency in JavaScript is an asynchronous programming model using callbacks, Promise or async/await.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;With JavaScript, it’s possible to do some level of multi-threaded concurrency and parallelization. It’s not as flexible as Rust or as simple as Go, but still, you can achieve almost everything possible in other languages and still get quite decent performance for most of those use cases.&lt;/p&gt;
-
-&lt;h3 id=&quot;multi-threading&quot;&gt;Multi-threading&lt;/h3&gt;
-
-&lt;p&gt;JavaScript is single-threaded hence the only way to achieve multi-threading is by spinning up multiple instances of the JS Engine. But then how do you communicate between these instances? That is where &lt;a href=&quot;https://developer.mozilla.org/en-us/docs/Web/API/Web_Workers_API&quot;&gt;Web Workers&lt;/a&gt; come in.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Web Workers makes it possible to run a script operation in a background thread separate from the main execution thread of a web application&lt;/p&gt;
-
-  &lt;p&gt;– MDN Web Docs&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;With the help of web workers, it is possible to offload heavy computations to a separate thread hence freeing up the main thread. These workers and the main thread communicate using events and a worker thread can spawn other worker threads.&lt;/p&gt;
-
-&lt;p&gt;Now when it comes to NodeJS, there are few ways to spawn additional threads and processes. There is the classical &lt;a href=&quot;https://nodejs.org/api/child_process.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;child_process&lt;/code&gt;&lt;/a&gt; module, the more modern &lt;a href=&quot;https://nodejs.org/dist/latest-v15.x/docs/api/worker_threads.html&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;worker_threads&lt;/code&gt;&lt;/a&gt; module which is quite similar to web workers, and the &lt;a href=&quot;https://nodejs.org/api/cluster.html#cluster_cluster&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cluster&lt;/code&gt;&lt;/a&gt; module for creating clusters of NodeJS instances.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Workers (threads) are useful for performing CPU-intensive JavaScript operations. They do not help much with I/O-intensive work.&lt;/p&gt;
-
-  &lt;p&gt;– NodeJS docs&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Be it web workers or worker threads, they are not as flexible or easy as the multi-threading implementations in other languages and has many limitations and hence these are mostly used only when there are CPU intensive tasks or background tasks to be performed for other use cases concurrency using asynchronous processing would be sufficient.&lt;/p&gt;
-
-&lt;p&gt;JavaScript doesn’t provide access to OS threads or green threads, the same applies for NodeJS however worker threads and the cluster comes close, and hence advanced multi-threading is not feasible. Message-passing concurrency is possible and is used by the JS event loop itself and can be used for both workers and the standard concurrency model in JS. Shared-state concurrency is possible in the standard concurrency model and with workers using array buffers.&lt;/p&gt;
-
-&lt;h3 id=&quot;asynchronous-processing&quot;&gt;Asynchronous processing&lt;/h3&gt;
-
-&lt;p&gt;Technically asynchronous programming is not part of concurrency but in practice, it goes hand in hand for many use cases and improves performance, and makes resource usage more efficient. Since the JavaScript event loop is non-blocking and asynchronous, it’s perfect for asynchronous programming and that’s why the concept is so popular among JS developers than in other languages and is heavily used especially in NodeJS and on the client-side with modern SPA frameworks. In a way, asynchronous programming was made popular by JavaScript and NodeJS. JavaScript provides 3 ways to do asynchronous programming, Callbacks, Promises, and Async/Await. In recent times Async/Await is becoming more widely used instead of or together with promises and callbacks due to its cleaner approach (Read, no callback hell). In NodeJS all I/O operations are async(non-blocking) by default, you would have to use sync alternatives provided to do synchronous I/O. This makes it easy to write concurrent applications in NodeJS using these constructs.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;// sequential&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;users&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getUsers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;posts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPosts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;messages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getMessages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// do stuff&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// concurrent&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;load&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;posts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;messages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;all&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getUsers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getPosts&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;getMessages&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()]);&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// do stuff&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;benchmarking&quot;&gt;Benchmarking&lt;/h2&gt;
-
-&lt;p&gt;Now that we have some basic understanding of concurrency features in JavaScript &amp;amp; NodeJS, let us build a simple concurrent web server in NodeJS. Since asynchronous concurrency is the best way to achieve this in NodeJS we’ll build a sample application using the standard &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; module and then improve it using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cluster&lt;/code&gt; module. The NodeJS version used is the latest (15.8.0) at the time of writing.&lt;/p&gt;
-
-&lt;h3 id=&quot;async-http-concurrent-webserver&quot;&gt;Async HTTP concurrent webserver&lt;/h3&gt;
-
-&lt;p&gt;This example is closer to the Rust Asynchronous example we built in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;second chapter&lt;/a&gt;. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/jsws&quot;&gt;GitHub here&lt;/a&gt;. We are not using any external dependency in this case.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;promises&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// set router&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;requestListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;localhost&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;port&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// set listen port&lt;/span&gt;
-&lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Server is running on http://&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;requestListener&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Adding delay. Count: &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/hello.html&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// read html file&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setHeader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Connection&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;keep-alive&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeHead&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 200 OK&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// send data to client side&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see we create an HTTP server and bind it to port 8080 and listen to all incoming requests. Each request is processed in a callback function that internally uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;async/await&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
-
-This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
-...
-
-Server Software:
-Server Hostname:        127.0.0.1
-Server Port:            8080
-
-Document Path:          /
-Document Length:        174 bytes
-
-Concurrency Level:      100
-Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   21.329 seconds
-Complete requests:      10000
-Failed requests:        0
-Total transferred:      2540000 bytes
-HTML transferred:       1740000 bytes
-Requests per second:    468.85 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
-Time per request:       213.286 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Time per request:       2.133 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Transfer rate:          116.30 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
-
-Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-              min  mean[+/-sd] median   max
-Connect:        0    0   0.9      0      11
-Processing:     0  207 599.9      4    2048
-Waiting:        0  206 600.0      3    2038
-Total:          0  208 599.9      4    2048
-
-Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-  50%      4
-  66%      8
-  75%     13
-  80%     19
-  90%   2000
-  95%   2004
-  98%   2012
-  99%   2017
- 100%   2048 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;Let’s see if there is a difference in performance with multi-threading using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cluster&lt;/code&gt; package.&lt;/p&gt;
-
-&lt;h3 id=&quot;multi-threaded-webserver-cluster&quot;&gt;Multi-threaded webserver cluster&lt;/h3&gt;
-
-&lt;p&gt;This example is quite similar to the previous one except that we are using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cluster&lt;/code&gt; module to fork into master and worker threads, one worker per CPU thread. We are still using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; module and callbacks here. You can find the full example on &lt;a href=&quot;https://github.com/deepu105/concurrency-benchmarks/tree/main/jsws_thread&quot;&gt;GitHub here&lt;/a&gt;. We are not using any external dependency in this case as well.&lt;/p&gt;
-
-&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;promises&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cluster&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numCPUs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cpus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// set router&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;createServer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;requestListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;localhost&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;port&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;isMaster&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Master &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; is running&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;c1&quot;&gt;// Fork workers.&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;numCPUs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;fork&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;nx&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;signal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;worker &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt; died&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// set listen port, TCP connection is shared by all workers&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;listen&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;Worker &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;process&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;: Server is running on http://&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;requestListener&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// add 2 second delay to every 10th request&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Adding delay. Count: &lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;readFile&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/hello.html&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// read html file&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;setHeader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;Connection&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;keep-alive&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;writeHead&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 200 OK&lt;/span&gt;
-  &lt;span class=&quot;nx&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;end&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// send data to client side&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// sleep function since NodeJS doesn't provide one&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Promise&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;setTimeout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;ms&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see we used the same code from previous example and moved the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;server.listen&lt;/code&gt; to the worker nodes. The cluster module forks into master and workers. We assign a callback function to handle each request which internally calls the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;requestListener&lt;/code&gt; method. The code here is a bit more complex compared to the previous one.&lt;/p&gt;
-
-&lt;p&gt;Let us run a benchmark using ApacheBench. We will make 10000 requests with 100 concurrent requests.&lt;/p&gt;
-
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;ab &lt;span class=&quot;nt&quot;&gt;-c&lt;/span&gt; 100 &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; 10000 http://127.0.0.1:8080/
-
-This is ApacheBench, Version 2.3 &amp;lt;&lt;span class=&quot;nv&quot;&gt;$Revision&lt;/span&gt;: 1879490 &lt;span class=&quot;nv&quot;&gt;$&amp;gt;&lt;/span&gt;
-...
-
-Server Software:
-Server Hostname:        127.0.0.1
-Server Port:            8080
-
-Document Path:          /
-Document Length:        174 bytes
-
-Concurrency Level:      100
-Time taken &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;tests:   21.075 seconds
-Complete requests:      10000
-Failed requests:        0
-Total transferred:      2540000 bytes
-HTML transferred:       1740000 bytes
-Requests per second:    474.50 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;c&quot;&gt;#/sec] (mean)&lt;/span&gt;
-Time per request:       210.747 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Time per request:       2.107 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;ms] &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;mean, across all concurrent requests&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-Transfer rate:          117.70 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;Kbytes/sec] received
-
-Connection Times &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-              min  mean[+/-sd] median   max
-Connect:        0    0   0.8      0      11
-Processing:     0  206 600.1      4    2047
-Waiting:        0  205 600.1      3    2045
-Total:          1  206 600.1      4    2047
-
-Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;ms&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-  50%      4
-  66%      8
-  75%     11
-  80%     14
-  90%     88
-  95%   2005
-  98%   2012
-  99%   2016
- 100%   2047 &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;longest request&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;We got almost identical results here. If you look close, the multi-threaded one is slightly faster but then the added complexity might not be worth it for all use cases. So it might be preferable to just use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; package without clustering for such use cases as it’s cleaner.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;As I explained in the &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;first part&lt;/a&gt; of this serious, this simple benchmarking is not an accurate representation for all concurrency use cases. It’s a simple test for a very particular use case, a simple concurrent web server that just serves a file. The idea is to see the differences in solutions and to understand how concurrency works in JavaScript specifically on NodeJS. And for this particular use case, an asynchronous server using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; module provided by the standard library does seem to be the best choice.&lt;/p&gt;
-
-&lt;p&gt;So stay tuned for the next post where we will look at concurrency in &lt;a href=&quot;https://deno.land/&quot;&gt;Deno&lt;/a&gt; and build the same use case in TypeScript.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop&quot;&gt;developer.mozilla.org&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://tsh.io/blog/simple-guide-concurrency-node-js/&quot;&gt;tsh.io&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/@onejohi/concurrency-in-javascript-f5bb387708d8&quot;&gt;medium.com/@onejohi&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.logrocket.com/a-complete-guide-to-threads-in-node-js-4fa3898fe74f/&quot;&gt;blog.logrocket.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.logrocket.com/node-js-multithreading-what-are-worker-threads-and-why-do-they-matter-48ab102f8b10/&quot;&gt;blog.logrocket.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/ideas-at-igenius/some-beginner-tips-for-concurrency-with-async-await-and-promise-all-dc28b5a4411e&quot;&gt;medium.com/ideas-at-igenius&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@mparzuchowski?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Michał Parzuchowski&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-</content:encoded>
-        <media:content url="https://i.imgur.com/PABMBDP.jpg" medium="image">https://i.imgur.com/PABMBDP.jpg</media:content>
-        <pubDate>Fri, 05 Feb 2021 00:00:00 +0530</pubDate>
-        <link>https://deepu.tech/concurrency-in-modern-languages-js/</link>
-        <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages-js/</guid>
-        
-        <category>languages</category>
-        
-        <category>concurrency</category>
-        
-        <category>nodejs</category>
-        
-        <category>javascript</category>
         
         
       </item>
