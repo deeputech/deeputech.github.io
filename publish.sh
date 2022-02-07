@@ -50,11 +50,11 @@ if [ "$ci" = true ] || [ -z "$(git status --porcelain)" ]; then
     now=$(date)
     git add --all || exit
     git commit -am "Updated site on $now" || exit
-    # if [ "$ci" = true ]; then
-        # git push https://${{ secrets.GITHUB_TOKEN }}@github.com/<GITHUB_USERNAME>/<REPOSITORY_NAME>.git
-    # else
-    git push origin master --force || exit
-    # fi
+    if [ "$ci" = true ]; then
+        git push https://$GITHUB_TOKEN@github.com/deeputech/deeputech.github.io.git
+    else
+        git push origin master --force || exit
+    fi
 
     echo ">> $now: Published changes to GitHub"
 
