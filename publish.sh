@@ -1,16 +1,22 @@
 #!/bin/bash
 
 publishDev=true
+ci=false
 
-while getopts 's' opt; do
+while getopts 'sc' opt; do
     case $opt in
         s) publishDev=false ;;
+        c) ci=true ;;
         *) echo 'Error in command line parsing' >&2
             exit 1
     esac
 done
 
-if [ -z "$(git status --porcelain)" ]; then
+echo "Publish dev: $publishDev"
+echo "Ci: $ci"
+
+# check if $ci is true or git status is clean
+if [ "$ci" = true ] || [ -z "$(git status --porcelain)" ]; then
     echo ">>> Working directory clean"
     TMP_LOC=/tmp/deepu.github.io
 
@@ -36,7 +42,7 @@ if [ -z "$(git status --porcelain)" ]; then
 
     echo ">> Checkout and clean master"
     git checkout master || exit
-    find -mindepth 1 -depth -print0 | grep -vEzZ '(_drafts(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf || exit
+    find -mindepth 1 -depth -print0 | grep -vEzZ '(_drafts(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|.github(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf || exit
 
     echo ">> Move site form temp & publish to GitHub"
     mv $TMP_LOC/* . || exit
