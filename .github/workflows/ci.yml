@@ -36,14 +36,11 @@ jobs:
         with:
           ruby-version: 2.7
       - uses: actions/setup-node@v2
-      # - name: install dependencies & build site
-      #   uses: limjh16/jekyll-action-ts@v2
-      #   with:
-      #     enable_cache: true
-      # These dependencies are required for `clipboard`
-      # - run: sudo apt-get install -y -qq libxcb1-dev libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev
       - run: npm install
+      - run: git config user.email "d4udts@gmail.com"
+      - run: git config user.name "Deepu K Sasidharan"
       - run: ./publish.sh -sc
         env:
           DEV_API_KEY: ${{ secrets.DEV_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
