@@ -41,6 +41,7 @@ if [ "$ci" = true ] || [ -z "$(git status --porcelain)" ]; then
     mv _site/* $TMP_LOC || exit
 
     echo ">> Checkout and clean master"
+    git branch
     git checkout master || exit
     find -mindepth 1 -depth -print0 | grep -vEzZ '(_drafts(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|.github(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf || exit
 
