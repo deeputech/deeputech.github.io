@@ -51,7 +51,7 @@ if [ "$ci" = true ] || [ -z "$(git status --porcelain)" ]; then
     git add --all || exit
     git commit -am "Updated site on $now" || exit
     if [ "$ci" = true ]; then
-        git push https://$GITHUB_TOKEN@github.com/deeputech/deeputech.github.io.git master --force || exit
+        git push https://$GITHUB_ACCESS_TOKEN@github.com/deeputech/deeputech.github.io.git master --force || exit
     else
         git push origin master --force || exit
     fi
