@@ -46,9 +46,15 @@ First, I suggest you read the [introduction post](https://deepu.tech/concurrency
 
 In the previous posts, I built a simple web server in Rust, Go, Node.js, Deno, and Java. I kept it as simple as possible without using external dependencies as much as possible. I also kept the code similar across languages. In this final post, we will compare the performance of all these implementations to see which language offers the best performance for a concurrent web server.
 
-If the language supports both asynchronous and multi-threaded concurrency, we will try both and a combination of both and pick the best performer for the comparison. The complexity of the application will hence depend on language features and language complexity. We will use whatever the language provides to make concurrency performance as good as possible without over-complicating stuff. The web server will just serve one endpoint, and it will add a sleep of two seconds on every tenth request. This will simulate a more realistic load, IMO.
+If the language supports both asynchronous and multi-threaded concurrency, we will try both and a combination of both and pick the best performer for the comparison. The complexity of the application will hence depend on language features and language complexity. We will use whatever the language provides to make concurrency performance as good as possible without over-complicating stuff. The web server will just serve one endpoint<del>, and it will add a sleep of two seconds on every tenth request. This will simulate a more realistic load, IMO.</del>
 
 We will use promises, thread pools, and workers if required and if the language supports it. We won't use any unnecessary I/O in the application.
+
+The code implementations are not probably the best possible, if you have suggestion for improvement please open and issue or PR on [this repository](https://github.com/deepu105/concurrency-benchmarks). Further improvements possible are:
+
+- Use a thread pool for Java multi-threaded version
+- Use [`createReadStream` for Node.js](https://github.com/deepu105/concurrency-benchmarks/issues/5)
+- Use Warp, Rocket or actix-web for Rust
 
 **_Disclaimer_**: I'm not claiming this to be an accurate scientific method or the best benchmark for concurrency. I'm pretty sure different use cases will have different results, and real-world web servers will have more complexity that requires communication between concurrent processes affecting performance. I'm just trying to provide some simple base comparisons for a simple use case. Also, my knowledge of some languages is better than others; hence I might miss some optimizations here and there. So please don't shout at me. If you think the code for a particular language can be improved out of the box to enhance concurrency performance, let me know. If you think this benchmark is useless, well, please suggest a better one :)
 
@@ -153,11 +159,11 @@ Another general observation is that Rust was quite consistent in terms of perfor
 
 ### Simplicity
 
-While performance is quite similar between different languages and implementations, ease of use and simplicity is a whole different matter. I think it's also important to differentiate between asynchronous and multi-threaded approaches.
+While performance is an important aspect, ease of use and simplicity is also very important. I think it's also important to differentiate between asynchronous and multi-threaded approaches.
 
 **Asynchronous**: I personally find Node.js and Deno the simplest and easy-to-use platforms for async concurrency. Golang would be my second choice as it's also easy to use and simple without compromising on features or performance. Rust follows it as it is a bit more complex as it has more features and needs getting used to. I would rate Java last as it requires much more boilerplate, and doing asynchronous programming is more complex than in others. I hope project Loom fixes that for Java.
 
-**Multi-threaded**: For multi-threaded concurrency, I will put Rust first as it's packed with features, and doing multi-threading is easy and worry-free in Rust. I'll put Java second here as it has a mature ecosystem for multi-threading and is not too difficult to use. Go is very easy to use, but you don't have a lot of control over OS threads else I would rate Go higher than Java. Finally, there are multi-threading capabilities in Node.js and Deno, but they are not as flexible as other languages; hence I'll put them last.
+**Multi-threaded**: For multi-threaded concurrency, I will put Rust first as it's packed with features, and doing multi-threading is easy and worry-free in Rust due to memory and thread safety. You don't have to worry about race conditions and such. I'll put Java and Go second here. Java has a mature ecosystem for multi-threading and is not too difficult to use. Go is very easy to use, but you don't have a lot of control over OS threads else I would rate Go higher than Java. Finally, there are multi-threading capabilities in Node.js and Deno, but they are not as flexible as other languages; hence I'll put them last.
 
 ### Ecosystem
 
