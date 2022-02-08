@@ -1,16 +1,22 @@
 #!/bin/bash
 
 publishDev=true
+ci=false
 
-while getopts 's' opt; do
+while getopts 'sc' opt; do
     case $opt in
         s) publishDev=false ;;
+        c) ci=true ;;
         *) echo 'Error in command line parsing' >&2
             exit 1
     esac
 done
 
-if [ -z "$(git status --porcelain)" ]; then
+echo "Publish dev: $publishDev"
+echo "Ci: $ci"
+
+# check if $ci is true or git status is clean
+if [ "$ci" = true ] || [ -z "$(git status --porcelain)" ]; then
     echo ">>> Working directory clean"
     TMP_LOC=/tmp/deepu.github.io
 
@@ -35,15 +41,20 @@ if [ -z "$(git status --porcelain)" ]; then
     mv _site/* $TMP_LOC || exit
 
     echo ">> Checkout and clean master"
+    git branch
     git checkout master || exit
-    find -mindepth 1 -depth -print0 | grep -vEzZ '(_drafts(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf || exit
+    find -mindepth 1 -depth -print0 | grep -vEzZ '(_drafts(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|.github(/|$)|\.git(/|$)|/\.gitignore$)' | xargs -0 rm -rvf || exit
 
     echo ">> Move site form temp & publish to GitHub"
     mv $TMP_LOC/* . || exit
     now=$(date)
     git add --all || exit
     git commit -am "Updated site on $now" || exit
-    git push origin master --force || exit
+    if [ "$ci" = true ]; then
+        git push https://$GITHUB_ACCESS_TOKEN@github.com/deeputech/deeputech.github.io.git master --force || exit
+    else
+        git push origin master --force || exit
+    fi
 
     echo ">> $now: Published changes to GitHub"
 
