@@ -1,9 +1,9 @@
 ---
 title: >-
   Concurrency in modern programming languages: Rust vs Go vs Java vs Node.js vs
-  Deno
+  Deno vs .NET 6
 description: >-
-  Building a concurrent web server in Rust, Go, JS, TS, Kotlin, and Java to
+  Building a concurrent web server in Rust, Go, JS, TS, .NET, and Java to
   compare concurrency performance
 published: true
 featured: false
@@ -11,7 +11,7 @@ tags:
   - rust
   - js
   - go
-  - jvm
+  - java
 series: concurrency in modern programming languages
 canonical_url: "https://deepu.tech/concurrency-in-modern-languages-final/"
 cover_image: "https://i.imgur.com/JGoa8Xe.png"
@@ -53,8 +53,9 @@ We will use promises, thread pools, and workers if required and if the language 
 The code implementations are not probably the best possible, if you have suggestion for improvement please open and issue or PR on [this repository](https://github.com/deepu105/concurrency-benchmarks). Further improvements possible are:
 
 - Use a thread pool for Java multi-threaded version
+- Use a Java webserver library
 - Use [`createReadStream` for Node.js](https://github.com/deepu105/concurrency-benchmarks/issues/5)
-- Use Warp, Rocket or actix-web for Rust
+- <del>Use Warp, Rocket or actix-web for Rust</del> Added a Rust actix-web sample to comparison
 
 **_Disclaimer_**: I'm not claiming this to be an accurate scientific method or the best benchmark for concurrency. I'm pretty sure different use cases will have different results, and real-world web servers will have more complexity that requires communication between concurrent processes affecting performance. I'm just trying to provide some simple base comparisons for a simple use case. Also, my knowledge of some languages is better than others; hence I might miss some optimizations here and there. So please don't shout at me. If you think the code for a particular language can be improved out of the box to enhance concurrency performance, let me know. If you think this benchmark is useless, well, please suggest a better one :)
 
@@ -72,17 +73,18 @@ These will be some of the conditions I'll use for the benchmark.
   - Java: `OpenJDK 17.0.2`
   - Node.js: `17.4.0`
   - Deno: `1.18.1`
+  - .NET: `6.0.100`
 - **Update**: Thread.sleep has been removed from all implementations.
 - We will be using external dependencies only if that is the standard recommended way in the language.
   - latest versions of such dependencies as of writing will be used
 - We are not going to look at improving concurrency performance using any configuration tweaks
+- **Update**: Many people pointed out that ApacheBench is not the best tool for this benchmark. I have hence also included results from [wrk](https://github.com/wg/wrk) and [drill](https://github.com/fcsonline/drill)
 - We will use ApacheBench for the benchmarks with the below settings:
   - Concurrency factor of 100 requests
   - 10000 total requests
   - The benchmark will be done ten times for each language with a warmup round, and the mean values will be used.
   - ApacheBench version on Fedora: `httpd-tools-2.4.52-1.fc35.x86_64`
   - Command used: `ab -c 100 -n 10000 http://localhost:8080/`
-- **Update**: Many people pointed out that ApacheBench is not the best tool for this benchmark. I have hence also included results from [wrk](https://github.com/wg/wrk) and [drill](https://github.com/fcsonline/drill)
 - All the benchmarks are run on the same machine running Fedora 35 on an Intel i9-11900H (8 core/16 thread) processor with 64GB memory.
   - The `wrk` and `drill` clients were run from another similar machine on the same network and also from the same computer; the results were more or less the same; I used the results from the client computer for comparisons.
 
@@ -99,7 +101,9 @@ I'll be comparing the below aspects related to concurrency as well.
 
 **Updated**: I have updated the benchmark results with the results from [wrk](https://github.com/wg/wrk), [drill](https://github.com/fcsonline/drill) and also updated previous results from ApacheBench after tweaks suggested by various folks.
 
-**Update 2**: There is a [.NET 6 version](https://github.com/deepu105/concurrency-benchmarks/tree/nosleep/dotnetws) in the repo now, thanks to [srollinet](https://github.com/srollinet) for the PR. There is some [performance numbers in the PR](https://github.com/deepu105/concurrency-benchmarks/pull/6)
+**Update 2**: There is a [.NET 6 version](https://github.com/deepu105/concurrency-benchmarks/tree/nosleep/dotnetws) in the repo now, thanks to [srollinet](https://github.com/srollinet) for the PR. Benchmarks updated with the .NET results.
+
+**Update 3**: Rust using actix-web and Java undertow is now included in the `wrk` and `drill` benchmarks. The implementations were simplified to return just a string instead of doing a file I/O for these and hence they are shown as a separate set. I started this series as a concurrency in languages experiment and now this feels like benchmark of web server frameworks, while concurrency is an important aspect of these I'm not sure if the results mean anything anymore from a concurrency of the language aspect.
 
 ### Results from [wrk](https://github.com/wg/wrk)
 
@@ -111,9 +115,13 @@ wrk -t8 -c500 -d30s http://127.0.0.1:8080
 
 ![wrk benchmarks with Go HTTP version](https://i.imgur.com/j83tChU.png)
 
-The Go HTTP version blows everything out of the water when it comes to req/second performance. If we remove it, we get a better picture as below.
+**Update** comparison of Go HTTP, Rust actix-web, Java Undertow and .NET 6
 
-![wrk benchmarks without Go HTTP version](https://i.imgur.com/rDWT8Mi.png)
+![wrk benchmarks with web servers](https://i.imgur.com/sUMZ1OX.png)
+
+The Go, Rust, and Java web server versions blows everything out of the water when it comes to req/second performance. If we remove it, we get a better picture as below.
+
+![wrk benchmarks without web servers](https://i.imgur.com/rDWT8Mi.png)
 
 ### Results from [drill](https://github.com/fcsonline/drill)
 
@@ -121,9 +129,17 @@ Benchmark using `drill` with concurrency 1000 and 1 million requests
 
 ![drill benchmark 1](https://i.imgur.com/z4K0lJ8.png)
 
+**Update** comparison of Go HTTP, Rust actix-web, Java Undertow and .NET 6
+
+![drill benchmark 1 with web servers](https://i.imgur.com/eWDkxyz.png)
+
 Benchmark using `drill` with concurrency 2000 and 1 million requests
 
 ![drill benchmark 2](https://i.imgur.com/Xfp1trI.png)
+
+**Update** comparison of Go HTTP, Rust actix-web, Java Undertow and .NET 6
+
+![drill benchmark 2 with web servers](https://i.imgur.com/qF5BsSj.png)
 
 ### Previous ApacheBench results with thread blocking
 
@@ -141,7 +157,7 @@ Based on the benchmark results, these are my observations.
 
 Since recommendations based on benchmarks are hot topics, I'll just share my observations, and you can make decisions yourself.
 
-- For the HTTP server benchmark using `wrk`, Go HTTP wins in request/sec, latency, and throughput, but it uses more memory and CPU than Rust. This might be because Go has one of the best built-in HTTP libraries, and it's extremely tuned for the best possible performance; hence it's not fair to compare that with the simple TCP implementations I did for Java and Rust. But you can compare it to Node.js and Deno as they also have standard HTTP libs that are used here for benchmarks.
+- For the HTTP server benchmark using `wrk`, Go HTTP wins in request/sec, latency, and throughput, but it uses more memory and CPU than Rust. This might be because Go has one of the best built-in HTTP libraries, and it's extremely tuned for the best possible performance; hence it's not fair to compare that with the simple TCP implementations I did for Java and Rust. But you can compare it to Node.js and Deno as they also have standard HTTP libs that are used here for benchmarks. **Update**: I have now compared Go HTTP to Rust actix-web and Java Undertow, and surprisingly Undertow performs better and actix-web comes second. Probably a Go web framework, like Gin, will come closer to Undertow and actix-web.
 - The Go TCP version is a fair comparison to the Rust and Java implementations, and in this case, Both Java and Rust outperforms Go and hence would be logical to expect third party HTTP libraries in Rust and Java that can compete with Go and if I'm a betting person I would bet that there is a Rust library that can outperform Go.
 - Resource usage is a whole different story, Rust seems to use the least memory and CPU consistently in all the benchmarks, while Java uses the most memory, and Node.js multi-threaded version uses the most CPU.
 - Asynchronous Rust seems to perform worst than multi-threaded Rust implementations.
