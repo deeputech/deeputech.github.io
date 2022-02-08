@@ -99,6 +99,8 @@ I'll be comparing the below aspects related to concurrency as well.
 
 **Updated**: I have updated the benchmark results with the results from [wrk](https://github.com/wg/wrk), [drill](https://github.com/fcsonline/drill) and also updated previous results from ApacheBench after tweaks suggested by various folks.
 
+**Update 2**: There is a [.NET 6 version](https://github.com/deepu105/concurrency-benchmarks/tree/nosleep/dotnetws) in the repo now, thanks to [srollinet](https://github.com/srollinet) for the PR. There is some [performance numbers in the PR](https://github.com/deepu105/concurrency-benchmarks/pull/6)
+
 ### Results from [wrk](https://github.com/wg/wrk)
 
 Benchmark using `wrk` with the below command (Threads 8, Connections 500, duration 30 seconds):
@@ -147,6 +149,7 @@ Since recommendations based on benchmarks are hot topics, I'll just share my obs
 - Java and Deno have more failed requests than others.
 - When concurrent requests are increased from 1000 to 2000, most implementations have a very high failure rate. The Go HTTP and Rust Tokio versions have nearly 100% failure rates, while multi-threaded Node.js have the least failure and have good performance at that concurrency level but with high CPU usage. It runs multiple versions of V8 for multi-threading, which explains the high CPU use.
 - Overall, Node.js still seems to perform better than Deno.
+- Another important takeaway is that benchmarking tools like ApacheBench, wrk, or drill seems to offer very different results and hence micro-benchmarks are not that reliable as ultimate performance benchmarks. Based on actual use case and implementation specific details there could be a lot of differences. Thanks to [Eamon Nerbonne for pointing it out](https://dev.to/eamonnerbonne/comment/1lpkf).
 - Apache Benchmarks run on versions with and without `thread.sleep` doesn't say much as the results are similar for all implementations, and it might be due to limitations of the ApacheBench tool. Hence as many people pointed out, i'm disregarding them.
 
 <del>With ApacheBench, as you can see, there isn't any significant difference between the languages when it comes to total time taken for 10k requests for a system with considerable thread blocking, which means for a real-world use case, the language choice isn't going to be a huge factor for concurrency performance. But of course, if you want the best possible performance, then Rust clearly seems faster than other languages as it gives you the highest throughput, followed by Java and Golang. JavaScript and TypeScript are behind them, but not by a considerable margin. The Go version using the built-in HTTP server is the slowest of the bunch due to inconsistent performance across runs, probably due to garbage collection (GC) kicking in, causing spikes. Also interesting is to see the difference between the multi-threaded and asynchronous approaches. While for Rust, multi-threaded implementation performs the best by a slight margin, the asynchronous version performs slightly better for Java and JavaScript. But none of the differences is significant enough to justify suggesting one approach over another for this particular case. But in general, I would recommend using the asynchronous approach if available as it's more flexible without some of the limitations you might encounter with threads.</del>
