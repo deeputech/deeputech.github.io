@@ -1,4 +1,1 @@
-- [FOSDEM'22](https://fosdem.org/2022/): 5-6th February
-  - [Why safe programming matters and why Rust](https://fosdem.org/2022/schedule/event/security_rust)
-  - [Let's Talk About Foreign Functions In Java](https://fosdem.org/2022/schedule/event/foreignfunctions/)
 - [Devops.js](https://devopsjsconf.com/): 24-25 March - How to Secure Your Node.js Containers on Kubernetes With Best Practices
