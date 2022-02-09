@@ -15,11 +15,11 @@ comments: false
 
 [Why safe programming matters and why Rust](https://fosdem.org/2022/schedule/event/security_rust)
 
-[slides](https://speakerdeck.com/deepu105/why-safe-programming-matters-and-why-rust) | [video](https://youtu.be/8jtPUOytWyU)
+[slides](https://speakerdeck.com/deepu105/why-safe-programming-matters-and-why-rust), [video](https://youtu.be/8jtPUOytWyU)
 
 [Let's Talk About Foreign Functions In Java](https://fosdem.org/2022/schedule/event/foreignfunctions/)
 
-[slides](https://speakerdeck.com/deepu105/lets-talk-about-foreign-functions-in-java) | [video](https://www.youtube.com/watch?v=lW69_AtAXzE)
+[slides](https://speakerdeck.com/deepu105/lets-talk-about-foreign-functions-in-java), [video](https://www.youtube.com/watch?v=lW69_AtAXzE)
 
 ---
 
@@ -29,7 +29,7 @@ Building a Kubernetes monitoring dashboard in Rust. Why not?
 
 <small>January 2022</small>
 
-[slides](https://speakerdeck.com/deepu105/why-did-i-build-a-kubernetes-dashboard-in-rust) | [video](https://www.youtube.com/watch?v=_8G6pEzCAuY)
+[slides](https://speakerdeck.com/deepu105/why-did-i-build-a-kubernetes-dashboard-in-rust), [video](https://www.youtube.com/watch?v=_8G6pEzCAuY)
 
 ---
 
