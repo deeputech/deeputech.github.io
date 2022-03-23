@@ -1,1 +1,2 @@
 - [Devops.js](https://devopsjsconf.com/): 24-25 March - How to Secure Your Node.js Containers on Kubernetes With Best Practices
+- [J-Spring](https://jspring.nl/): 8 June - Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and JHipster
