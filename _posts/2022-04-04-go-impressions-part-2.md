@@ -7,8 +7,8 @@ tags:
   - programming
   - languages
   - thepragmaticprogrammer
-cover_image: 'https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg'
-canonical_url: 'https://deepu.tech/go-impressions-part-2/'
+cover_image: "https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg"
+canonical_url: "https://deepu.tech/go-impressions-part-2/"
 series: languages
 devto_id: 1044000
 devto_url: >-
@@ -76,7 +76,6 @@ func FindIndexFromFloat64Array(arr []float64, target float64) int {
 
 You can simplify the above code to one function with generics, and it will work for all possible data types you pass.
 
-{% raw  %}
 ```go
 func main() {
 	type Foo struct {
@@ -87,7 +86,9 @@ func main() {
 	a := FindIndexFromArray([]string{"a", "b", "c"}, "a")
 	b := FindIndexFromArray([]int{1, 2, 3}, 2)
 	c := FindIndexFromArray([]float64{1.1, 2.2, 3.3}, 3.3)
-	d := FindIndexFromArray([]Foo{{"a", true}, {"b", false}, {"c", true}}, Foo{"a", true})
+	d := FindIndexFromArray([]Foo{
+    {"a", true}, {"b", false}, {"c", true},
+  }, Foo{"a", true})
 	println(a, b, c, d)
 }
 
@@ -100,7 +101,6 @@ func FindIndexFromArray[T comparable](arr []T, target T) int {
 	return -1
 }
 ```
-{% endraw  %}
 
 Generics would significantly reduce duplicated code in your codebase. You can also write other useful generic functions like map, reduce, filter, and so on for arrays and maps. Here are some [examples from the official design document](https://go.googlesource.com/proposal/+/refs/heads/master/design/43651-type-parameters.md#examples).
 
@@ -175,4 +175,3 @@ Yes! Without a doubt, generics make Go much more enjoyable to write. While gener
 ## Where does that leave Go?
 
 Recently I was pretty interested in systems programming and CLIs. I would have used Go for those if I hadn't known Rust. Once I started using Rust, I gave up on Go, as [I didn't see much reason to use it over Rust](https://deepu.tech/my-second-impression-of-rust/) for the use cases that I was interested in. Honestly, the annoyance with Go was one reason that prompted me to learn Rust. I did use Go for some simple stuff like building a [CLI for the Elgato Keylights](https://github.com/deepu105/keylight), and probably if I had a use case of building microservices, then I might have given Go a thought along with Java. With generics making Go much better, IMO, I might give Go more weightage for microservices and simple CLIs.
-
