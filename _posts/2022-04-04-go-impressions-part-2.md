@@ -2,10 +2,17 @@
 title: Golang Finally Gets Generics! Does It Make Go a Better Language?
 published: true
 description: Let's see if Golang became better with the addition of generics.
-tags: [go, programming, languages, thepragmaticprogrammer]
-cover_image: https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg
-canonical_url: https://deepu.tech/go-impressions-part-2/
+tags:
+  - go
+  - programming
+  - languages
+  - thepragmaticprogrammer
+cover_image: 'https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg'
+canonical_url: 'https://deepu.tech/go-impressions-part-2/'
 series: languages
+devto_id: 1044000
+devto_url: >-
+  https://dev.to/deepu105/golang-finally-gets-generics-does-it-make-go-a-better-language-3dai
 ---
 
 So Golang finally made the sane decision to add support for generics, in version 1.18, after dragging it out for years and after multiple proposals. Well, simplicity is nice when you are a newbie in the language but becomes annoying really fast, in my personal experience, especially in large codebases.
@@ -168,3 +175,4 @@ Yes! Without a doubt, generics make Go much more enjoyable to write. While gener
 ## Where does that leave Go?
 
 Recently I was pretty interested in systems programming and CLIs. I would have used Go for those if I hadn't known Rust. Once I started using Rust, I gave up on Go, as [I didn't see much reason to use it over Rust](https://deepu.tech/my-second-impression-of-rust/) for the use cases that I was interested in. Honestly, the annoyance with Go was one reason that prompted me to learn Rust. I did use Go for some simple stuff like building a [CLI for the Elgato Keylights](https://github.com/deepu105/keylight), and probably if I had a use case of building microservices, then I might have given Go a thought along with Java. With generics making Go much better, IMO, I might give Go more weightage for microservices and simple CLIs.
+
