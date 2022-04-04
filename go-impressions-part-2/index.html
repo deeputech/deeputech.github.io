@@ -89,6 +89,8 @@
 19
 20
 21
+22
+23
 </pre></td><td class="rouge-code"><pre><span class="k">func</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
 	<span class="k">type</span> <span class="n">Foo</span> <span class="k">struct</span> <span class="p">{</span>
 		<span class="n">a</span> <span class="kt">string</span>
@@ -98,7 +100,9 @@
 	<span class="n">a</span> <span class="o">:=</span> <span class="n">FindIndexFromArray</span><span class="p">([]</span><span class="kt">string</span><span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="s">"b"</span><span class="p">,</span> <span class="s">"c"</span><span class="p">},</span> <span class="s">"a"</span><span class="p">)</span>
 	<span class="n">b</span> <span class="o">:=</span> <span class="n">FindIndexFromArray</span><span class="p">([]</span><span class="kt">int</span><span class="p">{</span><span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">},</span> <span class="m">2</span><span class="p">)</span>
 	<span class="n">c</span> <span class="o">:=</span> <span class="n">FindIndexFromArray</span><span class="p">([]</span><span class="kt">float64</span><span class="p">{</span><span class="m">1.1</span><span class="p">,</span> <span class="m">2.2</span><span class="p">,</span> <span class="m">3.3</span><span class="p">},</span> <span class="m">3.3</span><span class="p">)</span>
-	<span class="n">d</span> <span class="o">:=</span> <span class="n">FindIndexFromArray</span><span class="p">([]</span><span class="n">Foo</span><span class="p">{{</span><span class="s">"a"</span><span class="p">,</span> <span class="no">true</span><span class="p">},</span> <span class="p">{</span><span class="s">"b"</span><span class="p">,</span> <span class="no">false</span><span class="p">},</span> <span class="p">{</span><span class="s">"c"</span><span class="p">,</span> <span class="no">true</span><span class="p">}},</span> <span class="n">Foo</span><span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="no">true</span><span class="p">})</span>
+	<span class="n">d</span> <span class="o">:=</span> <span class="n">FindIndexFromArray</span><span class="p">([]</span><span class="n">Foo</span><span class="p">{</span>
+    <span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="no">true</span><span class="p">},</span> <span class="p">{</span><span class="s">"b"</span><span class="p">,</span> <span class="no">false</span><span class="p">},</span> <span class="p">{</span><span class="s">"c"</span><span class="p">,</span> <span class="no">true</span><span class="p">},</span>
+  <span class="p">},</span> <span class="n">Foo</span><span class="p">{</span><span class="s">"a"</span><span class="p">,</span> <span class="no">true</span><span class="p">})</span>
 	<span class="nb">println</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
 <span class="p">}</span>
 
