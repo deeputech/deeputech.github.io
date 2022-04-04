@@ -187,13 +187,13 @@ func main() {
 
 The interface concept in Go is weird. These are the only implicit construct in Go. If you come from other languages that have interfaces then this will feel weird. The fact that they are implicit means its really easy to mess things up. Refactoring is messy unless you have a smart IDE, and you can accidentally implement someone's interface by just naming your method a certain way. While implicit interfaces certainly help with polymorphism and decoupling code I personally would still prefer interfaces that are explicit.
 
-Another interface Gotcha is nil value checks, in Go, an interface is made up of two parts a type and a value, so an interface is `nil` only when both type and value are nil, this means you can't just simply do nil checks on interfaces. This is so confusing the Go has a specific [FAQ](https://golang.org/doc/faq#nil_error) for this. Below article explains this in more detail
+Another interface Gotcha is null value checks, in Go, an interface is made up of two parts a type and a value, so an interface is `nil` only when both type and value are null, this means you can't just simply do null checks on interfaces. This is so confusing the Go has a specific [FAQ](https://golang.org/doc/faq#nil_error) for this. Below article explains this in more detail
 
 {% link https://dev.to/pauljlucas/go-tcha-when-nil--nil-hic %}
 
 ### Single GC algorithm
 
-Go implements a concurrent tri-color mark-sweep collector as its garbage collector. This specific GC implementation is optimized for better pause times while ignoring program throughput, pause frequency and many other parameters that are considered during GC. Some people in the Go community claims this as the best ever GC. Having some Java background I would have to disagree as most JVM implementations provide multiple GC algorithms you can choose from which includes a concurrent mark-sweep collector as well and most of these are balanced to take care of many more parameters than just pause times. [This](https://blog.plan99.net/modern-garbage-collection-911ef4f8bd8e) articles analyses this in detail. So some use cases that produce a high amount of garbage might actually be slower in Go compared to another language due to frequent GC.
+Go implements a [concurrent tri-color mark-sweep collector as its garbage collector](https://deepu.tech/memory-management-in-golang/). This specific GC implementation is optimized for better pause times while ignoring program throughput, pause frequency and many other parameters that are considered during GC. Some people in the Go community claims this as the best ever GC. Having some Java background I would have to disagree as most JVM implementations provide multiple GC algorithms you can choose from which includes a concurrent mark-sweep collector as well and most of these are balanced to take care of many more parameters than just pause times. [This](https://blog.plan99.net/modern-garbage-collection-911ef4f8bd8e) articles analyses this in detail. So some use cases that produce a high amount of garbage might actually be slower in Go compared to another language due to frequent GC.
 
 ### Developer experience
 
