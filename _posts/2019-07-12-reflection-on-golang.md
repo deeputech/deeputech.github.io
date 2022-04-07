@@ -3,7 +3,7 @@ title: My reflections on Golang
 published: true
 description: After using Go for more than 9 months, here is what I think of it
 tags: [go, programming, languages, thepragmaticprogrammer]
-cover_image: https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg
+cover_image: https://i.imgur.com/LoyzPSs.jpeg
 featured: true
 canonical_url: https://deepu.tech/reflection-on-golang/
 devto_url: https://dev.to/deepu105/my-reflections-on-golang-38jk
@@ -229,4 +229,4 @@ If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
-Cover image credit: Image from [Gophercises](https://gophercises.com/) created by @joncalhoun, Marcus Olsson (@marcusolsson), and Jon Calhoun.
+Cover image credit: Image from [egonelbre/gophers](https://github.com/egonelbre/gophers) created by [@egonelbre](https://twitter.com/egonelbre).

@@ -7,7 +7,7 @@ tags:
   - programming
   - languages
   - thepragmaticprogrammer
-cover_image: "https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg"
+cover_image: "https://i.imgur.com/WGkshhB.jpeg"
 canonical_url: "https://deepu.tech/go-impressions-part-2/"
 series: languages
 devto_id: 1044000
@@ -175,3 +175,11 @@ Yes! Without a doubt, generics make Go much more enjoyable to write. While gener
 ## Where does that leave Go?
 
 Recently I was pretty interested in systems programming and CLIs. I would have used Go for those if I hadn't known Rust. Once I started using Rust, I gave up on Go, as [I didn't see much reason to use it over Rust](https://deepu.tech/my-second-impression-of-rust/) for the use cases that I was interested in. Honestly, the annoyance with Go was one reason that prompted me to learn Rust. I did use Go for some simple stuff like building a [CLI for the Elgato Keylights](https://github.com/deepu105/keylight), and probably if I had a use case of building microservices, then I might have given Go a thought along with Java. With generics making Go much better, IMO, I might give Go more weightage for microservices and simple CLIs.
+
+---
+
+If you like this article, please leave a like or a comment.
+
+You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
+Cover image credit: Image derived from work in [egonelbre/gophers](https://github.com/egonelbre/gophers) created by [@egonelbre](https://twitter.com/egonelbre).
