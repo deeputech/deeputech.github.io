@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Apr 2022 15:26:48 +0530</pubDate>
-    <lastBuildDate>Mon, 04 Apr 2022 15:26:48 +0530</lastBuildDate>
+    <pubDate>Thu, 07 Apr 2022 13:31:32 +0530</pubDate>
+    <lastBuildDate>Thu, 07 Apr 2022 13:31:32 +0530</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -277,8 +277,16 @@ Though I would have preferred to see the &lt;code class=&quot;language-plaintext
 &lt;h2 id=&quot;where-does-that-leave-go&quot;&gt;Where does that leave Go?&lt;/h2&gt;
 
 &lt;p&gt;Recently I was pretty interested in systems programming and CLIs. I would have used Go for those if I hadn’t known Rust. Once I started using Rust, I gave up on Go, as &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;I didn’t see much reason to use it over Rust&lt;/a&gt; for the use cases that I was interested in. Honestly, the annoyance with Go was one reason that prompted me to learn Rust. I did use Go for some simple stuff like building a &lt;a href=&quot;https://github.com/deepu105/keylight&quot;&gt;CLI for the Elgato Keylights&lt;/a&gt;, and probably if I had a use case of building microservices, then I might have given Go a thought along with Java. With generics making Go much better, IMO, I might give Go more weightage for microservices and simple CLIs.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cover image credit: Image derived from work in &lt;a href=&quot;https://github.com/egonelbre/gophers&quot;&gt;egonelbre/gophers&lt;/a&gt; created by &lt;a href=&quot;https://twitter.com/egonelbre&quot;&gt;@egonelbre&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
-        <media:content url="https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg" medium="image">https://thepracticaldev.s3.amazonaws.com/i/snu9zy2ywp0ftfcthda2.jpg</media:content>
+        <media:content url="https://i.imgur.com/WGkshhB.jpeg" medium="image">https://i.imgur.com/WGkshhB.jpeg</media:content>
         <pubDate>Mon, 04 Apr 2022 00:00:00 +0530</pubDate>
         <link>https://deepu.tech/go-impressions-part-2/</link>
         <guid isPermaLink="true">https://deepu.tech/go-impressions-part-2/</guid>
