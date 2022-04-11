@@ -9,6 +9,16 @@ comments: false
 
 ---
 
+##### [Devops.js](https://devopsjsconf.com/)
+
+<small>March 2022</small>
+
+How to Secure Your Node.js Containers on Kubernetes With Best Practices
+
+[slides](https://speakerdeck.com/deepu105/how-to-secure-your-node-dot-js-containers-on-kubernetes-with-best-practices), [video](https://youtu.be/MKqrvoWGvrk)
+
+---
+
 ##### FOSDEM'22
 
 <small>February 2022</small>
