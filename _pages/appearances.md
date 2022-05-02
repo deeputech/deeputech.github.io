@@ -9,6 +9,16 @@ comments: false
 
 ---
 
+##### [Rust Meetup Linz](https://rust-linz.at/)
+
+<small>April 2022</small>
+
+Is Rust a great language for building Kubernetes ecosystem?
+
+[slides](https://speakerdeck.com/deepu105/is-rust-a-great-language-for-building-kubernetes-ecosystem), [video](https://www.youtube.com/watch?v=Rc8HUwrJt9U)
+
+---
+
 ##### [Devops.js](https://devopsjsconf.com/)
 
 <small>March 2022</small>
