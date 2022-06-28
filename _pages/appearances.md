@@ -9,6 +9,56 @@ comments: false
 
 ---
 
+##### [Devopsdays Amsterdam 2022](https://devopsdays.org/events/2022-amsterdam/welcome/)
+
+<small>June 2022</small>
+
+Is containerless the future of Kubernetes? Let's see how WebAssembly can make containers obsolete
+
+[slides](https://speakerdeck.com/deepu105/is-containerless-the-future-of-kubernetes), [video](https://youtu.be/eenoelrr9Kc?t=5706)
+
+---
+
+##### [OpenValue Utrecht Meetup](https://www.meetup.com/OpenValue/)
+
+<small>June 2022</small>
+
+Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and JHipster
+
+[slides](https://speakerdeck.com/deepu105/reactive-java-microservices-on-kubernetes-with-spring-and-jhipster), [video](https://www.youtube.com/watch?v=zFzMebkSQdY)
+
+---
+
+##### [J-Spring](https://jspring.nl/)
+
+<small>June 2022</small>
+
+Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and JHipster
+
+[slides](https://speakerdeck.com/deepu105/reactive-java-microservices-on-kubernetes-with-spring-and-jhipster)
+
+---
+
+##### [Java.IL](http://www.meetup.com/JavaIL/)
+
+<small>June 2022</small>
+
+Let's talk about Foreign functions in Java
+
+[slides](https://speakerdeck.com/deepu105/lets-talk-about-foreign-functions-in-java), [video](https://www.youtube.com/watch?v=JIfva4SbQOo)
+
+---
+
+##### [Geekle Online Summit for Java devs'22](https://events.geekle.us/java/)
+
+<small>May 2022</small>
+
+Let's talk about Foreign functions in Java
+
+[slides](https://speakerdeck.com/deepu105/lets-talk-about-foreign-functions-in-java)
+
+---
+
 ##### [Rust Meetup Linz](https://rust-linz.at/)
 
 <small>April 2022</small>

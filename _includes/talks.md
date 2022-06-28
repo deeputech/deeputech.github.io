@@ -1,3 +1,1 @@
-- [Geekle Online Summit for Java devs'22](https://events.geekle.us/java/): 11-12 May - Let's talk about Foreign functions in Java
-- [J-Spring](https://jspring.nl/): 8 June - Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and JHipster
-- [Devopsdays Amsterdam 2022](https://devopsdays.org/events/2022-amsterdam/welcome/): 22-24 June - Is containerless the future of Kubernetes? Let's see how WebAssembly can make containers obsolete
+
