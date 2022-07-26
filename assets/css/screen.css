@@ -538,6 +538,7 @@ ul.tags {
 ul.tags li {
   display: inline-block;
   font-size: 0.9rem;
+  margin: 0 5px 0 0;
 }
 
 ul.tags li a {
