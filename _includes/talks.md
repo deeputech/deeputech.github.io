@@ -5,5 +5,8 @@
   - Building a Kubernetes monitoring dashboard in Rust. Why not?
 - [DevOps Global Summit'22](https://events.geekle.us/devops/) - October 4 - 5, 2022
   - Is containerless the future of Kubernetes?
+- [Devoxx Belgium](https://devoxx.be/) - October 10 - 14, 2022
+  - What the heck is Project Loom and what can a normal Java developer expect from it?
+  - Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh
 - [JavaSummit Israel](https://www.javasummitil.com/) - November 21, 2022
   - What the heck is Project Loom?
