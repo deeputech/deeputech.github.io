@@ -367,6 +367,7 @@ small.sitetitlesub {
 
 .separator {
   color: #e4e0e0 !important;
+  margin: 0 10px;
 }
 
 blockquote {
