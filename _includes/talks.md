@@ -1,12 +1,11 @@
-
-- [JavaZone](https://2022.javazone.no/) - September 7 - 8, 2022
+- [JavaZone](https://2022.javazone.no/) (Oslo, Norway) - September 7 - 8, 2022
   - Let's talk about Foreign functions in Java
-- [RustLab 2022](https://rustlab.it/) - October 2 - 4, 2022
+- [RustLab](https://rustlab.it/) (Florence, Italy) - October 2 - 4, 2022
   - Building a Kubernetes monitoring dashboard in Rust. Why not?
-- [DevOps Global Summit'22](https://events.geekle.us/devops/) - October 4 - 5, 2022
+- [DevOps Global Summit'22](https://events.geekle.us/devops/) (Virtual) - October 4 - 5, 2022
   - Is containerless the future of Kubernetes?
-- [Devoxx Belgium](https://devoxx.be/) - October 10 - 14, 2022
+- [Devoxx](https://devoxx.be/) (Antwerp, Belgium) - October 10 - 14, 2022
   - What the heck is Project Loom and what can a normal Java developer expect from it?
   - Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh
-- [JavaSummit Israel](https://www.javasummitil.com/) - November 21, 2022
+- [JavaSummit](https://www.javasummitil.com/) (Tel Aviv, Israel)- November 21, 2022
   - What the heck is Project Loom?
