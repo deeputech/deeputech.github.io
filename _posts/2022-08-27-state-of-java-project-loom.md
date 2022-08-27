@@ -2,7 +2,7 @@
 title: "What the Heck Is Project Loom for Java?"
 published: true
 description: "What the heck is Java's Project Loom and what does it mean for regular Java developers?"
-tags: [java, concurrency, project-loom, openjdk]
+tags: [java, concurrency, loom, openjdk]
 cover_image: https://i.imgur.com/7FfOmmD.jpeg
 canonical_url: https://developer.okta.com/blog/2022/08/26/state-of-java-project-loom
 ---
