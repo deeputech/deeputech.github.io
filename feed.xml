@@ -5,9 +5,361 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 23 Aug 2022 17:00:26 +0200</pubDate>
-    <lastBuildDate>Tue, 23 Aug 2022 17:00:26 +0200</lastBuildDate>
+    <pubDate>Sat, 27 Aug 2022 16:29:30 +0200</pubDate>
+    <lastBuildDate>Sat, 27 Aug 2022 16:29:30 +0200</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>What the Heck Is Project Loom for Java?</title>
+        <description>What the heck is Java's Project Loom and what does it mean for regular Java developers? | &lt;a href=&quot;https://deepu.tech/state-of-java-project-loom/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;Java has had good multi-threading and concurrency capabilities from early on in its evolution and can effectively utilize multi-threaded and multi-core CPUs. Java Development Kit (JDK) 1.1 had basic support for platform threads (or Operating System (OS) threads), and JDK 1.5 had more utilities and updates to improve concurrency and multi-threading. JDK 8 brought asynchronous programming support and more concurrency improvements. While things have continued to improve over multiple versions, there has been nothing groundbreaking in Java for the last three decades, apart from support for concurrency and multi-threading using OS threads.&lt;/p&gt;
+
+&lt;p&gt;Though the concurrency model in Java is powerful and flexible as a feature, it was not the easiest to use, and the developer experience hasn’t been great. This is primarily due to the shared state concurrency model used by default. One has to resort to synchronizing threads to avoid issues like data races and thread blocking. I wrote more about Java concurrency in my &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-java/&quot;&gt;Concurrency in modern programming languages: Java&lt;/a&gt; post.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-project-loom&quot;&gt;What is Project Loom?&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Project Loom aims to drastically reduce the effort of writing, maintaining, and observing high-throughput concurrent applications that make the best use of available hardware.&lt;/p&gt;
+
+  &lt;p&gt;— Ron Pressler (Tech lead, Project Loom)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;OS threads are at the core of Java’s concurrency model and have a very mature ecosystem around them, but they also come with some drawbacks and are expensive computationally. Let’s look at the two most common use cases for concurrency and the drawbacks of the current Java concurrency model in these cases.&lt;/p&gt;
+
+&lt;p&gt;One of the most common concurrency use cases is serving requests over the wire using a server. For this, the preferred approach is the thread-per-request model, where a separate thread handles each request. Throughput of such systems can be explained using &lt;a href=&quot;https://en.wikipedia.org/wiki/Little%27s_law&quot;&gt;Little’s law&lt;/a&gt;, which states that in a &lt;strong&gt;stable system&lt;/strong&gt;, the average concurrency (number of requests concurrently processed by the server), &lt;strong&gt;L&lt;/strong&gt;, is equal to the throughput (average rate of requests), &lt;strong&gt;λ&lt;/strong&gt;, times the latency (average duration of processing each request), &lt;strong&gt;W&lt;/strong&gt;. With this, you can derive that throughput equals average concurrency divided by latency (&lt;strong&gt;λ = L/W&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;p&gt;So in a thread-per-request model, the throughput will be limited by the number of OS threads available, which depends on the number of physical cores/threads available on the hardware. To work around this, you have to use shared thread pools or asynchronous concurrency, both of which have their drawbacks. Thread pools have many limitations, like thread leaking, deadlocks, resource thrashing, etc. Asynchronous concurrency means you must adapt to a more complex programming style and handle data races carefully. There are also chances for memory leaks, thread locking, etc.&lt;/p&gt;
+
+&lt;p&gt;Another common use case is parallel processing or multi-threading, where you might split a task into subtasks across multiple threads. Here you have to write solutions to avoid data corruption and data races. In some cases, you must also ensure thread synchronization when executing a parallel task distributed over multiple threads. The implementation becomes even more fragile and puts a lot more responsibility on the developer to ensure there are no issues like thread leaks and cancellation delays.&lt;/p&gt;
+
+&lt;p&gt;Project Loom aims to fix these issues in the current concurrency model by introducing two new features: &lt;em&gt;virtual threads&lt;/em&gt; and &lt;em&gt;structured concurrency&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;virtual-threads&quot;&gt;Virtual threads&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Java 19 is scheduled to be released in September 2022, and Virtual threads will be a preview feature. Yayyy!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://openjdk.org/jeps/425&quot;&gt;Virtual threads&lt;/a&gt; are lightweight threads that are not tied to OS threads but are managed by the JVM. They are suitable for thread-per-request programming styles without having the limitations of OS threads. You can create millions of virtual threads without affecting throughput. This is quite similar to coroutines, like &lt;a href=&quot;https://go.dev/tour/concurrency/1&quot;&gt;goroutines&lt;/a&gt;, made famous by the Go programming language (Golang).&lt;/p&gt;
+
+&lt;p&gt;The new virtual threads in Java 19 will be pretty easy to use. Compare the below with Golang’s goroutines or Kotlin’s coroutines.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Virtual thread&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startVirtualThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, Project Loom!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Goroutine&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;go&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, Goroutines!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}()&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Kotlin coroutine&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-kotlin highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nf&quot;&gt;runBlocking&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;launch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, Kotlin coroutines!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Fun fact: before JDK 1.1, Java had support for green threads (aka virtual threads), but the feature was removed in JDK 1.1 as that implementation was not any better than platform threads.&lt;/p&gt;
+
+&lt;p&gt;The new implementation of virtual threads is done in the JVM, where it maps multiple virtual threads to one or more OS threads, and the developer can use virtual threads or platform threads as per their needs. A few other important aspects of this implementation of virtual threads:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It is a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Thread&lt;/code&gt; in code, runtime, debugger, and profiler&lt;/li&gt;
+  &lt;li&gt;It’s a Java entity and not a wrapper around a native thread&lt;/li&gt;
+  &lt;li&gt;Creating and blocking them are cheap operations&lt;/li&gt;
+  &lt;li&gt;They should not be pooled&lt;/li&gt;
+  &lt;li&gt;Virtual threads use a work-stealing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ForkJoinPool&lt;/code&gt; scheduler&lt;/li&gt;
+  &lt;li&gt;Pluggable schedulers can be used for asynchronous programming&lt;/li&gt;
+  &lt;li&gt;A virtual thread will have its own stack memory&lt;/li&gt;
+  &lt;li&gt;The virtual threads API is very similar to platform threads and hence easier to adopt/migrate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s look at some examples that show the power of virtual threads.&lt;/p&gt;
+
+&lt;h4 id=&quot;total-number-of-threads&quot;&gt;Total number of threads&lt;/h4&gt;
+
+&lt;p&gt;First, let’s see how many platform threads vs. virtual threads we can create on a machine. My machine is Intel Core i9-11900H with 8 cores, 16 threads, and 64GB RAM running Fedora 36.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Platform threads&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AtomicInteger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;incrementAndGet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Thread count = &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;LockSupport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;park&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;On my machine, the code crashed after &lt;strong&gt;32_539&lt;/strong&gt; platform threads.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Virtual threads&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AtomicInteger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;startVirtualThread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;counter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;incrementAndGet&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Thread count = &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;LockSupport&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;park&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;On my machine, the process hung after &lt;strong&gt;14_625_956&lt;/strong&gt; virtual threads but didn’t crash, and as memory became available, it kept going slowly.&lt;/p&gt;
+
+&lt;h4 id=&quot;task-throughput&quot;&gt;Task throughput&lt;/h4&gt;
+
+&lt;p&gt;Let’s try to run 100,000 tasks using platform threads.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;executor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newThreadPerTaskExecutor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;defaultThreadFactory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;IntStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100_000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;executor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofSeconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}));&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This uses the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;newThreadPerTaskExecutor&lt;/code&gt; with the default thread factory and thus uses a thread group. When I ran this code and timed it, I got the numbers shown here. I get better performance when I use a thread pool with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Executors.newCachedThreadPool()&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# 'newThreadPerTaskExecutor' with 'defaultThreadFactory'&lt;/span&gt;
+0:18.77 real,   18.15 s user,   7.19 s sys,     135% 3891pu,    0 amem,         743584 mmem
+&lt;span class=&quot;c&quot;&gt;# 'newCachedThreadPool' with 'defaultThreadFactory'&lt;/span&gt;
+0:11.52 real,   13.21 s user,   4.91 s sys,     157% 6019pu,    0 amem,         2215972 mmem
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Not so bad. Now, let’s do the same using virtual threads.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;executor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Executors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;newVirtualThreadPerTaskExecutor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nc&quot;&gt;IntStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100_000&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;executor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Duration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ofSeconds&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}));&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If I run and time it, I get the following numbers.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;0:02.62 real,   6.83 s user,    1.46 s sys,     316% 14840pu,   0 amem,         350268 mmem
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This is far more performant than using platform threads with thread pools. Of course, these are simple use cases; both thread pools and virtual thread implementations can be further optimized for better performance, but that’s not the point of this post.&lt;/p&gt;
+
+&lt;p&gt;Running Java Microbenchmark Harness (JMH) with the same code gives the following results, and you can see that virtual threads outperform platform threads by a huge margin.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Throughput&lt;/span&gt;
+Benchmark                             Mode  Cnt  Score   Error  Units
+LoomBenchmark.platformThreadPerTask  thrpt    5  0.362 ± 0.079  ops/s
+LoomBenchmark.platformThreadPool     thrpt    5  0.528 ± 0.067  ops/s
+LoomBenchmark.virtualThreadPerTask   thrpt    5  1.843 ± 0.093  ops/s
+
+&lt;span class=&quot;c&quot;&gt;# Average time&lt;/span&gt;
+Benchmark                             Mode  Cnt  Score   Error  Units
+LoomBenchmark.platformThreadPerTask   avgt    5  5.600 ± 0.768   s/op
+LoomBenchmark.platformThreadPool      avgt    5  3.887 ± 0.717   s/op
+LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can find the benchmark &lt;a href=&quot;https://github.com/deepu105/java-loom-benchmarks&quot;&gt;source code on GitHub&lt;/a&gt;. Here are some other meaningful benchmarks for virtual threads:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;An interesting benchmark using ApacheBench &lt;a href=&quot;https://github.com/ebarlas/project-loom-comparison&quot;&gt;on GitHub&lt;/a&gt; by &lt;a href=&quot;https://twitter.com/ElliotBarlas&quot;&gt;Elliot Barlas&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;A benchmark using Akka actors &lt;a href=&quot;https://medium.com/@zakgof/a-simple-benchmark-for-jdk-project-looms-virtual-threads-4f43ef8aeb1&quot;&gt;on Medium&lt;/a&gt; by &lt;a href=&quot;https://medium.com/@zakgof&quot;&gt;Alexander Zakusylo&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;JMH benchmarks for I/O and non-I/O tasks &lt;a href=&quot;https://github.com/colincachia/loom-benchmark&quot;&gt;on GitHub&lt;/a&gt; by &lt;a href=&quot;https://twitter.com/colincachia&quot;&gt;Colin Cachia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;structured-concurrency&quot;&gt;Structured concurrency&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Structured concurrency will be an incubator feature in Java 19.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://openjdk.org/jeps/428&quot;&gt;Structured concurrency&lt;/a&gt; aims to simplify multi-threaded and parallel programming. It treats multiple tasks running in different threads as a single unit of work, streamlining error handling and cancellation while improving reliability and observability. This helps to avoid issues like thread leaking and cancellation delays. Being an incubator feature, this might go through further changes during stabilization.&lt;/p&gt;
+
+&lt;p&gt;Consider the following example using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java.util.concurrent.ExecutorService&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ExecutionException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;esvc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ScheduledThreadPoolExecutor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Future&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inventory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;esvc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updateInventory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Future&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;esvc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theInventory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inventory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// Join updateInventory&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theOrder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;order&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// Join updateOrder&lt;/span&gt;
+
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Inventory &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theInventory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; updated for order &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;theOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We want &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateInventory()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateOrder()&lt;/code&gt; subtasks to be executed concurrently. Each of those can succeed or fail independently. Ideally, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;handleOrder()&lt;/code&gt; method should fail if any subtask fails. However, if a failure occurs in one subtask, things get messy.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Imagine that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateInventory()&lt;/code&gt; fails and throws an exception. Then, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;handleOrder()&lt;/code&gt; method throws an exception when calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inventory.get()&lt;/code&gt;. So far this is fine, but what about &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateOrder()&lt;/code&gt;? Since it runs on its own thread, it can complete successfully. But now we have an issue with a mismatch in inventory and order. Suppose the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateOrder()&lt;/code&gt; is an expensive operation. In that case, we are just wasting the resources for nothing, and we will have to write some sort of guard logic to revert the updates done to order as our overall operation has failed.&lt;/li&gt;
+  &lt;li&gt;Imagine that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateInventory()&lt;/code&gt; is an expensive long-running operation and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateOrder()&lt;/code&gt; throws an error. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;handleOrder()&lt;/code&gt; task will be blocked on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;inventory.get()&lt;/code&gt; even though &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateOrder()&lt;/code&gt; threw an error. Ideally, we would like the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;handleOrder()&lt;/code&gt; task to cancel &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateInventory()&lt;/code&gt; when a failure occurs in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateOrder()&lt;/code&gt; so that we are not wasting time.&lt;/li&gt;
+  &lt;li&gt;If the thread executing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;handleOrder()&lt;/code&gt; is interrupted, the interruption is not propagated to the subtasks. In this case &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateInventory()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateOrder()&lt;/code&gt; will leak and continue to run in the background.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For these situations, we would have to carefully write workarounds and failsafe, putting all the burden on the developer.&lt;/p&gt;
+
+&lt;p&gt;We can achieve the same functionality with structured concurrency using the code below.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;handleOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ExecutionException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InterruptedException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;StructuredTaskScope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ShutdownOnFailure&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Future&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inventory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fork&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updateInventory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;Future&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;order&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fork&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;updateOrder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// Join both forks&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;scope&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;throwIfFailed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;  &lt;span class=&quot;c1&quot;&gt;// ... and propagate errors&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// Here, both forks have succeeded, so compose their results&lt;/span&gt;
+        &lt;span class=&quot;nc&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Inventory &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inventory&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;resultNow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; updated for order &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;order&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;resultNow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Unlike the previous sample using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ExecutorService&lt;/code&gt;, we can now use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StructuredTaskScope&lt;/code&gt; to achieve the same result while confining the lifetimes of the subtasks to the lexical scope, in this case, the body of the &lt;em&gt;try-with-resources&lt;/em&gt; statement. The code is much more readable, and the intent is also clear. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;StructuredTaskScope&lt;/code&gt; also ensures the following behavior automatically.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Error handling with short-circuiting&lt;/strong&gt; — If either the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateInventory()&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateOrder()&lt;/code&gt; fails, the other is canceled unless its already completed. This is managed by the cancellation policy implemented by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ShutdownOnFailure()&lt;/code&gt;; other policies are possible.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Cancellation propagation&lt;/strong&gt; — If the thread running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;handleOrder()&lt;/code&gt; is interrupted before or during the call to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;join()&lt;/code&gt;, both forks are canceled automatically when the thread exits the scope.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Observability&lt;/strong&gt; — A thread dump would clearly display the task hierarchy, with the threads running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateInventory()&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;updateOrder()&lt;/code&gt; shown as children of the scope.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;state-of-project-loom&quot;&gt;State of Project Loom&lt;/h2&gt;
+
+&lt;p&gt;The Loom project started in 2017 and has undergone many changes and proposals. Virtual threads were initially called fibers, but later on they were renamed to avoid confusion. Today with Java 19 getting closer to release, the project has delivered the two features discussed above. One as a preview and another as an incubator. Hence the path to stabilization of the features should be more precise.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-does-this-mean-to-regular-java-developers&quot;&gt;What does this mean to regular Java developers?&lt;/h2&gt;
+
+&lt;p&gt;When these features are production ready, it should not affect regular Java developers much, as these developers may be using libraries for concurrency use cases. But it can be a big deal in those rare scenarios where you are doing a lot of multi-threading without using libraries. Virtual threads could be a no-brainer replacement for all use cases where you use thread pools today. This will increase performance and scalability in most cases based on the benchmarks out there. Structured concurrency can help simplify the multi-threading or parallel processing use cases and make them less fragile and more maintainable.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-does-this-mean-to-java-library-developers&quot;&gt;What does this mean to Java library developers?&lt;/h2&gt;
+
+&lt;p&gt;When these features are production ready, it will be a big deal for libraries and frameworks that use threads or parallelism. Library authors will see huge performance and scalability improvements while simplifying the codebase and making it more maintainable. Most Java projects using thread pools and platform threads will benefit from switching to virtual threads. Candidates include Java server software like Tomcat, Undertow, and Netty; and web frameworks like Spring and Micronaut. I expect most Java web technologies to migrate to virtual threads from thread pools. Java web technologies and trendy reactive programming libraries like RxJava and Akka could also use structured concurrency effectively. This doesn’t mean that virtual threads will be the one solution for all; there will still be use cases and benefits for asynchronous and reactive programming.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The cover image was created using a photo by &lt;a href=&quot;https://unsplash.com/@tama66&quot;&gt;Peter Herrmann&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This post was originally published on the &lt;a href=&quot;https://developer.okta.com/blog/2022/08/26/state-of-java-project-loom&quot;&gt;Okta Developer Blog&lt;/a&gt;.&lt;/p&gt;
+
+</content:encoded>
+        <media:content url="https://i.imgur.com/7FfOmmD.jpeg" medium="image">https://i.imgur.com/7FfOmmD.jpeg</media:content>
+        <pubDate>Sat, 27 Aug 2022 00:00:00 +0200</pubDate>
+        <link>https://deepu.tech/state-of-java-project-loom/</link>
+        <guid isPermaLink="true">https://deepu.tech/state-of-java-project-loom/</guid>
+        
+        <category>java</category>
+        
+        <category>concurrency</category>
+        
+        <category>loom</category>
+        
+        <category>openjdk</category>
+        
+        
+      </item>
     
       <item>
         <title>Golang Finally Gets Generics! Does It Make Go a Better Language?</title>
@@ -2781,294 +3133,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <category>fedora</category>
         
         <category>kde</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>What about Svelte? Should you care!</title>
-        <description>Learn why Svelte matters and if you should you care about it | &lt;a href=&quot;https://deepu.tech/what-about-svelte/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;&lt;a href=&quot;https://svelte.dev/&quot;&gt;Svelte&lt;/a&gt; is one of the latest cool-and-shiny client-side frameworks in the JavaScript world. Svelte lets you write blazing fast web applications with minimal boilerplate, reduced complexity, and smaller bundle size.&lt;/p&gt;
-
-&lt;p&gt;Yes, we have heard the same promise many times before as well from other cool-and-shiny projects like Angular, React, Vue, and &lt;a href=&quot;https://en.wikipedia.org/wiki/Comparison_of_JavaScript_frameworks&quot;&gt;others&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;So how is Svelte any different and why should we care? Let’s dive into that&lt;/p&gt;
-
-&lt;h2 id=&quot;what-is-svelte&quot;&gt;What is Svelte?&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Svelte is a radical new approach to building user interfaces. Whereas traditional frameworks like React and Vue do the bulk of their work in the browser, Svelte shifts that work into a compile step that happens when you build your app.&lt;/p&gt;
-
-  &lt;p&gt;Instead of using techniques like virtual DOM diffing, Svelte writes code that surgically updates the DOM when the state of your app changes.&lt;/p&gt;
-
-  &lt;p&gt;– Svelte docs&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;As per Svelte docs, Svelte is a component framework similar to React or Vue. But the most unique thing about Svelte is that it’s a compiler first and a UI framework second.&lt;/p&gt;
-
-&lt;p&gt;You basically provide template files containing standard-compliant HTML, CSS, and JS/TS for your components with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.svelte&lt;/code&gt; extension. This is compiled by Svelte into highly-optimized vanilla JavaScript at build time that runs in a browser with minimal framework overhead.&lt;/p&gt;
-
-&lt;p&gt;Frameworks like React revolutionized client-side engineering by popularizing the concept of the &lt;a href=&quot;https://www.codecademy.com/articles/react-virtual-dom&quot;&gt;Virtual DOM&lt;/a&gt;. This made web applications faster, more responsive, and slick. Gone were the days of JQuery and DOM manipulation hell. But this also meant doing a lot more work for the reconciliation of the DOM on the browser and using a lot more memory. This in turn means having to ship the library, like React, as well on your production code making bundles bigger and downloads slower.&lt;/p&gt;
-
-&lt;p&gt;Svelte on the other hand took a different route and introduced a compiler that does all of the heavy liftings during the build phase. It converts components into efficient imperative vanilla JS code that surgically updates the DOM at runtime. This removed the need for a middle man, like Virtual DOM, at the runtime making web applications faster and lighter. There are still some Svelte specific code that ends up on your application on the browser but it’s very minimal when compared to React, Vue, or Angular&lt;/p&gt;
-
-&lt;p&gt;So let’s see why you should give Svelte a chance&lt;/p&gt;
-
-&lt;h2 id=&quot;why-svelte&quot;&gt;Why Svelte?&lt;/h2&gt;
-
-&lt;p&gt;Svelte may not be as revolutionary as AngularJS or React during our JQuery days, as in the end, it pretty much does the same job that most other MVVM frameworks like, React, Vue, or Angular does. To be fair, Svelte builds upon lessons learned from its predecessors. But that’s not the point. What makes it different is the approach it takes and the advantages it hence provides which could be subtle or prominent based on your exact use case.&lt;/p&gt;
-
-&lt;h3 id=&quot;advantages&quot;&gt;Advantages&lt;/h3&gt;
-
-&lt;p&gt;Let us see what are the advantages Svelte offers:&lt;/p&gt;
-
-&lt;h4 id=&quot;compiler-vs-virtual-dom&quot;&gt;Compiler vs Virtual DOM&lt;/h4&gt;
-
-&lt;p&gt;Being a compiler and getting rid of the VirtualDOM is the most important advantage of Svelte that facilitates many of the other advantages we will see below. The concept is becoming so popular that Angular and Ember have started moving towards compilation in their recent versions.&lt;/p&gt;
-
-&lt;h4 id=&quot;lightweight--performant&quot;&gt;Lightweight &amp;amp; Performant&lt;/h4&gt;
-
-&lt;p&gt;Svelte produces highly optimized vanilla JS with a very minimal overhead at runtime. This means small bundle sizes, a low memory footprint, and a fast-loading and fast-running application. Check the performance &lt;a href=&quot;https://krausest.github.io/js-framework-benchmark/current.html&quot;&gt;benchmarks here&lt;/a&gt; to see the difference. All this is out of the box without even having to do any tuning and there are many ways to improve performance even further.&lt;/p&gt;
-
-&lt;h4 id=&quot;less-boilerplate&quot;&gt;Less boilerplate&lt;/h4&gt;
-
-&lt;p&gt;With Svelte there is no need for adding glue code like hooks or complex state management and so on. The boilerplate required for components is very minimal and almost close to vanilla HTML/JS. Svelte also supports optional two-way bindings making it easier to build forms.&lt;/p&gt;
-
-&lt;p&gt;Below is a simple component in Svelte with a two-way input binding, it can’t get simpler than this!&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;style&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;h1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nl&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;blue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/style&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;world&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;bind:value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{name}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Hello {name}!&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;truly-reactive&quot;&gt;Truly reactive&lt;/h4&gt;
-
-&lt;p&gt;Svelte is reactive by default. the DOM is automatically updated on state changes in any top-level variable on a component. You don’t even have to add any special code for that. Only direct top-level assignments work this way and reference mutations like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;array.push&lt;/code&gt; won’t work. This means mutations would be more explicit and easier to understand in my opinion.&lt;/p&gt;
-
-&lt;p&gt;Svelte also supports derived declarations and statements that are recomputed on state change with a special label (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$:&lt;/code&gt;). Here is an example:&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// reactive top-level variable&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;doubled&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// derived declaration&lt;/span&gt;
-
-  &lt;span class=&quot;c1&quot;&gt;// derived statement&lt;/span&gt;
-  &lt;span class=&quot;nl&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;the count is &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-  &lt;span class=&quot;c1&quot;&gt;// when variable is updated the DOM is updated accordingly&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;handleClick&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;button&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;on:click=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{handleClick}&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;{count} doubled is {doubled}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/button&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;low-learning-curve&quot;&gt;Low learning curve&lt;/h4&gt;
-
-&lt;p&gt;Unlike React or Angular, the learning curve for Svelte is quite low. There is no special syntax like JSX to learn or complex APIs like Angular to remember. Everything is written using standard-compliant JS/TS, CSS, and HTML with some additional syntax sugar for directives and template logic. The component API is simple and straightforward. The documentation is also quite good and easy to follow.&lt;/p&gt;
-
-&lt;p&gt;For example, it took me just a few days to get comfortable with Svelte even for advanced concepts like life cycles, composition, and so on. Whereas it took months for me to get really comfortable in React and I still don’t know half of the Angular APIs even after using it for almost a year. Of course, knowing React or Angular does help in making it easier to learn Svelte as there are a lot of concepts that are similar.&lt;/p&gt;
-
-&lt;h4 id=&quot;components-pattern&quot;&gt;Components pattern&lt;/h4&gt;
-
-&lt;p&gt;Svelte follows a component first pattern which makes it ideal for building new web applications or for adding web components to existing applications. Styles are scoped to components by default making Svelte ideal for web components.&lt;/p&gt;
-
-&lt;h4 id=&quot;built-in-animations-and-effects&quot;&gt;Built-in animations and effects&lt;/h4&gt;
-
-&lt;p&gt;Svelte provides built-in animations and effects which makes it easier to build slick user interfaces and interactive visualizations. Well, the framework was originally created for building interactive graphics for The Guardian. This approach provides a much nicer developer experience than something like React and is way easier to use.&lt;/p&gt;
-
-&lt;p&gt;Here is a simple example of using a transition effect:&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fade&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;svelte/transition&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;visible&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;label&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;checkbox&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;bind:checked=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;{visible}&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
-  visible
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/label&amp;gt;&lt;/span&gt;
-
-{#if visible}
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;transition:fade&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;Fades in and out&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-{/if}
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;built-in-reactive-store&quot;&gt;Built-in Reactive store&lt;/h4&gt;
-
-&lt;p&gt;Svelte provides both mutable and immutable reactive stores out of the box making it easier to do more complex state management in your application. The stores support manual and automatic subscriptions and two-way bindings making them very flexible. The implementation also makes it possible to switch to another state management solution like RxJS for example.&lt;/p&gt;
-
-&lt;p&gt;Let’s see an example of a writable store:&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// you can also use readable or derived stores&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;writable&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;svelte/store&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-  &lt;span class=&quot;c1&quot;&gt;// ideally you should do this in a different file&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;writable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-  &lt;span class=&quot;c1&quot;&gt;// using manual subscription&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count_value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;unsubscribe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;nx&quot;&gt;count_value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
-
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;The count is {count_value}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- The same can be done with auto subscription like below --&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;The count is {$count}&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h4 id=&quot;multiple-output-targets&quot;&gt;Multiple output targets&lt;/h4&gt;
-
-&lt;p&gt;Being a compiler, it is easy to change output targets without having to change your component’s code. For example, Svelte supports server-side rendering out of the box by providing a compiler mode for it (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dom&lt;/code&gt; vs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssr&lt;/code&gt;). There is even a &lt;a href=&quot;https://github.com/halfnelson/svelte-native&quot;&gt;NativeScript integration&lt;/a&gt; for Svelte that makes use of this flexibility to produce targets beyond &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dom&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssr&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;There is also the &lt;a href=&quot;https://svelte.dev/blog/sapper-towards-the-ideal-web-app-framework&quot;&gt;Sapper framework&lt;/a&gt;, soon to be &lt;a href=&quot;https://github.com/sveltejs/kit&quot;&gt;SvelteKit&lt;/a&gt;, from Svelte team, which is similar to &lt;a href=&quot;https://learnnextjs.com/&quot;&gt;Next.js&lt;/a&gt; but optimized to work with Svelte’s philosophy. Sapper supports SSR, Progressive Web Apps, code-splitting, and so on.&lt;/p&gt;
-
-&lt;h3 id=&quot;disadvantages&quot;&gt;Disadvantages&lt;/h3&gt;
-
-&lt;p&gt;All those advantages we saw above don’t mean there are no downsides, every framework makes tradeoffs. The major downsides of Svelte are:&lt;/p&gt;
-
-&lt;h4 id=&quot;young-framework&quot;&gt;Young framework&lt;/h4&gt;
-
-&lt;p&gt;Svelte is very young and that means it is not as battle-tested as React or Angular and you might run into some walls at times. This means it’s probably not suitable for very complex or mission-critical applications that are expected to scale.&lt;/p&gt;
-
-&lt;p&gt;This might not be a long-term problem as the framework is exploding in popularity and the introduction of Sapper has helped with the scaling concerns. Though, the &lt;a href=&quot;https://svelte.dev/blog/whats-the-deal-with-sveltekit&quot;&gt;confusion&lt;/a&gt; around Sapper vs SvelteKit could have been avoided, in my opinion.&lt;/p&gt;
-
-&lt;h4 id=&quot;smaller-community-and-ecosystem&quot;&gt;Smaller community and ecosystem&lt;/h4&gt;
-
-&lt;p&gt;Being a young framework means it has a smaller community and user base along with a smaller ecosystem. So you may not find as many tools or libraries as in React or as much help on Stack Overflow when you are stuck on some complex problem.&lt;/p&gt;
-
-&lt;h4 id=&quot;compilation-heavy&quot;&gt;Compilation heavy&lt;/h4&gt;
-
-&lt;p&gt;If you are involved in the front-end development space as well for a while, like me, you could look back and see that UX has improved miles, but the toolchain to produce that has grown to be very complex.&lt;/p&gt;
-
-&lt;p&gt;For example, at &lt;a href=&quot;https://www.jhipster.tech/&quot;&gt;JHipster&lt;/a&gt;, we try to provide the best in class production-grade set up for a full stack web app with React/Vue/Angular front end and Java/Kotlin/.NET/NodeJS backend. When you create a new app and compile it, you will see that the front-end takes 10x more time than the backend to compile.&lt;/p&gt;
-
-&lt;p&gt;This is the new normal in any full-stack web apps these days and Svelte also has the same issue. It’s compiler heavy and the more complex your app becomes the more complex and time-consuming the build will become. This also means you can’t just drop a JS file into a webpage and expect to make it a Svelte app like you can do with Vue.&lt;/p&gt;
-
-&lt;p&gt;By the way, JHipster also has &lt;a href=&quot;https://github.com/jhipster/generator-jhipster-svelte&quot;&gt;Svelte support&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h4 id=&quot;quirks&quot;&gt;Quirks&lt;/h4&gt;
-
-&lt;p&gt;Svelte is web standards compliant, it doesn’t introduce anything new like JSX. But it does change some of the standard semantics to work in a different way and this could be confusing for new users. For example, it uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;export&lt;/code&gt; keyword differently and there are quirks like having to use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on:click&lt;/code&gt; instead of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onClick&lt;/code&gt; and so on.&lt;/p&gt;
-
-&lt;p&gt;But those are almost unavoidable in any framework. It also uses a JS label (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;$:&lt;/code&gt;) to make derived statements/declarations work, it could look alien as some JS developers probably don’t even know that labels exist in JS as we rarely use it.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Of course, all this just scratches the surface of what Svelte offers. If you are coming from other frameworks like React, Angular, or Vue, you will find that Svelte provides a lot of similar features that you are already familiar with. I’m glad that Svelte didn’t just try to re-invent the wheel on everything.&lt;/p&gt;
-
-&lt;p&gt;I have built complex-mission-critical apps on production with JQuery, AngularJS, Angular, and React. I have also dabbed with Vue and few other lesser-known frameworks in the past. Having matured into a polyglot developer, I have stopped marrying languages/frameworks and hence I have no blind loyalty to any frameworks. I just pick what I think is the best fit for the problem at hand. I used to pick React for random stuff in the past but I think I’ll give Svelte a chance next time.&lt;/p&gt;
-
-&lt;p&gt;In my opinion, React would continue to be a big challenger for Svelte, especially with the new &lt;a href=&quot;https://reactjs.org/docs/concurrent-mode-intro.html&quot;&gt;concurrent mode&lt;/a&gt; that promises non-blocking rendering and hence no dropped frames.&lt;/p&gt;
-
-&lt;p&gt;If you already have an app on an MVVM framework like React, Vue, or Angular, there is no justifiable benefit for you to switch to Svelte as those frameworks can also get the job done with very similar performance. Each framework has its own pros and cons which could be situational based on your use case. But if you are going to build a new application or add web components to an existing application then Svelte could be a great choice, especially for web components due to Svelte’s simple and lightweight nature.&lt;/p&gt;
-
-&lt;p&gt;If you are convinced and want to dive in &lt;a href=&quot;https://svelte.dev/tutorial/basics&quot;&gt;here&lt;/a&gt; is a great resource to get started. you can also &lt;a href=&quot;https://sapper.svelte.dev/&quot;&gt;get started&lt;/a&gt; directly with Sapper if you like.&lt;/p&gt;
-
-&lt;p&gt;So keep Svelte in your mind and consider giving it a chance for your next greenfield project.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://svelte.dev/blog/svelte-3-rethinking-reactivity&quot;&gt;svelte.dev&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.codecademy.com/articles/react-virtual-dom&quot;&gt;www.codecademy.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.logrocket.com/should-you-switch-from-react-to-svelte&quot;&gt;blog.logrocket.com&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
-        <media:content url="https://i.imgur.com/YZca3NW.jpg" medium="image">https://i.imgur.com/YZca3NW.jpg</media:content>
-        <pubDate>Thu, 18 Mar 2021 00:00:00 +0100</pubDate>
-        <link>https://deepu.tech/what-about-svelte/</link>
-        <guid isPermaLink="true">https://deepu.tech/what-about-svelte/</guid>
-        
-        <category>svelte</category>
-        
-        <category>javascript</category>
-        
-        <category>web</category>
-        
-        <category>react</category>
         
         
       </item>
