@@ -1,5 +1,7 @@
 - [JavaZone](https://2022.javazone.no/) (Oslo, Norway) - September 7 - 8, 2022
   - Let's talk about Foreign functions in Java
+- [Berlin JUG](https://www.meetup.com/de-DE/jug-bb/events/288161006/) (Berlin, Germany) - September 10, 2022
+  - Let's talk about Foreign functions in Java
 - [RustLab](https://rustlab.it/) (Florence, Italy) - October 2 - 4, 2022
   - Building a Kubernetes monitoring dashboard in Rust. Why not?
 - [DevOps Global Summit'22](https://events.geekle.us/devops/) (Virtual) - October 4 - 5, 2022
