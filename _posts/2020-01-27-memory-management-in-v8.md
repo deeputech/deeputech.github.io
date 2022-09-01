@@ -6,7 +6,7 @@ description: Let us take a look at how the V8 engine for JavaScript & WebAssembl
 tags:
   - javascript
   - typescript
-  - WebAssembly
+  - webassembly
   - node
 canonical_url: "https://deepu.tech/memory-management-in-v8/"
 cover_image: "https://i.imgur.com/kSgatSL.png"
