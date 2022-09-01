@@ -8,7 +8,8 @@ License: https://www.wowthemes.net/freebies-license/
     font-size: 18px;
   } /* Increase the font size on higher resolutions */
   .container {
-    max-width: 1280px;
+    max-width: 60%;
+    min-width: 1280px;
   }
 }
 .mainheading {
