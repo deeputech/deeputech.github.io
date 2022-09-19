@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 01 Sep 2022 12:01:38 +0200</pubDate>
-    <lastBuildDate>Thu, 01 Sep 2022 12:01:38 +0200</lastBuildDate>
+    <pubDate>Mon, 19 Sep 2022 11:44:23 +0200</pubDate>
+    <lastBuildDate>Mon, 19 Sep 2022 11:44:23 +0200</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -142,7 +142,7 @@
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;On my machine, the process hung after &lt;strong&gt;14_625_956&lt;/strong&gt; virtual threads but didn’t crash, and as memory became available, it kept going slowly.&lt;/p&gt;
+&lt;p&gt;On my machine, the process hung after &lt;strong&gt;14_625_956&lt;/strong&gt; virtual threads but didn’t crash, and as memory became available, it kept going slowly. You may be wondering why this behavior! It’s due to the parked virtual threads being garbage collected, and the JVM is able to create more virtual threads and assign them to the underlying platform thread.&lt;/p&gt;
 
 &lt;h4 id=&quot;task-throughput&quot;&gt;Task throughput&lt;/h4&gt;
 
@@ -343,7 +343,6 @@ LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op
 &lt;p&gt;The cover image was created using a photo by &lt;a href=&quot;https://unsplash.com/@tama66&quot;&gt;Peter Herrmann&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;This post was originally published on the &lt;a href=&quot;https://developer.okta.com/blog/2022/08/26/state-of-java-project-loom&quot;&gt;Okta Developer Blog&lt;/a&gt;.&lt;/p&gt;
-
 </content:encoded>
         <media:content url="https://i.imgur.com/7FfOmmD.jpeg" medium="image">https://i.imgur.com/7FfOmmD.jpeg</media:content>
         <pubDate>Sat, 27 Aug 2022 00:00:00 +0200</pubDate>

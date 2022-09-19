@@ -52,7 +52,7 @@
         <span class="nc">LockSupport</span><span class="o">.</span><span class="na">park</span><span class="o">();</span>
     <span class="o">});</span>
 <span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></div></div><p>On my machine, the process hung after <strong>14_625_956</strong> virtual threads but didn’t crash, and as memory became available, it kept going slowly.</p><h4 id="task-throughput">Task throughput</h4><p>Let’s try to run 100,000 tasks using platform threads.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td></tr></tbody></table></code></pre></div></div><p>On my machine, the process hung after <strong>14_625_956</strong> virtual threads but didn’t crash, and as memory became available, it kept going slowly. You may be wondering why this behavior! It’s due to the parked virtual threads being garbage collected, and the JVM is able to create more virtual threads and assign them to the underlying platform thread.</p><h4 id="task-throughput">Task throughput</h4><p>Let’s try to run 100,000 tasks using platform threads.</p><div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
