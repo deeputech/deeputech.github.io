@@ -9,10 +9,10 @@ tags:
   - concurrency
   - loom
   - openjdk
-cover_image: 'https://i.imgur.com/7FfOmmD.jpeg'
-canonical_url: 'https://developer.okta.com/blog/2022/08/26/state-of-java-project-loom'
+cover_image: "https://i.imgur.com/7FfOmmD.jpeg"
+canonical_url: "https://developer.okta.com/blog/2022/08/26/state-of-java-project-loom"
 devto_id: 1177625
-devto_url: 'https://dev.to/deepu105/what-the-heck-is-project-loom-for-java-21hh'
+devto_url: "https://dev.to/deepu105/what-the-heck-is-project-loom-for-java-21hh"
 ---
 
 Java has had good multi-threading and concurrency capabilities from early on in its evolution and can effectively utilize multi-threaded and multi-core CPUs. Java Development Kit (JDK) 1.1 had basic support for platform threads (or Operating System (OS) threads), and JDK 1.5 had more utilities and updates to improve concurrency and multi-threading. JDK 8 brought asynchronous programming support and more concurrency improvements. While things have continued to improve over multiple versions, there has been nothing groundbreaking in Java for the last three decades, apart from support for concurrency and multi-threading using OS threads.
@@ -116,7 +116,7 @@ while (true) {
 }
 ```
 
-On my machine, the process hung after **14_625_956** virtual threads but didn't crash, and as memory became available, it kept going slowly.
+On my machine, the process hung after **14_625_956** virtual threads but didn't crash, and as memory became available, it kept going slowly. You may be wondering why this behavior! It's due to the parked virtual threads being garbage collected, and the JVM is able to create more virtual threads and assign them to the underlying platform thread.
 
 #### Task throughput
 
@@ -259,4 +259,3 @@ You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](http
 The cover image was created using a photo by [Peter Herrmann](https://unsplash.com/@tama66) on [Unsplash](https://unsplash.com)
 
 This post was originally published on the [Okta Developer Blog](https://developer.okta.com/blog/2022/08/26/state-of-java-project-loom).
-
