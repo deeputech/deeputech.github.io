@@ -9,6 +9,16 @@ comments: false
 
 ---
 
+##### [JavaZone](https://2022.javazone.no/)
+
+<small>September 2022</small>
+
+Let's talk about Foreign functions in Java
+
+[slides](https://speakerdeck.com/deepu105/lets-talk-about-foreign-functions-in-java)
+
+---
+
 ##### [Devopsdays Amsterdam 2022](https://devopsdays.org/events/2022-amsterdam/welcome/)
 
 <small>June 2022</small>
@@ -35,7 +45,7 @@ Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and 
 
 Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and JHipster
 
-[slides](https://speakerdeck.com/deepu105/reactive-java-microservices-on-kubernetes-with-spring-and-jhipster)
+[slides](https://speakerdeck.com/deepu105/reactive-java-microservices-on-kubernetes-with-spring-and-jhipster), [video](https://www.youtube.com/watch?v=rpIn4S8LJQk)
 
 ---
 
