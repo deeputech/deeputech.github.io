@@ -1,12 +1,8 @@
-- [RustLab](https://rustlab.it/) (Florence, Italy) - October 2 - 4, 2022
-  - Building a Kubernetes monitoring dashboard in Rust. Why not?
-- [DevOps Global Summit'22](https://events.geekle.us/devops/) (Virtual) - October 4 - 5, 2022
-  - Is containerless the future of Kubernetes?
 - [Devoxx](https://devoxx.be/) (Antwerp, Belgium) - October 10 - 14, 2022
   - What the heck is Project Loom and what can a normal Java developer expect from it?
-  - Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh
+  - Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh (workshop)
 - [JFall](https://jfall.nl/) (Ede, Netherlands) - November 2-3, 2022
-  - Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh
+  - Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh (workshop)
 - [All Day DevOps](https://www.alldaydevops.com/) (Virtual) - November 10, 2022
   - Building a Kubernetes monitoring dashboard in Rust. Why not?
 - [JavaSummit](https://www.javasummitil.com/) (Tel Aviv, Israel)- November 21, 2022

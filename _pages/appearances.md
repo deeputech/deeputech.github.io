@@ -9,6 +9,26 @@ comments: false
 
 ---
 
+##### [DevOps Global Summit'22](https://events.geekle.us/devops/)
+
+<small>October 2022</small>
+
+Is containerless the future of Kubernetes?
+
+[slides](https://speakerdeck.com/deepu105/is-containerless-the-future-of-kubernetes-ada1d280-da2d-49bd-a7de-a2d295f4e3ba)
+
+---
+
+##### [RustLab](https://rustlab.it/)
+
+<small>October 2022</small>
+
+Building a Kubernetes monitoring dashboard in Rust. Why not?
+
+[slides](https://speakerdeck.com/deepu105/why-did-i-build-kdash-in-rust-822822f8-5ef7-4ae0-a8ea-f773a8ac8d9c)
+
+---
+
 ##### [JavaZone](https://2022.javazone.no/)
 
 <small>September 2022</small>
