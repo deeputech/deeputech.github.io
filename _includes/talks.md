@@ -1,9 +1,10 @@
-- [Devoxx](https://devoxx.be/) (Antwerp, Belgium) - October 10 - 14, 2022
-  - What the heck is Project Loom and what can a normal Java developer expect from it?
-  - Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh (workshop)
+- [Cloud Native/Kubernetes meetup](https://www.meetup.com/dutch-kubernetes-meetup/events/288131176/) (Amsterdam, Netherlands) - October 21, 2022
+  - Is containerless the future of Kubernetes?"
 - [JFall](https://jfall.nl/) (Ede, Netherlands) - November 2-3, 2022
   - Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh (workshop)
 - [All Day DevOps](https://www.alldaydevops.com/) (Virtual) - November 10, 2022
   - Building a Kubernetes monitoring dashboard in Rust. Why not?
 - [JavaSummit](https://www.javasummitil.com/) (Tel Aviv, Israel)- November 21, 2022
+  - What the heck is Project Loom?
+- [Utrecht JUG](https://www.meetup.com/utrecht-java-user-group/) (Utrecht, Netherlands)- November 30, 2022
   - What the heck is Project Loom?

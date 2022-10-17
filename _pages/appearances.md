@@ -9,6 +9,20 @@ comments: false
 
 ---
 
+##### [Devoxx](https://devoxx.be/)
+
+<small>October 2022</small>
+
+What the heck is Project Loom and what can a normal Java developer expect from it?
+
+[slides](https://speakerdeck.com/deepu105/what-the-heck-is-project-loom-and-what-can-a-normal-java-developer-expect-from-it) | [video](https://www.youtube.com/watch?v=GjN0-vCzAzI)
+
+Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh (workshop)
+
+[slides](https://speakerdeck.com/deepu105/build-and-deploy-cloud-native-java-microservices-on-kubernetes-with-istio-service-mesh) | [video](https://www.youtube.com/watch?v=NucXvPL1z5o)
+
+---
+
 ##### [DevOps Global Summit'22](https://events.geekle.us/devops/)
 
 <small>October 2022</small>
