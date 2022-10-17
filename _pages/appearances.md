@@ -15,11 +15,11 @@ comments: false
 
 What the heck is Project Loom and what can a normal Java developer expect from it?
 
-[slides](https://speakerdeck.com/deepu105/what-the-heck-is-project-loom-and-what-can-a-normal-java-developer-expect-from-it) | [video](https://www.youtube.com/watch?v=GjN0-vCzAzI)
+[slides](https://speakerdeck.com/deepu105/what-the-heck-is-project-loom-and-what-can-a-normal-java-developer-expect-from-it) &#124; [video](https://www.youtube.com/watch?v=GjN0-vCzAzI)
 
 Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh (workshop)
 
-[slides](https://speakerdeck.com/deepu105/build-and-deploy-cloud-native-java-microservices-on-kubernetes-with-istio-service-mesh) | [video](https://www.youtube.com/watch?v=NucXvPL1z5o)
+[slides](https://speakerdeck.com/deepu105/build-and-deploy-cloud-native-java-microservices-on-kubernetes-with-istio-service-mesh) &#124; [video](https://www.youtube.com/watch?v=NucXvPL1z5o)
 
 ---
 
@@ -53,13 +53,33 @@ Let's talk about Foreign functions in Java
 
 ---
 
+##### [Dreamix](https://dreamix.eu/)
+
+<small>September 2022</small>
+
+Polyglot mindset: Beyond JHipster, Java, Rust and Open Source
+
+[interview](https://dreamix.eu/blog/bloggers/learn-from-java-champion-deepu-k-sasidharan-polyglot-mindset-beyond-jhipster-java-rust-and-open-source)
+
+---
+
+##### [Foojay Podcast](https://foojay.io/today/category/podcast/)
+
+<small>September 2022</small>
+
+OpenJDK Discussion Panel
+
+[podcast](https://foojay.io/today/foojay-podcast-5-openjdk-discussion-panel/)
+
+---
+
 ##### [Devopsdays Amsterdam 2022](https://devopsdays.org/events/2022-amsterdam/welcome/)
 
 <small>June 2022</small>
 
 Is containerless the future of Kubernetes? Let's see how WebAssembly can make containers obsolete
 
-[slides](https://speakerdeck.com/deepu105/is-containerless-the-future-of-kubernetes), [video](https://youtu.be/eenoelrr9Kc?t=5706)
+[slides](https://speakerdeck.com/deepu105/is-containerless-the-future-of-kubernetes) &#124; [video](https://youtu.be/eenoelrr9Kc?t=5706)
 
 ---
 
@@ -69,7 +89,7 @@ Is containerless the future of Kubernetes? Let's see how WebAssembly can make co
 
 Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and JHipster
 
-[slides](https://speakerdeck.com/deepu105/reactive-java-microservices-on-kubernetes-with-spring-and-jhipster), [video](https://www.youtube.com/watch?v=zFzMebkSQdY)
+[slides](https://speakerdeck.com/deepu105/reactive-java-microservices-on-kubernetes-with-spring-and-jhipster) &#124; [video](https://www.youtube.com/watch?v=zFzMebkSQdY)
 
 ---
 
@@ -79,7 +99,7 @@ Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and 
 
 Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and JHipster
 
-[slides](https://speakerdeck.com/deepu105/reactive-java-microservices-on-kubernetes-with-spring-and-jhipster), [video](https://www.youtube.com/watch?v=rpIn4S8LJQk)
+[slides](https://speakerdeck.com/deepu105/reactive-java-microservices-on-kubernetes-with-spring-and-jhipster) &#124; [video](https://www.youtube.com/watch?v=rpIn4S8LJQk)
 
 ---
 
@@ -89,7 +109,7 @@ Reactive Java Microservices on Kubernetes with Spring WebFlux, Spring Cloud and 
 
 Let's talk about Foreign functions in Java
 
-[slides](https://speakerdeck.com/deepu105/lets-talk-about-foreign-functions-in-java), [video](https://www.youtube.com/watch?v=JIfva4SbQOo)
+[slides](https://speakerdeck.com/deepu105/lets-talk-about-foreign-functions-in-java) &#124; [video](https://www.youtube.com/watch?v=JIfva4SbQOo)
 
 ---
 
@@ -109,7 +129,7 @@ Let's talk about Foreign functions in Java
 
 Is Rust a great language for building Kubernetes ecosystem?
 
-[slides](https://speakerdeck.com/deepu105/is-rust-a-great-language-for-building-kubernetes-ecosystem), [video](https://www.youtube.com/watch?v=Rc8HUwrJt9U)
+[slides](https://speakerdeck.com/deepu105/is-rust-a-great-language-for-building-kubernetes-ecosystem) &#124; [video](https://www.youtube.com/watch?v=Rc8HUwrJt9U)
 
 ---
 
@@ -119,7 +139,7 @@ Is Rust a great language for building Kubernetes ecosystem?
 
 How to Secure Your Node.js Containers on Kubernetes With Best Practices
 
-[slides](https://speakerdeck.com/deepu105/how-to-secure-your-node-dot-js-containers-on-kubernetes-with-best-practices), [video](https://youtu.be/MKqrvoWGvrk)
+[slides](https://speakerdeck.com/deepu105/how-to-secure-your-node-dot-js-containers-on-kubernetes-with-best-practices) &#124; [video](https://youtu.be/MKqrvoWGvrk)
 
 ---
 
@@ -129,11 +149,11 @@ How to Secure Your Node.js Containers on Kubernetes With Best Practices
 
 [Why safe programming matters and why Rust](https://fosdem.org/2022/schedule/event/security_rust)
 
-[slides](https://speakerdeck.com/deepu105/why-safe-programming-matters-and-why-rust), [video](https://youtu.be/8jtPUOytWyU)
+[slides](https://speakerdeck.com/deepu105/why-safe-programming-matters-and-why-rust) &#124; [video](https://youtu.be/8jtPUOytWyU)
 
 [Let's Talk About Foreign Functions In Java](https://fosdem.org/2022/schedule/event/foreignfunctions/)
 
-[slides](https://speakerdeck.com/deepu105/lets-talk-about-foreign-functions-in-java), [video](https://www.youtube.com/watch?v=lW69_AtAXzE)
+[slides](https://speakerdeck.com/deepu105/lets-talk-about-foreign-functions-in-java) &#124; [video](https://www.youtube.com/watch?v=lW69_AtAXzE)
 
 ---
 
@@ -143,7 +163,7 @@ Building a Kubernetes monitoring dashboard in Rust. Why not?
 
 <small>January 2022</small>
 
-[slides](https://speakerdeck.com/deepu105/why-did-i-build-a-kubernetes-dashboard-in-rust), [video](https://www.youtube.com/watch?v=_8G6pEzCAuY)
+[slides](https://speakerdeck.com/deepu105/why-did-i-build-a-kubernetes-dashboard-in-rust) &#124; [video](https://www.youtube.com/watch?v=_8G6pEzCAuY)
 
 ---
 
@@ -187,7 +207,7 @@ Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
 
 <small>October 2021</small>
 
-[video](https://www.youtube.com/watch?v=w-WdjPrO4GE), [slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
+[video](https://www.youtube.com/watch?v=w-WdjPrO4GE) &#124; [slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
 
 ---
 
@@ -197,7 +217,7 @@ Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
 
 <small>September 2021</small>
 
-[video](https://www.youtube.com/watch?v=eKKv39xni6Y), [slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
+[video](https://www.youtube.com/watch?v=eKKv39xni6Y) &#124; [slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
 
 ---
 
@@ -207,7 +227,7 @@ Pattern Matching & Sealed Classes: Best Features of OpenJDK 17?
 
 <small>September 2021</small>
 
-[video](https://www.youtube.com/watch?v=Sh8eXMChTTs), [slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
+[video](https://www.youtube.com/watch?v=Sh8eXMChTTs) &#124; [slides](https://speakerdeck.com/deepu105/state-of-pattern-matching-in-java)
 
 ---
 
@@ -237,7 +257,7 @@ What Is Developer Experience and Why Should We Care?
 
 <small>August 2021</small>
 
-[podcast](https://www.therelicans.com/polyglot/what-is-developer-experience-and-why-should-we-care-with-deepu-k-sasidharan), [transcript](https://www.therelicans.com/mandymoore/what-is-developer-experience-and-why-should-we-care-with-deepu-k-sasidharan-43fj)
+[podcast](https://www.therelicans.com/polyglot/what-is-developer-experience-and-why-should-we-care-with-deepu-k-sasidharan) &#124; [transcript](https://www.therelicans.com/mandymoore/what-is-developer-experience-and-why-should-we-care-with-deepu-k-sasidharan-43fj)
 
 ---
 
@@ -257,7 +277,7 @@ Functional programming primer for Java
 
 <small>April 2021</small>
 
-[video](https://www.youtube.com/watch?v=5dBw4madIpo), [slides](https://speakerdeck.com/deepu105/functional-programming-in-java)
+[video](https://www.youtube.com/watch?v=5dBw4madIpo) &#124; [slides](https://speakerdeck.com/deepu105/functional-programming-in-java)
 
 ---
 
@@ -267,7 +287,7 @@ Microservices with Istio, JHipster and Kubernetes
 
 <small>March 2021</small>
 
-[video](https://www.youtube.com/watch?v=VMxC9zqboVA&t=15331s), [slides](https://speakerdeck.com/deepu105/microservices-with-istio-jhipster-and-kubernetes-6c19ea46-cf70-4e89-99c2-d7390bc9546b)
+[video](https://www.youtube.com/watch?v=VMxC9zqboVA&t=15331s) &#124; [slides](https://speakerdeck.com/deepu105/microservices-with-istio-jhipster-and-kubernetes-6c19ea46-cf70-4e89-99c2-d7390bc9546b)
 
 ---
 
@@ -277,7 +297,7 @@ Using JHipster for boosting development speed and learning
 
 <small>March 2021</small>
 
-[video](https://www.youtube.com/watch?v=k6h5B9OdQh4), [slides](https://speakerdeck.com/deepu105/rapid-application-development-with-jhipster)
+[video](https://www.youtube.com/watch?v=k6h5B9OdQh4) &#124; [slides](https://speakerdeck.com/deepu105/rapid-application-development-with-jhipster)
 
 ---
 
@@ -325,7 +345,7 @@ Building Native TypeScript applications using Deno runtime
 
 <small>November 2019</small>
 
-[video](https://www.youtube.com/watch?v=8LZ0JmalhZE), [slides](https://speakerdeck.com/deepu105/building-native-typescript-applications-using-deno-devoxx-ukraine-2019)
+[video](https://www.youtube.com/watch?v=8LZ0JmalhZE) &#124; [slides](https://speakerdeck.com/deepu105/building-native-typescript-applications-using-deno-devoxx-ukraine-2019)
 
 ---
 
@@ -335,7 +355,7 @@ Java Microservices Made Easy with JHipster, Istio, and Kubernetes
 
 <small>Sept 2019</small>
 
-[video](https://www.youtube.com/watch?v=XHMnraI2Pg8), [slides](https://speakerdeck.com/deepu105/java-microservices-with-jhipster-istio-and-kubernetes)
+[video](https://www.youtube.com/watch?v=XHMnraI2Pg8) &#124; [slides](https://speakerdeck.com/deepu105/java-microservices-with-jhipster-istio-and-kubernetes)
 
 ---
 
@@ -353,7 +373,7 @@ Keynote
 
 <small>June 2019</small>
 
-[video](https://www.youtube.com/watch?v=6HFmfEHVu-o), [slides](https://speakerdeck.com/deepu105/jhipsterconf-2019-english-keynote)
+[video](https://www.youtube.com/watch?v=6HFmfEHVu-o) &#124; [slides](https://speakerdeck.com/deepu105/jhipsterconf-2019-english-keynote)
 
 ---
 
@@ -397,7 +417,7 @@ JHipster 5 What's new and noteworthy
 
 <small>November 2018</small>
 
-[video](https://www.youtube.com/watch?v=NPToZd0PxbI), [slides](https://speakerdeck.com/deepu105/jhipster-5-whats-new-and-noteworthy)
+[video](https://www.youtube.com/watch?v=NPToZd0PxbI) &#124; [slides](https://speakerdeck.com/deepu105/jhipster-5-whats-new-and-noteworthy)
 
 ---
 
@@ -407,7 +427,7 @@ Why you should love TypeScript A practical guide
 
 <small>November 2018</small>
 
-[video](https://www.youtube.com/watch?v=SBwGH4kbkms), [slides](https://speakerdeck.com/deepu105/why-you-should-love-typescript-a-practical-guide)
+[video](https://www.youtube.com/watch?v=SBwGH4kbkms) &#124; [slides](https://speakerdeck.com/deepu105/why-you-should-love-typescript-a-practical-guide)
 
 ---
 
@@ -417,7 +437,7 @@ TypeScript: Complete
 
 <small>November 2018</small>
 
-[video](https://www.youtube.com/watch?v=5roA60WTITw), [slides](https://speakerdeck.com/deepu105/typescript-complete)
+[video](https://www.youtube.com/watch?v=5roA60WTITw) &#124; [slides](https://speakerdeck.com/deepu105/typescript-complete)
 
 ---
 
@@ -437,7 +457,7 @@ How we built our Analytics platform with JHipster and OSS technologies
 
 <small>October 2018</small>
 
-[video](https://www.youtube.com/watch?v=LOn27uOb_Iw), [slides](https://speakerdeck.com/deepu105/heapcon-how-we-built-our-analytics-platform-with-jhipster-and-oss-technologies)
+[video](https://www.youtube.com/watch?v=LOn27uOb_Iw) &#124; [slides](https://speakerdeck.com/deepu105/heapcon-how-we-built-our-analytics-platform-with-jhipster-and-oss-technologies)
 
 ---
 
@@ -457,7 +477,7 @@ JHipster What's new in our Spring:Summer 2018 collection
 
 <small>April 2018</small>
 
-[video](https://www.youtube.com/watch?v=D9XYYh6xAog), [slides](https://speakerdeck.com/deepu105/devoxx-france-2018-jhipster-whats-new-in-our-spring-summer-2018-collection)
+[video](https://www.youtube.com/watch?v=D9XYYh6xAog) &#124; [slides](https://speakerdeck.com/deepu105/devoxx-france-2018-jhipster-whats-new-in-our-spring-summer-2018-collection)
 
 ---
 
@@ -467,7 +487,7 @@ Frontend stack for Java developers
 
 <small>April 2018</small>
 
-[video](https://www.youtube.com/watch?v=l_g-_iWigjc), [slides](https://speakerdeck.com/deepu105/front-end-for-java-developers-devoxx-france-2018)
+[video](https://www.youtube.com/watch?v=l_g-_iWigjc) &#124; [slides](https://speakerdeck.com/deepu105/front-end-for-java-developers-devoxx-france-2018)
 
 ---
 
@@ -501,7 +521,7 @@ Angular vs React Smackdown
 
 <small>November 2017</small>
 
-[video](https://www.youtube.com/watch?v=qYEEuiI4l10), [slides](https://speakerdeck.com/deepu105/angular-vs-react-devoxx-be-2017)
+[video](https://www.youtube.com/watch?v=qYEEuiI4l10) &#124; [slides](https://speakerdeck.com/deepu105/angular-vs-react-devoxx-be-2017)
 
 ---
 
@@ -521,7 +541,7 @@ Easy microservices with JHipster
 
 <small>November 2017</small>
 
-[video](https://www.youtube.com/watch?v=FuG5t_UW7pw), [slides](https://speakerdeck.com/deepu105/easy-microservices-with-jhipster-devoxx-be-2017)
+[video](https://www.youtube.com/watch?v=FuG5t_UW7pw) &#124; [slides](https://speakerdeck.com/deepu105/easy-microservices-with-jhipster-devoxx-be-2017)
 
 ---
 
@@ -545,7 +565,7 @@ Be Productive with JHipster
 
 <small>November 2016</small>
 
-[video](https://www.youtube.com/watch?v=dzdjP3CPOCs), [slides](https://www.slideshare.net/julien.dubois/devoxx-being-productive-with-jhipster)
+[video](https://www.youtube.com/watch?v=dzdjP3CPOCs) &#124; [slides](https://www.slideshare.net/julien.dubois/devoxx-being-productive-with-jhipster)
 
 ---
 
