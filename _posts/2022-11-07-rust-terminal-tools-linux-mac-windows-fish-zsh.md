@@ -1,15 +1,21 @@
 ---
-title: Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal
+title: >-
+  Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your
+  Terminal
 published: true
 description: >-
-  Rust tooling is taking over the terminal. Use these awesome tools to supercharge your Linux/macOS/Windows terminal.
+  Rust tooling is taking over the terminal. Use these awesome tools to
+  supercharge your Linux/macOS/Windows terminal.
 tags:
   - rust
   - terminal
   - linux
   - macos
-cover_image: "https://i.imgur.com/KsMv5xG.png"
-canonical_url: "https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/"
+cover_image: 'https://i.imgur.com/KsMv5xG.png'
+canonical_url: 'https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/'
+devto_id: 1246290
+devto_url: >-
+  https://dev.to/deepu105/rust-easy-modern-cross-platform-command-line-tools-to-supercharge-your-terminal-4dd3
 ---
 
 Rust is taking over the terminal. Rust is a general-purpose programming language that is blazing fast and memory safe. It is the fastest-growing and most loved programming language in the world. It is used to build everything from operating systems to web servers to command-line tools. Recently there has been a surge of command line tools and utilities written in Rust, and many of them are intended to replace standard Unix commands. They are faster, more user-friendly, and have more features than their standard Unix counterparts. In this post, I will cover some of the best Rust command line tools I have used for a while. You can also use these to supercharge your terminal.
@@ -445,3 +451,4 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Image derived from work in [egonelbre/gophers](https://github.com/egonelbre/gophers) created by [@egonelbre](https://twitter.com/egonelbre).
+
