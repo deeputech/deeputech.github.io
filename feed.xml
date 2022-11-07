@@ -5,13 +5,682 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 17 Oct 2022 16:07:07 +0200</pubDate>
-    <lastBuildDate>Mon, 17 Oct 2022 16:07:07 +0200</lastBuildDate>
+    <pubDate>Mon, 07 Nov 2022 10:37:34 +0100</pubDate>
+    <lastBuildDate>Mon, 07 Nov 2022 10:37:34 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
+        <title>Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal</title>
+        <description>Rust tooling is taking over the terminal. Use these awesome tools to supercharge your Linux/macOS/Windows terminal. | &lt;a href=&quot;https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;Rust is taking over the terminal. Rust is a general-purpose programming language that is blazing fast and memory safe. It is the fastest-growing and most loved programming language in the world. It is used to build everything from operating systems to web servers to command-line tools. Recently there has been a surge of command line tools and utilities written in Rust, and many of them are intended to replace standard Unix commands. They are faster, more user-friendly, and have more features than their standard Unix counterparts. In this post, I will cover some of the best Rust command line tools I have used for a while. You can also use these to supercharge your terminal.&lt;/p&gt;
+
+&lt;p&gt;These tools are available for both Linux and macOS. I have not tested them on Windows, but most should also work on Windows. I recommend aliasing the commands to replace the standard commands based on your preferences. If you have &lt;a href=&quot;https://doc.rust-lang.org/cargo/&quot;&gt;Cargo&lt;/a&gt;, the rust package manager, you can install all these using Cargo.&lt;/p&gt;
+
+&lt;h2 id=&quot;alacritty&quot;&gt;Alacritty&lt;/h2&gt;
+
+&lt;p&gt;Let us start with the terminal itself. &lt;a href=&quot;https://github.com/alacritty/alacritty&quot;&gt;Alacritty&lt;/a&gt; is a cross-platform modern terminal emulator with sensible defaults. It is &lt;strong&gt;GPU accelerated&lt;/strong&gt;, super fast, and highly configurable. You can use it on Linux, macOS, and Windows. It doesn’t have much in terms of a UI, and hence all &lt;a href=&quot;https://github.com/alacritty/alacritty/releases/download/v0.11.0/alacritty.yml&quot;&gt;configurations&lt;/a&gt; are done through YAML files. I don’t use it as my primary terminal as I love &lt;a href=&quot;https://invent.kde.org/utilities/yakuake&quot;&gt;Yakuake&lt;/a&gt; too much for all its cool features. We can get most of those features (tabs, split panes, dropdown mode) using &lt;a href=&quot;&quot;&gt;tmux&lt;/a&gt; and &lt;a href=&quot;https://github.com/noctuid/tdrop&quot;&gt;tdrop&lt;/a&gt; if really needed. I use Alacrity when I need speed and GPU acceleration. There is an excellent tutorial on &lt;a href=&quot;https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/&quot;&gt;using Alacritty with tmux&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/XPYyJof.png&quot; alt=&quot;Alacritty&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; alacritty
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf copr &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;atim/alacritty
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;alacritty
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+add-apt-repository ppa:aslatter/ppa
+apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;alacritty
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--cask&lt;/span&gt; alacritty
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop bucket add extras
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;alacritty
+&lt;span class=&quot;c&quot;&gt;# Cargo on any&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;alacritty
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;starship&quot;&gt;Starship&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://starship.rs/&quot;&gt;Starship&lt;/a&gt; is the best terminal prompt I have ever used. Forget &lt;a href=&quot;https://ohmyz.sh/&quot;&gt;Oh My Zsh&lt;/a&gt; and stuff like that. Starship is fast, highly customizable, and has a great default theme and settings. I didn’t even change most of the default settings, as things were perfect as it is. Starship works on shells like zsh, fish, and bash and can also work alongside other prompts like Oh My Zsh, in case you still want to use Oh My Zsh for other plugins like autosuggestions and so on. Starship works best with a &lt;a href=&quot;https://www.nerdfonts.com/&quot;&gt;Nerd Font&lt;/a&gt; as it can show icons and ligatures based on context. I used Oh My Zsh for many years with the &lt;a href=&quot;https://github.com/romkatv/powerlevel10k&quot;&gt;powerlevel10k&lt;/a&gt; theme, but the prompt was a bit slow. Starship is blazing fast with more features and an excellent UX.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/bPmhPKH.gif&quot; alt=&quot;starship&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-1&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; starship
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;starship
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+curl &lt;span class=&quot;nt&quot;&gt;-sS&lt;/span&gt; https://starship.rs/install.sh | sh
+&lt;span class=&quot;c&quot;&gt;# macOS/Linux Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;starship
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;starship
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;starship
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;starship &lt;span class=&quot;nt&quot;&gt;--locked&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;bat&quot;&gt;bat&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sharkdp/bat&quot;&gt;bat&lt;/a&gt; is one of my favorite tools from this list. It’s a replacement for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt;, and once you have used &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bat&lt;/code&gt;, you will never go back. It provides features like syntax highlight, line numbers, Git change highlight, shows special chars, paging, and so on. It is super fast and looks beautiful. I have aliased &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bat&lt;/code&gt; immediately after trying it for the first time. By default, bat behaves similarly to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;less&lt;/code&gt; by paging large output, but that can be disabled to make it work precisely like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt;. It can be used as a drop-in replacement for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat&lt;/code&gt; even in scripts. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bat&lt;/code&gt; can also be used as a previewer for &lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;fzf&lt;/a&gt;. It can also be combined with many other commands and tools like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tail&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;man&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt;, among others, to add syntax highlighting to outputs. Syntax highlighting themes are configurable.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/46r4uom.png&quot; alt=&quot;bat&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-2&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; bat
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bat
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bat
+&lt;span class=&quot;c&quot;&gt;# macOS/Linux Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bat
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bat
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bat
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bat &lt;span class=&quot;nt&quot;&gt;--locked&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;lsd-and-exa&quot;&gt;LSD and exa&lt;/h2&gt;
+
+&lt;p&gt;Both &lt;a href=&quot;https://github.com/Peltoche/lsd&quot;&gt;LSD&lt;/a&gt; and &lt;a href=&quot;https://github.com/ogham/exa&quot;&gt;exa&lt;/a&gt; are replacements for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; command. They both look gorgeous with nice colors and icons and have features like headers, sorting, tree views, and so on. Exa is a bit faster than LSD for tree views and can show the Git status of files and folders. I prefer exa due to the Git support and faster tree views. I have set up my &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; alias to use exa by default. Both can be configured to show custom columns and sorting behaviors.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/KsMv5xG.png&quot; alt=&quot;lsd-exa&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;exa-installation&quot;&gt;exa Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; exa
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;exa
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;exa
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;exa
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;exa
+
+&lt;span class=&quot;c&quot;&gt;# Alias ls to exa&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias ls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;exa --git --icons --color=always --group-directories-first&apos;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;lsd-installation&quot;&gt;LSD Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; lsd
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsd
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+dpkg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; lsd_0.23.1_amd64.deb &lt;span class=&quot;c&quot;&gt;# get .deb file from https://github.com/Peltoche/lsd/releases&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsd
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsd
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsd
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsd
+
+&lt;span class=&quot;c&quot;&gt;# Alias ls to lsd&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias ls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;lsd --header --color=always --group-directories-first&apos;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;rip&quot;&gt;rip&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/nivekuil/rip&quot;&gt;rip&lt;/a&gt; is an improved version of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm&lt;/code&gt; command. It is faster, safer, and user-friendly. rip sends deleted files to a temp location so they can be recovered using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rip -u&lt;/code&gt;. I really like the simplicity and the revert feature, as I don’t have to worry about accidentally deleting something using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm&lt;/code&gt;. While rip can be aliased to replace &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm&lt;/code&gt;, the creators advise not doing that as you might get used to it and do &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm&lt;/code&gt; on other systems where you cannot revert the delete.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-3&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; rm-improved
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS/Debian/Ubuntu&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Install from binary or build locally using Cargo&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;rm-improved
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;rm-improved
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;xcp&quot;&gt;xcp&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tarka/xcp&quot;&gt;xcp&lt;/a&gt; is a partial clone of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp&lt;/code&gt; command. It is faster and more user-friendly with progress bars, parallel copying, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; support, and so on. I like its simplicity and developer experience, especially the progress bars. I have aliased &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cp&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xcp&lt;/code&gt; so I can use it everywhere.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/NOnkDyx.png&quot; alt=&quot;xcp&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-4&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; xcp
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS/Debian/Ubuntu/macOS&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Install from binary or build locally using Cargo&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;xcp
+
+&lt;span class=&quot;c&quot;&gt;# Alias cp to xcp&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias cp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;xcp&apos;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;zoxide&quot;&gt;zoxide&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ajeetdsouza/zoxide&quot;&gt;zoxide&lt;/a&gt; is a smarter &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt; replacement. It remembers the directories you visit, and you can jump to them without providing a full path. You can provide partial paths or even a word from the path. When there are similar paths, zoxide offers an interactive selection using &lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;fzf&lt;/a&gt;. It is super fast and works with all major shells. I like how it works, and I have aliased &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;z&lt;/code&gt; so I can use it everywhere.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/OTZS3yu.png&quot; alt=&quot;zoxide&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-5&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; zoxide
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;zoxide
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;zoxide
+&lt;span class=&quot;c&quot;&gt;# macOS/Linux Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;zoxide
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;zoxide
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;zoxide
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;zoxide &lt;span class=&quot;nt&quot;&gt;--locked&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once installed, you must add the following to your shell config file. For other shells, refer the &lt;a href=&quot;https://github.com/ajeetdsouza/zoxide#step-2-add-zoxide-to-your-shell&quot;&gt;docs&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# bash (~/.bashrc)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;zoxide init bash&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# zsh (~/.zshrc)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;eval&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;zoxide init zsh&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# fish (~/.config/fish/config.fish)&lt;/span&gt;
+zoxide init fish | &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Alias cd to z&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias cd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;z&apos;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;dust&quot;&gt;dust&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/bootandy/dust&quot;&gt;Dust&lt;/a&gt; is an alternative for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;du&lt;/code&gt; command. It is fast and has a better UX with nice visualization for disk usage.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/wfYJPqn.png&quot; alt=&quot;dust&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-6&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; dust
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Install binary from https://github.com/bootandy/dust/releases&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+deb-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;du-dust
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;dust
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;dust
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;dust
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;du-dust
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;ripgrep&quot;&gt;ripgrep&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/BurntSushi/ripgrep&quot;&gt;ripgrep (rg)&lt;/a&gt; is a line-oriented search tool that recursively searches your current directory for a regex pattern. It is faster than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;grep&lt;/code&gt; and has many features like compressed files search, colorized output, smart case, file type filtering, multi-threading, and so on. It understands &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; files and skips hidden and ignored files. &lt;a href=&quot;https://beyondgrep.com/feature-comparison/&quot;&gt;Here&lt;/a&gt; is a feature comparison with other similar tools, and yes, it is faster than all the other tools in the list.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/bi8838T.png&quot; alt=&quot;ripgrep&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-7&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; ripgrep
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ripgrep
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ripgrep
+&lt;span class=&quot;c&quot;&gt;# macOS/Linux Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ripgrep
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ripgrep
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ripgrep
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;ripgrep
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;fd&quot;&gt;fd&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/sharkdp/fd&quot;&gt;fd&lt;/a&gt; is a simpler alternative to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt;. It is more intuitive to use and comes with sensible defaults. It is extremely fast due to parallel traversing and shows a modern colorized output and supports patterns and regex, parallel commands, smart case, understands &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; files, and so on. I have aliased &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;find&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fd&lt;/code&gt; as I could never remember what options to pass to get a basic find command working.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/tcSzQ4S.png&quot; alt=&quot;fd&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-8&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; fd
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;fd-find
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+apt &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;fd-find
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;fd
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;fd
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;fd
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;fd-find
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;sd&quot;&gt;sd&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/chmln/sd&quot;&gt;sd&lt;/a&gt; is a find-and-replace CLI, and you can use it as a replacement for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;awk&lt;/code&gt;. It is way more user-friendly and modern. It is also magnitudes faster than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sed&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-9&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; sd
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;sd
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Install binary from the release page&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;sd
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+choco &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;sd-cli
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;sd
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;procs&quot;&gt;procs&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/dalance/procs&quot;&gt;procs&lt;/a&gt; is a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt; replacement. It provides colorized human-readable output, multi-column search, more information than &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt;, docker support, paging, watch mode, and tree view. It is a much more user-friendly and modern alternative to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt;. You can filter by name and PID and use logical and/or operators to combine multiple filters. It also has a tree view which is very useful for seeing the process hierarchy. It can also show docker container names for the process running docker containers.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/nvho7hM.png&quot; alt=&quot;procs&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-10&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; procs
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;procs
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Install binary from the release page&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;procs
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;procs
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;procs
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;procs
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;bottom&quot;&gt;bottom&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/ClementTsang/bottom&quot;&gt;bottom&lt;/a&gt; is a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;top&lt;/code&gt; replacement with a nice terminal UI. It’s quite feature-rich and customizable.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/nbL8gBi.png&quot; alt=&quot;bottom&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-11&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; bottom
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf copr &lt;span class=&quot;nb&quot;&gt;enable &lt;/span&gt;atim/bottom &lt;span class=&quot;nt&quot;&gt;-y&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bottom
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+dpkg &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; bottom_0.6.8_amd64.deb
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bottom
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bottom
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bottom
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;bottom &lt;span class=&quot;nt&quot;&gt;--locked&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;topgrade&quot;&gt;Topgrade&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/topgrade-rs/topgrade&quot;&gt;Topgrade&lt;/a&gt; is a fantastic utility if you prefer to keep your system up-to-date, like me. It detects most of the package managers on your system and triggers updates. It is configurable, so you can configure it to ignore certain package managers. On my system, it detected pacman, SDKMAN, Flatpak, snap, Homebrew, rustup, Linux firmware, Pip, and so on. Topgrade is cross-platform; you can use it on Windows, macOS, and Linux.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/7PXryFh.png&quot; alt=&quot;topgrade&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-12&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; topgrade
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS/Debian/Ubuntu/Windows&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Install binary from the release page&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;topgrade
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;topgrade
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;topgrade &lt;span class=&quot;nt&quot;&gt;--locked&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;broot&quot;&gt;Broot&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/Canop/broot&quot;&gt;Broot&lt;/a&gt; is a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tree&lt;/code&gt; alternative with a better user experience, and you can use it to navigate a file structure. It’s fast and respects &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt;. You can cd into a directory from the tree view, open sub-directories in a panel, and even preview files. It has excellent keyboard navigation as well. It has many more features.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/kAuL7oJ.png&quot; alt=&quot;broot&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-13&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; broot
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS/Debian/Ubuntu/Windows&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Install binary from release page https://dystroy.org/broot/install/&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;broot
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;broot
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;broot &lt;span class=&quot;nt&quot;&gt;--locked&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;tokei&quot;&gt;Tokei&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/XAMPPRocky/tokei&quot;&gt;Tokei&lt;/a&gt; is a nice utility to count lines and stats of code. It is very fast, accurate, and has a nice output. It supports over 150 languages and can output in JSON, YAML, CBOR, and human-readable tables.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/DGFI13M.png&quot; alt=&quot;tokei&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;installation-14&quot;&gt;Installation&lt;/h3&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Arch Linux&lt;/span&gt;
+yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; tokei
+&lt;span class=&quot;c&quot;&gt;# Fedora/CentOS&lt;/span&gt;
+dnf &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
+&lt;span class=&quot;c&quot;&gt;# Debian/Ubuntu&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Install binary from the release page&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# macOS Homebrew&lt;/span&gt;
+brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
+&lt;span class=&quot;c&quot;&gt;# macOS MacPorts&lt;/span&gt;
+port &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
+&lt;span class=&quot;c&quot;&gt;# Windows Scoop&lt;/span&gt;
+scoop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
+&lt;span class=&quot;c&quot;&gt;# Cargo&lt;/span&gt;
+cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;other-notable-tools&quot;&gt;Other notable tools&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/kdash-rs/kdash/&quot;&gt;kdash&lt;/a&gt;: A fast and simple dashboard for Kubernetes. Its created by me :)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ducaale/xh&quot;&gt;xh&lt;/a&gt;: A HTTPie alternative with better performance.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/y2z/monolith&quot;&gt;monolith&lt;/a&gt;: Convert any webpage into a single HTML file with all assets inlined.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/dandavison/delta&quot;&gt;delta&lt;/a&gt;: A syntax-highlighting pager for git, diff, and grep output.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/sirwart/ripsecrets&quot;&gt;ripsecrets&lt;/a&gt;: Find secret keys in your code before committing them to git.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/nerdypepper/eva&quot;&gt;eva&lt;/a&gt;: A CLI REPL calculator.&lt;/li&gt;
+  &lt;li&gt;You can find a list of other Rust CLI tools &lt;a href=&quot;https://gist.github.com/sts10/daadbc2f403bdffad1b6d33aff016c0a&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Cover image credit: Image derived from work in &lt;a href=&quot;https://github.com/egonelbre/gophers&quot;&gt;egonelbre/gophers&lt;/a&gt; created by &lt;a href=&quot;https://twitter.com/egonelbre&quot;&gt;@egonelbre&lt;/a&gt;.&lt;/p&gt;
+
+</content:encoded>
+        <media:content url="https://i.imgur.com/KsMv5xG.png" medium="image">https://i.imgur.com/KsMv5xG.png</media:content>
+        <pubDate>Mon, 07 Nov 2022 00:00:00 +0100</pubDate>
+        <link>https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/</link>
+        <guid isPermaLink="true">https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/</guid>
+        
+        <category>rust</category>
+        
+        <category>terminal</category>
+        
+        <category>linux</category>
+        
+        <category>macos</category>
+        
+        
+      </item>
+    
+      <item>
         <title>What the Heck Is Project Loom for Java?</title>
-        <description>What the heck is Java's Project Loom and what does it mean for regular Java developers? | &lt;a href=&quot;https://deepu.tech/state-of-java-project-loom/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <description>What the heck is Java&apos;s Project Loom and what does it mean for regular Java developers? | &lt;a href=&quot;https://deepu.tech/state-of-java-project-loom/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Java has had good multi-threading and concurrency capabilities from early on in its evolution and can effectively utilize multi-threaded and multi-core CPUs. Java Development Kit (JDK) 1.1 had basic support for platform threads (or Operating System (OS) threads), and JDK 1.5 had more utilities and updates to improve concurrency and multi-threading. JDK 8 brought asynchronous programming support and more concurrency improvements. While things have continued to improve over multiple versions, there has been nothing groundbreaking in Java for the last three decades, apart from support for concurrency and multi-threading using OS threads.&lt;/p&gt;
 
@@ -170,9 +839,9 @@
 2
 3
 4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# 'newThreadPerTaskExecutor' with 'defaultThreadFactory'&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# &apos;newThreadPerTaskExecutor&apos; with &apos;defaultThreadFactory&apos;&lt;/span&gt;
 0:18.77 real,   18.15 s user,   7.19 s sys,     135% 3891pu,    0 amem,         743584 mmem
-&lt;span class=&quot;c&quot;&gt;# 'newCachedThreadPool' with 'defaultThreadFactory'&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# &apos;newCachedThreadPool&apos; with &apos;defaultThreadFactory&apos;&lt;/span&gt;
 0:11.52 real,   13.21 s user,   4.91 s sys,     157% 6019pu,    0 amem,         2215972 mmem
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -362,7 +1031,7 @@ LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op
     
       <item>
         <title>Golang Finally Gets Generics! Does It Make Go a Better Language?</title>
-        <description>Let's see if Golang became better with the addition of generics. | &lt;a href=&quot;https://deepu.tech/go-impressions-part-2/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <description>Let&apos;s see if Golang became better with the addition of generics. | &lt;a href=&quot;https://deepu.tech/go-impressions-part-2/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;So Golang finally made the sane decision to add support for generics, in version 1.18, after dragging it out for years and after multiple proposals. Well, simplicity is nice when you are a newbie in the language but becomes annoying really fast, in my personal experience, especially in large codebases.&lt;/p&gt;
 
@@ -1303,7 +1972,7 @@ Though I would have preferred to see the &lt;code class=&quot;language-plaintext
 15
 16
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rotate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;angle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// this will be 'switch' expression does not cover all possible input values error&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// this will be &apos;switch&apos; expression does not cover all possible input values error&lt;/span&gt;
        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Circle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Square&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rotate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;angle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
    &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
@@ -1622,7 +2291,7 @@ We probably would still have to wait a few years before we can actually start us
     
       <item>
         <title>What is Developer Experience and why should we care?</title>
-        <description>Let's bust some myths around developer experience and see why it's important. | &lt;a href=&quot;https://deepu.tech/what-is-developer-experience-and-why-care/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <description>Let&apos;s bust some myths around developer experience and see why it&apos;s important. | &lt;a href=&quot;https://deepu.tech/what-is-developer-experience-and-why-care/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Information Technology (IT) is undoubtedly one of the most important industries today and one that is ever-growing. Every company is becoming an IT company these days. From Taxis to food delivery to banking, every industry is dominated by companies that are IT companies first and domain second. With that growth, the demand for software and tools used by other developers also grows.&lt;/p&gt;
 
@@ -1967,7 +2636,7 @@ We probably would still have to wait a few years before we can actually start us
       </item>
     
       <item>
-        <title>My second impression of Rust and why I think it's a great general-purpose language!</title>
+        <title>My second impression of Rust and why I think it&apos;s a great general-purpose language!</title>
         <description>My second impression of Rust, after building a real-life use case with it and my thoughts on why it is a great general-purpose language for the future. | &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;I wrote about &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;my first impression of Rust&lt;/a&gt; in November 2019. After that, I dabbled with it few times, but mostly on very simple code, and while I liked using Rust I wasn’t too amazed. On the surface, it kind of felt more or less like many other languages I have dabbled with.&lt;/p&gt;
@@ -2694,7 +3363,7 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
     &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 
     &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;c1&quot;&gt;// we shouldn't use try with resource here as it will kill the stream&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// we shouldn&apos;t use try with resource here as it will kill the stream&lt;/span&gt;
         &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AsynchronousServerSocketChannel&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;bind&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;InetSocketAddress&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;127.0.0.1&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8080&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// bind listener&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setOption&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;StandardSocketOptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SO_REUSEADDR&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
@@ -2883,255 +3552,6 @@ Percentage of the requests served within a certain &lt;span class=&quot;nb&quot;
         <category>jvm</category>
         
         <category>languages</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>The state of Linux as a daily use OS in 2021</title>
-        <description>Let's see what is the state of Linux, for daily use, in 2021 is and if its a viable alternative to  Windows and macOS | &lt;a href=&quot;https://deepu.tech/the-state-of-linux-on-desktops/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;I got my first PC when I was in high school, in 2003. It was a DIY Intel Pentium 4 PC with 512MB of RAM, running Windows XP. This got me hooked to computers and I even started assembling PCs for others and selling my service as a Windows OS installer (pirated, of course, the middle class in India back then couldn’t afford to buy software).&lt;/p&gt;
-
-&lt;p&gt;This also made me quite an expert in the Windows XP OS which I loved. I used to get occasional bootable CDs of a Linux distro from my Chip magazine subscription which I would try then forget as they weren’t as compelling or user-friendly as Windows back then.&lt;/p&gt;
-
-&lt;p&gt;Then came Windows Vista, which I didn’t like much, and Windows 8, which I didn’t care for, and Windows 10, which seemed decent but still didn’t feel as good as XP.&lt;/p&gt;
-
-&lt;p&gt;Fast forward to 2016 I made a bold jump to Ubuntu from Windows 10, after 13 years of being a loyal Windows user. I was on Ubuntu for ~6 months then switched to Fedora and never looked back.&lt;/p&gt;
-
-&lt;p&gt;Now in 2021, I’m still using &lt;a href=&quot;https://deepu.tech/my-beautiful-linux-development-environment/&quot;&gt;Fedora as my daily driver&lt;/a&gt;. I have macOS from work which I use for work stuff and a Windows 10 &lt;a href=&quot;https://deepu.tech/my-vr-gaming-pc-build/&quot;&gt;PC for VR gaming&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Ok, now that I have nerded out about my fascination with computers, let’s get into the actual topic and see if Linux is good enough as a daily driver even for regular users who just wants a working computer and are not tech-savvy and never want to visit the terminal. Throughout the article, I’ll be making some comparisons with the world’s most popular OS, Microsoft Windows, and Apple’s macOS which, IMO, is unavoidable.&lt;/p&gt;
-
-&lt;h2 id=&quot;state-of-linux&quot;&gt;State of Linux&lt;/h2&gt;
-
-&lt;p&gt;Linux has come a long way. For those of you, who still think of a terminal and an outdated UI(I know people who still love those UI) when you hear the word Linux, I think you probably haven’t seen or worked on a Linux distro in the last 10 years.&lt;/p&gt;
-
-&lt;p&gt;When we talk about Linux on Desktop(or Laptop) we are really talking about a Linux distribution, like &lt;a href=&quot;https://ubuntu.com/&quot;&gt;Ubuntu&lt;/a&gt; or &lt;a href=&quot;https://getfedora.org/&quot;&gt;Fedora&lt;/a&gt;, and hence we need to understand what makes a distribution (distro). A Linux distribution is an Operating System made up of mainly the below:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://www.kernel.org/&quot;&gt;The Linux Kernel&lt;/a&gt;&lt;/strong&gt; - This is the core of the operating system and it is used by all Linux operating systems, including Android and Chrome OS&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Windowing_system&quot;&gt;Windowing system&lt;/a&gt;&lt;/strong&gt; - Responsible for managing input peripherals and driving output displays. This is either the legacy &lt;a href=&quot;https://en.wikipedia.org/wiki/X_Window_System&quot;&gt;X11&lt;/a&gt; or the newer &lt;a href=&quot;https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)&quot;&gt;Wayland&lt;/a&gt; on almost all desktop Linux distros. More and more distros are using Wayland by default now instead of the legacy X11 server. All distros normally support both and you can configure the display sever you prefer as the default&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Desktop Environment (DE)&lt;/strong&gt; - This forms the GUI shell for the operating system and there is a multitude of options like &lt;a href=&quot;https://www.gnome.org/&quot;&gt;Gnome&lt;/a&gt;, &lt;a href=&quot;https://kde.org/&quot;&gt;KDE&lt;/a&gt;, &lt;a href=&quot;https://www.xfce.org/&quot;&gt;Xfce&lt;/a&gt; and so on. You can find most distros providing multiple versions each having a different DE. The DE can also include a Window manager like &lt;a href=&quot;https://en.wikipedia.org/wiki/KWin&quot;&gt;KWin&lt;/a&gt; or &lt;a href=&quot;https://en.wikipedia.org/wiki/Mutter_(window_manager)&quot;&gt;Mutter&lt;/a&gt; that works with the windowing system&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Package manager&lt;/strong&gt; - Every family of Linux distributions provides a package manager to find and install software and the package manager is unique for every distribution family. For example &lt;a href=&quot;https://en.wikipedia.org/wiki/APT_(software)&quot;&gt;APT&lt;/a&gt;, &lt;a href=&quot;https://en.wikipedia.org/wiki/DNF_(software)&quot;&gt;DNF&lt;/a&gt;, &lt;a href=&quot;https://wiki.archlinux.org/index.php/pacman&quot;&gt;pacman&lt;/a&gt; and so on.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Software and tools&lt;/strong&gt; - The distributions generally also come with a set of useful default software like a terminal emulator, a shell, a browser, file browser, and so on.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;So let’s look into different aspects of Linux and see if it is ready for daily use. I hope by the end of this post, you will give Linux serious consideration.&lt;/p&gt;
-
-&lt;h3 id=&quot;flexibility&quot;&gt;Flexibility&lt;/h3&gt;
-
-&lt;p&gt;Flexibility is a boon and a curse at the same time for Linux. IMO it is the reason many people get into Linux and many people get scared of Linux. I’m in the first group though.&lt;/p&gt;
-
-&lt;p&gt;Flexibility and freedom is the core of Linux, you can see this theme in everything else, from the choice of distribution to choosing a DE there is a plethora of choice and even after making a choice, there are so many things you can customize to your exact preference, be it look and feel, UX or performance, everything is configurable.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/zihMQUp.jpeg&quot; alt=&quot;KDE plasma window customization&quot; /&gt;&lt;em&gt;Window decoration customization in KDE Plasma&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;While such flexibility is great for power users and tech-savvy users, it could be daunting and annoying to people who just want to use the computer to get some work done. Linux in the past is known to scare off average users as they either came pretty bare metal out of the box or came with highly opinionated defaults, like unity desktop in Ubuntu. Having sane defaults was not a thing in the Linux world and that’s why people associate Linux users to someone working only on a terminal as you would end up using the terminal to do something as it’s the fastest way in Linux.&lt;/p&gt;
-
-&lt;p&gt;This situation is changing though, for example &lt;a href=&quot;https://ubuntu.com/&quot;&gt;Ubuntu&lt;/a&gt;, with Gnome, or Kubuntu, with KDE, &lt;a href=&quot;https://elementary.io/&quot;&gt;Elementary&lt;/a&gt; and &lt;a href=&quot;https://pop.system76.com/&quot;&gt;Pop!_OS&lt;/a&gt; are very user friendly from the beginning and comes with sane defaults and a pretty decent set of default applications. They also offer nice app stores for users to find more software.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;With great power comes great responsibility&lt;/p&gt;
-
-  &lt;ul&gt;
-    &lt;li&gt;Uncle Ben&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;When it comes to freedom Linux is not a walled garden like the Apple ecosystem or configurable but annoying for power users like Windows.&lt;/p&gt;
-
-&lt;p&gt;✅ This level of flexibility makes it easy to break things if you don’t know what you are doing. But IMO the advantages outweigh the disadvantages and the default setup in Linux distros keeps getting better. It’s already possible to get on a distro like Ubuntu and get work done without having to configure anything.&lt;/p&gt;
-
-&lt;h3 id=&quot;uiux&quot;&gt;UI/UX&lt;/h3&gt;
-
-&lt;p&gt;First of all, UI and UX is not the same thing. A polished UI doesn’t mean good UX and vice versa. While UI/UX is subjective for most people, they would mostly agree on what good UX is and what bad UX is. Linux didn’t use to care much about either of those two decades ago and it still didn’t care about UI a decade ago. Fast forward to 2020 and you will find some of the most beautiful and slick-looking UIs and one of the best UX on Linux DEs. Look at the &lt;a href=&quot;https://www.youtube.com/watch?v=qTF9Nmt3iXY&amp;amp;t=34s&quot;&gt;customized KDE plasma [video]&lt;/a&gt; on the header image of this post for example.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/ryFPwYl.png&quot; alt=&quot;KDE plasma on Garuda OS&quot; /&gt;&lt;em&gt;KDE Plasma with default Dragonized theme on Garuda OS&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The UI/UX on Linux is entirely up to the DE, which unlike in Windows/macOS is separate from the OS, and you can freely and easily switch between different DEs. You can even install multiple DEs and pick one for each login session.&lt;/p&gt;
-
-&lt;p&gt;Is it as polished as a macOS though? You may ask. Probably not but it makes up for that in terms of flexibility and better UX, IMO. Having used a macOS for over a year now, I do like how the UI looks but I hate the UX of a macOS. It’s not very intuitive, unless you grew up with a macOS, IMO. It’s either the macOS way or the highway, there isn’t much flexibility in terms of what you can change to fit your preferences, and in the end, you just end up adapting to whatever the UX designers at Apple thought is good for the rest of us. I like the UX of Windows way better than that of macOS even if the UI of Windows is a bit dated.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/E1Dbwzc.jpeg&quot; alt=&quot;Gnome with Arc theme&quot; /&gt;&lt;em&gt;Gnome 3.36 with Arc theme on Fedora 32&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;With Linux, you can make your UI look and feel like &lt;a href=&quot;https://www.youtube.com/watch?v=DX_gQTQLUZc&amp;amp;t=101s&quot;&gt;macOS [video]&lt;/a&gt; or &lt;a href=&quot;https://www.youtube.com/watch?v=UZx-F-CSIaw&amp;amp;t=31s&quot;&gt;Windows [video]&lt;/a&gt; if that’s what you like. You can also go full &lt;a href=&quot;https://www.youtube.com/watch?v=9ToyNWl-xFk&quot;&gt;CyberPunk [video]&lt;/a&gt; on it if you feel like it or anything else for that matter. The possibilities are unlimited. It doesn’t mean you have to customize things to get a good experience, the default setup in many of the DEs is quite good for most people.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/JdMoDzb.jpg&quot; alt=&quot;KDE Plasma default&quot; /&gt;&lt;em&gt;KDE plasma 5.20 default Breeze twilight theme on Fedora 34&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;I’m using Gnome for over 4 years and recently decided I will switch to KDE when I refresh my laptop. There are a ton of DEs in the Linux world but in my personal opinion, &lt;a href=&quot;https://www.gnome.org/&quot;&gt;Gnome&lt;/a&gt;, &lt;a href=&quot;https://kde.org/&quot;&gt;KDE&lt;/a&gt;, &lt;a href=&quot;https://elementary.io/&quot;&gt;Pantheon (Elementary OS)&lt;/a&gt; and &lt;a href=&quot;https://www.deepin.org/en/dde/&quot;&gt;Deepin&lt;/a&gt; provides the best UX out of the box and has slick UIs as well.&lt;/p&gt;
-
-&lt;p&gt;✅ So I think it’s fair to say Linux is better than or on par with, depending on personal preferences, macOS/Windows in terms of UI/UX&lt;/p&gt;
-
-&lt;h3 id=&quot;performance&quot;&gt;Performance&lt;/h3&gt;
-
-&lt;p&gt;I don’t think there is much to worry about when it comes to performance. There is a reason Linux is used as the default choice for servers and infrastructure. Performance has never been an issue in the Linux world and I don’t think that was ever a factor in its adoption so I’m not gonna go into details here.&lt;/p&gt;
-
-&lt;p&gt;Mainstream distributions based on Ubuntu, Fedora, and Arch Linux provide very good performance out of the box and DEs like Gnome and KDE have evolved to become much smoother and faster. You could even run Linux with fairly good performance on very outdated hardware thanks to lightweight distributions like &lt;a href=&quot;https://xubuntu.org/&quot;&gt;Xubuntu&lt;/a&gt; or &lt;a href=&quot;https://lubuntu.net/&quot;&gt;Lubuntu&lt;/a&gt; that use lightweight DEs like &lt;a href=&quot;https://www.xfce.org/&quot;&gt;Xfce&lt;/a&gt; and &lt;a href=&quot;https://lxqt-project.org/&quot;&gt;LXQt&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;macOS comes quite close to Linux in terms of overall performance and it still has the advantage of being built by the same company as its hardware thus making it possible to tune the OS for specific hardware without worrying about supporting other hardware combinations. Whereas in Linux &amp;amp; Windows, it has to work on a wide range of hardware. Also when it comes to individual application performances, some are just better tuned for macOS/Windows than for Linux&lt;/p&gt;
-
-&lt;p&gt;Graphics performance used to be an issue for Linux in the past but the latest drivers for both NVidia and AMD have bridged the gap a lot and you can get good GPU performance these days in Linux and even play AAA titles via Steam on Linux with performance that is on par with Windows.&lt;/p&gt;
-
-&lt;p&gt;Battery life on Linux laptops are still not as good as macOS or Windows but it’s getting better and is not bad enough to be a deal-breaker&lt;/p&gt;
-
-&lt;p&gt;✅ Overall, Linux is better than Windows and macOS in overall performance. Linux also has the advantage of having more powerful hardware to choose from compared to macOS.&lt;/p&gt;
-
-&lt;h3 id=&quot;stability--software-support&quot;&gt;Stability &amp;amp; software support&lt;/h3&gt;
-
-&lt;p&gt;Unfortunately this is a weak point for Linux distros. While the Linux kernel itself is very stable, the distros on the other hand tend to be less stable compared to macOS or even Windows sometimes. While the overall stability of Linux distros has improved a lot, depending on the specific distro you are using, the stability aspect could still be an issue.&lt;/p&gt;
-
-&lt;p&gt;In Linux, you choose between stability and bleeding-edge based on your preference. For example;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Ubuntu&lt;/strong&gt; prioritizes stability over bleeding edge software and hence has long-interval release cycles and long-term support for versions. You won’t get all software automatically updated in Ubuntu and might have to either do it manually or wait for the next release.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Arch Linux&lt;/strong&gt; on the other hand prioritizes providing the latest and greatest software over stability. It hence has a rolling release and you always get the latest software as soon as it’s released. This is definitely for power users who knows what they are doing&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Fedora&lt;/strong&gt; on the other hand choose a compromise to provide stable software at more frequent release cycles. So you get releases often which keeps everything up to date but versions are not supported as long as in Ubuntu.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Another issue with the Linux ecosystem is the availability &amp;amp; stability of software. Some software vendors just don’t care about Linux users, I’m looking at you Adobe, and doesn’t bother publishing software for Linux. Some publish software that is worse/unstable/buggy than their macOS/Windows counterparts. The same goes for hardware support. Linux sometimes lacks support for certain hardware that just works in Windows/macOS. While the hardware support and drivers keep getting better they will never match up with what you will find in Windows or macOS unless the vendors start caring about Linux, which will only happen if Linux gains more market share in Desktop&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If a certain Windows software is needed on Linux, there is also the possibility of getting it working with &lt;a href=&quot;https://appdb.winehq.org/&quot;&gt;Wine&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Distributions like Ubuntu and Fedora are quite stable and have better support for third-party software and hardware drivers, and are getting better at staying stable. You can also find many variations of these based on your preferences. There are also many distributions in between all these, like Manjaro which is a more stable version of Arch, and so on. I have been using Fedora for close to 5 years now and I’m quite happy with its stability and shorter release cycles. If stability is very important for you, then probably Ubuntu is better for you as it has longer release cycles and a much more stable ecosystem with wider software choice.&lt;/p&gt;
-
-&lt;p&gt;When it comes to updates and upgrades, Linux easily wins as it’s the easiest to upgrade and most updates won’t even require a reboot.&lt;/p&gt;
-
-&lt;p&gt;✅ macOS and Windows score better in terms of stability and software/hardware support and the gap is shrinking. For daily use you already have everything required for most user personas, we will see more about these later, and with the correct distro you will not be missing out on anything.&lt;/p&gt;
-
-&lt;h3 id=&quot;security--privacy&quot;&gt;Security &amp;amp; Privacy&lt;/h3&gt;
-
-&lt;p&gt;If you are privacy and security-focused then Linux is the best OS for you. macOS would come second but it’s not even close and I think we all can agree that Windows is the worst when it comes to Security and Privacy. For Linux, you don’t need to create any online accounts or use any proprietary software or send your data to anyone if you don’t want to. There are also Linux distributions, like &lt;a href=&quot;https://www.qubes-os.org/&quot;&gt;Qubes OS&lt;/a&gt; and &lt;a href=&quot;https://pureos.net/&quot;&gt;PureOS&lt;/a&gt;, which are entirely privacy and security-focused. Linux is also the least intrusive among the three.&lt;/p&gt;
-
-&lt;p&gt;On the security front, you don’t have to worry about malware and junkware on Linux like in Windows. Most Linux software being open source also means they are more trustworthy and has a community around who will find and fix vulnerabilities much faster than Windows or macOS&lt;/p&gt;
-
-&lt;p&gt;✅ Linux is easily the best when it comes to privacy and security without sacrificing your freedom&lt;/p&gt;
-
-&lt;h3 id=&quot;installation--availability&quot;&gt;Installation &amp;amp; Availability&lt;/h3&gt;
-
-&lt;p&gt;This probably was the hardest part of Linux in the past and it still is quite difficult in some distros like Arch, but there are many distros like Ubuntu, Fedora, Elementary and so on that are so easy to install. Most stable and popular distros provide an easy installation wizard that is easy enough for most people, but it still requires some technical knowledge and hence is not for everyone. This is where Windows takes the pie as it comes pre-installed on 95% of PCs and the same for macOS.&lt;/p&gt;
-
-&lt;p&gt;Thankfully this situation has started to change. When I switched to Linux in 2016, I started looking for a laptop that either came pre-installed with Linux or was certified to work well with Linux and I couldn’t find many options. The only decent choice was the Dell Precision line that came with Ubuntu. Fast forward to today and there are a lot of great companies that are building PCs and laptops specifically for Linux. Even bigger names like Dell, Lenovo and Asus has started selling hardware with Linux pre-installed. Some of the good options for Linux out of the box are:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://system76.com/&quot;&gt;System76&lt;/a&gt; - They make highly configurable and performant PCs and Laptops specifically for Linux that come with Pop!_OS or Ubuntu&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.tuxedocomputers.com/&quot;&gt;Tuxedo&lt;/a&gt;, &lt;a href=&quot;https://laptopmetlinux.nl/&quot;&gt;Clevo&lt;/a&gt; - They make highly configurable Laptops and PCs for Linux and can pre-install Ubuntu&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://slimbook.es/en/&quot;&gt;Slimbook&lt;/a&gt; - They make highly configurable Ultrabooks and PCs for Linux and can pre-install Ubuntu, Kubuntu, Ubuntu Mate, Debian, Elementary, Mint, Manjaro, Zorin, and KDE Neon. They even do dual boot setup with Windows.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://kfocus.org/&quot;&gt;Kubuntu Focus&lt;/a&gt; - They make highly performant Linux Laptops with long term premium support option for Kubuntu.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://puri.sm/&quot;&gt;Purism&lt;/a&gt; - They make PCs, Laptops, and Mobile phones that comes with PureOS, a privacy-focused Linux distro&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.dell.com/en-us/work/shop/overview/cp/linuxsystems&quot;&gt;Dell XPS/Precision developer editions&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://news.lenovo.com/pressroom/press-releases/lenovo-launches-linux-ready-thinkpad-and-thinkstation-pcs-preinstalled-with-ubuntu/&quot;&gt;Lenovo ThinkPad&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://linux-laptop.net/&quot;&gt;This list&lt;/a&gt; is a good source to find if your existing hardware works for your distro of choice.&lt;/p&gt;
-
-&lt;p&gt;✅ The availability of pre-installed Linux laptops is still not that great and choices are very limited. But if you are Ok to do the installation yourself then there is a plethora of modern hardware to choose from and with the support of an amazing community, you can get up and running in few hours.&lt;/p&gt;
-
-&lt;h3 id=&quot;support&quot;&gt;Support&lt;/h3&gt;
-
-&lt;p&gt;When it comes to support, Linux is either the best or worst depending on how you see it. For example, I would argue that Linux has the best support system due to the fact it’s FOSS and there is a great community that helps you along your way. Bugs are fixed faster and security patches are available immediately when ready. No other OS has the kind of community support that Linux offers. Now if you are expecting professional paid support then probably it’s not as great as what is available in Windows/macOS. While professional support is great for server distributions like RHEL very few consumer distributions, like Ubuntu, provide official support plans. Of course, many independent organizations provide support for most consumer Linux distros.&lt;/p&gt;
-
-&lt;p&gt;✅ This boils down to preference. For most average users community support would be good enough but if you are looking for enterprise-level support it could be a bit more work to acquire.&lt;/p&gt;
-
-&lt;h2 id=&quot;decision-fatigue&quot;&gt;Decision fatigue&lt;/h2&gt;
-
-&lt;p&gt;Now that we looked at different aspects of the OS that we need to care about, let’s look at another boon/curse in the Linux world, which in my opinion scares away regular users.&lt;/p&gt;
-
-&lt;p&gt;When it comes to Linux distributions they can be grouped into families based on the software packaging format they support. After that there are specific distributions and way too many derivatives of them, I’m only going to mention the popular ones here so that the blog doesn’t end up being a book. You can find the full list &lt;a href=&quot;https://en.wikipedia.org/wiki/List_of_Linux_distributions&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;RPM-based&lt;/strong&gt;: Fedora and derivatives, CentOS/RHEL and derivatives, openSUSE, and so on&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Debian-based&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Ubuntu and derivatives like Pop!_OS, Kubuntu, Lubuntu, Xubuntu, KDE Neon, Elementary OS, Linux Mint, and so on&lt;/li&gt;
-      &lt;li&gt;Kali Linux, PureOS, Deepin, and so on&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Pacman-based&lt;/strong&gt;: Arch Linux, Manjaro, Garuda, BlackArch and so on&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Gentoo-based&lt;/strong&gt;: Gentoo and its derivatives&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Distro hopping is a term popular with Linux enthusiasts, but it’s not for everyone. Average users just need a working OS and having so many options will only cause decision fatigue. I’m not gonna go into the debate of, if it’s good or bad to have so many distros, instead I’ll make some personal suggestions for newcomers to Linux so it might help with a decision&lt;/p&gt;
-
-&lt;h2 id=&quot;linux-for-everyone&quot;&gt;Linux for everyone&lt;/h2&gt;
-
-&lt;p&gt;These are my suggestion for people who are new to Linux or for those who are annoyed with macOS/Windows but are terrified of Linux to give it a chance&lt;/p&gt;
-
-&lt;h3 id=&quot;for-an-average-computer-user&quot;&gt;For an average computer user&lt;/h3&gt;
-
-&lt;p&gt;For an average computer user who just wants a working desktop/laptop with which you can browse the internet, use some productivity tools, make video calls, watch videos or listen to music and do other general-purpose stuff without worrying about using the terminal for anything and have descent stability:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ubuntu.com/&quot;&gt;Ubuntu&lt;/a&gt;: It’s the easiest distro to get started and comes pre-installed in most Linux laptop options. It’s also the most widely used Linux distro. It’s easy to install and easy to use thanks to Gnome DE. It has a great community, long-term support, excellent software, and hardware support. This is the most beginner-friendly Linux distro out there that comes with a good set of default software. If you don’t like Gnome or if you are coming from Windows you can choose variants like &lt;a href=&quot;https://kubuntu.org/&quot;&gt;Kubuntu&lt;/a&gt; or &lt;a href=&quot;https://linuxmint.com/&quot;&gt;Linux Mint&lt;/a&gt;. If you have very old hardware then go for &lt;a href=&quot;https://xubuntu.org/&quot;&gt;Xubuntu&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://elementary.io/&quot;&gt;Elementary OS&lt;/a&gt;: If you come from macOS, you will feel at home with elementary. It’s Ubuntu-based and hence is super stable and user-friendly.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Tip&lt;/strong&gt;: You can find all the officially supported laptops/desktops for Ubuntu &lt;a href=&quot;https://certification.ubuntu.com/desktop&quot;&gt;here&lt;/a&gt;. They should work for all Ubuntu derivatives as well.&lt;/p&gt;
-
-&lt;h3 id=&quot;for-developers&quot;&gt;For developers&lt;/h3&gt;
-
-&lt;p&gt;For developers, who want a fast and productive operating system for anything from web development to kernel development the below are a great choice&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://getfedora.org/&quot;&gt;Fedora&lt;/a&gt;: Provides a stable OS with shorter release cycles thus keeping libraries and tools up to date. Has great community and software support. Comes with required toolchain for most languages pre-installed. I have been using Fedora for over 4 years and I’m very happy with it. Fun fact, &lt;a href=&quot;https://en.wikipedia.org/wiki/Linus_Torvalds&quot;&gt;Linus Torvalds&lt;/a&gt; also uses Fedora. It comes with Gnome DE as default and you can choose from different &lt;a href=&quot;https://spins.fedoraproject.org/&quot;&gt;variants&lt;/a&gt; if you like KDE or Xfce DE instead&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://manjaro.org/&quot;&gt;Manjaro&lt;/a&gt;: If you don’t mind living on the edge then Manjaro can be a good option as well, but beware that it’s Arch-based and hence does rolling updates which could break something from time to time. But since it’s Arch-based, it’s also extremely flexible and powerful. You can find Manjaro with all popular DE options. If you are a computer science student, I would also recommend Manjaro as you can learn a lot from an Arch-based rolling distribution.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Tip&lt;/strong&gt;: You can find some OOB Manjaro hardware &lt;a href=&quot;https://manjaro.org/hardware/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;for-designers-and-multimedia-professionals&quot;&gt;For designers and multimedia professionals&lt;/h3&gt;
-
-&lt;p&gt;For people who are into graphics design, 3D modeling, video editing, audio production, and other media-related work, Linux could be a great choice unless your entire workflows are based on Adobe or some other software suite with poor Linux support. So first see if your favorite software suite has Linux support. If you feel a bit brave then you will be surprised with the free and OSS software alternatives like &lt;a href=&quot;https://www.gimp.org/&quot;&gt;GIMP&lt;/a&gt;, &lt;a href=&quot;https://kdenlive.org/&quot;&gt;Kdenlive&lt;/a&gt;, &lt;a href=&quot;https://www.blender.org/&quot;&gt;Blender&lt;/a&gt; and so on&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ubuntustudio.org/&quot;&gt;Ubuntu Studio&lt;/a&gt;: This is a great choice as Ubuntu is very stable and this variant comes with a lot of multi-media software like Gimp, Inkscape and Blender, and so on.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://labs.fedoraproject.org/en/design-suite/&quot;&gt;Fedora design suite&lt;/a&gt;: Another great choice if you want a bit more bleeding edge. This also comes with a lot of OSS multi-media software&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.bandshed.net/avlinux/&quot;&gt;AV Linux&lt;/a&gt;: This is crafted specifically for audio production and comes with all optimizations and software required for audio/video production.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;for-gamers&quot;&gt;For gamers&lt;/h3&gt;
-
-&lt;p&gt;A decade ago you wouldn’t even think of Linux when it comes to Gaming, that has changed thanks to the growing community of indie game makers and Valve, makers of Steam. Steam made it possible to run AAA titles on Linux which runs almost as well as in Windows. A great testament to this is &lt;a href=&quot;https://store.steampowered.com/steamos/&quot;&gt;SteamOS&lt;/a&gt; from Valve which powers their Steam Machine line of gaming PCs. There is also &lt;a href=&quot;https://www.gamingonlinux.com/articles/14552&quot;&gt;Steam Play&lt;/a&gt; that makes it possible to run Windows games on Linux&lt;/p&gt;
-
-&lt;p&gt;Windows still dominate when it comes to gaming. Largely due to huge collection of games that are only supported on Windows and due to better Graphics performance. But things are looking good on the Linux side as well and Linux might be the best alternative to Windows for gamers.&lt;/p&gt;
-
-&lt;p&gt;There are great options for Gamers on Linux&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://pop.system76.com/&quot;&gt;Pop!_OS&lt;/a&gt;: This is an Ubuntu-based distribution from System76 that comes optimized for gaming&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://store.steampowered.com/steamos/&quot;&gt;SteamOS&lt;/a&gt; or &lt;a href=&quot;https://gamer-os.github.io/&quot;&gt;GamerOS&lt;/a&gt;: If you want a console-like GUI with great controller support for gaming on Steam&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Linux is undisputed on the mobile/server/infra space. It has the largest installed base of all general-purpose operating systems mainly due to Android. Did you know that &lt;a href=&quot;https://haydenjames.io/85-of-all-smartphones-are-powered-by-linux/&quot;&gt;85% of all smartphones are powered by Linux&lt;/a&gt;?&lt;/p&gt;
-
-&lt;p&gt;TBH, Linux has been touted as the future since the 90s, and we have been hearing “Year of the Linux Desktop” for quite some time. On the desktop space, however, it never really materialized. But from what I have observed, it finally seems like Linux is actually taking hold and getting there in the last decade. &lt;a href=&quot;https://docs.microsoft.com/en-us/windows/wsl/&quot;&gt;WSL&lt;/a&gt; from Microsoft is a testament to that, IMO. The fact that we are seeing more and more laptops shipping Linux OOB is also a testament to the fact that Linux on the desktop is finally happening, albeit a bit slower than we expected.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/fjE6D0c.png&quot; alt=&quot;Desktop OS shares&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I wouldn’t be surprised if one day Microsoft just ditches windows and ships their own Linux distro. Well, it’s probably a distant dream as Windows still holds around 75% market share in desktop OS and macOS stands around 16% with Linux and derivatives taking the remaining 9%.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image credit: &lt;a href=&quot;https://www.youtube.com/watch?v=qTF9Nmt3iXY&amp;amp;t=34s&quot;&gt;Linux Scoop&lt;/a&gt;&lt;/p&gt;
-</content:encoded>
-        <media:content url="https://i.imgur.com/sO0DY6V.jpeg" medium="image">https://i.imgur.com/sO0DY6V.jpeg</media:content>
-        <pubDate>Wed, 24 Mar 2021 00:00:00 +0100</pubDate>
-        <link>https://deepu.tech/the-state-of-linux-on-desktops/</link>
-        <guid isPermaLink="true">https://deepu.tech/the-state-of-linux-on-desktops/</guid>
-        
-        <category>linux</category>
-        
-        <category>ubuntu</category>
-        
-        <category>fedora</category>
-        
-        <category>kde</category>
         
         
       </item>
