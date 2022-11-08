@@ -11,8 +11,8 @@ tags:
   - terminal
   - linux
   - macos
-cover_image: 'https://i.imgur.com/KsMv5xG.png'
-canonical_url: 'https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/'
+cover_image: "https://i.imgur.com/KsMv5xG.png"
+canonical_url: "https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/"
 devto_id: 1246290
 devto_url: >-
   https://dev.to/deepu105/rust-easy-modern-cross-platform-command-line-tools-to-supercharge-your-terminal-4dd3
@@ -25,6 +25,8 @@ These tools are available for both Linux and macOS. I have not tested them on Wi
 ## Alacritty
 
 Let us start with the terminal itself. [Alacritty](https://github.com/alacritty/alacritty) is a cross-platform modern terminal emulator with sensible defaults. It is **GPU accelerated**, super fast, and highly configurable. You can use it on Linux, macOS, and Windows. It doesn't have much in terms of a UI, and hence all [configurations](https://github.com/alacritty/alacritty/releases/download/v0.11.0/alacritty.yml) are done through YAML files. I don't use it as my primary terminal as I love [Yakuake](https://invent.kde.org/utilities/yakuake) too much for all its cool features. We can get most of those features (tabs, split panes, dropdown mode) using [tmux]() and [tdrop](https://github.com/noctuid/tdrop) if really needed. I use Alacrity when I need speed and GPU acceleration. There is an excellent tutorial on [using Alacritty with tmux](https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/).
+
+There is also the [Warp](https://www.warp.dev/) terminal, but it is not open source. It is a great terminal, but I prefer open source software. Thanks to [Fran Sancisco](https://dev.to/francisc) for the suggestion.
 
 ![Alacritty](https://i.imgur.com/XPYyJof.png)
 
@@ -451,4 +453,3 @@ If you like this article, please leave a like or a comment.
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
 
 Cover image credit: Image derived from work in [egonelbre/gophers](https://github.com/egonelbre/gophers) created by [@egonelbre](https://twitter.com/egonelbre).
-
