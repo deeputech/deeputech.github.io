@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 07 Nov 2022 10:37:34 +0100</pubDate>
-    <lastBuildDate>Mon, 07 Nov 2022 10:37:34 +0100</lastBuildDate>
+    <pubDate>Tue, 08 Nov 2022 10:35:57 +0100</pubDate>
+    <lastBuildDate>Tue, 08 Nov 2022 10:35:57 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -20,6 +20,8 @@
 &lt;h2 id=&quot;alacritty&quot;&gt;Alacritty&lt;/h2&gt;
 
 &lt;p&gt;Let us start with the terminal itself. &lt;a href=&quot;https://github.com/alacritty/alacritty&quot;&gt;Alacritty&lt;/a&gt; is a cross-platform modern terminal emulator with sensible defaults. It is &lt;strong&gt;GPU accelerated&lt;/strong&gt;, super fast, and highly configurable. You can use it on Linux, macOS, and Windows. It doesn’t have much in terms of a UI, and hence all &lt;a href=&quot;https://github.com/alacritty/alacritty/releases/download/v0.11.0/alacritty.yml&quot;&gt;configurations&lt;/a&gt; are done through YAML files. I don’t use it as my primary terminal as I love &lt;a href=&quot;https://invent.kde.org/utilities/yakuake&quot;&gt;Yakuake&lt;/a&gt; too much for all its cool features. We can get most of those features (tabs, split panes, dropdown mode) using &lt;a href=&quot;&quot;&gt;tmux&lt;/a&gt; and &lt;a href=&quot;https://github.com/noctuid/tdrop&quot;&gt;tdrop&lt;/a&gt; if really needed. I use Alacrity when I need speed and GPU acceleration. There is an excellent tutorial on &lt;a href=&quot;https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/&quot;&gt;using Alacritty with tmux&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There is also the &lt;a href=&quot;https://www.warp.dev/&quot;&gt;Warp&lt;/a&gt; terminal, but it is not open source. It is a great terminal, but I prefer open source software. Thanks to &lt;a href=&quot;https://dev.to/francisc&quot;&gt;Fran Sancisco&lt;/a&gt; for the suggestion.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://i.imgur.com/XPYyJof.png&quot; alt=&quot;Alacritty&quot; /&gt;&lt;/p&gt;
 
@@ -660,7 +662,6 @@ cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Cover image credit: Image derived from work in &lt;a href=&quot;https://github.com/egonelbre/gophers&quot;&gt;egonelbre/gophers&lt;/a&gt; created by &lt;a href=&quot;https://twitter.com/egonelbre&quot;&gt;@egonelbre&lt;/a&gt;.&lt;/p&gt;
-
 </content:encoded>
         <media:content url="https://i.imgur.com/KsMv5xG.png" medium="image">https://i.imgur.com/KsMv5xG.png</media:content>
         <pubDate>Mon, 07 Nov 2022 00:00:00 +0100</pubDate>
