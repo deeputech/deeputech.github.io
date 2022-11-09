@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 Nov 2022 10:35:57 +0100</pubDate>
-    <lastBuildDate>Tue, 08 Nov 2022 10:35:57 +0100</lastBuildDate>
+    <pubDate>Wed, 09 Nov 2022 11:34:03 +0100</pubDate>
+    <lastBuildDate>Wed, 09 Nov 2022 11:34:03 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -19,7 +19,7 @@
 
 &lt;h2 id=&quot;alacritty&quot;&gt;Alacritty&lt;/h2&gt;
 
-&lt;p&gt;Let us start with the terminal itself. &lt;a href=&quot;https://github.com/alacritty/alacritty&quot;&gt;Alacritty&lt;/a&gt; is a cross-platform modern terminal emulator with sensible defaults. It is &lt;strong&gt;GPU accelerated&lt;/strong&gt;, super fast, and highly configurable. You can use it on Linux, macOS, and Windows. It doesn’t have much in terms of a UI, and hence all &lt;a href=&quot;https://github.com/alacritty/alacritty/releases/download/v0.11.0/alacritty.yml&quot;&gt;configurations&lt;/a&gt; are done through YAML files. I don’t use it as my primary terminal as I love &lt;a href=&quot;https://invent.kde.org/utilities/yakuake&quot;&gt;Yakuake&lt;/a&gt; too much for all its cool features. We can get most of those features (tabs, split panes, dropdown mode) using &lt;a href=&quot;&quot;&gt;tmux&lt;/a&gt; and &lt;a href=&quot;https://github.com/noctuid/tdrop&quot;&gt;tdrop&lt;/a&gt; if really needed. I use Alacrity when I need speed and GPU acceleration. There is an excellent tutorial on &lt;a href=&quot;https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/&quot;&gt;using Alacritty with tmux&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Let us start with the terminal itself. &lt;a href=&quot;https://github.com/alacritty/alacritty&quot;&gt;Alacritty&lt;/a&gt; is a cross-platform modern terminal emulator with sensible defaults. It is &lt;strong&gt;GPU accelerated&lt;/strong&gt;, super fast, and highly configurable. You can use it on Linux, macOS, and Windows. It doesn’t have much in terms of a UI, and hence all &lt;a href=&quot;https://github.com/alacritty/alacritty/releases/download/v0.11.0/alacritty.yml&quot;&gt;configurations&lt;/a&gt; are done through YAML files. I don’t use it as my primary terminal as I love &lt;a href=&quot;https://invent.kde.org/utilities/yakuake&quot;&gt;Yakuake&lt;/a&gt; too much for all its cool features. We can get most of those features (tabs, split panes, dropdown mode) using &lt;a href=&quot;&quot;&gt;tmux&lt;/a&gt; and &lt;a href=&quot;https://github.com/noctuid/tdrop&quot;&gt;tdrop&lt;/a&gt; if really needed. I use Alacrity when I need speed and GPU acceleration. There is an excellent tutorial on &lt;a href=&quot;https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/&quot;&gt;using Alacritty with tmux&lt;/a&gt;. You could also use &lt;a href=&quot;https://github.com/zellij-org/zellij&quot;&gt;Zellij&lt;/a&gt;, a modern terminal multiplexer written in Rust, with Alacritty.&lt;/p&gt;
 
 &lt;p&gt;There is also the &lt;a href=&quot;https://www.warp.dev/&quot;&gt;Warp&lt;/a&gt; terminal, but it is not open source. It is a great terminal, but I prefer open source software. Thanks to &lt;a href=&quot;https://dev.to/francisc&quot;&gt;Fran Sancisco&lt;/a&gt; for the suggestion.&lt;/p&gt;
 
@@ -647,6 +647,8 @@ cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/kdash-rs/kdash/&quot;&gt;kdash&lt;/a&gt;: A fast and simple dashboard for Kubernetes. Its created by me :)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/zellij-org/zellij&quot;&gt;Zellij&lt;/a&gt;: A feature rich modern terminal multiplexer with batteries included.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/nushell/nushell&quot;&gt;Nushell&lt;/a&gt;: A modern shell written in Rust. Looks quite promising.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/ducaale/xh&quot;&gt;xh&lt;/a&gt;: A HTTPie alternative with better performance.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/y2z/monolith&quot;&gt;monolith&lt;/a&gt;: Convert any webpage into a single HTML file with all assets inlined.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/dandavison/delta&quot;&gt;delta&lt;/a&gt;: A syntax-highlighting pager for git, diff, and grep output.&lt;/li&gt;
