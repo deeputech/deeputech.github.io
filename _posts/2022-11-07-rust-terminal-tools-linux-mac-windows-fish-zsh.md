@@ -24,7 +24,7 @@ These tools are available for both Linux and macOS. I have not tested them on Wi
 
 ## Alacritty
 
-Let us start with the terminal itself. [Alacritty](https://github.com/alacritty/alacritty) is a cross-platform modern terminal emulator with sensible defaults. It is **GPU accelerated**, super fast, and highly configurable. You can use it on Linux, macOS, and Windows. It doesn't have much in terms of a UI, and hence all [configurations](https://github.com/alacritty/alacritty/releases/download/v0.11.0/alacritty.yml) are done through YAML files. I don't use it as my primary terminal as I love [Yakuake](https://invent.kde.org/utilities/yakuake) too much for all its cool features. We can get most of those features (tabs, split panes, dropdown mode) using [tmux]() and [tdrop](https://github.com/noctuid/tdrop) if really needed. I use Alacrity when I need speed and GPU acceleration. There is an excellent tutorial on [using Alacritty with tmux](https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/).
+Let us start with the terminal itself. [Alacritty](https://github.com/alacritty/alacritty) is a cross-platform modern terminal emulator with sensible defaults. It is **GPU accelerated**, super fast, and highly configurable. You can use it on Linux, macOS, and Windows. It doesn't have much in terms of a UI, and hence all [configurations](https://github.com/alacritty/alacritty/releases/download/v0.11.0/alacritty.yml) are done through YAML files. I don't use it as my primary terminal as I love [Yakuake](https://invent.kde.org/utilities/yakuake) too much for all its cool features. We can get most of those features (tabs, split panes, dropdown mode) using [tmux]() and [tdrop](https://github.com/noctuid/tdrop) if really needed. I use Alacrity when I need speed and GPU acceleration. There is an excellent tutorial on [using Alacritty with tmux](https://arslan.io/2018/02/05/gpu-accelerated-terminal-alacritty/). You could also use [Zellij](https://github.com/zellij-org/zellij), a modern terminal multiplexer written in Rust, with Alacritty.
 
 There is also the [Warp](https://www.warp.dev/) terminal, but it is not open source. It is a great terminal, but I prefer open source software. Thanks to [Fran Sancisco](https://dev.to/francisc) for the suggestion.
 
@@ -439,6 +439,8 @@ cargo install tokei
 ## Other notable tools
 
 - [kdash](https://github.com/kdash-rs/kdash/): A fast and simple dashboard for Kubernetes. Its created by me :)
+- [Zellij](https://github.com/zellij-org/zellij): A feature rich modern terminal multiplexer with batteries included.
+- [Nushell](https://github.com/nushell/nushell): A modern shell written in Rust. Looks quite promising.
 - [xh](https://github.com/ducaale/xh): A HTTPie alternative with better performance.
 - [monolith](https://github.com/y2z/monolith): Convert any webpage into a single HTML file with all assets inlined.
 - [delta](https://github.com/dandavison/delta): A syntax-highlighting pager for git, diff, and grep output.
