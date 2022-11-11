@@ -453,5 +453,3 @@ cargo install tokei
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Twitter](https://twitter.com/deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
-
-Cover image credit: Image derived from work in [egonelbre/gophers](https://github.com/egonelbre/gophers) created by [@egonelbre](https://twitter.com/egonelbre).
