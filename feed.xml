@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Nov 2022 11:34:03 +0100</pubDate>
-    <lastBuildDate>Wed, 09 Nov 2022 11:34:03 +0100</lastBuildDate>
+    <pubDate>Fri, 11 Nov 2022 20:18:51 +0100</pubDate>
+    <lastBuildDate>Fri, 11 Nov 2022 20:18:51 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -662,8 +662,6 @@ cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
 &lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
 
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image credit: Image derived from work in &lt;a href=&quot;https://github.com/egonelbre/gophers&quot;&gt;egonelbre/gophers&lt;/a&gt; created by &lt;a href=&quot;https://twitter.com/egonelbre&quot;&gt;@egonelbre&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/KsMv5xG.png" medium="image">https://i.imgur.com/KsMv5xG.png</media:content>
         <pubDate>Mon, 07 Nov 2022 00:00:00 +0100</pubDate>
