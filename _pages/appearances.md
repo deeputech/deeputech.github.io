@@ -9,6 +9,36 @@ comments: false
 
 ---
 
+##### [All Day DevOps](https://www.alldaydevops.com/) 
+
+<small>November 2022</small>
+
+Building a Kubernetes monitoring dashboard in Rust. Why not?
+
+[slides](https://speakerdeck.com/deepu105/why-did-i-build-kdash-in-rust-822822f8-5ef7-4ae0-a8ea-f773a8ac8d9c)
+
+---
+
+##### [JFall](https://jfall.nl/) 
+
+<small>November 2022</small>
+
+Build and deploy cloud native Java microservices on Kubernetes with Istio service mesh (workshop)
+
+[slides](https://speakerdeck.com/deepu105/build-and-deploy-cloud-native-java-microservices-on-kubernetes-with-istio-service-mesh)
+
+---
+
+##### [Cloud Native/Kubernetes meetup](https://www.meetup.com/dutch-kubernetes-meetup/events/288131176/)
+
+<small>October 2022</small>
+
+Is containerless the future of Kubernetes?
+
+[slides](https://speakerdeck.com/deepu105/is-containerless-the-future-of-kubernetes-ada1d280-da2d-49bd-a7de-a2d295f4e3ba) &#124; [video](https://youtu.be/qp0rfKL7-6I?t=5270)
+
+---
+
 ##### [Devoxx](https://devoxx.be/)
 
 <small>October 2022</small>
