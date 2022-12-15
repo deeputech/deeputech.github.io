@@ -1,14 +1,18 @@
 ---
-title: "Shhhh... Kubernetes Secrets Are Not Really Secret!"
+title: Shhhh... Kubernetes Secrets Are Not Really Secret!
 published: true
 description: >-
-  Learn how to setup secure secrets on Kubernetes using Sealed Secrets, External Secrets Operator, and Secrets Store CSI driver.
+  Learn how to setup secure secrets on Kubernetes using Sealed Secrets, External
+  Secrets Operator, and Secrets Store CSI driver.
 tags:
   - devops
   - kubernetes
   - devsecops
-cover_image: "https://images.ctfassets.net/23aumh6u8s0i/5sGRuNiW4fSPVSoZjbwkK0/f505f0bdf239fd84fc6b4d128a48d4ed/Deepu_a_container_ship_entering_a_door_lock_lens_flare_photorea_66931d74-fd55-456a-93e0-48e0ad9e927b.png"
-canonical_url: "https://auth0.com/blog/kubernetes-secrets-management/"
+cover_image: >-
+  https://images.ctfassets.net/23aumh6u8s0i/5sGRuNiW4fSPVSoZjbwkK0/f505f0bdf239fd84fc6b4d128a48d4ed/Deepu_a_container_ship_entering_a_door_lock_lens_flare_photorea_66931d74-fd55-456a-93e0-48e0ad9e927b.png
+canonical_url: 'https://auth0.com/blog/kubernetes-secrets-management/'
+devto_id: 1297422
+devto_url: 'https://dev.to/deepu105/shhhh-kubernetes-secrets-are-not-really-secret-3h38'
 ---
 
 Kubernetes has become an inevitable part of the modern software infrastructure. Hence managing sensitive data on Kubernetes is also an essential aspect of modern software engineering so that you can put the security back into DevSecOps. Kubernetes offers a way to store sensitive data using the [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) object. While it's better than nothing, it is not really a secret, as it is just [base64](https://en.wikipedia.org/wiki/Base64) encoded strings that anyone with access to the cluster or the code can decode.
@@ -474,3 +478,4 @@ Cover image created using [Midjourney](https://midjourney.gitbook.io/) under [CC
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Mastodon](https://mastodon.social/@deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
