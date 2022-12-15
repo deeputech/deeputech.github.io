@@ -15,6 +15,8 @@ devto_id: 1297422
 devto_url: 'https://dev.to/deepu105/shhhh-kubernetes-secrets-are-not-really-secret-3h38'
 ---
 
+_Originally published at [auth0.com](https://auth0.com/blog/kubernetes-secrets-management/)_
+
 Kubernetes has become an inevitable part of the modern software infrastructure. Hence managing sensitive data on Kubernetes is also an essential aspect of modern software engineering so that you can put the security back into DevSecOps. Kubernetes offers a way to store sensitive data using the [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) object. While it's better than nothing, it is not really a secret, as it is just [base64](https://en.wikipedia.org/wiki/Base64) encoded strings that anyone with access to the cluster or the code can decode.
 
 > **Caution:**
