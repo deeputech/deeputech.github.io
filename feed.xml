@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 15 Dec 2022 12:49:03 +0100</pubDate>
-    <lastBuildDate>Thu, 15 Dec 2022 12:49:03 +0100</lastBuildDate>
+    <pubDate>Thu, 15 Dec 2022 11:51:24 +0000</pubDate>
+    <lastBuildDate>Thu, 15 Dec 2022 11:51:24 +0000</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -680,7 +680,7 @@ root@mypod:/# &lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /var/secrets/goo
 
 </content:encoded>
         <media:content url="https://images.ctfassets.net/23aumh6u8s0i/5sGRuNiW4fSPVSoZjbwkK0/f505f0bdf239fd84fc6b4d128a48d4ed/Deepu_a_container_ship_entering_a_door_lock_lens_flare_photorea_66931d74-fd55-456a-93e0-48e0ad9e927b.png" medium="image">https://images.ctfassets.net/23aumh6u8s0i/5sGRuNiW4fSPVSoZjbwkK0/f505f0bdf239fd84fc6b4d128a48d4ed/Deepu_a_container_ship_entering_a_door_lock_lens_flare_photorea_66931d74-fd55-456a-93e0-48e0ad9e927b.png</media:content>
-        <pubDate>Thu, 15 Dec 2022 00:00:00 +0100</pubDate>
+        <pubDate>Thu, 15 Dec 2022 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/kubernetes-secrets-management/</link>
         <guid isPermaLink="true">https://deepu.tech/kubernetes-secrets-management/</guid>
         
@@ -852,7 +852,7 @@ brew &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;exa
 cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;exa
 
 &lt;span class=&quot;c&quot;&gt;# Alias ls to exa&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;alias ls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;exa --git --icons --color=always --group-directories-first&apos;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias ls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'exa --git --icons --color=always --group-directories-first'&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;lsd-installation&quot;&gt;LSD Installation&lt;/h3&gt;
@@ -890,7 +890,7 @@ scop &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsd
 cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;lsd
 
 &lt;span class=&quot;c&quot;&gt;# Alias ls to lsd&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;alias ls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;lsd --header --color=always --group-directories-first&apos;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias ls&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'lsd --header --color=always --group-directories-first'&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;rip&quot;&gt;rip&lt;/h2&gt;
@@ -942,7 +942,7 @@ yay &lt;span class=&quot;nt&quot;&gt;-S&lt;/span&gt; xcp
 cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;xcp
 
 &lt;span class=&quot;c&quot;&gt;# Alias cp to xcp&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;alias cp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;xcp&apos;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias cp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'xcp'&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;zoxide&quot;&gt;zoxide&lt;/h2&gt;
@@ -1002,7 +1002,7 @@ cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;zoxide &lt;span clas
 zoxide init fish | &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt;
 
 &lt;span class=&quot;c&quot;&gt;# Alias cd to z&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;alias cd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;z&apos;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;alias cd&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'z'&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;dust&quot;&gt;dust&lt;/h2&gt;
@@ -1348,7 +1348,7 @@ cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/KsMv5xG.png" medium="image">https://i.imgur.com/KsMv5xG.png</media:content>
-        <pubDate>Mon, 07 Nov 2022 00:00:00 +0100</pubDate>
+        <pubDate>Mon, 07 Nov 2022 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/</link>
         <guid isPermaLink="true">https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/</guid>
         
@@ -1365,7 +1365,7 @@ cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
     
       <item>
         <title>What the Heck Is Project Loom for Java?</title>
-        <description>What the heck is Java&apos;s Project Loom and what does it mean for regular Java developers? | &lt;a href=&quot;https://deepu.tech/state-of-java-project-loom/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <description>What the heck is Java's Project Loom and what does it mean for regular Java developers? | &lt;a href=&quot;https://deepu.tech/state-of-java-project-loom/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Java has had good multi-threading and concurrency capabilities from early on in its evolution and can effectively utilize multi-threaded and multi-core CPUs. Java Development Kit (JDK) 1.1 had basic support for platform threads (or Operating System (OS) threads), and JDK 1.5 had more utilities and updates to improve concurrency and multi-threading. JDK 8 brought asynchronous programming support and more concurrency improvements. While things have continued to improve over multiple versions, there has been nothing groundbreaking in Java for the last three decades, apart from support for concurrency and multi-threading using OS threads.&lt;/p&gt;
 
@@ -1524,9 +1524,9 @@ cargo &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;tokei
 2
 3
 4
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# &apos;newThreadPerTaskExecutor&apos; with &apos;defaultThreadFactory&apos;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# 'newThreadPerTaskExecutor' with 'defaultThreadFactory'&lt;/span&gt;
 0:18.77 real,   18.15 s user,   7.19 s sys,     135% 3891pu,    0 amem,         743584 mmem
-&lt;span class=&quot;c&quot;&gt;# &apos;newCachedThreadPool&apos; with &apos;defaultThreadFactory&apos;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 'newCachedThreadPool' with 'defaultThreadFactory'&lt;/span&gt;
 0:11.52 real,   13.21 s user,   4.91 s sys,     157% 6019pu,    0 amem,         2215972 mmem
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -1699,7 +1699,7 @@ LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op
 &lt;p&gt;This post was originally published on the &lt;a href=&quot;https://developer.okta.com/blog/2022/08/26/state-of-java-project-loom&quot;&gt;Okta Developer Blog&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/7FfOmmD.jpeg" medium="image">https://i.imgur.com/7FfOmmD.jpeg</media:content>
-        <pubDate>Sat, 27 Aug 2022 00:00:00 +0200</pubDate>
+        <pubDate>Sat, 27 Aug 2022 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/state-of-java-project-loom/</link>
         <guid isPermaLink="true">https://deepu.tech/state-of-java-project-loom/</guid>
         
@@ -1716,7 +1716,7 @@ LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op
     
       <item>
         <title>Golang Finally Gets Generics! Does It Make Go a Better Language?</title>
-        <description>Let&apos;s see if Golang became better with the addition of generics. | &lt;a href=&quot;https://deepu.tech/go-impressions-part-2/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <description>Let's see if Golang became better with the addition of generics. | &lt;a href=&quot;https://deepu.tech/go-impressions-part-2/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;So Golang finally made the sane decision to add support for generics, in version 1.18, after dragging it out for years and after multiple proposals. Well, simplicity is nice when you are a newbie in the language but becomes annoying really fast, in my personal experience, especially in large codebases.&lt;/p&gt;
 
@@ -1992,7 +1992,7 @@ Though I would have preferred to see the &lt;code class=&quot;language-plaintext
 &lt;p&gt;Cover image credit: Image derived from work in &lt;a href=&quot;https://github.com/egonelbre/gophers&quot;&gt;egonelbre/gophers&lt;/a&gt; created by &lt;a href=&quot;https://twitter.com/egonelbre&quot;&gt;@egonelbre&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/WGkshhB.jpeg" medium="image">https://i.imgur.com/WGkshhB.jpeg</media:content>
-        <pubDate>Mon, 04 Apr 2022 00:00:00 +0200</pubDate>
+        <pubDate>Mon, 04 Apr 2022 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/go-impressions-part-2/</link>
         <guid isPermaLink="true">https://deepu.tech/go-impressions-part-2/</guid>
         
@@ -2212,7 +2212,7 @@ Though I would have preferred to see the &lt;code class=&quot;language-plaintext
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/JGoa8Xe.png" medium="image">https://i.imgur.com/JGoa8Xe.png</media:content>
-        <pubDate>Fri, 04 Feb 2022 00:00:00 +0100</pubDate>
+        <pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/concurrency-in-modern-languages-final/</link>
         <guid isPermaLink="true">https://deepu.tech/concurrency-in-modern-languages-final/</guid>
         
@@ -2657,7 +2657,7 @@ Though I would have preferred to see the &lt;code class=&quot;language-plaintext
 15
 16
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;rotate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Shape&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;double&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;angle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// this will be &apos;switch&apos; expression does not cover all possible input values error&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// this will be 'switch' expression does not cover all possible input values error&lt;/span&gt;
        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Circle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
        &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Square&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;s&lt;/span&gt;    &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rotate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;angle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
    &lt;span class=&quot;o&quot;&gt;};&lt;/span&gt;
@@ -2810,7 +2810,7 @@ We probably would still have to wait a few years before we can actually start us
 &lt;p&gt;Cover image credit: Meme from &lt;a href=&quot;https://makeameme.org/meme/patterns-patterns-everywhere-5c0a75&quot;&gt;makeameme.org&lt;/a&gt;&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/DK0pANn.jpeg" medium="image">https://i.imgur.com/DK0pANn.jpeg</media:content>
-        <pubDate>Thu, 23 Dec 2021 00:00:00 +0100</pubDate>
+        <pubDate>Thu, 23 Dec 2021 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/state-of-pattern-matching-java/</link>
         <guid isPermaLink="true">https://deepu.tech/state-of-pattern-matching-java/</guid>
         
@@ -2959,7 +2959,7 @@ We probably would still have to wait a few years before we can actually start us
 
 </content:encoded>
         <media:content url="https://i.imgur.com/LIn8i4h.jpeg" medium="image">https://i.imgur.com/LIn8i4h.jpeg</media:content>
-        <pubDate>Mon, 01 Nov 2021 00:00:00 +0100</pubDate>
+        <pubDate>Mon, 01 Nov 2021 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/my-beautiful-linux-development-environment-2021/</link>
         <guid isPermaLink="true">https://deepu.tech/my-beautiful-linux-development-environment-2021/</guid>
         
@@ -2976,7 +2976,7 @@ We probably would still have to wait a few years before we can actually start us
     
       <item>
         <title>What is Developer Experience and why should we care?</title>
-        <description>Let&apos;s bust some myths around developer experience and see why it&apos;s important. | &lt;a href=&quot;https://deepu.tech/what-is-developer-experience-and-why-care/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <description>Let's bust some myths around developer experience and see why it's important. | &lt;a href=&quot;https://deepu.tech/what-is-developer-experience-and-why-care/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Information Technology (IT) is undoubtedly one of the most important industries today and one that is ever-growing. Every company is becoming an IT company these days. From Taxis to food delivery to banking, every industry is dominated by companies that are IT companies first and domain second. With that growth, the demand for software and tools used by other developers also grows.&lt;/p&gt;
 
@@ -3118,7 +3118,7 @@ We probably would still have to wait a few years before we can actually start us
 
 </content:encoded>
         <media:content url="https://i.imgur.com/NDimrjE.jpeg" medium="image">https://i.imgur.com/NDimrjE.jpeg</media:content>
-        <pubDate>Fri, 16 Jul 2021 00:00:00 +0200</pubDate>
+        <pubDate>Fri, 16 Jul 2021 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/what-is-developer-experience-and-why-care/</link>
         <guid isPermaLink="true">https://deepu.tech/what-is-developer-experience-and-why-care/</guid>
         
@@ -3305,7 +3305,7 @@ We probably would still have to wait a few years before we can actually start us
 
 </content:encoded>
         <media:content url="https://i.imgur.com/FOpUG38.jpeg" medium="image">https://i.imgur.com/FOpUG38.jpeg</media:content>
-        <pubDate>Fri, 09 Jul 2021 00:00:00 +0200</pubDate>
+        <pubDate>Fri, 09 Jul 2021 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/languages-i-like-and-why/</link>
         <guid isPermaLink="true">https://deepu.tech/languages-i-like-and-why/</guid>
         
@@ -3321,7 +3321,7 @@ We probably would still have to wait a few years before we can actually start us
       </item>
     
       <item>
-        <title>My second impression of Rust and why I think it&apos;s a great general-purpose language!</title>
+        <title>My second impression of Rust and why I think it's a great general-purpose language!</title>
         <description>My second impression of Rust, after building a real-life use case with it and my thoughts on why it is a great general-purpose language for the future. | &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;I wrote about &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;my first impression of Rust&lt;/a&gt; in November 2019. After that, I dabbled with it few times, but mostly on very simple code, and while I liked using Rust I wasn’t too amazed. On the surface, it kind of felt more or less like many other languages I have dabbled with.&lt;/p&gt;
@@ -3658,7 +3658,7 @@ There were few instances where I ended up using the same name for different cont
 &lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
 </content:encoded>
         <media:content url="https://i.imgur.com/QHH8hev.png" medium="image">https://i.imgur.com/QHH8hev.png</media:content>
-        <pubDate>Fri, 07 May 2021 00:00:00 +0200</pubDate>
+        <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
         <link>https://deepu.tech/my-second-impression-of-rust/</link>
         <guid isPermaLink="true">https://deepu.tech/my-second-impression-of-rust/</guid>
         
