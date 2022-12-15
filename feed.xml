@@ -5,15 +5,17 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 15 Dec 2022 12:46:35 +0100</pubDate>
-    <lastBuildDate>Thu, 15 Dec 2022 12:46:35 +0100</lastBuildDate>
+    <pubDate>Thu, 15 Dec 2022 12:49:03 +0100</pubDate>
+    <lastBuildDate>Thu, 15 Dec 2022 12:49:03 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
         <title>Shhhh... Kubernetes Secrets Are Not Really Secret!</title>
         <description>Learn how to setup secure secrets on Kubernetes using Sealed Secrets, External Secrets Operator, and Secrets Store CSI driver. | &lt;a href=&quot;https://deepu.tech/kubernetes-secrets-management/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Kubernetes has become an inevitable part of the modern software infrastructure. Hence managing sensitive data on Kubernetes is also an essential aspect of modern software engineering so that you can put the security back into DevSecOps. Kubernetes offers a way to store sensitive data using the &lt;a href=&quot;https://kubernetes.io/docs/concepts/configuration/secret/&quot;&gt;Secret&lt;/a&gt; object. While it’s better than nothing, it is not really a secret, as it is just &lt;a href=&quot;https://en.wikipedia.org/wiki/Base64&quot;&gt;base64&lt;/a&gt; encoded strings that anyone with access to the cluster or the code can decode.&lt;/p&gt;
+        <content:encoded>&lt;p&gt;&lt;em&gt;Originally published at &lt;a href=&quot;https://auth0.com/blog/kubernetes-secrets-management/&quot;&gt;auth0.com&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Kubernetes has become an inevitable part of the modern software infrastructure. Hence managing sensitive data on Kubernetes is also an essential aspect of modern software engineering so that you can put the security back into DevSecOps. Kubernetes offers a way to store sensitive data using the &lt;a href=&quot;https://kubernetes.io/docs/concepts/configuration/secret/&quot;&gt;Secret&lt;/a&gt; object. While it’s better than nothing, it is not really a secret, as it is just &lt;a href=&quot;https://en.wikipedia.org/wiki/Base64&quot;&gt;base64&lt;/a&gt; encoded strings that anyone with access to the cluster or the code can decode.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;strong&gt;Caution:&lt;/strong&gt;
