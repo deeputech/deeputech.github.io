@@ -1,4 +1,2 @@
-- [Utrecht JUG](https://www.meetup.com/utrecht-java-user-group/) (Utrecht, Netherlands)- November 30, 2022
+- [Stage of Java](https://stageofjava.com/) (Virtual, Ukraine)- February 10, 2023
   - What the heck is Project Loom?
-- [Developer Day Amsterdam](https://regionalevents.okta.com/developerdayamsterdam2022) (Amsterdam, Netherlands)- December 1, 2022
-  - Lock your containers down!

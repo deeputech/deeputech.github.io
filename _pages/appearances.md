@@ -9,7 +9,27 @@ comments: false
 
 ---
 
-##### [All Day DevOps](https://www.alldaydevops.com/) 
+##### [Developer Day Amsterdam](https://regionalevents.okta.com/developerdayamsterdam2022)
+
+<small>December 2022</small>
+
+Lock your containers down!
+
+[slides](https://speakerdeck.com/deepu105/lock-your-containers-down)
+
+---
+
+##### [Utrecht JUG](https://www.meetup.com/utrecht-java-user-group/)
+
+<small>November 2022</small>
+
+What the heck is Project Loom?
+
+[slides](https://speakerdeck.com/deepu105/what-the-heck-is-project-loom)
+
+---
+
+##### [All Day DevOps](https://www.alldaydevops.com/)
 
 <small>November 2022</small>
 
@@ -19,7 +39,7 @@ Building a Kubernetes monitoring dashboard in Rust. Why not?
 
 ---
 
-##### [JFall](https://jfall.nl/) 
+##### [JFall](https://jfall.nl/)
 
 <small>November 2022</small>
 
