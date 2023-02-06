@@ -5,9 +5,160 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 15 Dec 2022 12:49:03 +0100</pubDate>
-    <lastBuildDate>Thu, 15 Dec 2022 12:49:03 +0100</lastBuildDate>
+    <pubDate>Mon, 06 Feb 2023 14:35:08 +0100</pubDate>
+    <lastBuildDate>Mon, 06 Feb 2023 14:35:08 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>Mastodon for Developers: Everything You Need to Know</title>
+        <description>Learn how to use Mastodon effectively as a developer. | &lt;a href=&quot;https://deepu.tech/mastodon-for-devs/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;&lt;em&gt;Originally published at &lt;a href=&quot;https://auth0.com/blog/mastdon-for-developers/&quot;&gt;auth0.com&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-mastodon&quot;&gt;What Is Mastodon?&lt;/h2&gt;
+
+&lt;p&gt;Mastodon is an open-source, distributed micro-blogging platform that can host social networking sites. It was created by &lt;a href=&quot;https://en.wikipedia.org/wiki/Eugen_Rochko&quot;&gt;Eugen Rochko&lt;/a&gt; and was first released in 2016. It is similar to Twitter regarding features, target audience, and user experience. But unlike Twitter, it is run on a decentralized network of servers, each of which is called an &lt;strong&gt;instance&lt;/strong&gt;. This does not mean that you have fragmented silos; instances are federated, which means you can talk to other instances, follow people, and see content from other instances, making Mastodon the ideal decentralized social network.&lt;/p&gt;
+
+&lt;p&gt;Any single company does not own the Mastodon network, and users can join any instance they wish. The federation allows people to connect and interact with each other across different instances, making Mastodon more open, secure, and free than something like Twitter. This means no single entity has absolute control over Mastodon, which is a big advantage over traditional social networks like Twitter, which is owned by a single company and is not open source.&lt;/p&gt;
+
+&lt;p&gt;After the recent &lt;a href=&quot;https://twitterisgoinggreat.com&quot;&gt;Twitter saga&lt;/a&gt;, it’s clear why this is a major benefit. However, this does not mean there is no moderation. Quite the contrary, actually. Each instance can have its own rules and can moderate content as they see fit. This means you can join an instance that is more aligned with your values and beliefs or even hosts your own if you have the necessary resources.&lt;/p&gt;
+
+&lt;h2 id=&quot;why-should-you-care-about-mastodon&quot;&gt;Why Should You Care about Mastodon?&lt;/h2&gt;
+
+&lt;p&gt;Platforms like Twitter, Facebook, Instagram, and TikTok make most of their revenue from advertisements. This means they are selling our attention to advertisers.&lt;/p&gt;
+
+&lt;p&gt;How do you keep someones attention? Our brains are naturally wired to seek dopamine reward pathways and &lt;a href=&quot;https://www.iomcworld.org/open-access/neurotransmitter-dopamine-da-and-its-role-in-the-development-of-social-media-addiction-59222.html&quot;&gt;algorithms&lt;/a&gt; used by these social media often target dopamine pathways to create a feeling of reward and reinforcement that encourages people to keep using their services. This is done by providing users with a steady stream of new content and positive feedback, such as likes and comments, which stimulates dopamine production in the brain. This can lead to people becoming addicted to social media, as they constantly seek out the reward of dopamine that comes with using the platform.&lt;/p&gt;
+
+&lt;p&gt;In addition, many platforms use algorithms to personalize content and increase the chance of a positive outcome, further encouraging people to use the service. But that’s not all; these algorithms also use tactics like amplifying content that is reactionary, sensational, or &lt;a href=&quot;https://en.wikipedia.org/wiki/Mean_world_syndrome&quot;&gt;frightening&lt;/a&gt;, which grabs our attention.&lt;/p&gt;
+
+&lt;p&gt;Platforms like Mastodon, which &lt;a href=&quot;https://arstechnica.com/tech-policy/2022/12/twitter-rival-mastodon-rejects-funding-to-preserve-nonprofit-status/&quot;&gt;does not operate for profit&lt;/a&gt;, do not have any incentives to follow similar tactics. This does not mean that it is not possible as a Mastodon instance can choose to serve advertisements. But since you have control as a user, you can choose to join an instance that does not serve advertisements. This means that algorithms are not manipulating you to keep you hooked on the platform. This is a big advantage over platforms like Twitter which are designed to keep you hooked on the platform, making it easier to sow division and hatred by nefarious actors.&lt;/p&gt;
+
+&lt;p&gt;Mastodon is an important platform for anyone who values their freedom, security, mental health, and privacy online. It is a great alternative to Twitter for those who are looking for a more open and secure platform to connect with others without having to worry about being harassed or bullied. It is quite customizable and provides greater control over your data. With its growing user base, Mastodon is quickly becoming the go-to platform for many people looking for a better way to connect with others and get out of the grasp of BigTech.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-fediverse-and-how-does-it-work&quot;&gt;What Is Fediverse, and How Does It Work?&lt;/h2&gt;
+
+&lt;p&gt;Fediverse is the term used to describe a network of interconnected servers that can communicate with each other using decentralized networking protocols. Fediverse is bigger than Mastodon and can include, among others:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mastodon servers (social networking and microblogging)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://friendi.ca/&quot;&gt;Friendica&lt;/a&gt; servers (social networking and microblogging)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://joinpeertube.org/&quot;&gt;PeerTube&lt;/a&gt; servers (video hosting)&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://pleroma.social/&quot;&gt;Pleroma&lt;/a&gt; servers (social networking and microblogging)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Fediverse networks can be used for social networks, file hosting services, and so on.&lt;/p&gt;
+
+&lt;p&gt;Fediverse works using several different communication protocols. The most important ones are &lt;a href=&quot;https://activitypub.rocks/&quot;&gt;ActivityPub&lt;/a&gt;, &lt;a href=&quot;https://www.w3.org/community/ostatus/wiki/Main_Page&quot;&gt;OStatus&lt;/a&gt;, and &lt;a href=&quot;https://diaspora.github.io/diaspora_federation/&quot;&gt;diaspora&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;ActivityPub is a protocol that allows servers to communicate with each other. It is a decentralized protocol based on the &lt;a href=&quot;https://www.w3.org/TR/activitystreams-core/&quot;&gt;ActivityStreams&lt;/a&gt; standard. Mastodon, PeerTube, and Pleroma use ActivityPub.&lt;/p&gt;
+
+&lt;p&gt;OStatus is a decentralized protocol based on the &lt;a href=&quot;https://www.rfc-editor.org/rfc/rfc4287&quot;&gt;Atom Syndication Format&lt;/a&gt;. OStatus is a predecessor to ActivityPub and is used by older instances of Mastodon and Pleroma.&lt;/p&gt;
+
+&lt;p&gt;Diaspora is a decentralized protocol. Mastodon, Friendica, and Pleroma use it.&lt;/p&gt;
+
+&lt;p&gt;Any server that supports one of these protocols can communicate with other servers that support the same protocol.&lt;/p&gt;
+
+&lt;p&gt;It is difficult to estimate the number of users in Fediverse due to the distributed nature, but &lt;a href=&quot;https://fediverse.observer/stats&quot;&gt;rough third-party estimates&lt;/a&gt; put it at around 8 million users. This is a small fraction of the number of users on Twitter, but it is growing rapidly, as well as the number of instances.&lt;/p&gt;
+
+&lt;h2 id=&quot;choosing-servers&quot;&gt;Choosing Servers&lt;/h2&gt;
+
+&lt;p&gt;One of the biggest strengths of Mastodon, decentralization, is also its biggest hurdle when it comes to adoption. This means that there is no single place to sign up for Mastodon. Instead, you have to choose an instance to join. Choosing a server could be a daunting task, especially if you are new to Mastodon. There are some factors to consider when choosing a server. These include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Quality and reliability of the server&lt;/li&gt;
+  &lt;li&gt;Community and moderation&lt;/li&gt;
+  &lt;li&gt;Rules and Policies&lt;/li&gt;
+  &lt;li&gt;Non-profit status&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Choosing a server based on this is important, but it’s not as critical as it seems. This is because you can follow people from other servers and see their content in your timeline. This means you can join a server that is more aligned with your values and beliefs and still follow people from other servers. This is one of the biggest advantages of Mastodon over Twitter, where you are forced to follow people from the same server. Not just that, Mastodon lets you move from one server to another in case you choose a server that turns out to be unreliable, or you realize that you disagree with the server’s policies. You can also easily import your data, like your followers and people you follow, to the new server. So choose a server you feel comfortable with and stick around to see how it goes. You can always move to another server if you don’t like it.&lt;/p&gt;
+
+&lt;p&gt;As of this writing, there are over 17,000 instances of Mastodon, which is growing daily. This means that there is a Mastodon instance for everyone. You can find a list of Mastodon instances on &lt;a href=&quot;https://instances.social/&quot;&gt;instances.social&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;recommended-servers&quot;&gt;Recommended servers&lt;/h3&gt;
+
+&lt;p&gt;For technical folks like developers, you could consider joining one of these servers:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://fosstodon.org/&quot;&gt;fosstodon.org&lt;/a&gt;: Ideal for developers, especially if you are an open-source enthusiast&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mstdn.social/&quot;&gt;mstdn.social&lt;/a&gt;: It’s a general-purpose server with a good community and is quite reliable&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mastodon.social/&quot;&gt;mastodon.social&lt;/a&gt;: The official Mastodon server with a good community and is quite reliable&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://hachyderm.io/&quot;&gt;hachyderm.io&lt;/a&gt;: A server for tech industry professionals&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://techhub.social/&quot;&gt;techhub.social&lt;/a&gt;: A server for technology enthusiasts&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;building-a-timeline-based-on-hashtags-and-follows&quot;&gt;Building a Timeline Based on Hashtags and Follows&lt;/h2&gt;
+
+&lt;p&gt;Unlike Twitter, when you join a Mastodon server, you will not be greeted by a timeline with interesting posts and recommendations for people to follow. Instead, you are going to be greeted by an empty timeline. This is by design, as Mastodon does not have any algorithm or recommendation system, and you will not be following people from the same server. This means that you have to build your timeline by following people and hashtags. This is a good thing as it gives you more control over your timeline, and you will not be bombarded with content you are not interested in. You can find and follow people from other instances by searching for their usernames. For example, if you want to follow me, you can search for my username &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@deepu105&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@deepu105@mastodon.social&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Similarly, you can also follow hashtags; look for the &lt;strong&gt;+&lt;/strong&gt; button on the top right corner of the screen when you are on the hashtag page. This works on the web version and some mobile clients.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/2j6yJWRTi4l5ietKeozjqR/374a2ad171c40d316bf9f0dfb5d7a92e/follow-hasgtags.png&quot; alt=&quot;Follow hashtags&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is important to follow people and hashtags you are interested in to have interesting content on your timeline. You can mute people you are not interested in.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/6TfN7bNDr2wW1gUZAj88tN/ca7e15a4aa52899a3c4b183f6fb9925a/mute-accounts.png&quot; alt=&quot;Mute accounts&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also filter hashtags or words you don’t want to see on your timeline.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/2k95DqMi5dliPOdPLdmLxm/cbd8ca9268379c89bd4207b581e3df2f/mute-hashtag.png&quot; alt=&quot;Filter hashtags&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is a great way to keep your timeline clean and free of unwanted content.&lt;/p&gt;
+
+&lt;p&gt;If you are migrating from Twitter, &lt;a href=&quot;https://www.movetodon.org/&quot;&gt;Movetodon.org&lt;/a&gt; is a great tool to help you find and follow people from Twitter on Mastodon.&lt;/p&gt;
+
+&lt;h2 id=&quot;cross-posting&quot;&gt;Cross-Posting&lt;/h2&gt;
+
+&lt;p&gt;If you prefer to keep your Twitter account and cross-post to Mastodon and vice versa, you can use some tools to do so, including writing your own scripts using Twitter and Mastodon APIs. My personal favorite is &lt;a href=&quot;https://moa.party/&quot;&gt;moa.party&lt;/a&gt;. It supports cross-posting to and from Twitter and Mastodon and is simple to setup and use. It can also post from Instagram to Mastodon. It is &lt;a href=&quot;https://gitlab.com/fedstoa/moa&quot;&gt;open-source&lt;/a&gt;, and you can host it yourself if you don’t want to give the service access to your Twitter/Mastodon accounts &lt;a href=&quot;https://moaparty.com/oauth/&quot;&gt;using OAuth&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;securing-the-account&quot;&gt;Securing the Account&lt;/h2&gt;
+
+&lt;p&gt;As usual, it is important to keep your Mastodon account secure. This includes using a strong password, using a password manager, and enabling two-factor authentication (2FA). Mastodon supports 2FA using TOTP (Time-based One-time Password Algorithm) authenticator apps like Google Authenticator and FIDO security keys like Yubikey.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/3u8URYtpAdDxDHXiNb5Tvb/2df7bd5aa4975e281054d3853cab566a/2fa.png&quot; alt=&quot;Adding 2FA&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also verify your Mastodon account by linking your official website, GitHub profile, and so on. This is a great way to prove that you are the owner of the account and prevent impersonation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/CP3tOMcsMX7V90jGrYXJO/2641210af2340acd254c4d1fdd08e9b0/verify.png&quot; alt=&quot;Verify your Mastodon account&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To do this, go to &lt;strong&gt;Preferences&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Appearance&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Profile metadata&lt;/strong&gt; and copy the verification URL and add it to your website as instructed. For the GitHub profile, add your Mastodon profile URL in the GitHub profile’s website field. For example, my Mastodon profile URL is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://mastodon.social/@deepu105&lt;/code&gt;. Now add your website or GitHub profile URL to your Mastodon profile metadata and save.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/45ZMJHHZsTkADIWI4yOlbf/0a50498ca9ca17e43c358bba1ecdd1fa/verify-result.png&quot; alt=&quot;Verified links on Mastodon account&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;moving-between-servers&quot;&gt;Moving between Servers&lt;/h2&gt;
+
+&lt;p&gt;If you decide to move from one Mastodon server to another, here are a few tips to make the process smooth.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;First, create a profile on the new server you want to use. Note that this will be a new username, as Mastodon usernames include the server name, and you need to choose a username that is available on the new server.&lt;/li&gt;
+  &lt;li&gt;Export your data from the old server by going to &lt;strong&gt;Preferences&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Import and export&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Data export&lt;/strong&gt;. You will get CSV files for each item you export, like Follows, mutes, and so on.&lt;/li&gt;
+  &lt;li&gt;Create an account alias in your new account by going to &lt;strong&gt;Preferences&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Account&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Account settings&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Moving from a different account&lt;/strong&gt;. This will allow you to redirect your old account and move followers from your old account to the new account.&lt;/li&gt;
+  &lt;li&gt;Now, from your old account, redirect to the new account by going to &lt;strong&gt;Preferences&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Account&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Account settings&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Moving to a different account&lt;/strong&gt;. This will redirect your old account to the new account, and all your followers will be moved to the new account.&lt;/li&gt;
+  &lt;li&gt;Now, from your new account, go to &lt;strong&gt;Preferences&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Import and export&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Import&lt;/strong&gt; and import the CSV files that you exported from your old account. This will import all your follows, mutes, lists, and so on to the new account.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Mastodon is a great alternative to Twitter and is a great way to connect with people from around the world without worrying about a single entity dictating what you can and cannot do with your social media. It is a great way to build a community around your projects and share your thoughts and ideas. It is also a great way to connect with people from the open-source community. I hope this guide will help you get started with Mastodon.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://mastodon.social/@deepu105&quot;&gt;Mastodon&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+</content:encoded>
+        <media:content url="https://images.ctfassets.net/23aumh6u8s0i/48DMcrjsrTyczgB2Im8ii7/8b8e3050f1c04e797181500c44da05ee/mastodon-color.png" medium="image">https://images.ctfassets.net/23aumh6u8s0i/48DMcrjsrTyczgB2Im8ii7/8b8e3050f1c04e797181500c44da05ee/mastodon-color.png</media:content>
+        <pubDate>Mon, 06 Feb 2023 00:00:00 +0100</pubDate>
+        <link>https://deepu.tech/mastodon-for-devs/</link>
+        <guid isPermaLink="true">https://deepu.tech/mastodon-for-devs/</guid>
+        
+        <category>social</category>
+        
+        <category>mastodon</category>
+        
+        
+      </item>
     
       <item>
         <title>Shhhh... Kubernetes Secrets Are Not Really Secret!</title>
@@ -3316,359 +3467,6 @@ We probably would still have to wait a few years before we can actually start us
         <category>golang</category>
         
         <category>javascript</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>My second impression of Rust and why I think it&apos;s a great general-purpose language!</title>
-        <description>My second impression of Rust, after building a real-life use case with it and my thoughts on why it is a great general-purpose language for the future. | &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;I wrote about &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;my first impression of Rust&lt;/a&gt; in November 2019. After that, I dabbled with it few times, but mostly on very simple code, and while I liked using Rust I wasn’t too amazed. On the surface, it kind of felt more or less like many other languages I have dabbled with.&lt;/p&gt;
-
-&lt;p&gt;All that changed last month when I finally decided to build a realistic use case with Rust. Since I was quite invested in cloud computing and containers, I decided to build a terminal UI to monitor Kubernetes clusters with Rust. I know it was quite ambitious for a Rust newbie. But looking back, it was absolutely worth it and I have &lt;a href=&quot;https://github.com/kdash-rs/kdash&quot;&gt;KDash&lt;/a&gt; to show for it.&lt;/p&gt;
-
-&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Introducing KDash - A simple &lt;a href=&quot;https://twitter.com/kubernetesio?ref_src=twsrc%5Etfw&quot;&gt;@kubernetesio&lt;/a&gt; terminal dashboard built with &lt;a href=&quot;https://twitter.com/rustlang?ref_src=twsrc%5Etfw&quot;&gt;@rustlang&lt;/a&gt; &lt;br /&gt;&lt;br /&gt;Still a WIP but here is an MVP I built over the last few weeks. Please try it out and provide me feedback also any contribution is welcome&lt;a href=&quot;https://twitter.com/hashtag/rust?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#rust&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/Kubernetes?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Kubernetes&lt;/a&gt; &lt;a href=&quot;https://twitter.com/hashtag/oss?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#oss&lt;/a&gt; &lt;a href=&quot;https://t.co/ws9qfc9ie8&quot;&gt;https://t.co/ws9qfc9ie8&lt;/a&gt; &lt;a href=&quot;https://t.co/NYkQHQwBc2&quot;&gt;pic.twitter.com/NYkQHQwBc2&lt;/a&gt;&lt;/p&gt;&amp;mdash; @deepu105@mastodon.social (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1383017556546584578?ref_src=twsrc%5Etfw&quot;&gt;April 16, 2021&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;p&gt;So it’s a pretty UI on the terminal that shows different resource data and utilization metrics for Kubernetes clusters. Kind of inspired by &lt;a href=&quot;https://github.com/kdash-rs/kdash#how-does-this-compare-to-k9s&quot;&gt;K9s&lt;/a&gt;, which is built with Go. The focus for KDash was speed and UX. With Rust, I knew that I didn’t have to worry about the speed part.&lt;/p&gt;
-
-&lt;p&gt;The architecture was quite complex. It’s fully event-driven, concurrent, and asynchronous with different threads to handle drawing of the UI, doing network requests, streaming logs, and running commands. I used channels to pass events across threads and the application state was shared using an &lt;a href=&quot;https://doc.rust-lang.org/std/sync/struct.Arc.html&quot;&gt;ARC&lt;/a&gt; smart pointer and a &lt;a href=&quot;https://doc.rust-lang.org/std/sync/struct.Mutex.html&quot;&gt;Mutex&lt;/a&gt; lock. I’ll write another blog with more details about the architecture choices and inspirations.&lt;/p&gt;
-
-&lt;p&gt;While, I have implemented similar architectures in Go, Java, and JavaScript, doing it in Rust was quite challenging. I struggled the first few days to put together a basic structure and was constantly battling the compiler thanks to my habits from other languages I work with. But I started getting better at thinking in the Rust way and within a week I was having fewer compiler errors and Clippy warnings. After few weeks, I rarely get compiler errors for new code (also thanks to &lt;a href=&quot;https://rust-analyzer.github.io/&quot;&gt;rust-analyzer&lt;/a&gt;) and I have started to polish existing code to make it better or to write better abstractions.&lt;/p&gt;
-
-&lt;p&gt;So now that I have set the context, I feel it’s time to revisit points from my first impression and see if they still hold true. Along the way, I’ll share my thoughts on why I think Rust is the future for general-purpose languages and how it is taking over the software engineering world. I’ll try not to be biased as much as possible and wear my polyglot hat for comparisons. If you haven’t read my previous &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;post&lt;/a&gt; on the topic, I encourage you to read it for better context.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-i-love-about-rust&quot;&gt;What I love about Rust&lt;/h2&gt;
-
-&lt;p&gt;Ok, let’s get this out of the way first. So I love everything I originally liked about Rust. Some of them even more so after using Rust full-fledged and gaining more experience in it. So here, I’ll touch upon some important high-level stuff that I didn’t mention in the &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;previous post&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Rust throws around some buzz words in its docs, but they are not just marketing buzz, they actually mean it with full sincerity and they actually matter a lot and are indeed the biggest selling points of Rust.&lt;/p&gt;
-
-&lt;h3 id=&quot;safety&quot;&gt;Safety&lt;/h3&gt;
-
-&lt;p&gt;What does being safe mean for a language? or rather what does unsafe mean? Let’s set the context first so that we can appreciate what Rust offers. Safety can be categorized into three (or four if you count null safety)&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;About 70% of all CVEs at Microsoft are memory safety issues.
-Two-thirds of Linux kernel vulnerabilities come from memory safety issues&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h5 id=&quot;memory-safety&quot;&gt;Memory safety&lt;/h5&gt;
-
-&lt;p&gt;This means when you access a variable or an item in an array, you can be sure that you are indeed accessing what you meant to or are allowed to access. In other words, you will not be reading/writing into the memory of another variable or pointer by mistake regardless of what you do in your program.&lt;/p&gt;
-
-&lt;p&gt;Why is this a big deal? Doesn’t all major programming languages ensure this?&lt;/p&gt;
-
-&lt;p&gt;Yes, to varying extent. But some languages are unsafe by default. In C or C++, you can access the memory of another variable by mistake or you can free a pointer twice (double-free error). Such behavior is categorized as undefined behavior as they are unpredictable and hence can be abused by a hacker to take control of the program or to leak privileged information. In memory-safe languages, if you try to access an array element out of its bound, you will just crash the program with a panic/error, which is predictable behavior.&lt;/p&gt;
-
-&lt;p&gt;This is why memory-related bugs in C/C++ systems often result in &lt;a href=&quot;https://en.wikipedia.org/wiki/Common_Vulnerabilities_and_Exposures&quot;&gt;CVEs&lt;/a&gt; and emergency patches. There are other memory-unsafe behaviors in C or C++; accessing pointers to stack frames that have been popped, a memory that has been de-allocated, iterator invalidation, and so on.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Null safety&lt;/strong&gt;: I list this separately under memory safety, as I come from a Java/JS background and we are so used to the concept of null (infamous for being the worst invention in programming). Garbage collected languages kind of need a concept of nothing so that a pointer can be freed. But it also leads to issues and pain. NPE anyone? Technically this falls under memory safety but most memory-safe languages still let you use null as a value leading to null pointer errors&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;type-safety&quot;&gt;Type safety&lt;/h5&gt;
-
-&lt;p&gt;This means when you access a variable you access it as the correct type of data it is stored as. This gives us the confidence to work on data without having to manually check for the data type during runtime. Memory safety is required for a language to be type-safe.&lt;/p&gt;
-
-&lt;h5 id=&quot;thread-safety&quot;&gt;Thread safety&lt;/h5&gt;
-
-&lt;p&gt;This means you can access/modify the same memory from multiple threads at the same time without worrying about data races. This is generally achieved by using mutual exclusion locks (Mutex) or thread synchronization. Thread safety is required for optimal memory and type safety so generally languages that are memory and type-safe tend to be thread-safe as well.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Now let’s see how Rust offers safety in these aspects.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;memory-safety-1&quot;&gt;Memory safety&lt;/h5&gt;
-
-&lt;p&gt;Rust ensures memory safety at compile time using its innovative ownership mechanism and the borrow checker built into the compiler. The compiler just does not allow memory unsafe code unless it’s explicitly marked as &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unsafe&lt;/code&gt; in an unsafe block or function. This static compile-time analysis eliminates many types of memory bugs and with some more runtime checks, Rust guarantees memory safety.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Null safety&lt;/strong&gt;: There is no concept of null at the language level. Instead, Rust provides the Option enum which can be used to mark the presence or absence of a value making the resulting code null safe and much easier to deal with and you will never encounter null pointer exceptions in Rust.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;type-safety-1&quot;&gt;Type safety&lt;/h5&gt;
-
-&lt;p&gt;Rust is statically typed and it guarantees type safety by strict compile-time type checks and by guaranteeing memory safety. This is not special as most modern languages are statically typed. Rust also allows some level of dynamic typing with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;dyn&lt;/code&gt; keyword and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Any&lt;/code&gt; type when required. But the powerful type inference and the compiler ensure type safety even in that case.&lt;/p&gt;
-
-&lt;h5 id=&quot;thread-safety-1&quot;&gt;Thread safety&lt;/h5&gt;
-
-&lt;p&gt;Rust guarantees thread safety using similar concepts it uses for memory safety along with providing standard library features like channels, Mutex, and ARC. The compiler makes it impossible to cause accidental data race from a shared state. This makes us confident to focus on code and let the compiler worry about shared data between threads.&lt;/p&gt;
-
-&lt;p&gt;Now, don’t be mistaken, you will see crashes and errors in a Rust application, even array index out of bound errors, and so on. Rust is not claiming safety against errors or is going to catch wrong logic, as no compiler can guarantee against human error. It just makes errors predictable so when errors do happen you are sure that there is no security issue associated with it like in a C/C++ application.&lt;/p&gt;
-
-&lt;p&gt;Rust also lets you write unsafe code when required by explicitly declaring &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unsafe&lt;/code&gt; blocks. This gives the flexibility when needed as there are certain low-level systems use cases that would need unsafe memory access. Rust cannot guarantee any of the above safety in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;unsafe&lt;/code&gt; code blocks as it’s for people who are sure of what they are doing and don’t want the compiler to interfere.&lt;/p&gt;
-
-&lt;p&gt;Now, most statically typed high-level languages like Java, Go or C# also offers all of the above to varying extend, none of them provide null safety though. But they do it with the cost of having a runtime and a garbage collector.&lt;/p&gt;
-
-&lt;p&gt;This is why Rust is special as it offers better safety than any high-level language without a runtime or memory management (garbage collection, reference counting, and so on) overhead. At the same time, it offers speed and performance, &lt;a href=&quot;https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/rust.html&quot;&gt;sometimes better than&lt;/a&gt;, of a low-level language like C/C++&lt;/p&gt;
-
-&lt;h3 id=&quot;zero-cost-abstractions&quot;&gt;Zero cost abstractions&lt;/h3&gt;
-
-&lt;p&gt;A zero-cost abstraction means that how you write your program does not affect its performance, for example, you can choose to create or use any number of abstractions to structure your program, you could use loops or iterators, you could do functional or imperative programming and the result remains the same. The compiler will produce the best possible implementation of the machine code for the use case regardless of the flavor of code you choose.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;What you don’t use, you don’t pay for. And further: What you do use, you couldn’t hand code any better.&lt;/p&gt;
-
-  &lt;p&gt;– &lt;a href=&quot;https://en.wikipedia.org/wiki/Bjarne_Stroustrup&quot;&gt;Bjarne Stroustrup&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Only very few programming languages offer this. C++ is popular for offering zero-overhead abstractions but &lt;a href=&quot;https://www.youtube.com/watch?v=rHIkrotSwcc&quot;&gt;they are not always zero cost if you consider the compile-time cost&lt;/a&gt;. Rust compiler, however, seems to be smarter and offers zero-cost abstractions in most cases with better developer experience which is an important factor. There could still be negligible overheads like array bound checks and so on.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A zero-cost abstraction, like all abstractions, must actually offer a better experience than the alternative.&lt;/p&gt;
-
-  &lt;p&gt;– &lt;a href=&quot;https://twitter.com/withoutboats&quot;&gt;Saoirse&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Let’s see a small example to understand and appreciate the importance of this. We will compare a high-level language like Java to Rust for this. But you could technically take any other high-level language for the comparison and the results can be similar.&lt;/p&gt;
-
-&lt;p&gt;Let’s take the below Java program. Running &lt;a href=&quot;https://github.com/openjdk/jmh&quot;&gt;JMH&lt;/a&gt; benchmark on it gives the performance numbers for each function and its added as comments inline&lt;/p&gt;
-
-&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;// Average  10.059 ns/op&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;factorialForLoop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Average  20.689  ns/op&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;factorialRecursive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factorialRecursive&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Average  23.457 ns/op&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;factorialStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LongStream&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rangeClosed&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;cm&quot;&gt;/*
-# Run complete. Total time: 00:02:30 (JDK 11)
-
-Benchmark                  Mode  Cnt   Score    Error  Units
-MyBenchMark.forLoop        avgt    3  10.059 ±  1.229  ns/op
-MyBenchMark.recursive      avgt    3  20.689 ±  4.465  ns/op
-MyBenchMark.stream         avgt    3  23.457 ± 32.424  ns/op
-*/&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see, even though all three functions does the same job, they don’t have similar performance. The one with the most abstractions, stream iterations, suffers the most. Now let’s try the same three functions in Rust and run benchmarks using &lt;a href=&quot;https://github.com/bheisler/criterion.rs&quot;&gt;Criterion&lt;/a&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-rust highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;// Average  8.5858 ns/op&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;factorial_loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;usize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;usize&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;mut&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;// Average  8.6150 ns/op&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;factorial_recursion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;usize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;usize&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-        &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-        &lt;span class=&quot;mi&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;factorial_recursion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;// Average 6.6387 ns/op&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;fn&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;factorial_iterator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;usize&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;usize&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;..&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;.fold&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;cm&quot;&gt;/*
-Benchmark                time:   [min       avg       max      ]
-factorial_loop           time:   [8.4579 ns 8.5732 ns 8.7105 ns]
-factorial_recursion      time:   [8.4394 ns 8.5074 ns 8.5829 ns]
-factorial_iterator       time:   [6.4240 ns 6.4742 ns 6.5338 ns]
-*/&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;As you can see the performance is identical for iterative and recursive approach and it’s even better for inbuilt abstractions (due to internal iterator optimizations and stuff).&lt;/p&gt;
-
-&lt;p&gt;So in the case of Rust, it’s even fair to say that abstractions provide better performance than hand-optimized code in many cases and at worst they provide the same performance at zero cost. If you look &lt;a href=&quot;https://godbolt.org/z/v593nhKoh&quot;&gt;into the assembly code generated&lt;/a&gt; by different flavors, in many cases, you can see the compiler produces the same assembly code.&lt;/p&gt;
-
-&lt;p&gt;This gives us the power not to think about writing the most optimal code and instead focus on writing the most readable and reusable code. This doesn’t mean that anything in Rust is zero-cost abstractions. You can always end up writing code that does unnecessary computations and such which adds to the cost but at least it will be obvious.&lt;/p&gt;
-
-&lt;p&gt;Some of the most notable zero-cost abstractions in Rust are&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Ownership and borrowing&lt;/li&gt;
-  &lt;li&gt;Iterator and closure APIs&lt;/li&gt;
-  &lt;li&gt;Async/await and Futures&lt;/li&gt;
-  &lt;li&gt;Unsafe and the module boundary&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;fearless-concurrency&quot;&gt;Fearless concurrency&lt;/h3&gt;
-
-&lt;p&gt;We already saw that Rust is thread-safe so technically you can do all sorts of &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-rust/&quot;&gt;concurrency implementations&lt;/a&gt; in Rust without worries. Rust supports multithreading, green threads, parallel computing, and asynchronous programming either as first-class citizens or via crates like Tokio or Futures.&lt;/p&gt;
-
-&lt;p&gt;The first realistic &lt;a href=&quot;https://github.com/kdash-rs/kdash&quot;&gt;app I built&lt;/a&gt; in Rust is extremely concurrent and asynchronous and I’m yet to encounter any issues related to concurrency and Rust promises that I’ll never encounter data race issues even though I share state between multiple threads doing asynchronous operations. Honestly, I won’t be comfortable doing the same in any other language that I’m used to, maybe to an extend in Go as it’s &lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages-go/&quot;&gt;quite good when it comes to concurrency&lt;/a&gt; as well.&lt;/p&gt;
-
-&lt;h3 id=&quot;community-tooling--ecosystem&quot;&gt;Community, Tooling &amp;amp; Ecosystem&lt;/h3&gt;
-
-&lt;p&gt;Rust has hands down, one of the best &lt;a href=&quot;https://www.rust-lang.org/community&quot;&gt;communities&lt;/a&gt; around, in my opinion. It doesn’t have the politics of Java or the bloat of JavaScript (yet 😉). Rust didn’t shy away from copying good things from other languages like package management from JavaScript, language features from Haskell, OCaml, Ruby, JavaScript, and so on.&lt;/p&gt;
-
-&lt;p&gt;That diversity is visible in the community as well. You can see people with all sorts of backgrounds and an extremely welcoming and friendly community. Strangely the &lt;a href=&quot;https://users.rust-lang.org/&quot;&gt;Rust community forum&lt;/a&gt; is more active than its stack overflow community and that says a lot. You will find people helping you and guiding you rather than being gatekeepers.&lt;/p&gt;
-
-&lt;p&gt;Rust also guarantees backward compatibility while still improving the language constantly and has a tooling and library ecosystem that keeps up. The Rust library ecosystem feels similar to that of JavaScript and gives you the NPM vibes.&lt;/p&gt;
-
-&lt;p&gt;The tooling is just amazing, rustc, rustup, and cargo are standard and there are tons of plugins like Clippy, rustfmt, and so on. Cargo acts as the build runner, package manager, plugin manager, and so on. It all feels well integrated and results in a great developer experience. There are some rough edges from time to time but is still way ahead of many other languages with an even longer history.&lt;/p&gt;
-
-&lt;p&gt;Rust also provides one of the best documentation around. It is even included in the standard toolchain via the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rustup docs&lt;/code&gt; command.&lt;/p&gt;
-
-&lt;p&gt;Many other smaller things in Rust is awesome, I’m just skipping them for high-level stuff.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-i-still-dont-like-about-rust&quot;&gt;What I still don’t like about Rust&lt;/h2&gt;
-
-&lt;p&gt;These were the things I originally didn’t like about Rust and while I haven’t changed my mind on how I feel about many of these, some of these make more sense to me now. But that doesn’t mean I have to like them right. Read my &lt;a href=&quot;https://deepu.tech/first-impression-of-rust/&quot;&gt;original post&lt;/a&gt; if you want more context on these.&lt;/p&gt;
-
-&lt;h3 id=&quot;complexity&quot;&gt;Complexity&lt;/h3&gt;
-
-&lt;p&gt;It seems like the complexity of the language only keeps on increasing at one end, with new language features, while some things are being simplified at the other end and I’m a bit torn about this, to be honest.
-I do like many features it provides and my issue about having many ways to do the same thing doesn’t seem like a big deal now that I understand the zero-cost abstractions in Rust. But once you step into advanced generics, traits, lifetimes and so on it quickly becomes mind-boggling and I can relate to newcomers as there is a steep learning curve.&lt;/p&gt;
-
-&lt;p&gt;While I understand that this complexity is required and most of the time worth it, given the benefits of ownership, it’s hard not to yearn for a bit more simplicity. Hopefully, future versions will evolve to simplify a lot of these 🤞&lt;/p&gt;
-
-&lt;h3 id=&quot;shadowing-of-variables-in-the-same-context&quot;&gt;Shadowing of variables in the same context&lt;/h3&gt;
-
-&lt;p&gt;This makes more sense to me now and I end up using this a lot. With the ownership mechanism, you often have to rebind, create temporary intermediates or get value from option or transforms value so this is useful but my point about this being abused is quite true as well.
-There were few instances where I ended up using the same name for different content with the same type in the same context giving me an unexpected result. It didn’t cause any major issues but did affect readability and logic sometimes. So probably it would have been fine without this feature as well. However, with &lt;a href=&quot;https://rust-lang.github.io/rust-clippy/rust-1.51.0/index.html#shadow_reuse&quot;&gt;Clippy&lt;/a&gt;, it’s possible to add a lint rule to disallow this so it’s good enough I guess.&lt;/p&gt;
-
-&lt;h3 id=&quot;functions-are-not-first-class-citizens&quot;&gt;Functions are not first-class citizens&lt;/h3&gt;
-
-&lt;p&gt;Well, turns out they are first-class citizens but it’s just that functions in Rust are very complex. I understand the whys and hows and they make sense. But I would still prefer if this was more streamlined at least with some syntax sugars. But it’s not a big deal and is more of a nitpick now&lt;/p&gt;
-
-&lt;h3 id=&quot;implicit-implementation-of-traits&quot;&gt;Implicit implementation of traits&lt;/h3&gt;
-
-&lt;p&gt;After using Rust this makes sense and I like the way Rust does it much more than Go, for example. So this is no longer an issue for me 😸&lt;/p&gt;
-
-&lt;p&gt;Also, the nitpicks I had in my original post no longer bothers me 😄&lt;/p&gt;
-
-&lt;h2 id=&quot;rust-is-the-future&quot;&gt;Rust is the future&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Rust, not Firefox, is Mozilla’s greatest industry contribution&lt;/p&gt;
-
-  &lt;p&gt;TechRepublic&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Well, first of all, let me say I’m falling in love with the language. So maybe my opinions have a small bias. I haven’t had this much fun programming in years. There is a weird feeling of satisfaction that you get when writing code in Rust. Now I understand why Rust is the most loved language for 5 years in a row from the &lt;a href=&quot;https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved&quot;&gt;Stack Overflow developer survey&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Don’t get me wrong. Rust is not a silver bullet as there are issues like the steep learning curve and complexity and so on. But it’s the closest thing to a silver bullet in my opinion. That doesn’t mean I’ll just start using Rust for everything. I still enjoy being a polyglot developer and I’m still invested in Java, JS/TS, and Go among others. But if the use case requires speed and or concurrency or building system tools or CLIs, then I will be giving Rust the first preference, and maybe Go will take a backseat as there isn’t any advantage that Go brings over Rust for similar use cases.&lt;/p&gt;
-
-&lt;p&gt;Normally a language would offer a choice between safety, speed, and high-level abstractions. At the very best you can pick two of those. For example with Java/C#/Go you get the safety and high-level abstractions at the cost of a runtime overhead whereas C++ gives you speed and abstractions at the cost of safety. But Rust offers all three and a good developer experience as a bonus.&lt;/p&gt;
-
-&lt;p&gt;As our IT landscape is getting more complex and resource-hungry this combination matters a lot. Rust looks and feels like a general-purpose high-level language yet offers performance and memory efficiency of a low-level systems language. So this could be the &lt;a href=&quot;https://www.rust-lang.org/what/&quot;&gt;general purpose language&lt;/a&gt; that doesn’t make compromises and doesn’t require a runtime and is cross-platform and is not as hard as C/C++. What is not to love here?&lt;/p&gt;
-
-&lt;p&gt;Due to these unique characteristics, Rust is getting a foothold not just in systems programming but also in areas currently dominated by high-level languages like web applications, microservices, and CLI tools. It’s also getting more and more popular as a web-assembly language due to its light footprint and great &lt;a href=&quot;https://www.rust-lang.org/what/wasm&quot;&gt;WASM support&lt;/a&gt;. It has also made its way into the &lt;a href=&quot;https://www.rust-lang.org/what/embedded&quot;&gt;embedded/IoT&lt;/a&gt; world. There are many more use cases like serverless, &lt;a href=&quot;https://deno.land/&quot;&gt;JS runtime&lt;/a&gt;, game engines, game dev, Operating Systems, and even &lt;a href=&quot;https://threatpost.com/buer-malware-loader-rewritten-rust/165782/&quot;&gt;malwares&lt;/a&gt; 🤦&lt;/p&gt;
-
-&lt;p&gt;Rust is rapidly gaining popularity. That’s impressive given its just 5 years old. Big names like Microsoft, Google, Apple, Amazon, and Facebook are already &lt;a href=&quot;https://foundation.rust-lang.org/members/&quot;&gt;invested&lt;/a&gt; in Rust and are making plans to replace C/C++ code with Rust. It will not be overnight but slowly Rust is going to replace a lot of those codes. Even Linux, the poster child of C, recently &lt;a href=&quot;https://www.zdnet.com/article/linus-torvalds-on-where-rust-will-fit-into-linux/&quot;&gt;approved the use of Rust in some parts of the kernel&lt;/a&gt;, like driver code and so on.&lt;/p&gt;
-
-&lt;p&gt;Unlike many general-purpose languages, which are not appropriate for some use cases due to the tradeoffs they make, Rust is uniquely positioned to work across the spectrum without any major disadvantage and be the general-purpose language for any use case, from client-side to systems programming.&lt;/p&gt;
-
-&lt;p&gt;C/C++ and Go might be the ones to be displaced most in the short term by Rust in my opinion. I think Java/JS/TS/Python etc are safe for a long while due to their massive presence in large-scale applications, the maturity of the ecosystem and due to the migration cost.&lt;/p&gt;
-
-&lt;p&gt;IMO, the only thing holding back Rust is the maturity of the library ecosystem which is only a matter of time to get better.&lt;/p&gt;
-
-&lt;p&gt;I would finish off by saying this: You won’t appreciate Rust unless you spend few weeks building something in it. The initial steep learning curve could be frustrating or challenging depending on how you see it, but once past that it’s hard not to love it. It’s a toddler with superpowers after all 💗&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://engineering.fb.com/2021/04/29/developer-tools/rust/&quot;&gt;engineering.fb.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.techrepublic.com/article/rust-not-firefox-is-mozillas-greatest-industry-contribution/&quot;&gt;www.techrepublic.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://threatpost.com/buer-malware-loader-rewritten-rust/165782/&quot;&gt;threatpost.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blogs.gartner.com/manjunath-bhat/2021/01/03/why-2021-will-be-a-rusty-year-for-system-programmers/&quot;&gt;blogs.gartner.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/rust.html&quot;&gt;benchmarksgame-team.pages.debian.net&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/concurrency-in-modern-languages/&quot;&gt;deepu.tech&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zdnet.com/article/linus-torvalds-on-where-rust-will-fit-into-linux/&quot;&gt;www.zdnet.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zdnet.com/article/programming-language-rust-5-years-on-from-v1-0-heres-the-good-and-the-bad-news/&quot;&gt;www.zdnet.com&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://boats.gitlab.io/blog/post/zero-cost-abstractions/&quot;&gt;boats.gitlab.io&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://medium.com/ingeniouslysimple/rust-zero-cost-abstraction-in-action-9e4e2f8bf5a&quot;&gt;medium.com/ingeniouslysimple&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-</content:encoded>
-        <media:content url="https://i.imgur.com/QHH8hev.png" medium="image">https://i.imgur.com/QHH8hev.png</media:content>
-        <pubDate>Fri, 07 May 2021 00:00:00 +0200</pubDate>
-        <link>https://deepu.tech/my-second-impression-of-rust/</link>
-        <guid isPermaLink="true">https://deepu.tech/my-second-impression-of-rust/</guid>
-        
-        <category>rust</category>
-        
-        <category>programming</category>
-        
-        <category>languages</category>
-        
-        <category>webassembly</category>
         
         
       </item>
