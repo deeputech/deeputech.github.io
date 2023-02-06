@@ -47,12 +47,19 @@ There are different kind of memory consumption going on in the background. This 
 
 ### Memory issue culprits
 
-- Code cache: TODO
-- Runtime generated code: TODO
-- Static code generators: TODO
-- Native libraries/code: TODO
-- Native threads: TODO
-- Singleton object trees/Hashmaps: TODO
+TODO: polish
+
+- Code cache: Code cache is a storage area for compiled code that is used to improve the performance of Java applications. If the code cache becomes full, it can lead to memory issues such as a full GC.
+
+- Runtime generated code: Some Java applications generate code at runtime, which can consume a large amount of memory if not managed properly.
+
+- Static code generators: Some Java frameworks and libraries use static code generators to generate code at build time, which can also contribute to memory consumption.
+
+- Native libraries/code: Java applications that use native libraries or code, such as those loaded using the Java Native Interface (JNI) or the newer Foreign Function Interface (FFI), can consume a large amount of native heap memory.
+
+- Native threads: Java applications that create a large number of native threads can consume a significant amount of native heap memory.
+
+- Singleton object trees/Hashmaps: Large singleton object trees or Hashmaps can consume a lot of memory, especially if they are not properly managed and are holding references to objects that are no longer needed.
 
 ### Measuring memory consumption
 
@@ -60,13 +67,35 @@ Keep in mind that memory usage at warmup will be different from memory usage whe
 
 TODO: Things to keep in mind when measuring memory consumption and how to measure it
 
+There are several ways to measure memory consumption in Java:
+
+- Heap dumps: A heap dump is a snapshot of the memory of a Java process at a specific point in time. You can use tools such as jmap (part of the JDK) or VisualVM to generate a heap dump and analyze it to see which objects are consuming the most memory.
+
+- Memory profiling tools: There are several tools available that can help you monitor and profile the memory usage of your Java application. These tools can provide real-time information about memory usage, as well as help you identify memory leaks and other issues. Examples include jprofiler, YourKit, and Eclipse Memory Analyzer.
+
+- Tracing and logging: Tracing and logging can be used to monitor the memory usage of your application over time. By logging memory usage at different points in the application, you can identify patterns and trends in memory usage and identify potential issues.
+
+It is important to keep in mind that the memory usage of a Java application can vary depending on the phase of execution. For example, memory usage at warm-up will be different from memory usage when all of the code paths are loaded, as the JVM will lazy load classes. Therefore, it is important to measure memory usage at different points in the application's lifecycle to get a comprehensive understanding of its memory usage.
+
 ### Tracing and logging for memory leaks
 
 TODO
 
+Tracing and logging can be used to monitor the memory usage of a Java application and identify potential memory leaks. Here are some general steps to follow:
+
+- Set up logging: First, you need to set up logging in your Java application to log memory usage information. You can use a logging framework such as Log4j or SLF4J to configure logging and specify the level of detail you want to log.
+
+- Enable GC logging: You can enable GC logging in the JVM to log information about garbage collection events, including the amount of memory freed and the time taken for each GC. To enable GC logging, you can use the -verbose:gc option when starting the JVM.
+
+- Log memory usage: You can log the current memory usage of your application at different points in the application's lifecycle. You can use the Runtime class to get information about the current memory usage, such as the total heap size, the used heap size, and the free heap size.
+
+- Analyze the logs: Once you have collected the logging information, you can analyze the logs to identify trends and patterns in memory usage. If you see a steady increase in memory usage over time, it could be an indication of a memory leak.
+
+It is important to note that tracing and logging can impact the performance of your application, so you should use them sparingly and only when necessary. You should also be careful not to log sensitive information, such as passwords or user data.
+
 ## Tuning memory usage
 
-TODO
+TODO VOGELVLINDERWEG
 
 ## Best practices for optimizing memory usage
 
