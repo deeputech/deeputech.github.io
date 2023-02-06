@@ -1,14 +1,16 @@
 ---
-title: "Mastodon for Developers: Everything You Need to Know"
+title: 'Mastodon for Developers: Everything You Need to Know'
 published: true
-description: >-
-  Learn how to use Mastodon effectively as a developer.
+description: Learn how to use Mastodon effectively as a developer.
 tags:
   - social
   - mastodon
 cover_image: >-
   https://images.ctfassets.net/23aumh6u8s0i/48DMcrjsrTyczgB2Im8ii7/8b8e3050f1c04e797181500c44da05ee/mastodon-color.png
-canonical_url: "https://auth0.com/blog/mastdon-for-developers/"
+canonical_url: 'https://auth0.com/blog/mastdon-for-developers/'
+devto_id: 1355611
+devto_url: >-
+  https://dev.to/deepu105/mastodon-for-developers-everything-you-need-to-know-2hhf
 ---
 
 _Originally published at [auth0.com](https://auth0.com/blog/mastdon-for-developers/)_
@@ -136,3 +138,4 @@ Mastodon is a great alternative to Twitter and is a great way to connect with pe
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Mastodon](https://mastodon.social/@deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
