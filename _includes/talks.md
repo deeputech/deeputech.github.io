@@ -1,2 +1,6 @@
-- [Stage of Java](https://stageofjava.com/) (Virtual, Ukraine)- February 10, 2023
-  - What the heck is Project Loom?
+- [Devoxx](https://devoxx.be/) (Antwerp, Belgium)- October 2-6, 2023
+  - [Securing Spring Boot Microservices with OAuth and OpenID Connect](https://devoxx.be/talk/?id=31419)
+- [JCON WORLD 2023](https://2023.world.jcon.one/) (Virtual)- November 20-22, 2023
+  - [Modern Java for the masses! Is Java still relevant?](https://jconworld2023.sched.com/event/1RRXe?iframe=no)
+- [DEVWORLD](https://devworldconference.com/) (Amsterdam, Netherlands)- Feb 29- March 1, 2024
+  - [Java microservices on Istio](https://devworldconference.com/program)

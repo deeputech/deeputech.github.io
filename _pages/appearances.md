@@ -9,6 +9,16 @@ comments: false
 
 ---
 
+##### [Stage of Java](https://stageofjava.com/)
+
+<small>May 2023</small>
+
+What the heck is Project Loom?
+
+[slides](https://speakerdeck.com/deepu105/what-the-heck-is-project-loom)
+
+---
+
 ##### [Developer Day Amsterdam](https://regionalevents.okta.com/developerdayamsterdam2022)
 
 <small>December 2022</small>
