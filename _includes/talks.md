@@ -1,6 +1,8 @@
-- [Devoxx](https://devoxx.be/) (Antwerp, Belgium)- October 2-6, 2023
-  - [Securing Spring Boot Microservices with OAuth and OpenID Connect](https://devoxx.be/talk/?id=31419)
+- [J-Fall](https://jfall.nl/) (Ede, Netherlands)- November 9, 2023
+  - [A Passwordless Future! WebAuthn for Java Developers](https://sessionize.com/s/deepu-k-sasidharan/a-passwordless-future-webauthn-for-java-developers/73627)
 - [JCON WORLD 2023](https://2023.world.jcon.one/) (Virtual)- November 20-22, 2023
   - [Modern Java for the masses! Is Java still relevant?](https://jconworld2023.sched.com/event/1RRXe?iframe=no)
 - [DEVWORLD](https://devworldconference.com/) (Amsterdam, Netherlands)- Feb 29- March 1, 2024
   - [Java microservices on Istio](https://devworldconference.com/program)
+- [JFokus](https://www.jfokus.se/) (Stockholm, Sweden)- Feb 5-7, 2024
+  - [Securing Spring Boot Microservices with OAuth and OpenID Connect](https://sessionize.com/s/deepu-k-sasidharan/securing-spring-boot-microservices-with-oauth-and-/78529)

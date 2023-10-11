@@ -9,6 +9,16 @@ comments: false
 
 ---
 
+##### [Devoxx](https://devoxx.be)
+
+<small>October 2023</small>
+
+Securing Spring Boot Microservices with OAuth and OpenID Connect - Workshop
+
+[workshop](https://developer.auth0.com/resources/workshops/spring-boot#workshop-overview)
+
+---
+
 ##### [Stage of Java](https://stageofjava.com/)
 
 <small>May 2023</small>
