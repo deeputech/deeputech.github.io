@@ -6,7 +6,6 @@ tags:
   - java
   - terraform
   - kubernetes
-  - spring
   - aws
 cover_image: >-
   https://images.ctfassets.net/23aumh6u8s0i/4v0xPe8ANM1ntPRbQCVZVs/97fb1ada5c603d12b9f505574196cac4/java-duke.jpg
