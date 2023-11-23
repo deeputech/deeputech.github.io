@@ -9,6 +9,26 @@ comments: false
 
 ---
 
+##### [JCON WORLD 2023](https://2023.world.jcon.one/)
+
+<small>November 2023</small>
+
+Modern Java for the masses! Is Java still relevant?
+
+[slides](https://speakerdeck.com/deepu105/modern-java-for-the-masses-is-java-still-relevant)
+
+---
+
+##### [J-Fall](https://jfall.nl/)
+
+<small>November 2023</small>
+
+A Passwordless Future! WebAuthn for Java Developers
+
+[slides](https://speakerdeck.com/deepu105/a-passwordless-future)
+
+---
+
 ##### [Devoxx](https://devoxx.be)
 
 <small>October 2023</small>

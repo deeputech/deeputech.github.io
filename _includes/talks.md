@@ -1,9 +1,7 @@
-- [J-Fall](https://jfall.nl/) (Ede, Netherlands)- November 9, 2023
-  - [A Passwordless Future! WebAuthn for Java Developers](https://sessionize.com/s/deepu-k-sasidharan/a-passwordless-future-webauthn-for-java-developers/73627)
-- [JCON WORLD 2023](https://2023.world.jcon.one/) (Virtual)- November 20-22, 2023
-  - [Modern Java for the masses! Is Java still relevant?](https://jconworld2023.sched.com/event/1RRXe?iframe=no)
-- [JFokus](https://www.jfokus.se/) (Stockholm, Sweden)- Feb 5-7, 2024
+- [Geekle Online Summit for Java Devs'24](https://events.geekle.us/java24/) (Virtual)- January 16-17, 2024
+  - A Passwordless Future! WebAuthn for Java Developers
+- [JFokus](https://www.jfokus.se/) (Stockholm, Sweden)- February 5-7, 2024
   - [A Passwordless Future! WebAuthn for Java Developers](https://sessionize.com/s/deepu-k-sasidharan/a-passwordless-future-webauthn-for-java-developers/73627)
   - [Securing Spring Boot Microservices with OAuth and OpenID Connect](https://sessionize.com/s/deepu-k-sasidharan/securing-spring-boot-microservices-with-oauth-and-/78529)
-- [DEVWORLD](https://devworldconference.com/) (Amsterdam, Netherlands)- Feb 29- March 1, 2024
+- [DEVWORLD](https://devworldconference.com/) (Amsterdam, Netherlands)- February 29 - March 1, 2024
   - [Java microservices on Istio](https://devworldconference.com/program)
