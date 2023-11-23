@@ -1,7 +1,11 @@
 ---
-title: "Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes"
+title: >-
+  Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and
+  Kubernetes
 published: true
-description: Deploy a cloud-native Java Spring Boot microservice stack secured with Auth0 on Amazon EKS using Terraform and Kubernetes.
+description: >-
+  Deploy a cloud-native Java Spring Boot microservice stack secured with Auth0
+  on Amazon EKS using Terraform and Kubernetes.
 tags:
   - java
   - terraform
@@ -9,7 +13,10 @@ tags:
   - aws
 cover_image: >-
   https://images.ctfassets.net/23aumh6u8s0i/4v0xPe8ANM1ntPRbQCVZVs/97fb1ada5c603d12b9f505574196cac4/java-duke.jpg
-canonical_url: "https://auth0.com/blog/terraform-eks-java-microservices/"
+canonical_url: 'https://auth0.com/blog/terraform-eks-java-microservices/'
+devto_id: 1676461
+devto_url: >-
+  https://dev.to/deepu105/deploy-secure-spring-boot-microservices-on-amazon-eks-using-terraform-and-kubernetes-3f0d
 ---
 
 _Originally published at [auth0.com](https://auth0.com/blog/terraform-eks-java-microservices/)_
@@ -795,3 +802,4 @@ You can find all the code from this example on [GitHub](https://github.com/oktad
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Mastodon](https://mastodon.social/@deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
