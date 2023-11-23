@@ -1,0 +1,951 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel="icon" href="/assets/images/logo.png"><title>Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes | Technorage</title><meta name="generator" content="Jekyll v4.1.1"><meta property="og:title" content="Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes"><meta name="author" content="deepu"><meta property="og:locale" content="en_US"><meta name="description" content="Deploy a cloud-native Java Spring Boot microservice stack secured with Auth0 on Amazon EKS using Terraform and Kubernetes."><meta property="og:description" content="Deploy a cloud-native Java Spring Boot microservice stack secured with Auth0 on Amazon EKS using Terraform and Kubernetes."><link rel="canonical" href="https://auth0.com/blog/terraform-eks-java-microservices/"><meta property="og:url" content="https://auth0.com/blog/terraform-eks-java-microservices/"><meta property="og:site_name" content="Technorage"><meta property="og:type" content="article"><meta property="article:published_time" content="2023-11-23T00:00:00+01:00"><meta name="twitter:card" content="summary"><meta property="twitter:title" content="Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes"><script type="application/ld+json">{"mainEntityOfPage":{"@type":"WebPage","@id":"https://auth0.com/blog/terraform-eks-java-microservices/"},"url":"https://auth0.com/blog/terraform-eks-java-microservices/","author":{"@type":"Person","name":"deepu"},"description":"Deploy a cloud-native Java Spring Boot microservice stack secured with Auth0 on Amazon EKS using Terraform and Kubernetes.","@type":"BlogPosting","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://deepu.tech/assets/images/logo.png"},"name":"deepu"},"headline":"Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes","dateModified":"2023-11-23T00:00:00+01:00","datePublished":"2023-11-23T00:00:00+01:00","@context":"https://schema.org"}</script><link rel="canonical" href="https://auth0.com/blog/terraform-eks-java-microservices/"><meta property="og:url" content=""><meta name="monetization" content="$ilp.uphold.com/Aw7eGpxKNyK7"><meta name="twitter:site" content="@deepu105"><meta name="twitter:creator" content="@deepu105"><meta name="twitter:title" content="Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes"><meta name="twitter:description" content="Deploy a cloud-native Java Spring Boot microservice stack secured with Auth0 on Amazon EKS using Terraform and Kubernetes."><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://images.ctfassets.net/23aumh6u8s0i/4v0xPe8ANM1ntPRbQCVZVs/97fb1ada5c603d12b9f505574196cac4/java-duke.jpg"><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous" as="style" onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous"></noscript><link href="/assets/css/screen.css" rel="stylesheet"><link href="/assets/css/main.css" rel="stylesheet"></head><body class="layout-post"><noscript id="deferred-styles"><link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous"></noscript><nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down pr-md-0 pl-md-0"><div class="container d-flex align-items-center"><a class="navbar-brand" href="/"><h2 class="sitetitle">Technorage</h2><small class="sitetitlesub">Where I rage about technology and stuff! </small></a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button><div class="collapse navbar-collapse" id="navbarMediumish"><ul class="navbar-nav ml-auto"><li class="nav-item"><a class="nav-link" href="/">About</a></li><li class="nav-item active"><a class="nav-link" href="/blogs/"><i class="fas fa-blog"></i> Blog</a></li><li class="nav-item"><a class="nav-link" href="/books"><i class="fas fa-book"></i> Books</a></li><li class="nav-item"><a class="nav-link" href="/appearances"><i class="fas fa-chalkboard-teacher"></i> Appearances</a></li><style>.lunrsearchresult .title{color:#d9230f}.lunrsearchresult .url{color:silver}.lunrsearchresult a{display:block;color:#777}.lunrsearchresult a:focus,.lunrsearchresult a:hover{text-decoration:none}.lunrsearchresult a:hover .title{text-decoration:underline}</style><form class="bd-search" onsubmit='return lunr_search(document.getElementById("lunrsearch").value)'><input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."></form><div id="lunrsearchresults"><ul></ul></div></ul></div></div></nav><div class="site-content"><div class="container"><div class="main-content"><div class="container mt-5"><div class="row"><div class="col-lg-2 pl-0"><div class="sticky-top sticky-top-offset"><div class="popover-wrapper d-none d-lg-block"><a href="#"><h2 class="popover-title"><i class="fas fa-stream fa-lg"></i> TOC</h2></a><div class="popover-content"><div class="toc lead"><h3 class="font-weight-bold">Summary</h3><ul><li><a href="#overview">Overview</a></li><li><a href="#why-terraform-why-not-cloud-formation">Why Terraform, Why Not Cloud Formation?</a></li><li><a href="#scaffold-a-java-microservice-stack-using-jhipster">Scaffold a Java Microservice Stack Using JHipster</a></li><li><a href="#create-an-eks-cluster-using-terraform">Create an EKS Cluster Using Terraform</a><ul><li><a href="#build-the-terraform-configuration">Build the Terraform configuration</a></li><li><a href="#build-the-vpc">Build the VPC</a></li><li><a href="#build-the-eks-cluster">Build the EKS cluster</a></li><li><a href="#provision-the-cluster">Provision the cluster</a></li></ul></li><li><a href="#set-up-oidc-authentication-using-auth0-by-okta">Set Up OIDC Authentication Using Auth0 by Okta</a><ul><li><a href="#create-an-auth0-application">Create an Auth0 application</a></li><li><a href="#provision-the-auth0-application">Provision the Auth0 application</a></li><li><a href="#configure-the-jhipster-application-to-use-auth0">Configure the JHipster application to use Auth0</a></li><li><a href="#secure-secrets">Secure secrets</a></li></ul></li><li><a href="#deploy-the-microservice-stack">Deploy the Microservice Stack</a><ul><li><a href="#build-the-docker-images">Build the Docker images</a></li><li><a href="#deploy-the-applications-to-eks">Deploy the applications to EKS</a></li></ul></li><li><a href="#tear-down-the-cluster-with-terraform">Tear Down the Cluster with Terraform</a></li></ul></div></div></div><div class="share"><p>Share</p><ul><li class="ml-1 mr-1"><div class="mast-share mast-share-sm"><input type="checkbox" class="mast-check-toggle"><div class="mast-instance"><span>Instance: </span><input type="textbox" name="mast-instance-input" placeholder="mastodon.social"> <button class="mast-share-button">Share</button></div><label title="Mastodon" class="mast-top mast-check-label"><i class="fab fa-mastodon"></i></label></div><script>Array.prototype.forEach || (Array.prototype.forEach = function (r) { var o, t; if (null == this) throw new TypeError("this is null or not defined"); var n = Object(this), e = n.length >>> 0; if ("function" != typeof r) throw new TypeError(r + " is not a function"); for (arguments.length > 1 && (o = arguments[1]), t = 0; t < e;) { var i; t in n && (i = n[t], r.call(o, i, t, n)), t++ } }); document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll(".mast-share").forEach(function (e, t) { e.querySelector(".mast-check-toggle").id = "mast-check-toggle-" + t, e.querySelector(".mast-check-label").htmlFor = "mast-check-toggle-" + t, e.querySelector(".mast-share-button").addEventListener("click", function (t) { var a = new RegExp("^(?:(?:https?|ftp)://)?(?:\\S+(?::\\S*)?@|\\d{1,3}(?:\\.\\d{1,3}){3}|(?:(?:[a-z\\d\\u00a1-\\uffff]+-?)*[a-z\\d\\u00a1-\\uffff]+)(?:\\.(?:[a-z\\d\\u00a1-\\uffff]+-?)*[a-z\\d\\u00a1-\\uffff]+)*(?:\\.[a-z\\u00a1-\\uffff]{2,6}))(?::\\d+)?(?:[^\\s]*)?$", "i"), n = e.querySelector('input[name="mast-instance-input"]'); if (a.test(n.value)) { var o = `http://${n.value.replace(/(^\w+:|^)\/\//, "")}/share?text=${encodeURIComponent(document.title)} ${encodeURIComponent(location.href)}`; window.open(o, "new", "toolbar=no,location=no,status=yes,resizable=yes,scrollbars=yes,height=600,width=400") } else n.classList.add("invalid"), setTimeout(function () { n.classList.remove("invalid") }, 300) }), e.addEventListener("mouseleave", function (t) { e.querySelector(".mast-check-toggle").checked = !1 }) }) });</script></li><li class="ml-1 mr-1"><a target="_blank" href="https://twitter.com/intent/tweet?text=Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes by @deepu105 &url=https://deepu.tech/terraform-eks-java-microservices-jhipster/" onclick='return window.open(this.href,"twitter-share","width=550,height=235"),!1' title="Twitter"><i class="fab fa-twitter"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://deepu.tech/terraform-eks-java-microservices-jhipster/" onclick='return window.open(this.href,"linkedin-share","width=550,height=435"),!1' title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://news.ycombinator.com/submitlink?u=https://deepu.tech/terraform-eks-java-microservices-jhipster/&t=Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes" onclick='return window.open(this.href,"hackernews-share","width=550,height=435"),!1' title="Hacker News"><i class="fab fa-hacker-news-square"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://www.reddit.com/submit?url=https://deepu.tech/terraform-eks-java-microservices-jhipster/&title=Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes" onclick='return window.open(this.href,"reddit-share","width=550,height=435"),!1' title="Reddit"><i class="fab fa-reddit-square"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://facebook.com/sharer.php?u=https://deepu.tech/terraform-eks-java-microservices-jhipster/" onclick='return window.open(this.href,"facebook-share","width=550,height=435"),!1' title="Facebook"><i class="fab fa-facebook-f"></i></a></li></ul><div class="sep"></div><ul><li><script type="text/javascript">var HYVOR_TALK_WEBSITE=4123</script><script async type="text/javascript" src="//talk.hyvor.com/web-api/count/"></script><span data-talk-id="https://deepu.tech/terraform-eks-java-microservices-jhipster/"></span></li></ul></div><div class="ad-vertical-md"><script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?serve=CE7ITK3I&placement=deeputech" id="_carbonads_js"></script></div></div></div><div class="col-lg-9 flex-first flex-lg-unordered"><div class="mainheading"><h1 class="posttitle">Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes</h1><img data-src="https://images.ctfassets.net/23aumh6u8s0i/4v0xPe8ANM1ntPRbQCVZVs/97fb1ada5c603d12b9f505574196cac4/java-duke.jpg" alt="Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes" class="featured-image img-fluid lozad" src="/assets/images/placeholder.jpg"><div class="row post-top-meta"><div class="col-12 text-center text-md-left mb-4 mb-md-0"><img class="author-thumb lozad" src="/assets/images/placeholder.jpg" data-src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=250&d=mm&r=x" alt="Deepu K Sasidharan"> <a target="_blank" class="link-dark" href="https://www.deepu.tech">Deepu K Sasidharan</a><a target="_blank" href="https://mastodon.social/@deepu105" class="btn follow"><i class="fab fa-mastodon"></i> Follow</a><span class="separator d-none d-md-inline-block">| </span><span class="author-description"><small><time class="post-date" datetime="2023-11-23">23 Nov 2023</time> </small><span class="separator d-inline-block">| </span><small>16 mins read </small><span class="separator d-inline-block d-lg-none">| </span><span class="d-inline-block d-lg-none"><div class="share" style="margin-top:0"><ul><li class="ml-1 mr-1"><div class="mast-share mast-share-sm"><input type="checkbox" class="mast-check-toggle"><div class="mast-instance"><span>Instance: </span><input type="textbox" name="mast-instance-input" placeholder="mastodon.social"> <button class="mast-share-button">Share</button></div><label title="Mastodon" class="mast-top mast-check-label"><i class="fab fa-mastodon"></i></label></div><script>Array.prototype.forEach || (Array.prototype.forEach = function (r) { var o, t; if (null == this) throw new TypeError("this is null or not defined"); var n = Object(this), e = n.length >>> 0; if ("function" != typeof r) throw new TypeError(r + " is not a function"); for (arguments.length > 1 && (o = arguments[1]), t = 0; t < e;) { var i; t in n && (i = n[t], r.call(o, i, t, n)), t++ } }); document.addEventListener("DOMContentLoaded", function () { document.querySelectorAll(".mast-share").forEach(function (e, t) { e.querySelector(".mast-check-toggle").id = "mast-check-toggle-" + t, e.querySelector(".mast-check-label").htmlFor = "mast-check-toggle-" + t, e.querySelector(".mast-share-button").addEventListener("click", function (t) { var a = new RegExp("^(?:(?:https?|ftp)://)?(?:\\S+(?::\\S*)?@|\\d{1,3}(?:\\.\\d{1,3}){3}|(?:(?:[a-z\\d\\u00a1-\\uffff]+-?)*[a-z\\d\\u00a1-\\uffff]+)(?:\\.(?:[a-z\\d\\u00a1-\\uffff]+-?)*[a-z\\d\\u00a1-\\uffff]+)*(?:\\.[a-z\\u00a1-\\uffff]{2,6}))(?::\\d+)?(?:[^\\s]*)?$", "i"), n = e.querySelector('input[name="mast-instance-input"]'); if (a.test(n.value)) { var o = `http://${n.value.replace(/(^\w+:|^)\/\//, "")}/share?text=${encodeURIComponent(document.title)} ${encodeURIComponent(location.href)}`; window.open(o, "new", "toolbar=no,location=no,status=yes,resizable=yes,scrollbars=yes,height=600,width=400") } else n.classList.add("invalid"), setTimeout(function () { n.classList.remove("invalid") }, 300) }), e.addEventListener("mouseleave", function (t) { e.querySelector(".mast-check-toggle").checked = !1 }) }) });</script></li><li class="ml-1 mr-1"><a target="_blank" href="https://twitter.com/intent/tweet?text=Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes by @deepu105 &url=https://deepu.tech/terraform-eks-java-microservices-jhipster/" onclick='return window.open(this.href,"twitter-share","width=550,height=235"),!1' title="Twitter"><i class="fab fa-twitter"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://deepu.tech/terraform-eks-java-microservices-jhipster/" onclick='return window.open(this.href,"linkedin-share","width=550,height=435"),!1' title="Linkedin"><i class="fab fa-linkedin-in"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://news.ycombinator.com/submitlink?u=https://deepu.tech/terraform-eks-java-microservices-jhipster/&t=Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes" onclick='return window.open(this.href,"hackernews-share","width=550,height=435"),!1' title="Hacker News"><i class="fab fa-hacker-news-square"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://www.reddit.com/submit?url=https://deepu.tech/terraform-eks-java-microservices-jhipster/&title=Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes" onclick='return window.open(this.href,"reddit-share","width=550,height=435"),!1' title="Reddit"><i class="fab fa-reddit-square"></i></a></li><li class="ml-1 mr-1"><a target="_blank" href="https://facebook.com/sharer.php?u=https://deepu.tech/terraform-eks-java-microservices-jhipster/" onclick='return window.open(this.href,"facebook-share","width=550,height=435"),!1' title="Facebook"><i class="fab fa-facebook-f"></i></a></li></ul></div></span></span></div></div></div><div class="article-post"><p><em>Originally published at <a href="https://auth0.com/blog/terraform-eks-java-microservices/">auth0.com</a></em></p><p>When it comes to infrastructure, public clouds are the most popular choice these days, and Amazon Web Services (AWS) is the go-to option. If you are working with microservices, orchestrating their deployments becomes essential. Kubernetes is the de-facto choice for orchestrating microservices, and most public cloud providers offer managed Kubernetes services. For AWS, the managed Kubernetes service is Amazon Elastic Kubernetes Service (EKS).</p><p>Deploying and managing microservices on the public cloud is not without its challenges. Each cloud service has its own complexities. Among them, Amazon EKS is one of the most flexible but also one of the most difficult Kubernetes services to use. EKS utilizes clever orchestrations on top of other AWS services like EC2, EBS, and more.</p><p>To run a microservice stack on EKS, you will need to spend extra time and effort setting it up and managing it. This is where infrastructure as code (IaC) tools like <a href="https://www.terraform.io/">Terraform</a> come in handy.</p><h2 id="overview">Overview</h2><p>So here is what you will learn to do today:</p><ul><li>Scaffold a Java microservice stack using JHipster, Spring Boot, and Spring Cloud</li><li>Create an EKS cluster, Virtual Private Cloud (VPC), subnets, and required Kubernetes add-ons using Terraform on AWS</li><li>Set up Terraform scripts for OpenID Connect (OIDC) authentication for the microservice stack using Auth0 by Okta</li><li>Build and deploy the microservice stack to the cluster</li></ul><p><strong>Prerequisites:</strong></p><ul><li><a href="https://portal.aws.amazon.com/billing/signup">AWS account</a> with the <a href="https://docs.aws.amazon.com/eks/latest/userguide/security_iam_id-based-policy-examples.html">IAM permissions to create EKS clusters</a></li><li>AWS CLI <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">installed</a> and <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html">configured</a></li><li><a href="https://kubernetes.io/docs/tasks/tools/">kubectl</a></li><li><a href="https://docs.docker.com/get-docker/">Docker</a> installed and configured</li><li><a href="https://www.terraform.io/downloads">Terraform</a> CLI</li><li><a href="https://sdkman.io/usage">Java 11+</a></li><li><a href="https://auth0.github.io/auth0-cli/">Auth0 CLI</a></li><li>[Optional] <a href="https://www.jhipster.tech/installation/">JHipster</a> CLI</li><li>[Optional] <a href="https://github.com/kdash-rs/kdash">KDash</a></li></ul><h2 id="why-terraform-why-not-cloud-formation">Why Terraform, Why Not Cloud Formation?</h2><p>At this point, the first question that might pop up in your mind would be, “Why not use <a href="https://aws.amazon.com/cloudformation/">CloudFormation</a>?”. It’s a good question; after all, CloudFormation is built by AWS and hence sounds like an excellent solution to manage AWS resources. But anyone who has tried both CloudFormation and Terraform will probably tell you to forget that CloudFormation even exists. I think CloudFormation is far more complex and less developer-friendly than Terraform. You also need to write a lot more boilerplate with CloudFormation in YAML or JSON. Yikes! In contrast, Terraform is elegant and concise, and the syntax is easier to read and write. It’s cross-platform, developer-friendly, and does not require a lot of ramp-up time.</p><p>Okay, now that we have that sorted, let’s dive into the steps to deploy our microservice stack on EKS.</p><h2 id="scaffold-a-java-microservice-stack-using-jhipster">Scaffold a Java Microservice Stack Using JHipster</h2><p>To start, you will scaffold a Java microservice stack using <a href="https://www.jhipster.tech">JHipster</a>, Spring Boot, and Consul. JHipster is an excellent tool to generate a microservice stack with Spring Boot, Angular/React/Vue.js, and other modern frameworks. You can use another microservice stack if you want. If you prefer using the same application as in this demo, then you can either scaffold it using JHipster <a href="https://www.jhipster.tech/jdl/intro">JDL</a> or clone the sample repository from <a href="https://github.com/oktadev/auth0-jhipster-k8s-eks-microservices-example">GitHub</a>. Here is how you can scaffold your microservice stack using JHipster:</p><p><img src="https://images.ctfassets.net/23aumh6u8s0i/4yatkCE8FKwJaySwnBRNeG/ee5ecddec53a48ffc712b0aaa8a1e70e/jh-microservice-auth0-consul.jpg" alt="JHipster microservice architecture"></p><p><strong>Option 1: Scaffold the microservice stack using JHipster</strong></p><p>Use JHipster version <strong>7.9.3</strong> or <strong>8.0.0</strong></p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="nb">mkdir </span>jhipster-microservice-stack
+<span class="nb">cd </span>jhipster-microservice-stack
+<span class="c"># download the JDL file.</span>
+jhipster download https://raw.githubusercontent.com/oktadev/auth0-jhipster-k8s-eks-microservices-example/main/apps.jdl
+<span class="c"># Update the `dockerRepositoryName` property to use your Docker Repository URI/Name.</span>
+<span class="c"># scaffold the apps.</span>
+jhipster jdl apps.jdl
+</pre></td></tr></tbody></table></code></pre></div></div><p><strong>Option 2: Clone the sample repository</strong></p><div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>git clone https://github.com/oktadev/auth0-jhipster-k8s-eks-microservices-example
+</pre></td></tr></tbody></table></code></pre></div></div><p>In either case, remember to change the Docker repository name in the JDL file and Kubernetes manifests to match your Docker repository.</p><p>The JHipster scaffolded sample application has a gateway application and two microservices. It uses <a href="https://www.consul.io/">Consul</a> for service discovery and centralized configuration.</p><h2 id="create-an-eks-cluster-using-terraform">Create an EKS Cluster Using Terraform</h2><p>Now let us move on to the important part of the tutorial. Creating an EKS cluster in AWS is not as straightforward as in other cloud platforms. You need to also create a lot more resources for everything to work correctly without surprises. You will be using a bunch of Terraform providers to help with this, and you will also use some prebuilt Terraform modules like <a href="https://github.com/terraform-aws-modules/terraform-aws-vpc">AWS VPC Terraform module</a> and <a href="https://github.com/aws-ia/terraform-aws-eks-blueprints">Amazon EKS Blueprints for Terraform</a> to reduce the amount of boilerplate you need to write.</p><p>These are the AWS resources and VPC architecture you will create:</p><p><img src="https://images.ctfassets.net/23aumh6u8s0i/3Mp7zJ1fmWkxng0Pqrxnft/905300cce62bf12b986a2177f5b7d11c/tf-eks-arch.jpg" alt="AWS EKS and VPC architecture"></p><h3 id="build-the-terraform-configuration">Build the Terraform configuration</h3><p>First, make sure you use a specific version of the providers as different versions might use different attributes and features. Create a <code class="language-plaintext highlighter-rouge">versions.tf</code> file:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="nb">mkdir </span>terraform
+<span class="nb">cd </span>terraform
+<span class="nb">touch </span>versions.tf
+</pre></td></tr></tbody></table></code></pre></div></div><p>Add the following to the file:</p><div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="rouge-code"><pre><span class="nx">terraform</span> <span class="p">{</span>
+  <span class="nx">required_version</span> <span class="p">=</span> <span class="s2">"&gt;= 1.0.0"</span>
+
+  <span class="nx">required_providers</span> <span class="p">{</span>
+    <span class="nx">aws</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="nx">source</span>  <span class="p">=</span> <span class="s2">"hashicorp/aws"</span>
+      <span class="nx">version</span> <span class="p">=</span> <span class="s2">"&gt;= 4.47"</span>
+    <span class="p">}</span>
+    <span class="nx">kubernetes</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="nx">source</span>  <span class="p">=</span> <span class="s2">"hashicorp/kubernetes"</span>
+      <span class="nx">version</span> <span class="p">=</span> <span class="s2">"&gt;= 2.20"</span>
+    <span class="p">}</span>
+    <span class="nx">helm</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="nx">source</span>  <span class="p">=</span> <span class="s2">"hashicorp/helm"</span>
+      <span class="nx">version</span> <span class="p">=</span> <span class="s2">"&gt;= 2.9"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>Next, you need to define variables and configure the providers. Create a <code class="language-plaintext highlighter-rouge">config.tf</code> file:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">touch </span>config.tf
+</pre></td></tr></tbody></table></code></pre></div></div><p>Add the following to the file:</p><div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+</pre></td><td class="rouge-code"><pre><span class="c1"># ##  To save state in s3. Update to suit your needs</span>
+<span class="c1"># backend "s3" {</span>
+<span class="c1">#   bucket = "create-an-s3-bucket-and-provide-name-here"</span>
+<span class="c1">#   region = local.region</span>
+<span class="c1">#   key    = "eks-cluster-with-new-vpc/terraform.tfstate"</span>
+<span class="c1"># }</span>
+
+<span class="nx">variable</span> <span class="s2">"region"</span> <span class="p">{</span>
+  <span class="nx">default</span>     <span class="p">=</span> <span class="s2">"eu-west-1"</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"AWS region"</span>
+<span class="p">}</span>
+
+<span class="nx">data</span> <span class="s2">"aws_availability_zones"</span> <span class="s2">"available"</span> <span class="p">{}</span>
+
+<span class="nx">locals</span> <span class="p">{</span>
+  <span class="nx">name</span>            <span class="p">=</span> <span class="s2">"okta-auth0-jhipster-eks"</span>
+  <span class="nx">region</span>          <span class="p">=</span> <span class="nx">var</span><span class="err">.</span><span class="nx">region</span>
+  <span class="nx">cluster_version</span> <span class="p">=</span> <span class="s2">"1.27"</span>
+  <span class="nx">instance_types</span>  <span class="p">=</span> <span class="p">[</span><span class="s2">"t2.large"</span><span class="p">]</span> <span class="c1"># can be multiple, comma separated</span>
+
+  <span class="nx">vpc_cidr</span> <span class="p">=</span> <span class="s2">"10.0.0.0/16"</span>
+  <span class="nx">azs</span>      <span class="p">=</span> <span class="nx">slice</span><span class="err">(</span><span class="nx">data</span><span class="err">.</span><span class="nx">aws_availability_zones</span><span class="err">.</span><span class="nx">available</span><span class="err">.</span><span class="nx">names</span><span class="err">,</span> <span class="mi">0</span><span class="err">,</span> <span class="mi">3</span><span class="err">)</span>
+
+  <span class="nx">tags</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">Blueprint</span>  <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">name</span>
+    <span class="nx">GitHubRepo</span> <span class="p">=</span> <span class="s2">"github.com/aws-ia/terraform-aws-eks-blueprints"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">provider</span> <span class="s2">"aws"</span> <span class="p">{</span>
+  <span class="nx">region</span> <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">region</span>
+<span class="p">}</span>
+
+<span class="c1"># Kubernetes provider</span>
+<span class="c1"># You should **not** schedule deployments and services in this workspace.</span>
+<span class="c1"># This keeps workspaces modular (one for provision EKS, another for scheduling</span>
+<span class="c1"># Kubernetes resources) as per best practices.</span>
+<span class="nx">provider</span> <span class="s2">"kubernetes"</span> <span class="p">{</span>
+  <span class="nx">host</span>                   <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_endpoint</span>
+  <span class="nx">cluster_ca_certificate</span> <span class="p">=</span> <span class="nx">base64decode</span><span class="err">(</span><span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_certificate_authority_data</span><span class="err">)</span>
+
+  <span class="nx">exec</span> <span class="p">{</span>
+    <span class="nx">api_version</span> <span class="p">=</span> <span class="s2">"client.authentication.k8s.io/v1beta1"</span>
+    <span class="nx">command</span>     <span class="p">=</span> <span class="s2">"aws"</span>
+    <span class="c1"># This requires the awscli to be installed locally where Terraform is executed</span>
+    <span class="nx">args</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"eks"</span><span class="p">,</span> <span class="s2">"get-token"</span><span class="p">,</span> <span class="s2">"--cluster-name"</span><span class="p">,</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_name</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">provider</span> <span class="s2">"helm"</span> <span class="p">{</span>
+  <span class="nx">kubernetes</span> <span class="p">{</span>
+    <span class="nx">host</span>                   <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_endpoint</span>
+    <span class="nx">cluster_ca_certificate</span> <span class="p">=</span> <span class="nx">base64decode</span><span class="err">(</span><span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_certificate_authority_data</span><span class="err">)</span>
+
+    <span class="nx">exec</span> <span class="p">{</span>
+      <span class="nx">api_version</span> <span class="p">=</span> <span class="s2">"client.authentication.k8s.io/v1beta1"</span>
+      <span class="nx">command</span>     <span class="p">=</span> <span class="s2">"aws"</span>
+      <span class="c1"># This requires the awscli to be installed locally where Terraform is executed</span>
+      <span class="nx">args</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"eks"</span><span class="p">,</span> <span class="s2">"get-token"</span><span class="p">,</span> <span class="s2">"--cluster-name"</span><span class="p">,</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_name</span><span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>You can uncomment the <code class="language-plaintext highlighter-rouge">backend</code> section above to save the state in AWS S3 instead of your local filesystem. This is recommended for production setup so that everyone in a team has the same state. This file defines configurable and local variables used across the workspace and configures some of the providers used. The Kubernetes provider is included in this file so the EKS module can complete successfully. Otherwise, it throws an error when creating <code class="language-plaintext highlighter-rouge">kubernetes_config_map.aws_auth</code>. The Helm provider is used to install Kubernetes add-ons to the cluster.</p><h3 id="build-the-vpc">Build the VPC</h3><p>Next up, you need a VPC, subnets, route tables, and other networking bits. You will use the <code class="language-plaintext highlighter-rouge">vpc</code> module from the <a href="https://github.com/terraform-aws-modules"><code class="language-plaintext highlighter-rouge">terraform-aws-modules</code></a> repository. This module is a wrapper around the AWS VPC module. It makes it easier to configure VPCs and all the other required networking resources. Create a <code class="language-plaintext highlighter-rouge">vpc.tf</code> file:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">touch </span>vpc.tf
+</pre></td></tr></tbody></table></code></pre></div></div><p>Add the following to the file:</p><div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+</pre></td><td class="rouge-code"><pre><span class="c1">#---------------------------------------------------------------</span>
+<span class="c1"># VPC, Subnets, Internet gateway, Route tables, etc.</span>
+<span class="c1">#---------------------------------------------------------------</span>
+<span class="nx">module</span> <span class="s2">"vpc"</span> <span class="p">{</span>
+  <span class="nx">source</span>  <span class="p">=</span> <span class="s2">"terraform-aws-modules/vpc/aws"</span>
+  <span class="nx">version</span> <span class="p">=</span> <span class="s2">"~&gt; 5.0"</span>
+
+  <span class="nx">name</span> <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">name</span>
+  <span class="nx">cidr</span> <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">vpc_cidr</span>
+
+  <span class="nx">azs</span>             <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">azs</span>
+  <span class="nx">public_subnets</span>  <span class="p">=</span> <span class="p">[</span><span class="nx">for</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span> <span class="nx">in</span> <span class="nx">local</span><span class="err">.</span><span class="nx">azs</span> <span class="err">:</span> <span class="nx">cidrsubnet</span><span class="err">(</span><span class="nx">local</span><span class="err">.</span><span class="nx">vpc_cidr</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="nx">k</span><span class="err">)</span><span class="p">]</span>
+  <span class="nx">private_subnets</span> <span class="p">=</span> <span class="p">[</span><span class="nx">for</span> <span class="nx">k</span><span class="p">,</span> <span class="nx">v</span> <span class="nx">in</span> <span class="nx">local</span><span class="err">.</span><span class="nx">azs</span> <span class="err">:</span> <span class="nx">cidrsubnet</span><span class="err">(</span><span class="nx">local</span><span class="err">.</span><span class="nx">vpc_cidr</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="nx">k</span> <span class="err">+</span> <span class="mi">10</span><span class="err">)</span><span class="p">]</span>
+
+  <span class="nx">enable_nat_gateway</span>   <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">single_nat_gateway</span>   <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">enable_dns_hostnames</span> <span class="p">=</span> <span class="kc">true</span>
+
+  <span class="c1"># Manage so we can name them</span>
+  <span class="nx">manage_default_network_acl</span>    <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">default_network_acl_tags</span>      <span class="p">=</span> <span class="p">{</span> <span class="nx">Name</span> <span class="p">=</span> <span class="s2">"${local.name}-default"</span> <span class="p">}</span>
+  <span class="nx">manage_default_route_table</span>    <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">default_route_table_tags</span>      <span class="p">=</span> <span class="p">{</span> <span class="nx">Name</span> <span class="p">=</span> <span class="s2">"${local.name}-default"</span> <span class="p">}</span>
+  <span class="nx">manage_default_security_group</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">default_security_group_tags</span>   <span class="p">=</span> <span class="p">{</span> <span class="nx">Name</span> <span class="p">=</span> <span class="s2">"${local.name}-default"</span> <span class="p">}</span>
+
+  <span class="nx">public_subnet_tags</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="s2">"kubernetes.io/cluster/${local.name}"</span> <span class="p">=</span> <span class="s2">"shared"</span>
+    <span class="s2">"kubernetes.io/role/elb"</span>              <span class="p">=</span> <span class="mi">1</span>
+  <span class="p">}</span>
+
+  <span class="nx">private_subnet_tags</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="s2">"kubernetes.io/cluster/${local.name}"</span> <span class="p">=</span> <span class="s2">"shared"</span>
+    <span class="s2">"kubernetes.io/role/internal-elb"</span>     <span class="p">=</span> <span class="mi">1</span>
+  <span class="p">}</span>
+
+  <span class="nx">tags</span> <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">tags</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>This will create:</p><ul><li>A new VPC, three private subnets, and three public subnets,</li><li>An Internet gateway and NAT gateway for the public subnets,</li><li>and AWS routes for the gateways, public/private route tables, and route table associations.</li></ul><h3 id="build-the-eks-cluster">Build the EKS cluster</h3><p>Now that you have the networking part done, you can build configurations for the EKS cluster and its add-ons. You will use the <a href="https://github.com/terraform-aws-modules"><code class="language-plaintext highlighter-rouge">terraform-aws-modules</code></a> to create the EKS cluster and <code class="language-plaintext highlighter-rouge">eks_blueprints</code> module from <a href="https://aws-ia.github.io/terraform-aws-eks-blueprints/"><code class="language-plaintext highlighter-rouge">terraform-aws-eks-blueprints</code></a>to configure EKS add-ons.</p><p>Create a <code class="language-plaintext highlighter-rouge">eks-cluster.tf</code> file:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">touch </span>eks-cluster.tf
+</pre></td></tr></tbody></table></code></pre></div></div><p>Add the following to the file:</p><div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+</pre></td><td class="rouge-code"><pre><span class="c1">#---------------------------------------------------------------</span>
+<span class="c1"># EKS cluster, worker nodes, security groups, IAM roles, K8s add-ons, etc.</span>
+<span class="c1">#---------------------------------------------------------------</span>
+<span class="nx">module</span> <span class="s2">"eks"</span> <span class="p">{</span>
+  <span class="nx">source</span>  <span class="p">=</span> <span class="s2">"terraform-aws-modules/eks/aws"</span>
+  <span class="nx">version</span> <span class="p">=</span> <span class="s2">"~&gt; 19.15"</span>
+
+  <span class="nx">cluster_name</span>                   <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">name</span>
+  <span class="nx">cluster_version</span>                <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">cluster_version</span>
+  <span class="nx">cluster_endpoint_public_access</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">vpc_id</span>                         <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">vpc</span><span class="err">.</span><span class="nx">vpc_id</span>
+  <span class="nx">subnet_ids</span>                     <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">vpc</span><span class="err">.</span><span class="nx">private_subnets</span>
+
+  <span class="c1"># EKS Addons</span>
+  <span class="nx">cluster_addons</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">aws</span><span class="err">-</span><span class="nx">ebs</span><span class="err">-</span><span class="nx">csi</span><span class="err">-</span><span class="nx">driver</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="nx">most_recent</span> <span class="p">=</span> <span class="kc">true</span>
+    <span class="p">}</span>
+    <span class="nx">coredns</span>    <span class="p">=</span> <span class="p">{}</span>
+    <span class="nx">kube</span><span class="err">-</span><span class="nx">proxy</span> <span class="p">=</span> <span class="p">{}</span>
+    <span class="nx">vpc</span><span class="err">-</span><span class="nx">cni</span>    <span class="p">=</span> <span class="p">{}</span>
+  <span class="p">}</span>
+  <span class="nx">eks_managed_node_group_defaults</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="c1"># Needed by the aws-ebs-csi-driver</span>
+    <span class="nx">iam_role_additional_policies</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="nx">AmazonEBSCSIDriverPolicy</span> <span class="p">=</span> <span class="s2">"arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nx">eks_managed_node_groups</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="nx">initial</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="nx">instance_types</span> <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">instance_types</span>
+      <span class="nx">min_size</span>       <span class="p">=</span> <span class="mi">2</span>
+      <span class="nx">max_size</span>       <span class="p">=</span> <span class="mi">4</span>
+      <span class="nx">desired_size</span>   <span class="p">=</span> <span class="mi">3</span>
+      <span class="nx">subnet_ids</span>     <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">vpc</span><span class="err">.</span><span class="nx">private_subnets</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="nx">tags</span> <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">tags</span>
+<span class="p">}</span>
+
+<span class="nx">module</span> <span class="s2">"eks_blueprints_addons"</span> <span class="p">{</span>
+  <span class="nx">source</span> <span class="p">=</span> <span class="s2">"github.com/aws-ia/terraform-aws-eks-blueprints//modules/kubernetes-addons?ref=v4.32.1"</span>
+
+  <span class="nx">eks_cluster_id</span>        <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_name</span>
+  <span class="nx">eks_cluster_endpoint</span>  <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_endpoint</span>
+  <span class="nx">eks_cluster_version</span>   <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_version</span>
+  <span class="nx">eks_oidc_provider</span>     <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">oidc_provider</span>
+  <span class="nx">eks_oidc_provider_arn</span> <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">oidc_provider_arn</span>
+
+  <span class="c1"># K8S Add-ons</span>
+  <span class="nx">enable_aws_load_balancer_controller</span> <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">enable_metrics_server</span>               <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">enable_aws_cloudwatch_metrics</span>       <span class="p">=</span> <span class="kc">false</span>
+
+  <span class="nx">tags</span> <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">tags</span>
+<span class="p">}</span>
+
+<span class="c1"># To update local kubeconfig with new cluster details</span>
+<span class="nx">resource</span> <span class="s2">"null_resource"</span> <span class="s2">"kubeconfig"</span> <span class="p">{</span>
+  <span class="nx">depends_on</span> <span class="p">=</span> <span class="p">[</span><span class="nx">module</span><span class="err">.</span><span class="nx">eks_blueprints_addons</span><span class="p">]</span>
+  <span class="nx">provisioner</span> <span class="s2">"local-exec"</span> <span class="p">{</span>
+    <span class="nx">command</span> <span class="p">=</span> <span class="s2">"aws eks --region ${local.region}  update-kubeconfig --name $AWS_CLUSTER_NAME"</span>
+    <span class="nx">environment</span> <span class="p">=</span> <span class="p">{</span>
+      <span class="nx">AWS_CLUSTER_NAME</span> <span class="p">=</span> <span class="nx">local</span><span class="err">.</span><span class="nx">name</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>The <code class="language-plaintext highlighter-rouge">eks</code> module definition creates:</p><ul><li>EKS Cluster Control plane with one <a href="https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html">managed node group</a>,</li><li>Cluster and node security groups and rules, IAM roles and policies required,</li><li>Amazon EKS add-ons ebs-csi-driver, vpc-cni, CoreDNS, and kube-proxy,</li><li>and AWS Key Management Service (KMS) configuration.</li></ul><p>The <code class="language-plaintext highlighter-rouge">eks_blueprints_addons</code> module definition creates:</p><ul><li>AWS Load Balancer Controller that provisions an AWS Network Load Balancer for distributing traffic,</li><li>and the <a href="https://github.com/kubernetes-sigs/metrics-server">Metrics Server</a>.</li></ul><p>The <code class="language-plaintext highlighter-rouge">null_resource</code> configuration updates your local <code class="language-plaintext highlighter-rouge">kubeconfig</code> file with the new cluster details. It’s not a required step for provisioning but just a handy hack.</p><p>Finally, you can also define some outputs to be captured. Create a <code class="language-plaintext highlighter-rouge">outputs.tf</code> file:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">touch </span>outputs.tf
+</pre></td></tr></tbody></table></code></pre></div></div><p>Add the following to the file:</p><div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre></td><td class="rouge-code"><pre><span class="nx">output</span> <span class="s2">"vpc_private_subnet_cidr"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"VPC private subnet CIDR"</span>
+  <span class="nx">value</span>       <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">vpc</span><span class="err">.</span><span class="nx">private_subnets_cidr_blocks</span>
+<span class="p">}</span>
+
+<span class="nx">output</span> <span class="s2">"vpc_public_subnet_cidr"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"VPC public subnet CIDR"</span>
+  <span class="nx">value</span>       <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">vpc</span><span class="err">.</span><span class="nx">public_subnets_cidr_blocks</span>
+<span class="p">}</span>
+
+<span class="nx">output</span> <span class="s2">"vpc_cidr"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"VPC CIDR"</span>
+  <span class="nx">value</span>       <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">vpc</span><span class="err">.</span><span class="nx">vpc_cidr_block</span>
+<span class="p">}</span>
+
+<span class="nx">output</span> <span class="s2">"eks_cluster_id"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"EKS cluster ID"</span>
+  <span class="nx">value</span>       <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_id</span>
+<span class="p">}</span>
+
+<span class="nx">output</span> <span class="s2">"eks_cluster_name"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"EKS cluster Name"</span>
+  <span class="nx">value</span>       <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">cluster_name</span>
+<span class="p">}</span>
+
+<span class="nx">output</span> <span class="s2">"eks_managed_nodegroups"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"EKS managed node groups"</span>
+  <span class="nx">value</span>       <span class="p">=</span> <span class="nx">module</span><span class="err">.</span><span class="nx">eks</span><span class="err">.</span><span class="nx">eks_managed_node_groups</span>
+<span class="p">}</span>
+
+<span class="nx">output</span> <span class="s2">"configure_kubectl"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"Configure kubectl: make sure you're logged in with the correct AWS profile and run the following command to update your kubeconfig"</span>
+  <span class="nx">value</span>       <span class="p">=</span> <span class="s2">"aws eks update-kubeconfig --name ${module.eks.cluster_name} --alias ${module.eks.cluster_name}"</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div><h3 id="provision-the-cluster">Provision the cluster</h3><p>Our Terraform definitions are ready. Now you can provision the cluster.</p><p>First, ensure you have configured your AWS CLI to use the correct AWS account and a region that supports EKS. If not, run the following:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c"># Visit https://console.aws.amazon.com/iam/home?#/security_credentials for creating access keys</span>
+aws configure
+</pre></td></tr></tbody></table></code></pre></div></div><p>Next, initialize Terraform workspace and plan the changes:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c"># Download modules and providers. Initialize state.</span>
+terraform init
+<span class="c"># see a preview of what will be done</span>
+terraform plan
+</pre></td></tr></tbody></table></code></pre></div></div><p>Review the plan and make sure everything is correct.</p><p>Now you can apply the changes:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>terraform apply
+</pre></td></tr></tbody></table></code></pre></div></div><p>Confirm by typing <code class="language-plaintext highlighter-rouge">yes</code> when prompted. This will take a while (15-20 minutes), so sit back and have a coffee or contemplate what led you to this point in life. 😉</p><p>Once the EKS cluster is ready, you will see the output variables printed to the console.</p><div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+</pre></td><td class="rouge-code"><pre><span class="nx">configure_kubectl</span> <span class="err">=</span> <span class="s2">"aws eks update-kubeconfig --name okta-auth0-jhipster-eks --alias okta-auth0-jhipster-eks"</span>
+<span class="nx">eks_cluster_name</span> <span class="err">=</span> <span class="s2">"okta-auth0-jhipster-eks"</span>
+<span class="nx">eks_managed_nodegroups</span> <span class="err">=</span> <span class="p">{</span>
+  <span class="s2">"initial"</span> <span class="p">=</span> <span class="p">{</span>
+    <span class="s2">"autoscaling_group_schedule_arns"</span> <span class="p">=</span> <span class="p">{}</span>
+    <span class="s2">"iam_role_arn"</span> <span class="p">=</span> <span class="s2">"arn:aws:iam::216713166862:role/initial-eks-node-group-20230628170956397500000007"</span>
+    <span class="s2">"iam_role_name"</span> <span class="p">=</span> <span class="s2">"initial-eks-node-group-20230628170956397500000007"</span>
+    <span class="s2">"iam_role_unique_id"</span> <span class="p">=</span> <span class="s2">"AROATE5I4QAHNFCURF5WI"</span>
+    <span class="s2">"launch_template_arn"</span> <span class="p">=</span> <span class="s2">"arn:aws:ec2:eu-west-1:216713166862:launch-template/lt-028654c46a256c879"</span>
+    <span class="s2">"launch_template_id"</span> <span class="p">=</span> <span class="s2">"lt-028654c46a256c879"</span>
+    <span class="s2">"launch_template_latest_version"</span> <span class="p">=</span> <span class="mi">1</span>
+    <span class="s2">"launch_template_name"</span> <span class="p">=</span> <span class="s2">"initial-2023062817211846290000000e"</span>
+    <span class="s2">"node_group_arn"</span> <span class="p">=</span> <span class="s2">"arn:aws:eks:eu-west-1:216713166862:nodegroup/okta-auth0-jhipster-eks/initial-20230628172118695900000010/f2c48183-0cd0-f970-d405-0869ccddad37"</span>
+    <span class="s2">"node_group_autoscaling_group_names"</span> <span class="p">=</span> <span class="p">[</span>
+      <span class="s2">"eks-initial-20230628172118695900000010-f2c48183-0cd0-f970-d405-0869ccddad37"</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="s2">"node_group_id"</span> <span class="p">=</span> <span class="s2">"okta-auth0-jhipster-eks:initial-20230628172118695900000010"</span>
+    <span class="s2">"node_group_labels"</span> <span class="p">=</span> <span class="nx">tomap</span><span class="err">(</span><span class="kc">null</span><span class="err">)</span> <span class="cm">/* of string */</span>
+    <span class="s2">"node_group_resources"</span> <span class="p">=</span> <span class="nx">tolist</span><span class="err">(</span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">"autoscaling_groups"</span> <span class="p">=</span> <span class="nx">tolist</span><span class="err">(</span><span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">"name"</span> <span class="p">=</span> <span class="s2">"eks-initial-20230628172118695900000010-f2c48183-0cd0-f970-d405-0869ccddad37"</span>
+          <span class="p">},</span>
+        <span class="p">]</span><span class="err">)</span>
+        <span class="s2">"remote_access_security_group_id"</span> <span class="p">=</span> <span class="s2">""</span>
+      <span class="p">},</span>
+    <span class="p">]</span><span class="err">)</span>
+    <span class="s2">"node_group_status"</span> <span class="p">=</span> <span class="s2">"ACTIVE"</span>
+    <span class="s2">"node_group_taints"</span> <span class="p">=</span> <span class="nx">toset</span><span class="err">(</span><span class="p">[]</span><span class="err">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">vpc_cidr</span> <span class="err">=</span> <span class="s2">"10.0.0.0/16"</span>
+<span class="nx">vpc_private_subnet_cidr</span> <span class="err">=</span> <span class="nx">tolist</span><span class="err">(</span><span class="p">[</span>
+  <span class="s2">"10.0.10.0/24"</span><span class="p">,</span>
+  <span class="s2">"10.0.11.0/24"</span><span class="p">,</span>
+  <span class="s2">"10.0.12.0/24"</span><span class="p">,</span>
+<span class="p">]</span><span class="err">)</span>
+<span class="nx">vpc_public_subnet_cidr</span> <span class="err">=</span> <span class="nx">tolist</span><span class="err">(</span><span class="p">[</span>
+  <span class="s2">"10.0.0.0/24"</span><span class="p">,</span>
+  <span class="s2">"10.0.1.0/24"</span><span class="p">,</span>
+  <span class="s2">"10.0.2.0/24"</span><span class="p">,</span>
+<span class="p">]</span><span class="err">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>You should see the cluster details if you run <code class="language-plaintext highlighter-rouge">kdash</code> or <code class="language-plaintext highlighter-rouge">kubectl get nodes</code> commands.</p><p><img src="https://images.ctfassets.net/23aumh6u8s0i/7jsmSHoLHEGh9HMb1lWNqj/cbac14bd55c5b4a31865cd683feb4b53/eks-cluster.png" alt="EKS cluster in KDash"></p><blockquote><p><strong>Note</strong>: The EKS cluster defined here will not come under AWS free tier; hence, running this will cost money, so delete the cluster as soon as you finish the tutorial to keep the cost within a few dollars.</p></blockquote><h2 id="set-up-oidc-authentication-using-auth0-by-okta">Set Up OIDC Authentication Using Auth0 by Okta</h2><p>You can proceed to deploy the sample application. You could skip this step if you used a sample that does not use Auth0 or OIDC for authentication.</p><p>Since you are using Terraform, you can set up the Auth0 application using the <a href="https://registry.terraform.io/providers/auth0/auth0/latest/docs">Auth0 Terraform provider</a>. This will allow you to automate the setup of the Auth0 application and manage the addition of users, customizations, and such.</p><h3 id="create-an-auth0-application">Create an Auth0 application</h3><p>Open the <code class="language-plaintext highlighter-rouge">versions.tf</code> file in the <code class="language-plaintext highlighter-rouge">terraform</code> folder and add the following content to the <code class="language-plaintext highlighter-rouge">required_providers</code> section:</p><div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>    <span class="nx">auth0</span> <span class="err">=</span> <span class="p">{</span>
+      <span class="nx">source</span>  <span class="p">=</span> <span class="s2">"auth0/auth0"</span>
+      <span class="nx">version</span> <span class="p">=</span> <span class="s2">"~&gt; 0.49.0"</span>
+    <span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>Let’s create a Terraform script that creates an Auth0 web application and required customizations. Create a file named <code class="language-plaintext highlighter-rouge">auth0.tf</code> in the <code class="language-plaintext highlighter-rouge">terraform</code> folder and add the following content:</p><div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+</pre></td><td class="rouge-code"><pre><span class="nx">provider</span> <span class="s2">"auth0"</span> <span class="p">{</span>
+  <span class="nx">domain</span>        <span class="p">=</span> <span class="s2">"https://&lt;your_auth0_domain_uri&gt;"</span>
+  <span class="nx">debug</span>         <span class="p">=</span> <span class="kc">false</span>
+<span class="p">}</span>
+
+<span class="c1"># Create a new Auth0 application for the JHipster app</span>
+<span class="nx">resource</span> <span class="s2">"auth0_client"</span> <span class="s2">"java_ms_client"</span> <span class="p">{</span>
+  <span class="nx">name</span>                <span class="p">=</span> <span class="s2">"JavaMicroservices"</span>
+  <span class="nx">description</span>         <span class="p">=</span> <span class="s2">"Java Microservices Client Created Through Terraform"</span>
+  <span class="nx">app_type</span>            <span class="p">=</span> <span class="s2">"regular_web"</span>
+  <span class="nx">callbacks</span>           <span class="p">=</span> <span class="p">[</span><span class="s2">"http://localhost:8080/login/oauth2/code/oidc"</span><span class="p">]</span>
+  <span class="nx">allowed_logout_urls</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"http://localhost:8080"</span><span class="p">]</span>
+  <span class="nx">oidc_conformant</span>     <span class="p">=</span> <span class="kc">true</span>
+
+  <span class="nx">jwt_configuration</span> <span class="p">{</span>
+    <span class="nx">alg</span> <span class="p">=</span> <span class="s2">"RS256"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Configuring client_secret_post as an authentication method.</span>
+<span class="nx">resource</span> <span class="s2">"auth0_client_credentials"</span> <span class="s2">"java_ms_client_creds"</span> <span class="p">{</span>
+  <span class="nx">client_id</span> <span class="p">=</span> <span class="nx">auth0_client</span><span class="err">.</span><span class="nx">java_ms_client</span><span class="err">.</span><span class="nx">id</span>
+
+  <span class="nx">authentication_method</span> <span class="p">=</span> <span class="s2">"client_secret_post"</span>
+<span class="p">}</span>
+
+<span class="c1"># Create roles for the JHipster app</span>
+<span class="nx">resource</span> <span class="s2">"auth0_role"</span> <span class="s2">"admin"</span> <span class="p">{</span>
+  <span class="nx">name</span>        <span class="p">=</span> <span class="s2">"ROLE_ADMIN"</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"Administrator"</span>
+<span class="p">}</span>
+
+<span class="nx">resource</span> <span class="s2">"auth0_role"</span> <span class="s2">"user"</span> <span class="p">{</span>
+  <span class="nx">name</span>        <span class="p">=</span> <span class="s2">"ROLE_USER"</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"User"</span>
+<span class="p">}</span>
+
+<span class="c1"># Create an action to customize the authentication flow to add the roles and the username to the access token claims expected by JHipster applications.</span>
+<span class="nx">resource</span> <span class="s2">"auth0_action"</span> <span class="s2">"jhipster_action"</span> <span class="p">{</span>
+  <span class="nx">name</span>    <span class="p">=</span> <span class="s2">"jhipster_roles_claim"</span>
+  <span class="nx">runtime</span> <span class="p">=</span> <span class="s2">"node18"</span>
+  <span class="nx">deploy</span>  <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">code</span>    <span class="p">=</span> <span class="o">&lt;&lt;-</span><span class="no">EOT</span><span class="sh">
+  /**
+   * Handler that will be called during the execution of a PostLogin flow.
+   *
+   * @param {Event} event - Details about the user and the context in which they are logging in.
+   * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
+   */
+   exports.onExecutePostLogin = async (event, api) =&gt; {
+     const namespace = 'https://www.jhipster.tech';
+     if (event.authorization) {
+         api.idToken.setCustomClaim(namespace + '/roles', event.authorization.roles);
+         api.accessToken.setCustomClaim(namespace + '/roles', event.authorization.roles);
+     }
+   };
+</span><span class="no">  EOT
+
+</span>  <span class="nx">supported_triggers</span> <span class="p">{</span>
+    <span class="nx">id</span>      <span class="p">=</span> <span class="s2">"post-login"</span>
+    <span class="nx">version</span> <span class="p">=</span> <span class="s2">"v3"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Attach the action to the login flow</span>
+<span class="nx">resource</span> <span class="s2">"auth0_trigger_actions"</span> <span class="s2">"login_flow"</span> <span class="p">{</span>
+  <span class="nx">trigger</span> <span class="p">=</span> <span class="s2">"post-login"</span>
+
+  <span class="nx">actions</span> <span class="p">{</span>
+    <span class="nx">id</span>           <span class="p">=</span> <span class="nx">auth0_action</span><span class="err">.</span><span class="nx">jhipster_action</span><span class="err">.</span><span class="nx">id</span>
+    <span class="nx">display_name</span> <span class="p">=</span> <span class="nx">auth0_action</span><span class="err">.</span><span class="nx">jhipster_action</span><span class="err">.</span><span class="nx">name</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># Create a test user. You can create more users here if needed</span>
+<span class="nx">resource</span> <span class="s2">"auth0_user"</span> <span class="s2">"test_user"</span> <span class="p">{</span>
+  <span class="nx">connection_name</span> <span class="p">=</span> <span class="s2">"Username-Password-Authentication"</span>
+  <span class="nx">name</span>            <span class="p">=</span> <span class="s2">"Jane Doe"</span>
+  <span class="nx">email</span>           <span class="p">=</span> <span class="s2">"jhipster@test.com"</span>
+  <span class="nx">email_verified</span>  <span class="p">=</span> <span class="kc">true</span>
+  <span class="nx">password</span>        <span class="p">=</span> <span class="s2">"passpass$12$12"</span> <span class="c1"># Don't set passwords like this in production! Use env variables instead.</span>
+  <span class="nx">lifecycle</span> <span class="p">{</span>
+    <span class="nx">ignore_changes</span> <span class="p">=</span> <span class="p">[</span><span class="nx">roles</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">resource</span> <span class="s2">"auth0_user_roles"</span> <span class="s2">"test_user_roles"</span> <span class="p">{</span>
+  <span class="nx">user_id</span> <span class="p">=</span> <span class="nx">auth0_user</span><span class="err">.</span><span class="nx">test_user</span><span class="err">.</span><span class="nx">id</span>
+  <span class="nx">roles</span>   <span class="p">=</span> <span class="p">[</span><span class="nx">auth0_role</span><span class="err">.</span><span class="nx">admin</span><span class="err">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">auth0_role</span><span class="err">.</span><span class="nx">user</span><span class="err">.</span><span class="nx">id</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nx">output</span> <span class="s2">"auth0_webapp_client_id"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"Auth0 JavaMicroservices Client ID"</span>
+  <span class="nx">value</span>       <span class="p">=</span> <span class="nx">auth0_client</span><span class="err">.</span><span class="nx">java_ms_client</span><span class="err">.</span><span class="nx">client_id</span>
+<span class="p">}</span>
+
+<span class="nx">output</span> <span class="s2">"auth0_webapp_client_secret"</span> <span class="p">{</span>
+  <span class="nx">description</span> <span class="p">=</span> <span class="s2">"Auth0 JavaMicroservices Client Secret"</span>
+  <span class="nx">value</span>       <span class="p">=</span> <span class="nx">auth0_client_credentials</span><span class="err">.</span><span class="nx">java_ms_client_creds</span><span class="err">.</span><span class="nx">client_secret</span>
+  <span class="nx">sensitive</span>   <span class="p">=</span> <span class="kc">true</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>You can find your Auth0 domain in the <a href="https://manage.auth0.com/">Auth0 dashboard</a> or by running the <code class="language-plaintext highlighter-rouge">auth0 tenants list</code> command. The script above does the following:</p><ul><li>The <code class="language-plaintext highlighter-rouge">auth0_client</code> resource definition creates an Auth0 Web application client conforming to the OIDC standard.</li><li>The <code class="language-plaintext highlighter-rouge">auth0_client_credentials</code> resource definition configures the client to use the <code class="language-plaintext highlighter-rouge">client_secret_post</code> authentication method.</li><li>The <code class="language-plaintext highlighter-rouge">auth0_role</code> resource definition creates two roles for the JHipster application.</li><li>The <code class="language-plaintext highlighter-rouge">auth0_action</code> resource definition creates an action that will be executed during the Auth0 post-login flow. This action will add the roles and the username to the ID and access token claims as expected by JHipster applications.</li><li>The <code class="language-plaintext highlighter-rouge">auth0_user</code> resource definition creates a test user.</li></ul><h3 id="provision-the-auth0-application">Provision the Auth0 application</h3><p>Now before you can run this script you need to create a machine-to-machine application in Auth0 so that Terraform can communicate with the Auth0 management API. This can be done using the Auth0 CLI. Please note that you also need to have <a href="https://jqlang.github.io/jq/">jq</a> installed to run the below commands. Run the following commands to create an application after logging into the CLI with the <code class="language-plaintext highlighter-rouge">auth0 login</code> command:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="c"># Create a machine-to-machine application on Auth0</span>
+<span class="nb">export </span><span class="nv">AUTH0_M2M_APP</span><span class="o">=</span><span class="si">$(</span>auth0 apps create <span class="se">\</span>
+  <span class="nt">--name</span> <span class="s2">"Auth0 Terraform Provider"</span> <span class="se">\</span>
+  <span class="nt">--description</span> <span class="s2">"Auth0 Terraform Provider M2M"</span> <span class="se">\</span>
+  <span class="nt">--type</span> m2m <span class="se">\</span>
+  <span class="nt">--reveal-secrets</span> <span class="se">\</span>
+  <span class="nt">--json</span> | jq <span class="nt">-r</span> <span class="s1">'. | {client_id: .client_id, client_secret: .client_secret}'</span><span class="si">)</span>
+
+<span class="c"># Extract the client ID and client secret from the output.</span>
+<span class="nb">export </span><span class="nv">AUTH0_CLIENT_ID</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="nv">$AUTH0_M2M_APP</span> | jq <span class="nt">-r</span> <span class="s1">'.client_id'</span><span class="si">)</span>
+<span class="nb">export </span><span class="nv">AUTH0_CLIENT_SECRET</span><span class="o">=</span><span class="si">$(</span><span class="nb">echo</span> <span class="nv">$AUTH0_M2M_APP</span> | jq <span class="nt">-r</span> <span class="s1">'.client_secret'</span><span class="si">)</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>This will create the application and set environment variables for the client ID and secret. This application needs to be authorized to use the Auth0 management API. This can be done using the commands below.</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c"># Get the ID and IDENTIFIER fields of the Auth0 Management API</span>
+<span class="nb">export </span><span class="nv">AUTH0_MANAGEMENT_API_ID</span><span class="o">=</span><span class="si">$(</span>auth0 apis list <span class="nt">--json</span> | jq <span class="nt">-r</span> <span class="s1">'map(select(.name == "Auth0 Management API"))[0].id'</span><span class="si">)</span>
+<span class="nb">export </span><span class="nv">AUTH0_MANAGEMENT_API_IDENTIFIER</span><span class="o">=</span><span class="si">$(</span>auth0 apis list <span class="nt">--json</span> | jq <span class="nt">-r</span> <span class="s1">'map(select(.name == "Auth0 Management API"))[0].identifier'</span><span class="si">)</span>
+<span class="c"># Get the SCOPES to be authorized</span>
+<span class="nb">export </span><span class="nv">AUTH0_MANAGEMENT_API_SCOPES</span><span class="o">=</span><span class="si">$(</span>auth0 apis scopes list <span class="nv">$AUTH0_MANAGEMENT_API_ID</span> <span class="nt">--json</span> | jq <span class="nt">-r</span> <span class="s1">'.[].value'</span> | jq <span class="nt">-ncR</span> <span class="s1">'[inputs]'</span><span class="si">)</span>
+
+<span class="c"># Authorize the Auth0 Terraform Provider application to use the Auth0 Management API</span>
+auth0 api post <span class="s2">"client-grants"</span> <span class="nt">--data</span><span class="o">=</span><span class="s1">'{"client_id": "'</span><span class="nv">$AUTH0_CLIENT_ID</span><span class="s1">'", "audience": "'</span><span class="nv">$AUTH0_MANAGEMENT_API_IDENTIFIER</span><span class="s1">'", "scope":'</span><span class="nv">$AUTH0_MANAGEMENT_API_SCOPES</span><span class="s1">'}'</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>Now you can run the Terraform script to create the Auth0 application. Run the following commands to initialize the script and apply it.</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre><span class="c"># Upgrade the terraform script</span>
+terraform init <span class="nt">-upgrade</span>
+terraform apply
+</pre></td></tr></tbody></table></code></pre></div></div><p>This will create the Auth0 application and the test user. You can find the client ID and secret in the output of the <code class="language-plaintext highlighter-rouge">terraform output</code> command. You can also find the client ID and secret in the Auth0 dashboard.</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre><span class="c"># Client ID</span>
+terraform output <span class="nt">--json</span> | jq <span class="nt">-r</span> <span class="s1">'.auth0_webapp_client_id.value'</span>
+<span class="c"># Client Secret</span>
+terraform output <span class="nt">--json</span> | jq <span class="nt">-r</span> <span class="s1">'.auth0_webapp_client_secret.value'</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>Note the client ID and client secret from the output. You will need these values in the next section.</p><h3 id="configure-the-jhipster-application-to-use-auth0">Configure the JHipster application to use Auth0</h3><p>Update <code class="language-plaintext highlighter-rouge">kubernetes/registry-k8s/application-configmap.yml</code> with the Spring Security OIDC configuration using values from the previous step. This configuration is loaded into Consul, and it shares the values with the gateway and microservices.</p><div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="rouge-code"><pre><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">ConfigMap</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">application-config</span>
+  <span class="na">namespace</span><span class="pi">:</span> <span class="s">jhipster</span>
+<span class="c1">#common configuration shared between all applications</span>
+<span class="na">data</span><span class="pi">:</span>
+  <span class="s">application.yml</span><span class="pi">:</span> <span class="pi">|-</span>
+    <span class="s">configserver:</span>
+      <span class="s">...</span>
+    <span class="s">jhipster:</span>
+      <span class="s">security:</span>
+        <span class="s">...</span>
+        <span class="s">oauth2:</span>
+          <span class="s">audience:</span>
+            <span class="s">- https://&lt;your-auth0-domain&gt;/api/v2/</span>
+    <span class="s">spring:</span>
+      <span class="s">security:</span>
+        <span class="s">oauth2:</span>
+          <span class="s">client:</span>
+            <span class="s">provider:</span>
+              <span class="s">oidc:</span>
+                <span class="s"># make sure to include the trailing slash</span>
+                <span class="s">issuer-uri: https://&lt;your-auth0-domain&gt;/</span>
+            <span class="s">registration:</span>
+              <span class="s">oidc:</span>
+                <span class="s">client-id: &lt;client-id&gt;</span>
+                <span class="s">client-secret: &lt;client-secret&gt;</span>
+  <span class="c1"># app specific configuration</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>The microservice applications are now ready.</p><h3 id="secure-secrets">Secure secrets</h3><p>If you have noticed, you are setting secrets in plain text on the <code class="language-plaintext highlighter-rouge">application-configmap.yml</code> file, which is not ideal and is not a best practice for security. The best way to do this securely would be to use <a href="https://aws.amazon.com/secrets-manager/">AWS Secrets Manager</a>, an external service like <a href="https://www.hashicorp.com/products/vault">HashiCorp Vault</a>, or <a href="https://github.com/bitnami-labs/sealed-secrets">Sealed Secrets</a>. To learn more about these methods see the blog post <a href="https://auth0.com/blog/kubernetes-secrets-management/">Shhhh… Kubernetes Secrets Are Not Really Secret!</a>.</p><h2 id="deploy-the-microservice-stack">Deploy the Microservice Stack</h2><p>You are ready to deploy to our shiny new EKS cluster, but first, you need to build and push the Docker images to a container registry. You can use <a href="https://aws.amazon.com/ecr/">Amazon Elastic Container Registry (ECR)</a> or any other container registry.</p><h3 id="build-the-docker-images">Build the Docker images</h3><p>You need to build Docker images for each app. This is specific to the JHipster application used in this tutorial which uses <a href="https://github.com/GoogleContainerTools/jib">Jib</a> to build the images. Make sure you are logged into Docker using <code class="language-plaintext highlighter-rouge">docker login</code>. Navigate to each app folder (<strong>store</strong>, <strong>invoice</strong>, <strong>product</strong>) and run the following command:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>./gradlew bootJar <span class="nt">-Pprod</span> jib <span class="nt">-Djib</span>.to.image<span class="o">=</span>&lt;docker-repo-uri-or-name&gt;/&lt;image-name&gt;
+</pre></td></tr></tbody></table></code></pre></div></div><p>Image names should be <code class="language-plaintext highlighter-rouge">store</code>, <code class="language-plaintext highlighter-rouge">invoice</code>, and <code class="language-plaintext highlighter-rouge">product</code>.</p><h3 id="deploy-the-applications-to-eks">Deploy the applications to EKS</h3><p>Start the deployment using the handy script provided by JHipster. You could also manually apply deployments using <code class="language-plaintext highlighter-rouge">kubectl apply -f &lt;file&gt;</code> commands.</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">cd </span>kubernetes
+./kubectl-apply.sh <span class="nt">-f</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p><img src="https://images.ctfassets.net/23aumh6u8s0i/3vo9lWwxkHWghbvcnSt9wg/b5158d9a4b0ab89e8a73d255acb206ff/eks-pods.png" alt="JHipster pods in KDash"></p><p>You can also run the following command to see the status of the deployments:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>kubectl get pods <span class="nt">-n</span> jhipster
+</pre></td></tr></tbody></table></code></pre></div></div><p>View the Consul registry using port-forwarding as follows, and you will be able to access the application at <code class="language-plaintext highlighter-rouge">http://localhost:8500</code>.</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>kubectl port-forward svc/consul-ui <span class="nt">-n</span> jhipster 8500
+</pre></td></tr></tbody></table></code></pre></div></div><p>You can access the gateway application using port-forwarding as follows, and you will be able to access the application at <code class="language-plaintext highlighter-rouge">http://localhost:8080</code>.</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>kubectl port-forward svc/store <span class="nt">-n</span> jhipster 8080
+</pre></td></tr></tbody></table></code></pre></div></div><p>Or, you can access the application via the load balancer exposed. Find the external IP of the <code class="language-plaintext highlighter-rouge">store</code> service by navigating to the service tab in KDash or by running the following:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>kubectl get svc store <span class="nt">-n</span> jhipster
+</pre></td></tr></tbody></table></code></pre></div></div><p>You need to add the external IP of the store to allowed callback URLs and allowed logout URLs in the Auth0 web application. You can do this by adding the values to the <code class="language-plaintext highlighter-rouge">callbacks</code> and <code class="language-plaintext highlighter-rouge">allowed_logout_urls</code> array in the <code class="language-plaintext highlighter-rouge">java_ms_client</code> resource in <code class="language-plaintext highlighter-rouge">auth0.tf</code> file like below:</p><div class="language-hcl highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="nx">resource</span> <span class="s2">"auth0_client"</span> <span class="s2">"java_ms_client"</span> <span class="p">{</span>
+  <span class="nx">name</span>                <span class="p">=</span> <span class="s2">"JavaMicroservices"</span>
+  <span class="nx">description</span>         <span class="p">=</span> <span class="s2">"Java Microservices Client Created Through Terraform"</span>
+  <span class="nx">app_type</span>            <span class="p">=</span> <span class="s2">"regular_web"</span>
+  <span class="nx">callbacks</span>           <span class="p">=</span> <span class="p">[</span><span class="s2">"http://localhost:8080/login/oauth2/code/oidc"</span><span class="p">,</span> <span class="s2">"http://aws-elb-id.region.elb.amazonaws.com:8080/login/oauth2/code/oidc"</span><span class="p">]</span>
+  <span class="nx">allowed_logout_urls</span> <span class="p">=</span> <span class="p">[</span><span class="s2">"http://localhost:8080"</span><span class="p">,</span> <span class="s2">"http://aws-elb-id.region.elb.amazonaws.com:8080"</span><span class="p">]</span>
+  <span class="nx">oidc_conformant</span>     <span class="p">=</span> <span class="kc">true</span>
+
+  <span class="nx">jwt_configuration</span> <span class="p">{</span>
+    <span class="nx">alg</span> <span class="p">=</span> <span class="s2">"RS256"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>Run <code class="language-plaintext highlighter-rouge">terraform apply -target="auth0_client.java_ms_client"</code> to update the configuration in your Auth0 tenant.</p><p>Now you should be able to visit the external IP of the <code class="language-plaintext highlighter-rouge">store</code> service on port 8080 and see the application, and you should be able to log in using your Auth0 test user credentials.</p><p>If you encounter an issue where the Consul pods do not start, you might have issues with the AWS EBS addon for EKS. Run <code class="language-plaintext highlighter-rouge">kubectl describe pvc -n jhipster</code> to see if there are any errors. If you see <code class="language-plaintext highlighter-rouge">could not create volume in EC2: UnauthorizedOperation</code> in errors, then you need to troubleshoot by following the <a href="https://docs.aws.amazon.com/eks/latest/userguide/managing-ebs-csi.html">Managing the Amazon EBS CSI driver as an Amazon EKS add-on</a> guide.</p><h2 id="tear-down-the-cluster-with-terraform">Tear Down the Cluster with Terraform</h2><p>Once you are done with the tutorial, you can delete the cluster and all the resources created using Terraform by running the following commands:</p><div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="rouge-code"><pre><span class="nb">cd </span>terraform
+<span class="c"># The commands below might take a while to finish.</span>
+terraform destroy <span class="nt">-target</span><span class="o">=</span><span class="s2">"module.eks_blueprints_addons"</span> <span class="nt">-auto-approve</span>
+<span class="c"># If deleting the VPC fails, then manually delete the load balancers and the security groups</span>
+<span class="c"># for the load balancer associated with the VPC from the AWS EC2 console and try again.</span>
+<span class="c"># This is due to the fact that EKS creates a load balancer for Kubernetes service and it is not known to Terraform.</span>
+terraform destroy <span class="nt">-target</span><span class="o">=</span><span class="s2">"module.eks"</span> <span class="nt">-auto-approve</span>
+terraform destroy <span class="nt">-target</span><span class="o">=</span><span class="s2">"module.vpc"</span> <span class="nt">-auto-approve</span>
+<span class="c"># Clean up Auth0 apps and anything left over.</span>
+terraform destroy <span class="nt">-auto-approve</span>
+</pre></td></tr></tbody></table></code></pre></div></div><p>You can find all the code from this example on <a href="https://github.com/oktadev/auth0-jhipster-k8s-eks-microservices-example">GitHub</a>.</p><hr><p>If you like this article, please leave a like or a comment.</p><p>You can follow me on <a href="https://mastodon.social/@deepu105">Mastodon</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p></div><hr><div class="after-post-cats"><ul class="tags mb-4"></ul></div><div class="after-post-tags"><ul class="tags"><li><a class="smoothscroll" href="/tags#aws">#aws</a></li><li><a class="smoothscroll" href="/tags#java">#java</a></li><li><a class="smoothscroll" href="/tags#kubernetes">#kubernetes</a></li><li><a class="smoothscroll" href="/tags#terraform">#terraform</a></li></ul></div><div class="row PageNavigation d-flex justify-content-between font-weight-bold"><a class="prev d-block col-md-6" href="/mastodon-for-devs/">&laquo; Mastodon for Developers: Everything You Need to Know</a><div class="clearfix"></div></div><hr></div></div></div><div class="container"><div id="comments" class="row justify-content-center mb-5"><div class="col-md-8"><section class="hyvor"><div id="hyvor-talk-view"></div><script type="text/javascript">var HYVOR_TALK_WEBSITE=4123,HYVOR_TALK_CONFIG={url:"https://deepu.tech/terraform-eks-java-microservices-jhipster/",id:"https://deepu.tech/terraform-eks-java-microservices-jhipster/"}</script><script async type="text/javascript" src="//talk.hyvor.com/web-api/embed"></script></section></div></div></div></div><div class="alertbar"><div class="container text-center"><span>Never miss a <b>story</b> from us, subscribe to our newsletter</span><form action="https://tech.us7.list-manage.com/subscribe/post?u=00729f6c6d6bb180801b9484e&amp;id=f521dede4b" method="post" name="mc-embedded-subscribe-form" id="mc-embedded-subscribe-form" class="wj-contact-form validate" target="_blank" novalidate><div class="mc-field-group"><input type="email" placeholder="Email address" name="EMAIL" class="required email" id="mce-EMAIL" autocomplete="on" required> <input type="submit" value="Subscribe" name="subscribe" class="heart"></div></form></div></div></div><div class="jumbotron fortags lozad" data-background-image="/assets/images/jumbotron.jpg"><div class="d-md-flex h-100"><div class="col-md-4 transpdark align-self-center text-center h-100"><div class="d-md-flex align-items-center justify-content-center h-100"><h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2></div></div><div class="col-md-8 pt-1 ph-2 align-self-center text-center h-100"><a class="mt-1 mb-1" href="/tags#languages">languages (15)</a> <a class="mt-1 mb-1" href="/tags#programming">programming (15)</a> <a class="mt-1 mb-1" href="/tags#javascript">javascript (13)</a> <a class="mt-1 mb-1" href="/tags#java">java (12)</a> <a class="mt-1 mb-1" href="/tags#rust">rust (9)</a> <a class="mt-1 mb-1" href="/tags#beginners">beginners (8)</a> <a class="mt-1 mb-1" href="/tags#concurrency">concurrency (7)</a> <a class="mt-1 mb-1" href="/tags#go">go (7)</a> <a class="mt-1 mb-1" href="/tags#linux">linux (6)</a> <a class="mt-1 mb-1" href="/tags#kubernetes">kubernetes (5)</a> <a class="mt-1 mb-1" href="/tags#microservices">microservices (5)</a> <a class="mt-1 mb-1" href="/tags#typescript">typescript (5)</a> <a class="mt-1 mb-1" href="/tags#computerscience">computerscience (4)</a> <a class="mt-1 mb-1" href="/tags#development">development (4)</a> <a class="mt-1 mb-1" href="/tags#fedora">fedora (4)</a> <a class="mt-1 mb-1" href="/tags#functional">functional (4)</a> <a class="mt-1 mb-1" href="/tags#thepragmaticprogrammer">thepragmaticprogrammer (4)</a> <a class="mt-1 mb-1" href="/tags#async">async (3)</a> <a class="mt-1 mb-1" href="/tags#jhipster">jhipster (3)</a> <a class="mt-1 mb-1" href="/tags#azure">azure (2)</a> <a class="mt-1 mb-1" href="/tags#career">career (2)</a> <a class="mt-1 mb-1" href="/tags#codequality">codequality (2)</a> <a class="mt-1 mb-1" href="/tags#deno">deno (2)</a> <a class="mt-1 mb-1" href="/tags#devops">devops (2)</a> <a class="mt-1 mb-1" href="/tags#discuss">discuss (2)</a> <a class="mt-1 mb-1" href="/tags#docker">docker (2)</a> <a class="mt-1 mb-1" href="/tags#garbagecollection">garbagecollection (2)</a> <a class="mt-1 mb-1" href="/tags#gnome">gnome (2)</a> <a class="mt-1 mb-1" href="/tags#golang">golang (2)</a> <a class="mt-1 mb-1" href="/tags#kde">kde (2)</a> <a class="mt-1 mb-1" href="/tags#node">node (2)</a> <a class="mt-1 mb-1" href="/tags#nodejs">nodejs (2)</a> <a class="mt-1 mb-1" href="/tags#openjdk">openjdk (2)</a> <a class="mt-1 mb-1" href="/tags#react">react (2)</a> <a class="mt-1 mb-1" href="/tags#showdev">showdev (2)</a> <a class="mt-1 mb-1" href="/tags#terminal">terminal (2)</a> <a class="mt-1 mb-1" href="/tags#terraform">terraform (2)</a> <a class="mt-1 mb-1" href="/tags#webassembly">webassembly (2)</a> <a class="mt-1 mb-1" href="/tags#webdev">webdev (2)</a> <a class="mt-1 mb-1" href="/tags#architecture">architecture (1)</a> <a class="mt-1 mb-1" href="/tags#aws">aws (1)</a> <a class="mt-1 mb-1" href="/tags#bash">bash (1)</a> <a class="mt-1 mb-1" href="/tags#blogging">blogging (1)</a> <a class="mt-1 mb-1" href="/tags#books">books (1)</a> <a class="mt-1 mb-1" href="/tags#clojure">clojure (1)</a> <a class="mt-1 mb-1" href="/tags#codenewbie">codenewbie (1)</a> <a class="mt-1 mb-1" href="/tags#desktop">desktop (1)</a> <a class="mt-1 mb-1" href="/tags#developerexperience">developerexperience (1)</a> <a class="mt-1 mb-1" href="/tags#devrel">devrel (1)</a> <a class="mt-1 mb-1" href="/tags#devsecops">devsecops (1)</a> <a class="mt-1 mb-1" href="/tags#distributedsystems">distributedsystems (1)</a> <a class="mt-1 mb-1" href="/tags#engineering">engineering (1)</a> <a class="mt-1 mb-1" href="/tags#gaming">gaming (1)</a> <a class="mt-1 mb-1" href="/tags#ide">ide (1)</a> <a class="mt-1 mb-1" href="/tags#interview">interview (1)</a> <a class="mt-1 mb-1" href="/tags#istio">istio (1)</a> <a class="mt-1 mb-1" href="/tags#jdk">jdk (1)</a> <a class="mt-1 mb-1" href="/tags#Jekyll">Jekyll (1)</a> <a class="mt-1 mb-1" href="/tags#js">js (1)</a> <a class="mt-1 mb-1" href="/tags#jvm">jvm (1)</a> <a class="mt-1 mb-1" href="/tags#kotlin">kotlin (1)</a> <a class="mt-1 mb-1" href="/tags#loom">loom (1)</a> <a class="mt-1 mb-1" href="/tags#macos">macos (1)</a> <a class="mt-1 mb-1" href="/tags#mastodon">mastodon (1)</a> <a class="mt-1 mb-1" href="/tags#medium">medium (1)</a> <a class="mt-1 mb-1" href="/tags#memory-management">memory-management (1)</a> <a class="mt-1 mb-1" href="/tags#motivation">motivation (1)</a> <a class="mt-1 mb-1" href="/tags#multithreading">multithreading (1)</a> <a class="mt-1 mb-1" href="/tags#ohmyzsh">ohmyzsh (1)</a> <a class="mt-1 mb-1" href="/tags#opensource">opensource (1)</a> <a class="mt-1 mb-1" href="/tags#patternmatching">patternmatching (1)</a> <a class="mt-1 mb-1" href="/tags#polyglot">polyglot (1)</a> <a class="mt-1 mb-1" href="/tags#pragmatic">pragmatic (1)</a> <a class="mt-1 mb-1" href="/tags#python">python (1)</a> <a class="mt-1 mb-1" href="/tags#ruby">ruby (1)</a> <a class="mt-1 mb-1" href="/tags#scala">scala (1)</a> <a class="mt-1 mb-1" href="/tags#social">social (1)</a> <a class="mt-1 mb-1" href="/tags#svelte">svelte (1)</a> <a class="mt-1 mb-1" href="/tags#tech">tech (1)</a> <a class="mt-1 mb-1" href="/tags#ubuntu">ubuntu (1)</a> <a class="mt-1 mb-1" href="/tags#v8">v8 (1)</a> <a class="mt-1 mb-1" href="/tags#vr">vr (1)</a> <a class="mt-1 mb-1" href="/tags#vscode">vscode (1)</a> <a class="mt-1 mb-1" href="/tags#web">web (1)</a> <a class="mt-1 mb-1" href="/tags#windows">windows (1)</a> <a class="mt-1 mb-1" href="/tags#womenintech">womenintech (1)</a> <a class="mt-1 mb-1" href="/tags#writing">writing (1)</a> <a class="mt-1 mb-1" href="/tags#zsh">zsh (1)</a></div></div></div><footer class="footer"><div class="container"><div class="row"><div class="col-md-6 col-sm-6 text-center text-lg-left">Copyright © 2023 Deepu K Sasidharan<br><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img class="lozad" alt="Creative Commons License" style="border-width:0" src="/assets/images/placeholder.jpg" data-src="https://i.creativecommons.org/l/by/4.0/88x31.png"> </a>Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</div><div class="col-md-6 col-sm-6 text-center text-lg-right"><a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net | Domain by <a href="https://js.org" target="_blank" title="JS.ORG | JavaScript Community"><img src="/assets/images/placeholder.jpg" data-src="https://logo.js.org/dark_tiny.png" style="width:50px" alt="JS.ORG Logo" class="lozad"> </a>| Hosted with <i class="far fa-heart"></i> by <a href="https://pages.github.com/" target="_blank">Github</a></div></div></div></footer></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js" integrity="sha256-34Si1Y6llMBKM3G0jQILVeoQKEwuxjbk4zGWXXMT4ps=" crossorigin="anonymous"></script><script async src="/assets/js/lunrsearchengine.js"></script><script async src="/assets/js/mediumish.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.14.0/lozad.min.js" integrity="sha256-hstwhDmGVwZjIwt6SlTG6sQBREWrWTBjVTik/JLlb1Y=" crossorigin="anonymous"></script><script>// lazy loads images
+        const lazyloadObserver = lozad()
+        lazyloadObserver.observe();</script><script async src="/assets/js/ie10-viewport-bug-workaround.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-74370272-6"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-74370272-6")</script></body></html>

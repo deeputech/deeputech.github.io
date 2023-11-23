@@ -5,9 +5,1271 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 02 Nov 2023 17:00:22 +0100</pubDate>
-    <lastBuildDate>Thu, 02 Nov 2023 17:00:22 +0100</lastBuildDate>
+    <pubDate>Thu, 23 Nov 2023 15:34:50 +0100</pubDate>
+    <lastBuildDate>Thu, 23 Nov 2023 15:34:50 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes</title>
+        <description>Deploy a cloud-native Java Spring Boot microservice stack secured with Auth0 on Amazon EKS using Terraform and Kubernetes. | &lt;a href=&quot;https://deepu.tech/terraform-eks-java-microservices-jhipster/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;&lt;em&gt;Originally published at &lt;a href=&quot;https://auth0.com/blog/terraform-eks-java-microservices/&quot;&gt;auth0.com&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;When it comes to infrastructure, public clouds are the most popular choice these days, and Amazon Web Services (AWS) is the go-to option. If you are working with microservices, orchestrating their deployments becomes essential. Kubernetes is the de-facto choice for orchestrating microservices, and most public cloud providers offer managed Kubernetes services. For AWS, the managed Kubernetes service is Amazon Elastic Kubernetes Service (EKS).&lt;/p&gt;
+
+&lt;p&gt;Deploying and managing microservices on the public cloud is not without its challenges. Each cloud service has its own complexities. Among them, Amazon EKS is one of the most flexible but also one of the most difficult Kubernetes services to use. EKS utilizes clever orchestrations on top of other AWS services like EC2, EBS, and more.&lt;/p&gt;
+
+&lt;p&gt;To run a microservice stack on EKS, you will need to spend extra time and effort setting it up and managing it. This is where infrastructure as code (IaC) tools like &lt;a href=&quot;https://www.terraform.io/&quot;&gt;Terraform&lt;/a&gt; come in handy.&lt;/p&gt;
+
+&lt;h2 id=&quot;overview&quot;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;So here is what you will learn to do today:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Scaffold a Java microservice stack using JHipster, Spring Boot, and Spring Cloud&lt;/li&gt;
+  &lt;li&gt;Create an EKS cluster, Virtual Private Cloud (VPC), subnets, and required Kubernetes add-ons using Terraform on AWS&lt;/li&gt;
+  &lt;li&gt;Set up Terraform scripts for OpenID Connect (OIDC) authentication for the microservice stack using Auth0 by Okta&lt;/li&gt;
+  &lt;li&gt;Build and deploy the microservice stack to the cluster&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Prerequisites:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://portal.aws.amazon.com/billing/signup&quot;&gt;AWS account&lt;/a&gt; with the &lt;a href=&quot;https://docs.aws.amazon.com/eks/latest/userguide/security_iam_id-based-policy-examples.html&quot;&gt;IAM permissions to create EKS clusters&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;AWS CLI &lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html&quot;&gt;installed&lt;/a&gt; and &lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html&quot;&gt;configured&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://kubernetes.io/docs/tasks/tools/&quot;&gt;kubectl&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.docker.com/get-docker/&quot;&gt;Docker&lt;/a&gt; installed and configured&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.terraform.io/downloads&quot;&gt;Terraform&lt;/a&gt; CLI&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sdkman.io/usage&quot;&gt;Java 11+&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://auth0.github.io/auth0-cli/&quot;&gt;Auth0 CLI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;[Optional] &lt;a href=&quot;https://www.jhipster.tech/installation/&quot;&gt;JHipster&lt;/a&gt; CLI&lt;/li&gt;
+  &lt;li&gt;[Optional] &lt;a href=&quot;https://github.com/kdash-rs/kdash&quot;&gt;KDash&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;why-terraform-why-not-cloud-formation&quot;&gt;Why Terraform, Why Not Cloud Formation?&lt;/h2&gt;
+
+&lt;p&gt;At this point, the first question that might pop up in your mind would be, “Why not use &lt;a href=&quot;https://aws.amazon.com/cloudformation/&quot;&gt;CloudFormation&lt;/a&gt;?”. It’s a good question; after all, CloudFormation is built by AWS and hence sounds like an excellent solution to manage AWS resources. But anyone who has tried both CloudFormation and Terraform will probably tell you to forget that CloudFormation even exists. I think CloudFormation is far more complex and less developer-friendly than Terraform. You also need to write a lot more boilerplate with CloudFormation in YAML or JSON. Yikes! In contrast, Terraform is elegant and concise, and the syntax is easier to read and write. It’s cross-platform, developer-friendly, and does not require a lot of ramp-up time.&lt;/p&gt;
+
+&lt;p&gt;Okay, now that we have that sorted, let’s dive into the steps to deploy our microservice stack on EKS.&lt;/p&gt;
+
+&lt;h2 id=&quot;scaffold-a-java-microservice-stack-using-jhipster&quot;&gt;Scaffold a Java Microservice Stack Using JHipster&lt;/h2&gt;
+
+&lt;p&gt;To start, you will scaffold a Java microservice stack using &lt;a href=&quot;https://www.jhipster.tech&quot;&gt;JHipster&lt;/a&gt;, Spring Boot, and Consul. JHipster is an excellent tool to generate a microservice stack with Spring Boot, Angular/React/Vue.js, and other modern frameworks. You can use another microservice stack if you want. If you prefer using the same application as in this demo, then you can either scaffold it using JHipster &lt;a href=&quot;https://www.jhipster.tech/jdl/intro&quot;&gt;JDL&lt;/a&gt; or clone the sample repository from &lt;a href=&quot;https://github.com/oktadev/auth0-jhipster-k8s-eks-microservices-example&quot;&gt;GitHub&lt;/a&gt;. Here is how you can scaffold your microservice stack using JHipster:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/4yatkCE8FKwJaySwnBRNeG/ee5ecddec53a48ffc712b0aaa8a1e70e/jh-microservice-auth0-consul.jpg&quot; alt=&quot;JHipster microservice architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Option 1: Scaffold the microservice stack using JHipster&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Use JHipster version &lt;strong&gt;7.9.3&lt;/strong&gt; or &lt;strong&gt;8.0.0&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;jhipster-microservice-stack
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;jhipster-microservice-stack
+&lt;span class=&quot;c&quot;&gt;# download the JDL file.&lt;/span&gt;
+jhipster download https://raw.githubusercontent.com/oktadev/auth0-jhipster-k8s-eks-microservices-example/main/apps.jdl
+&lt;span class=&quot;c&quot;&gt;# Update the `dockerRepositoryName` property to use your Docker Repository URI/Name.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# scaffold the apps.&lt;/span&gt;
+jhipster jdl apps.jdl
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Option 2: Clone the sample repository&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;git clone https://github.com/oktadev/auth0-jhipster-k8s-eks-microservices-example
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;In either case, remember to change the Docker repository name in the JDL file and Kubernetes manifests to match your Docker repository.&lt;/p&gt;
+
+&lt;p&gt;The JHipster scaffolded sample application has a gateway application and two microservices. It uses &lt;a href=&quot;https://www.consul.io/&quot;&gt;Consul&lt;/a&gt; for service discovery and centralized configuration.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-an-eks-cluster-using-terraform&quot;&gt;Create an EKS Cluster Using Terraform&lt;/h2&gt;
+
+&lt;p&gt;Now let us move on to the important part of the tutorial. Creating an EKS cluster in AWS is not as straightforward as in other cloud platforms. You need to also create a lot more resources for everything to work correctly without surprises. You will be using a bunch of Terraform providers to help with this, and you will also use some prebuilt Terraform modules like &lt;a href=&quot;https://github.com/terraform-aws-modules/terraform-aws-vpc&quot;&gt;AWS VPC Terraform module&lt;/a&gt; and &lt;a href=&quot;https://github.com/aws-ia/terraform-aws-eks-blueprints&quot;&gt;Amazon EKS Blueprints for Terraform&lt;/a&gt; to reduce the amount of boilerplate you need to write.&lt;/p&gt;
+
+&lt;p&gt;These are the AWS resources and VPC architecture you will create:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/3Mp7zJ1fmWkxng0Pqrxnft/905300cce62bf12b986a2177f5b7d11c/tf-eks-arch.jpg&quot; alt=&quot;AWS EKS and VPC architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;build-the-terraform-configuration&quot;&gt;Build the Terraform configuration&lt;/h3&gt;
+
+&lt;p&gt;First, make sure you use a specific version of the providers as different versions might use different attributes and features. Create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;versions.tf&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;terraform
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;terraform
+&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;versions.tf
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the following to the file:&lt;/p&gt;
+
+&lt;div class=&quot;language-hcl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nx&quot;&gt;terraform&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;required_version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;gt;= 1.0.0&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;required_providers&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;aws&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hashicorp/aws&quot;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;gt;= 4.47&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;kubernetes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hashicorp/kubernetes&quot;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;gt;= 2.20&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;helm&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;hashicorp/helm&quot;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&amp;gt;= 2.9&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, you need to define variables and configure the providers. Create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config.tf&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;config.tf
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the following to the file:&lt;/p&gt;
+
+&lt;div class=&quot;language-hcl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# ##  To save state in s3. Update to suit your needs&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# backend &quot;s3&quot; {&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#   bucket = &quot;create-an-s3-bucket-and-provide-name-here&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#   region = local.region&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#   key    = &quot;eks-cluster-with-new-vpc/terraform.tfstate&quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# }&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;variable&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;region&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;default&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;eu-west-1&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AWS region&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;aws_availability_zones&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;available&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;locals&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;            &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;okta-auth0-jhipster-eks&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;region&lt;/span&gt;          &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;region&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;cluster_version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1.27&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;instance_types&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;t2.large&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# can be multiple, comma separated&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;vpc_cidr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;10.0.0.0/16&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;azs&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;slice&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;aws_availability_zones&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;available&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;names&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;Blueprint&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;GitHubRepo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;github.com/aws-ia/terraform-aws-eks-blueprints&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;provider&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;aws&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;region&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;region&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Kubernetes provider&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# You should **not** schedule deployments and services in this workspace.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# This keeps workspaces modular (one for provision EKS, another for scheduling&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# Kubernetes resources) as per best practices.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;provider&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;kubernetes&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt;                   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_endpoint&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;cluster_ca_certificate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64decode&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_certificate_authority_data&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;api_version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;client.authentication.k8s.io/v1beta1&quot;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;command&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;aws&quot;&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# This requires the awscli to be installed locally where Terraform is executed&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;eks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;get-token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;--cluster-name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;provider&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;helm&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;kubernetes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt;                   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_endpoint&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;cluster_ca_certificate&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64decode&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_certificate_authority_data&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;nx&quot;&gt;exec&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;api_version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;client.authentication.k8s.io/v1beta1&quot;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;command&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;aws&quot;&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;# This requires the awscli to be installed locally where Terraform is executed&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;eks&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;get-token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;--cluster-name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can uncomment the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;backend&lt;/code&gt; section above to save the state in AWS S3 instead of your local filesystem. This is recommended for production setup so that everyone in a team has the same state. This file defines configurable and local variables used across the workspace and configures some of the providers used. The Kubernetes provider is included in this file so the EKS module can complete successfully. Otherwise, it throws an error when creating &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubernetes_config_map.aws_auth&lt;/code&gt;. The Helm provider is used to install Kubernetes add-ons to the cluster.&lt;/p&gt;
+
+&lt;h3 id=&quot;build-the-vpc&quot;&gt;Build the VPC&lt;/h3&gt;
+
+&lt;p&gt;Next up, you need a VPC, subnets, route tables, and other networking bits. You will use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vpc&lt;/code&gt; module from the &lt;a href=&quot;https://github.com/terraform-aws-modules&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform-aws-modules&lt;/code&gt;&lt;/a&gt; repository. This module is a wrapper around the AWS VPC module. It makes it easier to configure VPCs and all the other required networking resources. Create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;vpc.tf&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;vpc.tf
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the following to the file:&lt;/p&gt;
+
+&lt;div class=&quot;language-hcl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;#---------------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# VPC, Subnets, Internet gateway, Route tables, etc.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#---------------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;vpc&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;terraform-aws-modules/vpc/aws&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;~&amp;gt; 5.0&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;cidr&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc_cidr&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;azs&lt;/span&gt;             &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;azs&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;public_subnets&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;azs&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cidrsubnet&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc_cidr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;private_subnets&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;azs&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cidrsubnet&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc_cidr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;enable_nat_gateway&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;single_nat_gateway&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;enable_dns_hostnames&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# Manage so we can name them&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;manage_default_network_acl&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;default_network_acl_tags&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;${local.name}-default&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;manage_default_route_table&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;default_route_table_tags&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;${local.name}-default&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;manage_default_security_group&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;default_security_group_tags&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;${local.name}-default&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;public_subnet_tags&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;kubernetes.io/cluster/${local.name}&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;shared&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;kubernetes.io/role/elb&quot;&lt;/span&gt;              &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;private_subnet_tags&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;kubernetes.io/cluster/${local.name}&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;shared&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;kubernetes.io/role/internal-elb&quot;&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tags&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A new VPC, three private subnets, and three public subnets,&lt;/li&gt;
+  &lt;li&gt;An Internet gateway and NAT gateway for the public subnets,&lt;/li&gt;
+  &lt;li&gt;and AWS routes for the gateways, public/private route tables, and route table associations.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;build-the-eks-cluster&quot;&gt;Build the EKS cluster&lt;/h3&gt;
+
+&lt;p&gt;Now that you have the networking part done, you can build configurations for the EKS cluster and its add-ons. You will use the &lt;a href=&quot;https://github.com/terraform-aws-modules&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform-aws-modules&lt;/code&gt;&lt;/a&gt; to create the EKS cluster and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eks_blueprints&lt;/code&gt; module from &lt;a href=&quot;https://aws-ia.github.io/terraform-aws-eks-blueprints/&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform-aws-eks-blueprints&lt;/code&gt;&lt;/a&gt;to configure EKS add-ons.&lt;/p&gt;
+
+&lt;p&gt;Create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eks-cluster.tf&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;eks-cluster.tf
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the following to the file:&lt;/p&gt;
+
+&lt;div class=&quot;language-hcl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;#---------------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# EKS cluster, worker nodes, security groups, IAM roles, K8s add-ons, etc.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#---------------------------------------------------------------&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;eks&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;terraform-aws-modules/eks/aws&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;~&amp;gt; 19.15&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;cluster_name&lt;/span&gt;                   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;cluster_version&lt;/span&gt;                &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_version&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;cluster_endpoint_public_access&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;vpc_id&lt;/span&gt;                         &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc_id&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;subnet_ids&lt;/span&gt;                     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;private_subnets&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# EKS Addons&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;cluster_addons&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;aws&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;ebs&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;csi&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;driver&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;most_recent&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;coredns&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;kube&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;proxy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;vpc&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cni&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;eks_managed_node_group_defaults&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# Needed by the aws-ebs-csi-driver&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;iam_role_additional_policies&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;AmazonEBSCSIDriverPolicy&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;eks_managed_node_groups&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;initial&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;instance_types&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;instance_types&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;min_size&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;max_size&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;desired_size&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;subnet_ids&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;private_subnets&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tags&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;eks_blueprints_addons&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;github.com/aws-ia/terraform-aws-eks-blueprints//modules/kubernetes-addons?ref=v4.32.1&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;eks_cluster_id&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_name&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;eks_cluster_endpoint&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_endpoint&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;eks_cluster_version&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_version&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;eks_oidc_provider&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;oidc_provider&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;eks_oidc_provider_arn&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;oidc_provider_arn&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# K8S Add-ons&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;enable_aws_load_balancer_controller&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;enable_metrics_server&lt;/span&gt;               &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;enable_aws_cloudwatch_metrics&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;tags&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;tags&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# To update local kubeconfig with new cluster details&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;null_resource&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;kubeconfig&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;depends_on&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks_blueprints_addons&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;provisioner&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;local-exec&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;aws eks --region ${local.region}  update-kubeconfig --name $AWS_CLUSTER_NAME&quot;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;environment&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;AWS_CLUSTER_NAME&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;local&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eks&lt;/code&gt; module definition creates:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;EKS Cluster Control plane with one &lt;a href=&quot;https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html&quot;&gt;managed node group&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;Cluster and node security groups and rules, IAM roles and policies required,&lt;/li&gt;
+  &lt;li&gt;Amazon EKS add-ons ebs-csi-driver, vpc-cni, CoreDNS, and kube-proxy,&lt;/li&gt;
+  &lt;li&gt;and AWS Key Management Service (KMS) configuration.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;eks_blueprints_addons&lt;/code&gt; module definition creates:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;AWS Load Balancer Controller that provisions an AWS Network Load Balancer for distributing traffic,&lt;/li&gt;
+  &lt;li&gt;and the &lt;a href=&quot;https://github.com/kubernetes-sigs/metrics-server&quot;&gt;Metrics Server&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;null_resource&lt;/code&gt; configuration updates your local &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubeconfig&lt;/code&gt; file with the new cluster details. It’s not a required step for provisioning but just a handy hack.&lt;/p&gt;
+
+&lt;p&gt;Finally, you can also define some outputs to be captured. Create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;outputs.tf&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;outputs.tf
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the following to the file:&lt;/p&gt;
+
+&lt;div class=&quot;language-hcl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;vpc_private_subnet_cidr&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;VPC private subnet CIDR&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;private_subnets_cidr_blocks&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;vpc_public_subnet_cidr&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;VPC public subnet CIDR&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;public_subnets_cidr_blocks&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;vpc_cidr&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;VPC CIDR&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;vpc_cidr_block&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;eks_cluster_id&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;EKS cluster ID&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_id&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;eks_cluster_name&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;EKS cluster Name&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cluster_name&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;eks_managed_nodegroups&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;EKS managed node groups&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;eks_managed_node_groups&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;configure_kubectl&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Configure kubectl: make sure you&apos;re logged in with the correct AWS profile and run the following command to update your kubeconfig&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;aws eks update-kubeconfig --name ${module.eks.cluster_name} --alias ${module.eks.cluster_name}&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;provision-the-cluster&quot;&gt;Provision the cluster&lt;/h3&gt;
+
+&lt;p&gt;Our Terraform definitions are ready. Now you can provision the cluster.&lt;/p&gt;
+
+&lt;p&gt;First, ensure you have configured your AWS CLI to use the correct AWS account and a region that supports EKS. If not, run the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Visit https://console.aws.amazon.com/iam/home?#/security_credentials for creating access keys&lt;/span&gt;
+aws configure
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, initialize Terraform workspace and plan the changes:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Download modules and providers. Initialize state.&lt;/span&gt;
+terraform init
+&lt;span class=&quot;c&quot;&gt;# see a preview of what will be done&lt;/span&gt;
+terraform plan
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Review the plan and make sure everything is correct.&lt;/p&gt;
+
+&lt;p&gt;Now you can apply the changes:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;terraform apply
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Confirm by typing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;yes&lt;/code&gt; when prompted. This will take a while (15-20 minutes), so sit back and have a coffee or contemplate what led you to this point in life. 😉&lt;/p&gt;
+
+&lt;p&gt;Once the EKS cluster is ready, you will see the output variables printed to the console.&lt;/p&gt;
+
+&lt;div class=&quot;language-hcl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nx&quot;&gt;configure_kubectl&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;aws eks update-kubeconfig --name okta-auth0-jhipster-eks --alias okta-auth0-jhipster-eks&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;eks_cluster_name&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;okta-auth0-jhipster-eks&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;eks_managed_nodegroups&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;initial&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;autoscaling_group_schedule_arns&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;iam_role_arn&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;arn:aws:iam::216713166862:role/initial-eks-node-group-20230628170956397500000007&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;iam_role_name&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;initial-eks-node-group-20230628170956397500000007&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;iam_role_unique_id&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AROATE5I4QAHNFCURF5WI&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;launch_template_arn&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;arn:aws:ec2:eu-west-1:216713166862:launch-template/lt-028654c46a256c879&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;launch_template_id&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;lt-028654c46a256c879&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;launch_template_latest_version&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;launch_template_name&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;initial-2023062817211846290000000e&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;node_group_arn&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;arn:aws:eks:eu-west-1:216713166862:nodegroup/okta-auth0-jhipster-eks/initial-20230628172118695900000010/f2c48183-0cd0-f970-d405-0869ccddad37&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;node_group_autoscaling_group_names&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;s2&quot;&gt;&quot;eks-initial-20230628172118695900000010-f2c48183-0cd0-f970-d405-0869ccddad37&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;node_group_id&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;okta-auth0-jhipster-eks:initial-20230628172118695900000010&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;node_group_labels&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tomap&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;cm&quot;&gt;/* of string */&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;node_group_resources&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;autoscaling_groups&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;s2&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;eks-initial-20230628172118695900000010-f2c48183-0cd0-f970-d405-0869ccddad37&quot;&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;s2&quot;&gt;&quot;remote_access_security_group_id&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;node_group_status&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ACTIVE&quot;&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;node_group_taints&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;toset&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;vpc_cidr&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;10.0.0.0/16&quot;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;vpc_private_subnet_cidr&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;10.0.10.0/24&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;10.0.11.0/24&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;10.0.12.0/24&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;vpc_public_subnet_cidr&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;tolist&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;10.0.0.0/24&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;10.0.1.0/24&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;s2&quot;&gt;&quot;10.0.2.0/24&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see the cluster details if you run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kdash&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl get nodes&lt;/code&gt; commands.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/7jsmSHoLHEGh9HMb1lWNqj/cbac14bd55c5b4a31865cd683feb4b53/eks-cluster.png&quot; alt=&quot;EKS cluster in KDash&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The EKS cluster defined here will not come under AWS free tier; hence, running this will cost money, so delete the cluster as soon as you finish the tutorial to keep the cost within a few dollars.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;set-up-oidc-authentication-using-auth0-by-okta&quot;&gt;Set Up OIDC Authentication Using Auth0 by Okta&lt;/h2&gt;
+
+&lt;p&gt;You can proceed to deploy the sample application. You could skip this step if you used a sample that does not use Auth0 or OIDC for authentication.&lt;/p&gt;
+
+&lt;p&gt;Since you are using Terraform, you can set up the Auth0 application using the &lt;a href=&quot;https://registry.terraform.io/providers/auth0/auth0/latest/docs&quot;&gt;Auth0 Terraform provider&lt;/a&gt;. This will allow you to automate the setup of the Auth0 application and manage the addition of users, customizations, and such.&lt;/p&gt;
+
+&lt;h3 id=&quot;create-an-auth0-application&quot;&gt;Create an Auth0 application&lt;/h3&gt;
+
+&lt;p&gt;Open the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;versions.tf&lt;/code&gt; file in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform&lt;/code&gt; folder and add the following content to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;required_providers&lt;/code&gt; section:&lt;/p&gt;
+
+&lt;div class=&quot;language-hcl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;    &lt;span class=&quot;nx&quot;&gt;auth0&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0/auth0&quot;&lt;/span&gt;
+      &lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;~&amp;gt; 0.49.0&quot;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s create a Terraform script that creates an Auth0 web application and required customizations. Create a file named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0.tf&lt;/code&gt; in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform&lt;/code&gt; folder and add the following content:&lt;/p&gt;
+
+&lt;div class=&quot;language-hcl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nx&quot;&gt;provider&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;domain&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://&amp;lt;your_auth0_domain_uri&amp;gt;&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;debug&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Create a new Auth0 application for the JHipster app&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_client&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;java_ms_client&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;                &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;JavaMicroservices&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Java Microservices Client Created Through Terraform&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;app_type&lt;/span&gt;            &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;regular_web&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;callbacks&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://localhost:8080/login/oauth2/code/oidc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;allowed_logout_urls&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://localhost:8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;oidc_conformant&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;jwt_configuration&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;alg&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;RS256&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Configuring client_secret_post as an authentication method.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_client_credentials&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;java_ms_client_creds&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;client_id&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;auth0_client&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;java_ms_client&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;authentication_method&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;client_secret_post&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Create roles for the JHipster app&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_role&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;admin&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ROLE_ADMIN&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Administrator&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_role&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;user&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;ROLE_USER&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;User&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Create an action to customize the authentication flow to add the roles and the username to the access token claims expected by JHipster applications.&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_action&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jhipster_action&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jhipster_roles_claim&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;runtime&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;node18&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;deploy&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;code&lt;/span&gt;    &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOT&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;
+  /**
+   * Handler that will be called during the execution of a PostLogin flow.
+   *
+   * @param {Event} event - Details about the user and the context in which they are logging in.
+   * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
+   */
+   exports.onExecutePostLogin = async (event, api) =&amp;gt; {
+     const namespace = &apos;https://www.jhipster.tech&apos;;
+     if (event.authorization) {
+         api.idToken.setCustomClaim(namespace + &apos;/roles&apos;, event.authorization.roles);
+         api.accessToken.setCustomClaim(namespace + &apos;/roles&apos;, event.authorization.roles);
+     }
+   };
+&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;  EOT
+
+&lt;/span&gt;  &lt;span class=&quot;nx&quot;&gt;supported_triggers&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;      &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;post-login&quot;&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;version&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;v3&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Attach the action to the login flow&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_trigger_actions&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;login_flow&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;trigger&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;post-login&quot;&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;actions&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;auth0_action&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;jhipster_action&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;display_name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;auth0_action&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;jhipster_action&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# Create a test user. You can create more users here if needed&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_user&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;test_user&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;connection_name&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Username-Password-Authentication&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;            &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Jane Doe&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;email&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jhipster@test.com&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;email_verified&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;password&lt;/span&gt;        &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;passpass$12$12&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Don&apos;t set passwords like this in production! Use env variables instead.&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;lifecycle&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;ignore_changes&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;roles&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_user_roles&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;test_user_roles&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;user_id&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;auth0_user&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;test_user&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;roles&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;auth0_role&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;admin&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;auth0_role&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_webapp_client_id&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Auth0 JavaMicroservices Client ID&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;auth0_client&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;java_ms_client&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;client_id&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;output&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_webapp_client_secret&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Auth0 JavaMicroservices Client Secret&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;auth0_client_credentials&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;java_ms_client_creds&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;client_secret&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;sensitive&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can find your Auth0 domain in the &lt;a href=&quot;https://manage.auth0.com/&quot;&gt;Auth0 dashboard&lt;/a&gt; or by running the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0 tenants list&lt;/code&gt; command. The script above does the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0_client&lt;/code&gt; resource definition creates an Auth0 Web application client conforming to the OIDC standard.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0_client_credentials&lt;/code&gt; resource definition configures the client to use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;client_secret_post&lt;/code&gt; authentication method.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0_role&lt;/code&gt; resource definition creates two roles for the JHipster application.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0_action&lt;/code&gt; resource definition creates an action that will be executed during the Auth0 post-login flow. This action will add the roles and the username to the ID and access token claims as expected by JHipster applications.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0_user&lt;/code&gt; resource definition creates a test user.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;provision-the-auth0-application&quot;&gt;Provision the Auth0 application&lt;/h3&gt;
+
+&lt;p&gt;Now before you can run this script you need to create a machine-to-machine application in Auth0 so that Terraform can communicate with the Auth0 management API. This can be done using the Auth0 CLI. Please note that you also need to have &lt;a href=&quot;https://jqlang.github.io/jq/&quot;&gt;jq&lt;/a&gt; installed to run the below commands. Run the following commands to create an application after logging into the CLI with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0 login&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Create a machine-to-machine application on Auth0&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;AUTH0_M2M_APP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;auth0 apps create &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Auth0 Terraform Provider&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--description&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Auth0 Terraform Provider M2M&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--type&lt;/span&gt; m2m &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--reveal-secrets&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--json&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;. | {client_id: .client_id, client_secret: .client_secret}&apos;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Extract the client ID and client secret from the output.&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;AUTH0_CLIENT_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$AUTH0_M2M_APP&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;.client_id&apos;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;AUTH0_CLIENT_SECRET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$AUTH0_M2M_APP&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;.client_secret&apos;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create the application and set environment variables for the client ID and secret. This application needs to be authorized to use the Auth0 management API. This can be done using the commands below.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Get the ID and IDENTIFIER fields of the Auth0 Management API&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;AUTH0_MANAGEMENT_API_ID&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;auth0 apis list &lt;span class=&quot;nt&quot;&gt;--json&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;map(select(.name == &quot;Auth0 Management API&quot;))[0].id&apos;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;AUTH0_MANAGEMENT_API_IDENTIFIER&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;auth0 apis list &lt;span class=&quot;nt&quot;&gt;--json&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;map(select(.name == &quot;Auth0 Management API&quot;))[0].identifier&apos;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Get the SCOPES to be authorized&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;AUTH0_MANAGEMENT_API_SCOPES&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;auth0 apis scopes list &lt;span class=&quot;nv&quot;&gt;$AUTH0_MANAGEMENT_API_ID&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--json&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;.[].value&apos;&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-ncR&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;[inputs]&apos;&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# Authorize the Auth0 Terraform Provider application to use the Auth0 Management API&lt;/span&gt;
+auth0 api post &lt;span class=&quot;s2&quot;&gt;&quot;client-grants&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;{&quot;client_id&quot;: &quot;&apos;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$AUTH0_CLIENT_ID&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;&quot;, &quot;audience&quot;: &quot;&apos;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$AUTH0_MANAGEMENT_API_IDENTIFIER&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;&quot;, &quot;scope&quot;:&apos;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$AUTH0_MANAGEMENT_API_SCOPES&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&apos;}&apos;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you can run the Terraform script to create the Auth0 application. Run the following commands to initialize the script and apply it.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Upgrade the terraform script&lt;/span&gt;
+terraform init &lt;span class=&quot;nt&quot;&gt;-upgrade&lt;/span&gt;
+terraform apply
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create the Auth0 application and the test user. You can find the client ID and secret in the output of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform output&lt;/code&gt; command. You can also find the client ID and secret in the Auth0 dashboard.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c&quot;&gt;# Client ID&lt;/span&gt;
+terraform output &lt;span class=&quot;nt&quot;&gt;--json&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;.auth0_webapp_client_id.value&apos;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Client Secret&lt;/span&gt;
+terraform output &lt;span class=&quot;nt&quot;&gt;--json&lt;/span&gt; | jq &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;.auth0_webapp_client_secret.value&apos;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note the client ID and client secret from the output. You will need these values in the next section.&lt;/p&gt;
+
+&lt;h3 id=&quot;configure-the-jhipster-application-to-use-auth0&quot;&gt;Configure the JHipster application to use Auth0&lt;/h3&gt;
+
+&lt;p&gt;Update &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubernetes/registry-k8s/application-configmap.yml&lt;/code&gt; with the Spring Security OIDC configuration using values from the previous step. This configuration is loaded into Consul, and it shares the values with the gateway and microservices.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;na&quot;&gt;apiVersion&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ConfigMap&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;metadata&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;application-config&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jhipster&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#common configuration shared between all applications&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;s&quot;&gt;application.yml&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|-&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;configserver:&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;jhipster:&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;security:&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;...&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;oauth2:&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;audience:&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;- https://&amp;lt;your-auth0-domain&amp;gt;/api/v2/&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;spring:&lt;/span&gt;
+      &lt;span class=&quot;s&quot;&gt;security:&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;oauth2:&lt;/span&gt;
+          &lt;span class=&quot;s&quot;&gt;client:&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;provider:&lt;/span&gt;
+              &lt;span class=&quot;s&quot;&gt;oidc:&lt;/span&gt;
+                &lt;span class=&quot;s&quot;&gt;# make sure to include the trailing slash&lt;/span&gt;
+                &lt;span class=&quot;s&quot;&gt;issuer-uri: https://&amp;lt;your-auth0-domain&amp;gt;/&lt;/span&gt;
+            &lt;span class=&quot;s&quot;&gt;registration:&lt;/span&gt;
+              &lt;span class=&quot;s&quot;&gt;oidc:&lt;/span&gt;
+                &lt;span class=&quot;s&quot;&gt;client-id: &amp;lt;client-id&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;s&quot;&gt;client-secret: &amp;lt;client-secret&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# app specific configuration&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The microservice applications are now ready.&lt;/p&gt;
+
+&lt;h3 id=&quot;secure-secrets&quot;&gt;Secure secrets&lt;/h3&gt;
+
+&lt;p&gt;If you have noticed, you are setting secrets in plain text on the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;application-configmap.yml&lt;/code&gt; file, which is not ideal and is not a best practice for security. The best way to do this securely would be to use &lt;a href=&quot;https://aws.amazon.com/secrets-manager/&quot;&gt;AWS Secrets Manager&lt;/a&gt;, an external service like &lt;a href=&quot;https://www.hashicorp.com/products/vault&quot;&gt;HashiCorp Vault&lt;/a&gt;, or &lt;a href=&quot;https://github.com/bitnami-labs/sealed-secrets&quot;&gt;Sealed Secrets&lt;/a&gt;. To learn more about these methods see the blog post &lt;a href=&quot;https://auth0.com/blog/kubernetes-secrets-management/&quot;&gt;Shhhh… Kubernetes Secrets Are Not Really Secret!&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;deploy-the-microservice-stack&quot;&gt;Deploy the Microservice Stack&lt;/h2&gt;
+
+&lt;p&gt;You are ready to deploy to our shiny new EKS cluster, but first, you need to build and push the Docker images to a container registry. You can use &lt;a href=&quot;https://aws.amazon.com/ecr/&quot;&gt;Amazon Elastic Container Registry (ECR)&lt;/a&gt; or any other container registry.&lt;/p&gt;
+
+&lt;h3 id=&quot;build-the-docker-images&quot;&gt;Build the Docker images&lt;/h3&gt;
+
+&lt;p&gt;You need to build Docker images for each app. This is specific to the JHipster application used in this tutorial which uses &lt;a href=&quot;https://github.com/GoogleContainerTools/jib&quot;&gt;Jib&lt;/a&gt; to build the images. Make sure you are logged into Docker using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker login&lt;/code&gt;. Navigate to each app folder (&lt;strong&gt;store&lt;/strong&gt;, &lt;strong&gt;invoice&lt;/strong&gt;, &lt;strong&gt;product&lt;/strong&gt;) and run the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;./gradlew bootJar &lt;span class=&quot;nt&quot;&gt;-Pprod&lt;/span&gt; jib &lt;span class=&quot;nt&quot;&gt;-Djib&lt;/span&gt;.to.image&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&amp;lt;docker-repo-uri-or-name&amp;gt;/&amp;lt;image-name&amp;gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Image names should be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;store&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;invoice&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;product&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;deploy-the-applications-to-eks&quot;&gt;Deploy the applications to EKS&lt;/h3&gt;
+
+&lt;p&gt;Start the deployment using the handy script provided by JHipster. You could also manually apply deployments using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl apply -f &amp;lt;file&amp;gt;&lt;/code&gt; commands.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;kubernetes
+./kubectl-apply.sh &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/3vo9lWwxkHWghbvcnSt9wg/b5158d9a4b0ab89e8a73d255acb206ff/eks-pods.png&quot; alt=&quot;JHipster pods in KDash&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can also run the following command to see the status of the deployments:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;kubectl get pods &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhipster
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;View the Consul registry using port-forwarding as follows, and you will be able to access the application at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:8500&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;kubectl port-forward svc/consul-ui &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhipster 8500
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can access the gateway application using port-forwarding as follows, and you will be able to access the application at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:8080&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;kubectl port-forward svc/store &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhipster 8080
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Or, you can access the application via the load balancer exposed. Find the external IP of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;store&lt;/code&gt; service by navigating to the service tab in KDash or by running the following:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;kubectl get svc store &lt;span class=&quot;nt&quot;&gt;-n&lt;/span&gt; jhipster
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You need to add the external IP of the store to allowed callback URLs and allowed logout URLs in the Auth0 web application. You can do this by adding the values to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;callbacks&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;allowed_logout_urls&lt;/code&gt; array in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;java_ms_client&lt;/code&gt; resource in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0.tf&lt;/code&gt; file like below:&lt;/p&gt;
+
+&lt;div class=&quot;language-hcl highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nx&quot;&gt;resource&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;auth0_client&quot;&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;java_ms_client&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;                &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;JavaMicroservices&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;description&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Java Microservices Client Created Through Terraform&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;app_type&lt;/span&gt;            &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;regular_web&quot;&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;callbacks&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://localhost:8080/login/oauth2/code/oidc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http://aws-elb-id.region.elb.amazonaws.com:8080/login/oauth2/code/oidc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;allowed_logout_urls&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://localhost:8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;http://aws-elb-id.region.elb.amazonaws.com:8080&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;oidc_conformant&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+
+  &lt;span class=&quot;nx&quot;&gt;jwt_configuration&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;alg&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;RS256&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform apply -target=&quot;auth0_client.java_ms_client&quot;&lt;/code&gt; to update the configuration in your Auth0 tenant.&lt;/p&gt;
+
+&lt;p&gt;Now you should be able to visit the external IP of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;store&lt;/code&gt; service on port 8080 and see the application, and you should be able to log in using your Auth0 test user credentials.&lt;/p&gt;
+
+&lt;p&gt;If you encounter an issue where the Consul pods do not start, you might have issues with the AWS EBS addon for EKS. Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl describe pvc -n jhipster&lt;/code&gt; to see if there are any errors. If you see &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;could not create volume in EC2: UnauthorizedOperation&lt;/code&gt; in errors, then you need to troubleshoot by following the &lt;a href=&quot;https://docs.aws.amazon.com/eks/latest/userguide/managing-ebs-csi.html&quot;&gt;Managing the Amazon EBS CSI driver as an Amazon EKS add-on&lt;/a&gt; guide.&lt;/p&gt;
+
+&lt;h2 id=&quot;tear-down-the-cluster-with-terraform&quot;&gt;Tear Down the Cluster with Terraform&lt;/h2&gt;
+
+&lt;p&gt;Once you are done with the tutorial, you can delete the cluster and all the resources created using Terraform by running the following commands:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;terraform
+&lt;span class=&quot;c&quot;&gt;# The commands below might take a while to finish.&lt;/span&gt;
+terraform destroy &lt;span class=&quot;nt&quot;&gt;-target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;module.eks_blueprints_addons&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-auto-approve&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# If deleting the VPC fails, then manually delete the load balancers and the security groups&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# for the load balancer associated with the VPC from the AWS EC2 console and try again.&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# This is due to the fact that EKS creates a load balancer for Kubernetes service and it is not known to Terraform.&lt;/span&gt;
+terraform destroy &lt;span class=&quot;nt&quot;&gt;-target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;module.eks&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-auto-approve&lt;/span&gt;
+terraform destroy &lt;span class=&quot;nt&quot;&gt;-target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;module.vpc&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-auto-approve&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Clean up Auth0 apps and anything left over.&lt;/span&gt;
+terraform destroy &lt;span class=&quot;nt&quot;&gt;-auto-approve&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can find all the code from this example on &lt;a href=&quot;https://github.com/oktadev/auth0-jhipster-k8s-eks-microservices-example&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://mastodon.social/@deepu105&quot;&gt;Mastodon&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+</content:encoded>
+        <media:content url="https://images.ctfassets.net/23aumh6u8s0i/4v0xPe8ANM1ntPRbQCVZVs/97fb1ada5c603d12b9f505574196cac4/java-duke.jpg" medium="image">https://images.ctfassets.net/23aumh6u8s0i/4v0xPe8ANM1ntPRbQCVZVs/97fb1ada5c603d12b9f505574196cac4/java-duke.jpg</media:content>
+        <pubDate>Thu, 23 Nov 2023 00:00:00 +0100</pubDate>
+        <link>https://deepu.tech/terraform-eks-java-microservices-jhipster/</link>
+        <guid isPermaLink="true">https://deepu.tech/terraform-eks-java-microservices-jhipster/</guid>
+        
+        <category>java</category>
+        
+        <category>terraform</category>
+        
+        <category>kubernetes</category>
+        
+        <category>aws</category>
+        
+        
+      </item>
     
       <item>
         <title>Mastodon for Developers: Everything You Need to Know</title>
@@ -1871,7 +3133,7 @@ LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;So Golang finally made the sane decision to add support for generics, in version 1.18, after dragging it out for years and after multiple proposals. Well, simplicity is nice when you are a newbie in the language but becomes annoying really fast, in my personal experience, especially in large codebases.&lt;/p&gt;
 
-&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;So &lt;a href=&quot;https://twitter.com/hashtag/golang?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#golang&lt;/a&gt; finally makes the sane decision to introduce Generics in version 1.18 &lt;br /&gt;&lt;br /&gt;Finally people can get rid of like atleast 1/3 of their codebase which is basically just finding an element from an array or map 😂😂😂&lt;br /&gt;&lt;br /&gt;They could have kept the syntax as &amp;lt;&amp;gt; though 🤷‍♂️&lt;/p&gt;&amp;mdash; @deepu105@mastodon.social (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1505784416471158788?ref_src=twsrc%5Etfw&quot;&gt;March 21, 2022&lt;/a&gt;&lt;/blockquote&gt;
+&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;So &lt;a href=&quot;https://twitter.com/hashtag/golang?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#golang&lt;/a&gt; finally makes the sane decision to introduce Generics in version 1.18 &lt;br /&gt;&lt;br /&gt;Finally people can get rid of like atleast 1/3 of their codebase which is basically just finding an element from an array or map 😂😂😂&lt;br /&gt;&lt;br /&gt;They could have kept the syntax as &amp;lt;&amp;gt; though 🤷‍♂️&lt;/p&gt;&amp;mdash; Deepu K Sasidharan (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1505784416471158788?ref_src=twsrc%5Etfw&quot;&gt;March 21, 2022&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
 &lt;/div&gt;
 
@@ -3280,193 +4542,6 @@ We probably would still have to wait a few years before we can actually start us
         <category>engineering</category>
         
         <category>discuss</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>The programming languages I like and why I like them</title>
-        <description>Being a polyglot developer, there would be some language you like over others and here are mine. | &lt;a href=&quot;https://deepu.tech/languages-i-like-and-why/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Being a polyglot developer is fun. You are not married to a single language/ecosystem and you have a diverse tool-belt to choose from based on the issue at hand. But still, you are going to have favorites based on your experience with different languages and their ecosystem.&lt;/p&gt;
-
-&lt;p&gt;In my career, spanning 11+ years, I have worked with many programming languages. The first programming language I encountered was Basic when I was in school, but I won’t count that since I didn’t pay any attention and I didn’t understand it back then.&lt;/p&gt;
-
-&lt;p&gt;Later when I was in college I had a mandatory computer science class, I was doing Electrical and Electronic Engineering, and there I first came across C, C++, and Java. But again It was just basics and I wasn’t very interested and I just studied enough to clear the paper.&lt;/p&gt;
-
-&lt;p&gt;Later, I was running a blog about motorcycles and I started dabbling with WordPress, Flash, ActionScript, and JavaScript.&lt;/p&gt;
-
-&lt;p&gt;The first programming language I actually learned with an interest was &lt;a href=&quot;https://en.wikipedia.org/wiki/Scheme_(programming_language)&quot;&gt;Scheme&lt;/a&gt;, It was a training language used in my first job as an IT Intern/Trainee and that got me hooked and in few months I started learning Java and JavaScript.&lt;/p&gt;
-
-&lt;p&gt;I became quite good at Java and JS and really was enjoying working with those and If you have asked me back then, I would have said that Java and JS were the greatest languages out there.&lt;/p&gt;
-
-&lt;p&gt;So for a pretty good part of my career, I was coding in Java and JavaScript and later TypeScript. I did work with a bit of Groovy, Python, and Scala but I didn’t like those languages much and I had no interest in learning any new languages at that point.&lt;/p&gt;
-
-&lt;p&gt;A few years ago when Golang was all the rage, I moved to a project that was built in Go and hence started looking into Go. It was extremely easy to learn and I really liked working with it (for a while).&lt;/p&gt;
-
-&lt;p&gt;Rust was quite new at that point and I wanted to try it out but got around to it only a year later and I was in love with it.&lt;/p&gt;
-
-&lt;p&gt;In the past two years, I also worked with Kotlin, PHP, Ruby, and C# as well occasionally. But I wasn’t very impressed with Ruby and PHP.&lt;/p&gt;
-
-&lt;p&gt;So without further adieu, these are my favorite programming languages in order.&lt;/p&gt;
-
-&lt;h1 id=&quot;1-rust&quot;&gt;1. Rust&lt;/h1&gt;
-
-&lt;p&gt;Rust is currently my most favorite language. It’s so much fun to work with and I love the challenge of rethinking how you write code. You know, as they say, it sparks joy when you work with it. Rust is truly a modern and powerful programming language.&lt;/p&gt;
-
-&lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;&lt;a href=&quot;https://twitter.com/hashtag/java?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#java&lt;/a&gt;: I&amp;#39;ll provide you memory safety but you must pay performance penalty for abstractions and the runtime&lt;a href=&quot;https://twitter.com/hashtag/C?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#C&lt;/a&gt;++: I&amp;#39;ll provide you zero cost abstractions, but you must pay with memory safety&lt;a href=&quot;https://twitter.com/hashtag/Rust?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#Rust&lt;/a&gt;: hold my 🍺&lt;/p&gt;&amp;mdash; @deepu105@mastodon.social (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1413259371472109573?ref_src=twsrc%5Etfw&quot;&gt;July 8, 2021&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Rust would be my go-to for systems programming, embedded, CLIs, OS tools, WebAssembly, and so on. I guess the only place I won’t use Rust would be serious monolithic web application development as the ecosystem is not mature for that yet.&lt;/p&gt;
-
-&lt;p&gt;I wrote in detail about what I like and dislike about Rust in &lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/&quot;&gt;this post&lt;/a&gt;, but I’ll summarize it here for the casual skimmers.&lt;/p&gt;
-
-&lt;h2 id=&quot;-likes&quot;&gt;😍 Likes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/#safety&quot;&gt;&lt;strong&gt;Safe by default&lt;/strong&gt;&lt;/a&gt;: Rust is memory safe, thread-safe, type-safe, and null safe&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/#zero-cost-abstractions&quot;&gt;&lt;strong&gt;Zero cost abstractions&lt;/strong&gt;&lt;/a&gt;: Write in any programming style without worrying about the added performance penalty&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/#fearless-concurrency&quot;&gt;&lt;strong&gt;Awesome concurrency&lt;/strong&gt;&lt;/a&gt;: Great support for multi-threading, parallelism, and asynchronous programming&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/my-second-impression-of-rust/#community-tooling--ecosystem&quot;&gt;&lt;strong&gt;Great tooling out of the box&lt;/strong&gt;&lt;/a&gt;: Cargo, Clippy, Rustfmt, and so on. It’s the best tooling ecosystem I have come across. Testing, building, bootstrapping, benchmarking, linting and more included out of the box.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Immutable by default&lt;/strong&gt;: You need to declare mutable operations explicitly&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Built-in functional programming abstractions&lt;/strong&gt;: Monad like iterators, optional, chaining, and so on&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.logrocket.com/macros-in-rust-a-tutorial-with-examples/#typesofmacrosinrust&quot;&gt;&lt;strong&gt;Macros&lt;/strong&gt;&lt;/a&gt;: Powerful metaprogramming that can be used to define custom language features, code reusability, and so on&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Excellent community&lt;/strong&gt;: Fast-growing, active, and really supportive community&lt;/li&gt;
-  &lt;li&gt;Superfast, as fast as or sometimes even faster than C/C++&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;No heavy runtime&lt;/strong&gt;: No garbage collection and so on. There is a very small runtime for panics and stuff, but IMO it’s negligible&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Excellent language features&lt;/strong&gt;: Pattern matching, generics, iterators, traits, expressions, and so on&lt;/li&gt;
-  &lt;li&gt;Hands down the best compiler out there. You have to try it to appreciate it.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Fast growing and being widely adopted&lt;/strong&gt;: Rust is going places. There are a lot of big names(Google, Microsoft, AWS, Apple, and so on) adopting it and hence cementing its place. It’s also finding footing outside of systems programming like embedded, web assembly, web development, game development, and so on. Once the ecosystems for different use cases mature, I see great potential for Rust to be a great general-purpose language without any major compromise.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Native images&lt;/strong&gt;: It’s so easy to build native images with Rust, no special setup required. Cargo supports building for your favorite platform out of the box.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-dislikes&quot;&gt;😩 Dislikes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/first-impression-of-rust/#complexity&quot;&gt;&lt;strong&gt;Complexity&lt;/strong&gt;&lt;/a&gt;: Being an amalgamation of many languages, Rust does feel more complex than many other languages. I especially would have preferred to not have multiple ways to do the same thing.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Learning curve&lt;/strong&gt;: Rust is not the easiest language to learn, especially if you are a beginner or if you are used to working only in one language like Java, C#, or Python. But if you are polyglot and already familiar with a few languages like C/C++, Java, TS, and Go, you will feel quite at home with Rust. There are some advanced concepts like borrowing and lifetimes that take some getting used to and practice to grasp.&lt;/li&gt;
-  &lt;li&gt;Ecosystem is not mature enough for many use cases. I would love to use Rust for web application development but the ecosystem for that is still very young and you are gonna have a hard time compared to something like Java or C#&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;2-java&quot;&gt;2. Java&lt;/h1&gt;
-
-&lt;p&gt;Java isn’t cool like Rust or feature-rich like JavaScript but it makes up for all that by having one of the most stable, battle-tested, and rich ecosystems.&lt;/p&gt;
-
-&lt;p&gt;So if I would start my own company with a web application as the product, I would 100% go with JVM on the backend with either Java or Kotlin, and of course I will build it using &lt;a href=&quot;https://www.jhipster.tech/&quot;&gt;JHipster&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you like Java, it’s hard not to like Kotlin. It feels like a modern version of Java and building Android apps using Kotlin was a nice experience. Unlike Scala, Kotlin doesn’t go overboard with all the complexity and implicit stuff.&lt;/p&gt;
-
-&lt;p&gt;I might choose Kotlin over Java if building a new web app and if the team has experience with Kotlin.&lt;/p&gt;
-
-&lt;p&gt;Also, Java is close to my heart as it’s the programming language that jump-started my career.&lt;/p&gt;
-
-&lt;p&gt;Here is what I like and dislike about Java&lt;/p&gt;
-
-&lt;h2 id=&quot;-likes-1&quot;&gt;😍 Likes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Ecosystem&lt;/strong&gt;: The biggest strength of Java is its ecosystem. There are great frameworks and libraries for everything you can think of and most of these solutions are extremely stable with a lot of community and support. In reality, the ecosystem is whats keeping Java popular and growing.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Experienced community&lt;/strong&gt;: Java has a very mature and experienced community so even if you are a beginner there is a lot of resources to help you&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Great tooling&lt;/strong&gt;: There are a lot of great tools out there for Java. IDEs like IntelliJ, Eclipse, NetBeans offer some of the best developer experiences, and build tools like Gradle and Maven are so powerful and feature-rich. There are also profilers, linters, and so on.&lt;/li&gt;
-  &lt;li&gt;Built-in &lt;a href=&quot;https://deepu.tech/functional-programming-in-java-for-beginners/&quot;&gt;functional programming abstractions&lt;/a&gt;: Monad like iterators, streams, optional, functional interfaces, and so on&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Fairly easy to learn&lt;/strong&gt;: Java is not very complex and hence is fairly easy to learn and get started even with its boilerplate.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-dislikes-1&quot;&gt;😩 Dislikes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Boilerplate&lt;/strong&gt;: Java needs too much boilerplate. There is no nice way to say this. Compared to other languages in its league, Java feels too verbose. Lambdas have made it more digestible but there are other JVM languages like Kotlin or Scala that have got this part right. I really wish Java gets there one day where you don’t have to write 20 lines of code to read a file.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Not so modern&lt;/strong&gt;: Language features in Java are, let’s just say it doesn’t spark joy, it’s improving but if you are used to few other languages, then there is a lot to wish for, and compared to its peers Java feels old even though its just as old as JS, Ruby or Python&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Baggage&lt;/strong&gt;: Java has great backward compatibility but that also means baggage. there is a lot of such baggage in Java and it’s holding the language back in my humble opinion.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Virtual machine&lt;/strong&gt;: JVM was a great idea when Java was introduced as portability was not easy back then but in today’s IT landscape containers and native images have made portability easy and that makes a Java Virtual Machine redundant. JVM still provides a lot of valuable features but it also takes up resources and space whereas languages like Go or Rust can just build tiny native binaries that can be deployed using docker to get better performance with less resource usage than a Java app running on JVM.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;3-typescriptjavascript&quot;&gt;3. TypeScript/JavaScript&lt;/h1&gt;
-
-&lt;p&gt;Most Java developers hate JavaScript but I have a &lt;a href=&quot;https://deepu.tech/reflections-on-javascript/&quot;&gt;love-hate relationship&lt;/a&gt; with it. JavaScript is one of the quirkiest languages around and like it or not it’s the de-facto for the web and it gets the job done.&lt;/p&gt;
-
-&lt;p&gt;I like TypeScript a lot more than JavaScript and find it way nicer to work with than JS. So TS and by extension JS would tie with Java for the second spot for me.&lt;/p&gt;
-
-&lt;p&gt;TS/JS is still my go-to for quick scripting and building client-side apps and mobile apps (ReactNative/PWA)&lt;/p&gt;
-
-&lt;p&gt;I wrote in detail about what I like and dislike about JS in this post, here is the summary&lt;/p&gt;
-
-&lt;h2 id=&quot;-likes-2&quot;&gt;😍 Likes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#dynamic--extremely-flexible&quot;&gt;&lt;strong&gt;Flexible&lt;/strong&gt;&lt;/a&gt;: The dynamic nature of JS/TS makes it extremely flexible and powerful. It’s also very forgiving language. If you know what you are doing, there is literally nothing you cant get done. Of course, the flexibility comes with its own price.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#biggest-community&quot;&gt;&lt;strong&gt;Community&lt;/strong&gt;&lt;/a&gt;: JavaScript has the biggest community among programming languages. It’s active, mature, and thriving. It’s a huge strength as it helps beginners and experts alike in solving problems and improving the ecosystem on the whole.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Ecosystem&lt;/strong&gt;: JS has a huge ecosystem with a lot of libraries and frameworks. You will find anything you could imagine as a library. The ecosystem is so big that it has started to become an issue in terms of “yet another framework syndrome”.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Asynchronous programming&lt;/strong&gt;: JS has one of the best ecosystems for asynchronous programming. It’s so easy to write async code with Promises and async/await and it has become the de-facto way of programming in JS these days.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Great tooling&lt;/strong&gt;: JS has great tooling, thanks to NodeJS and its ecosystem. IDEs like VS Code, Atom, Webstorm, and so on provide great JS support. There are also so many wonderful tools like Webpack, Rollup, Jest, and so on.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/functional-programming-in-typescript/&quot;&gt;&lt;strong&gt;Functional programming&lt;/strong&gt;&lt;/a&gt;: JS is multi-paradigm and has a lot of support for functional programming. It’s a great fit for functional programming.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#beginner-friendly-but-also-powerful&quot;&gt;&lt;strong&gt;Easy to learn&lt;/strong&gt;&lt;/a&gt;: JS is a simple language to learn and get started. It’s one of the most beginner-friendly languages and communities out there. Of course, there is complex stuff in JS but you don’t need to know that to get started.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;NodeJS&lt;/strong&gt;: NodeJS was the best thing to happen for software development. It not just revolutionized the JS world but also inspired other languages to take note and be more developer-friendly and build easy-to-use tooling and ecosystem. You can see this inspiration in Rust, Golang, and so on.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;TypeScript&lt;/strong&gt;: TS is another best thing that happened to JS. It provides an answer to a lot of JS issues that bother people and makes it possible to use JS in a more developer-friendly way on a huge codebase.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-dislikes-2&quot;&gt;😩 Dislikes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#fragmentation-browser-implementations-version-compatibility&quot;&gt;&lt;strong&gt;Fragmentation&lt;/strong&gt;&lt;/a&gt;: This is the biggest issue with JS. There are standards and there is vendors and that’s the perfect recipe for disaster. Most of the time a JS developer spends used to be to make it work across different browsers and platforms. The demise of IE has made this better but hey I heard Safari is the next IE so there is that.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#error-prone-a-side-effect-of-flexibility&quot;&gt;&lt;strong&gt;Error-prone&lt;/strong&gt;&lt;/a&gt;: This is the side effect of being too flexible. JS code is extremely error-prone and unmanageable in huge code bases. TypeScript makes this much much better but still, it’s so easy to shoot in your own foot with JS.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflections-on-javascript/#yet-another-framework-syndrome&quot;&gt;&lt;strong&gt;Framework overload&lt;/strong&gt;&lt;/a&gt;: Too many frameworks for the same thing, too many libraries for the same thing, and libraries for doing extremely trivial stuff like left-padding :( Competition is good but IMO what we have in the JS ecosystem is just too much. It causes mental drain and unnecessary fragmentation in the community.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Over-engineering in the ecosystem&lt;/strong&gt;: I have been doing JS for over 11 years now and I’m noticing a clear trend of over-engineering in the ecosystem. Look at the JS build tooling for example it has been over-engineered to the extend that setting that up feels like a project in itself.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;4-go&quot;&gt;4. Go&lt;/h1&gt;
-
-&lt;p&gt;Go is the simplest language I have worked with and the easiest to learn. I like Golang for quickly putting something together and Go code is quite easy to read.&lt;/p&gt;
-
-&lt;p&gt;But I would choose Rust over go for large codebase since Go becomes annoying due to its limited features after a while especially on large codebases. IMO go is still ideal for building small system utilities and microservices.&lt;/p&gt;
-
-&lt;p&gt;I wrote in detail about what I like and dislike about Go in &lt;a href=&quot;https://deepu.tech/reflection-on-golang/&quot;&gt;this post&lt;/a&gt;, here is the summary&lt;/p&gt;
-
-&lt;h2 id=&quot;-likes-3&quot;&gt;😍 Likes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#simplicity&quot;&gt;&lt;strong&gt;Simplicity&lt;/strong&gt;&lt;/a&gt;: Go is extremely simple. You could technically learn it in a day or two. It’s easy to get started and be productive in Go. It’s also easy to read and debug as there is only one way of doing anything so you know what is going on without having to ask the person who wrote the code. It’s the easiest language for beginners as well.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#tooling&quot;&gt;&lt;strong&gt;Built-in tooling and style guide&lt;/strong&gt;&lt;/a&gt;: Go provides built-in tooling for all the basic stuff like dependency management, testing, build and so on. It also has an opinionated formatter that saves a lot of time.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#goroutines--channels&quot;&gt;&lt;strong&gt;Goroutines&lt;/strong&gt;&lt;/a&gt;: Goroutines are awesome. It’s so easy to use and intuitive and the best concurrency experience you can find.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Native images&lt;/strong&gt;: It’s so easy to build native images with Go, no special setup required. It supports building for your favorite platform out of the box.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;-dislikes-3&quot;&gt;😩 Dislikes&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#simplicity-1&quot;&gt;&lt;strong&gt;Simplicity&lt;/strong&gt;&lt;/a&gt;: Go’s simplicity is really nice when you are getting started but it starts to feel like an annoyance once you start writing more Go code. If you come from another language, you soon start to yearn for features like generics, error handling, default values, and so on. Keeping code DRY is a challenge in Go due to the lack of generics. IMO Go would be a great language if it had generics. Also, I dread writing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if err != nil&lt;/code&gt; in Go.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Boilerplate&lt;/strong&gt;: Side effect of Go being too simple. In large codebases, you would be repeating stuff like finding an item from an array or map so many times that the boilerplate is just too much after a while.&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://deepu.tech/reflection-on-golang/#weird-interface-construct&quot;&gt;&lt;strong&gt;Implicit interfaces&lt;/strong&gt;&lt;/a&gt;: May it’s just me. I don’t like implicit interface implementations. It just feels wrong and confusing to me.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h1&gt;
-
-&lt;p&gt;These are my personal favorites among programming languages and doesn’t mean the likes and dislikes would apply to anyone. make your own conclusions but do use the language before making a judgment about it.&lt;/p&gt;
-
-&lt;p&gt;In today’s IT landscape, being a polyglot developer is becoming a requirement. And personally, I believe that being a polyglot makes you a better programmer and software engineer. I previously wrote about &lt;a href=&quot;https://deepu.tech/how-to-be-an-effective-polyglot-developer/&quot;&gt;how to be an effective polyglot developer&lt;/a&gt;, do check it out if you are interested.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Photo by &lt;a href=&quot;https://unsplash.com/@tama66&quot;&gt;Peter Herrmann&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/old-computer&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-</content:encoded>
-        <media:content url="https://i.imgur.com/FOpUG38.jpeg" medium="image">https://i.imgur.com/FOpUG38.jpeg</media:content>
-        <pubDate>Fri, 09 Jul 2021 00:00:00 +0200</pubDate>
-        <link>https://deepu.tech/languages-i-like-and-why/</link>
-        <guid isPermaLink="true">https://deepu.tech/languages-i-like-and-why/</guid>
-        
-        <category>java</category>
-        
-        <category>rust</category>
-        
-        <category>golang</category>
-        
-        <category>javascript</category>
         
         
       </item>
