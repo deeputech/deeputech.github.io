@@ -1,9 +1,9 @@
 ---
-title: >-
-  A Passwordless Future! Passkeys for Java Developers
+title: A Passwordless Future! Passkeys for Java Developers
 published: true
 description: >-
-  Passkeys and WebAuthn for Java developers. Learn how to get started with passkeys for your Java and Spring Boot applications.
+  Passkeys and WebAuthn for Java developers. Learn how to get started with
+  passkeys for your Java and Spring Boot applications.
 tags:
   - java
   - spring
@@ -11,7 +11,10 @@ tags:
   - webauthn
 cover_image: >-
   https://images.ctfassets.net/23aumh6u8s0i/5hJmVQbQfsNjNelza45z5p/41ef7af98a312dcd771c361bfc9e6149/Our_Take_on_Passkeys_4X.jpg
-canonical_url: "https://auth0.com/blog/webauthn-and-passkeys-for-java-developers/"
+canonical_url: 'https://auth0.com/blog/webauthn-and-passkeys-for-java-developers/'
+devto_id: 1714905
+devto_url: >-
+  https://dev.to/deepu105/a-passwordless-future-passkeys-for-java-developers-3f0c
 ---
 
 _Originally published at [auth0.com](https://auth0.com/blog/webauthn-and-passkeys-for-java-developers/)_
@@ -328,3 +331,4 @@ I hope that you found this article helpful. Here are some additional resources t
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Mastodon](https://mastodon.social/@deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
