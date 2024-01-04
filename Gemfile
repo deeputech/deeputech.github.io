@@ -23,4 +23,5 @@ group :jekyll_plugins do
     gem 'octokit', '~> 4.19'
 end
 
-gem "webrick", "~> 1.7"
+gem "webrick", "~> 1.8"
+gem "json", "~> 2.5"
