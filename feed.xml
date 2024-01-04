@@ -5,9 +5,418 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 23 Nov 2023 15:34:50 +0100</pubDate>
-    <lastBuildDate>Thu, 23 Nov 2023 15:34:50 +0100</lastBuildDate>
+    <pubDate>Thu, 04 Jan 2024 14:51:29 +0100</pubDate>
+    <lastBuildDate>Thu, 04 Jan 2024 14:51:29 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
+    
+      <item>
+        <title>A Passwordless Future! Passkeys for Java Developers</title>
+        <description>Passkeys and WebAuthn for Java developers. Learn how to get started with passkeys for your Java and Spring Boot applications. | &lt;a href=&quot;https://deepu.tech/webauthn-and-passkeys-for-java-developers/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;&lt;em&gt;Originally published at &lt;a href=&quot;https://auth0.com/blog/webauthn-and-passkeys-for-java-developers/&quot;&gt;auth0.com&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;So, first things first, why do we even need to go passwordless? After all, passwords have been around for over 1000 years, right? And we were all happily sharing our Netflix passwords.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-password-problem&quot;&gt;The Password Problem&lt;/h2&gt;
+
+&lt;p&gt;The most important reason to go passwordless would be the password problem. According to &lt;a href=&quot;https://www.verizon.com/business/resources/reports/dbir/2023/summary-of-findings/&quot;&gt;Verizon’s 2023 Data Breach Investigations Report&lt;/a&gt;, stolen credentials and phishing account for over 65% of all data breaches.&lt;/p&gt;
+
+&lt;p&gt;Most of the password problems are human problems in my opinion. Because passwords rely on us humans to remember them and to not share them and do a bunch of other stuff. History has repeatedly, a quadrillion times, shown us that we are not good at doing these things. So it is an &lt;strong&gt;us&lt;/strong&gt; problem rather than the technology itself.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/4kBHMXHpPNBBHiuwsJCMGK/4141a7ac4f7a7b66a3bbf07812c968c2/hacker_wearing_a_hoodie_anime.jpg&quot; alt=&quot;Anime character depicting a hacker&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;These are the main problems with passwords:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Knowledge-based&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;People can be socially engineered, quite easily, to divulge passwords, or other information that can be used to get to the password.&lt;/li&gt;
+      &lt;li&gt;In this day and age there are just too many passwords to remember. If passwords are easy to remember they are also easy to guess. Complex passwords are not easy to remember, so we end up reusing passwords.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Phishing&lt;/strong&gt;: Phishing websites can easily harvest passwords from even the most tech-savvy.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Remote Replay&lt;/strong&gt;: Accounts can be accessed remotely using harvested passwords.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data Breach&lt;/strong&gt;: Applications become a target for data breaches when they store passwords.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Share and Reuse&lt;/strong&gt;: Sharing and reusing passwords makes them even more vulnerable.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Password management&lt;/strong&gt;: Passwords are not just a hassle for the end users, they are a hassle on the server side as well. Because
+    &lt;ul&gt;
+      &lt;li&gt;We need to build password recovery and reset flows.&lt;/li&gt;
+      &lt;li&gt;We need multi-factor authentication flows to secure them further.&lt;/li&gt;
+      &lt;li&gt;They need to be reset regularly in some use cases.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://www.forbes.com/sites/forbestechcouncil/2023/03/23/embracing-the-end-of-the-password-here-and-now&quot;&gt;Did you know it could cost around 70$ to reset a password?&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Of course, password managers help with some aspects of this and everyone should use one. But they are still an overhead and not very convenient for everyone, especially non-tech folks.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-passwordless&quot;&gt;What is Passwordless?&lt;/h2&gt;
+
+&lt;p&gt;The obvious solution for the password problem is to go passwordless. So what exactly is passwordless?&lt;/p&gt;
+
+&lt;p&gt;If you can verify a user’s identity with something other than a password as the first factor of authentication, it is passwordless. We are doing this every day to unlock our phones and laptops using our fingerprints, faces, and so on.&lt;/p&gt;
+
+&lt;p&gt;There are a few &lt;a href=&quot;https://auth0.com/blog/what-is-passwordless-authentication/&quot;&gt;passwordless methods&lt;/a&gt; that you might have seen here and there. Like:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Biometric authentication&lt;/li&gt;
+  &lt;li&gt;Magic links&lt;/li&gt;
+  &lt;li&gt;SMS/Email One-Time Password (OTP)&lt;/li&gt;
+  &lt;li&gt;Push notifications&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But most of these methods are not secure enough to replace a password + Multi-Factor Authentication (MFA) combination.&lt;/p&gt;
+
+&lt;h2 id=&quot;passkeys&quot;&gt;Passkeys&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Passkeys are a password replacement that provide faster, easier, and more secure sign-ins to websites and apps across a user’s devices. Unlike passwords, passkeys are resistant to phishing, are always strong, and are designed so that there are no shared secrets.
+–– FIDO Alliance&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is where passkeys come into the picture. A secure passwordless future is the one offered by passkeys in my opinion. You probably already encountered passkeys since Google and GitHub have been rolling it out to all users recently. If you haven’t set them up yet, you should!&lt;/p&gt;
+
+&lt;p&gt;A passkey is a unique cryptographic key pair that allows you to access online services without using passwords. It is based on &lt;a href=&quot;https://en.wikipedia.org/wiki/Public-key_cryptography&quot;&gt;asymmetric public-key cryptography&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Before we dive deep into passkeys let’s look at some of the underlying technologies that make passkeys possible.&lt;/p&gt;
+
+&lt;h3 id=&quot;public-key-cryptography&quot;&gt;Public-key cryptography&lt;/h3&gt;
+
+&lt;p&gt;Asymmetric public key cryptography involves a pair of mathematically linked keys: a public key, which is shared openly, and a private key, kept secret by the owner.&lt;/p&gt;
+
+&lt;p&gt;When a message is encrypted with the public key, only the corresponding private key can decrypt it, ensuring confidentiality. At the same time, a message signed with a private key can be verified with the public key, authenticating the sender’s identity. Passkeys use the signature verification mechanism.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/3MWt9AKNIHYTANuAwI0kwT/54fa496219c32ad6f651165c16e5bec0/digital-signing.jpg&quot; alt=&quot;Signature verification using Public-key cryptography&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;These keys are generated using a cryptographic algorithm, such as RSA or ECC.&lt;/p&gt;
+
+&lt;h3 id=&quot;authenticator&quot;&gt;Authenticator&lt;/h3&gt;
+
+&lt;p&gt;An authenticator is a hardware or software entity that can create and store public-private key pairs which can be used for user registration and authentication. There are two types of authenticators:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Platform authenticators&lt;/strong&gt;: An authenticator built into a user’s device. For example, TouchID and FaceID from Apple, smartphone authenticators, Windows Hello, and so on.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Roaming authenticators&lt;/strong&gt;: A removable authenticator usable with any device the user is trying to sign in from. They are attached using USB, NFC, and/or Bluetooth. For example, security keys like &lt;a href=&quot;https://www.yubico.com/products/how-the-yubikey-works/&quot;&gt;YubiKey&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/titan-security-key&quot;&gt;Google Titan&lt;/a&gt; and smartphones.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;fido&quot;&gt;FIDO&lt;/h3&gt;
+
+&lt;p&gt;FIDO stands for Fast IDentity Online. FIDO is a global authentication standard based on public key cryptography developed by the &lt;a href=&quot;https://fidoalliance.org/&quot;&gt;FIDO Alliance&lt;/a&gt;. It aims to solve all our password problems. FIDO Credentials are cryptographic key pairs that can be used for authentication.&lt;/p&gt;
+
+&lt;p&gt;Passkeys are made possible by the &lt;a href=&quot;https://fidoalliance.org/fido2/&quot;&gt;FIDO2&lt;/a&gt; standard which is made up of Web Authentication (WebAuthn) and Client to Authenticator Protocol (CTAP).&lt;/p&gt;
+
+&lt;h3 id=&quot;web-authentication&quot;&gt;Web Authentication&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://webauthn.me/introduction&quot;&gt;Web Authentication&lt;/a&gt; is a &lt;a href=&quot;https://www.w3.org/TR/webauthn/&quot;&gt;W3C recommendation&lt;/a&gt; that lets a webpage use a set of JavaScript APIs to talk to authenticators.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/362EsMw63XVyLPh1jvJuZL/098194b80c218131f37f0af6435483f4/webauthn-arch-passkeys.jpg&quot; alt=&quot;WebAuthn architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The WebAuthn architecture consists of three main entities:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Authenticator&lt;/strong&gt;: Platform or roaming authenticators that let a user authenticate by confirming their presence.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Relying Party&lt;/strong&gt;: A server (custom implementation or an Identity Provider like Auth0) that requires authentication. It issues challenges and stores public keys.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Client&lt;/strong&gt;: A client consists of the user’s browser. The client relays information between an authenticator and a relying party.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;client-to-authenticator-protocol&quot;&gt;Client to Authenticator Protocol&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html&quot;&gt;FIDO Client to Authenticator Protocol&lt;/a&gt; is used for communications with authenticators over a variety of transports like USB, NFC, and Bluetooth. It is used to send requests from WebAuthn to authenticators.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Passkeys are passwordless FIDO credentials implemented using WebAuthn.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The term passkey itself is just a marketing term popularized originally by companies like Apple and Google. Originally it was FIDO Multi-Device Credentials implemented with the WebAuthn specification. But recently that definition has evolved to mean any passwordless FIDO credentials that are discoverable by the browser. Passkeys are still evolving and hence this could change as well. But for simplicity let’s stick to passkeys as that is the term approved and used by the FIDO Alliance.&lt;/p&gt;
+
+&lt;h3 id=&quot;types-of-passkeys&quot;&gt;Types of passkeys&lt;/h3&gt;
+
+&lt;p&gt;Passkeys have two variants. Synced or multi-device passkeys and hardware or device-bound passkeys.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/6gWyrZIApjNIMzNLsYTZAy/dbd53f5f33b665fb4abe499612e87513/passkey-types.jpg&quot; alt=&quot;Passkey types&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;synced-passkeys&quot;&gt;Synced passkeys&lt;/h4&gt;
+
+&lt;p&gt;Synced passkeys have a better user experience since the private keys are end-to-end encrypted and synced to the cloud. For example, on the Apple ecosystem, the private key is synced on your iCloud keychain and you can register on one device and log in to any synced Apple device. The same goes for the Google ecosystem using the Chrome browser. Or you can use a password manager like BitWarden to store your passkeys.
+This kind of passkeys can be restored on new devices. But they are less secure than single device-bound passkeys since your private key is on the cloud and theoretically can be breached.&lt;/p&gt;
+
+&lt;h4 id=&quot;hardware-bound-passkeys&quot;&gt;Hardware-bound passkeys&lt;/h4&gt;
+
+&lt;p&gt;In the hardware or device-bound passkeys, the private key stays on the device itself and you need to authenticate using the same authenticator used for registration. It is slightly less convenient but more secure than synced passkeys. The relying party must support registering multiple credentials for a user so that backup keys can be registered, which is a best practice for hardware-bound passkeys.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;For example, I use a YubiKey with a fingerprint reader since I’m on Linux, and my passkeys are hardware-bound to that YubiKey. I don’t get any roaming or backup benefits like in the Apple or Google ecosystem. But it’s not a big deal, in my opinion, since I can register multiple Yubikeys as backup and use them on any device, and it’s more secure and way more convenient than password + MFA.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;how-does-it-work&quot;&gt;How does it work?&lt;/h3&gt;
+
+&lt;p&gt;Let’s see how user registration and authentication works with passkeys.&lt;/p&gt;
+
+&lt;h4 id=&quot;user-registration&quot;&gt;User registration&lt;/h4&gt;
+
+&lt;p&gt;First, let’s see how the registration flow works.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/1baVPd0OibsVRiE1ZRhLyr/525189d154e10c19b789263642b6baf4/passkey-registration-flow.jpg&quot; alt=&quot;Passkey registration flow&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The user begins the registration flow. The relying party provides a randomly generated challenge string.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.create()&lt;/code&gt; API is invoked and the user provides approval using their authenticator.&lt;/li&gt;
+  &lt;li&gt;The authenticator creates a private-public key pair which is unique for the relying party’s domain and the user. The private key is used to sign the challenge.
+    &lt;ul&gt;
+      &lt;li&gt;An attestation object is created which contains the public key, signed challenge, credential ID, and certificate.&lt;/li&gt;
+      &lt;li&gt;The private key is stored on the authenticator.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;For synced passkeys&lt;/strong&gt;, the private key is also synced to a cloud service for backup and roaming (This is the only place where synced passkeys differ from hardware-bound passkeys).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The attestation object and other metadata are then passed to the relying party by the client-side implementation. The relying party verifies the signed challenge using the public key and registers the user by storing the public key and credential ID along with the user details.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;user-authentication&quot;&gt;User authentication&lt;/h4&gt;
+
+&lt;p&gt;Now, let’s see how the login flow works, which is quite similar except for the third step.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/1jrvIF1jqOAPckwX7FnVyB/456c25b1586a84770efeaff7d2664e0e/passkey-login-flow.jpg&quot; alt=&quot;Passkey login flow&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The user begins the login flow. The relying party provides a randomly generated challenge string.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.get()&lt;/code&gt; API is invoked and the user provides approval using their authenticator.&lt;/li&gt;
+  &lt;li&gt;The authenticator retrieves the private keys for the relying party’s domain name.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;For synced passkeys&lt;/strong&gt;, if the device is new, the private key is synced from a cloud service if available (This is the only place where synced passkeys differ from hardware-bound passkeys).&lt;/li&gt;
+      &lt;li&gt;The user selects the private key for their username. The private key is used to sign the challenge.&lt;/li&gt;
+      &lt;li&gt;An assertion object is created which contains the signed challenge and credential ID.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The assertion object and other metadata are then passed to the relying party by the client-side implementation. The relying party verifies the signed challenge using the public key stored for the user and authenticates the user.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;why-passkeys&quot;&gt;Why Passkeys?&lt;/h2&gt;
+
+&lt;p&gt;Let’s see why we need passkeys to replace passwords.&lt;/p&gt;
+
+&lt;p&gt;Passkeys are superior to password + traditional OTP MFA in terms of security and usability and they are as secure and more convenient than password + FIDO MFA. Most importantly, you don’t have to remember anything (unless you are like me and forget your YubiKeys all the time).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/2PT1FgbaFHD0ZOJDu3789k/b8a229f5c72115298db20f64060c65b0/passkey-vs-password.jpg&quot; alt=&quot;password vs passkeys&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Discoverable&lt;/strong&gt;: They are discoverable by the browser and the browser can autofill them for a service making it unnecessary for you to remember even usernames. It doesn’t rely on something you know, instead, it relies on something you have which is more secure from hacking and social engineering.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Phishing resistant&lt;/strong&gt;: Passkeys cannot be phished as they rely on public key cryptography and are bound to the domain name of the website, making it impossible to work on a spoofed website.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Remote attack resistant&lt;/strong&gt;: They rely on physical keys, like biometric sensors of platform authenticators or roaming authenticators like YubiKey, hence cannot be remotely breached.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Breach resistant&lt;/strong&gt;: The website only stores the public key of a user which is useless to an attacker on a data breach on the server side. This makes the server less attractive to hackers.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Not reusable and shareable*&lt;/strong&gt;: They cannot be reused as they are unique per service and user combination and cannot be shared.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;*&lt;/strong&gt;except for Apple which lets you share a passkey by air-dropping it 🤷🏽 making it slightly less secure.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Easier management&lt;/strong&gt;: Passkeys are scalable. Synced passkeys are backed up and replicated across your devices by cloud services like iCloud, Google Cloud, Bitwarden, and so on. This makes recovery part of the platform rather than the application.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cross-device authentication&lt;/strong&gt;: Passkeys can also perform cross-device authentication regardless of ecosystem or platform. This means you can simply use your Android phone as an authenticator for your Apple laptop. This method also ensures security by making sure the devices are nearby using Bluetooth.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/5QPkAg3AaayeXqAqILLbC/06967f9aaf00771e619cb260e4d924ff/passkey-usability-security.jpg&quot; alt=&quot;Security and usability spectrum&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The security of passkeys is way better than most other combinations. When it comes to user experience, though it is subjective, I think it outperforms all other combinations.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-does-it-differ-from-fido2-mfa&quot;&gt;How Does It Differ from FIDO2 MFA?&lt;/h2&gt;
+
+&lt;p&gt;Technically they are very similar since both can be implemented with WebAuthn and in the case of hardware-bound passkeys they are almost the same. However, there are some differences in terms of usability.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Passkeys are &lt;strong&gt;Discoverable Credentials (Resident Keys)&lt;/strong&gt; and hence are discoverable by browsers, FIDO2 MFA is non-resident keys. This means for hardware keys like YubiKey, the private key is stored on the key itself and hence can only hold what its memory allows, whereas for FIDO2 MFA, the private key is encrypted and sent to the relying party, hence no storage limitation on the hardware key.&lt;/li&gt;
+  &lt;li&gt;FIDO2 MFA does not have a synced option, passkeys does.&lt;/li&gt;
+  &lt;li&gt;In the case of synced passkeys there are even more differences in terms of usability and security. For example, enrollment needs to be done only once and the private keys are synced to a cloud.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The most important difference is that passkeys can be used as first-factor authentication whereas MFA can only be used as a second-factor after user registration with a password.&lt;/p&gt;
+
+&lt;h2 id=&quot;challenges&quot;&gt;Challenges&lt;/h2&gt;
+
+&lt;p&gt;There are still some challenges when it comes to passkeys:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;W3C Recommendation&lt;/strong&gt;: It’s still a W3C recommendation and not a standard, which means it can still change, hence slowing down adoption.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;OS/Browser support&lt;/strong&gt;: It is dependent on the OS and Browser to implement the specs, and we all know how that turns out right? This means the support may not be uniform and can become fragmented and we might never have the same experience everywhere.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cloud vendor reliance&lt;/strong&gt;: It relies on companies like Apple, Google, and Microsoft to save the private keys in their cloud securely and protect it from breaches.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Enterprise use cases&lt;/strong&gt;: Enterprise users might want more control and flexibility which could be a problem. For example, if an enterprise doesn’t allow iCloud or Google on their computer, passkeys would not work there.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reset &amp;amp; Recovery&lt;/strong&gt;: There are no default recovery flows for hardware-bound passkeys, and applications might still need to implement recovery &amp;amp; reset flows to accommodate all use cases.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://webauthn.me/browser-support&quot;&gt;Browser and OS compatibility&lt;/a&gt; is still catching up. As of writing, Chrome has the best support and the Apple ecosystem has the most seamless experience, especially for platform authenticators. Linux does not have any support for platform authenticators. Roaming authenticators have great support on all platforms.&lt;/p&gt;
+
+&lt;h2 id=&quot;lets-see-passkeys-in-action&quot;&gt;Let’s See Passkeys in Action&lt;/h2&gt;
+
+&lt;p&gt;Let’s build a Spring Boot web app and secure it using passkeys with the help of Auth0 by Okta. You can find a sample app &lt;a href=&quot;https://a0.to/jfall-passkey&quot;&gt;on GitHub&lt;/a&gt; if you just want to try passkeys.&lt;/p&gt;
+
+&lt;p&gt;Before you get started, you will need the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Java 17 or higher. You can use &lt;a href=&quot;https://sdkman.io/&quot;&gt;SDKMAN!&lt;/a&gt; to install Java if you don’t have it already.&lt;/li&gt;
+  &lt;li&gt;A free Auth0 account. &lt;a href=&quot;https://a0.to/blog_signup&quot;&gt;Sign up&lt;/a&gt; if you don’t have one already.&lt;/li&gt;
+  &lt;li&gt;The Auth0 CLI. &lt;a href=&quot;https://github.com/auth0/auth0-cli#installation&quot;&gt;Install&lt;/a&gt; the CLI if you don’t have it and log in to your Auth0 account using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0 login&lt;/code&gt; command.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;create-a-spring-boot-application&quot;&gt;Create a Spring Boot application&lt;/h3&gt;
+
+&lt;p&gt;Create a new Spring Boot application using the &lt;a href=&quot;https://start.spring.io/&quot;&gt;Spring Initializr&lt;/a&gt;. You can use the web version or the curl command below. Use the default for most of the options. For the dependencies, select &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;web&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;okta&lt;/code&gt;. For the build tool, select &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gradle&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;curl &lt;span class=&quot;nt&quot;&gt;-G&lt;/span&gt; https://start.spring.io/starter.tgz &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;dependencies&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;web,okta &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;baseDir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;passkey-demo &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+ | &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-xzvf&lt;/span&gt; -
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;web&lt;/code&gt; dependency provides Spring Web MVC with basic HTTP REST functionality. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;okta&lt;/code&gt; dependency provides the Okta Spring Boot Starter, which provides the required dependencies and configuration to add OIDC authentication to your application.&lt;/p&gt;
+
+&lt;h3 id=&quot;add-a-web-controller&quot;&gt;Add a web controller&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Imports are omitted for brevity so make sure to import them using your IDE.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Open the created starter application in your favorite IDE. Add a simple web controller to the application. Create a new file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/main/java/com/example/demo/HomeController.java&lt;/code&gt; with the following content:&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nd&quot;&gt;@RestController&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;HomeController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@GetMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;home&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nd&quot;&gt;@AuthenticationPrincipal&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;OidcUser&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Hello, &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getFullName&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This controller will handle requests to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt; path.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you run the application using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./gradlew bootRun&lt;/code&gt;, you will see a login page from the Okta Spring Boot starter instead of your home screen. This is OK, and you will be able to configure this soon. You can comment out the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;okta-spring-boot-starter&lt;/code&gt; dependency in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;build.gradle&lt;/code&gt; file if you want to run the application at this point.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;enable-passkeys-on-your-auth0-tenant&quot;&gt;Enable passkeys on your Auth0 tenant&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Log in to your &lt;a href=&quot;https://manage.auth0.com&quot;&gt;Auth0 Dashboard&lt;/a&gt; and navigate to &lt;strong&gt;Authentication&lt;/strong&gt; &amp;gt; &lt;strong&gt;Database&lt;/strong&gt; &amp;gt; &lt;strong&gt;Username-Password-Authentication&lt;/strong&gt;.
+    &lt;ol&gt;
+      &lt;li&gt;If the second tab says &lt;strong&gt;Authentication Methods&lt;/strong&gt;, your tenant supports passkeys, proceed to the next step.&lt;/li&gt;
+      &lt;li&gt;If the second tab says &lt;strong&gt;Password Policy&lt;/strong&gt;, your tenant doesn’t support passkeys, &lt;a href=&quot;https://auth0.com/docs/get-started/auth0-overview/create-tenants&quot;&gt;Create a new tenant&lt;/a&gt; and proceed to the next step.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Navigate to &lt;strong&gt;Authentication&lt;/strong&gt; &amp;gt; &lt;strong&gt;Authentication Profile&lt;/strong&gt; and select &lt;strong&gt;Identifier First&lt;/strong&gt;. &lt;strong&gt;Save&lt;/strong&gt; your changes.&lt;/li&gt;
+  &lt;li&gt;Navigate to &lt;strong&gt;Authentication&lt;/strong&gt; &amp;gt; &lt;strong&gt;Database&lt;/strong&gt; &amp;gt; &lt;strong&gt;Username-Password-Authentication&lt;/strong&gt; and select the &lt;strong&gt;Authentication Methods&lt;/strong&gt; tab and enable &lt;strong&gt;Passkey&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;configure-oidc-authentication-with-auth0&quot;&gt;Configure OIDC Authentication with Auth0&lt;/h3&gt;
+
+&lt;p&gt;Configure the application to use Auth0 as the Identity Provider (IdP). You can use the Auth0 CLI to create a new application. Run the following command to create a new application:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;auth0 apps create &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Spring Boot Passkeys&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--description&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Spring Boot Example&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--type&lt;/span&gt; regular &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--callbacks&lt;/span&gt; http://localhost:8080/login/oauth2/code/okta &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--logout-urls&lt;/span&gt; http://localhost:8080 &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--reveal-secrets&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--type&lt;/code&gt; option specifies that you use a regular web application. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--callbacks&lt;/code&gt; option specifies the callback URL for the application. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--logout-urls&lt;/code&gt; option specifies the logout URL for the application. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--reveal-secrets&lt;/code&gt; option will display the client secret in the output. You can also use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0 apps update&lt;/code&gt; command to update the application with the callback and logout URLs.&lt;/p&gt;
+
+&lt;p&gt;Note down the Auth0 issuer (for example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://dev-12345678.us.auth0.com/&lt;/code&gt;), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CLIENT ID&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CLIENT SECRET&lt;/code&gt; from the output. You will use these values in the next step.&lt;/p&gt;
+
+&lt;h3 id=&quot;configure-the-spring-boot-application&quot;&gt;Configure the Spring Boot application&lt;/h3&gt;
+
+&lt;p&gt;Configure the application by creating an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;application.properties&lt;/code&gt; file in the applications root folder with the following content:&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;c1&quot;&gt;# trailing `/` is important for issuer URI&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;okta.oauth2.issuer=https://&amp;lt;AUTH0_domain&amp;gt;/&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;okta.oauth2.client-id=&amp;lt;AUTH0_clientId&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;s&quot;&gt;okta.oauth2.client-secret=&amp;lt;AUTH0_clientSecret&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;application.properties&lt;/code&gt; file to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.gitignore&lt;/code&gt; file to avoid committing the secrets to the repository.&lt;/p&gt;
+
+&lt;h3 id=&quot;run-the-application&quot;&gt;Run the application&lt;/h3&gt;
+
+&lt;p&gt;To run the application, execute the following command:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;./gradlew bootRun
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The application should start successfully. Navigate to &lt;a href=&quot;http://localhost:8080/&quot;&gt;http://localhost:8080&lt;/a&gt; in your browser. You will be redirected to the Auth0 universal login page for authentication.&lt;/p&gt;
+
+&lt;p&gt;Click on the &lt;strong&gt;Sign up&lt;/strong&gt; link to register a new user. Enter any email address and click &lt;strong&gt;Continue&lt;/strong&gt;. You will now be prompted to register a passkey.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/6HjspO1xZy3n4wOCalfmpQ/a6b88eb00dab38ee7c724536b69ee4c8/register-screen.jpg&quot; alt=&quot;Registration Screen&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Create a passkey using your platform authenticator or roaming authenticator like YubiKey. Once you have registered a passkey, you should be redirected back to the application and see the welcome message.&lt;/p&gt;
+
+&lt;h2 id=&quot;webauthn-for-java&quot;&gt;WebAuthn for Java&lt;/h2&gt;
+
+&lt;p&gt;Though Web Authentication’s user experience is a client-side implementation using JavaScript, the backend or Relying party can be a Java server. Ideally using an IdP like Auth0 would be the best option since it takes care of all the heavy lifting for you. But if you want to implement it yourself, you can use one of the below libraries.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/webauthn4j/webauthn4j&quot;&gt;WebAuthn4j&lt;/a&gt;: A 100% FIDO2 conformant library with support for all attestation formats and validation. It is used by Keycloak and Spring Security.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Yubico/java-webauthn-server&quot;&gt;java-webauthn-server&lt;/a&gt;: A library from Yubico that supports many attestation format. But it is not 100% FIDO2 conformant.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We will dive deeper into using WebAuthn4j with Spring Security in a follow-up blog post. In the meantime, you can explore a sample application I built using WebAuthn4j and Spring Security &lt;a href=&quot;https://a0.to/jfall-webauthn&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;p&gt;I hope that you found this article helpful. Here are some additional resources to learn more about WebAuthn and passkeys.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;https://webauthn.me&lt;/li&gt;
+  &lt;li&gt;https://passkeys.dev&lt;/li&gt;
+  &lt;li&gt;https://passkey.org/&lt;/li&gt;
+  &lt;li&gt;https://fidoalliance.org/passkeys/&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://auth0.com/blog/our-take-on-passkeys/&quot;&gt;Our Take On Passkeys&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://mastodon.social/@deepu105&quot;&gt;Mastodon&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+</content:encoded>
+        <media:content url="https://images.ctfassets.net/23aumh6u8s0i/5hJmVQbQfsNjNelza45z5p/41ef7af98a312dcd771c361bfc9e6149/Our_Take_on_Passkeys_4X.jpg" medium="image">https://images.ctfassets.net/23aumh6u8s0i/5hJmVQbQfsNjNelza45z5p/41ef7af98a312dcd771c361bfc9e6149/Our_Take_on_Passkeys_4X.jpg</media:content>
+        <pubDate>Tue, 02 Jan 2024 00:00:00 +0100</pubDate>
+        <link>https://deepu.tech/webauthn-and-passkeys-for-java-developers/</link>
+        <guid isPermaLink="true">https://deepu.tech/webauthn-and-passkeys-for-java-developers/</guid>
+        
+        <category>java</category>
+        
+        <category>spring</category>
+        
+        <category>passkeys</category>
+        
+        <category>webauthn</category>
+        
+        
+      </item>
     
       <item>
         <title>Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes</title>
@@ -1106,7 +1515,7 @@ terraform output &lt;span class=&quot;nt&quot;&gt;--json&lt;/span&gt; | jq &lt;s
   &lt;span class=&quot;na&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jhipster&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;#common configuration shared between all applications&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;s&quot;&gt;application.yml&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|-&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;application.yml&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|-&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;configserver:&lt;/span&gt;
       &lt;span class=&quot;s&quot;&gt;...&lt;/span&gt;
     &lt;span class=&quot;s&quot;&gt;jhipster:&lt;/span&gt;
@@ -2024,7 +2433,7 @@ gcloud secrets add-iam-policy-binding testsecret &lt;span class=&quot;se&quot;&g
   &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;mypodserviceaccount&lt;/span&gt;
   &lt;span class=&quot;na&quot;&gt;namespace&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;default&lt;/span&gt;
   &lt;span class=&quot;na&quot;&gt;annotations&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;s&quot;&gt;iam.gke.io/gcp-service-account&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;gke-workload@$PROJECT_ID.iam.gserviceaccount.com&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;iam.gke.io/gcp-service-account&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;gke-workload@$PROJECT_ID.iam.gserviceaccount.com&lt;/span&gt;
 &lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;apiVersion&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;v1&lt;/span&gt;
 &lt;span class=&quot;na&quot;&gt;kind&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Pod&lt;/span&gt;
@@ -3135,6 +3544,7 @@ LoomBenchmark.virtualThreadPerTask    avgt    5  1.098 ± 0.020   s/op
 
 &lt;div class=&quot;jekyll-twitter-plugin&quot;&gt;&lt;blockquote class=&quot;twitter-tweet&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;So &lt;a href=&quot;https://twitter.com/hashtag/golang?src=hash&amp;amp;ref_src=twsrc%5Etfw&quot;&gt;#golang&lt;/a&gt; finally makes the sane decision to introduce Generics in version 1.18 &lt;br /&gt;&lt;br /&gt;Finally people can get rid of like atleast 1/3 of their codebase which is basically just finding an element from an array or map 😂😂😂&lt;br /&gt;&lt;br /&gt;They could have kept the syntax as &amp;lt;&amp;gt; though 🤷‍♂️&lt;/p&gt;&amp;mdash; Deepu K Sasidharan (@deepu105) &lt;a href=&quot;https://twitter.com/deepu105/status/1505784416471158788?ref_src=twsrc%5Etfw&quot;&gt;March 21, 2022&lt;/a&gt;&lt;/blockquote&gt;
 &lt;script async=&quot;&quot; src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+
 &lt;/div&gt;
 
 &lt;p&gt;As a polyglot developer who has worked extensively in Golang for a few years, I have been quite critical of it &lt;a href=&quot;https://deepu.tech/reflection-on-golang/&quot;&gt;in a previous blog post titled “My reflections on Golang”&lt;/a&gt;, written in 2019. If you are ready to be triggered, go ahead and read that post and come back here. One of my biggest gripes was that Go didn’t have generics. So now that it has generics, I decided to re-evaluate my opinions about Go.&lt;/p&gt;
@@ -4383,165 +4793,6 @@ We probably would still have to wait a few years before we can actually start us
         <category>development</category>
         
         <category>kde</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>What is Developer Experience and why should we care?</title>
-        <description>Let&apos;s bust some myths around developer experience and see why it&apos;s important. | &lt;a href=&quot;https://deepu.tech/what-is-developer-experience-and-why-care/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;Information Technology (IT) is undoubtedly one of the most important industries today and one that is ever-growing. Every company is becoming an IT company these days. From Taxis to food delivery to banking, every industry is dominated by companies that are IT companies first and domain second. With that growth, the demand for software and tools used by other developers also grows.&lt;/p&gt;
-
-&lt;p&gt;As an industry it took us some time to realize the importance of user experience (UX), you will understand what I’m talking about if you have tried using the internet or any software before the 2000s, but fortunately, we took notice, and today there are entire departments dedicated to user research and UX in software development.&lt;/p&gt;
-
-&lt;p&gt;User experience matters for any software, but if your primary consumers are developers, then there is something else that matters more than UX. Its developer experience (DX) as developers make IT possible.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-is-developer-experience&quot;&gt;What is Developer Experience?&lt;/h2&gt;
-
-&lt;p&gt;It is the overall feeling that a developer gets when using a technical product in her/his development workflow. It is akin to UX but from a developer’s perspective. Let’s take an example for the sake of non-developer folks out there.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/EB23Cv3.png&quot; alt=&quot;What is Developer experience&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Let’s say you are building a cool and fancy product that lets developers add an image gallery to their applications, as part of the product you provide:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;an API, to get random optimized images from your service;&lt;/li&gt;
-  &lt;li&gt;a JS SDK to add this easily on WordPress sites;&lt;/li&gt;
-  &lt;li&gt;a web application to manage the images.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Now for a developer who would use this product the DX is going to be the sum of:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The experience using the API, like:
-    &lt;ul&gt;
-      &lt;li&gt;how easy it was to onboard&lt;/li&gt;
-      &lt;li&gt;how easy it is to integrate into their app?&lt;/li&gt;
-      &lt;li&gt;simplicity of the API and the resulting code&lt;/li&gt;
-      &lt;li&gt;learning curve of the API&lt;/li&gt;
-      &lt;li&gt;how informative are error messages?&lt;/li&gt;
-      &lt;li&gt;does it follow known standards and structure?&lt;/li&gt;
-      &lt;li&gt;how easy it is to debug.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Performance of the API.&lt;/li&gt;
-  &lt;li&gt;Documentation of the API and product.&lt;/li&gt;
-  &lt;li&gt;The ease of use of the JS SDK if they are using it.&lt;/li&gt;
-  &lt;li&gt;The user experience of the web app when managing images.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;And this experience determines if the developer is going to consider using your product for the next project or not.&lt;/p&gt;
-
-&lt;p&gt;We could also loosely measure DX as the inverse of the amount of frustration a developer has when using a product. Sometimes these frustrations could be outside of your control but regardless it is going to affect the DX as after all we are human and our emotions and feelings bound us.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Of course other factors like features, pricing, sales, marketing, and so on will get you through the door, but good DX is what will keep you in the room.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Of course, there are more things that can be done in the above example to make DX even better, like providing example applications, video tutorials, blog posts showing various use cases, CLI tools for debugging, and so on.&lt;/p&gt;
-
-&lt;h2 id=&quot;why-should-you-care-about-developer-experience&quot;&gt;Why should you care about Developer Experience?&lt;/h2&gt;
-
-&lt;p&gt;You should care about the DX of your product for the same reasons you care about the UX and some more. If you are a developer, just think of what kind of experience you would want when using a similar product. A good DX also shows empathy on your part for your primary users.&lt;/p&gt;
-
-&lt;p&gt;Developers are a very opinionated bunch. We love our opinions and we love to defend our favorite language, technology, and tools. Heck, we are even ready to go to war over something as trivial as &lt;a href=&quot;https://www.reddit.com/r/programming/comments/p1j1c/tabs_vs_spaces_vs_both/&quot;&gt;tabs vs spaces&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;So if your product has great DX the developers using it will love it and will evangelize and defend your product to the death. You might even gain a community of ardent supporters for your product that no amount of marketing can get you.&lt;/p&gt;
-
-&lt;p&gt;But if the DX is bad, they are going to badmouth your product. If you are a developer, I think you know what I’m talking about and I’m pretty sure you have done this a lot.&lt;/p&gt;
-
-&lt;p&gt;Another reason for focusing on DX is that it will make marketing and sales much easier as you have less friction with your end-users and fewer things that you need to convince them about.&lt;/p&gt;
-
-&lt;p&gt;The recent surge in the interest for developer advocacy has also helped to bring to the limelight the importance of DX and without good DX there is not much you can do about developer advocacy and evangelism.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-can-we-have-a-great-developer-experience&quot;&gt;How can we have a great Developer Experience?&lt;/h2&gt;
-
-&lt;p&gt;A product with great DX helps a developer to get up and running quickly and reach her/his goal with minimal frustrations.&lt;/p&gt;
-
-&lt;p&gt;So let’s see what are some of the common things that could help make great DX. Please note that this is not an exhaustive list and there are many more things that could help, depending on the specific product/use case.&lt;/p&gt;
-
-&lt;h3 id=&quot;if-you-are-building-apis&quot;&gt;If you are building APIs&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Stick to known and highly adopted standards and conventions. Do not reinvent the wheel or try to come up with new fancy conventions as it will increase the learning curve and make it harder for developers to onboard.&lt;/li&gt;
-  &lt;li&gt;Provide good error handling. Adopt something like &lt;a href=&quot;https://datatracker.ietf.org/doc/html/rfc7807&quot;&gt;RFC 7807&lt;/a&gt; to provide a consistent and easy-to-use error handling for your API. Errors are unavoidable but making developers scratch their heads when it happens is avoidable to an extend.&lt;/li&gt;
-  &lt;li&gt;Provide consistent and easy-to-use documentation. Provide an &lt;a href=&quot;https://www.openapis.org/&quot;&gt;OpenAPI&lt;/a&gt; or &lt;a href=&quot;http://raml.org/&quot;&gt;RAML&lt;/a&gt; file that describes your API and the endpoints. Also, provide easy-to-use interactive online API documentation like &lt;a href=&quot;https://swagger.io/&quot;&gt;Swagger&lt;/a&gt; if possible.&lt;/li&gt;
-  &lt;li&gt;Provide SDKs and libraries for most popular languages and frameworks.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;if-you-are-building-development-toolsproducts&quot;&gt;If you are building development tools/products&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Good UX, which is tailored for developers. Like providing high contrast options. Good keyboard navigation, consistent with an industry standard.&lt;/li&gt;
-  &lt;li&gt;Customizability, did I mention developers are an opinionated bunch?&lt;/li&gt;
-  &lt;li&gt;Easy to install on different platforms. Support different OSes. Provide multiple installation methods, especially, support the most popular installation method/package manager used by the ecosystem relevant to your product.&lt;/li&gt;
-  &lt;li&gt;Easy-to-use and well documented.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;if-you-are-building-sdkslibrariesframeworks&quot;&gt;If you are building SDKs/Libraries/Frameworks&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Consistency and following industry standards and conventions. Avoid reinventing the wheel without a solid reason.&lt;/li&gt;
-  &lt;li&gt;Play well with other SDKs/Frameworks in the ecosystem.&lt;/li&gt;
-  &lt;li&gt;Provide inline code documentation wherever possible. Developers appreciate not requiring to leave their IDE.&lt;/li&gt;
-  &lt;li&gt;Provide great documentation, examples, tutorials, interactive learning, and so on.&lt;/li&gt;
-  &lt;li&gt;Easy to use error reporting system.&lt;/li&gt;
-  &lt;li&gt;Open source when possible.&lt;/li&gt;
-  &lt;li&gt;Avoid gatekeeping as much as possible. No registration-only webinars and no white papers that ask for my mother’s favorite color.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;general&quot;&gt;General&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;In general, always ask this question, how can my product make a developer’s day better?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Make sure the product does exactly what it claims to do.&lt;/li&gt;
-  &lt;li&gt;Make sure the product is reliable and performant otherwise good DX will not cut it.&lt;/li&gt;
-  &lt;li&gt;Focus on easy-to-use self-service rather than traditional support channels. Developers hate bureaucratic processes. Provide transparent support channels for those edge cases but most developers would prefer self-service if available rather than talking to a support person.&lt;/li&gt;
-  &lt;li&gt;Simple onboarding. Avoid having to go through sales or other channels just to get started with development or for trying out your product.&lt;/li&gt;
-  &lt;li&gt;Provide modern tooling or make your stuff compatible with modern tooling. Nobody wants to download and set up something from the 80s to run your software.&lt;/li&gt;
-  &lt;li&gt;Make trying out your product as easy as possible.&lt;/li&gt;
-  &lt;li&gt;Make documentation easy to find and navigate. Avoid having to jump through hoops to find documentation.&lt;/li&gt;
-  &lt;li&gt;Make developer resources easy to find. Make a developer-focused section on your company website as a landing point for developer resources.&lt;/li&gt;
-  &lt;li&gt;Avoid jargon-rich fancy marketing as most of us can see right through it. Keep it simple and to the point.&lt;/li&gt;
-  &lt;li&gt;Build developer advocacy rather than technical evangelism.&lt;/li&gt;
-  &lt;li&gt;Build a community around your product.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;We are slowly transitioning to an era where the importance of developers is being recognized and their influence on decision making is no longer something companies can take for granted.&lt;/p&gt;
-
-&lt;p&gt;This is very clear from the fact that more and more companies are building developer relationship teams and hiring developer advocates rather than marketing evangelists.&lt;/p&gt;
-
-&lt;p&gt;In this crowded space, being developer-focused used to be a differentiator but things are going towards the same situation that happened with UX where it became a must have rather than a good to have.&lt;/p&gt;
-
-&lt;p&gt;The same will happen for DX as well and if you are building a product that is going to be used by developers, then you should start caring. Building developer experience and developer advocacy don’t happen overnight.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Cover image credit: Photo by &lt;a href=&quot;https://unsplash.com/@nublson&quot;&gt;Nubelson Fernandes&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/developer&quot;&gt;Unsplash&lt;/a&gt;&lt;/p&gt;
-
-</content:encoded>
-        <media:content url="https://i.imgur.com/NDimrjE.jpeg" medium="image">https://i.imgur.com/NDimrjE.jpeg</media:content>
-        <pubDate>Fri, 16 Jul 2021 00:00:00 +0200</pubDate>
-        <link>https://deepu.tech/what-is-developer-experience-and-why-care/</link>
-        <guid isPermaLink="true">https://deepu.tech/what-is-developer-experience-and-why-care/</guid>
-        
-        <category>devrel</category>
-        
-        <category>developerexperience</category>
-        
-        <category>engineering</category>
-        
-        <category>discuss</category>
         
         
       </item>
