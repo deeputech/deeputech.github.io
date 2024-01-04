@@ -322,7 +322,6 @@ I hope that you found this article helpful. Here are some additional resources t
 -   https://webauthn.me
 -   https://passkeys.dev
 -   https://passkey.org/
--   https://webauthn.io/
 -   https://fidoalliance.org/passkeys/
 -   [Our Take On Passkeys](https://auth0.com/blog/our-take-on-passkeys/)
 
