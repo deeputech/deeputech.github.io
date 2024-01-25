@@ -200,7 +200,6 @@ The most important difference is that passkeys can be used as first-factor authe
 
 There are still some challenges when it comes to passkeys:
 
--   **W3C Recommendation**: It's still a W3C recommendation and not a standard, which means it can still change, hence slowing down adoption.
 -   **OS/Browser support**: It is dependent on the OS and Browser to implement the specs, and we all know how that turns out right? This means the support may not be uniform and can become fragmented and we might never have the same experience everywhere.
 -   **Cloud vendor reliance**: It relies on companies like Apple, Google, and Microsoft to save the private keys in their cloud securely and protect it from breaches.
 -   **Enterprise use cases**: Enterprise users might want more control and flexibility which could be a problem. For example, if an enterprise doesn’t allow iCloud or Google on their computer, passkeys would not work there.
