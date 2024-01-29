@@ -144,7 +144,7 @@ First, let's see how the registration flow works.
 ![Passkey registration flow](https://images.ctfassets.net/23aumh6u8s0i/1baVPd0OibsVRiE1ZRhLyr/525189d154e10c19b789263642b6baf4/passkey-registration-flow.jpg)
 
 1. The user begins the registration flow. The relying party provides a randomly generated challenge string.
-2. The `navigator.credentials.create()` API is invoked and the user provides approval using their authenticator.
+2. The `navigator.credentials.create()` method is invoked and the user provides approval using their authenticator.
 3. The authenticator creates a private-public key pair which is unique for the relying party's domain and the user. The private key is used to sign the challenge.
     - An attestation object is created which contains the public key, signed challenge, credential ID, and certificate.
     - The private key is stored on the authenticator.
@@ -158,7 +158,7 @@ Now, let's see how the login flow works, which is quite similar except for the t
 ![Passkey login flow](https://images.ctfassets.net/23aumh6u8s0i/1jrvIF1jqOAPckwX7FnVyB/456c25b1586a84770efeaff7d2664e0e/passkey-login-flow.jpg)
 
 1. The user begins the login flow. The relying party provides a randomly generated challenge string.
-2. The `navigator.credentials.get()` API is invoked and the user provides approval using their authenticator.
+2. The `navigator.credentials.get()` method is invoked and the user provides approval using their authenticator.
 3. The authenticator retrieves the private keys for the relying party's domain name.
     - **For synced passkeys**, if the device is new, the private key is synced from a cloud service if available (This is the only place where synced passkeys differ from hardware-bound passkeys).
     - The user selects the private key for their username. The private key is used to sign the challenge.
