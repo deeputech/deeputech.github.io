@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 25 Jan 2024 13:01:53 +0100</pubDate>
-    <lastBuildDate>Thu, 25 Jan 2024 13:01:53 +0100</lastBuildDate>
+    <pubDate>Mon, 29 Jan 2024 15:14:21 +0100</pubDate>
+    <lastBuildDate>Mon, 29 Jan 2024 15:14:21 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -163,7 +163,7 @@ This kind of passkeys can be restored on new devices. But they are less secure t
 
 &lt;ol&gt;
   &lt;li&gt;The user begins the registration flow. The relying party provides a randomly generated challenge string.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.create()&lt;/code&gt; API is invoked and the user provides approval using their authenticator.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.create()&lt;/code&gt; method is invoked and the user provides approval using their authenticator.&lt;/li&gt;
   &lt;li&gt;The authenticator creates a private-public key pair which is unique for the relying party’s domain and the user. The private key is used to sign the challenge.
     &lt;ul&gt;
       &lt;li&gt;An attestation object is created which contains the public key, signed challenge, credential ID, and certificate.&lt;/li&gt;
@@ -182,7 +182,7 @@ This kind of passkeys can be restored on new devices. But they are less secure t
 
 &lt;ol&gt;
   &lt;li&gt;The user begins the login flow. The relying party provides a randomly generated challenge string.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.get()&lt;/code&gt; API is invoked and the user provides approval using their authenticator.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.get()&lt;/code&gt; method is invoked and the user provides approval using their authenticator.&lt;/li&gt;
   &lt;li&gt;The authenticator retrieves the private keys for the relying party’s domain name.
     &lt;ul&gt;
       &lt;li&gt;&lt;strong&gt;For synced passkeys&lt;/strong&gt;, if the device is new, the private key is synced from a cloud service if available (This is the only place where synced passkeys differ from hardware-bound passkeys).&lt;/li&gt;
