@@ -7,96 +7,94 @@ post_class: post-template
 <!-- Begin Article
 ================================================== -->
 <div class="container mt-5">
-    <div class="row">
-        <!-- Post Share -->
-        <div class="col-lg-2 pl-0">
-            <div class="sticky-top sticky-top-offset">
-                <!-- Toc if any -->
-                {% if page.toc %}
-                    <div class="popover-wrapper d-none d-lg-block">
-                        <a href="#">
-                            <h2 class="popover-title"><i class="fas fa-stream fa-lg"></i> TOC</h2>
-                        </a>
-                        <div class="popover-content">
-                            {% if page.beforetoc %}
-                                <p><em>{{page.beforetoc}}</em></p>
-                            {% endif %}
-                            <div class="toc lead">
-                                <h3 class="font-weight-bold">Summary</h3>
-                                {% include toc.html html=content h_max=3 %}
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-                <!-- End Toc -->
-                {% include share.html mini=false %}
-                <div class="ad-vertical-md">
-                    {% include carbon-ad.html %}
-                </div>
-            </div>
-        </div>
-
-        <!-- Post -->
-        {% assign author = site.authors[page.author] %}
-
-        <div class="col-lg-9 flex-first flex-lg-unordered">
-            <div class="mainheading">
-                <!-- Post Title -->
-                <h1 class="posttitle">{{ page.title }}</h1>
-                <!-- Post Featured Image -->
-                {% if page.cover_image %}
-                <img
-                    data-src="{% if page.cover_image contains "://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}"
-                    alt="{{ page.title }}"
-                    class="featured-image img-fluid lozad"
-                    src="{{ site.baseurl }}/assets/images/placeholder.jpg"
-                >
-                {% endif %}
-                <!-- End Featured Image -->
-                <!-- Author Box -->
-                {% if page.author %}
-                <div class="row post-top-meta">
-                    <div class="col-12 text-center text-md-left mb-4 mb-md-0">
-                        {% if author.avatar %}
-                        <img class="author-thumb lozad"  src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
-                        {% else %}
-                        <img class="author-thumb lozad"  src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x" alt="{{ author.display_name }}">
-                        {% endif %}
-
-                        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.mastodon }}" class="btn follow"><i class="fab fa-mastodon"></i> Follow</a>
-                        <!-- <span class="author-description">{{ author.description }}</span> -->
-                        <span class="separator d-none d-md-inline-block"> | </span>
-                        <!-- Post Date -->
-                        <span class="author-description">
-                            <small>
-                                <time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time>
-                                {% if page.last_modified_at %}
-                                (Updated: <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">{{ page.last_modified_at | date: "%b %-d, %Y" }}</time>)
-                                {% endif %}
-                            </small>
-                            <span class="separator d-inline-block"> | </span>
-                            <small>{% include reading-time.html content=content %}</small>
-                            <span class="separator d-inline-block d-lg-none"> | </span>
-                            <span class="d-inline-block d-lg-none">{% include share.html mini=true %}</span>
-                        </span>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-
-            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
-            {% if site.adsense == "enabled" %}
-                {% include adsense-under-header.html %}
+  <div class="row">
+    <!-- Post Share -->
+    <div class="col-lg-2 pl-0">
+      <div class="sticky-top sticky-top-offset">
+        <!-- Toc if any -->
+        {% if page.toc %}
+        <div class="popover-wrapper d-none d-lg-block">
+          <a href="#">
+            <h2 class="popover-title"><i class="fas fa-stream fa-lg"></i> TOC</h2>
+          </a>
+          <div class="popover-content">
+            {% if page.beforetoc %}
+            <p><em>{{page.beforetoc}}</em></p>
             {% endif %}
-            <!-- End Adsense -->
+            <div class="toc lead">
+              <h3 class="font-weight-bold">Summary</h3>
+              {% include toc.html html=content h_max=3 %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        <!-- End Toc -->
+        {% include share.html mini=false %}
+        <div class="ad-vertical-md">
+          {% include carbon-ad.html %}
+        </div>
+      </div>
+    </div>
 
-            <!-- Post series -->
-            {% if page.series %}
-            <div class="panel">
-                <p>
-                    <strong>This is part of my "{{page.series}}" series</strong>
-                </p>
-                <!-- <div class="article-collection">
+    <!-- Post -->
+    {% assign author = site.authors[page.author] %}
+
+    <div class="col-lg-9 flex-first flex-lg-unordered">
+      <div class="mainheading">
+        <!-- Post Title -->
+        <h1 class="posttitle">{{ page.title }}</h1>
+        <!-- Post Featured Image -->
+        {% if page.cover_image %}
+        <img data-src="{% if page.cover_image contains " ://" %}{{ page.cover_image }}{% else %}{{ site.baseurl }}/{{ page.cover_image }}{% endif %}" alt="{{ page.title }}"
+          class="featured-image img-fluid lozad" src="{{ site.baseurl }}/assets/images/placeholder.jpg">
+        {% endif %}
+        <!-- End Featured Image -->
+        <!-- Author Box -->
+        {% if page.author %}
+        <div class="row post-top-meta">
+          <div class="col-12 text-center text-md-left mb-4 mb-md-0">
+            {% if author.avatar %}
+            <img class="author-thumb lozad" src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
+            {% else %}
+            <img class="author-thumb lozad" src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="https://www.gravatar.com/avatar/{{ author.gravatar }}?s=250&d=mm&r=x"
+              alt="{{ author.display_name }}">
+            {% endif %}
+
+            <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.mastodon }}" class="btn follow"><i
+                class="fab fa-mastodon"></i> Follow</a>
+            <!-- <span class="author-description">{{ author.description }}</span> -->
+            <span class="separator d-none d-md-inline-block"> | </span>
+            <!-- Post Date -->
+            <span class="author-description">
+              <small>
+                <time class="post-date" datetime="{{ page.date | date:" %Y-%m-%d" }}">{{ page.date | date_to_string }}</time>
+                {% if page.last_modified_at %}
+                (Updated: <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">{{ page.last_modified_at | date: "%b %-d, %Y" }}</time>)
+                {% endif %}
+              </small>
+              <span class="separator d-inline-block"> | </span>
+              <small>{% include reading-time.html content=content %}</small>
+              <span class="separator d-inline-block d-lg-none"> | </span>
+              <span class="d-inline-block d-lg-none">{% include share.html mini=true %}</span>
+            </span>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+      {% if site.adsense == "enabled" %}
+      {% include adsense-under-header.html %}
+      {% endif %}
+      <!-- End Adsense -->
+
+      <!-- Post series -->
+      {% if page.series %}
+      <div class="panel">
+        <p>
+          <strong>This is part of my "{{page.series}}" series</strong>
+        </p>
+        <!-- <div class="article-collection">
                   {% assign count = '0' %}
                   {% for post in site.posts reversed %}
                   {% if post.series == page.series %}
@@ -106,108 +104,108 @@ post_class: post-template
                   {% endif %}
                   {% endfor %}
                 </div> -->
-                <ol>
-                  {% assign series-posts = site.posts | reverse | where: 'series', page.series %}
-                  {% for post in series-posts %}
-                  <li>
-                    {% if post.url == page.url %}
-                    <strong>{{ post.title }}</strong>
-                    {% else %}
-                    <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-                    {% endif %}
-                  </li>
-                  {% endfor %}
-                </ol>
-                {% if series-posts.size == 1 %}
-                <p>More posts coming soon!</p>
-                {% endif %}
-            </div>
+        <ol>
+          {% assign series-posts = site.posts | reverse | where: 'series', page.series %}
+          {% for post in series-posts %}
+          <li>
+            {% if post.url == page.url %}
+            <strong>{{ post.title }}</strong>
+            {% else %}
+            <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
             {% endif %}
-            <!-- End series -->
+          </li>
+          {% endfor %}
+        </ol>
+        {% if series-posts.size == 1 %}
+        <p>More posts coming soon!</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      <!-- End series -->
 
-            <!-- Post Content -->
-            <div class="article-post">
-                {{content}}
-            </div>
-            <hr/>
-            <!-- Rating -->
-            {% if page.rating %}
-            <div class="rating mb-4 d-flex align-items-center">
-                <strong class="mr-1">Rating:</strong> {% include star_rating.html %}
-            </div>
-            {% endif %}
+      <!-- Post Content -->
+      <div class="article-post">
+        {{content}}
+      </div>
+      <hr />
+      <!-- Rating -->
+      {% if page.rating %}
+      <div class="rating mb-4 d-flex align-items-center">
+        <strong class="mr-1">Rating:</strong> {% include star_rating.html %}
+      </div>
+      {% endif %}
 
-            <!-- Post series links -->
-            {% if page.series %}
-              {% assign series-posts = site.posts | reverse | where: 'series', page.series %}
-              {% for post in series-posts %}
-                {% if post.url == page.url %}
-                  {% assign prev_post_index = forloop.index | minus: 1 %}
-                  {% assign curr_post_index = forloop.index %}
-                  {% assign next_post_index = forloop.index | plus: 1 %}
-                {% endif %}
-              {% endfor %}
+      <!-- Post series links -->
+      {% if page.series %}
+      {% assign series-posts = site.posts | reverse | where: 'series', page.series %}
+      {% for post in series-posts %}
+      {% if post.url == page.url %}
+      {% assign prev_post_index = forloop.index | minus: 1 %}
+      {% assign curr_post_index = forloop.index %}
+      {% assign next_post_index = forloop.index | plus: 1 %}
+      {% endif %}
+      {% endfor %}
 
-              <p>Post <strong>{{ curr_post_index }}</strong> of <strong>{{ series-posts.size }}</strong> in series <strong>"{{page.series}}"</strong>.</p>
-              <p>{% if series-posts.size == 1 %}More posts coming soon!{% endif %}</p>
+      <p>Post <strong>{{ curr_post_index }}</strong> of <strong>{{ series-posts.size }}</strong> in series <strong>"{{page.series}}"</strong>.</p>
+      <p>{% if series-posts.size == 1 %}More posts coming soon!{% endif %}</p>
 
-              <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
-              {% for post in series-posts %}
-                {% if prev_post_index == forloop.index %}
-                  <a class="prev d-block col-md-6" rel="prev" href="{{ site.baseurl }}{{ post.url }}">&laquo; Prev post in series</a>
-                {% endif %}
+      <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+        {% for post in series-posts %}
+        {% if prev_post_index == forloop.index %}
+        <a class="prev d-block col-md-6" rel="prev" href="{{ site.baseurl }}{{ post.url }}">&laquo; Prev post in series</a>
+        {% endif %}
 
-                {% if next_post_index == forloop.index %}
-                  <a class="prev d-block col-md-6 text-right" rel="next" href="{{ site.baseurl }}{{ post.url }}">Next post in series &raquo;</a>
-                {% endif %}
-              {% endfor %}
-                <div class="clearfix"></div>
-              </div>
-            {% endif %}
-            <!-- End series links -->
+        {% if next_post_index == forloop.index %}
+        <a class="prev d-block col-md-6 text-right" rel="next" href="{{ site.baseurl }}{{ post.url }}">Next post in series &raquo;</a>
+        {% endif %}
+        {% endfor %}
+        <div class="clearfix"></div>
+      </div>
+      {% endif %}
+      <!-- End series links -->
 
-            <!-- Post Categories -->
-            <div class="after-post-cats">
-                <ul class="tags mb-4">
-                    {% assign sortedCategories = page.categories | sort %}
-                    {% for category in sortedCategories %}
-                    <li>
-                        <a class="smoothscroll" href="{{site.baseurl}}/categories#{{ category | replace: " ","-" }}">{{ category }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- End Categories -->
+      <!-- Post Categories -->
+      <div class="after-post-cats">
+        <ul class="tags mb-4">
+          {% assign sortedCategories = page.categories | sort %}
+          {% for category in sortedCategories %}
+          <li>
+            <a class="smoothscroll" href="{{site.baseurl}}/categories#{{ category | replace: " "," -" }}">{{ category }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <!-- End Categories -->
 
-            <!-- Post Tags -->
-            <div class="after-post-tags">
-                <ul class="tags">
-                    {% assign sortedTags = page.tags | sort %}
-                    {% for tag in sortedTags %}
-                    <li>
-                        <a class="smoothscroll" href="{{site.baseurl}}/tags#{{ tag | replace: " ","-" }}">#{{ tag }}</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- End Tags -->
+      <!-- Post Tags -->
+      <div class="after-post-tags">
+        <ul class="tags">
+          {% assign sortedTags = page.tags | sort %}
+          {% for tag in sortedTags %}
+          <li>
+            <a class="smoothscroll" href="{{site.baseurl}}/tags#{{ tag | replace: " "," -" }}">#{{ tag }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <!-- End Tags -->
 
-            <!-- Prev/Next -->
-            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
-            {% if page.previous.url %}
-            <a class="prev d-block col-md-6" href="{{ site.baseurl }}{{page.previous.url}}"> &laquo; {{page.previous.title}}</a>
-            {% endif %}
-            {% if page.next.url %}
-            <a class="next d-block col-md-6 text-lg-right" href="{{ site.baseurl }}{{page.next.url}}">{{page.next.title}} &raquo; </a>
-            {% endif %}
-            <div class="clearfix"></div>
-            </div>
-            <!-- End Categories -->
-            <hr/>
-        </div>
-        <!-- End Post -->
-
+      <!-- Prev/Next -->
+      <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+        {% if page.previous.url %}
+        <a class="prev d-block col-md-6" href="{{ site.baseurl }}{{page.previous.url}}"> &laquo; {{page.previous.title}}</a>
+        {% endif %}
+        {% if page.next.url %}
+        <a class="next d-block col-md-6 text-lg-right" href="{{ site.baseurl }}{{page.next.url}}">{{page.next.title}} &raquo; </a>
+        {% endif %}
+        <div class="clearfix"></div>
+      </div>
+      <!-- End Categories -->
+      <hr />
     </div>
+    <!-- End Post -->
+
+  </div>
 </div>
 <!-- End Article
 ================================================== -->
@@ -215,7 +213,7 @@ post_class: post-template
 <!-- Begin Comments
 ================================================== -->
 {% if page.comments != false %}
-    <!-- <div class="container">
+<!-- <div class="container">
       <div id="comments" class="row justify-content-center mb-5">
         <div class="col-md-8">
             {% include hyvor.html %}

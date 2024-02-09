@@ -1,15 +1,15 @@
 <div class="card-body">
-    <h2 class="card-title">
-        <a class="text-dark" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-        {% if post.rating %}
-        <div class="mb-2 mt-2 font-weight-normal">
-        {% include star_rating_postbox.html %}
-        </div>
-        {% endif %}
-    </h2>
-    {% if post.description %}
-    <h4 class="card-text">{{ post.description | strip_html | truncatewords:25 }}</h4>
-    {% else %}
-    <h4 class="card-text">{{ post.excerpt | strip_html | truncatewords:25 }}</h4>
+  <h2 class="card-title">
+    <a class="text-dark" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+    {% if post.rating %}
+    <div class="mb-2 mt-2 font-weight-normal">
+      {% include star_rating_postbox.html %}
+    </div>
     {% endif %}
+  </h2>
+  {% if post.description %}
+  <h4 class="card-text">{{ post.description | strip_html | truncatewords:25 }}</h4>
+  {% else %}
+  <h4 class="card-text">{{ post.excerpt | strip_html | truncatewords:25 }}</h4>
+  {% endif %}
 </div>

@@ -3,7 +3,7 @@ layout: default
 title: Blogs
 permalink: /blogs
 pagination:
-    enabled: true
+enabled: true
 comments: false
 ---
 
@@ -22,35 +22,34 @@ comments: false
 <!-- Latest
 ================================================== -->
 <section class="featured-posts mt-4">
-    <div class="section-title">
-        <h2><span>Latest</span></h2>
-    </div>
-    <div class="row">
-        {% for post in site.posts %}
-            {% if forloop.index < 3 %}
-        <div class="col-md-6 mb-30px">
-            {% include featuredbox.html %}
-        </div>
-            {% endif %}
-        {% endfor %}
-    </div>
+  <div class="section-title">
+    <h2><span>Latest</span></h2>
+  </div>
+  <div class="row">
+    {% for post in site.posts %}
+    {% if forloop.index < 3 %} <div class="col-md-6 mb-30px">
+      {% include featuredbox.html %}
+  </div>
+  {% endif %}
+  {% endfor %}
+  </div>
 </section>
 
 <!-- Featured
 ================================================== -->
 <section class="featured-posts">
-    <div class="section-title">
-        <h2><span>Featured</span></h2>
+  <div class="section-title">
+    <h2><span>Featured</span></h2>
+  </div>
+  <div class="row">
+    {% for post in site.posts %}
+    {% if post.featured == true %}
+    <div class="col-md-6 mb-30px">
+      {% include featuredbox.html %}
     </div>
-    <div class="row">
-        {% for post in site.posts %}
-            {% if post.featured == true %}
-        <div class="col-md-6 mb-30px">
-            {% include featuredbox.html %}
-        </div>
-            {% endif %}
-        {% endfor %}
-    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
 </section>
 
 <section class="carbon-ad mb-3">
@@ -64,23 +63,23 @@ comments: false
 <!-- Posts Index
 ================================================== -->
 <section class="recent-posts">
-    <div class="section-title">
-        <h2><span>All Stories</span></h2>
+  <div class="section-title">
+    <h2><span>All Stories</span></h2>
+  </div>
+  <div class="infinite-scroll">
+    <div class="row listrecent">
+      {% for post in paginator.posts %}
+      <div class="col-lg-4 col-md-6 mb-30px card-group">
+        {% include postbox.html %}
+      </div>
+      {% endfor %}
     </div>
-    <div class="infinite-scroll">
-        <div class="row listrecent">
-            {% for post in paginator.posts %}
-            <div class="col-lg-4 col-md-6 mb-30px card-group">
-                {% include postbox.html %}
-            </div>
-            {% endfor %}
-        </div>
-        <!-- Pagination
+    <!-- Pagination
         ================================================== -->
-        <div class="bottompagination">
-            <span class="navigation" role="navigation">
-                {% include pagination.html %}
-            </span>
-        </div>
+    <div class="bottompagination">
+      <span class="navigation" role="navigation">
+        {% include pagination.html %}
+      </span>
     </div>
+  </div>
 </section>
