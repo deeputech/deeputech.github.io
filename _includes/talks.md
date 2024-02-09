@@ -1,7 +1,9 @@
-- [Geekle Online Summit for Java Devs'24](https://events.geekle.us/java24/) (Virtual)- January 16-17, 2024
-  - A Passwordless Future! Passkeys for Java Developers
-- [JFokus](https://www.jfokus.se/) (Stockholm, Sweden)- February 5-7, 2024
-  - [A Passwordless Future! Passkeys for Java Developers](https://sessionize.com/s/deepu-k-sasidharan/a-passwordless-future-webauthn-for-java-developers/73627)
-  - [Securing Spring Boot Microservices with OAuth and OpenID Connect](https://sessionize.com/s/deepu-k-sasidharan/securing-spring-boot-microservices-with-oauth-and-/78529)
-- [DEVWORLD](https://devworldconference.com/) (Amsterdam, Netherlands)- February 29 - March 1, 2024
+- [DEVWORLD](https://devworldconference.com/) (Amsterdam, Netherlands) - February 29 - March 1, 2024
   - [Java microservices on Istio](https://devworldconference.com/program)
+- [ArnhemJUG](https://www.meetup.com/nl-NL/arnhemjug/) (Arnhem, Netherlands) - 28-Mar-2024
+- German Java User Group Tour
+  - [Dortmund](https://www.meetup.com/de-DE/jug-dortmund/) - 23-Apr-2024
+  - [Paderborn](https://jug-pb.gitlab.io/) - 24-Apr-2024
+  - [Bielfeld](https://www.meetup.com/de-DE/java-user-group-bielefeld/) - 25-Apr-2024
+- [Devoxx UK](https://www.devoxx.co.uk/) (London, UK) - May 8-10, 2024
+  - A Passwordless Future! Passkeys for Java Developers

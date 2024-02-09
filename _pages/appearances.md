@@ -5,6 +5,44 @@ permalink: /appearances
 comments: false
 ---
 
+Check [my sessionize profile](https://sessionize.com/deepu-k-sasidharan/) for more details about the talks and events.
+
+#### 2024
+
+---
+
+##### [JFokus](https://www.jfokus.se/)
+
+<small>February 2024</small>
+
+[A Passwordless Future! Passkeys for Java Developers](https://sessionize.com/s/deepu-k-sasidharan/a-passwordless-future-webauthn-for-java-developers/73627)
+
+[slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers) &#124; [video](https://www.youtube.com/live/-OLZViA13Jo?si=avJUHUJ2aAyt0qJq&t=25555)
+
+[Securing Spring Boot Microservices with OAuth and OpenID Connect](https://sessionize.com/s/deepu-k-sasidharan/securing-spring-boot-microservices-with-oauth-and-/78529)
+
+[workshop](https://developer.auth0.com/resources/guides/web-app/spring?utm_source=conference&utm_medium=events&utm_campaign=jfokus)
+
+---
+
+##### [Geekle Online Summit for Java Devs'24](https://events.geekle.us/java24/)
+
+<small>February 2024</small>
+
+[A Passwordless Future! Passkeys for Java Developers](https://sessionize.com/s/deepu-k-sasidharan/a-passwordless-future-webauthn-for-java-developers/73627)
+
+[slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers) &#124; [video](https://www.youtube.com/live/-OLZViA13Jo?si=avJUHUJ2aAyt0qJq&t=25555)
+
+---
+
+##### [Foojay Podcast](https://foojay.io/today/category/podcast/)
+
+<small>January 2024</small>
+
+[Making Java Attractive for Beginners in Programming](https://foojay.io/today/foojay-podcast-40/)
+
+---
+
 #### 2023
 
 ---
