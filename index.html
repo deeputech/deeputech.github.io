@@ -6,230 +6,237 @@ author: deepu
 ---
 
 <div class="row justify-content-between pt-4 home">
-  <div class="col-md-8 pr-md-5">
-    <section class="featured-posts pb-3">
-      <div class="row flex-sm-column flex-lg-row">
-        <div class="col-12 col-lg-4 text-center mb-5 my-lg-auto">
-          <div class="profile-pic">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <img class="lozad" data-src="{{ site.baseurl }}/assets/images/prof-cartoon.png" src="{{ site.baseurl }}/assets/images/placeholder.jpg" alt="Deepu K Sasidharan">
-              </div>
-              <div class="flip-card-back">
-                <img class="lozad" data-src="{{ site.baseurl }}/assets/images/prof-cartoon-2.png" src="{{ site.baseurl }}/assets/images/placeholder.jpg" alt="Deepu K Sasidharan" />
-              </div>
+    <div class="col-md-8 pr-md-5">
+        <section class="featured-posts pb-3">
+            <div class="row flex-sm-column flex-lg-row">
+                <div class="col-12 col-lg-4 text-center mb-5 my-lg-auto">
+                    <div class="profile-pic">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img class="lozad" data-src="{{ site.baseurl }}/assets/images/prof-cartoon.png"
+                                    src="{{ site.baseurl }}/assets/images/placeholder.jpg" alt="Deepu K Sasidharan">
+                            </div>
+                            <div class="flip-card-back">
+                                <img class="lozad" data-src="{{ site.baseurl }}/assets/images/prof-cartoon-2.png" src="{{ site.baseurl }}/assets/images/placeholder.jpg" alt="Deepu K Sasidharan" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                  <h2>Deepu K Sasidharan</h2>
+                    <p>
+                        <ul>
+                            <li>Open-source software aficionado and a technology advocate by passion & profession</li>
+                            <li>Co-lead of <a href="https://jhipster.tech" target="_blank">JHipster</a>, the best development platform in the world 😸</li>
+                            <li>Creator of <a href="https://github.com/kdash-rs/kdash" target="_blank">KDash</a>, a terminal dashboard for Kubernetes written in Rust 🚀</li>
+                            <li>Creator of <a href="https://start.jhipster.tech/jdl-studio/" target="_blank">JDL Studio</a>, JHipster React, JHipster Blueprints, and JHipster Entity Audit</li>
+                            <li>Staff Developer Advocate at Auth0 by <a href="https://www.okta.com" target="_blank">Okta</a>. Alumni of Adyen, TCS and XebiaLabs 💵</li>
+                            <li><a href="https://dev.java/community/jcs/" target="_blank">Java Champion</a> ☕</li>
+                            <li>Polyglot developer mainly working with Java, Rust, JavaScript, TypeScript, Go, and Kotlin. Dabbling with few other languages occasionally.</li>
+                            <li>Cloud & Container technology enthusiast and advocate</li>
+                            <li>Published author, international conference speaker, and an avid blogger</li>
+                            <li>Passionate about developer experience and user experience</li>
+                            <li>Love Astronomy, Motorbikes, Coding and Robotics</li>
+                        </ul>
+                    </p>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="col">
-          <h2>Deepu K Sasidharan</h2>
-          <p>
-          <ul>
-            <li>Open-source software aficionado and a technology advocate by passion & profession</li>
-            <li>Co-lead of <a href="https://jhipster.tech" target="_blank">JHipster</a>, the best development platform in the world 😸</li>
-            <li>Creator of <a href="https://github.com/kdash-rs/kdash" target="_blank">KDash</a>, a Terminal dashboard for Kubernetes written in Rust 🚀</li>
-            <li>Creator of <a href="https://github.com/kdash-rs/kdash" target="_blank">JWT UI</a>, a Terminal UI for decoding/encoding JSON Web Tokens 🚀</li>
-            <li>Creator of <a href="https://start.jhipster.tech/jdl-studio/" target="_blank">JDL Studio</a>, JHipster React, JHipster Blueprints, and JHipster Entity Audit</li>
-            <li>Staff Developer Advocate at Auth0 by <a href="https://www.okta.com" target="_blank">Okta</a>. Alumni of Adyen, TCS and XebiaLabs 💵</li>
-            <li><a href="https://dev.java/community/jcs/" target="_blank">Java Champion</a> ☕</li>
-            <li>Polyglot developer mainly working with Java, Rust, JavaScript, TypeScript, Go, and Kotlin. Dabbling with few other languages occasionally.</li>
-            <li>Cloud & Container technology enthusiast and advocate</li>
-            <li>Published author, international conference speaker, and an avid blogger</li>
-            <li>Passionate about developer experience and user experience</li>
-            <li>Love Astronomy, Motorbikes, Coding and Robotics</li>
-          </ul>
-          </p>
-        </div>
-      </div>
-    </section>
-    <!-- Book ================================================= -->
-    <section class="featured-posts">
-      <div class="section-title">
-        <h2><span>Latest Book</span></h2>
-      </div>
-      <div>
-        <p>
-          Full Stack Development with JHipster - second edition. Get it on
-          <a href="https://www.packtpub.com/web-development/full-stack-development-with-jhipster-second-edition" target="_blank">Packt</a>,
-          <a href="https://smile.amazon.com/Full-Stack-Development-JHipster-microservices/dp/1838824987" target="_blank">Amazon</a> and
-          <a href="https://learning.oreilly.com/library/view/full-stack-development/9781838824983/" target="_blank">Safari</a>.
-        </p>
-        <p class="mb-5">
-          <img class="shadow-lg lozad" src="{{ site.baseurl }}/assets/images/placeholder.jpg" data-src="{{ site.baseurl }}/assets/images/jhbook-banner-v2.png"
-            alt="Full stack development with JHipster" />
-        </p>
-      </div>
-    </section>
-    <!-- Latest blog ================================================= -->
-    <section class="featured-posts">
-      <div class="section-title">
-        <h2><span>Latest Blog Post</span></h2>
-      </div>
-      <div>
-        <div class="row">
-          {% for post in site.posts %}
-          {% if forloop.index == 1 %}
-          <div class="col-md-12 mb-30px">
-            {% include featuredbox.html %}
-          </div>
-          {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </section>
-    <!-- Projects ================================================= -->
-    <section class="featured-posts">
-      <div class="section-title">
-        <h2><span>Some OSS projects I work on</span></h2>
-      </div>
-      <div>
-        <div class="row">
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="about-item">
-              <a class="project-link" target="_blank" href="http://jhipster.tech/">
-                <h3>JHipster Generator</h3>
-              </a>
-              <p>
-                A cool generator for Angular/React/VueJS + Spring stack
-              </p>
+        </section>
+        <!-- Book ================================================= -->
+        <section class="featured-posts">
+            <div class="section-title">
+                <h2><span>Latest Book</span></h2>
             </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="about-item">
-              <a class="project-link" target="_blank" href="https://github.com/kdash-rs/kdash">
-                <h3>KDash</h3>
-              </a>
-              <p>A Kubernetes dashboard written in Rust</p>
+            <div>
+                <p>
+                    Full Stack Development with JHipster - second edition. Get it on
+                    <a href="https://www.packtpub.com/web-development/full-stack-development-with-jhipster-second-edition" target="_blank"
+                        >Packt</a
+                    >,
+                    <a href="https://smile.amazon.com/Full-Stack-Development-JHipster-microservices/dp/1838824987" target="_blank"
+                        >Amazon</a
+                    > and
+                    <a href="https://learning.oreilly.com/library/view/full-stack-development/9781838824983/" target="_blank">Safari</a>.
+                </p>
+                <p class="mb-5">
+                    <img
+                        class="shadow-lg lozad"
+                        src="{{ site.baseurl }}/assets/images/placeholder.jpg"
+                        data-src="{{ site.baseurl }}/assets/images/jhbook-banner-v2.png"
+                        alt="Full stack development with JHipster"
+                    />
+                </p>
             </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="about-item">
-              <a class="project-link" target="_blank" href="http://jhipster.github.io/jdl-studio/">
-                <h3>JDL Studio</h3>
-              </a>
-              <p>An awesome online JDL editor and visualizer</p>
+        </section>
+        <!-- Latest blog ================================================= -->
+        <section class="featured-posts">
+            <div class="section-title">
+                <h2><span>Latest Blog Post</span></h2>
             </div>
-          </div>
-          <div class="clearfix visible-sm-block"></div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="about-item">
-              <a class="project-link" target="_blank" href="https://github.com/jwt-rs/jwt-ui">
-                <h3>JWT UI</h3>
-              </a>
-              <p>
-                A Terminal UI for decoding/encoding JSON Web Tokens
-              </p>
+            <div>
+                <div class="row">
+                    {% for post in site.posts %}
+                        {% if forloop.index == 1 %}
+                        <div class="col-md-12 mb-30px">
+                            {% include featuredbox.html %}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
-          </div>
+        </section>
+        <!-- Projects ================================================= -->
+        <section class="featured-posts">
+            <div class="section-title">
+                <h2><span>Some OSS projects I work on</span></h2>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="about-item">
+                            <a class="project-link" target="_blank" href="http://jhipster.tech/">
+                                <h3>JHipster Generator</h3>
+                            </a>
+                            <p>
+                                A cool generator for Angular/React/VueJS + Spring stack
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="about-item">
+                            <a class="project-link" target="_blank" href="https://github.com/kdash-rs/kdash">
+                                <h3>KDash</h3>
+                            </a>
+                            <p>A Kubernetes dashboard written in Rust</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="about-item">
+                            <a class="project-link" target="_blank" href="http://jhipster.github.io/jdl-studio/">
+                                <h3>JDL Studio</h3>
+                            </a>
+                            <p>An awesome online JDL editor and visualizer</p>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-sm-block"></div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="about-item">
+                            <a class="project-link" target="_blank" href="https://github.com/jhipster/jhipster-registry">
+                                <h3>JHipster Registry</h3>
+                            </a>
+                            <p>
+                                Service Registry, based on Spring Cloud Netflix Eureka and Spring Cloud Config
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-sm-block"></div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="about-item">
+                            <a class="project-link" target="_blank" href="https://github.com/hipster-labs/generator-jhipster-entity-audit">
+                                <h3>JHipster Entity Audit Generator</h3>
+                            </a>
+                            <p>
+                                A yeoman generator to enable entity audit in JHipster generated apps
+                            </p>
+                        </div>
+                    </div>
 
-          <div class="clearfix visible-sm-block"></div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="about-item">
-              <a class="project-link" target="_blank" href="https://github.com/hipster-labs/generator-jhipster-entity-audit">
-                <h3>JHipster Entity Audit Generator</h3>
-              </a>
-              <p>
-                A yeoman generator to enable entity audit in JHipster generated apps
-              </p>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="about-item">
+                            <a class="project-link" target="_blank" href="https://github.com/hipster-labs/generator-jhipster-bootswatch">
+                                <h3>JHipster Bootswatch Theme Generator</h3>
+                            </a>
+                            <p>
+                                A yeoman generator to enable Bootswatch themes in JHipster generated apps
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-sm-block"></div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="about-item">
+                            <a class="project-link" target="_blank" href="https://github.com/deepu105/angular-object-diff">
+                                <h3>Angular Object Diff</h3>
+                            </a>
+                            <p>
+                                An AngularJS plugin to generate and view object difference
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="about-item">
+                            <a class="project-link" target="_blank" href="/svg-seq-diagram">
+                                <h3>UML and Sequence Diagram Generator</h3>
+                            </a>
+                            <p></p>
+                            <p>
+                                A sequence diagram generator using angularJS and an UML Diagram Generator based on PlantUML. Experimental.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-sm-block"></div>
+                </div>
             </div>
-          </div>
-
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="about-item">
-              <a class="project-link" target="_blank" href="https://github.com/hipster-labs/generator-jhipster-bootswatch">
-                <h3>JHipster Bootswatch Theme Generator</h3>
-              </a>
-              <p>
-                A yeoman generator to enable Bootswatch themes in JHipster generated apps
-              </p>
-            </div>
-          </div>
-          <div class="clearfix visible-sm-block"></div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="about-item">
-              <a class="project-link" target="_blank" href="https://github.com/jhipster/jhipster-registry">
-                <h3>JHipster Registry</h3>
-              </a>
-              <p>
-                Service Registry, based on Spring Cloud Netflix Eureka and Spring Cloud Config
-              </p>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="about-item">
-              <a class="project-link" target="_blank" href="/svg-seq-diagram">
-                <h3>UML and Sequence Diagram Generator</h3>
-              </a>
-              <p></p>
-              <p>
-                A sequence diagram generator using angularJS and an UML Diagram Generator based on PlantUML. Experimental.
-              </p>
-            </div>
-          </div>
-          <div class="clearfix visible-sm-block"></div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <div class="col-md-4">
-    <div class="sticky-top sticky-top-80">
-      <section class="featured-posts">
-        <div class="section-title">
-          <h2><span>Follow me on social media</span></h2>
-        </div>
-        <div class="about-social">
-          <a rel="me" href="https://mastodon.social/@deepu105" target="_blank">
-            <i class="fab fa-mastodon fa-lg"></i>
-          </a>
-          <a href="https://twitter.com/deepu105" target="_blank">
-            <i class="fab fa-twitter fa-lg"></i>
-          </a>
-          <a href="https://github.com/deepu105" target="_blank">
-            <i class="fab fa-github fa-lg"></i>
-          </a>
-          <a href="https://dev.to/deepu105" target="_blank">
-            <i class="fab fa-dev fa-lg"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/deepu05" target="_blank">
-            <i class="fab fa-linkedin fa-lg"></i>
-          </a>
-          <a href="https://medium.com/@deepu105" target="_blank">
-            <i class="fab fa-medium fa-lg"></i>
-          </a>
-        </div>
-      </section>
-      <!-- Upcoming talks ================================================= -->
-      <section class="featured-posts">
-        <div class="section-title">
-          <h2><span>Upcoming talks</span></h2>
-        </div>
-        <div class="row">
-          {% capture talks %}{% include talks.md %}{% endcapture %} {{ talks | markdownify }}
-        </div>
-      </section>
-      <!-- Featured ================================================= -->
-      <section class="featured-posts">
-        <div class="section-title">
-          <h2><span>Featured posts</span></h2>
-        </div>
-        <div class="row">
-          {% for post in site.posts %} {% if post.featured == true %}
-          <div class="col-md-12 mb-30px no-image">
-            {% include featuredbox.html %}
-          </div>
-          {% endif %} {% endfor %}
-        </div>
-      </section>
-      <div class="ad-holder w-100 mb-3">
-        {% include carbon-ad.html %}
-      </div>
-      <section>
-        <div class="section-title">
-          <h2><span>Blogs on Dev.to</span></h2>
-        </div>
-        <dev-widget data-username="deepu105" data-width="100%"></dev-widget>
-      </section>
+        </section>
     </div>
-  </div>
+
+    <div class="col-md-4">
+        <div class="sticky-top sticky-top-80">
+            <section class="featured-posts">
+                <div class="section-title">
+                    <h2><span>Follow me on social media</span></h2>
+                </div>
+                <div class="about-social">
+                    <a rel="me" href="https://mastodon.social/@deepu105" target="_blank">
+                        <i class="fab fa-mastodon fa-lg"></i>
+                    </a>
+                    <a href="https://twitter.com/deepu105" target="_blank">
+                        <i class="fab fa-twitter fa-lg"></i>
+                    </a>
+                    <a href="https://github.com/deepu105" target="_blank">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                    <a href="https://dev.to/deepu105" target="_blank">
+                        <i class="fab fa-dev fa-lg"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/deepu05" target="_blank">
+                        <i class="fab fa-linkedin fa-lg"></i>
+                    </a>
+                    <a href="https://medium.com/@deepu105" target="_blank">
+                        <i class="fab fa-medium fa-lg"></i>
+                    </a>
+                </div>
+            </section>
+            <!-- Upcoming talks ================================================= -->
+            <section class="featured-posts">
+                <div class="section-title">
+                    <h2><span>Upcoming talks</span></h2>
+                </div>
+                <div class="row">
+                    {% capture talks %}{% include talks.md %}{% endcapture %} {{ talks | markdownify }}
+                </div>
+            </section>
+            <!-- Featured ================================================= -->
+            <section class="featured-posts">
+                <div class="section-title">
+                    <h2><span>Featured posts</span></h2>
+                </div>
+                <div class="row">
+                    {% for post in site.posts %} {% if post.featured == true %}
+                    <div class="col-md-12 mb-30px no-image">
+                        {% include featuredbox.html %}
+                    </div>
+                    {% endif %} {% endfor %}
+                </div>
+            </section>
+            <div class="ad-holder w-100 mb-3">
+              {% include carbon-ad.html %}
+            </div>
+            <section>
+              <div class="section-title">
+                  <h2><span>Blogs on Dev.to</span></h2>
+              </div>
+              <dev-widget data-username="deepu105" data-width="100%"></dev-widget>
+            </section>
+        </div>
+    </div>
 </div>

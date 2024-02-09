@@ -1,6 +1,9 @@
 <a href="{{ site.baseurl }}{{ post.url }}">
-  {% if post.cover_image %}
-  <img data-src="{% if post.cover_image contains " ://" %}{{ post.cover_image }}{% else %}{{ site.baseurl }}/{{ post.cover_image }}{% endif %}" alt="{{ post.title }}"
-    class="featured-box-img-cover lozad" src="{{ site.baseurl }}/assets/images/placeholder.jpg">
-  {% endif %}
+    {% if post.cover_image %}
+        <img
+            data-src="{% if post.cover_image contains "://" %}{{ post.cover_image }}{% else %}{{ site.baseurl }}/{{ post.cover_image }}{% endif %}"
+            alt="{{ post.title }}" class="featured-box-img-cover lozad"
+            src="{{ site.baseurl }}/assets/images/placeholder.jpg"
+        >
+    {% endif %}
 </a>
