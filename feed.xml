@@ -5,246 +5,47 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 09 Feb 2024 18:00:34 +0100</pubDate>
-    <lastBuildDate>Fri, 09 Feb 2024 18:00:34 +0100</lastBuildDate>
+    <pubDate>Fri, 16 Feb 2024 16:55:10 +0100</pubDate>
+    <lastBuildDate>Fri, 16 Feb 2024 16:55:10 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
-        <title>A Passwordless Future! Passkeys for Java Developers</title>
-        <description>Passkeys and WebAuthn for Java developers. Learn how to get started with passkeys for your Java and Spring Boot applications. | &lt;a href=&quot;https://deepu.tech/webauthn-and-passkeys-for-java-developers/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <title>A Passwordless Future: Passkeys for Java Developers</title>
+        <description>Learn how to get started with passkeys for your Java and Spring Boot applications. | &lt;a href=&quot;https://deepu.tech/webauthn-and-passkeys-for-java-developers/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;&lt;em&gt;Originally published at &lt;a href=&quot;https://auth0.com/blog/webauthn-and-passkeys-for-java-developers/&quot;&gt;auth0.com&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;So, first things first, why do we even need to go passwordless? After all, passwords have been around for over 1000 years, right? And we were all happily sharing our Netflix passwords.&lt;/p&gt;
+&lt;p&gt;This blog post is a continuation of my previous &lt;a href=&quot;https://auth0.com/blog/webauthn-and-passkeys-for-developers/&quot;&gt;blog post on passkeys&lt;/a&gt;. In this post, you will learn how to implement passkeys using Auth0 and the WebAuthn4j library on your Java applications.&lt;/p&gt;
 
-&lt;h2 id=&quot;the-password-problem&quot;&gt;The Password Problem&lt;/h2&gt;
+&lt;div class=&quot;link-container&quot;&gt;
+                &lt;a href=&quot;https://deepu.tech/webauthn-and-passkeys-for-developers/&quot;&gt;
+                    &lt;div class=&quot;ltag__link__content&quot;&gt;
+                        &lt;h3&gt;A Passwordless Future: Passkeys for Developers&lt;/h3&gt;
+                        &lt;p&gt;02-Jan-2024&lt;/p&gt;
+                        &lt;div class=&quot;ltag__link__taglist&quot;&gt;
+                            #security #passkeys #webauthn
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
 
-&lt;p&gt;The most important reason to go passwordless would be the password problem. According to &lt;a href=&quot;https://www.verizon.com/business/resources/reports/dbir/2023/summary-of-findings/&quot;&gt;Verizon’s 2023 Data Breach Investigations Report&lt;/a&gt;, stolen credentials and phishing account for over 65% of all data breaches.&lt;/p&gt;
-
-&lt;p&gt;Most of the password problems are human problems in my opinion. Because passwords rely on us humans to remember them and to not share them and do a bunch of other stuff. History has repeatedly, a quadrillion times, shown us that we are not good at doing these things. So it is an &lt;strong&gt;us&lt;/strong&gt; problem rather than the technology itself.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/4kBHMXHpPNBBHiuwsJCMGK/4141a7ac4f7a7b66a3bbf07812c968c2/hacker_wearing_a_hoodie_anime.jpg&quot; alt=&quot;Anime character depicting a hacker&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;These are the main problems with passwords:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Knowledge-based&lt;/strong&gt;:
-    &lt;ul&gt;
-      &lt;li&gt;People can be socially engineered, quite easily, to divulge passwords, or other information that can be used to get to the password.&lt;/li&gt;
-      &lt;li&gt;In this day and age there are just too many passwords to remember. If passwords are easy to remember they are also easy to guess. Complex passwords are not easy to remember, so we end up reusing passwords.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Phishing&lt;/strong&gt;: Phishing websites can easily harvest passwords from even the most tech-savvy.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Remote Replay&lt;/strong&gt;: Accounts can be accessed remotely using harvested passwords.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Data Breach&lt;/strong&gt;: Applications become a target for data breaches when they store passwords.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Share and Reuse&lt;/strong&gt;: Sharing and reusing passwords makes them even more vulnerable.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Password management&lt;/strong&gt;: Passwords are not just a hassle for the end users, they are a hassle on the server side as well. Because
-    &lt;ul&gt;
-      &lt;li&gt;We need to build password recovery and reset flows.&lt;/li&gt;
-      &lt;li&gt;We need multi-factor authentication flows to secure them further.&lt;/li&gt;
-      &lt;li&gt;They need to be reset regularly in some use cases.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;https://www.forbes.com/sites/forbestechcouncil/2023/03/23/embracing-the-end-of-the-password-here-and-now&quot;&gt;Did you know it could cost around 70$ to reset a password?&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Of course, password managers help with some aspects of this and everyone should use one. But they are still an overhead and not very convenient for everyone, especially non-tech folks.&lt;/p&gt;
-
-&lt;h2 id=&quot;what-is-passwordless&quot;&gt;What is Passwordless?&lt;/h2&gt;
-
-&lt;p&gt;The obvious solution for the password problem is to go passwordless. So what exactly is passwordless?&lt;/p&gt;
-
-&lt;p&gt;If you can verify a user’s identity with something other than a password as the first factor of authentication, it is passwordless. We are doing this every day to unlock our phones and laptops using our fingerprints, faces, and so on.&lt;/p&gt;
-
-&lt;p&gt;There are a few &lt;a href=&quot;https://auth0.com/blog/what-is-passwordless-authentication/&quot;&gt;passwordless methods&lt;/a&gt; that you might have seen here and there. Like:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Biometric authentication&lt;/li&gt;
-  &lt;li&gt;Magic links&lt;/li&gt;
-  &lt;li&gt;SMS/Email One-Time Password (OTP)&lt;/li&gt;
-  &lt;li&gt;Push notifications&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;But most of these methods are not secure enough to replace a password + Multi-Factor Authentication (MFA) combination.&lt;/p&gt;
+&lt;p&gt;If you have not read the previous blog post, I would highly recommend you read it first to understand the basics of passkeys and WebAuthn.&lt;/p&gt;
 
 &lt;h2 id=&quot;passkeys&quot;&gt;Passkeys&lt;/h2&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Passkeys are a password replacement that provide faster, easier, and more secure sign-ins to websites and apps across a user’s devices. Unlike passwords, passkeys are resistant to phishing, are always strong, and are designed so that there are no shared secrets.
-–– FIDO Alliance&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This is where passkeys come into the picture. A secure passwordless future is the one offered by passkeys in my opinion. You probably already encountered passkeys since Google and GitHub have been rolling it out to all users recently. If you haven’t set them up yet, you should!&lt;/p&gt;
-
 &lt;p&gt;A passkey is a unique cryptographic key pair that allows you to access online services without using passwords. It is based on &lt;a href=&quot;https://en.wikipedia.org/wiki/Public-key_cryptography&quot;&gt;asymmetric public-key cryptography&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Before we dive deep into passkeys let’s look at some of the underlying technologies that make passkeys possible.&lt;/p&gt;
-
-&lt;h3 id=&quot;public-key-cryptography&quot;&gt;Public-key cryptography&lt;/h3&gt;
-
-&lt;p&gt;Asymmetric public key cryptography involves a pair of mathematically linked keys: a public key, which is shared openly, and a private key, kept secret by the owner.&lt;/p&gt;
-
-&lt;p&gt;When a message is encrypted with the public key, only the corresponding private key can decrypt it, ensuring confidentiality. At the same time, a message signed with a private key can be verified with the public key, authenticating the sender’s identity. Passkeys use the signature verification mechanism.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/3MWt9AKNIHYTANuAwI0kwT/54fa496219c32ad6f651165c16e5bec0/digital-signing.jpg&quot; alt=&quot;Signature verification using Public-key cryptography&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;These keys are generated using a cryptographic algorithm, such as RSA or ECC.&lt;/p&gt;
-
-&lt;h3 id=&quot;authenticator&quot;&gt;Authenticator&lt;/h3&gt;
-
-&lt;p&gt;An authenticator is a hardware or software entity that can create and store public-private key pairs which can be used for user registration and authentication. There are two types of authenticators:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Platform authenticators&lt;/strong&gt;: An authenticator built into a user’s device. For example, TouchID and FaceID from Apple, smartphone authenticators, Windows Hello, and so on.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Roaming authenticators&lt;/strong&gt;: A removable authenticator usable with any device the user is trying to sign in from. They are attached using USB, NFC, and/or Bluetooth. For example, security keys like &lt;a href=&quot;https://www.yubico.com/products/how-the-yubikey-works/&quot;&gt;YubiKey&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/titan-security-key&quot;&gt;Google Titan&lt;/a&gt; and smartphones.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;fido&quot;&gt;FIDO&lt;/h3&gt;
-
-&lt;p&gt;FIDO stands for Fast IDentity Online. FIDO is a global authentication standard based on public key cryptography developed by the &lt;a href=&quot;https://fidoalliance.org/&quot;&gt;FIDO Alliance&lt;/a&gt;. It aims to solve all our password problems. FIDO Credentials are cryptographic key pairs that can be used for authentication.&lt;/p&gt;
-
-&lt;p&gt;Passkeys are made possible by the &lt;a href=&quot;https://fidoalliance.org/fido2/&quot;&gt;FIDO2&lt;/a&gt; standard which is made up of Web Authentication (WebAuthn) and Client to Authenticator Protocol (CTAP).&lt;/p&gt;
-
-&lt;h3 id=&quot;web-authentication&quot;&gt;Web Authentication&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://webauthn.me/introduction&quot;&gt;Web Authentication&lt;/a&gt; is a &lt;a href=&quot;https://www.w3.org/TR/webauthn/&quot;&gt;W3C recommendation&lt;/a&gt; that lets a webpage use a set of JavaScript APIs to talk to authenticators.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/362EsMw63XVyLPh1jvJuZL/098194b80c218131f37f0af6435483f4/webauthn-arch-passkeys.jpg&quot; alt=&quot;WebAuthn architecture&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The WebAuthn architecture consists of three main entities:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Authenticator&lt;/strong&gt;: Platform or roaming authenticators that let a user authenticate by confirming their presence.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Relying Party&lt;/strong&gt;: A server (custom implementation or an Identity Provider like Auth0) that requires authentication. It issues challenges and stores public keys.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Client&lt;/strong&gt;: A client consists of the user’s browser. The client relays information between an authenticator and a relying party.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;client-to-authenticator-protocol&quot;&gt;Client to Authenticator Protocol&lt;/h3&gt;
-
-&lt;p&gt;The &lt;a href=&quot;https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html&quot;&gt;FIDO Client to Authenticator Protocol&lt;/a&gt; is used for communications with authenticators over a variety of transports like USB, NFC, and Bluetooth. It is used to send requests from WebAuthn to authenticators.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;Passkeys are passwordless FIDO credentials implemented using WebAuthn.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;The term passkey itself is just a marketing term popularized originally by companies like Apple and Google. Originally it was FIDO Multi-Device Credentials implemented with the WebAuthn specification. But recently that definition has evolved to mean any passwordless FIDO credentials that are discoverable by the browser. Passkeys are still evolving and hence this could change as well. But for simplicity let’s stick to passkeys as that is the term approved and used by the FIDO Alliance.&lt;/p&gt;
-
-&lt;h3 id=&quot;types-of-passkeys&quot;&gt;Types of passkeys&lt;/h3&gt;
-
-&lt;p&gt;Passkeys have two variants. Synced or multi-device passkeys and hardware or device-bound passkeys.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/6gWyrZIApjNIMzNLsYTZAy/dbd53f5f33b665fb4abe499612e87513/passkey-types.jpg&quot; alt=&quot;Passkey types&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;synced-passkeys&quot;&gt;Synced passkeys&lt;/h4&gt;
-
-&lt;p&gt;Synced passkeys have a better user experience since the private keys are end-to-end encrypted and synced to the cloud. For example, on the Apple ecosystem, the private key is synced on your iCloud keychain and you can register on one device and log in to any synced Apple device. The same goes for the Google ecosystem using the Chrome browser. Or you can use a password manager like BitWarden to store your passkeys.
-This kind of passkeys can be restored on new devices. But they are less secure than single device-bound passkeys since your private key is on the cloud and theoretically can be breached.&lt;/p&gt;
-
-&lt;h4 id=&quot;hardware-bound-passkeys&quot;&gt;Hardware-bound passkeys&lt;/h4&gt;
-
-&lt;p&gt;In the hardware or device-bound passkeys, the private key stays on the device itself and you need to authenticate using the same authenticator used for registration. It is slightly less convenient but more secure than synced passkeys. The relying party must support registering multiple credentials for a user so that backup keys can be registered, which is a best practice for hardware-bound passkeys.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;For example, I use a YubiKey with a fingerprint reader since I’m on Linux, and my passkeys are hardware-bound to that YubiKey. I don’t get any roaming or backup benefits like in the Apple or Google ecosystem. But it’s not a big deal, in my opinion, since I can register multiple Yubikeys as backup and use them on any device, and it’s more secure and way more convenient than password + MFA.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;how-does-it-work&quot;&gt;How does it work?&lt;/h3&gt;
-
-&lt;p&gt;Let’s see how user registration and authentication works with passkeys.&lt;/p&gt;
-
-&lt;h4 id=&quot;user-registration&quot;&gt;User registration&lt;/h4&gt;
-
-&lt;p&gt;First, let’s see how the registration flow works.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/1baVPd0OibsVRiE1ZRhLyr/525189d154e10c19b789263642b6baf4/passkey-registration-flow.jpg&quot; alt=&quot;Passkey registration flow&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;The user begins the registration flow. The relying party provides a randomly generated challenge string.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.create()&lt;/code&gt; method is invoked and the user provides approval using their authenticator.&lt;/li&gt;
-  &lt;li&gt;The authenticator creates a private-public key pair which is unique for the relying party’s domain and the user. The private key is used to sign the challenge.
-    &lt;ul&gt;
-      &lt;li&gt;An attestation object is created which contains the public key, signed challenge, credential ID, and certificate.&lt;/li&gt;
-      &lt;li&gt;The private key is stored on the authenticator.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;For synced passkeys&lt;/strong&gt;, the private key is also synced to a cloud service for backup and roaming (This is the only place where synced passkeys differ from hardware-bound passkeys).&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;The attestation object and other metadata are then passed to the relying party by the client-side implementation. The relying party verifies the signed challenge using the public key and registers the user by storing the public key and credential ID along with the user details.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;user-authentication&quot;&gt;User authentication&lt;/h4&gt;
-
-&lt;p&gt;Now, let’s see how the login flow works, which is quite similar except for the third step.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/1jrvIF1jqOAPckwX7FnVyB/456c25b1586a84770efeaff7d2664e0e/passkey-login-flow.jpg&quot; alt=&quot;Passkey login flow&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;The user begins the login flow. The relying party provides a randomly generated challenge string.&lt;/li&gt;
-  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.get()&lt;/code&gt; method is invoked and the user provides approval using their authenticator.&lt;/li&gt;
-  &lt;li&gt;The authenticator retrieves the private keys for the relying party’s domain name.
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;For synced passkeys&lt;/strong&gt;, if the device is new, the private key is synced from a cloud service if available (This is the only place where synced passkeys differ from hardware-bound passkeys).&lt;/li&gt;
-      &lt;li&gt;The user selects the private key for their username. The private key is used to sign the challenge.&lt;/li&gt;
-      &lt;li&gt;An assertion object is created which contains the signed challenge and credential ID.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;The assertion object and other metadata are then passed to the relying party by the client-side implementation. The relying party verifies the signed challenge using the public key stored for the user and authenticates the user.&lt;/li&gt;
-&lt;/ol&gt;
-
 &lt;h2 id=&quot;why-passkeys&quot;&gt;Why Passkeys?&lt;/h2&gt;
 
-&lt;p&gt;Let’s see why we need passkeys to replace passwords.&lt;/p&gt;
+&lt;p&gt;Passkeys are superior to password + traditional OTP MFA in terms of security and usability and they are as secure and more convenient than password + FIDO MFA. Most importantly, you don’t have to remember anything.&lt;/p&gt;
 
-&lt;p&gt;Passkeys are superior to password + traditional OTP MFA in terms of security and usability and they are as secure and more convenient than password + FIDO MFA. Most importantly, you don’t have to remember anything (unless you are like me and forget your YubiKeys all the time).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/6VeM8DTr7thzYZYucQk53A/b16e52d6e9b404cd5fc5d576ba972688/password-vs-passkey.jpg&quot; alt=&quot;password vs passkeys&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/2PT1FgbaFHD0ZOJDu3789k/b8a229f5c72115298db20f64060c65b0/passkey-vs-password.jpg&quot; alt=&quot;password vs passkeys&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Discoverable&lt;/strong&gt;: They are discoverable by the browser and the browser can autofill them for a service making it unnecessary for you to remember even usernames. It doesn’t rely on something you know, instead, it relies on something you have which is more secure from hacking and social engineering.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Phishing resistant&lt;/strong&gt;: Passkeys cannot be phished as they rely on public key cryptography and are bound to the domain name of the website, making it impossible to work on a spoofed website.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Remote attack resistant&lt;/strong&gt;: They rely on physical keys, like biometric sensors of platform authenticators or roaming authenticators like YubiKey, hence cannot be remotely breached.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Breach resistant&lt;/strong&gt;: The website only stores the public key of a user which is useless to an attacker on a data breach on the server side. This makes the server less attractive to hackers.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Not reusable and shareable*&lt;/strong&gt;: They cannot be reused as they are unique per service and user combination and cannot be shared.
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;*&lt;/strong&gt;except for Apple which lets you share a passkey by air-dropping it 🤷🏽 making it slightly less secure.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Easier management&lt;/strong&gt;: Passkeys are scalable. Synced passkeys are backed up and replicated across your devices by cloud services like iCloud, Google Cloud, Bitwarden, and so on. This makes recovery part of the platform rather than the application.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cross-device authentication&lt;/strong&gt;: Passkeys can also perform cross-device authentication regardless of ecosystem or platform. This means you can simply use your Android phone as an authenticator for your Apple laptop. This method also ensures security by making sure the devices are nearby using Bluetooth.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/5QPkAg3AaayeXqAqILLbC/06967f9aaf00771e619cb260e4d924ff/passkey-usability-security.jpg&quot; alt=&quot;Security and usability spectrum&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The security of passkeys is way better than most other combinations. When it comes to user experience, though it is subjective, I think it outperforms all other combinations.&lt;/p&gt;
-
-&lt;h2 id=&quot;how-does-it-differ-from-fido2-mfa&quot;&gt;How Does It Differ from FIDO2 MFA?&lt;/h2&gt;
-
-&lt;p&gt;Technically they are very similar since both can be implemented with WebAuthn and in the case of hardware-bound passkeys they are almost the same. However, there are some differences in terms of usability.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Passkeys are &lt;strong&gt;Discoverable Credentials (Resident Keys)&lt;/strong&gt; and hence are discoverable by browsers, FIDO2 MFA is non-resident keys. This means for hardware keys like YubiKey, the private key is stored on the key itself and hence can only hold what its memory allows, whereas for FIDO2 MFA, the private key is encrypted and sent to the relying party, hence no storage limitation on the hardware key.&lt;/li&gt;
-  &lt;li&gt;FIDO2 MFA does not have a synced option, passkeys does.&lt;/li&gt;
-  &lt;li&gt;In the case of synced passkeys there are even more differences in terms of usability and security. For example, enrollment needs to be done only once and the private keys are synced to a cloud.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The most important difference is that passkeys can be used as first-factor authentication whereas MFA can only be used as a second-factor after user registration with a password.&lt;/p&gt;
-
-&lt;h2 id=&quot;challenges&quot;&gt;Challenges&lt;/h2&gt;
-
-&lt;p&gt;There are still some challenges when it comes to passkeys:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;OS/Browser support&lt;/strong&gt;: It is dependent on the OS and Browser to implement the specs, and we all know how that turns out right? This means the support may not be uniform and can become fragmented and we might never have the same experience everywhere.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Cloud vendor reliance&lt;/strong&gt;: It relies on companies like Apple, Google, and Microsoft to save the private keys in their cloud securely and protect it from breaches.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Enterprise use cases&lt;/strong&gt;: Enterprise users might want more control and flexibility which could be a problem. For example, if an enterprise doesn’t allow iCloud or Google on their computer, passkeys would not work there.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Reset &amp;amp; Recovery&lt;/strong&gt;: There are no default recovery flows for hardware-bound passkeys, and applications might still need to implement recovery &amp;amp; reset flows to accommodate all use cases.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://webauthn.me/browser-support&quot;&gt;Browser and OS compatibility&lt;/a&gt; is still catching up. As of writing, Chrome has the best support and the Apple ecosystem has the most seamless experience, especially for platform authenticators. Linux does not have any support for platform authenticators. Roaming authenticators have great support on all platforms.&lt;/p&gt;
-
-&lt;h2 id=&quot;lets-see-passkeys-in-action&quot;&gt;Let’s See Passkeys in Action&lt;/h2&gt;
+&lt;h2 id=&quot;lets-see-passkeys-in-action-with-auth0&quot;&gt;Let’s See Passkeys in Action with Auth0&lt;/h2&gt;
 
 &lt;p&gt;Let’s build a Spring Boot web app and secure it using passkeys with the help of Auth0 by Okta. You can find a sample app &lt;a href=&quot;https://a0.to/jfall-passkey&quot;&gt;on GitHub&lt;/a&gt; if you just want to try passkeys.&lt;/p&gt;
 
@@ -270,7 +71,10 @@ This kind of passkeys can be restored on new devices. But they are less secure t
  | &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-xzvf&lt;/span&gt; -
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;web&lt;/code&gt; dependency provides Spring Web MVC with basic HTTP REST functionality. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;okta&lt;/code&gt; dependency provides the Okta Spring Boot Starter, which provides the required dependencies and configuration to add OIDC authentication to your application.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;web&lt;/code&gt; dependency provides Spring Web MVC with basic HTTP REST functionality.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;okta&lt;/code&gt; dependency provides the Okta Spring Boot Starter, which provides the required dependencies and configuration to add OIDC authentication to your application.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;add-a-web-controller&quot;&gt;Add a web controller&lt;/h3&gt;
 
@@ -317,7 +121,7 @@ This kind of passkeys can be restored on new devices. But they are less secure t
 
 &lt;h3 id=&quot;configure-oidc-authentication-with-auth0&quot;&gt;Configure OIDC Authentication with Auth0&lt;/h3&gt;
 
-&lt;p&gt;Configure the application to use Auth0 as the Identity Provider (IdP). You can use the Auth0 CLI to create a new application. Run the following command to create a new application:&lt;/p&gt;
+&lt;p&gt;Configure the application to use Auth0 as the Identity Provider (IdP). You can use the Auth0 CLI to create a new authorization server application. Run the following command to create a new application:&lt;/p&gt;
 
 &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
@@ -335,7 +139,14 @@ This kind of passkeys can be restored on new devices. But they are less secure t
   &lt;span class=&quot;nt&quot;&gt;--reveal-secrets&lt;/span&gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--type&lt;/code&gt; option specifies that you use a regular web application. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--callbacks&lt;/code&gt; option specifies the callback URL for the application. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--logout-urls&lt;/code&gt; option specifies the logout URL for the application. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--reveal-secrets&lt;/code&gt; option will display the client secret in the output. You can also use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0 apps update&lt;/code&gt; command to update the application with the callback and logout URLs.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--type&lt;/code&gt; option specifies that you use a regular web application.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--callbacks&lt;/code&gt; option specifies the callback URL for the application.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--logout-urls&lt;/code&gt; option specifies the logout URL for the application.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--reveal-secrets&lt;/code&gt; option will display the client secret in the output.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can also use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;auth0 apps update&lt;/code&gt; command to update the application with the callback and logout URLs.&lt;/p&gt;
 
 &lt;p&gt;Note down the Auth0 issuer (for example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://dev-12345678.us.auth0.com/&lt;/code&gt;), &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CLIENT ID&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CLIENT SECRET&lt;/code&gt; from the output. You will use these values in the next step.&lt;/p&gt;
 
@@ -371,27 +182,431 @@ This kind of passkeys can be restored on new devices. But they are less secure t
 
 &lt;p&gt;Create a passkey using your platform authenticator or roaming authenticator like YubiKey. Once you have registered a passkey, you should be redirected back to the application and see the welcome message.&lt;/p&gt;
 
+&lt;p&gt;Open a new incognito window and navigate to &lt;a href=&quot;http://localhost:8080/&quot;&gt;http://localhost:8080&lt;/a&gt;. You will be prompted to sign in using your passkey. Once you have signed in, you will see the welcome message.&lt;/p&gt;
+
+&lt;p&gt;Isn’t that cool? You just implemented passkeys in your Spring Boot application with so little effort thanks to Auth0.&lt;/p&gt;
+
 &lt;h2 id=&quot;webauthn-for-java&quot;&gt;WebAuthn for Java&lt;/h2&gt;
 
-&lt;p&gt;Though Web Authentication’s user experience is a client-side implementation using JavaScript, the backend or Relying party can be a Java server. Ideally using an IdP like Auth0 would be the best option since it takes care of all the heavy lifting for you. But if you want to implement it yourself, you can use one of the below libraries.&lt;/p&gt;
+&lt;p&gt;Though Web Authentication’s user experience is a client-side implementation using JavaScript, the backend or Relying party can be a Java server. Ideally using an IdP like Auth0 would be the best option since it takes care of all the heavy lifting for you. But if you want to implement it yourself and walk the harder path, you can use one of the below libraries.&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/webauthn4j/webauthn4j&quot;&gt;WebAuthn4j&lt;/a&gt;: A 100% FIDO2 conformant library with support for all attestation formats and validation. It is used by Keycloak and Spring Security.&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/Yubico/java-webauthn-server&quot;&gt;java-webauthn-server&lt;/a&gt;: A library from Yubico that supports many attestation format. But it is not 100% FIDO2 conformant.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;We will dive deeper into using WebAuthn4j with Spring Security in a follow-up blog post. In the meantime, you can explore a sample application I built using WebAuthn4j and Spring Security &lt;a href=&quot;https://a0.to/jfall-webauthn&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;webauthn4j-with-spring-security-in-action&quot;&gt;WebAuthn4j with Spring Security in Action&lt;/h2&gt;
+
+&lt;p&gt;Let’s look at a simple Spring Boot application that uses passkeys for authentication without using an IdP. You can find the sample app &lt;a href=&quot;https://a0.to/jfall-webauthn&quot;&gt;on GitHub&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;clone-and-run-the-application&quot;&gt;Clone and run the application&lt;/h3&gt;
+
+&lt;p&gt;Start by cloning the application.&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;git clone https://github.com/deepu105/webauthn4j-spring-boot-passkeys-demo.git
+
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;webauthn4j-spring-boot-passkeys-demo
+./gradlew bootRun
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Visit &lt;a href=&quot;http://localhost:8080/&quot;&gt;http://localhost:8080/&lt;/a&gt;. You should see the below screen. Try registering a new user with passkeys and log in.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/6AMgTTV5zvVh1kqb3Y3MjQ/ad84606693d09195dc43a4aa1c5ea8a5/register-screen-webauthn4j.jpg&quot; alt=&quot;Sign up Screen&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;webauthn4j-configuration&quot;&gt;WebAuthn4j configuration&lt;/h3&gt;
+
+&lt;p&gt;Let’s look at some of the important parts of the application.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;webauthn4j-spring-security-core&lt;/code&gt; dependency, in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;build.gradle&lt;/code&gt; file, provides the Spring Security integration for WebAuthn4j.&lt;/li&gt;
+  &lt;li&gt;The required beans for WebAuthn4j are configured in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/main/java/com/example/demo/config/WebSecurityBeanConfig.java&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;InMemoryWebAuthnAuthenticatorManager&lt;/code&gt; is used to keep things simple but it means authenticator data is lost on application restart. For production use, it is better to implement the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WebAuthnAuthenticatorManager&lt;/code&gt; interface and persist credential IDs for users.&lt;/li&gt;
+  &lt;li&gt;WebAuthn4j is configured using the standard Spring Security filter chain in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/main/java/com/example/demo/config/WebSecurityConfig.java&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nd&quot;&gt;@Configuration&lt;/span&gt;
+&lt;span class=&quot;nd&quot;&gt;@EnableWebSecurity&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebSecurityConfig&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Bean&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SecurityFilterChain&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;filterChain&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpSecurity&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AuthenticationManager&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;authenticationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// WebAuthn Login&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;apply&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;WebAuthnLoginConfigurer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;webAuthnLogin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;defaultSuccessUrl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;failureHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Login error&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sendRedirect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/login?error=Login failed: &quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getMessage&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;})&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attestationOptionsEndpoint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;rp&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;WebAuthn4J Passkeys Demo&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pubKeyCredParams&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;c1&quot;&gt;// supported algorithms for cryptography&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PublicKeyCredentialParameters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;PublicKeyCredentialType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;PUBLIC_KEY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;COSEAlgorithmIdentifier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ES256&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;),&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;PublicKeyCredentialParameters&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;PublicKeyCredentialType&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;PUBLIC_KEY&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;COSEAlgorithmIdentifier&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;RS256&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;attestation&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;AttestationConveyancePreference&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DIRECT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;uvm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;credProps&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extensionProviders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;assertionOptionsEndpoint&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extensions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;extensionProviders&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// &apos;publickey-credentials-get *&apos; allows getting WebAuthn credentials to all nested browsing contexts (iframes) regardless of their origin.&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;permissionsPolicy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;policy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;publickey-credentials-get *&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+            &lt;span class=&quot;c1&quot;&gt;// Disable &quot;X-Frame-Options&quot; to allow cross-origin iframe access&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;frameOptions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;Customizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;withDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;disable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// Authorization&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authorizeHttpRequests&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;authz&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;authz&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requestMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;GET&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/login&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;permitAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;requestMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpMethod&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;POST&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/signup&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;permitAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;anyRequest&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;access&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getWebExpressionAuthorizationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@webAuthnSecurityExpression.isWebAuthnAuthenticated(authentication)&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;exceptionHandling&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eh&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eh&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;accessDeniedHandler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accessDeniedException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Access denied&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accessDeniedException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sendRedirect&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/login&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}));&lt;/span&gt;
+
+        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;authenticationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;authenticationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// As WebAuthn has its own CSRF protection mechanism (challenge), CSRF token is disabled here&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;csrf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;csrf&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;csrf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;csrfTokenRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;CookieCsrfTokenRepository&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;withHttpOnlyFalse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;());&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;csrf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ignoringRequestMatchers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/webauthn/**&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;http&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The endpoints are configured in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/main/java/com/example/demo/web/WebAuthnSampleController.java&lt;/code&gt;. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/login&lt;/code&gt; endpoints are quite simple and self-explanatory. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/signup&lt;/code&gt; endpoint handles the WebAuthn registration request using WebAuthn4j. The request is first validated using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WebAuthnRegistrationRequestValidator&lt;/code&gt; and then the authenticator is created using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WebAuthnAuthenticatorManager&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nd&quot;&gt;@Controller&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebAuthnSampleController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@PostMapping&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;/signup&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;HttpServletRequest&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@Valid&lt;/span&gt; &lt;span class=&quot;nd&quot;&gt;@ModelAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;userForm&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UserCreateForm&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userCreateForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;BindingResult&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Model&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;RedirectAttributes&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;redirectAttributes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;hasErrors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;errorMessage&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Your input needs correction.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;User input validation failed.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;VIEW_LOGIN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;nc&quot;&gt;WebAuthnRegistrationRequestValidationResponse&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;registrationRequestValidationResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;registrationRequestValidationResponse&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;registrationRequestValidator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;validate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;userCreateForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClientDataJSON&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;userCreateForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAttestationObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;userCreateForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getTransports&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;userCreateForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getClientExtensions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;WebAuthnException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebAuthnAuthenticationException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;errorMessage&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Authenticator registration request validation failed. Please try again.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;WebAuthn registration request validation failed.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;VIEW_LOGIN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;userCreateForm&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getUsername&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;authenticator&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;WebAuthnAuthenticatorImpl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;
+                &lt;span class=&quot;s&quot;&gt;&quot;authenticator&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;registrationRequestValidationResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAttestationObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAuthenticatorData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAttestedCredentialData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;registrationRequestValidationResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAttestationObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAttestationStatement&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;registrationRequestValidationResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAttestationObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAuthenticatorData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getSignCount&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;registrationRequestValidationResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getTransports&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;registrationRequestValidationResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getRegistrationExtensionsClientOutputs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(),&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;registrationRequestValidationResponse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAttestationObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getAuthenticatorData&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getExtensions&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;webAuthnAuthenticatorManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;createAuthenticator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;authenticator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;IllegalArgumentException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;errorMessage&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Registration failed. The user may already be registered.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Registration failed.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;VIEW_LOGIN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nc&quot;&gt;RuntimeException&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;errorMessage&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Registration failed by unexpected error.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;logger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Registration failed.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ex&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;VIEW_LOGIN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAttribute&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;successMessage&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;User registration successful. Please login.&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;VIEW_LOGIN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;client-side-configuration&quot;&gt;Client-side configuration&lt;/h3&gt;
+
+&lt;p&gt;The file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;src/main/resources/templates/login.html&lt;/code&gt; handles login and sign-up. The login button will invoke the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.get()&lt;/code&gt; API and the register button will invoke the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.create()&lt;/code&gt; API. The buttons submit the corresponding forms with the input data in them. All inputs except the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;username&lt;/code&gt; field are hidden as their data will be set using JavaScript.&lt;/p&gt;
+
+&lt;p&gt;WebAuthn4j exposes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/webauthn/attestation/options&lt;/code&gt; endpoint in the application to fetch the registration options. Some of the option parameters need to be decoded from base64URL. The &lt;a href=&quot;https://github.com/deepu105/base64url-arraybuffer&quot;&gt;base64url-arraybuffer&lt;/a&gt; library is used for this. The options are then passed to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.create()&lt;/code&gt; API. The response from the API is then updated to the form fields and submitted to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/signup&lt;/code&gt; endpoint.&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;signup-form&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;preventDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;userHandle&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;userHandle&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;optionsRes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/webauthn/attestation/options&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;optionsRes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;publicKey&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;challenge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;challenge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;userHandle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;displayName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;excludeCredentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;excludeCredentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+                &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;})),&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;authenticatorSelection&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;requireResidentKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                &lt;span class=&quot;na&quot;&gt;userVerification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;discouraged&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;create&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;publicKey&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;clientDataJSON&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clientDataJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;attestationObject&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;attestationObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;clientExtensions&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getClientExtensionResults&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;signup-form&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Error:%s, Message:%s&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;WebAuthn4j exposes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/webauthn/assertion/options&lt;/code&gt; endpoint in the application to fetch the authentication options. Some of the option parameters need to be decoded from base64URL. The options are then passed to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.get()&lt;/code&gt; API. The response from the API is then updated to the form fields and submitted to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/login&lt;/code&gt; endpoint.&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;login-form&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;addEventListener&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;async&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;preventDefault&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;optionsRes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/webauthn/assertion/options&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;optionsRes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;publicKey&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;challenge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;decode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;challenge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            &lt;span class=&quot;na&quot;&gt;userVerification&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;preferred&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+        &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;await&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;navigator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credentials&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;publicKey&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;credentialId&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;loginClientDataJSON&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;clientDataJSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;authenticatorData&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;authenticatorData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;base64url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;encode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;signature&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;loginClientExtensions&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;JSON&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;stringify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;credential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getClientExtensionResults&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+        &lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;login-form&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;submit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;Error:%s, Message:%s&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;message&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;You have now learned:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;How to implement passkeys using an IdP like Auth0.&lt;/li&gt;
+  &lt;li&gt;You also learned how to configure the application to use Auth0 as the Identity Provider and how to configure Auth0 for passkey support.&lt;/li&gt;
+  &lt;li&gt;Roll your own passkey solution using WebAuthn4j and Spring Security.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Passkeys are the future of authentication. They are more secure and convenient than traditional passwords and OTPs. Though you could roll your own solution using WebAuthn4j, it is always better to use an IdP like Auth0 to handle the heavy lifting for you and take care of all the security best practices.&lt;/p&gt;
 
 &lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
 
 &lt;p&gt;I hope that you found this article helpful. Here are some additional resources to learn more about WebAuthn and passkeys.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;https://webauthn.me&lt;/li&gt;
-  &lt;li&gt;https://passkeys.dev&lt;/li&gt;
-  &lt;li&gt;https://passkey.org/&lt;/li&gt;
-  &lt;li&gt;https://fidoalliance.org/passkeys/&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://auth0.com/blog/our-take-on-passkeys/&quot;&gt;Our Take On Passkeys&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://learnpasskeys.io&quot;&gt;learnpasskeys.io&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://webauthn.me&quot;&gt;webauthn.me&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://passkeys.dev&quot;&gt;passkeys.dev&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://fidoalliance.org/passkeys/&quot;&gt;fidoalliance&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -409,6 +624,305 @@ This kind of passkeys can be restored on new devices. But they are less secure t
         <category>java</category>
         
         <category>spring</category>
+        
+        <category>passkeys</category>
+        
+        <category>webauthn</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>A Passwordless Future: Passkeys for Developers</title>
+        <description>Passkeys and WebAuthn for developers. Learn how passkeys work and the benefits they provide. | &lt;a href=&quot;https://deepu.tech/webauthn-and-passkeys-for-developers/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
+        <author>Deepu K Sasidharan</author>
+        <content:encoded>&lt;p&gt;&lt;em&gt;Originally published at &lt;a href=&quot;https://auth0.com/blog/webauthn-and-passkeys-for-developers/&quot;&gt;auth0.com&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;So, first things first, why do we even need to go passwordless? After all, passwords have been around for over 1000 years, right? And we were all happily sharing our Netflix passwords.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-password-problem&quot;&gt;The Password Problem&lt;/h2&gt;
+
+&lt;p&gt;The most important reason to go passwordless would be the password problem. According to &lt;a href=&quot;https://www.verizon.com/business/resources/reports/dbir/2023/summary-of-findings/&quot;&gt;Verizon’s 2023 Data Breach Investigations Report&lt;/a&gt;, stolen credentials and phishing account for over 65% of all data breaches.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/4kBHMXHpPNBBHiuwsJCMGK/4141a7ac4f7a7b66a3bbf07812c968c2/hacker_wearing_a_hoodie_anime.jpg&quot; alt=&quot;Anime character depicting a hacker&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Most of the password problems are human problems in my opinion. Because passwords rely on us humans to remember them and to not share them and do a bunch of other stuff. History has repeatedly, a quadrillion times, shown us that we are not good at doing these things. So it is an &lt;strong&gt;us&lt;/strong&gt; problem rather than the technology itself.&lt;/p&gt;
+
+&lt;p&gt;These are the main problems with passwords:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Knowledge-based&lt;/strong&gt;:
+    &lt;ul&gt;
+      &lt;li&gt;People can be socially engineered, quite easily, to divulge passwords, or other information that can be used to get to the password.&lt;/li&gt;
+      &lt;li&gt;In this day and age there are just too many passwords to remember. If passwords are easy to remember they are also easy to guess. Complex passwords are not easy to remember, so we end up reusing passwords.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Phishing&lt;/strong&gt;: Phishing websites can easily harvest passwords from even the most tech-savvy.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Remote Replay&lt;/strong&gt;: Accounts can be accessed remotely using harvested passwords.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Data Breach&lt;/strong&gt;: Applications become a target for data breaches when they store passwords.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Share and Reuse&lt;/strong&gt;: Sharing and reusing passwords makes them even more vulnerable.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Password management&lt;/strong&gt;: Passwords are not just a hassle for the end users, they are a hassle on the server side as well. Because
+    &lt;ul&gt;
+      &lt;li&gt;We need to build password recovery and reset flows.&lt;/li&gt;
+      &lt;li&gt;We need multi-factor authentication flows to secure them further.&lt;/li&gt;
+      &lt;li&gt;They need to be reset regularly in some use cases.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/2aFBrgOCSmtq4yWQa958jh/99c50506bf6eeaad148afee6eb5f9a0a/password-problems.jpg&quot; alt=&quot;Problems with passwords&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://www.forbes.com/sites/forbestechcouncil/2023/03/23/embracing-the-end-of-the-password-here-and-now&quot;&gt;Did you know it could cost around 70$ to reset a password?&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Of course, password managers help with some aspects of this and everyone should use one. But they are still an overhead and not very convenient for everyone, especially non-tech folks.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-passwordless&quot;&gt;What is Passwordless?&lt;/h2&gt;
+
+&lt;p&gt;The obvious solution for the password problem is to go passwordless. So what exactly is passwordless?&lt;/p&gt;
+
+&lt;p&gt;If you can verify a user’s identity with something other than a password as the first factor of authentication, it is passwordless. We are doing this every day to unlock our phones and laptops using our fingerprints, faces, and so on.&lt;/p&gt;
+
+&lt;p&gt;There are a few &lt;a href=&quot;https://auth0.com/blog/what-is-passwordless-authentication/&quot;&gt;passwordless methods&lt;/a&gt; that you might have seen here and there. Like:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Biometric authentication&lt;/li&gt;
+  &lt;li&gt;Magic links&lt;/li&gt;
+  &lt;li&gt;SMS/Email One-Time Password (OTP)&lt;/li&gt;
+  &lt;li&gt;Push notifications&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;But most of these methods are not secure enough to replace a password + Multi-Factor Authentication (MFA) combination.&lt;/p&gt;
+
+&lt;h2 id=&quot;passkeys&quot;&gt;Passkeys&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Passkeys are a password replacement that provide faster, easier, and more secure sign-ins to websites and apps across a user’s devices. Unlike passwords, passkeys are resistant to phishing, are always strong, and are designed so that there are no shared secrets.&lt;/p&gt;
+
+  &lt;p&gt;— FIDO Alliance&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is where passkeys come into the picture. A secure passwordless future is the one offered by passkeys in my opinion. You probably already encountered passkeys since Google and GitHub have been rolling it out to all users recently. If you haven’t set them up yet, you should!&lt;/p&gt;
+
+&lt;p&gt;A passkey is a unique cryptographic key pair that allows you to access online services without using passwords. It is based on &lt;a href=&quot;https://en.wikipedia.org/wiki/Public-key_cryptography&quot;&gt;asymmetric public-key cryptography&lt;/a&gt;.&lt;/p&gt;
+
+&lt;include src=&quot;LearnPasskeysCTA&quot; /&gt;
+
+&lt;p&gt;Before we dive deep into passkeys let’s look at some of the underlying technologies that make passkeys possible.&lt;/p&gt;
+
+&lt;h3 id=&quot;public-key-cryptography&quot;&gt;Public-key cryptography&lt;/h3&gt;
+
+&lt;p&gt;Asymmetric public key cryptography involves a pair of mathematically linked keys: a public key, which is shared openly, and a private key, kept secret by the owner.&lt;/p&gt;
+
+&lt;p&gt;This key pair can be used for encryption. When a message is encrypted with the public key, only the corresponding private key can decrypt it, ensuring confidentiality.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/65xEECjioOX0xqW8D4sYtf/a105305563ee8cdc4431a59c61ee95a7/pub-key-encrypt.jpg&quot; alt=&quot;Signature verification using Public-key cryptography&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The same key pair can also be used for digital signatures. A message signed with a private key can be verified with the public key, authenticating the sender’s identity.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/2SROWLHSH9If5eZ0fZ5dbj/89633fe6d9afe573c407fcc9ff8303c0/pub-key-sign.jpg&quot; alt=&quot;Signature verification using Public-key cryptography&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Passkeys use the signature verification mechanism. These keys are generated using a cryptographic algorithm, such as RSA or ECC.&lt;/p&gt;
+
+&lt;h3 id=&quot;authenticator&quot;&gt;Authenticator&lt;/h3&gt;
+
+&lt;p&gt;An authenticator is a hardware or software entity that can create and store public-private key pairs which can be used for user registration and authentication. There are two types of authenticators:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Platform authenticators&lt;/strong&gt;: An authenticator built into a user’s device. For example, TouchID and FaceID from Apple, smartphone authenticators, Windows Hello, and so on.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Roaming authenticators&lt;/strong&gt;: A removable authenticator usable with any device the user is trying to sign in from. They are attached using USB, NFC, and/or Bluetooth. For example, security keys like &lt;a href=&quot;https://www.yubico.com/products/how-the-yubikey-works/&quot;&gt;YubiKey&lt;/a&gt;, &lt;a href=&quot;https://cloud.google.com/titan-security-key&quot;&gt;Google Titan&lt;/a&gt; and smartphones.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;fido&quot;&gt;FIDO&lt;/h3&gt;
+
+&lt;p&gt;FIDO stands for Fast IDentity Online. FIDO is a global authentication standard based on public key cryptography developed by the &lt;a href=&quot;https://fidoalliance.org/&quot;&gt;FIDO Alliance&lt;/a&gt;. It aims to solve all our password problems. FIDO Credentials are cryptographic key pairs that can be used for authentication.&lt;/p&gt;
+
+&lt;p&gt;Passkeys are made possible by the &lt;a href=&quot;https://fidoalliance.org/fido2/&quot;&gt;FIDO2&lt;/a&gt; standard which is made up of Web Authentication (WebAuthn) and Client to Authenticator Protocol (CTAP).&lt;/p&gt;
+
+&lt;h3 id=&quot;web-authentication&quot;&gt;Web Authentication&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://webauthn.me/introduction&quot;&gt;Web Authentication&lt;/a&gt; is a &lt;a href=&quot;https://www.w3.org/TR/webauthn/&quot;&gt;W3C recommendation&lt;/a&gt; that lets a webpage use a set of JavaScript APIs to talk to authenticators.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/362EsMw63XVyLPh1jvJuZL/098194b80c218131f37f0af6435483f4/webauthn-arch-passkeys.jpg&quot; alt=&quot;WebAuthn architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The WebAuthn architecture consists of three main entities:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Authenticator&lt;/strong&gt;: Platform or roaming authenticators that let a user authenticate by confirming their presence.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Relying Party&lt;/strong&gt;: A server (custom implementation or an Identity Provider like Auth0) that requires authentication. It issues challenges and stores public keys.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Client&lt;/strong&gt;: A client consists of the user’s browser. The client relays information between an authenticator and a relying party.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;client-to-authenticator-protocol&quot;&gt;Client to Authenticator Protocol&lt;/h3&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://fidoalliance.org/specs/fido-v2.1-ps-20210615/fido-client-to-authenticator-protocol-v2.1-ps-errata-20220621.html&quot;&gt;FIDO Client to Authenticator Protocol&lt;/a&gt; is used for communications with authenticators over a variety of transports like USB, NFC, and Bluetooth. It is used to send requests from WebAuthn to authenticators.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Passkeys are passwordless FIDO credentials implemented using WebAuthn.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Passkeys were originally called FIDO Multi-Device Credentials implemented with the WebAuthn. But recently that definition has evolved to mean any passwordless FIDO credentials that are discoverable by the browser. Passkeys are still evolving and hence this could change as well. But for simplicity let’s stick to passkeys as that is the term used by the FIDO Alliance.&lt;/p&gt;
+
+&lt;h3 id=&quot;types-of-passkeys&quot;&gt;Types of passkeys&lt;/h3&gt;
+
+&lt;p&gt;Passkeys have two variants. Synced passkeys (sometimes referred to as multi-device passkeys) and device-bound passkeys (sometimes referred to as hardware-bound passkeys).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/3I3nxEpG2HYNBnQi1BZx3O/b10ff4f77c0d385b9b99ba8bf05cc0b6/passkey-types.jpg&quot; alt=&quot;Passkey types&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;synced-passkeys&quot;&gt;Synced passkeys&lt;/h4&gt;
+
+&lt;p&gt;Synced passkeys have a better user experience since the private keys are end-to-end encrypted and synced to the cloud. For example, on the Apple ecosystem, the private key is synced on your iCloud Keychain and you can register on one device and log in to any synced Apple device. The same goes for the Google ecosystem using the Chrome browser and Google Password Manager. Or you can use a password manager like BitWarden or 1Password to store your passkeys.
+This kind of passkeys can be restored on new devices. But they are less secure than single device-bound passkeys since your private key is on the cloud and theoretically can be breached.&lt;/p&gt;
+
+&lt;h4 id=&quot;device-bound-passkeys&quot;&gt;Device-bound passkeys&lt;/h4&gt;
+
+&lt;p&gt;In the device-bound passkeys, the private key stays on the device itself and you need to authenticate using the same authenticator used for registration. It is slightly less convenient but more secure than synced passkeys. The relying party must support registering multiple credentials for a user so that backup keys can be registered, which is a best practice for device-bound passkeys.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;For example, I use a YubiKey with a fingerprint reader since I’m on Linux, and my passkeys are device-bound to that YubiKey. I don’t get any roaming or backup benefits like in the Apple or Google ecosystem. But it’s not a big deal, in my opinion, since I can register multiple YubiKeys as backup and use them on any device, and it’s more secure and way more convenient than password + MFA.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;how-does-it-work&quot;&gt;How does it work?&lt;/h3&gt;
+
+&lt;p&gt;Let’s see how user registration and authentication work with passkeys.&lt;/p&gt;
+
+&lt;h4 id=&quot;user-registration&quot;&gt;User registration&lt;/h4&gt;
+
+&lt;p&gt;First, let’s see how the registration flow works.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/2wFESoN5p5JJNnCM8gzIIA/8359b4717f89f2bd6ad0036961b4e841/registartion-flow.jpg&quot; alt=&quot;Passkey registration flow&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The user begins the registration flow. The relying party provides a randomly generated challenge string.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.create()&lt;/code&gt; method of the WebAuthn API is invoked and the user provides approval using their authenticator.&lt;/li&gt;
+  &lt;li&gt;The authenticator creates a private-public key pair which is unique for the relying party’s domain and the user. The private key is used to sign the challenge.
+    &lt;ul&gt;
+      &lt;li&gt;The private key is stored on the authenticator.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;For synced passkeys&lt;/strong&gt;, the private key is also synced to a cloud service for backup and roaming (This is the only place where synced passkeys differ from device-bound passkeys).&lt;/li&gt;
+      &lt;li&gt;An attestation object is created which contains the public key, signed challenge, credential ID, and certificate.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The attestation object and other metadata are then passed to the relying party by the client-side implementation. The relying party verifies the signed challenge using the public key and registers the user by storing the public key and credential ID along with the user details.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;user-authentication&quot;&gt;User authentication&lt;/h4&gt;
+
+&lt;p&gt;Now, let’s see how the login flow works, which is quite similar except for the third step.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/6sQPhaAjnYdPl2L1Ruu0gU/0b866c672109b02ba5a856b324d719a0/login-flow.jpg&quot; alt=&quot;Passkey login flow&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The user begins the login flow. The relying party provides a randomly generated challenge string.&lt;/li&gt;
+  &lt;li&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;navigator.credentials.get()&lt;/code&gt; method of the WebAuthn API is invoked and the user provides approval using their authenticator.&lt;/li&gt;
+  &lt;li&gt;The authenticator retrieves the private keys for the relying party’s domain name.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;For synced passkeys&lt;/strong&gt;, if the device is new, the private key is synced from a cloud service if available (This is the only place where synced passkeys differ from device-bound passkeys).&lt;/li&gt;
+      &lt;li&gt;The user selects the private key for their username. The private key is used to sign the challenge.&lt;/li&gt;
+      &lt;li&gt;An assertion object is created which contains the signed challenge and credential ID.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The assertion object and other metadata are then passed to the relying party by the client-side implementation. The relying party verifies the signed challenge using the public key stored for the user and authenticates the user.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;why-passkeys&quot;&gt;Why Passkeys?&lt;/h2&gt;
+
+&lt;p&gt;Let’s see why we need passkeys to replace passwords.&lt;/p&gt;
+
+&lt;p&gt;Passkeys are superior to password + traditional OTP MFA in terms of security and usability and they are as secure and more convenient than password + FIDO MFA. Most importantly, you don’t have to remember anything (unless you are like me and forget your YubiKeys all the time).&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/6VeM8DTr7thzYZYucQk53A/b16e52d6e9b404cd5fc5d576ba972688/password-vs-passkey.jpg&quot; alt=&quot;password vs passkeys&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Discoverable&lt;/strong&gt;: Passwords are knowledge-based but passkeys are discoverable credentials and the browser can autofill them for a service making it unnecessary for you to remember even usernames. It doesn’t rely on something you know, instead, it relies on something you have or something you are which is more secure from hacking and social engineering.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Phishing resistant&lt;/strong&gt;: Passkeys cannot be phished as they rely on public key cryptography and are bound to the domain name of the website, making it impossible to work on a spoofed website.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Remote attack resistant&lt;/strong&gt;: Passkeys rely on physical keys, like biometric sensors of platform authenticators or roaming authenticators like YubiKey, hence cannot be remotely breached.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Breach resistant&lt;/strong&gt;: The website only stores the public key of a user which is useless to an attacker on a data breach on the server side. This makes the server less attractive to hackers.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Not reusable and shareable*&lt;/strong&gt;: They cannot be reused as they are unique per service and user combination and cannot be shared.
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;*&lt;/strong&gt;except for Apple which lets you share a passkey by air-dropping it 🤷🏽.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Easier management&lt;/strong&gt;: Passkeys are scalable. Synced passkeys are backed up and replicated across your devices by services like iCloud Keychain, Google Password Manager, Bitwarden, and so on. This makes recovery part of the platform rather than the application.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cross-device authentication&lt;/strong&gt;: Passkeys can also perform cross-device authentication regardless of ecosystem or platform. For example, you can simply use your Android phone as an authenticator for your Apple laptop.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/42XVjCL09xrYbViYJEBJKz/e18d7b66fdd0973c45ab58b4c880ee8c/usability.jpg&quot; alt=&quot;Security and usability spectrum of passkeys&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The security of passkeys is way better than most other combinations. When it comes to user experience, though it is subjective, I think it outperforms all other combinations.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-does-passkeys-differ-from-webauthn-multi-factor-authentication&quot;&gt;How Does Passkeys Differ from WebAuthn Multi-Factor Authentication?&lt;/h2&gt;
+
+&lt;p&gt;Technically they are very similar since both are implemented with WebAuthn and in the case of device-bound passkeys they are even more similar. However, some differences set them apart.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Passkeys are &lt;strong&gt;&lt;a href=&quot;https://www.w3.org/TR/webauthn-2/#discoverable-credential&quot;&gt;Discoverable Credentials&lt;/a&gt;&lt;/strong&gt; and are entirely stored on the authenticator. This means for hardware keys like YubiKey, the private key is stored on the key itself and hence can only hold what its memory allows. They are client-side discoverable during authentication ceremonies and can be used in the &lt;a href=&quot;https://passkeys.dev/docs/reference/terms/#autofill-ui&quot;&gt;autofill UI&lt;/a&gt; of the browser. WebAuthn/FIDO-based MFA implementations are &lt;strong&gt;Non-Discoverable Credentials&lt;/strong&gt; or &lt;strong&gt;&lt;a href=&quot;https://www.w3.org/TR/webauthn-2/#server-side-credential&quot;&gt;Server-side Credentials&lt;/a&gt;&lt;/strong&gt; and hence are not client-side discoverable. They are stored server-side and the private key is encrypted and sent to the relying party, hence there is no storage limitation on the hardware key.&lt;/li&gt;
+  &lt;li&gt;WebAuthn MFA does not have a synced option, passkeys do.&lt;/li&gt;
+  &lt;li&gt;In the case of synced passkeys there are even more differences in terms of usability and security. For example, enrollment needs to be done only once and the private keys are synced to a cloud.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The most important difference is that passkeys can be used as first-factor authentication whereas WebAuthn MFA can only be used as a second-factor after user registration with a password.&lt;/p&gt;
+
+&lt;h2 id=&quot;challenges&quot;&gt;Challenges&lt;/h2&gt;
+
+&lt;p&gt;There are still some challenges when it comes to passkeys:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;OS/Browser support&lt;/strong&gt;: It is dependent on the OS and Browser to implement the specs, and we all know how that turns out right? This means the support may not be uniform and can become fragmented and we might never have the same experience everywhere.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Cloud vendor reliance&lt;/strong&gt;: It relies on companies like Apple, Google, and Microsoft to save the private keys in their cloud securely and protect them from breaches.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Enterprise use cases&lt;/strong&gt;: Enterprise users might want more control and flexibility which could be a problem. For example, if an enterprise doesn’t allow iCloud or Google Chrome on their computer, synced passkeys will not work there, only device-bound passkeys will work.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Reset &amp;amp; Recovery&lt;/strong&gt;: There are no default recovery flows for device-bound passkeys, and applications might still need to implement recovery &amp;amp; reset flows to accommodate all use cases.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://passkeys.dev/device-support/&quot;&gt;Browser and OS compatibility&lt;/a&gt; is still catching up. As of writing, Chrome has the best support and the Apple ecosystem has the most seamless experience, especially for platform authenticators. Linux does not have any support for platform authenticators. Roaming authenticators have great support on all platforms.&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Passkeys are the future of secure authentication. They are more secure and more convenient than passwords and traditional MFA. They are also more secure and more convenient than other passwordless methods like magic links, SMS/Email OTP, and push notifications. The wider adoption of passkeys could finally solve the password problem and make the internet a safer place.&lt;/p&gt;
+
+&lt;p&gt;Passkeys are not just for the future, they are here now. You can start using them today. If you are a developer, you can start implementing them in your applications &lt;a href=&quot;https://developer.auth0.com/resources/labs/authentication/passkeys#go-beyond-passwords-with-passkeys&quot;&gt;using Auth0&lt;/a&gt;. If you are a user, you can start using them on &lt;a href=&quot;https://passkeys.directory/&quot;&gt;services that support them&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;resources&quot;&gt;Resources&lt;/h2&gt;
+
+&lt;p&gt;Check out this follow-up blog post.&lt;/p&gt;
+
+&lt;div class=&quot;link-container&quot;&gt;
+                &lt;a href=&quot;https://deepu.tech/webauthn-and-passkeys-for-java-developers/&quot;&gt;
+                    &lt;div class=&quot;ltag__link__content&quot;&gt;
+                        &lt;h3&gt;A Passwordless Future: Passkeys for Java Developers&lt;/h3&gt;
+                        &lt;p&gt;02-Jan-2024&lt;/p&gt;
+                        &lt;div class=&quot;ltag__link__taglist&quot;&gt;
+                            #java #spring #passkeys #webauthn
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/a&gt;
+            &lt;/div&gt;
+
+&lt;p&gt;I hope that you found this article helpful. Here are some additional resources to learn more about WebAuthn and passkeys.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://learnpasskeys.io&quot;&gt;learnpasskeys.io&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://webauthn.me&quot;&gt;webauthn.me&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://passkeys.dev&quot;&gt;passkeys.dev&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://fidoalliance.org/passkeys/&quot;&gt;fidoalliance&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://auth0.com/blog/our-take-on-passkeys/&quot;&gt;Our Take On Passkeys&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://auth0.com/blog/activate-passkeys-let-users-log-in-without-password/&quot;&gt;Activate Passkeys and Let Your Users Log in without a Password&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://auth0.com/blog/how-to-explain-public-key-cryptography-digital-signatures-to-anyone/&quot;&gt;How to Explain Public-Key Cryptography and Digital Signatures to Anyone&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
+
+&lt;p&gt;You can follow me on &lt;a href=&quot;https://mastodon.social/@deepu105&quot;&gt;Mastodon&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
+
+</content:encoded>
+        <media:content url="https://images.ctfassets.net/23aumh6u8s0i/7rtOe5zpG2fdUQvgPIBT4k/8ae35a470997b31ea60d57ceffa8f9a4/passkeys-hero.jpg" medium="image">https://images.ctfassets.net/23aumh6u8s0i/7rtOe5zpG2fdUQvgPIBT4k/8ae35a470997b31ea60d57ceffa8f9a4/passkeys-hero.jpg</media:content>
+        <pubDate>Tue, 02 Jan 2024 00:00:00 +0100</pubDate>
+        <link>https://deepu.tech/webauthn-and-passkeys-for-developers/</link>
+        <guid isPermaLink="true">https://deepu.tech/webauthn-and-passkeys-for-developers/</guid>
+        
+        <category>security</category>
         
         <category>passkeys</category>
         
@@ -4643,155 +5157,6 @@ We probably would still have to wait a few years before we can actually start us
         <category>jdk</category>
         
         <category>openjdk</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>My sleek and modern Linux development machine in 2021</title>
-        <description>My 2021 Linux development machine explained | &lt;a href=&quot;https://deepu.tech/my-beautiful-linux-development-environment-2021/&quot;&gt;Read the full article on deepu.tech&lt;/a&gt;</description>
-        <author>Deepu K Sasidharan</author>
-        <content:encoded>&lt;p&gt;One of my most popular posts of all time was when I wrote about &lt;a href=&quot;https://deepu.tech/my-beautiful-linux-development-environment/&quot;&gt;my beautiful Linux development machine in 2019&lt;/a&gt;. Since I got a new machine and a new setup, it naturally calls for a follow-up.&lt;/p&gt;
-
-&lt;p&gt;By now, I’m a die-hard Linux user. It’s been five years since I’m using Linux as my primary OS. I would take a Linux machine any day over macOS or Windows. I own a Windows gaming PC and a Macbook pro from work. Still, they are nowhere near the Linux experience, personally for me. My primary driver is my Linux laptop, and I can’t be any happier with it (well, I can, I’ll come to that at the end of the post).&lt;/p&gt;
-
-&lt;p&gt;So a Dell Precision from 2016 was my primary device until last month, and it is still going good. Fedora runs smoothly on it for most parts. There is some minor glitch now and then but nothing that bothers me. What is a Linux experience without glitches, right? 😉&lt;/p&gt;
-
-&lt;p&gt;But that setup is almost five years old now, and sometimes it shows from the increased CPU load and fan noise. Applications like Chrome, Slack, and VSCode aren’t becoming any lighter in CPU and memory usage. So when I had a chance to get a Linux machine from my new job, thank you &lt;a href=&quot;https://www.okta.com/&quot;&gt;Okta&lt;/a&gt;, I went all in and got myself a Dell XPS 15 9510.&lt;/p&gt;
-
-&lt;p&gt;So here I’m detailing essential aspects of my setup and hoping it will inspire more people to use Linux. I also wrote about the &lt;a href=&quot;https://deepu.tech/the-state-of-linux-on-desktops/&quot;&gt;state of Linux on the desktop&lt;/a&gt;. Check it out if you are interested in Linux. You might be surprised.&lt;/p&gt;
-
-&lt;p&gt;So when I was choosing a new laptop, I narrowed my options down to either &lt;a href=&quot;https://www.dell.com/nl-nl/shop/bekijk-alle-laptops-ultrabooks-tablets/nieuw-xps-15/spd/xps-15-9510-laptop/cn95103cc&quot;&gt;Dell XPS 15&lt;/a&gt; or &lt;a href=&quot;https://www.tuxedocomputers.com/en/Linux-Hardware/Linux-Notebooks/15-16-inch/TUXEDO-Book-Pulse-15-Gen1.tuxedo&quot;&gt;Tuxedo Pulse 15&lt;/a&gt;. Form factor, CPU, and memory was the most important factors for me since my work involves working with Docker and Kubernetes, polyglot development and travel. In the end, I chose Dell since Tuxedo had some issues with multiple monitors via USB-C as it didn’t have thunderbolt support.&lt;/p&gt;
-
-&lt;p&gt;This is not just my work laptop; it’s my primary machine for all of the below.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Java, Rust, JS, TS, Go and web development (and everything in between)&lt;/li&gt;
-  &lt;li&gt;Running multiple web applications locally&lt;/li&gt;
-  &lt;li&gt;Running Docker containers and local Kubernetes clusters&lt;/li&gt;
-  &lt;li&gt;Kubernetes, Terraform, CloudFormation development and deployments&lt;/li&gt;
-  &lt;li&gt;VirtualBox for Windows testing and other VM stuff&lt;/li&gt;
-  &lt;li&gt;Azure, AWS, and GCP deployments using required CLI tools&lt;/li&gt;
-  &lt;li&gt;Heavy browser usage&lt;/li&gt;
-  &lt;li&gt;E-mail, chat, and video conferencing&lt;/li&gt;
-  &lt;li&gt;Plex media server&lt;/li&gt;
-  &lt;li&gt;Writing, presentations, and illustrations&lt;/li&gt;
-  &lt;li&gt;YouTube and Social media&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;machine-configuration&quot;&gt;Machine configuration&lt;/h2&gt;
-
-&lt;p&gt;The configuration of the machine is also quite crucial for any development setup.&lt;/p&gt;
-
-&lt;p&gt;I selected a &lt;a href=&quot;https://www.dell.com/nl-nl/shop/bekijk-alle-laptops-ultrabooks-tablets/nieuw-xps-15/spd/xps-15-9510-laptop/cn95103cc&quot;&gt;custom configuration&lt;/a&gt; from Dell to get the best possible setup at that time. It’s not cheap, but my company, &lt;a href=&quot;https://www.okta.com/&quot;&gt;Okta&lt;/a&gt;, provided a handsome budget. But I do think it can be a lot more competitive in pricing like Tuxedo and the like. This, in my opinion, is one of the best Laptops for developers. So here is what I have.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/DoyiLTS.png&quot; alt=&quot;Konsole running neofetch&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Processor&lt;/strong&gt;: Intel® Core™ i9-11900H CPU @ 4.9GHz (8 cores, 16 threads)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Memory&lt;/strong&gt;: 64GB, DDR4-3200MHz SDRAM, 2 DIMMS, non-ECC&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;HDD&lt;/strong&gt;: 1TB M.2 NVMe SSD&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Graphics&lt;/strong&gt;: NVIDIA GeForce RTX 3050Ti with 4 GB GDDR6 memory &amp;amp; Intel® UHD Graphics&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Wireless&lt;/strong&gt;: Killer Wifi 6 (2x2) + BT 5.1&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Keyboard&lt;/strong&gt;: English QWERTY US, backlit&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Display&lt;/strong&gt;: 15.6” FHD 1920x1080, matte, non-touch&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Battery&lt;/strong&gt;: 6-cell (86Wh)&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Ports&lt;/strong&gt;: 2 x Thunderbolt 4 USB-C, 1 x USB-C 3.2 Gen2,&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/x5A39eu.jpeg&quot; alt=&quot;Work from home setup&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I use the laptop mostly with my home office, which consists of a &lt;a href=&quot;https://iiyama.com/gl_en/products/prolite-xub3493wqsu-b1/&quot;&gt;34 inch&lt;/a&gt; and a &lt;a href=&quot;https://www.msi.com/Business-Productivity-Monitor/PRO-MP271QP&quot;&gt;27 inch&lt;/a&gt; monitor. A &lt;a href=&quot;https://www.keychron.com/products/keychron-k2-wireless-mechanical-keyboard?variant=31063869718617&quot;&gt;Keychron K2&lt;/a&gt; keyboard, &lt;a href=&quot;https://www.logitech.com/en-us/products/mice/mx-vertical-ergonomic-mouse.910-005447.html&quot;&gt;Logitech MX Vertical&lt;/a&gt; mouse, &lt;a href=&quot;https://www.razer.com/streaming-cameras/razer-kiyo-pro/RZ19-03640100-R3U1&quot;&gt;Razer Kiyo&lt;/a&gt; webcam, &lt;a href=&quot;https://www.elgato.com/en/key-light-air&quot;&gt;Elgato Keylight&lt;/a&gt;, &lt;a href=&quot;https://fifinemicrophone.com/collections/microphones/products/fifine-k780-usb-microphone-kit-with-scissors-arm-stand-shock-mount-and-pop-filter&quot;&gt;Fifine&lt;/a&gt; mic and a &lt;a href=&quot;https://www.dell.com/nl-nl/work/shop/dell-thunderbolt-dock-wd19tbs/apd/210-azbv/pc-accessoires&quot;&gt;Dell Thunderbolt dock&lt;/a&gt; that drives all my peripherals and monitors while powering the laptop all using a single USB-C cable. I have an old Sony Bluetooth headset and a cheap custom amplifier running a pair of old bookshelves and a subwoofer for audio.&lt;/p&gt;
-
-&lt;h2 id=&quot;operating-system-and-desktop-environment&quot;&gt;Operating system and desktop environment&lt;/h2&gt;
-
-&lt;p&gt;Switching to Fedora was a great decision I made sometime in 2017, and I’m so happy with it. Updates are butter smooth. I don’t have to worry about stuff breaking all the time from rolling releases. At the same time, new stuff lands every six months, and packages are updated frequently, keeping everything running smoothly. For a developer, that is an excellent combination, in my opinion. So naturally, I choose to stick to Fedora; why fix something that isn’t broken, right?&lt;/p&gt;
-
-&lt;p&gt;So I’m running Fedora 34. I have been using Gnome for the past five years, but recently KDE caught my eyes, and I decided to give it a shot. So I went with the &lt;a href=&quot;https://spins.fedoraproject.org/kde/&quot;&gt;KDE spin of Fedora&lt;/a&gt;. KDE has been great so far. I love the amount of customization you can do on it, and top of all, it looks super sleek, and there is an excellent selection of themes and styles to choose from. I’m definitely not missing Gnome.&lt;/p&gt;
-
-&lt;p&gt;What good is a desktop without a nice theme, right? KDE has a great collection of themes, and I went with &lt;a href=&quot;https://store.kde.org/p/1464321/&quot;&gt;Ant-Dark&lt;/a&gt; theme for now, and it looks gorgeous with transparency and blur effects. While KDE themes are self-sufficient with icons, cursors, and lock screens, I switched from default icons to icons from &lt;a href=&quot;https://store.kde.org/p/1307867/&quot;&gt;KDE-Story theme&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/D5wlea4.png&quot; alt=&quot;KDE Settings for appearance&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I use many plugins in Gnome, but in KDE, all those came out of the box, like clipboard manager, notepad, system monitor, etc. Another reason I’m enjoying KDE.&lt;/p&gt;
-
-&lt;p&gt;With the new installation, I also went with the BTRFS filesystem, which is fantastic. Snapshots and backups are so fast. Though setting up snapshots and backup was a challenge initially.&lt;/p&gt;
-
-&lt;h2 id=&quot;development-tools&quot;&gt;Development tools&lt;/h2&gt;
-
-&lt;p&gt;These are mostly objective choices and really don’t matter as long as you are comfortable with your chosen tools. Below are my choices for some of the important categories for development.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Shell&lt;/strong&gt;: This is one of the most important for a developer. I use &lt;a href=&quot;https://www.zsh.org/&quot;&gt;ZSH&lt;/a&gt; along with the awesome &lt;a href=&quot;https://starship.rs/&quot;&gt;Starship prompt&lt;/a&gt; as my shell. I tried to switch to &lt;a href=&quot;https://fishshell.com/&quot;&gt;Fish&lt;/a&gt;, but it was quite annoying due to its difference with bash/ZSH, and I gave up on it. I went with the default theme and settings from Starship as it was very close to my earlier setup with Oh My ZSH. I also use &lt;a href=&quot;https://github.com/zsh-users/zsh-autosuggestions&quot;&gt;zsh-autosuggestions&lt;/a&gt; and &lt;a href=&quot;https://github.com/zsh-users/zsh-syntax-highlighting&quot;&gt;zsh-syntax-highlighting&lt;/a&gt; plugins for ZSH and &lt;a href=&quot;https://github.com/junegunn/fzf&quot;&gt;fzf&lt;/a&gt; for search.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Terminal&lt;/strong&gt;: What good is a nice shell without a good terminal. Fortunately, the default KDE shell, Konsole, is great, and KDE also has &lt;a href=&quot;https://apps.kde.org/yakuake/&quot;&gt;Yakuake&lt;/a&gt;, which is one of the best terminal applications out there. It has workspaces, tabs, split windows, Quake mode, etc. I mostly use Yakuake, which is bound to &lt;kbd&gt;Ctrl+`&lt;/kbd&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/S3cpjzW.png&quot; alt=&quot;Yakuake on KDE&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;IDE&lt;/strong&gt;: &lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt; - My go-to editor. I love it. I use VSCode for web development, Rust, Go, JS development, DevOps, and everything other than JVM languages. A VSCode setup is never complete without some good plugins. &lt;a href=&quot;https://gist.github.com/deepu105/4599d3b381218b9d1a63119fbf9ca537&quot;&gt;Here&lt;/a&gt; are the plugins that I’m using. You can run the script to install those. For Java development, I use &lt;a href=&quot;https://www.jetbrains.com/idea/&quot;&gt;IntelliJ IDEA Ultimate&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Other notable development tools I use are &lt;a href=&quot;https://www.gitkraken.com/&quot;&gt;GitKraken&lt;/a&gt; for Git repo management, &lt;a href=&quot;https://www.scootersoftware.com&quot;&gt;Beyond Compare&lt;/a&gt; for code comparisons, &lt;a href=&quot;https://www.virtualbox.org/&quot;&gt;VirtualBox&lt;/a&gt;, &lt;a href=&quot;https://github.com/nvm-sh/nvm&quot;&gt;NVM&lt;/a&gt; for Node.js version management and &lt;a href=&quot;https://sdkman.io&quot;&gt;SDKMan&lt;/a&gt; for JDK version management.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Toolchains&lt;/strong&gt;: Node.js and NPM, Rust toolchain, Golang, JVM, Deno, Ruby toolchain, and Python toolchain. I also ran &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo dnf groupinstall &quot;Development Tools&quot; &quot;Development Libraries&quot;&lt;/code&gt; to install the toolchains required for compiling Linux applications.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;DevOps&lt;/strong&gt;: Docker, kubectl, Terraform, k3d, and so on&lt;/p&gt;
-
-&lt;h2 id=&quot;productivity-tools&quot;&gt;Productivity tools&lt;/h2&gt;
-
-&lt;p&gt;Productivity tools are also quite necessary, and below are my choices.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Browser&lt;/strong&gt;: Google Chrome is my primary browser. I also use Firefox sometimes. I use the &lt;a href=&quot;https://bitwarden.com/&quot;&gt;Bitwarden&lt;/a&gt; plugin for password management.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;E-mail&lt;/strong&gt;: I use &lt;a href=&quot;https://getmailspring.com/&quot;&gt;Mailspring&lt;/a&gt; as my e-mail client. It’s a fairly decent mail client with nice themes and a simple UI.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Office suite&lt;/strong&gt;: I mostly use Google Docs, but when I have to work on something on my desktop I use &lt;a href=&quot;https://www.libreoffice.org/&quot;&gt;LibreOffice&lt;/a&gt;, which is a good office suite and even handles Microsoft Office &amp;amp; Keynote formats.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Communication&lt;/strong&gt;: Of course I use &lt;a href=&quot;https://slack.com&quot;&gt;Slack&lt;/a&gt; and for video conference I use &lt;a href=&quot;https://www.zoom.us/&quot;&gt;Zoom&lt;/a&gt;. I also have Telegram and Signal installed.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Screen capture&lt;/strong&gt;: I use this nifty tool called &lt;a href=&quot;https://github.com/phw/peek&quot;&gt;Peek&lt;/a&gt; for screen recording and &lt;a href=&quot;https://github.com/flameshot-org/flameshot&quot;&gt;Flameshot&lt;/a&gt; for screenshots.&lt;/p&gt;
-
-&lt;h2 id=&quot;streaming--media&quot;&gt;Streaming &amp;amp; Media&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;Streaming&lt;/strong&gt;: I think &lt;a href=&quot;https://obsproject.com/&quot;&gt;OBS Studio&lt;/a&gt; is the default choice here and is one of the best options for streaming and screen recording.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Image editing and processing&lt;/strong&gt;: &lt;a href=&quot;https://www.gimp.org/&quot;&gt;Gimp&lt;/a&gt; for photo editing, &lt;a href=&quot;https://inkscape.org/&quot;&gt;Inkscape&lt;/a&gt; for vector editing, and &lt;a href=&quot;https://app.diagrams.net/&quot;&gt;Draw.io&lt;/a&gt; for illustrations. KDE also has some default apps for photo management, which is quite good.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Video editing&lt;/strong&gt;: &lt;a href=&quot;https://kdenlive.org/&quot;&gt;Kdenlive&lt;/a&gt; is a great choice for video editing on Linux.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Video player&lt;/strong&gt;: &lt;a href=&quot;https://www.smplayer.info/en/downloads&quot;&gt;SMPlayer&lt;/a&gt; is my go-to video player.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;There are many other small and nifty utilities that I use; most are command-line utilities. There are some notable mentions like &lt;a href=&quot;https://github.com/teejee2008/timeshift&quot;&gt;Timeshift&lt;/a&gt;, which is nice for backing up your machine.&lt;/p&gt;
-
-&lt;p&gt;Of course, not everything is perfect in the Linux world, but it is the same with every OS from my experience. Before switching to Linux, I was a long-time Windows user, and last year, I spent more than a year using macOS now and then, so issues are everywhere. So like every Linux user, I have from time to time messed things up(With great power comes great responsibility, Peter). There are some minor annoyances with this new setup, but there is nothing that bothers me much. Some of the most annoying issues I have currently are below, and I’ll probably fix them if it bothers me.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;New Intel platforms do not support deep sleep, and hence laptop does lose power over time, even in Idle.&lt;/li&gt;
-  &lt;li&gt;Hibernation doesn’t work out of the box. It’s easy to fix, but at the moment doesn’t bother me.&lt;/li&gt;
-  &lt;li&gt;Some random crashes from KDE settings. Not a big deal as it’s a rare occurrence.&lt;/li&gt;
-  &lt;li&gt;KDE remembers open apps on a restart, but when on multiple monitors, it doesn’t remember which screen it was in.&lt;/li&gt;
-  &lt;li&gt;Biometrics is a bit tricky in Linux. The built-in fingerprint sensor doesn’t have a proper driver for Fedora yet, there is one for Ubuntu, and I probably can &lt;a href=&quot;https://aboutcher.co.uk/2020/10/goodix-fingerprint-reader-on-fedora-linux/&quot;&gt;get it working&lt;/a&gt;. For face recognition, there is &lt;a href=&quot;https://github.com/boltgolt/howdy&quot;&gt;Howdy&lt;/a&gt;, but for some reason, I couldn’t get it working and hence probably need to &lt;a href=&quot;https://github.com/boltgolt/howdy/issues/604&quot;&gt;do some digging&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I hope you find this inspires you to give Linux a chance. If you have any questions, please ask in the comments.&lt;/p&gt;
-
-&lt;p&gt;If you like this article, please leave a like or a comment.&lt;/p&gt;
-
-&lt;p&gt;You can follow me on &lt;a href=&quot;https://twitter.com/deepu105&quot;&gt;Twitter&lt;/a&gt; and &lt;a href=&quot;https://www.linkedin.com/in/deepu05/&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;
-
-</content:encoded>
-        <media:content url="https://i.imgur.com/LIn8i4h.jpeg" medium="image">https://i.imgur.com/LIn8i4h.jpeg</media:content>
-        <pubDate>Mon, 01 Nov 2021 00:00:00 +0100</pubDate>
-        <link>https://deepu.tech/my-beautiful-linux-development-environment-2021/</link>
-        <guid isPermaLink="true">https://deepu.tech/my-beautiful-linux-development-environment-2021/</guid>
-        
-        <category>linux</category>
-        
-        <category>fedora</category>
-        
-        <category>development</category>
-        
-        <category>kde</category>
         
         
       </item>
