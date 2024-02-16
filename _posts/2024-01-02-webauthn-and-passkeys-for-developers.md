@@ -221,7 +221,7 @@ Passkeys are not just for the future, they are here now. You can start using the
 
 Check out this follow-up blog post.
 
-{% link https://deepu.tech/webauthn-and-passkeys-for-java-developers/ %}
+{% link https://dev.to/deepu105/a-passwordless-future-passkeys-for-java-developers-3f0c %}
 
 I hope that you found this article helpful. Here are some additional resources to learn more about WebAuthn and passkeys.
 
