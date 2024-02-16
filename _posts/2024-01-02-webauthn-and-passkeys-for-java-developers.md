@@ -20,7 +20,7 @@ _Originally published at [auth0.com](https://auth0.com/blog/webauthn-and-passkey
 
 This blog post is a continuation of my previous [blog post on passkeys](https://auth0.com/blog/webauthn-and-passkeys-for-developers/). In this post, you will learn how to implement passkeys using Auth0 and the WebAuthn4j library on your Java applications.
 
-{% link https://deepu.tech/webauthn-and-passkeys-for-developers/ %}
+{% link https://dev.to/deepu105/a-passwordless-future-passkeys-for-java-developers-1f54 %}
 
 If you have not read the previous blog post, I would highly recommend you read it first to understand the basics of passkeys and WebAuthn.
 
