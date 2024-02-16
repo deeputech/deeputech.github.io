@@ -1,15 +1,19 @@
 ---
-title: "A Passwordless Future: Passkeys for Java Developers"
+title: 'A Passwordless Future: Passkeys for Developers'
 published: true
 description: >-
-  Passkeys and WebAuthn for developers. Learn how passkeys work and the benefits they provide.
+  Passkeys and WebAuthn for developers. Learn how passkeys work and the benefits
+  they provide.
 tags:
   - security
   - passkeys
   - webauthn
 cover_image: >-
   https://images.ctfassets.net/23aumh6u8s0i/7rtOe5zpG2fdUQvgPIBT4k/8ae35a470997b31ea60d57ceffa8f9a4/passkeys-hero.jpg
-canonical_url: "https://auth0.com/blog/webauthn-and-passkeys-for-developers/"
+canonical_url: 'https://auth0.com/blog/webauthn-and-passkeys-for-developers/'
+devto_id: 1763303
+devto_url: >-
+  https://dev.to/deepu105/a-passwordless-future-passkeys-for-java-developers-1f54
 ---
 
 _Originally published at [auth0.com](https://auth0.com/blog/webauthn-and-passkeys-for-developers/)_
@@ -238,3 +242,4 @@ I hope that you found this article helpful. Here are some additional resources t
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Mastodon](https://mastodon.social/@deepu105) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
+
