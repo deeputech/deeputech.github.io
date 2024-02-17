@@ -5,8 +5,8 @@
     <description>Where I rage about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 16 Feb 2024 16:55:10 +0100</pubDate>
-    <lastBuildDate>Fri, 16 Feb 2024 16:55:10 +0100</lastBuildDate>
+    <pubDate>Sat, 17 Feb 2024 20:45:51 +0100</pubDate>
+    <lastBuildDate>Sat, 17 Feb 2024 20:45:51 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -617,7 +617,7 @@
 
 </content:encoded>
         <media:content url="https://images.ctfassets.net/23aumh6u8s0i/5hJmVQbQfsNjNelza45z5p/41ef7af98a312dcd771c361bfc9e6149/Our_Take_on_Passkeys_4X.jpg" medium="image">https://images.ctfassets.net/23aumh6u8s0i/5hJmVQbQfsNjNelza45z5p/41ef7af98a312dcd771c361bfc9e6149/Our_Take_on_Passkeys_4X.jpg</media:content>
-        <pubDate>Tue, 02 Jan 2024 00:00:00 +0100</pubDate>
+        <pubDate>Thu, 15 Feb 2024 00:00:00 +0100</pubDate>
         <link>https://deepu.tech/webauthn-and-passkeys-for-java-developers/</link>
         <guid isPermaLink="true">https://deepu.tech/webauthn-and-passkeys-for-java-developers/</guid>
         
@@ -890,7 +890,7 @@ This kind of passkeys can be restored on new devices. But they are less secure t
                 &lt;a href=&quot;https://deepu.tech/webauthn-and-passkeys-for-java-developers/&quot;&gt;
                     &lt;div class=&quot;ltag__link__content&quot;&gt;
                         &lt;h3&gt;A Passwordless Future: Passkeys for Java Developers&lt;/h3&gt;
-                        &lt;p&gt;02-Jan-2024&lt;/p&gt;
+                        &lt;p&gt;15-Feb-2024&lt;/p&gt;
                         &lt;div class=&quot;ltag__link__taglist&quot;&gt;
                             #java #spring #passkeys #webauthn
                         &lt;/div&gt;
