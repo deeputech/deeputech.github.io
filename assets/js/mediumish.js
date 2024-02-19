@@ -24,14 +24,14 @@ jQuery(document).ready(function ($) {
   });
 
   // alertbar later
-  $(document).scroll(function () {
-    var y = $(this).scrollTop();
-    if (y > 280) {
-      $(".alertbar").show();
-    } else {
-      $(".alertbar").hide();
-    }
-  });
+  // $(document).scroll(function () {
+  //   var y = $(this).scrollTop();
+  //   if (y > 280) {
+  //     $(".alertbar").show();
+  //   } else {
+  //     $(".alertbar").hide();
+  //   }
+  // });
 
   // Hide Header on on scroll down
   var didScroll;

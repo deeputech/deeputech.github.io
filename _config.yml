@@ -5,7 +5,8 @@ description: "Where I rant about technology and stuff!"
 logo: "assets/images/logo.png"
 favicon: "assets/images/logo.png"
 title_image: "assets/images/logo.png"
-google_analytics: "UA-74370272-6"
+# google_analytics: "UA-74370272-6" # old
+google_analytics: "G-1SDSM5NX07"
 # disqus: "deepu-tech"
 mailchimp-list: 'https://tech.us7.list-manage.com/subscribe/post?u=00729f6c6d6bb180801b9484e&amp;id=f521dede4b'
 permalink: /:title/
