@@ -1,11 +1,11 @@
 ---
 title: My beautiful Linux development environment
-description: My Linux development machine explained
+description: My GNU/Linux development machine explained
 published: true
 tags: [linux, fedora, development, gnome]
 image: https://thepracticaldev.s3.amazonaws.com/i/8ap820z2y55e423dta8h.png
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/8ap820z2y55e423dta8h.png
-series: Linux Environment for Developers
+series: GNU/Linux Environment for Developers
 featured: false
 canonical_url: https://deepu.tech/my-beautiful-linux-development-environment
 devto_url: https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc
@@ -18,7 +18,7 @@ One of the questions that I often get after a conference talk is weirdly not abo
 
 Not that I'm complaining, I love my desktop setup. I love it so much that I was afraid of getting a new PC when I was due for one. I was afraid that I would mess things up(I have done that many times in the past, I think Linux users can relate to me)
 
-So I decided to capture the most important aspects of my distro for anyone interested in using Linux as their primary OS for development.
+So I decided to capture the most important aspects of my distro for anyone interested in using GNU/Linux as their primary OS for development.
 
 ![](https://thepracticaldev.s3.amazonaws.com/i/3zajm5va5xplo9mg7804.png)
 

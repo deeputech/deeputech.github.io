@@ -28,10 +28,10 @@
   description:
     Learn about building microservice architectures with JHipster, Kubernetes and Istio
 
-- id: "Linux Environment for Developers"
-  title: Linux Environment for Developers
+- id: "GNU/Linux Environment for Developers"
+  title: GNU/Linux Environment for Developers
   description:
-    Posts covering Linux setup and tools for developers
+    Posts covering GNU/Linux setup and tools for developers
 
 - id: "Passkeys"
   title: Passkeys
