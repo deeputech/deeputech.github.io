@@ -20,7 +20,7 @@ devto_url: >-
 
 Rust is taking over the terminal. Rust is a general-purpose programming language that is blazing fast and memory safe. It is the fastest-growing and most loved programming language in the world. It is used to build everything from operating systems to web servers to command-line tools. Recently there has been a surge of command line tools and utilities written in Rust, and many of them are intended to replace standard Unix commands. They are faster, more user-friendly, and have more features than their standard Unix counterparts. In this post, I will cover some of the best Rust command line tools I have used for a while. You can also use these to supercharge your terminal.
 
-These tools are available for both Linux and macOS. I have not tested them on Windows, but most should also work on Windows. I recommend aliasing the commands to replace the standard commands based on your preferences. If you have [Cargo](https://doc.rust-lang.org/cargo/), the rust package manager, you can install all these using Cargo.
+These tools are available for both GNU/Linux and macOS. I have not tested them on Windows, but most should also work on Windows. I recommend aliasing the commands to replace the standard commands based on your preferences. If you have [Cargo](https://doc.rust-lang.org/cargo/), the rust package manager, you can install all these using Cargo.
 
 ## Alacritty
 

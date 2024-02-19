@@ -1,6 +1,6 @@
 ---
 title: My sleek and modern Linux development machine in 2021
-description: My 2021 Linux development machine explained
+description: My 2021 GNU/Linux development machine explained
 published: true
 tags:
   - linux
@@ -18,7 +18,7 @@ devto_url: >-
 
 One of my most popular posts of all time was when I wrote about [my beautiful Linux development machine in 2019](https://deepu.tech/my-beautiful-linux-development-environment/). Since I got a new machine and a new setup, it naturally calls for a follow-up.
 
-By now, I'm a die-hard Linux user. It's been five years since I'm using Linux as my primary OS. I would take a Linux machine any day over macOS or Windows. I own a Windows gaming PC and a Macbook pro from work. Still, they are nowhere near the Linux experience, personally for me. My primary driver is my Linux laptop, and I can't be any happier with it (well, I can, I'll come to that at the end of the post).
+By now, I'm a die-hard GNU/Linux user. It's been five years since I'm using Linux as my primary OS. I would take a Linux machine any day over macOS or Windows. I own a Windows gaming PC and a Macbook pro from work. Still, they are nowhere near the Linux experience, personally for me. My primary driver is my Linux laptop, and I can't be any happier with it (well, I can, I'll come to that at the end of the post).
 
 So a Dell Precision from 2016 was my primary device until last month, and it is still going good. Fedora runs smoothly on it for most parts. There is some minor glitch now and then but nothing that bothers me. What is a Linux experience without glitches, right? 😉
 

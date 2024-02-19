@@ -1,7 +1,7 @@
 ---
 title: The state of Linux as a daily use OS in 2021
 description: >-
-  Let's see what is the state of Linux, for daily use, in 2021 is and if its a
+  Let's see what is the state of GNU/Linux, for daily use, in 2021 is and if its a
   viable alternative to  Windows and macOS
 published: true
 featured: true
@@ -10,7 +10,7 @@ tags:
   - ubuntu
   - fedora
   - kde
-series: Linux Environment for Developers
+series: GNU/Linux Environment for Developers
 canonical_url: "https://deepu.tech/the-state-of-linux-on-desktops/"
 cover_image: "https://i.imgur.com/sO0DY6V.jpeg"
 devto_id: 644327
@@ -29,11 +29,11 @@ Now in 2021, I'm still using [Fedora as my daily driver](https://deepu.tech/my-b
 
 Ok, now that I have nerded out about my fascination with computers, let's get into the actual topic and see if Linux is good enough as a daily driver even for regular users who just wants a working computer and are not tech-savvy and never want to visit the terminal. Throughout the article, I'll be making some comparisons with the world's most popular OS, Microsoft Windows, and Apple's macOS which, IMO, is unavoidable.
 
-## State of Linux
+## State of GNU/Linux
 
 Linux has come a long way. For those of you, who still think of a terminal and an outdated UI(I know people who still love those UI) when you hear the word Linux, I think you probably haven't seen or worked on a Linux distro in the last 10 years.
 
-When we talk about Linux on Desktop(or Laptop) we are really talking about a Linux distribution, like [Ubuntu](https://ubuntu.com/) or [Fedora](https://getfedora.org/), and hence we need to understand what makes a distribution (distro). A Linux distribution is an Operating System made up of mainly the below:
+When we talk about Linux on Desktop(or Laptop) we are really talking about a GNU/Linux distribution, like [Ubuntu](https://ubuntu.com/) or [Fedora](https://getfedora.org/), and hence we need to understand what makes a distribution (distro). A GNU/Linux distribution is an Operating System made up of mainly the below:
 
 1. **[The Linux Kernel](https://www.kernel.org/)** - This is the core of the operating system and it is used by all Linux operating systems, including Android and Chrome OS
 2. **[Windowing system](https://en.wikipedia.org/wiki/Windowing_system)** - Responsible for managing input peripherals and driving output displays. This is either the legacy [X11](https://en.wikipedia.org/wiki/X_Window_System) or the newer [Wayland](<https://en.wikipedia.org/wiki/Wayland_(display_server_protocol)>) on almost all desktop Linux distros. More and more distros are using Wayland by default now instead of the legacy X11 server. All distros normally support both and you can configure the display sever you prefer as the default

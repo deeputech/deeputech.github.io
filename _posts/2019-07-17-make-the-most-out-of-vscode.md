@@ -4,7 +4,7 @@ published: true
 description: How I have configured VS Code to make the most out of it for development.
 tags: [vscode, development, ide, opensource]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/zkv3883der29keb7qkrr.png
-series: Linux Environment for Developers
+series: GNU/Linux Environment for Developers
 canonical_url: https://deepu.tech/make-the-most-out-of-vscode
 devto_url: https://dev.to/deepu105/my-vs-code-setup-making-the-most-out-of-vs-code-4enl
 devto_id: 141925
@@ -220,7 +220,7 @@ If you are using Zsh shell with Oh-my-zsh like me as explained [here](https://de
 Follow these steps
 
 - Download and install a [patched font](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Medium/complete/Sauce%20Code%20Pro%20Medium%20Nerd%20Font%20Complete%20Mono.ttf).
-- On Linux, run `fc-cache -f -v` to refresh font cache.
+- On GNU/Linux, run `fc-cache -f -v` to refresh font cache.
 - On VSCode, open Preferences → Settings and click on the `{}` icon to open JSON mode and set the below
 
 ```json
