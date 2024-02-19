@@ -11,6 +11,7 @@ tags:
 cover_image: >-
   https://images.ctfassets.net/23aumh6u8s0i/7rtOe5zpG2fdUQvgPIBT4k/8ae35a470997b31ea60d57ceffa8f9a4/passkeys-hero.jpg
 canonical_url: 'https://auth0.com/blog/webauthn-and-passkeys-for-developers/'
+series: Passkeys
 devto_id: 1763303
 devto_url: >-
   https://dev.to/deepu105/a-passwordless-future-passkeys-for-java-developers-1f54

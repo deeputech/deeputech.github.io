@@ -7,7 +7,7 @@ cover_image: https://thepracticaldev.s3.amazonaws.com/i/8sta9oosbpy9lxefm0lp.jpg
 canonical_url: https://deepu.tech/functional-programming-in-typescript/
 devto_url: https://dev.to/deepu105/easy-functional-programming-techniques-in-typescript-for-everyone-1bl2
 devto_id: 163949
-series: functional-programming
+series: Functional Programming
 ---
 
 There is a lot of hype around functional programming(FP) and a lot of cool kids are doing it but it is not a silver bullet. Like other programming paradigms/styles, functional programming also has its pros and cons and one may prefer one paradigm over the other. If you are a TypeScript/JavaScript developer and wants to venture into functional programming, do not worry, you don't have to learn functional programming oriented languages like Haskell or Clojure since JavaScript and hence TypeScript has you covered and this post is for you.

@@ -5,7 +5,7 @@ published: true
 tags: [linux, fedora, development, gnome]
 image: https://thepracticaldev.s3.amazonaws.com/i/8ap820z2y55e423dta8h.png
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/8ap820z2y55e423dta8h.png
-series: Linux environment for developers
+series: Linux Environment for Developers
 featured: false
 canonical_url: https://deepu.tech/my-beautiful-linux-development-environment
 devto_url: https://dev.to/deepu105/my-beautiful-linux-development-environment-2afc

@@ -10,7 +10,7 @@ tags:
   - concurrency
   - async
   - golang
-series: concurrency in modern programming languages
+series: Concurrency in Modern Programming Languages
 canonical_url: "https://deepu.tech/concurrency-in-modern-languages-go/"
 cover_image: "https://i.imgur.com/ZTfXUBU.jpg"
 devto_id: 578413

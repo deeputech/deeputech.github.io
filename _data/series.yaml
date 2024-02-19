@@ -1,25 +1,25 @@
-- id: "languages"
+- id: "Languages"
   title: Languages
   description:
     Posts about different languages, my impression of languages and polyglot development
 
-- id: "memory-management"
-  title: Memory management
+- id: "Memory Management"
+  title: Memory Management
   description:
     In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages.
 
-- id: "concurrency in modern programming languages"
-  title: Concurrency in modern programming languages
+- id: "Concurrency in Modern Programming Languages"
+  title: Concurrency in Modern Programming Languages
   description:
     This is a multi-part series where I’ll be talking about concurrency in modern programming languages and will be building and benchmarking a concurrent web server, inspired by the example from the Rust book, in popular languages like Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency and its performance between these languages/platforms.
 
-- id: "functional-programming"
-  title: Functional programming
+- id: "Functional Programming"
+  title: Functional Programming
   description:
     Learn functional programming in different languages
 
-- id: "Golang for JavaScript developers"
-  title: Golang for JavaScript developers
+- id: "Golang for JavaScript Developers"
+  title: Golang for JavaScript Developers
   description:
     Learn Golang from a  JavaScript developers perspective.
 
@@ -28,7 +28,12 @@
   description:
     Learn about building microservice architectures with JHipster, Kubernetes and Istio
 
-- id: "Linux environment for developers"
-  title: Linux environment for developers
+- id: "Linux Environment for Developers"
+  title: Linux Environment for Developers
   description:
     Posts covering Linux setup and tools for developers
+
+- id: "Passkeys"
+  title: Passkeys
+  description:
+    Posts about WebAuthn and Passkeys

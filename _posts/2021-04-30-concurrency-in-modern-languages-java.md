@@ -10,7 +10,7 @@ tags:
   - java
   - jvm
   - languages
-series: concurrency in modern programming languages
+series: Concurrency in Modern Programming Languages
 canonical_url: "https://deepu.tech/concurrency-in-modern-languages-java/"
 cover_image: "https://i.imgur.com/I3qwqQs.jpeg"
 devto_id: 683566

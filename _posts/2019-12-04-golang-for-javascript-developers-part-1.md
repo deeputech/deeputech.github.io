@@ -7,7 +7,7 @@ canonical_url: https://deepu.tech/golang-for-javascript-developers-part-1/
 devto_url: https://dev.to/deepu105/golang-for-javascript-developers-part-1-38je
 devto_id: 215285
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/eu6knwm6llwmgjr6yx59.png
-series: Golang for JavaScript developers
+series: Golang for JavaScript Developers
 ---
 
 If you are a JavaScript developer thinking about learning another programming language, then Golang is a great choice. It is simple, has a lot of momentum, very performant and has some similarities to JavaScript.

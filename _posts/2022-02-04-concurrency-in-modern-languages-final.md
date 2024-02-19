@@ -12,7 +12,7 @@ tags:
   - js
   - go
   - java
-series: concurrency in modern programming languages
+series: Concurrency in Modern Programming Languages
 canonical_url: "https://deepu.tech/concurrency-in-modern-languages-final/"
 cover_image: "https://i.imgur.com/JGoa8Xe.png"
 devto_id: 978487

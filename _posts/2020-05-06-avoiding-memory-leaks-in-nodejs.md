@@ -5,7 +5,7 @@ published: true
 featured: false
 skip_devto: true
 tags: [javascript, node, v8, memory-management]
-series: memory-management
+series: Memory Management
 canonical_url: "https://blog.appsignal.com/2020/05/06/avoiding-memory-leaks-in-nodejs-best-practices-for-performance.html"
 cover_image: https://blog.appsignal.com/images/blog/2020-05/node-leak.jpg
 ---

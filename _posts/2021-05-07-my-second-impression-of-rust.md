@@ -14,7 +14,7 @@ tags:
   - webassembly
 cover_image: "https://i.imgur.com/QHH8hev.png"
 canonical_url: "https://deepu.tech/my-second-impression-of-rust/"
-series: languages
+series: Languages
 devto_id: 691156
 devto_url: >-
   https://dev.to/deepu105/my-second-impression-of-rust-and-why-i-think-it-s-the-best-general-purpose-language-31jh

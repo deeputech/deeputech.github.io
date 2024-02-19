@@ -8,7 +8,7 @@ canonical_url: https://deepu.tech/memory-management-in-programming/
 devto_url: https://dev.to/deepu105/demystifying-memory-management-in-modern-programming-languages-ddd
 devto_id: 232566
 cover_image: https://i.imgur.com/R0mdaId.png
-series: memory-management
+series: Memory Management
 ---
 
 In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages. I hope the series would give you some insights into what is happening under the hood of these languages in terms of memory management. Learning about memory management will also help us to write more performant code as the way we write code also has an impact on memory management regardless of the automatic memory management technique used by the language.

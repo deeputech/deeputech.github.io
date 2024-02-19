@@ -8,7 +8,7 @@ tags:
   - development
   - kde
 cover_image: 'https://i.imgur.com/LIn8i4h.jpeg'
-series: Linux environment for developers
+series: Linux Environment for Developers
 featured: true
 canonical_url: 'https://deepu.tech/my-beautiful-linux-development-environment-2021'
 devto_id: 883882

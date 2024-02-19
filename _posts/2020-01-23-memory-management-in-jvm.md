@@ -6,7 +6,7 @@ description: Let us take a look at how the JVM manages memory.
 tags: [java, kotlin, scala, clojure]
 canonical_url: https://deepu.tech/memory-management-in-jvm/
 cover_image: https://i.imgur.com/Kv9ichJ.gif
-series: memory-management
+series: Memory Management
 devto_id: 247445
 devto_url: https://dev.to/deepu105/visualizing-memory-management-in-jvm-java-kotlin-scala-groovy-clojure-19le
 ---

@@ -8,7 +8,7 @@ featured: true
 canonical_url: https://deepu.tech/reflection-on-golang/
 devto_url: https://dev.to/deepu105/my-reflections-on-golang-38jk
 devto_id: 135373
-series: languages
+series: Languages
 ---
 
 Do I like [Go](https://golang.org/)? Yes. Would I use it for every use case I have? Definitely not.

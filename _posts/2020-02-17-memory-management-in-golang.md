@@ -10,7 +10,7 @@ tags:
   - computerscience
 canonical_url: "https://deepu.tech/memory-management-in-golang/"
 cover_image: "https://i.imgur.com/nYAy8Ox.jpg"
-series: memory-management
+series: Memory Management
 devto_id: 262942
 devto_url: "https://dev.to/deepu105/visualizing-memory-management-in-golang-1apa"
 ---

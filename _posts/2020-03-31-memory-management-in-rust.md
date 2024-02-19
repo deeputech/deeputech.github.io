@@ -10,7 +10,7 @@ tags:
   - computerscience
 canonical_url: "https://deepu.tech/memory-management-in-rust/"
 cover_image: "https://i.imgur.com/xolsOsW.jpg"
-series: memory-management
+series: Memory Management
 devto_id: 295607
 devto_url: "https://dev.to/deepu105/visualizing-memory-management-in-rust-5898"
 ---

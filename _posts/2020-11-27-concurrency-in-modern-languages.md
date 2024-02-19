@@ -10,7 +10,7 @@ tags:
   - concurrency
   - async
   - multithreading
-series: concurrency in modern programming languages
+series: Concurrency in Modern Programming Languages
 canonical_url: "https://deepu.tech/concurrency-in-modern-languages/"
 cover_image: "https://i.imgur.com/anGGYRi.jpg"
 devto_id: 526520

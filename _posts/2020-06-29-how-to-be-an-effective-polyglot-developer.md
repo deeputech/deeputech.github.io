@@ -10,7 +10,7 @@ tags:
   - computerscience
   - languages
   - polyglot
-series: languages
+series: Languages
 canonical_url: "https://deepu.tech/how-to-be-an-effective-polyglot-developer/"
 cover_image: "https://i.imgur.com/3ereMQQ.jpg"
 devto_id: 373867

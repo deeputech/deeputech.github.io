@@ -4,7 +4,7 @@ published: true
 description: See how you can configure a beautiful terminal on Unix with Zsh and Oh-My-Zsh
 tags: [linux, terminal, ohmyzsh, zsh]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/vt2sh5znt9ks31xn0040.png
-series: Linux environment for developers
+series: Linux Environment for Developers
 canonical_url: https://deepu.tech/configure-a-beautiful-terminal-on-unix/
 devto_url: https://dev.to/deepu105/configure-a-beautiful-terminal-on-unix-with-zsh-4mcb
 devto_id: 126019

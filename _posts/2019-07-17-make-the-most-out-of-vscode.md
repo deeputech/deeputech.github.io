@@ -4,7 +4,7 @@ published: true
 description: How I have configured VS Code to make the most out of it for development.
 tags: [vscode, development, ide, opensource]
 cover_image: https://thepracticaldev.s3.amazonaws.com/i/zkv3883der29keb7qkrr.png
-series: Linux environment for developers
+series: Linux Environment for Developers
 canonical_url: https://deepu.tech/make-the-most-out-of-vscode
 devto_url: https://dev.to/deepu105/my-vs-code-setup-making-the-most-out-of-vs-code-4enl
 devto_id: 141925

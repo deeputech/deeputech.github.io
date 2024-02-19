@@ -4,7 +4,7 @@ description: Lets take a deep dive into JVM memory usage and see how to optimize
 published: false
 featured: false
 tags: [java, jvm, optimization]
-series: memory-management
+series: Memory Management
 canonical_url: https://deepu.tech/optimizing-java-memory-usage/
 cover_image:
 ---

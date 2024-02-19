@@ -7,7 +7,7 @@ cover_image: https://thepracticaldev.s3.amazonaws.com/i/rpcyaes2mf3amw79lmr7.jpg
 canonical_url: https://deepu.tech/reflections-on-javascript/
 devto_url: https://dev.to/deepu105/my-love-hate-relationship-with-javascript-3p66
 devto_id: 209286
-series: languages
+series: Languages
 ---
 
 There are three types of programmers, the ones who love JavaScript, the ones who hate JavaScript and the ones who do both. JavaScript is the second language(First was C/C++) I learned when I was trying to run my Wordpress blog. It was even before I started my career. When I started my engineering career I started as a Java Web app developer, which meant I had the chance to work on JavaScript as well for the front-end part. I was pretty good at JS/HTML/CSS and soon I was doing a lot of front-end focused Java Web apps. I also learned JQuery and fell in love with it.

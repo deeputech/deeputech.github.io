@@ -7,7 +7,7 @@ cover_image: https://thepracticaldev.s3.amazonaws.com/i/8jy8jkp8bwlufob52bgu.png
 canonical_url: https://deepu.tech/functional-programming-in-rust/
 devto_url: https://dev.to/deepu105/easy-functional-programming-techniques-in-rust-for-everyone-nae
 devto_id: 205509
-series: functional-programming
+series: Functional Programming
 ---
 
 There is a lot of hype around functional programming(FP) and a lot of cool kids are doing it but it is not a silver bullet. Like other programming paradigms/styles, functional programming also has its pros and cons and one may prefer one paradigm over the other. If you are a Rust developer and wants to venture into functional programming, do not worry, you don't have to learn functional programming oriented languages like Haskell or Clojure(or even Scala or JavaScript though they are not pure functional programming languages) since Rust has you covered and this post is for you.

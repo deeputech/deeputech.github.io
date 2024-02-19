@@ -10,7 +10,7 @@ tags:
   - concurrency
   - nodejs
   - javascript
-series: concurrency in modern programming languages
+series: Concurrency in Modern Programming Languages
 canonical_url: "https://deepu.tech/concurrency-in-modern-languages-js/"
 cover_image: "https://i.imgur.com/PABMBDP.jpg"
 devto_id: 592869

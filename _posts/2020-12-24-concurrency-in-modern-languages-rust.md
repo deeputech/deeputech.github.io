@@ -10,7 +10,7 @@ tags:
   - concurrency
   - async
   - rust
-series: concurrency in modern programming languages
+series: Concurrency in Modern Programming Languages
 canonical_url: "https://deepu.tech/concurrency-in-modern-languages-rust/"
 cover_image: "https://i.imgur.com/XalVFUX.jpg"
 devto_id: 551615

@@ -10,7 +10,7 @@ tags:
   - rust
   - golang
   - javascript
-series: languages
+series: Languages
 canonical_url: 'https://deepu.tech/languages-i-like-and-why/'
 cover_image: 'https://i.imgur.com/FOpUG38.jpeg'
 devto_id: 754627

@@ -17,7 +17,7 @@ Check [my sessionize profile](https://sessionize.com/deepu-k-sasidharan/) for mo
 
 [A Passwordless Future! Passkeys for Java Developers](https://sessionize.com/s/deepu-k-sasidharan/a-passwordless-future-webauthn-for-java-developers/73627)
 
-[slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers) &#124; [video](https://www.youtube.com/live/-OLZViA13Jo?si=avJUHUJ2aAyt0qJq&t=25555)
+[slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers) &#124; [video](https://www.youtube.com/watch?v=zKNbNWr-an05)
 
 [Securing Spring Boot Microservices with OAuth and OpenID Connect](https://sessionize.com/s/deepu-k-sasidharan/securing-spring-boot-microservices-with-oauth-and-/78529)
 

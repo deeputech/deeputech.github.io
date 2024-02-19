@@ -10,7 +10,7 @@ tags:
   - ubuntu
   - fedora
   - kde
-series: Linux environment for developers
+series: Linux Environment for Developers
 canonical_url: "https://deepu.tech/the-state-of-linux-on-desktops/"
 cover_image: "https://i.imgur.com/sO0DY6V.jpeg"
 devto_id: 644327

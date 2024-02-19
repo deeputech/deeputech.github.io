@@ -9,7 +9,7 @@ tags:
   - thepragmaticprogrammer
 cover_image: "https://i.imgur.com/WGkshhB.jpeg"
 canonical_url: "https://deepu.tech/go-impressions-part-2/"
-series: languages
+series: Languages
 devto_id: 1044000
 devto_url: >-
   https://dev.to/deepu105/golang-finally-gets-generics-does-it-make-go-a-better-language-3dai

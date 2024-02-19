@@ -4,7 +4,7 @@ description: Languages to learn in 2020 depending on your experience & domain an
 published: true
 featured: false
 tags: [languages, career, programming]
-series: languages
+series: Languages
 canonical_url: https://deepu.tech/languages-to-learn-in-2020/
 devto_url: https://dev.to/deepu105/7-languages-to-learn-in-2020-with-resources-to-get-started-1ieo
 devto_id: 229467
