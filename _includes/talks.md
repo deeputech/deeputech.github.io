@@ -1,5 +1,5 @@
 - [DEVWORLD](https://devworldconference.com/) (Amsterdam, Netherlands) - February 29 - March 1, 2024
-  - [Java microservices on Istio](https://devworldconference.com/program)
+  - [A Passwordless Future! Passkeys for Java Developers](https://devworldconference.com/program)
 - [ArnhemJUG](https://www.meetup.com/nl-NL/arnhemjug/) (Arnhem, Netherlands) - 28-Mar-2024
 - German Java User Group Tour
   - [Dortmund](https://www.meetup.com/de-DE/jug-dortmund/) - 23-Apr-2024
