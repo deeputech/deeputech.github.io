@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:media="http://search.yahoo.com/mrss/">
   <channel>
     <title>Technorage</title>
-    <description>Where I rage about technology and stuff!</description>
+    <description>Where I rant about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 17 Feb 2024 20:45:51 +0100</pubDate>
-    <lastBuildDate>Sat, 17 Feb 2024 20:45:51 +0100</lastBuildDate>
+    <pubDate>Mon, 19 Feb 2024 16:33:34 +0100</pubDate>
+    <lastBuildDate>Mon, 19 Feb 2024 16:33:34 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -3034,7 +3034,7 @@ root@mypod:/# &lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; /var/secrets/goo
         <author>Deepu K Sasidharan</author>
         <content:encoded>&lt;p&gt;Rust is taking over the terminal. Rust is a general-purpose programming language that is blazing fast and memory safe. It is the fastest-growing and most loved programming language in the world. It is used to build everything from operating systems to web servers to command-line tools. Recently there has been a surge of command line tools and utilities written in Rust, and many of them are intended to replace standard Unix commands. They are faster, more user-friendly, and have more features than their standard Unix counterparts. In this post, I will cover some of the best Rust command line tools I have used for a while. You can also use these to supercharge your terminal.&lt;/p&gt;
 
-&lt;p&gt;These tools are available for both Linux and macOS. I have not tested them on Windows, but most should also work on Windows. I recommend aliasing the commands to replace the standard commands based on your preferences. If you have &lt;a href=&quot;https://doc.rust-lang.org/cargo/&quot;&gt;Cargo&lt;/a&gt;, the rust package manager, you can install all these using Cargo.&lt;/p&gt;
+&lt;p&gt;These tools are available for both GNU/Linux and macOS. I have not tested them on Windows, but most should also work on Windows. I recommend aliasing the commands to replace the standard commands based on your preferences. If you have &lt;a href=&quot;https://doc.rust-lang.org/cargo/&quot;&gt;Cargo&lt;/a&gt;, the rust package manager, you can install all these using Cargo.&lt;/p&gt;
 
 &lt;h2 id=&quot;alacritty&quot;&gt;Alacritty&lt;/h2&gt;
 
