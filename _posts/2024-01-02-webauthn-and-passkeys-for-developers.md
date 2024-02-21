@@ -84,7 +84,7 @@ Asymmetric public key cryptography involves a pair of mathematically linked keys
 
 This key pair can be used for encryption. When a message is encrypted with the public key, only the corresponding private key can decrypt it, ensuring confidentiality.
 
-![Signature verification using Public-key cryptography](https://images.ctfassets.net/23aumh6u8s0i/65xEECjioOX0xqW8D4sYtf/a105305563ee8cdc4431a59c61ee95a7/pub-key-encrypt.jpg)
+![Encryption using Public-key cryptography](https://images.ctfassets.net/23aumh6u8s0i/21EnBU43HXxjOo1V96LfIh/4fc796fcd69bacb82b6d0f3c1f9f1b96/pub-key-encrypt.jpeg)
 
 The same key pair can also be used for digital signatures. A message signed with a private key can be verified with the public key, authenticating the sender's identity.
 
