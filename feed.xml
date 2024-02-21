@@ -5,8 +5,8 @@
     <description>Where I rant about technology and stuff!</description>
     <link>https://deepu.tech/</link>
     <atom:link href="https://deepu.tech/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 19 Feb 2024 18:42:03 +0100</pubDate>
-    <lastBuildDate>Mon, 19 Feb 2024 18:42:03 +0100</lastBuildDate>
+    <pubDate>Wed, 21 Feb 2024 10:32:07 +0100</pubDate>
+    <lastBuildDate>Wed, 21 Feb 2024 10:32:07 +0100</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
     
       <item>
@@ -717,7 +717,7 @@
 
 &lt;p&gt;This key pair can be used for encryption. When a message is encrypted with the public key, only the corresponding private key can decrypt it, ensuring confidentiality.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/65xEECjioOX0xqW8D4sYtf/a105305563ee8cdc4431a59c61ee95a7/pub-key-encrypt.jpg&quot; alt=&quot;Signature verification using Public-key cryptography&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://images.ctfassets.net/23aumh6u8s0i/21EnBU43HXxjOo1V96LfIh/4fc796fcd69bacb82b6d0f3c1f9f1b96/pub-key-encrypt.jpeg&quot; alt=&quot;Encryption using Public-key cryptography&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The same key pair can also be used for digital signatures. A message signed with a private key can be verified with the public key, authenticating the sender’s identity.&lt;/p&gt;
 
