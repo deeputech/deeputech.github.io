@@ -7,3 +7,5 @@
   - [Bielfeld](https://www.meetup.com/de-DE/java-user-group-bielefeld/) - 25-Apr-2024
 - [Devoxx UK](https://www.devoxx.co.uk/) (London, UK) - May 8-10, 2024
   - A Passwordless Future! Passkeys for Java Developers
+- [Spring IO](https://2024.springio.net/) (Barcelona, Spain) - May 30-31, 2024
+  - A Passwordless Future! Passkeys for Spring Developers

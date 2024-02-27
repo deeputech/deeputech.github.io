@@ -9,7 +9,7 @@ comments: false
   {% capture talks %}{% include talks.md %}{% endcapture %} {{ talks | markdownify }}
 </div>
 
-Check [my sessionize profile](https://sessionize.com/deepu-k-sasidharan/) for more details about the talks and events.
+Check [my sessionize profile](https://sessionize.com/deepu-k-sasidharan/) for more details about the talks and events. [Here](https://www.youtube.com/playlist?list=PLxayiD7e52nPpb-sSaoOPc-zXGhmOaNHK) are some of the videos from my talks.
 
 ---
 
