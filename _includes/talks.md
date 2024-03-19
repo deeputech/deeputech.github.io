@@ -1,11 +1,12 @@
-- [DEVWORLD](https://devworldconference.com/) (Amsterdam, Netherlands) - February 29 - March 1, 2024
-  - [A Passwordless Future! Passkeys for Java Developers](https://devworldconference.com/program)
-- [ArnhemJUG](https://www.meetup.com/nl-NL/arnhemjug/) (Arnhem, Netherlands) - 28-Mar-2024
+- [ArnhemJUG](https://www.meetup.com/nl-NL/arnhemjug/) (Arnhem, Netherlands) - Mar 28, 2024
 - German Java User Group Tour
-  - [Dortmund](https://www.meetup.com/de-DE/jug-dortmund/) - 23-Apr-2024
-  - [Paderborn](https://jug-pb.gitlab.io/) - 24-Apr-2024
-  - [Bielfeld](https://www.meetup.com/de-DE/java-user-group-bielefeld/) - 25-Apr-2024
+  - [Bielefeld](https://www.meetup.com/de-DE/java-user-group-bielefeld/) - Apr 23, 2024
+  - [Paderborn](https://jug-pb.gitlab.io/) - Apr 24, 2024
+  - [Dortmund](https://www.meetup.com/de-DE/jug-dortmund/) - Apr 25, 2024
 - [Devoxx UK](https://www.devoxx.co.uk/) (London, UK) - May 8-10, 2024
   - A Passwordless Future! Passkeys for Java Developers
+  - Securing Spring Boot Microservices with OAuth and OpenID Connect [workshop]
+- [TEQNation](https://conference.teqnation.com/) (Utrecht, Netherlands) - May 22, 2024
+  - A Passwordless Future! Passkeys for Developers
 - [Spring IO](https://2024.springio.net/) (Barcelona, Spain) - May 30-31, 2024
   - A Passwordless Future! Passkeys for Spring Developers

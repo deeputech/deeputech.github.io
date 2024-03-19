@@ -1,5 +1,14 @@
-
 #### 2024
+
+---
+
+##### [DEVWORLD](https://devworldconference.com/)
+
+<small>March 2024</small>
+
+[A Passwordless Future! Passkeys for Java Developers](https://devworldconference.com/program)
+
+[slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers)
 
 ---
 
