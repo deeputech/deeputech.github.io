@@ -1,4 +1,3 @@
-- [ArnhemJUG](https://www.meetup.com/nl-NL/arnhemjug/) (Arnhem, Netherlands) - Mar 28, 2024
 - German Java User Group Tour
   - [Bielefeld](https://www.meetup.com/de-DE/java-user-group-bielefeld/) - Apr 23, 2024
   - [Paderborn](https://jug-pb.gitlab.io/) - Apr 24, 2024
@@ -10,3 +9,5 @@
   - A Passwordless Future! Passkeys for Developers
 - [Spring IO](https://2024.springio.net/) (Barcelona, Spain) - May 30-31, 2024
   - A Passwordless Future! Passkeys for Spring Developers
+- [JNation](https://jnation.pt/) (Coimbra, Portugal) - June 4-5, 2024
+  - A Passwordless Future! Passkeys for Java Developers

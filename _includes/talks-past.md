@@ -2,6 +2,16 @@
 
 ---
 
+##### [ArnhemJUG](https://www.meetup.com/arnhemjug/events/299487202/)
+
+<small>March 2024</small>
+
+A Passwordless Future! Passkeys for Java Developers
+
+[slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers)
+
+---
+
 ##### [DEVWORLD](https://devworldconference.com/)
 
 <small>March 2024</small>
