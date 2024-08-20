@@ -2,6 +2,58 @@
 
 ---
 
+##### [WeAreDevelopers World Congress](https://www.wearedevelopers.com/world-congress)
+
+<small>July 2024</small>
+
+An illustrated crash course for OAuth and OIDC
+
+[slides](https://speakerdeck.com/deepu105/an-illustrated-crash-course-for-oauth-and-oidc)
+
+---
+
+##### [JNation](https://jnation.pt/)
+
+<small>June 2024</small>
+
+A Passwordless Future! Passkeys for Spring Developers
+
+[video](https://www.youtube.com/live/Z4ktHSGcy98?si=ecE6RvmEim2DyZfC&t=20374) &#124; [slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers-43acdb9d-489e-4236-b5e8-fd93c92a1132)
+
+---
+
+##### [Spring IO](https://2024.springio.net/)
+
+<small>May 2024</small>
+
+A Passwordless Future! Passkeys for Spring Developers
+
+[video](https://www.youtube.com/watch?v=7R81uwxv1k0) &#124; [slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-spring-developers)
+
+---
+
+##### [Devoxx UK](https://www.devoxx.co.uk/)
+
+<small>May 2024</small>
+
+A Passwordless Future! Passkeys for Java Developers
+
+[video](https://www.youtube.com/watch?v=tt5ovzq0B5Y) &#124; [slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers-43acdb9d-489e-4236-b5e8-fd93c92a1132)
+
+Securing Spring Boot Microservices with OAuth and OpenID Connect
+
+## [workshop](https://developer.auth0.com/resources/labs/authorization/spring-boot-microservices-security#overview)
+
+##### [Bielefeld JUG](https://www.meetup.com/de-DE/java-user-group-bielefeld/) &#124; [Paderborn JUG](https://jug-pb.gitlab.io/) &#124; [Dortmund JUG](https://www.meetup.com/de-DE/jug-dortmund/)
+
+<small>April 2024</small>
+
+A Passwordless Future! Passkeys for Java Developers
+
+[slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers-43acdb9d-489e-4236-b5e8-fd93c92a1132)
+
+---
+
 ##### [ArnhemJUG](https://www.meetup.com/arnhemjug/events/299487202/)
 
 <small>March 2024</small>

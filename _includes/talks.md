@@ -1,13 +1,4 @@
-- German Java User Group Tour
-  - [Bielefeld](https://www.meetup.com/de-DE/java-user-group-bielefeld/) - Apr 23, 2024
-  - [Paderborn](https://jug-pb.gitlab.io/) - Apr 24, 2024
-  - [Dortmund](https://www.meetup.com/de-DE/jug-dortmund/) - Apr 25, 2024
-- [Devoxx UK](https://www.devoxx.co.uk/) (London, UK) - May 8-10, 2024
-  - A Passwordless Future! Passkeys for Java Developers
-  - Securing Spring Boot Microservices with OAuth and OpenID Connect [workshop]
-- [TEQNation](https://conference.teqnation.com/) (Utrecht, Netherlands) - May 22, 2024
-  - A Passwordless Future! Passkeys for Developers
-- [Spring IO](https://2024.springio.net/) (Barcelona, Spain) - May 30-31, 2024
-  - A Passwordless Future! Passkeys for Spring Developers
-- [JNation](https://jnation.pt/) (Coimbra, Portugal) - June 4-5, 2024
+- [Conf42 Rustlang 2024](https://www.conf42.com/rustlang2024) (Virtual) - August 22, 2024
+  - Go containerless on Kubernetes with WebAssembly and Rust
+- [Devoxx 2024](https://devoxx.be/) (Antwerp, Belgium) - October 7-11, 2024
   - A Passwordless Future! Passkeys for Java Developers
