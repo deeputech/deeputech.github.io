@@ -1,4 +1,6 @@
-- [Conf42 Rustlang 2024](https://www.conf42.com/rustlang2024) (Virtual) - August 22, 2024
-  - Go containerless on Kubernetes with WebAssembly and Rust
-- [Devoxx 2024](https://devoxx.be/) (Antwerp, Belgium) - October 7-11, 2024
-  - A Passwordless Future! Passkeys for Java Developers
+- [Conf42 DevSecOps 2024](https://www.conf42.com/devsecops2024) (Virtual) - December 5, 2024
+  - Mastering Kubernetes Security: From Containers to Cluster Fortresses
+- [JFokus](https://www.jfokus.se/) (Stockholm, Sweden) - February 3-5, 2025
+  - [An illustrated crash course for OAuth and OIDC](https://sessionize.com/app/speaker/session/738144)
+- [Voxxeddays Amsterdam](https://amsterdam.voxxeddays.com/) (Amsterdam, Netherlands) - April 3, 2025
+  - [Securing the Future of AI: Authorization Strategies for Retrieval-Augmented Generation (RAG) Systems](https://sessionize.com/s/deepu-k-sasidharan/securing-the-future-of-ai-authorization-strategies/108414)

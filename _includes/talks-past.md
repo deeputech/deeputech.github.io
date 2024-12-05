@@ -2,6 +2,64 @@
 
 ---
 
+##### [Conf42 DevSecOps 2024](https://www.conf42.com/devsecops2024)
+
+<small>December 2024</small>
+
+Mastering Kubernetes Security from Containers to Cluster Fortresses
+
+[slides](https://speakerdeck.com/deepu105/mastering-kubernetes-security-from-containers-to-cluster-fortresses)
+
+---
+
+##### [SREday](https://www.papercall.io/sreday-2024-amsterdam)
+
+<small>November 2024</small>
+
+Go containerless on Kubernetes with WebAssembly
+
+[slides](https://speakerdeck.com/deepu105/go-containerless-on-kubernetes)
+
+---
+
+##### [J-Fall](https://jfall.nl/)
+
+<small>November 2024</small>
+
+Be an Effective Polyglot Developer: Learn Languages Like It's Nobody's Business!
+
+---
+
+##### [Devoxx 2024](https://devoxx.be/)
+
+<small>October 2024</small>
+
+A Passwordless Future! Passkeys for Java Developers
+
+[video](https://www.youtube.com/watch?v=ekiUjlHLj8c) &#124; [slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers-a494014a-6255-4c61-905a-2b547653a38d)
+
+---
+
+##### [Utrecht JUG](https://www.meetup.com/utrecht-java-user-group/events/299097793/?eventOrigin=group_events_list)
+
+<small>September 2024</small>
+
+A Passwordless Future! Passkeys for Java Developers
+
+[slides](https://speakerdeck.com/deepu105/a-passwordless-future-passkeys-for-java-developers-a494014a-6255-4c61-905a-2b547653a38d)
+
+---
+
+##### [Conf42 Rustlang 2024](https://www.conf42.com/rustlang2024)
+
+<small>Aug 2024</small>
+
+Go containerless on Kubernetes with WebAssembly
+
+[slides](https://speakerdeck.com/deepu105/go-containerless-on-kubernetes)
+
+---
+
 ##### [WeAreDevelopers World Congress](https://www.wearedevelopers.com/world-congress)
 
 <small>July 2024</small>
