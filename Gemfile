@@ -21,6 +21,7 @@ group :jekyll_plugins do
     gem 'kramdown'
     gem 'rouge'
     gem 'octokit', '~> 4.19'
+    gem "sassc", "~> 2.1", "< 2.2"
 end
 
 gem "webrick", "~> 1.8"
