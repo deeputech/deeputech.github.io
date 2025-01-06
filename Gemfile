@@ -22,6 +22,9 @@ group :jekyll_plugins do
     gem 'rouge'
     gem 'octokit', '~> 4.19'
     gem "sassc", "~> 2.1", "< 2.2"
+    gem 'logger'
+    gem 'bigdecimal'
+    gem 'faraday-retry'
 end
 
 gem "webrick", "~> 1.8"
