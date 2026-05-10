@@ -1,0 +1,92 @@
+---
+// Giscus comments. To activate:
+//  1. Enable Discussions on the GitHub repo.
+//  2. Visit https://giscus.app, fill in the repo, pick a category,
+//     copy the data-* attribute values into the env vars below.
+//  3. Set in src/data/giscus.ts (created on activation) or expose as
+//     Astro env vars at build time.
+//
+// Until configured, this renders a small placeholder so layout is
+// preserved without spamming the console.
+
+const config = {
+  repo: "deeputech/deeputech.github.io",
+  repoId: "", // e.g. "MDEwOlJlcG9zaXRvcnkxMjM0NTY="
+  category: "Comments",
+  categoryId: "", // e.g. "DIC_kwDOABCDEF4CDgHi"
+  mapping: "pathname" as
+    | "pathname"
+    | "url"
+    | "title"
+    | "og:title"
+    | "specific"
+    | "number",
+  strict: "0",
+  reactionsEnabled: "1",
+  emitMetadata: "0",
+  inputPosition: "top" as "top" | "bottom",
+  lang: "en",
+};
+
+const isConfigured = config.repoId && config.categoryId;
+---
+
+<section class="not-prose mt-12 border-t border-[var(--color-border)] pt-8">
+  <h2 class="font-display mb-4 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">
+    Comments
+  </h2>
+
+  {
+    isConfigured ? (
+      <div id="giscus-mount" />
+    ) : (
+      <p class="rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 text-sm text-[var(--color-fg-muted)]">
+        Comments will appear here once Giscus is configured. Set <code>repoId</code> and{" "}
+        <code>categoryId</code> in <code>src/components/Giscus.astro</code> after creating a
+        Discussions category at <a href="https://giscus.app" class="underline-offset-2 hover:underline">giscus.app</a>.
+      </p>
+    )
+  }
+</section>
+
+{
+  isConfigured && (
+    <script
+      is:inline
+      define:vars={{ config }}
+      src="https://giscus.app/client.js"
+      data-repo={config.repo}
+      data-repo-id={config.repoId}
+      data-category={config.category}
+      data-category-id={config.categoryId}
+      data-mapping={config.mapping}
+      data-strict={config.strict}
+      data-reactions-enabled={config.reactionsEnabled}
+      data-emit-metadata={config.emitMetadata}
+      data-input-position={config.inputPosition}
+      data-theme="preferred_color_scheme"
+      data-lang={config.lang}
+      crossorigin="anonymous"
+      async
+    />
+  )
+}
+
+<script is:inline>
+  // Re-theme Giscus iframe when the site theme toggles.
+  (function () {
+    function send(theme) {
+      var iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme === "dark" ? "dark" : "light" } } },
+        "https://giscus.app",
+      );
+    }
+    var html = document.documentElement;
+    var observer = new MutationObserver(function () {
+      send(html.getAttribute("data-theme") || "light");
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["data-theme"] });
+  })();
+</script>

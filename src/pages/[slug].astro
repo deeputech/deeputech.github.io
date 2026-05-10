@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 const allPosts = await getPublishedPosts();
 const idx = allPosts.findIndex((p) => p.id === post.id);
 const newer = idx > 0 ? allPosts[idx - 1] : null;
@@ -21,7 +21,6 @@ const older = idx >= 0 && idx < allPosts.length - 1 ? allPosts[idx + 1] : null;
 const seriesPosts = post.data.series ? await getPostsBySeries(post.data.series) : [];
 const seriesIndex = post.data.series ? seriesPosts.findIndex((p) => p.id === post.id) : -1;
 
-const wordCount = post.body?.split(/\s+/).length ?? 0;
 const readingTime = readingTimeMinutes(post.body ?? "");
 ---
 
@@ -35,6 +34,9 @@ const readingTime = readingTimeMinutes(post.body ?? "");
   series={post.data.series}
   readingTimeMinutes={readingTime}
   canonical={post.data.canonical_url}
+  headings={headings}
+  showComments={post.data.comments !== false}
+  showToc={post.data.toc !== false}
 >
   {
     post.data.series && seriesPosts.length > 1 && (

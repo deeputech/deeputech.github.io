@@ -1,5 +1,9 @@
 ---
+import type { MarkdownHeading } from "astro";
 import BaseLayout from "./BaseLayout.astro";
+import ReadingProgress from "~/components/ReadingProgress.astro";
+import TOC from "~/components/TOC.astro";
+import Giscus from "~/components/Giscus.astro";
 import { defaultAuthor } from "~/data/authors";
 
 export type Props = {
@@ -12,6 +16,9 @@ export type Props = {
   series?: string;
   canonical?: string;
   readingTimeMinutes?: number;
+  headings?: MarkdownHeading[];
+  showComments?: boolean;
+  showToc?: boolean;
 };
 
 const {
@@ -24,6 +31,9 @@ const {
   series,
   canonical,
   readingTimeMinutes,
+  headings = [],
+  showComments = true,
+  showToc = true,
 } = Astro.props;
 
 const author = defaultAuthor;
@@ -37,76 +47,93 @@ const coverSrc = cover_image
     ? cover_image
     : `/${cover_image}`
   : null;
+
+const hasToc = showToc && headings.filter((h) => h.depth === 2 || h.depth === 3).length > 1;
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical} type="article" monetization>
-  <article class="mx-auto max-w-3xl px-4 pt-10 sm:px-6 sm:pt-14">
-    <header class="mb-8">
-      {
-        tags.length > 0 && (
-          <div class="mb-4 flex flex-wrap gap-2 text-xs text-[var(--color-fg-subtle)]">
-            {tags.slice(0, 4).map((t) => (
-              <a href={`/tags/#${t}`} class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]">
-                {t}
-              </a>
-            ))}
+  <ReadingProgress />
+
+  <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px]">
+      <article data-pagefind-body class="mx-auto w-full max-w-3xl lg:mx-0">
+        <header class="mb-8">
+          {
+            tags.length > 0 && (
+              <div class="mb-4 flex flex-wrap gap-2 text-xs text-[var(--color-fg-subtle)]">
+                {tags.slice(0, 4).map((t) => (
+                  <a
+                    href={`/tags/#${t}`}
+                    class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"
+                  >
+                    {t}
+                  </a>
+                ))}
+              </div>
+            )
+          }
+          <h1 class="font-display text-4xl font-bold tracking-tight text-[var(--color-fg)] sm:text-5xl">
+            {title}
+          </h1>
+          {description && <p class="mt-4 text-lg text-[var(--color-fg-muted)]">{description}</p>}
+          <div class="mt-6 flex items-center gap-3 text-sm text-[var(--color-fg-subtle)]">
+            <img
+              src={`https://www.gravatar.com/avatar/${author.gravatar}?s=64&d=mm`}
+              alt={author.display_name}
+              width="32"
+              height="32"
+              class="h-8 w-8 rounded-full"
+            />
+            <a href={author.web} class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">
+              {author.display_name}
+            </a>
+            <span class="text-[var(--color-border-strong)]">·</span>
+            <time datetime={date.toISOString()}>{dateStr}</time>
+            {
+              updatedStr && (
+                <>
+                  <span class="text-[var(--color-border-strong)]">·</span>
+                  <span>Updated {updatedStr}</span>
+                </>
+              )
+            }
+            {
+              readingTimeMinutes && (
+                <>
+                  <span class="text-[var(--color-border-strong)]">·</span>
+                  <span>{readingTimeMinutes} min read</span>
+                </>
+              )
+            }
           </div>
-        )
-      }
-      <h1 class="font-display text-4xl font-bold tracking-tight text-[var(--color-fg)] sm:text-5xl">
-        {title}
-      </h1>
-      {description && <p class="mt-4 text-lg text-[var(--color-fg-muted)]">{description}</p>}
-      <div class="mt-6 flex items-center gap-3 text-sm text-[var(--color-fg-subtle)]">
-        <img
-          src={`https://www.gravatar.com/avatar/${author.gravatar}?s=64&d=mm`}
-          alt={author.display_name}
-          width="32"
-          height="32"
-          class="h-8 w-8 rounded-full"
-        />
-        <a href={author.web} class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">
-          {author.display_name}
-        </a>
-        <span class="text-[var(--color-border-strong)]">·</span>
-        <time datetime={date.toISOString()}>{dateStr}</time>
-        {updatedStr && (
-          <>
-            <span class="text-[var(--color-border-strong)]">·</span>
-            <span>Updated {updatedStr}</span>
-          </>
-        )}
-        {readingTimeMinutes && (
-          <>
-            <span class="text-[var(--color-border-strong)]">·</span>
-            <span>{readingTimeMinutes} min read</span>
-          </>
-        )}
-      </div>
+        </header>
+
+        {
+          coverSrc && (
+            <img
+              src={coverSrc}
+              alt={title}
+              class="mb-10 aspect-[16/9] w-full rounded-xl object-cover"
+            />
+          )
+        }
+
+        <div class="prose-blog">
+          <slot />
+        </div>
+
+        {showComments && <Giscus />}
+      </article>
+
       {
-        series && (
-          <a
-            href={`/series/${series.toLowerCase().replace(/\s+/g, "-")}/`}
-            class="mt-4 inline-flex items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)]"
-          >
-            <span class="text-[var(--color-accent)]">●</span> Part of <span class="text-[var(--color-fg)]">{series}</span>
-          </a>
+        hasToc && (
+          <aside class="hidden lg:block">
+            <div class="sticky top-24">
+              <TOC headings={headings} />
+            </div>
+          </aside>
         )
       }
-    </header>
-
-    {
-      coverSrc && (
-        <img
-          src={coverSrc}
-          alt={title}
-          class="mb-10 aspect-[16/9] w-full rounded-xl object-cover"
-        />
-      )
-    }
-
-    <div class="prose-blog">
-      <slot />
     </div>
-  </article>
+  </div>
 </BaseLayout>
