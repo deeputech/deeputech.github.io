@@ -24,3 +24,10 @@ _posts/draft-*
 AGENTS.md
 WRITING-STYLE.md
 .claude/
+
+# Astro
+dist/
+.astro/
+.env
+.env.production
+src/pages/_pagefind/

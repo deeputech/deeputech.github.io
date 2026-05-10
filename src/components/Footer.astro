@@ -1,0 +1,32 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-[var(--color-border)] py-10 text-sm text-[var(--color-fg-muted)]">
+  <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 sm:px-6 md:flex-row md:items-center md:justify-between">
+    <div class="flex flex-col gap-1">
+      <span>
+        © {year} Deepu K Sasidharan ·
+        <a
+          rel="license"
+          href="https://creativecommons.org/licenses/by/4.0/"
+          class="underline-offset-2 hover:underline"
+        >
+          CC BY 4.0
+        </a>
+      </span>
+      <span class="text-xs text-[var(--color-fg-subtle)]">
+        Built with <a href="https://astro.build" class="hover:underline">Astro</a> ·
+        Hosted on <a href="https://pages.github.com/" class="hover:underline">GitHub Pages</a>
+      </span>
+    </div>
+    <nav class="flex flex-wrap gap-x-4 gap-y-2 text-xs">
+      <a href="/blogs/" class="hover:text-[var(--color-fg)]">Blog</a>
+      <a href="/series/" class="hover:text-[var(--color-fg)]">Series</a>
+      <a href="/tags/" class="hover:text-[var(--color-fg)]">Tags</a>
+      <a href="/categories/" class="hover:text-[var(--color-fg)]">Categories</a>
+      <a href="/feed.xml" class="hover:text-[var(--color-fg)]">RSS</a>
+      <a href="/comment-policy/" class="hover:text-[var(--color-fg)]">Comments</a>
+    </nav>
+  </div>
+</footer>

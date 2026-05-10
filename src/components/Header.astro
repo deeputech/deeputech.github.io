@@ -1,0 +1,61 @@
+---
+import DarkModeToggle from "./DarkModeToggle.astro";
+
+const navItems = [
+  { href: "/", label: "About" },
+  { href: "/blogs/", label: "Blog" },
+  { href: "/books/", label: "Books" },
+  { href: "/appearances/", label: "Events" },
+];
+
+const path = Astro.url.pathname;
+function isActive(href: string) {
+  if (href === "/") return path === "/";
+  return path === href || path.startsWith(href);
+}
+---
+
+<header
+  class="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] backdrop-blur"
+>
+  <div class="mx-auto flex max-w-5xl items-center gap-4 px-4 py-3 sm:px-6">
+    <a href="/" class="group flex items-baseline gap-2 text-[var(--color-fg)]">
+      <span class="font-display text-xl font-semibold tracking-tight">technorage</span>
+      <span class="hidden text-xs text-[var(--color-fg-subtle)] sm:inline">/ deepu.tech</span>
+    </a>
+
+    <nav class="ml-auto flex items-center gap-1 sm:gap-2">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "rounded-md px-2 py-1 text-sm transition sm:px-3",
+              isActive(item.href)
+                ? "text-[var(--color-fg)] font-medium"
+                : "text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]",
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+
+      <button
+        type="button"
+        id="search-trigger"
+        aria-label="Search"
+        title="Search (⌘K)"
+        class="ml-1 hidden h-9 items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-2 text-sm text-[var(--color-fg-subtle)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)] sm:inline-flex"
+      >
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3-3"></path>
+        </svg>
+        <kbd class="rounded border border-[var(--color-border-strong)] px-1 font-mono text-[10px]">⌘K</kbd>
+      </button>
+
+      <DarkModeToggle />
+    </nav>
+  </div>
+</header>

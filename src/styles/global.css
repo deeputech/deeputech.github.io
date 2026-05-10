@@ -1,0 +1,150 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display: "Lexend", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50: #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #00ab6b;
+  --color-brand-600: #008f5a;
+  --color-brand-700: #057a4d;
+  --color-brand-800: #0a5e3e;
+  --color-brand-900: #0c4a32;
+
+  --color-bg: #ffffff;
+  --color-bg-subtle: #f8fafc;
+  --color-bg-muted: #f1f5f9;
+  --color-fg: #0f172a;
+  --color-fg-muted: #475569;
+  --color-fg-subtle: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-accent: var(--color-brand-500);
+  --color-accent-hover: var(--color-brand-600);
+}
+
+[data-theme="dark"] {
+  --color-bg: #0a0a0a;
+  --color-bg-subtle: #111111;
+  --color-bg-muted: #1a1a1a;
+  --color-fg: #f5f5f5;
+  --color-fg-muted: #a3a3a3;
+  --color-fg-subtle: #737373;
+  --color-border: #262626;
+  --color-border-strong: #404040;
+  --color-accent: #34d399;
+  --color-accent-hover: #6ee7b7;
+}
+
+html {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-brand-900);
+}
+[data-theme="dark"] ::selection {
+  background: var(--color-brand-700);
+  color: var(--color-brand-100);
+}
+
+/* Tuned prose for the modern dev blog look */
+.prose-blog {
+  --tw-prose-body: var(--color-fg);
+  --tw-prose-headings: var(--color-fg);
+  --tw-prose-lead: var(--color-fg-muted);
+  --tw-prose-links: var(--color-accent);
+  --tw-prose-bold: var(--color-fg);
+  --tw-prose-counters: var(--color-fg-muted);
+  --tw-prose-bullets: var(--color-border-strong);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-quotes: var(--color-fg);
+  --tw-prose-quote-borders: var(--color-accent);
+  --tw-prose-captions: var(--color-fg-subtle);
+  --tw-prose-code: var(--color-fg);
+  --tw-prose-pre-code: var(--color-fg);
+  --tw-prose-pre-bg: var(--color-bg-muted);
+  --tw-prose-th-borders: var(--color-border-strong);
+  --tw-prose-td-borders: var(--color-border);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  max-width: none;
+}
+
+.prose-blog :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  scroll-margin-top: 6rem;
+}
+.prose-blog :where(h2) {
+  font-size: 1.875rem;
+  margin-top: 2.5em;
+  margin-bottom: 1em;
+}
+.prose-blog :where(h3) {
+  font-size: 1.375rem;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+.prose-blog :where(p) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+.prose-blog :where(code):not(pre code) {
+  background: var(--color-bg-muted);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  font-family: var(--font-mono);
+}
+.prose-blog :where(code)::before,
+.prose-blog :where(code)::after {
+  content: "" !important;
+}
+.prose-blog :where(blockquote) {
+  font-style: normal;
+  border-left-width: 3px;
+  padding-left: 1.25rem;
+  color: var(--color-fg-muted);
+}
+.prose-blog :where(img) {
+  border-radius: 0.75rem;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
