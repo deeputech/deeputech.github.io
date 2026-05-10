@@ -24,14 +24,16 @@ function sleep(ms) {
 }
 
 function getBlogUrl(filename) {
-  return filename.replace(/^[0-9]{4}-[0-9]{2}-[0-9]{2}-/, "").replace(".md", "");
+  // Astro posts: src/content/posts/<slug>.mdx (no date prefix in filename anymore;
+  // date now lives in front-matter). Slug == filename without extension.
+  return filename.replace(/\.mdx?$/, "");
 }
 
-const POSTS_DIR = "_posts/";
+const POSTS_DIR = "src/content/posts/";
 
 async function processFiles() {
   try {
-    const filenames = fs.readdirSync(POSTS_DIR);
+    const filenames = fs.readdirSync(POSTS_DIR).filter((f) => /\.mdx?$/.test(f));
 
     if (filenames.length == 0) {
       console.error(`No files found in path ${POSTS_DIR}`);
