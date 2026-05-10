@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
+import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
@@ -18,13 +19,32 @@ export default defineConfig({
   },
   integrations: [
     expressiveCode({
-      themes: ["github-light", "github-dark-dimmed"],
-      themeCssSelector: (theme) => `[data-theme="${theme.name === "github-light" ? "light" : "dark"}"]`,
-      defaultProps: { wrap: false },
+      // Single theme for both light/dark site themes — code blocks are
+      // always rendered in the dark Catppuccin Macchiato style (matches
+      // the bash terminal vibe the user wanted).
+      themes: ["catppuccin-macchiato"],
+      // Plugin pulls in its own copy of @expressive-code/core via npm hoisting
+      // quirks; types disagree at compile time but runtime is fine.
+      plugins: [/** @type {any} */ (pluginLineNumbers())],
+      defaultProps: /** @type {any} */ ({
+        wrap: false,
+        showLineNumbers: true,
+      }),
       styleOverrides: {
-        codeFontFamily: "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+        codeFontFamily:
+          "'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
         borderRadius: "0.75rem",
-        frames: { shadowColor: "transparent" },
+        codeFontSize: "0.9rem",
+        codeLineHeight: "1.55",
+        codePaddingBlock: "1rem",
+        codePaddingInline: "1.1rem",
+        frames: {
+          shadowColor: "transparent",
+          editorBackground: "#181926",
+          terminalBackground: "#181926",
+          terminalTitlebarBackground: "#1e2030",
+          terminalTitlebarBorderBottomColor: "#363a4f",
+        },
       },
     }),
     mdx(),

@@ -2,10 +2,10 @@
 import DarkModeToggle from "./DarkModeToggle.astro";
 
 const navItems = [
-  { href: "/", label: "About" },
-  { href: "/blogs/", label: "Blog" },
-  { href: "/books/", label: "Books" },
-  { href: "/appearances/", label: "Events" },
+  { href: "/", label: "About", icon: "user" },
+  { href: "/blogs/", label: "Blog", icon: "blog" },
+  { href: "/books/", label: "Books", icon: "book" },
+  { href: "/appearances/", label: "Events", icon: "events" },
 ];
 
 const path = Astro.url.pathname;
@@ -18,25 +18,54 @@ function isActive(href: string) {
 <header
   class="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] backdrop-blur"
 >
-  <div class="mx-auto flex max-w-5xl items-center gap-4 px-4 py-3 sm:px-6">
-    <a href="/" class="group flex items-baseline gap-2 text-[var(--color-fg)]">
+  <div class="mx-auto flex max-w-5xl items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6">
+    <a href="/" class="flex items-center text-[var(--color-fg)]">
       <span class="font-display text-xl font-semibold tracking-tight">technorage</span>
-      <span class="hidden text-xs text-[var(--color-fg-subtle)] sm:inline">/ deepu.tech</span>
     </a>
 
-    <nav class="ml-auto flex items-center gap-1 sm:gap-2">
+    <nav class="ml-auto flex items-center gap-0.5 sm:gap-1">
       {
         navItems.map((item) => (
           <a
             href={item.href}
             class:list={[
-              "rounded-md px-2 py-1 text-sm transition sm:px-3",
+              "inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm transition sm:px-3",
               isActive(item.href)
                 ? "text-[var(--color-fg)] font-medium"
                 : "text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]",
             ]}
           >
-            {item.label}
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              {item.icon === "user" && (
+                <>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </>
+              )}
+              {item.icon === "blog" && (
+                <>
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="8" y1="13" x2="16" y2="13"></line>
+                  <line x1="8" y1="17" x2="16" y2="17"></line>
+                </>
+              )}
+              {item.icon === "book" && (
+                <>
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                </>
+              )}
+              {item.icon === "events" && (
+                <>
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </>
+              )}
+            </svg>
+            <span class="hidden sm:inline">{item.label}</span>
           </a>
         ))
       }
@@ -46,13 +75,13 @@ function isActive(href: string) {
         id="search-trigger"
         aria-label="Search"
         title="Search (⌘K)"
-        class="ml-1 hidden h-9 items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-2 text-sm text-[var(--color-fg-subtle)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)] sm:inline-flex"
+        class="ml-1 inline-flex h-9 items-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-2 text-sm text-[var(--color-fg-subtle)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
       >
         <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="7"></circle>
           <path d="m20 20-3-3"></path>
         </svg>
-        <kbd class="rounded border border-[var(--color-border-strong)] px-1 font-mono text-[10px]">⌘K</kbd>
+        <kbd class="hidden rounded border border-[var(--color-border-strong)] px-1 font-mono text-[10px] sm:inline">⌘K</kbd>
       </button>
 
       <DarkModeToggle />

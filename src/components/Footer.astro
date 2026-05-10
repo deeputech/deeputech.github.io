@@ -2,7 +2,30 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="mt-24 border-t border-[var(--color-border)] py-10 text-sm text-[var(--color-fg-muted)]">
+<aside class="alert-bar mt-16">
+  <div class="mx-auto max-w-3xl px-4 py-6 text-center text-sm text-[var(--color-fg-muted)] sm:px-6">
+    <p>
+      Never miss a story from Technorage — follow me on
+      <a rel="me" target="_blank" href="https://mastodon.social/@deepu105" class="text-[var(--color-accent)] hover:underline">Mastodon</a>,
+      <a rel="me" target="_blank" href="https://www.linkedin.com/in/deepu05" class="text-[var(--color-accent)] hover:underline">LinkedIn</a>,
+      or
+      <a rel="me" target="_blank" href="https://twitter.com/deepu105" class="text-[var(--color-accent)] hover:underline">Twitter</a>.
+      Or
+      <a href="/feed.xml" class="text-[var(--color-accent)] hover:underline">subscribe via RSS</a>.
+    </p>
+    <p class="mt-2 text-xs text-[var(--color-fg-subtle)]">
+      This site uses Google Analytics which places
+      <a
+        href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage#gtagjs_google_analytics_4_-_cookie_usage"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline-offset-2 hover:underline"
+      >a few cookies</a>. By using the site, you agree to their use.
+    </p>
+  </div>
+</aside>
+
+<footer class="border-t border-[var(--color-border)] py-10 text-sm text-[var(--color-fg-muted)]">
   <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 sm:px-6 md:flex-row md:items-center md:justify-between">
     <div class="flex flex-col gap-1">
       <span>
@@ -24,7 +47,6 @@ const year = new Date().getFullYear();
       <a href="/blogs/" class="hover:text-[var(--color-fg)]">Blog</a>
       <a href="/series/" class="hover:text-[var(--color-fg)]">Series</a>
       <a href="/tags/" class="hover:text-[var(--color-fg)]">Tags</a>
-      <a href="/categories/" class="hover:text-[var(--color-fg)]">Categories</a>
       <a href="/feed.xml" class="hover:text-[var(--color-fg)]">RSS</a>
       <a href="/comment-policy/" class="hover:text-[var(--color-fg)]">Comments</a>
     </nav>

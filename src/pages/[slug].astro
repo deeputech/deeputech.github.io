@@ -20,6 +20,9 @@ const older = idx >= 0 && idx < allPosts.length - 1 ? allPosts[idx + 1] : null;
 
 const seriesPosts = post.data.series ? await getPostsBySeries(post.data.series) : [];
 const seriesIndex = post.data.series ? seriesPosts.findIndex((p) => p.id === post.id) : -1;
+const seriesPrev = seriesIndex > 0 ? seriesPosts[seriesIndex - 1] : null;
+const seriesNext =
+  seriesIndex >= 0 && seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex + 1] : null;
 
 const readingTime = readingTimeMinutes(post.body ?? "");
 ---
@@ -80,6 +83,48 @@ const readingTime = readingTimeMinutes(post.body ?? "");
           </a>
         ))}
       </div>
+    )
+  }
+
+  {
+    post.data.series && (seriesPrev || seriesNext) && (
+      <nav class="not-prose mt-10 grid gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 sm:grid-cols-2">
+        <p class="sm:col-span-2 text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+          More in <a href={`/series/${slugifySeries(post.data.series)}/`} class="hover:underline">{post.data.series}</a>
+        </p>
+        {
+          seriesPrev ? (
+            <a
+              rel="prev"
+              href={`/${seriesPrev.id}/`}
+              class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4 transition hover:border-[var(--color-accent)]"
+            >
+              <span class="text-xs text-[var(--color-fg-subtle)]">← Previous in series</span>
+              <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+                {seriesPrev.data.title}
+              </span>
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          seriesNext ? (
+            <a
+              rel="next"
+              href={`/${seriesNext.id}/`}
+              class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4 text-right transition hover:border-[var(--color-accent)]"
+            >
+              <span class="text-xs text-[var(--color-fg-subtle)]">Next in series →</span>
+              <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+                {seriesNext.data.title}
+              </span>
+            </a>
+          ) : (
+            <span />
+          )
+        }
+      </nav>
     )
   }
 

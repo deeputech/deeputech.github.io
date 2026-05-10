@@ -4,6 +4,7 @@ import BaseLayout from "./BaseLayout.astro";
 import ReadingProgress from "~/components/ReadingProgress.astro";
 import TOC from "~/components/TOC.astro";
 import Giscus from "~/components/Giscus.astro";
+import ShareButtons from "~/components/ShareButtons.astro";
 import { defaultAuthor } from "~/data/authors";
 
 export type Props = {
@@ -19,6 +20,7 @@ export type Props = {
   headings?: MarkdownHeading[];
   showComments?: boolean;
   showToc?: boolean;
+  shareUrl?: string;
 };
 
 const {
@@ -34,7 +36,10 @@ const {
   headings = [],
   showComments = true,
   showToc = true,
+  shareUrl,
 } = Astro.props;
+
+const fullShareUrl = shareUrl ?? new URL(Astro.url.pathname, "https://deepu.tech").toString();
 
 const author = defaultAuthor;
 const dateStr = date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
@@ -76,7 +81,7 @@ const hasToc = showToc && headings.filter((h) => h.depth === 2 || h.depth === 3)
             {title}
           </h1>
           {description && <p class="mt-4 text-lg text-[var(--color-fg-muted)]">{description}</p>}
-          <div class="mt-6 flex items-center gap-3 text-sm text-[var(--color-fg-subtle)]">
+          <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[var(--color-fg-subtle)]">
             <img
               src={`https://www.gravatar.com/avatar/${author.gravatar}?s=64&d=mm`}
               alt={author.display_name}
@@ -105,6 +110,9 @@ const hasToc = showToc && headings.filter((h) => h.depth === 2 || h.depth === 3)
                 </>
               )
             }
+            <span class="ml-auto">
+              <ShareButtons title={title} url={fullShareUrl} />
+            </span>
           </div>
         </header>
 

@@ -291,6 +291,11 @@ function rewriteContent(content) {
       // Drop {% raw %} / {% endraw %} blocks (just unwrap)
       txt = txt.replace(/\{%\s*raw\s*%\}/g, "");
       txt = txt.replace(/\{%\s*endraw\s*%\}/g, "");
+      // Drop Dev.to-only Liquid-ish tags that leaked into source
+      // (e.g. <include src="LearnPasskeysCTA"/>). They have no Jekyll plugin
+      // and rendered as literal text on the old site too.
+      txt = txt.replace(/<include\s+[^>]*\/?>/gi, "");
+      txt = txt.replace(/<cta\s+[^>]*\/?>/gi, "");
       // MDX-escape lone braces in prose, but leave inline `code` alone
       const inner = splitInlineCode(txt)
         .map((s) => (s.type === "inline-code" ? s.value : escapeMdxProse(s.value)))

@@ -1,0 +1,87 @@
+---
+export type Props = {
+  title: string;
+  url: string;
+};
+
+const { title, url } = Astro.props;
+const enc = encodeURIComponent;
+const text = `${title}\n\n`;
+
+const links = [
+  {
+    label: "Twitter",
+    href: `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}&via=deepu105`,
+    icon: "twitter",
+  },
+  {
+    label: "LinkedIn",
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`,
+    icon: "linkedin",
+  },
+  {
+    label: "Mastodon",
+    // Web Share intent — opens the user's instance picker
+    href: `https://toot.kytta.dev/?text=${enc(text + url)}`,
+    icon: "mastodon",
+  },
+];
+---
+
+<div class="not-prose flex items-center gap-1 text-[var(--color-fg-subtle)]">
+  <span class="mr-2 hidden text-xs uppercase tracking-wider sm:inline">Share</span>
+  {
+    links.map((s) => (
+      <a
+        href={s.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Share on ${s.label}`}
+        title={`Share on ${s.label}`}
+        class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"
+      >
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          {s.icon === "twitter" && (
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          )}
+          {s.icon === "linkedin" && (
+            <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.37V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z" />
+          )}
+          {s.icon === "mastodon" && (
+            <path d="M21.58 8.94v6.83c0 1.85-1.2 3.45-2.99 3.83l-2.85.62c-1.49.32-3.02.5-4.55.5-2.77 0-5.43-.32-6.7-.97 0 .14.01.27.02.4.16 1.92.95 2.07 2.05 2.13 1.09.05 2.17-.04 3.27-.13l1.78-.16.01 2.13s-2.04.55-4.45.7c-3.4.16-6.27-.46-6.6-4.39-.06-.74-.13-2.46-.16-4.05-.04-2.04-.07-3.96 0-5.49.16-3.7 2.55-4.4 5.4-4.6 1.04-.06 2.07-.1 3.06-.06 1.96.06 3.79.5 5.06 1.34 1.27.84 2.05 2.21 2.16 4.07.21 3.6.04 7.13.04 7.13l.01.04c0-.16.01-.32.01-.49h.43zM18 8.96c0-.95-.27-1.7-.81-2.25-.55-.55-1.27-.83-2.16-.83-1.04 0-1.83.4-2.36 1.2l-.51.85-.51-.85c-.53-.8-1.32-1.2-2.36-1.2-.89 0-1.61.28-2.16.83-.54.55-.81 1.3-.81 2.25v4.65h1.85V9.06c0-.95.4-1.43 1.2-1.43.89 0 1.33.57 1.33 1.7v2.5h1.84v-2.5c0-1.13.45-1.7 1.34-1.7.8 0 1.2.48 1.2 1.43v4.55H18V8.96z" />
+          )}
+        </svg>
+      </a>
+    ))
+  }
+  <button
+    type="button"
+    data-copy-link={url}
+    aria-label="Copy link"
+    title="Copy link"
+    class="copy-link inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"
+  >
+    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.71"></path>
+    </svg>
+  </button>
+</div>
+
+<script is:inline>
+  document.querySelectorAll(".copy-link").forEach(function (btn) {
+    btn.addEventListener("click", async function () {
+      var url = btn.getAttribute("data-copy-link");
+      try {
+        await navigator.clipboard.writeText(url);
+        var prev = btn.title;
+        btn.title = "Copied!";
+        btn.style.color = "var(--color-accent)";
+        setTimeout(function () {
+          btn.title = prev;
+          btn.style.color = "";
+        }, 1500);
+      } catch (_) {}
+    });
+  });
+</script>
