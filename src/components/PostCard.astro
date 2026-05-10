@@ -1,0 +1,75 @@
+---
+import type { Post } from "~/lib/posts";
+
+export type Props = {
+  post: Post;
+  variant?: "card" | "row";
+};
+
+const { post, variant = "card" } = Astro.props;
+const url = `/${post.id}/`;
+const dateStr = post.data.date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+{
+  variant === "card" ? (
+    <a href={url} class="not-prose group block h-full overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] transition hover:border-[var(--color-border-strong)]">
+      {post.data.cover_image && (
+        <div class="aspect-[16/9] w-full overflow-hidden bg-[var(--color-bg-muted)]">
+          <img
+            src={post.data.cover_image.startsWith("http") || post.data.cover_image.startsWith("/") ? post.data.cover_image : `/${post.data.cover_image}`}
+            alt={post.data.title}
+            loading="lazy"
+            class="h-full w-full object-cover transition group-hover:scale-105"
+          />
+        </div>
+      )}
+      <div class="p-5">
+        <div class="flex items-center gap-2 text-xs text-[var(--color-fg-subtle)]">
+          <time datetime={post.data.date.toISOString()}>{dateStr}</time>
+          {post.data.series && (
+            <>
+              <span>·</span>
+              <span class="truncate">{post.data.series}</span>
+            </>
+          )}
+        </div>
+        <h3 class="font-display mt-2 text-lg leading-snug font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+          {post.data.title}
+        </h3>
+        {post.data.description && (
+          <p class="mt-2 line-clamp-3 text-sm text-[var(--color-fg-muted)]">
+            {post.data.description}
+          </p>
+        )}
+      </div>
+    </a>
+  ) : (
+    <a
+      href={url}
+      class="not-prose group block border-b border-[var(--color-border)] py-5 transition hover:border-[var(--color-border-strong)]"
+    >
+      <div class="flex items-baseline gap-3 text-xs text-[var(--color-fg-subtle)]">
+        <time datetime={post.data.date.toISOString()}>{dateStr}</time>
+        {post.data.series && (
+          <>
+            <span>·</span>
+            <span>{post.data.series}</span>
+          </>
+        )}
+      </div>
+      <h3 class="font-display mt-1 text-lg leading-snug font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)] sm:text-xl">
+        {post.data.title}
+      </h3>
+      {post.data.description && (
+        <p class="mt-1 line-clamp-2 text-sm text-[var(--color-fg-muted)]">
+          {post.data.description}
+        </p>
+      )}
+    </a>
+  )
+}

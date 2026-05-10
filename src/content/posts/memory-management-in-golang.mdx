@@ -68,7 +68,7 @@ The resident set is divided into pages of 8KB each and is managed by one global 
 
 - **arena**: The heap memory grows and shrinks as required within the virtual memory allocated. When more memory is needed, `mheap` pulls them from the virtual memory as a chunk of 64MB(for 64-bit architectures) called `arena`. The pages are mapped to spans here.
 
-- **mcache**: This is a very interesting construct. `mcache` is a cache of memory provided to a `P`(Logical Processor) to store small objects(Object size <=32Kb). Though this resembles the thread stack, it is part of the heap and is used for dynamic data. `mcache` contains `scan` and `noscan` types of `mspan` for all class sizes. Goroutines can obtain memory from `mcache` without any locks as a `P` can have only one `G` at a time. Hence this is more efficient. `mcache` requests new spans from `mcentral` when required.
+- **mcache**: This is a very interesting construct. `mcache` is a cache of memory provided to a `P`(Logical Processor) to store small objects(Object size &lt;=32Kb). Though this resembles the thread stack, it is part of the heap and is used for dynamic data. `mcache` contains `scan` and `noscan` types of `mspan` for all class sizes. Goroutines can obtain memory from `mcache` without any locks as a `P` can have only one `G` at a time. Hence this is more efficient. `mcache` requests new spans from `mcentral` when required.
 
 ## Stack
 
@@ -164,7 +164,7 @@ Many programming languages that employ Garbage collection use a generational mem
 
 Go decides the allocation process of an object based on its size and is divided into three categories:
 
-**Tiny(size < 16B)**: Objects of size less than 16 bytes are allocated using the `mcache`'s tiny allocator. This is efficient and multiple tiny allocations are done on a single 16-byte block.
+**Tiny(size &lt; 16B)**: Objects of size less than 16 bytes are allocated using the `mcache`'s tiny allocator. This is efficient and multiple tiny allocations are done on a single 16-byte block.
 
 ![Tiny allocation](https://i.imgur.com/Kh26oVp.gif)
 

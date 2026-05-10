@@ -26,15 +26,7 @@ const posts = defineCollection({
   }),
 });
 
-const series = defineCollection({
-  loader: glob({ pattern: "series.yaml", base: "./src/data" }),
-  schema: z.array(
-    z.object({
-      id: z.string(),
-      title: z.string(),
-      description: z.string(),
-    }),
-  ),
-});
+// Series metadata is a plain TS module at src/data/series.ts (Vite can't import
+// raw .yaml without a plugin and we don't need the collection layer for it).
 
-export const collections = { posts, series };
+export const collections = { posts };

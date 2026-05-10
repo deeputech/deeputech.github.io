@@ -159,14 +159,31 @@ function splitInlineCode(text) {
   return out;
 }
 
+// HTML tags we keep verbatim — MDX will render them as actual HTML elements.
+// Anything else that looks like <foo> in prose is treated as a pseudo-placeholder
+// and escaped so MDX doesn't try to parse it as a component.
+const SAFE_HTML_TAGS = new Set([
+  "a", "abbr", "address", "area", "article", "aside", "audio", "b", "base", "bdi",
+  "bdo", "blockquote", "body", "br", "button", "canvas", "caption", "cite", "code",
+  "col", "colgroup", "data", "datalist", "dd", "del", "details", "dfn", "dialog",
+  "div", "dl", "dt", "em", "embed", "fieldset", "figcaption", "figure", "footer",
+  "form", "h1", "h2", "h3", "h4", "h5", "h6", "head", "header", "hgroup", "hr",
+  "html", "i", "iframe", "img", "input", "ins", "kbd", "label", "legend", "li",
+  "link", "main", "map", "mark", "menu", "meta", "meter", "nav", "noscript",
+  "object", "ol", "optgroup", "option", "output", "p", "param", "picture", "pre",
+  "progress", "q", "rb", "rp", "rt", "rtc", "ruby", "s", "samp", "script", "section",
+  "select", "slot", "small", "source", "span", "strong", "style", "sub", "summary",
+  "sup", "svg", "path", "g", "rect", "circle", "line", "polyline", "polygon",
+  "table", "tbody", "td", "template", "textarea", "tfoot", "th", "thead", "time",
+  "title", "tr", "track", "u", "ul", "var", "video", "wbr",
+]);
+
 function escapeMdxProse(text) {
-  // Escape stray { and < that would break MDX. Don't touch valid markdown like
-  // <https://...>, <Component ... />, or <!-- comments -->, or HTML tags we want to keep.
+  // 1) escape stray { and } that would otherwise be parsed as JSX expressions
   let out = "";
   for (let i = 0; i < text.length; i++) {
     const ch = text[i];
     if (ch === "{") {
-      // Escape lone braces that aren't already escaped
       if (text[i - 1] !== "\\") out += "\\{";
       else out += "{";
     } else if (ch === "}") {
@@ -176,11 +193,87 @@ function escapeMdxProse(text) {
       out += ch;
     }
   }
+  // 2) escape pseudo-HTML tags MDX would try to parse as JSX components.
+  //    Whitelist real HTML; everything else gets &lt;...&gt;.
+  //    Skip <https?://...> autolinks and capitalized JSX components.
+  out = out.replace(/<(\/?)([A-Za-z][A-Za-z0-9-]*)([^>]*)>/g, (full, slash, tag, attrs) => {
+    if (/^https?:/i.test(tag)) return full;
+    if (/^[A-Z]/.test(tag)) return full;
+    if (SAFE_HTML_TAGS.has(tag.toLowerCase())) return full;
+    return `&lt;${slash}${tag}${attrs}&gt;`;
+  });
+  // 3) Escape any remaining `<` that isn't the start of a tag/comment/autolink.
+  //    MDX parses `<=`, `< 5`, `<-` etc. as JSX starts and errors.
+  out = out.replace(/<(?![A-Za-z/!])/g, "&lt;");
   return out;
+}
+
+// Convert markdown indented (4-space) code blocks into fenced blocks. MDX is
+// strict about JSX-ish content even inside indented code, so fences are safer.
+// Only fires when the indented block is preceded by a blank line (per markdown
+// spec, that's what makes it a code block rather than a list continuation).
+// Crucially: skip content already inside fenced code blocks.
+function fenceIndentedBlocks(content) {
+  const lines = content.split("\n");
+  const out = [];
+  let i = 0;
+  let prevBlank = true;
+  let inFence = false;
+  let fenceMarker = "";
+  while (i < lines.length) {
+    const line = lines[i];
+    const fenceMatch = line.match(/^(\s*)(`{3,}|~{3,})/);
+    if (fenceMatch && (!inFence || line.trim().startsWith(fenceMarker))) {
+      out.push(line);
+      if (inFence) {
+        inFence = false;
+        fenceMarker = "";
+      } else {
+        inFence = true;
+        fenceMarker = fenceMatch[2];
+      }
+      prevBlank = false;
+      i++;
+      continue;
+    }
+    if (inFence) {
+      out.push(line);
+      prevBlank = false;
+      i++;
+      continue;
+    }
+    const isIndented = /^(?: {4}|\t)/.test(line) && line.trim().length > 0;
+    if (prevBlank && isIndented) {
+      const block = [];
+      while (i < lines.length) {
+        const l = lines[i];
+        if (/^(?: {4}|\t)/.test(l)) {
+          block.push(l.replace(/^(?: {4}|\t)/, ""));
+          i++;
+        } else if (l.trim() === "" && /^(?: {4}|\t)/.test(lines[i + 1] ?? "")) {
+          block.push("");
+          i++;
+        } else {
+          break;
+        }
+      }
+      out.push("```");
+      out.push(...block);
+      out.push("```");
+      prevBlank = false;
+      continue;
+    }
+    out.push(line);
+    prevBlank = line.trim() === "";
+    i++;
+  }
+  return out.join("\n");
 }
 
 function rewriteContent(content) {
   const used = new Set();
+  // Pre-pass: convert indented code blocks → fenced (so JSX-like content stays inert)
+  content = fenceIndentedBlocks(content);
   const segments = splitByCodeFences(content);
   const rewritten = segments
     .map((seg) => {
