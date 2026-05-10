@@ -1,0 +1,18 @@
+---
+export type Props = {
+  id: string;
+  ratio?: string;
+};
+
+const { id, ratio = "1.77777777777778" } = Astro.props;
+const cleanId = id.replace(/['"]/g, "").trim();
+---
+
+<div class="my-6 overflow-hidden rounded-lg">
+  <script async class="speakerdeck-embed" data-id={cleanId} data-ratio={ratio} src="//speakerdeck.com/assets/embed.js" is:inline></script>
+  <noscript>
+    <a href={`https://speakerdeck.com/player/${cleanId}`} target="_blank" rel="noopener noreferrer">
+      <img alt="SpeakerDeck slides" loading="lazy" src={`//speakerd.s3.amazonaws.com/presentations/${cleanId}/slide_0.jpg`} />
+    </a>
+  </noscript>
+</div>
