@@ -18,6 +18,10 @@ export type Props = {
 const SITE_NAME = "Technorage";
 const SITE_TAGLINE = "Where I rant about technology and stuff!";
 const SITE_URL = "https://deepu.tech";
+const GA_ID = "G-1SDSM5NX07";
+
+// Only emit GA in production builds — keeps dev/preview free of analytics.
+const isProd = import.meta.env.PROD;
 
 const {
   title,
@@ -70,6 +74,27 @@ const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, SITE_
     />
 
     <ThemeScript />
+
+    {
+      isProd && (
+        <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+          <script is:inline define:vars={{ GA_ID }}>
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  ad_storage: 'denied',
+  analytics_storage: 'granted'
+});
+gtag('js', new Date());
+gtag('config', GA_ID);`}
+          </script>
+        </>
+      )
+    }
+
     <slot name="head" />
   </head>
   <body>
