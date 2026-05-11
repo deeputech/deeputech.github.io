@@ -5,24 +5,30 @@
 # Flags:
 #   -s   skip the Dev.to syndication step
 #   -c   CI mode (use $GITHUB_ACCESS_TOKEN to push, allow dirty tree)
+#   -d   dry run: show what *would* happen on Dev.to and skip git push.
+#        The site is still built locally so you can preview ./dist.
+#        No Dev.to API writes, no devto_id/url written back, no master push.
 
 set -euo pipefail
 
 publishDev=true
 ci=false
+dryRun=false
 
-while getopts 'sc' opt; do
+while getopts 'scd' opt; do
     case $opt in
         s) publishDev=false ;;
         c) ci=true ;;
+        d) dryRun=true ;;
         *) echo 'Error in command line parsing' >&2; exit 1 ;;
     esac
 done
 
 echo ">>> Publish to Dev.to: $publishDev"
 echo ">>> CI mode: $ci"
+echo ">>> Dry run: $dryRun"
 
-if [ "$ci" != true ] && [ -n "$(git status --porcelain)" ]; then
+if [ "$ci" != true ] && [ "$dryRun" != true ] && [ -n "$(git status --porcelain)" ]; then
     echo ">>> Working directory is not clean. Commit changes!"
     exit 1
 fi
@@ -34,16 +40,32 @@ rm -rf "$DIST_DIR"
 rm -rf "$TMP_LOC"
 
 if "$publishDev"; then
-    echo ">>> Publish to Dev.to and update slugs (pass -s to skip)"
-    npm run publish-to-dev
-    if [ -n "$(git status --porcelain)" ]; then
-        git add --all
-        git commit --allow-empty -am "Updated posts with Dev.to slug"
+    echo ">>> Publish to Dev.to (pass -s to skip, -d for dry run)"
+    if "$dryRun"; then
+        DRY_RUN=1 npm run publish-to-dev
+    else
+        npm run publish-to-dev
+        if [ -n "$(git status --porcelain)" ]; then
+            git add --all
+            git commit --allow-empty -am "Updated posts with Dev.to slug"
+        fi
     fi
 fi
 
 echo ">>> Building Astro site"
 NODE_ENV=production npm run build
+
+if "$dryRun"; then
+    echo ""
+    echo "=========================================="
+    echo " Dry run complete."
+    echo "  • Dev.to: see actions listed above"
+    echo "  • Local build: $DIST_DIR/"
+    echo "  • Preview: npm run preview"
+    echo "  • No git push performed."
+    echo "=========================================="
+    exit 0
+fi
 
 echo ">>> Move build output to temp folder"
 mkdir --parents "$TMP_LOC"
@@ -58,9 +80,11 @@ shopt -u dotglob nullglob
 
 echo ">>> Checkout and clean master"
 git checkout master
-# Wipe everything tracked except a small allow-list (drafts, ignored dirs, .git, etc.)
+# Wipe everything except gitignored / per-machine dirs and .git itself.
+# src/ and public/ are NOT preserved — they belong only on site_src and
+# `git checkout site_src` at the end of this script will restore them.
 find -mindepth 1 -depth -print0 \
-  | grep -vEzZ '(_drafts(/|$)|node_modules(/|$)|temp(/|$)|vendor(/|$)|\.github(/|$)|\.git(/|$)|/\.gitignore$|src(/|$)|public(/|$))' \
+  | grep -vEzZ '(_drafts(/|$)|node_modules(/|$)|temp(/|$)|.claude(/|$)|\.github(/|$)|\.git(/|$)|/\.gitignore$|/AGENTS\.md$|/WRITING-STYLE\.md$)' \
   | xargs -0 rm -rvf || true
 
 echo ">>> Move site from temp & publish to GitHub"
