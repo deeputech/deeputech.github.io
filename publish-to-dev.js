@@ -41,10 +41,15 @@ const slugFromFilename = (filename) =>
 
 const COMPONENT_TO_LIQUID = [
   // <Gist id="user/id" file="x" /> | <Gist id="..." />
+  // Dev.to's Liquid {% gist %} requires the full gist URL (not bare id or
+  // owner/id), so we expand here.
   {
     tag: "Gist",
     re: /<Gist\s+id="([^"]+)"(?:\s+file="([^"]+)")?\s*\/>/g,
-    to: (_m, id, file) => (file ? `{% gist ${id} ${file} %}` : `{% gist ${id} %}`),
+    to: (_m, id, file) => {
+      const url = id.startsWith("http") ? id : `https://gist.github.com/${id}`;
+      return file ? `{% gist ${url} ${file} %}` : `{% gist ${url} %}`;
+    },
   },
   {
     tag: "YouTube",
@@ -102,19 +107,39 @@ const STRIP_FM_KEYS = new Set([
   "skip_devto",
 ]);
 
-function buildBodyForDevto(frontmatter, content) {
+const SITE_URL = "https://deepu.tech";
+const DEVTO_MAX_TAGS = 4;
+
+function buildBodyForDevto(frontmatter, content, { isCreate = false } = {}) {
   const fm = {};
   for (const [k, v] of Object.entries(frontmatter)) {
     if (STRIP_FM_KEYS.has(k)) continue;
     if (v === null || v === undefined) continue;
-    // Dev.to expects a "date" field as ISO string, not Date
     if (v instanceof Date) fm[k] = v.toISOString().slice(0, 10);
     else fm[k] = v;
   }
 
+  // --- Dev.to-specific massaging --------------------------------------------
+  // 1. Expand site-relative image paths to absolute URLs (Dev.to rejects
+  //    relative paths in cover_image / main_image).
+  for (const key of ["cover_image", "main_image", "image"]) {
+    if (typeof fm[key] === "string" && fm[key].startsWith("/")) {
+      fm[key] = SITE_URL + fm[key];
+    }
+  }
+  // 2. Cap tags at 4 (Dev.to's hard limit).
+  if (Array.isArray(fm.tags) && fm.tags.length > DEVTO_MAX_TAGS) {
+    fm.tags = fm.tags.slice(0, DEVTO_MAX_TAGS);
+  }
+  // 3. On CREATE, Dev.to refuses a past `published_at`. Our `date` field maps
+  //    to published_at, so drop it — Dev.to will use "now". Existing posts
+  //    keep their date because update flow preserves the original.
+  if (isCreate) delete fm.date;
+  // -------------------------------------------------------------------------
+
   const note =
     fm.canonical_url && fm.canonical_url.includes("deepu.tech")
-      ? `*Originally published at [deepu.tech](https://deepu.tech/${slugFromFilename(fm.__filename ?? "")}/)*.\n`
+      ? `*Originally published at [deepu.tech](${SITE_URL}/${slugFromFilename(fm.__filename ?? "")}/)*.\n`
       : "";
   delete fm.__filename;
 
@@ -192,7 +217,8 @@ async function publish() {
     }
 
     const fmForBody = { ...fm, __filename: filename };
-    const body_markdown = buildBodyForDevto(fmForBody, parsed.content);
+    const isCreate = !(fm.devto_url && fm.devto_id);
+    const body_markdown = buildBodyForDevto(fmForBody, parsed.content, { isCreate });
     const payload = { article: { body_markdown } };
 
     try {
