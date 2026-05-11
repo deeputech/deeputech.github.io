@@ -1,7 +1,7 @@
 ---
 title: My fully offline AI-assisted Linux development machine
 description: My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13
-published: false
+published: true
 tags:
   - "linux"
   - "archlinux"
@@ -9,10 +9,11 @@ tags:
   - "ai"
   - "niri"
 series: Linux Environment for Developers
-featured: false
+featured: true
 canonical_url: "https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine"
 date: 2026-05-07
 ---
+
 One of my most popular posts of all time was when I wrote about [my beautiful Linux development machine in 2019](https://deepu.tech/my-beautiful-linux-development-environment/). I followed that up in 2021 with [my sleek and modern Linux development machine](https://deepu.tech/my-beautiful-linux-development-environment-2021/). Since then, a lot has changed in my setup.
 
 I moved from Fedora and KDE to a mostly vanilla [Arch Linux](https://archlinux.org/) setup. I moved from a traditional desktop environment to [niri](https://github.com/YaLTeR/niri), a scrolling Wayland compositor. And of course, like every developer out there, my workflow now has AI in it. But this time, I wanted something a bit different: AI-assisted development that can run fully offline on my own machine.
@@ -25,14 +26,14 @@ This post is more about the current shape of my Linux development machine and wh
 
 This is my primary machine for all of the below.
 
-- Java, Rust, JavaScript, TypeScript, Go, Python, and web development
+- Rust, JavaScript, TypeScript, Java, Go, Python, Linux, and web development
 - Running multiple web applications locally
 - Running Docker containers and local Kubernetes clusters
 - Kubernetes, Terraform, and cloud CLI work
 - Writing, blogging, presentations, and demos
 - Heavy browser usage
 - E-mail, chat, and video conferencing
-- Screen recording, screenshots, and light media work
+- Screen recording, screenshots, video editing, and light media work
 - Running local LLMs for coding, refactoring, and code review
 - Testing AI tools without sending every prompt to a cloud provider
 
@@ -102,17 +103,12 @@ Niri gives me the compositor. DMS gives me the desktop shell pieces that I would
 DMS replaces a lot of the usual Wayland desktop plumbing:
 
 - Top bar
-- Application launcher
-- Control center
-- Clipboard manager
-- Notification center
-- Process list
-- Power menu
-- Lock screen
-- Media controls
+- Application launcher, Control center, Media controls
+- Clipboard manager, Notification center
+- Process and System monitoring
+- Power menu, Lock screen
 - Screenshot and screen recording plugins
 - Wallpaper and theme switching
-- System monitoring widgets
 
 This is the kind of stuff where I do not want to maintain five different tools and a bunch of scripts if one project does the job well enough. DMS is still young, but it is already quite useful, especially with niri. It's also quite extendable, and I have already started adding tools that I want. For example, a locally saved [TODO widget](https://github.com/deepu105/dms-dank-todo).
 
@@ -142,11 +138,10 @@ My current stack is:
 
 - [OpenCode](https://opencode.ai/) as the coding agent
 - A custom [llama.cpp](https://github.com/ggml-org/llama.cpp) build with HIP support. This is much more performant than Ollama or LM Studio.
-- A local `llama-server` exposing an OpenAI-compatible API on `127.0.0.1:8080/v1`
+- A local `llama-server` exposing an OpenAI-compatible API on `127.0.0.1:18080/v1`
 - Qwen3.6 27B and Gemma 4 31B for the local model, depending on the task. I use different quantization based on need, from 4-bit to 8-bit.
 - [LM Studio](https://lmstudio.ai/) for managing models and for offline chat.
 - ROCm/HIP acceleration on the Radeon 8060S
-- Large context presets from 32k to 256k tokens
 - [opencode-telegram-bot](https://github.com/grinev/opencode-telegram-bot) for managing OpenCode sessions remotely from Telegram
 
 Here is my OpenCode provider config:
@@ -159,7 +154,7 @@ Here is my OpenCode provider config:
       "npm": "@ai-sdk/openai-compatible",
       "name": "llama.cpp ROCm (local)",
       "options": {
-        "baseURL": "http://127.0.0.1:8080/v1"
+        "baseURL": "http://127.0.0.1:18080/v1"
       },
       "models": {
         "qwen3-6-27b-q8-0": {
@@ -254,7 +249,7 @@ ROCBLAS_USE_HIPBLASLT=1 llama-server \
   --model "$model" \
   --alias "$alias_name" \
   --host 127.0.0.1 \
-  --port 8080 \
+  --port 18080 \
   --ctx-size "$ctx" \
   --n-gpu-layers 999 \
   --flash-attn on \
@@ -353,4 +348,3 @@ The right tool for the right job.
 If you like this article, please leave a like or a comment.
 
 You can follow me on [Bluesky](https://bsky.app/profile/deepu105.bsky.social) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
-
