@@ -11,16 +11,10 @@
 
 const config = {
   repo: "deeputech/deeputech.github.io",
-  repoId: "", // e.g. "MDEwOlJlcG9zaXRvcnkxMjM0NTY="
+  repoId: "MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk", // e.g. "MDEwOlJlcG9zaXRvcnkxMjM0NTY="
   category: "Comments",
-  categoryId: "", // e.g. "DIC_kwDOABCDEF4CDgHi"
-  mapping: "pathname" as
-    | "pathname"
-    | "url"
-    | "title"
-    | "og:title"
-    | "specific"
-    | "number",
+  categoryId: "DIC_kwDODBl9a84C8yBt", // e.g. "DIC_kwDOABCDEF4CDgHi"
+  mapping: "pathname" as "pathname" | "url" | "title" | "og:title" | "specific" | "number",
   strict: "0",
   reactionsEnabled: "1",
   emitMetadata: "0",
@@ -32,18 +26,19 @@ const isConfigured = config.repoId && config.categoryId;
 ---
 
 <section class="not-prose mt-12 border-t border-[var(--color-border)] pt-8">
-  <h2 class="font-display mb-4 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">
-    Comments
-  </h2>
+  <h2 class="font-display mb-4 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Comments</h2>
 
   {
     isConfigured ? (
       <div id="giscus-mount" />
     ) : (
       <p class="rounded-lg border border-dashed border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 text-sm text-[var(--color-fg-muted)]">
-        Comments will appear here once Giscus is configured. Set <code>repoId</code> and{" "}
-        <code>categoryId</code> in <code>src/components/Giscus.astro</code> after creating a
-        Discussions category at <a href="https://giscus.app" class="underline-offset-2 hover:underline">giscus.app</a>.
+        Comments will appear here once Giscus is configured. Set <code>repoId</code> and <code>categoryId</code> in{" "}
+        <code>src/components/Giscus.astro</code> after creating a Discussions category at{" "}
+        <a href="https://giscus.app" class="underline-offset-2 hover:underline">
+          giscus.app
+        </a>
+        .
       </p>
     )
   }
@@ -78,10 +73,7 @@ const isConfigured = config.repoId && config.categoryId;
     function send(theme) {
       var iframe = document.querySelector("iframe.giscus-frame");
       if (!iframe) return;
-      iframe.contentWindow.postMessage(
-        { giscus: { setConfig: { theme: theme === "dark" ? "dark" : "light" } } },
-        "https://giscus.app",
-      );
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme === "dark" ? "dark" : "light" } } }, "https://giscus.app");
     }
     var html = document.documentElement;
     var observer = new MutationObserver(function () {
