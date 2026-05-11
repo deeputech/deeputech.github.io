@@ -1,6 +1,7 @@
 _site
 .sass-cache
 .jekyll-metadata
+.jekyll-cache
 vendor
 node_modules
 .idea
@@ -18,6 +19,15 @@ _site
 .sass-cache
 *~
 _drafts
+_json
+_posts/draft-*
 AGENTS.md
 WRITING-STYLE.md
 .claude/
+
+# Astro
+dist/
+.astro/
+.env
+.env.production
+src/pages/_pagefind/
