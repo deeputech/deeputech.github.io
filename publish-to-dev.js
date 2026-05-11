@@ -30,7 +30,10 @@ const http = axios.create({
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const slugFromFilename = (filename) => filename.replace(/\.mdx?$/, "");
+// Files are named YYYY-MM-DD-<slug>.mdx for chronological filesystem order,
+// but the URL slug is just <slug> (matches the generateId in content.config.ts).
+const slugFromFilename = (filename) =>
+  filename.replace(/\.mdx?$/, "").replace(/^\d{4}-\d{2}-\d{2}-/, "");
 
 // --------------------------------------------------------------------------
 // MDX → Dev.to-flavoured markdown

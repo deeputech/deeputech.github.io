@@ -2,7 +2,15 @@ import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
 const posts = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/posts" }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}",
+    base: "./src/content/posts",
+    // Files are named `YYYY-MM-DD-<slug>.mdx` so the directory sorts in
+    // chronological order. The leading date is purely visual — the post id
+    // (= URL slug) is the part after it.
+    generateId: ({ entry }) =>
+      entry.replace(/\.mdx?$/, "").replace(/^\d{4}-\d{2}-\d{2}-/, ""),
+  }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
