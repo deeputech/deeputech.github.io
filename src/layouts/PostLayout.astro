@@ -1,0 +1,147 @@
+---
+import type { MarkdownHeading } from "astro";
+import BaseLayout from "./BaseLayout.astro";
+import ReadingProgress from "~/components/ReadingProgress.astro";
+import TOC from "~/components/TOC.astro";
+import Giscus from "~/components/Giscus.astro";
+import ShareButtons from "~/components/ShareButtons.astro";
+import { defaultAuthor } from "~/data/authors";
+
+export type Props = {
+  title: string;
+  description?: string;
+  date: Date;
+  last_modified_at?: Date;
+  cover_image?: string;
+  tags?: string[];
+  series?: string;
+  canonical?: string;
+  readingTimeMinutes?: number;
+  headings?: MarkdownHeading[];
+  showComments?: boolean;
+  showToc?: boolean;
+  shareUrl?: string;
+};
+
+const {
+  title,
+  description,
+  date,
+  last_modified_at,
+  cover_image,
+  tags = [],
+  series,
+  canonical,
+  readingTimeMinutes,
+  headings = [],
+  showComments = true,
+  showToc = true,
+  shareUrl,
+} = Astro.props;
+
+const fullShareUrl = shareUrl ?? new URL(Astro.url.pathname, "https://deepu.tech").toString();
+
+const author = defaultAuthor;
+const dateStr = date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+const updatedStr = last_modified_at
+  ? last_modified_at.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
+  : null;
+
+const coverSrc = cover_image
+  ? cover_image.startsWith("http") || cover_image.startsWith("/")
+    ? cover_image
+    : `/${cover_image}`
+  : null;
+
+const hasToc = showToc && headings.filter((h) => h.depth === 2 || h.depth === 3).length > 1;
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} type="article" monetization>
+  <ReadingProgress />
+
+  <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14">
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px]">
+      <article data-pagefind-body class="mx-auto w-full min-w-0 max-w-3xl lg:mx-0">
+        <header class="mb-8">
+          {
+            tags.length > 0 && (
+              <div class="mb-4 flex flex-wrap gap-2 text-xs text-[var(--color-fg-subtle)]">
+                {tags.slice(0, 4).map((t) => (
+                  <a
+                    href={`/tags/#${t}`}
+                    class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"
+                  >
+                    {t}
+                  </a>
+                ))}
+              </div>
+            )
+          }
+          <h1 class="font-display text-4xl font-bold tracking-tight text-[var(--color-fg)] sm:text-5xl">
+            {title}
+          </h1>
+          {description && <p class="mt-4 text-lg text-[var(--color-fg-muted)]">{description}</p>}
+          <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[var(--color-fg-subtle)]">
+            <img
+              src={`https://www.gravatar.com/avatar/${author.gravatar}?s=64&d=mm`}
+              alt={author.display_name}
+              width="32"
+              height="32"
+              class="h-8 w-8 rounded-full"
+            />
+            <a href={author.web} class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">
+              {author.display_name}
+            </a>
+            <span class="text-[var(--color-border-strong)]">·</span>
+            <time datetime={date.toISOString()}>{dateStr}</time>
+            {
+              updatedStr && (
+                <>
+                  <span class="text-[var(--color-border-strong)]">·</span>
+                  <span>Updated {updatedStr}</span>
+                </>
+              )
+            }
+            {
+              readingTimeMinutes && (
+                <>
+                  <span class="text-[var(--color-border-strong)]">·</span>
+                  <span>{readingTimeMinutes} min read</span>
+                </>
+              )
+            }
+            <span class="ml-auto">
+              <ShareButtons title={title} url={fullShareUrl} />
+            </span>
+          </div>
+        </header>
+
+        {
+          coverSrc && (
+            <img
+              src={coverSrc}
+              alt={title}
+              class="mb-10 aspect-[16/9] w-full rounded-xl object-cover"
+            />
+          )
+        }
+
+        <div class="prose-blog">
+          <slot />
+        </div>
+
+        {showComments && <Giscus />}
+      </article>
+
+      {
+        hasToc && (
+          <aside class="hidden lg:block">
+            <div class="sticky top-24">
+              <TOC headings={headings} />
+            </div>
+          </aside>
+        )
+      }
+    </div>
+  </div>
+</BaseLayout>

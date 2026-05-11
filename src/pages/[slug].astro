@@ -1,0 +1,163 @@
+---
+import { render } from "astro:content";
+import { getPublishedPosts, getPostsBySeries, readingTimeMinutes, slugifySeries } from "~/lib/posts";
+import PostLayout from "~/layouts/PostLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+const allPosts = await getPublishedPosts();
+const idx = allPosts.findIndex((p) => p.id === post.id);
+const newer = idx > 0 ? allPosts[idx - 1] : null;
+const older = idx >= 0 && idx < allPosts.length - 1 ? allPosts[idx + 1] : null;
+
+const seriesPosts = post.data.series ? await getPostsBySeries(post.data.series) : [];
+const seriesIndex = post.data.series ? seriesPosts.findIndex((p) => p.id === post.id) : -1;
+const seriesPrev = seriesIndex > 0 ? seriesPosts[seriesIndex - 1] : null;
+const seriesNext =
+  seriesIndex >= 0 && seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex + 1] : null;
+
+const readingTime = readingTimeMinutes(post.body ?? "");
+---
+
+<PostLayout
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  last_modified_at={post.data.last_modified_at}
+  cover_image={post.data.cover_image}
+  tags={post.data.tags}
+  series={post.data.series}
+  readingTimeMinutes={readingTime}
+  canonical={post.data.canonical_url}
+  headings={headings}
+  showComments={post.data.comments !== false}
+  showToc={post.data.toc !== false}
+>
+  {
+    post.data.series && seriesPosts.length > 1 && (
+      <aside class="not-prose my-8 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5">
+        <p class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+          Series · <a href={`/series/${slugifySeries(post.data.series)}/`} class="hover:underline">{post.data.series}</a>
+        </p>
+        <ol class="mt-3 space-y-1.5 text-sm">
+          {seriesPosts.map((sp, i) => (
+            <li class="flex items-baseline gap-2">
+              <span class="w-5 text-right text-xs text-[var(--color-fg-subtle)]">{i + 1}.</span>
+              {sp.id === post.id ? (
+                <span class="font-semibold text-[var(--color-fg)]">{sp.data.title}</span>
+              ) : (
+                <a href={`/${sp.id}/`} class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">{sp.data.title}</a>
+              )}
+            </li>
+          ))}
+        </ol>
+        <p class="mt-3 text-xs text-[var(--color-fg-subtle)]">
+          Post <strong class="text-[var(--color-fg-muted)]">{seriesIndex + 1}</strong> of{" "}
+          <strong class="text-[var(--color-fg-muted)]">{seriesPosts.length}</strong>
+        </p>
+      </aside>
+    )
+  }
+
+  <Content />
+
+  <hr class="my-12 border-[var(--color-border)]" />
+
+  {
+    post.data.tags && post.data.tags.length > 0 && (
+      <div class="not-prose mb-8 flex flex-wrap gap-2">
+        {post.data.tags.map((t) => (
+          <a
+            href={`/tags/#${t}`}
+            class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
+          >
+            #{t}
+          </a>
+        ))}
+      </div>
+    )
+  }
+
+  {
+    post.data.series && (seriesPrev || seriesNext) && (
+      <nav class="not-prose mt-10 grid gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 sm:grid-cols-2">
+        <p class="sm:col-span-2 text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+          More in <a href={`/series/${slugifySeries(post.data.series)}/`} class="hover:underline">{post.data.series}</a>
+        </p>
+        {
+          seriesPrev ? (
+            <a
+              rel="prev"
+              href={`/${seriesPrev.id}/`}
+              class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4 transition hover:border-[var(--color-accent)]"
+            >
+              <span class="text-xs text-[var(--color-fg-subtle)]">← Previous in series</span>
+              <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+                {seriesPrev.data.title}
+              </span>
+            </a>
+          ) : (
+            <span />
+          )
+        }
+        {
+          seriesNext ? (
+            <a
+              rel="next"
+              href={`/${seriesNext.id}/`}
+              class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4 text-right transition hover:border-[var(--color-accent)]"
+            >
+              <span class="text-xs text-[var(--color-fg-subtle)]">Next in series →</span>
+              <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+                {seriesNext.data.title}
+              </span>
+            </a>
+          ) : (
+            <span />
+          )
+        }
+      </nav>
+    )
+  }
+
+  <nav class="not-prose mt-10 grid gap-4 border-t border-[var(--color-border)] pt-8 sm:grid-cols-2">
+    {
+      newer ? (
+        <a
+          href={`/${newer.id}/`}
+          class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 transition hover:border-[var(--color-border-strong)]"
+        >
+          <span class="text-xs text-[var(--color-fg-subtle)]">← Newer</span>
+          <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+            {newer.data.title}
+          </span>
+        </a>
+      ) : (
+        <span />
+      )
+    }
+    {
+      older ? (
+        <a
+          href={`/${older.id}/`}
+          class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 text-right transition hover:border-[var(--color-border-strong)]"
+        >
+          <span class="text-xs text-[var(--color-fg-subtle)]">Older →</span>
+          <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+            {older.data.title}
+          </span>
+        </a>
+      ) : (
+        <span />
+      )
+    }
+  </nav>
+</PostLayout>

@@ -1,0 +1,16 @@
+---
+export type Props = {
+  id: string;
+  user?: string;
+};
+
+const { id, user = "twitter" } = Astro.props;
+const tweetUrl = `https://twitter.com/${user}/status/${id}`;
+---
+
+<div class="jekyll-twitter-plugin my-6 flex justify-center">
+  <blockquote class="twitter-tweet" data-dnt="true">
+    <a href={tweetUrl}>View tweet →</a>
+  </blockquote>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" is:inline></script>
+</div>

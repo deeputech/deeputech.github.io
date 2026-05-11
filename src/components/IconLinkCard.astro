@@ -1,0 +1,49 @@
+---
+export type Props = {
+  href: string;
+  title: string;
+  subtitle?: string;
+  tags?: string[];
+  external?: boolean;
+};
+
+const { href, title, subtitle, tags = [], external = false } = Astro.props;
+const externalAttrs = external
+  ? { target: "_blank", rel: "noopener noreferrer" }
+  : {};
+---
+
+<a
+  href={href}
+  {...externalAttrs}
+  class="group grid grid-cols-[3.5rem_1fr] overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] transition hover:border-[var(--color-accent)]"
+>
+  <div class="flex items-center justify-center self-stretch">
+    <svg
+      class="h-6 w-6 text-[var(--color-accent)]"
+      viewBox="0 0 576 512"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+    </svg>
+  </div>
+  <div class="min-w-0 p-4">
+    <span class="font-display block text-base font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+      {title}
+    </span>
+    {subtitle && (
+      <span class="mt-1 block text-sm text-[var(--color-fg-muted)]">{subtitle}</span>
+    )}
+    {tags.length > 0 && (
+      <div class="mt-2.5 flex flex-wrap gap-1.5">
+        {tags.map((t) => (
+          <span class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-muted)] px-2 py-0.5 font-mono text-[10px] text-[var(--color-fg-muted)]">
+            {t}
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
+</a>

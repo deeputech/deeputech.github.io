@@ -1,0 +1,23 @@
+---
+export type Props = {
+  /** "user/gist_id" or just "gist_id" */
+  id: string;
+  /** Optional file name within the gist */
+  file?: string;
+};
+
+const { id, file } = Astro.props;
+const cleanId = id.includes("/") ? id.split("/").pop() : id;
+const src = file
+  ? `https://gist.github.com/${cleanId}.js?file=${file}`
+  : `https://gist.github.com/${cleanId}.js`;
+---
+
+<div class="my-6 overflow-hidden rounded-lg border border-[var(--color-border)]">
+  <script src={src} is:inline></script>
+  <noscript>
+    <a href={`https://gist.github.com/${cleanId}`} target="_blank" rel="noopener noreferrer">
+      View this gist on GitHub →
+    </a>
+  </noscript>
+</div>

@@ -1,0 +1,85 @@
+---
+import { Icon } from "astro-icon/components";
+
+export type Props = {
+  title: string;
+  url: string;
+};
+
+const { title, url } = Astro.props;
+const enc = encodeURIComponent;
+const text = `${title}\n\n`;
+
+const links = [
+  {
+    label: "Twitter",
+    href: `https://twitter.com/intent/tweet?text=${enc(text)}&url=${enc(url)}&via=deepu105`,
+    icon: "simple-icons:x",
+  },
+  {
+    label: "LinkedIn",
+    href: `https://www.linkedin.com/shareArticle?mini=true&url=${enc(url)}&title=${enc(title)}&summary=${enc(title)}&source=Technorage`,
+    icon: "simple-icons:linkedin",
+  },
+  {
+    label: "BlueSky",
+    href: `https://bsky.app/intent/compose?text=${enc(text + url)}`,
+    icon: "simple-icons:bluesky",
+  },
+  {
+    label: "Hacker News",
+    href: `https://news.ycombinator.com/submitlink?u=${enc(url)}&t=${enc(title)}`,
+    icon: "simple-icons:ycombinator",
+  },
+  {
+    label: "Reddit",
+    href: `https://www.reddit.com/submit?url=${enc(url)}&title=${enc(title)}`,
+    icon: "simple-icons:reddit",
+  },
+];
+---
+
+<div class="not-prose flex items-center gap-1 text-[var(--color-fg-subtle)]">
+  <span class="mr-2 hidden text-xs uppercase tracking-wider sm:inline">Share</span>
+  {
+    links.map((s) => (
+      <a
+        href={s.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`Share on ${s.label}`}
+        title={`Share on ${s.label}`}
+        class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"
+      >
+        <Icon name={s.icon} class="h-4 w-4" />
+      </a>
+    ))
+  }
+  <button
+    type="button"
+    data-copy-link={url}
+    aria-label="Copy link"
+    title="Copy link"
+    class="copy-link inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"
+  >
+    <Icon name="lucide:link-2" class="h-4 w-4" />
+  </button>
+</div>
+
+<script is:inline>
+  document.querySelectorAll(".copy-link").forEach(function (btn) {
+    btn.addEventListener("click", async function () {
+      var url = btn.getAttribute("data-copy-link");
+      try {
+        await navigator.clipboard.writeText(url);
+        var prev = btn.title;
+        btn.title = "Copied!";
+        btn.style.color = "var(--color-accent)";
+        setTimeout(function () {
+          btn.title = prev;
+          btn.style.color = "";
+        }, 1500);
+      } catch (_) {}
+    });
+  });
+</script>

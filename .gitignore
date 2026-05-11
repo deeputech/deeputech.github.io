@@ -21,3 +21,13 @@ _site
 _drafts
 _json
 _posts/draft-*
+AGENTS.md
+WRITING-STYLE.md
+.claude/
+
+# Astro
+dist/
+.astro/
+.env
+.env.production
+src/pages/_pagefind/

@@ -1,0 +1,151 @@
+---
+// Pagefind-backed ⌘K search dialog. Opens via the trigger in Header.astro
+// (id="search-trigger") or by pressing ⌘K / Ctrl+K.
+//
+// Pagefind generates /pagefind/pagefind.js at build time (run by npm run build
+// after astro build). In dev the index doesn't exist yet, so the dialog shows
+// a helpful note instead of erroring.
+---
+
+<dialog
+  id="search-dialog"
+  class="m-auto w-full max-w-xl rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-0 text-[var(--color-fg)] shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+>
+  <div class="flex items-center gap-3 border-b border-[var(--color-border)] px-4 py-3">
+    <svg class="h-4 w-4 text-[var(--color-fg-subtle)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="7"></circle>
+      <path d="m20 20-3-3"></path>
+    </svg>
+    <input
+      id="search-input"
+      type="search"
+      placeholder="Search posts…"
+      autocomplete="off"
+      class="w-full bg-transparent text-base text-[var(--color-fg)] outline-none placeholder:text-[var(--color-fg-subtle)]"
+    />
+    <kbd class="rounded border border-[var(--color-border)] px-1.5 py-0.5 font-mono text-xs text-[var(--color-fg-subtle)]">esc</kbd>
+  </div>
+  <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2 text-sm">
+    <p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">
+      Type to search the blog.
+    </p>
+  </div>
+</dialog>
+
+<script is:inline>
+  (function () {
+    var dialog = document.getElementById("search-dialog");
+    var input = document.getElementById("search-input");
+    var results = document.getElementById("search-results");
+    var trigger = document.getElementById("search-trigger");
+    if (!dialog || !input || !results) return;
+
+    var pagefind = null;
+    var loading = false;
+
+    async function loadPagefind() {
+      if (pagefind || loading) return;
+      loading = true;
+      try {
+        // Pagefind is generated at /pagefind/pagefind.js after `pagefind --site dist`
+        pagefind = await import(/* @vite-ignore */ "/pagefind/pagefind.js");
+        await pagefind.options({ excerptLength: 30 });
+      } catch (e) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Search index unavailable in dev. Run <code>npm run build</code> then <code>npm run preview</code>.</p>';
+      } finally {
+        loading = false;
+      }
+    }
+
+    function open() {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+      loadPagefind();
+      setTimeout(function () {
+        input.focus();
+      }, 0);
+    }
+    function close() {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+      input.value = "";
+      results.innerHTML =
+        '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+    }
+
+    if (trigger) trigger.addEventListener("click", open);
+    document.addEventListener("keydown", function (e) {
+      var isMac = /Mac|iPad|iPhone/.test(navigator.platform);
+      var isCmdK = (isMac ? e.metaKey : e.ctrlKey) && e.key === "k";
+      if (isCmdK) {
+        e.preventDefault();
+        open();
+      } else if (e.key === "Escape" && dialog.open) {
+        e.preventDefault();
+        close();
+      }
+    });
+    dialog.addEventListener("click", function (e) {
+      // close on backdrop click
+      if (e.target === dialog) close();
+    });
+
+    var lastQuery = "";
+    var debounceTimer = null;
+    input.addEventListener("input", function () {
+      var q = input.value.trim();
+      if (q === lastQuery) return;
+      lastQuery = q;
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () {
+        runSearch(q);
+      }, 80);
+    });
+
+    async function runSearch(q) {
+      if (!q) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+        return;
+      }
+      if (!pagefind) {
+        await loadPagefind();
+        if (!pagefind) return;
+      }
+      var search = await pagefind.search(q);
+      if (!search || !search.results.length) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">No results for &ldquo;' +
+          escapeHtml(q) +
+          '&rdquo;</p>';
+        return;
+      }
+      var top = await Promise.all(search.results.slice(0, 8).map(function (r) { return r.data(); }));
+      results.innerHTML = top
+        .map(function (d) {
+          return (
+            '<a href="' +
+            d.url +
+            '" class="block rounded-lg px-3 py-2.5 hover:bg-[var(--color-bg-subtle)]">' +
+            '<span class="font-display block text-sm font-semibold text-[var(--color-fg)]">' +
+            escapeHtml(d.meta && d.meta.title ? d.meta.title : d.url) +
+            "</span>" +
+            '<span class="mt-0.5 block text-xs text-[var(--color-fg-muted)]">' +
+            d.excerpt +
+            "</span>" +
+            "</a>"
+          );
+        })
+        .join("");
+    }
+
+    function escapeHtml(s) {
+      return s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  })();
+</script>

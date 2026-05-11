@@ -1,0 +1,61 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import PostCard from "~/components/PostCard.astro";
+import IconLinkCard from "~/components/IconLinkCard.astro";
+import { getPublishedPosts, getFeaturedPosts } from "~/lib/posts";
+
+const all = await getPublishedPosts();
+const featured = (await getFeaturedPosts()).slice(0, 6);
+const latest = all.slice(0, 2);
+const allPosts = all; // render the entire archive — scrolling reveals more.
+---
+
+<BaseLayout title="Blog" description="Articles on Rust, Java, Go, JavaScript, developer experience and cloud-native by Deepu K Sasidharan.">
+  <div class="mx-auto max-w-5xl px-4 pt-12 pb-16 sm:px-6">
+    <header class="mb-12">
+      <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Blog</h1>
+      <p class="mt-3 text-lg text-[var(--color-fg-muted)]">
+        {all.length} posts. Browse by{" "}
+        <a href="/series/" class="underline-offset-2 hover:underline">series</a>{" "}
+        or{" "}
+        <a href="/tags/" class="underline-offset-2 hover:underline">tags</a>.
+      </p>
+    </header>
+
+    <section class="mb-16">
+      <h2 class="font-display mb-6 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Latest</h2>
+      <div>
+        {latest.map((p) => <PostCard post={p} variant="row" />)}
+      </div>
+    </section>
+
+    {
+      featured.length > 0 && (
+        <section class="mb-16">
+          <h2 class="font-display mb-6 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Featured</h2>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featured.map((p) => (
+              <PostCard post={p} variant="card" />
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <div class="mb-16">
+      <IconLinkCard
+        href="https://auth0.com/blog/authors/deepu-sasidharan/"
+        title="Also on the Auth0 blog"
+        subtitle="I publish professional content on the Auth0 / Okta blog as a Developer Advocate."
+        external
+      />
+    </div>
+
+    <section>
+      <h2 class="font-display mb-2 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">All stories</h2>
+      <div>
+        {allPosts.map((p) => <PostCard post={p} variant="compact" />)}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

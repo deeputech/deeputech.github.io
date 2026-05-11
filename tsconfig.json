@@ -1,0 +1,26 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "src/**/*", "astro.config.mjs"],
+  "exclude": [
+    "dist",
+    "_site",
+    "vendor",
+    "node_modules",
+    "mediumish-theme-jekyll",
+    "temp",
+    "svg-seq-diagram",
+    "assets",
+    "site",
+    "scripts",
+    "publish-to-dev.js",
+    "replace-urls.js",
+    "gulpfile.js"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "jsx": "preserve"
+  }
+}

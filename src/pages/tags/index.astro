@@ -1,0 +1,61 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import { getAllTags, getPostsByTag } from "~/lib/posts";
+
+const tags = await getAllTags();
+const tagsWithPosts = await Promise.all(
+  tags.map(async ({ tag, count }) => ({
+    tag,
+    count,
+    posts: await getPostsByTag(tag),
+  })),
+);
+---
+
+<BaseLayout title="Tags" description={`All ${tags.length} tags across the blog.`}>
+  <div class="mx-auto max-w-4xl px-4 pt-12 pb-16 sm:px-6">
+    <header class="mb-10">
+      <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Tags</h1>
+      <p class="mt-3 text-lg text-[var(--color-fg-muted)]">
+        {tags.length} tags across {tagsWithPosts.reduce((s, t) => s + t.count, 0)} tagged posts.
+      </p>
+    </header>
+
+    <section class="mb-12 flex flex-wrap gap-2">
+      {
+        tags.map(({ tag, count }) => (
+          <a
+            href={`#${tag}`}
+            class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1.5 text-sm text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
+          >
+            {tag} <span class="text-[var(--color-fg-subtle)]">·{count}</span>
+          </a>
+        ))
+      }
+    </section>
+
+    <div class="space-y-12">
+      {
+        tagsWithPosts.map(({ tag, posts }) => (
+          <section id={tag} class="scroll-mt-24">
+            <h2 class="font-display mb-4 text-2xl font-semibold tracking-tight">
+              <span class="text-[var(--color-accent)]">#</span>{tag}
+            </h2>
+            <ul class="space-y-3">
+              {posts.map((p) => (
+                <li class="flex items-baseline gap-3 text-sm">
+                  <time class="w-24 shrink-0 text-xs text-[var(--color-fg-subtle)]" datetime={p.data.date.toISOString()}>
+                    {p.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}
+                  </time>
+                  <a href={`/${p.id}/`} class="text-[var(--color-fg)] hover:text-[var(--color-accent)]">
+                    {p.data.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</BaseLayout>

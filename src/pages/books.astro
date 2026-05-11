@@ -1,0 +1,80 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
+const stores = [
+  { href: "https://smile.amazon.com/Full-Stack-Development-JHipster-microservices/dp/1838824987", label: "Amazon" },
+  { href: "https://learning.oreilly.com/library/view/full-stack-development/9781838824983/", label: "O'Reilly" },
+];
+const storesV1 = [
+  { href: "https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X", label: "Amazon" },
+  { href: "https://www.safaribooksonline.com/library/view/full-stack-development/9781788476317/", label: "O'Reilly" },
+];
+---
+
+<BaseLayout title="Books" description="Books authored by Deepu K Sasidharan.">
+  <div class="mx-auto max-w-3xl px-4 pt-12 pb-16 sm:px-6">
+    <header class="mb-10">
+      <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Books</h1>
+      <p class="mt-3 text-lg text-[var(--color-fg-muted)]">
+        Books I've co-authored. Follow on X
+        <a href="https://twitter.com/FullstackBook" class="underline-offset-2 hover:underline">@FullstackBook</a>.
+      </p>
+    </header>
+
+    <article class="mb-16">
+      <h2 class="font-display text-2xl font-semibold tracking-tight">Full Stack Development with JHipster — second edition</h2>
+      <div class="mt-3 flex flex-wrap gap-2 text-sm">
+        {
+          stores.map((s) => (
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1.5 text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
+            >
+              {s.label} →
+            </a>
+          ))
+        }
+      </div>
+      <p class="prose-blog mt-6 text-[var(--color-fg-muted)]">
+        JHipster is an open-source development platform that lets you create web applications and microservices from scratch without
+        spending time wiring different technologies together. Updated for JHipster 6, Java 11, Spring Boot 2.1, Vue.js, and Istio, this
+        second edition will help you build full-stack applications and microservices seamlessly.
+      </p>
+      <img
+        src="/assets/images/jhbook-banner-v2.png"
+        alt="Full Stack Development with JHipster (2nd edition)"
+        loading="lazy"
+        class="mt-6 w-full rounded-xl shadow-lg"
+      />
+    </article>
+
+    <article>
+      <h2 class="font-display text-2xl font-semibold tracking-tight">Full Stack Development with JHipster — first edition</h2>
+      <div class="mt-3 flex flex-wrap gap-2 text-sm">
+        {
+          storesV1.map((s) => (
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1.5 text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
+            >
+              {s.label} →
+            </a>
+          ))
+        }
+      </div>
+      <p class="prose-blog mt-6 text-[var(--color-fg-muted)]">
+        The original guide to JHipster — generate, develop, and deploy Spring Boot and Angular/React applications and Spring microservices.
+      </p>
+      <img
+        src="/assets/images/jhbook-banner.png"
+        alt="Full Stack Development with JHipster (1st edition)"
+        loading="lazy"
+        class="mt-6 w-full rounded-xl shadow-lg"
+      />
+    </article>
+  </div>
+</BaseLayout>

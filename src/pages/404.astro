@@ -1,0 +1,42 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404 — Not found" description="The page you're looking for doesn't exist.">
+  <div class="mx-auto flex max-w-2xl flex-col items-center px-4 pt-24 pb-32 text-center sm:px-6">
+    <p class="font-display text-7xl font-bold tracking-tight text-[var(--color-accent)] sm:text-9xl">404</p>
+    <h1 class="font-display mt-6 text-3xl font-bold tracking-tight text-[var(--color-fg)] sm:text-4xl">
+      Page not found
+    </h1>
+    <p class="mt-4 text-lg text-[var(--color-fg-muted)]">
+      Sorry, the page you're looking for doesn't exist. It may have moved, or never existed at all.
+    </p>
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+      <a
+        href="/"
+        class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-4 py-2 text-sm text-[var(--color-fg)] transition hover:border-[var(--color-border-strong)]"
+      >
+        ← Home
+      </a>
+      <a
+        href="/blogs/"
+        class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-4 py-2 text-sm text-[var(--color-fg)] transition hover:border-[var(--color-border-strong)]"
+      >
+        Browse the blog
+      </a>
+      <button
+        type="button"
+        id="search-trigger-404"
+        class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-4 py-2 text-sm text-[var(--color-fg)] transition hover:border-[var(--color-border-strong)]"
+      >
+        Search ⌘K
+      </button>
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  document.getElementById("search-trigger-404")?.addEventListener("click", function () {
+    document.getElementById("search-trigger")?.click();
+  });
+</script>

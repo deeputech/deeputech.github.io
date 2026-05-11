@@ -1,0 +1,288 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import PostCard from "~/components/PostCard.astro";
+import IconLinkCard from "~/components/IconLinkCard.astro";
+import SocialIcons from "~/components/SocialIcons.astro";
+import { defaultAuthor } from "~/data/authors";
+import { getPublishedPosts, getFeaturedPosts, getAllSeries, slugifySeries } from "~/lib/posts";
+import { Content as Talks } from "~/data/talks.mdx";
+
+const author = defaultAuthor;
+const all = await getPublishedPosts();
+const latest = all.slice(0, 4);
+const featured = (await getFeaturedPosts()).slice(0, 6);
+const seriesGroups = await getAllSeries();
+const topSeries = seriesGroups
+  .filter((s) => s.count >= 2)
+  .sort((a, b) => b.count - a.count)
+  .slice(0, 6);
+
+const projects = [
+  {
+    name: "JHipster",
+    href: "https://jhipster.tech/",
+    note: "Rapid app development for modern Java + JS.",
+    tags: ["java", "spring-boot", "angular", "react"],
+  },
+  {
+    name: "KDash",
+    href: "https://github.com/kdash-rs/kdash",
+    note: "A Kubernetes dashboard, in Rust.",
+    tags: ["rust", "kubernetes", "tui", "monitoring"],
+  },
+  {
+    name: "JWT UI",
+    href: "https://github.com/jwt-rs/jwt-ui",
+    note: "Terminal UI for decoding JWTs.",
+    tags: ["rust", "jwt", "tui", "cli"],
+  },
+  {
+    name: "JDL Studio",
+    href: "https://start.jhipster.tech/jdl-studio/",
+    note: "Online editor for the JHipster Domain Language.",
+    tags: ["javascript", "react", "jhipster", "dsl"],
+  },
+  {
+    name: "auth0-token-vault-cli",
+    href: "https://github.com/deepu105/auth0-token-vault-cli",
+    note: "CLI tool for using Auth0 Token Vault from AI Agents.",
+    tags: ["typescript", "auth0", "oauth", "ai-agents"],
+  },
+  {
+    name: "Auth0 Assistant0",
+    href: "https://github.com/auth0-samples/auth0-assistant0",
+    note: "An AI assistant that can talk to external OAuth2 services like Gmail and Slack using Auth0",
+    tags: ["typescript", "ai", "auth0", "langchain"],
+  },
+  {
+    name: "Dank Todo",
+    href: "https://github.com/deepu105/dms-dank-todo",
+    note: "A todo widget for the Dank Material Shell.",
+    tags: ["qml", "quickshell", "wayland", "linux"],
+  },
+  {
+    name: "JHipster Registry",
+    href: "https://github.com/jhipster/jhipster-registry",
+    note: "Service Registry, based on Spring Cloud Netflix Eureka and Spring Cloud Config",
+    tags: ["java", "spring-cloud", "eureka", "jhipster"],
+  },
+];
+
+const sections = [
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "writing", label: "Latest writing" },
+  { id: "featured", label: "Featured" },
+  { id: "series", label: "Series" },
+  { id: "bio", label: "Bio" },
+  { id: "events", label: "Events" },
+];
+---
+
+<BaseLayout
+  title="Deepu K Sasidharan"
+  description="Java Champion, Co-chair of JHipster, polyglot developer. I write about Rust, Go, Java, developer experience and cloud-native."
+>
+  <div class="mx-auto max-w-6xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20">
+    <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_180px]">
+      <div>
+        <!-- Hero -->
+        <section id="about" class="scroll-mt-24">
+          <p class="font-display mb-4 text-2xl font-semibold text-[var(--color-accent)] sm:text-3xl">Hi, I'm Deepu 👋</p>
+          <h1 class="font-display text-4xl leading-tight font-bold tracking-tight text-balance text-[var(--color-fg)] sm:text-5xl lg:text-6xl">
+            I build, I write, I rant about technology.
+          </h1>
+          <p class="mt-6 text-lg text-[var(--color-fg-muted)]">
+            <strong>Polyglot developer</strong> · Open-source aficionado · Java Champion · Co-chair of
+            <a href="https://jhipster.tech">JHipster</a> · Creator of
+            <a href="https://github.com/kdash-rs/kdash">KDash</a> and
+            <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a> · Linux enthusiast · Published author · International speaker
+          </p>
+
+          <div class="mt-6">
+            <SocialIcons size="sm" showLabels={true} />
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section id="projects" class="mt-20 scroll-mt-24">
+          <header class="mb-6 flex items-baseline justify-between">
+            <h2 class="font-display text-2xl font-bold tracking-tight">Open-source projects</h2>
+          </header>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {projects.map((p) => <IconLinkCard href={p.href} title={p.name} subtitle={p.note} tags={p.tags} external />)}
+          </div>
+        </section>
+
+        <!-- Latest writing -->
+        <section id="writing" class="mt-20 scroll-mt-24">
+          <header class="mb-6 flex items-baseline justify-between">
+            <h2 class="font-display text-2xl font-bold tracking-tight">Latest writing</h2>
+            <a href="/blogs/" class="text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-accent)]">All posts →</a>
+          </header>
+          <div>
+            {latest.map((p) => <PostCard post={p} variant="row" />)}
+          </div>
+          <div class="mt-6">
+            <IconLinkCard
+              href="https://auth0.com/blog/authors/deepu-sasidharan/"
+              title="Also on the Auth0 blog"
+              subtitle="I publish professional content on the Auth0 / Okta blog as a Staff Developer Advocate."
+              external
+            />
+          </div>
+        </section>
+
+        <!-- Featured -->
+        {
+          featured.length > 0 && (
+            <section id="featured" class="mt-20 scroll-mt-24">
+              <header class="mb-6 flex items-baseline justify-between">
+                <h2 class="font-display text-2xl font-bold tracking-tight">Featured</h2>
+              </header>
+              <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {featured.map((p) => (
+                  <PostCard post={p} variant="card" />
+                ))}
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Series -->
+        {
+          topSeries.length > 0 && (
+            <section id="series" class="mt-20 scroll-mt-24">
+              <header class="mb-6 flex items-baseline justify-between">
+                <h2 class="font-display text-2xl font-bold tracking-tight">Deep-dive series</h2>
+                <a href="/series/" class="text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-accent)]">
+                  All series →
+                </a>
+              </header>
+              <div class="grid gap-4 sm:grid-cols-2">
+                {topSeries.map((s) => (
+                  <a
+                    href={`/series/${slugifySeries(s.series)}/`}
+                    class="group block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 transition hover:border-[var(--color-accent)]"
+                  >
+                    <span class="font-display block text-base font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+                      {s.series}
+                    </span>
+                    <span class="mt-1 block text-xs text-[var(--color-fg-subtle)]">{s.count} posts</span>
+                  </a>
+                ))}
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Bio -->
+        <section id="bio" class="mt-20 scroll-mt-24">
+          <header class="mb-6 flex items-baseline justify-between">
+            <h2 class="font-display text-2xl font-bold tracking-tight">Bio</h2>
+          </header>
+          <ul class="prose-blog terminal-list space-y-2 text-[var(--color-fg-muted)]">
+            <li>Polyglot developer working with Rust, JavaScript, TypeScript, Go, and Java. Dabbling with a few others occasionally.</li>
+            <li>
+              Co-chair of <a href="https://jhipster.tech">JHipster</a>, the rapid application development platform for modern Java + JS.
+            </li>
+            <li>Creator of <a href="https://github.com/kdash-rs/kdash">KDash</a>, a terminal dashboard for Kubernetes written in Rust.</li>
+            <li>Creator of <a href="https://github.com/jwt-rs/jwt-ui">JWT UI</a>, a terminal UI for decoding/encoding JSON Web Tokens.</li>
+            <li>
+              Creator of <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a>, JHipster React, JHipster Blueprints, and the
+              JHipster Entity Audit Generator.
+            </li>
+            <li>Principal Developer Advocate at <a href="https://auth0.com">Auth0</a>. Alumni of Adyen, TCS, and XebiaLabs.</li>
+            <li><a href="https://dev.java/community/jcs/">Java Champion</a> ☕</li>
+            <li>Cloud and container technology enthusiast.</li>
+            <li>Published author, international conference speaker, and avid blogger.</li>
+            <li>Passionate about developer experience and user experience.</li>
+            <li>Loves astronomy, motorbikes, coding, and robotics.</li>
+          </ul>
+        </section>
+
+        <!-- Events -->
+        <section id="events" class="mt-20 mb-8 scroll-mt-24">
+          <header class="mb-4 flex items-baseline justify-between">
+            <h2 class="font-display text-2xl font-bold tracking-tight">Upcoming events</h2>
+            <a href="/appearances/" class="text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-accent)]">All events →</a>
+          </header>
+          <div class="prose-blog">
+            <Talks />
+          </div>
+        </section>
+      </div>
+
+      <!-- Sticky sidemenu -->
+      <aside class="hidden lg:block">
+        <nav class="sticky top-24 text-sm" aria-label="Page sections">
+          <p class="font-display mb-3 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">On this page</p>
+          <ul class="space-y-1">
+            {
+              sections.map((s) => (
+                <li>
+                  <a
+                    href={`#${s.id}`}
+                    data-section-target={s.id}
+                    class="page-nav-link block border-l-2 border-transparent py-1 pl-3 text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-nav-link[data-active="true"] {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    font-weight: 500;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".page-nav-link"));
+    if (!links.length) return;
+    var bySlug = {};
+    links.forEach(function (l) {
+      bySlug[l.getAttribute("data-section-target")] = l;
+    });
+    var sections = Object.keys(bySlug)
+      .map(function (s) {
+        return document.getElementById(s);
+      })
+      .filter(Boolean);
+    if (!sections.length) return;
+    var current = null;
+    var observer = new IntersectionObserver(
+      function (entries) {
+        var visible = entries
+          .filter(function (e) {
+            return e.isIntersecting;
+          })
+          .sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+        if (visible.length) {
+          var n = visible[0].target.id;
+          if (n !== current) {
+            if (current && bySlug[current]) bySlug[current].removeAttribute("data-active");
+            current = n;
+            if (bySlug[current]) bySlug[current].setAttribute("data-active", "true");
+          }
+        }
+      },
+      { rootMargin: "-100px 0px -60% 0px" },
+    );
+    sections.forEach(function (s) {
+      observer.observe(s);
+    });
+  })();
+</script>

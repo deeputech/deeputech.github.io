@@ -1,0 +1,61 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import PostCard from "~/components/PostCard.astro";
+import { getPublishedPosts } from "~/lib/posts";
+
+export async function getStaticPaths() {
+  const POSTS_PER_PAGE = 6;
+  const all = await getPublishedPosts();
+  const totalPages = Math.ceil(all.length / POSTS_PER_PAGE);
+  // Pages 2..N — page 1 lives at /blogs/
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => {
+    const num = i + 2;
+    const start = (num - 1) * POSTS_PER_PAGE;
+    return {
+      params: { num: String(num) },
+      props: {
+        num,
+        totalPages,
+        posts: all.slice(start, start + POSTS_PER_PAGE),
+      },
+    };
+  });
+}
+
+const { num, totalPages, posts } = Astro.props;
+const prevHref = num === 2 ? "/blogs/" : `/page/${num - 1}/`;
+const nextHref = num < totalPages ? `/page/${num + 1}/` : null;
+---
+
+<BaseLayout title={`Blog · page ${num}`}>
+  <div class="mx-auto max-w-5xl px-4 pt-12 pb-16 sm:px-6">
+    <header class="mb-10">
+      <p class="text-sm text-[var(--color-fg-subtle)]"><a href="/blogs/" class="hover:underline">Blog</a> · page {num}</p>
+      <h1 class="font-display mt-2 text-3xl font-bold tracking-tight sm:text-4xl">All stories</h1>
+    </header>
+    <div>
+      {posts.map((p) => <PostCard post={p} variant="compact" />)}
+    </div>
+    <nav class="mt-10 flex items-center justify-between text-sm">
+      <a
+        href={prevHref}
+        class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-4 py-2 text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
+      >
+        ← Newer posts
+      </a>
+      <span class="text-[var(--color-fg-subtle)]">Page {num} of {totalPages}</span>
+      {
+        nextHref ? (
+          <a
+            href={nextHref}
+            class="rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-4 py-2 text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
+          >
+            Older posts →
+          </a>
+        ) : (
+          <span />
+        )
+      }
+    </nav>
+  </div>
+</BaseLayout>

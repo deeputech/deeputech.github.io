@@ -1,0 +1,44 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import PostCard from "~/components/PostCard.astro";
+import { getAllSeries, slugifySeries } from "~/lib/posts";
+import { seriesMeta } from "~/data/series";
+
+export async function getStaticPaths() {
+  const groups = await getAllSeries();
+  const meta = new Map(seriesMeta.map((s) => [s.id, s]));
+  return groups.map((g) => ({
+    params: { id: slugifySeries(g.series) },
+    props: {
+      series: g.series,
+      posts: g.posts,
+      description: meta.get(g.series)?.description,
+    },
+  }));
+}
+
+const { series, posts, description } = Astro.props;
+---
+
+<BaseLayout title={`Series · ${series}`} description={description}>
+  <div class="mx-auto max-w-4xl px-4 pt-12 pb-16 sm:px-6">
+    <header class="mb-12">
+      <p class="text-sm text-[var(--color-fg-subtle)]">
+        <a href="/series/" class="hover:underline">Series</a> · {posts.length} posts
+      </p>
+      <h1 class="font-display mt-2 text-4xl font-bold tracking-tight sm:text-5xl">{series}</h1>
+      {description && <p class="mt-4 text-lg text-[var(--color-fg-muted)]">{description}</p>}
+    </header>
+
+    <ol class="space-y-6">
+      {posts.map((p, i) => (
+        <li class="flex gap-6">
+          <span class="font-display w-8 shrink-0 text-right text-2xl font-bold text-[var(--color-fg-subtle)]">{i + 1}</span>
+          <div class="flex-1">
+            <PostCard post={p} variant="row" />
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</BaseLayout>
