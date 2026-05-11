@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import PostCard from "~/components/PostCard.astro";
+import IconLinkCard from "~/components/IconLinkCard.astro";
 import { getPublishedPosts, getFeaturedPosts } from "~/lib/posts";
 
 const all = await getPublishedPosts();
-const featured = await getFeaturedPosts();
+const featured = (await getFeaturedPosts()).slice(0, 6);
 const latest = all.slice(0, 2);
 const allPosts = all; // render the entire archive — scrolling reveals more.
 ---
@@ -23,18 +24,16 @@ const allPosts = all; // render the entire archive — scrolling reveals more.
 
     <section class="mb-16">
       <h2 class="font-display mb-6 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Latest</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
-        {latest.map((p) => <PostCard post={p} variant="card" />)}
+      <div>
+        {latest.map((p) => <PostCard post={p} variant="row" />)}
       </div>
     </section>
 
     {
       featured.length > 0 && (
         <section class="mb-16">
-          <h2 class="font-display mb-6 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">
-            Featured
-          </h2>
-          <div class="grid gap-6 sm:grid-cols-2">
+          <h2 class="font-display mb-6 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Featured</h2>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((p) => (
               <PostCard post={p} variant="card" />
             ))}
@@ -43,10 +42,19 @@ const allPosts = all; // render the entire archive — scrolling reveals more.
       )
     }
 
+    <div class="mb-16">
+      <IconLinkCard
+        href="https://auth0.com/blog/authors/deepu-sasidharan/"
+        title="Also on the Auth0 blog"
+        subtitle="I publish professional content on the Auth0 / Okta blog as a Developer Advocate."
+        external
+      />
+    </div>
+
     <section>
       <h2 class="font-display mb-2 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">All stories</h2>
       <div>
-        {allPosts.map((p) => <PostCard post={p} variant="row" />)}
+        {allPosts.map((p) => <PostCard post={p} variant="compact" />)}
       </div>
     </section>
   </div>

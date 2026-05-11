@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
 import PostCard from "~/components/PostCard.astro";
+import IconLinkCard from "~/components/IconLinkCard.astro";
 import SocialIcons from "~/components/SocialIcons.astro";
 import { defaultAuthor } from "~/data/authors";
 import { getPublishedPosts, getFeaturedPosts, getAllSeries, slugifySeries } from "~/lib/posts";
@@ -8,8 +9,8 @@ import { Content as Talks } from "~/data/talks.mdx";
 
 const author = defaultAuthor;
 const all = await getPublishedPosts();
-const latest = all.slice(0, 5);
-const featured = (await getFeaturedPosts()).slice(0, 4);
+const latest = all.slice(0, 4);
+const featured = (await getFeaturedPosts()).slice(0, 6);
 const seriesGroups = await getAllSeries();
 const topSeries = seriesGroups
   .filter((s) => s.count >= 2)
@@ -17,29 +18,53 @@ const topSeries = seriesGroups
   .slice(0, 6);
 
 const projects = [
-  { name: "JHipster", href: "https://jhipster.tech/", note: "Rapid app development for modern Java + JS." },
-  { name: "KDash", href: "https://github.com/kdash-rs/kdash", note: "A Kubernetes dashboard, in Rust." },
-  { name: "JWT UI", href: "https://github.com/jwt-rs/jwt-ui", note: "Terminal UI for decoding JWTs." },
-  { name: "JDL Studio", href: "https://start.jhipster.tech/jdl-studio/", note: "Online editor for the JHipster Domain Language." },
+  {
+    name: "JHipster",
+    href: "https://jhipster.tech/",
+    note: "Rapid app development for modern Java + JS.",
+    tags: ["java", "spring-boot", "angular", "react"],
+  },
+  {
+    name: "KDash",
+    href: "https://github.com/kdash-rs/kdash",
+    note: "A Kubernetes dashboard, in Rust.",
+    tags: ["rust", "kubernetes", "tui", "monitoring"],
+  },
+  {
+    name: "JWT UI",
+    href: "https://github.com/jwt-rs/jwt-ui",
+    note: "Terminal UI for decoding JWTs.",
+    tags: ["rust", "jwt", "tui", "cli"],
+  },
+  {
+    name: "JDL Studio",
+    href: "https://start.jhipster.tech/jdl-studio/",
+    note: "Online editor for the JHipster Domain Language.",
+    tags: ["javascript", "react", "jhipster", "dsl"],
+  },
   {
     name: "auth0-token-vault-cli",
     href: "https://github.com/deepu105/auth0-token-vault-cli",
     note: "CLI tool for using Auth0 Token Vault from AI Agents.",
+    tags: ["typescript", "auth0", "oauth", "ai-agents"],
   },
   {
     name: "Auth0 Assistant0",
     href: "https://github.com/auth0-samples/auth0-assistant0",
-    note: "An AI personal assistant that consolidates your digital life by dynamically accessing multiple tools to help you stay organized and efficient.",
+    note: "An AI assistant that can talk to external OAuth2 services like Gmail and Slack using Auth0",
+    tags: ["typescript", "ai", "auth0", "langchain"],
   },
   {
     name: "Dank Todo",
     href: "https://github.com/deepu105/dms-dank-todo",
     note: "A todo widget for the Dank Material Shell.",
+    tags: ["qml", "quickshell", "wayland", "linux"],
   },
   {
     name: "JHipster Registry",
     href: "https://github.com/jhipster/jhipster-registry",
     note: "Service Registry, based on Spring Cloud Netflix Eureka and Spring Cloud Config",
+    tags: ["java", "spring-cloud", "eureka", "jhipster"],
   },
 ];
 
@@ -49,6 +74,7 @@ const sections = [
   { id: "writing", label: "Latest writing" },
   { id: "featured", label: "Featured" },
   { id: "series", label: "Series" },
+  { id: "bio", label: "Bio" },
   { id: "events", label: "Events" },
 ];
 ---
@@ -62,39 +88,20 @@ const sections = [
       <div>
         <!-- Hero -->
         <section id="about" class="scroll-mt-24">
-          <p class="mb-3 text-sm font-medium tracking-wider text-[var(--color-accent)] uppercase">Hi, I'm Deepu 👋</p>
+          <p class="font-display mb-4 text-2xl font-semibold text-[var(--color-accent)] sm:text-3xl">Hi, I'm Deepu 👋</p>
           <h1 class="font-display text-4xl leading-tight font-bold tracking-tight text-[var(--color-fg)] sm:text-6xl">
             I build, I write, I rant about technology.
           </h1>
           <p class="mt-6 text-lg text-[var(--color-fg-muted)]">
-            <strong>Staff Developer Advocate at Auth0 by Okta.</strong> Java Champion · Co-chair of
-            <a href="https://jhipster.tech">JHipster</a> · open-source aficionado and a polyglot developer.
+            <strong>Polyglot developer</strong> · Open-source aficionado · Java Champion · Co-chair of
+            <a href="https://jhipster.tech">JHipster</a> · Creator of
+            <a href="https://github.com/kdash-rs/kdash">KDash</a> and
+            <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a> · Linux enthusiast · Published author · International speaker
           </p>
 
           <div class="mt-6">
             <SocialIcons size="sm" showLabels={true} />
           </div>
-
-          <ul class="prose-blog mt-8 space-y-2 text-[var(--color-fg-muted)]">
-            <li>
-              Co-chair of <a href="https://jhipster.tech">JHipster</a>, the rapid application development platform for modern Java + JS.
-            </li>
-            <li>Creator of <a href="https://github.com/kdash-rs/kdash">KDash</a>, a terminal dashboard for Kubernetes written in Rust.</li>
-            <li>Creator of <a href="https://github.com/jwt-rs/jwt-ui">JWT UI</a>, a terminal UI for decoding/encoding JSON Web Tokens.</li>
-            <li>
-              Creator of <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a>, JHipster React, JHipster Blueprints, and the
-              JHipster Entity Audit Generator.
-            </li>
-            <li>Alumni of Adyen, TCS, and XebiaLabs.</li>
-            <li><a href="https://dev.java/community/jcs/">Java Champion</a> ☕</li>
-            <li>
-              Polyglot developer working with Java, Rust, JavaScript, TypeScript, Go, and Kotlin. Dabbling with a few others occasionally.
-            </li>
-            <li>Cloud and container technology enthusiast and advocate.</li>
-            <li>Published author, international conference speaker, and avid blogger.</li>
-            <li>Passionate about developer experience and user experience.</li>
-            <li>Loves astronomy, motorbikes, coding, and robotics.</li>
-          </ul>
         </section>
 
         <!-- Projects -->
@@ -103,21 +110,7 @@ const sections = [
             <h2 class="font-display text-2xl font-bold tracking-tight">Open-source projects</h2>
           </header>
           <div class="grid gap-4 sm:grid-cols-2">
-            {
-              projects.map((p) => (
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="group block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 transition hover:border-[var(--color-accent)]"
-                >
-                  <span class="font-display block text-base font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
-                    {p.name}
-                  </span>
-                  <span class="mt-1 block text-sm text-[var(--color-fg-muted)]">{p.note}</span>
-                </a>
-              ))
-            }
+            {projects.map((p) => <IconLinkCard href={p.href} title={p.name} subtitle={p.note} tags={p.tags} external />)}
           </div>
         </section>
 
@@ -130,6 +123,14 @@ const sections = [
           <div>
             {latest.map((p) => <PostCard post={p} variant="row" />)}
           </div>
+          <div class="mt-6">
+            <IconLinkCard
+              href="https://auth0.com/blog/authors/deepu-sasidharan/"
+              title="Also on the Auth0 blog"
+              subtitle="I publish professional content on the Auth0 / Okta blog as a Staff Developer Advocate."
+              external
+            />
+          </div>
         </section>
 
         <!-- Featured -->
@@ -139,7 +140,7 @@ const sections = [
               <header class="mb-6 flex items-baseline justify-between">
                 <h2 class="font-display text-2xl font-bold tracking-tight">Featured</h2>
               </header>
-              <div class="grid gap-6 sm:grid-cols-2">
+              <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {featured.map((p) => (
                   <PostCard post={p} variant="card" />
                 ))}
@@ -158,22 +159,47 @@ const sections = [
                   All series →
                 </a>
               </header>
-              <ul class="grid gap-3 sm:grid-cols-2">
+              <div class="grid gap-4 sm:grid-cols-2">
                 {topSeries.map((s) => (
-                  <li>
-                    <a
-                      href={`/series/${slugifySeries(s.series)}/`}
-                      class="block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 transition hover:border-[var(--color-accent)]"
-                    >
-                      <span class="font-display block text-base font-semibold text-[var(--color-fg)]">{s.series}</span>
-                      <span class="text-xs text-[var(--color-fg-subtle)]">{s.count} posts</span>
-                    </a>
-                  </li>
+                  <a
+                    href={`/series/${slugifySeries(s.series)}/`}
+                    class="group block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 transition hover:border-[var(--color-accent)]"
+                  >
+                    <span class="font-display block text-base font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
+                      {s.series}
+                    </span>
+                    <span class="mt-1 block text-xs text-[var(--color-fg-subtle)]">{s.count} posts</span>
+                  </a>
                 ))}
-              </ul>
+              </div>
             </section>
           )
         }
+
+        <!-- Bio -->
+        <section id="bio" class="mt-20 scroll-mt-24">
+          <header class="mb-6 flex items-baseline justify-between">
+            <h2 class="font-display text-2xl font-bold tracking-tight">Bio</h2>
+          </header>
+          <ul class="prose-blog terminal-list space-y-2 text-[var(--color-fg-muted)]">
+            <li>Polyglot developer working with Rust, JavaScript, TypeScript, Go, and Java. Dabbling with a few others occasionally.</li>
+            <li>
+              Co-chair of <a href="https://jhipster.tech">JHipster</a>, the rapid application development platform for modern Java + JS.
+            </li>
+            <li>Creator of <a href="https://github.com/kdash-rs/kdash">KDash</a>, a terminal dashboard for Kubernetes written in Rust.</li>
+            <li>Creator of <a href="https://github.com/jwt-rs/jwt-ui">JWT UI</a>, a terminal UI for decoding/encoding JSON Web Tokens.</li>
+            <li>
+              Creator of <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a>, JHipster React, JHipster Blueprints, and the
+              JHipster Entity Audit Generator.
+            </li>
+            <li>Principal Developer Advocate at <a href="https://auth0.com">Auth0</a>. Alumni of Adyen, TCS, and XebiaLabs.</li>
+            <li><a href="https://dev.java/community/jcs/">Java Champion</a> ☕</li>
+            <li>Cloud and container technology enthusiast.</li>
+            <li>Published author, international conference speaker, and avid blogger.</li>
+            <li>Passionate about developer experience and user experience.</li>
+            <li>Loves astronomy, motorbikes, coding, and robotics.</li>
+          </ul>
+        </section>
 
         <!-- Events -->
         <section id="events" class="mt-20 mb-8 scroll-mt-24">
