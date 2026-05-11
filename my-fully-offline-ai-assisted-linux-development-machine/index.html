@@ -1,0 +1,534 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.18.1"><link rel="icon" type="image/png" href="/assets/images/logo.png"><link rel="canonical" href="https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine"><title>My fully offline AI-assisted Linux development machine | Technorage</title><meta name="description" content="My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13"><meta property="og:type" content="article"><meta property="og:title" content="My fully offline AI-assisted Linux development machine | Technorage"><meta property="og:description" content="My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13"><meta property="og:url" content="https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine"><meta property="og:image" content="https://deepu.tech/assets/images/logo.png"><meta property="og:site_name" content="Technorage"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@deepu105"><meta name="twitter:creator" content="@deepu105"><meta name="twitter:title" content="My fully offline AI-assisted Linux development machine | Technorage"><meta name="twitter:description" content="My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13"><meta name="twitter:image" content="https://deepu.tech/assets/images/logo.png"><meta name="monetization" content="$ilp.uphold.com/Aw7eGpxKNyK7"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@500;600;700&display=swap"><script>
+  (function () {
+    try {
+      var stored = localStorage.getItem("theme");
+      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme = stored || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.style.colorScheme = theme;
+    } catch (_) {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-1SDSM5NX07"></script><script>(function(){const GA_ID = "G-1SDSM5NX07";
+
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  ad_storage: 'denied',
+  analytics_storage: 'granted'
+});
+gtag('js', new Date());
+gtag('config', GA_ID);`}
+          })();</script><link rel="stylesheet" href="/_astro/comment-policy.D83ya9Ha.css">
+<style>.toc-link[data-astro-cid-obewoz47][data-active=true]{color:var(--color-accent);border-color:var(--color-accent);font-weight:500}
+</style></head> <body> <header class="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] backdrop-blur"> <div class="mx-auto flex max-w-5xl items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6"> <a href="/" class="flex min-w-0 shrink items-center gap-1.5 text-[var(--color-fg)]"> <svg class="h-5 w-5 shrink-0 text-[var(--color-accent)] sm:h-6 sm:w-6" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true"> <path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path> </svg> <span class="font-display truncate text-xl font-bold tracking-tight sm:text-3xl">technorage</span> </a> <nav class="ml-auto flex shrink-0 items-center gap-0 sm:gap-1"> <a href="/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path> <circle cx="12" cy="7" r="4"></circle>     </svg> <span class="hidden sm:inline">About</span> </a><a href="/blogs/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="8" y1="13" x2="16" y2="13"></line> <line x1="8" y1="17" x2="16" y2="17"></line>    </svg> <span class="hidden sm:inline">Blog</span> </a><a href="/books/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path> <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>   </svg> <span class="hidden sm:inline">Books</span> </a><a href="/appearances/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect> <line x1="16" y1="2" x2="16" y2="6"></line> <line x1="8" y1="2" x2="8" y2="6"></line> <line x1="3" y1="10" x2="21" y2="10"></line>  </svg> <span class="hidden sm:inline">Events</span> </a> <button type="button" id="search-trigger" aria-label="Search" title="Search (⌘K)" class="ml-0.5 inline-flex h-9 w-9 items-center justify-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-sm text-[var(--color-fg-subtle)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)] sm:ml-1 sm:w-auto sm:px-2"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <kbd class="hidden rounded border border-[var(--color-border-strong)] px-1 font-mono text-[10px] sm:inline">⌘K</kbd> </button> <button type="button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg> <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      var next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      document.documentElement.style.colorScheme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch (_) {}
+    });
+  })();
+</script> </nav> </div> </header> <main class="flex-1">  <div id="reading-progress" class="pointer-events-none fixed inset-x-0 top-0 z-50 h-0.5 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-75" aria-hidden="true"></div> <script>
+  (function () {
+    var bar = document.getElementById("reading-progress");
+    if (!bar) return;
+    var article = document.querySelector("article");
+    if (!article) return;
+    var ticking = false;
+    function update() {
+      var rect = article.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var scrolled = -rect.top;
+      var pct = total > 0 ? Math.min(1, Math.max(0, scrolled / total)) : 0;
+      bar.style.transform = "scaleX(" + pct + ")";
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  })();
+</script> <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14"> <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px]"> <article data-pagefind-body class="mx-auto w-full min-w-0 max-w-3xl lg:mx-0"> <header class="mb-8"> <div class="mb-4 flex flex-wrap gap-2 text-xs text-[var(--color-fg-subtle)]"> <a href="/tags/#linux" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> linux </a><a href="/tags/#archlinux" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> archlinux </a><a href="/tags/#development" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> development </a><a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> ai </a> </div> <h1 class="font-display text-4xl font-bold tracking-tight text-[var(--color-fg)] sm:text-5xl"> My fully offline AI-assisted Linux development machine </h1> <p class="mt-4 text-lg text-[var(--color-fg-muted)]">My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13</p> <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[var(--color-fg-subtle)]"> <img src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=64&d=mm" alt="Deepu K Sasidharan" width="32" height="32" class="h-8 w-8 rounded-full"> <a href="https://deepu.tech" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> Deepu K Sasidharan </a> <span class="text-[var(--color-border-strong)]">·</span> <time datetime="2026-05-07T00:00:00.000Z">May 7, 2026</time>   <span class="text-[var(--color-border-strong)]">·</span> <span>16 min read</span>  <span class="ml-auto"> <div class="not-prose flex items-center gap-1 text-[var(--color-fg-subtle)]"> <span class="mr-2 hidden text-xs uppercase tracking-wider sm:inline">Share</span> <a href="https://twitter.com/intent/tweet?text=My%20fully%20offline%20AI-assisted%20Linux%20development%20machine%0A%0A&url=https%3A%2F%2Fdeepu.tech%2Fmy-fully-offline-ai-assisted-linux-development-machine%2F&via=deepu105" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter" title="Share on Twitter" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:x">   <symbol id="ai:simple-icons:x" viewBox="0 0 24 24"><path fill="currentColor" d="M14.234 10.162L22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299l-.929-1.329L3.076 1.56h3.182l5.965 8.532l.929 1.329l7.754 11.09h-3.182z"/></symbol><use href="#ai:simple-icons:x"></use>  </svg> </a><a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fdeepu.tech%2Fmy-fully-offline-ai-assisted-linux-development-machine%2F&title=My%20fully%20offline%20AI-assisted%20Linux%20development%20machine&summary=My%20fully%20offline%20AI-assisted%20Linux%20development%20machine&source=Technorage" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" title="Share on LinkedIn" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:linkedin">   <symbol id="ai:simple-icons:linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037c-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.06 2.06 0 0 1-2.063-2.065a2.064 2.064 0 1 1 2.063 2.065m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></symbol><use href="#ai:simple-icons:linkedin"></use>  </svg> </a><a href="https://bsky.app/intent/compose?text=My%20fully%20offline%20AI-assisted%20Linux%20development%20machine%0A%0Ahttps%3A%2F%2Fdeepu.tech%2Fmy-fully-offline-ai-assisted-linux-development-machine%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on BlueSky" title="Share on BlueSky" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:bluesky">   <symbol id="ai:simple-icons:bluesky" viewBox="0 0 24 24"><path fill="currentColor" d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037c-.856 3.061-3.978 3.842-6.755 3.37c4.854.826 6.089 3.562 3.422 6.299c-5.065 5.196-7.28-1.304-7.847-2.97c-.104-.305-.152-.448-.153-.327c0-.121-.05.022-.153.327c-.568 1.666-2.782 8.166-7.847 2.97c-2.667-2.737-1.432-5.473 3.422-6.3c-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></symbol><use href="#ai:simple-icons:bluesky"></use>  </svg> </a><a href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdeepu.tech%2Fmy-fully-offline-ai-assisted-linux-development-machine%2F&t=My%20fully%20offline%20AI-assisted%20Linux%20development%20machine" target="_blank" rel="noopener noreferrer" aria-label="Share on Hacker News" title="Share on Hacker News" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:ycombinator">   <symbol id="ai:simple-icons:ycombinator" viewBox="0 0 24 24"><path fill="currentColor" d="M0 24V0h24v24zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896z"/></symbol><use href="#ai:simple-icons:ycombinator"></use>  </svg> </a><a href="https://www.reddit.com/submit?url=https%3A%2F%2Fdeepu.tech%2Fmy-fully-offline-ai-assisted-linux-development-machine%2F&title=My%20fully%20offline%20AI-assisted%20Linux%20development%20machine" target="_blank" rel="noopener noreferrer" aria-label="Share on Reddit" title="Share on Reddit" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:reddit">   <symbol id="ai:simple-icons:reddit" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286A.72.72 0 0 0 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0m4.388 3.199a1.999 1.999 0 1 1-1.947 2.46v.002a2.37 2.37 0 0 0-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363a2.802 2.802 0 1 1 2.908 4.753c-.088 3.256-3.637 5.876-7.997 5.876c-4.361 0-7.905-2.617-7.998-5.87a2.8 2.8 0 0 1 1.189-5.34c.645 0 1.239.218 1.712.585c1.275-.79 2.881-1.291 4.64-1.365v-.01a3.23 3.23 0 0 1 2.88-3.207a2 2 0 0 1 1.959-1.595m-8.085 8.376c-.784 0-1.459.78-1.506 1.797s.64 1.429 1.426 1.429s1.371-.369 1.418-1.385s-.553-1.841-1.338-1.841m7.406 0c-.786 0-1.385.824-1.338 1.841s.634 1.385 1.418 1.385c.785 0 1.473-.413 1.426-1.429c-.046-1.017-.721-1.797-1.506-1.797m-3.703 4.013c-.974 0-1.907.048-2.77.135a.222.222 0 0 0-.183.305a3.2 3.2 0 0 0 2.953 1.964a3.2 3.2 0 0 0 2.953-1.964a.222.222 0 0 0-.184-.305a28 28 0 0 0-2.769-.135"/></symbol><use href="#ai:simple-icons:reddit"></use>  </svg> </a> <button type="button" data-copy-link="https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine/" aria-label="Copy link" title="Copy link" class="copy-link inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="lucide:link-2">   <symbol id="ai:lucide:link-2" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></symbol><use href="#ai:lucide:link-2"></use>  </svg> </button> </div> <script>
+  document.querySelectorAll(".copy-link").forEach(function (btn) {
+    btn.addEventListener("click", async function () {
+      var url = btn.getAttribute("data-copy-link");
+      try {
+        await navigator.clipboard.writeText(url);
+        var prev = btn.title;
+        btn.title = "Copied!";
+        btn.style.color = "var(--color-accent)";
+        setTimeout(function () {
+          btn.title = prev;
+          btn.style.color = "";
+        }, 1500);
+      } catch (_) {}
+    });
+  });
+</script> </span> </div> </header> <img src="/assets/images/linux-2026/main.png" alt="My fully offline AI-assisted Linux development machine" class="mb-10 aspect-[16/9] w-full rounded-xl object-cover"> <div class="prose-blog"> <aside class="not-prose my-8 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5"> <p class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+Series · <a href="/series/gnu-linux-environment-for-developers/" class="hover:underline">GNU/Linux Environment for Developers</a> </p> <ol class="mt-3 space-y-1.5 text-sm"> <li class="flex items-baseline gap-2"> <span class="w-5 text-right text-xs text-[var(--color-fg-subtle)]">1.</span> <a href="/my-beautiful-linux-development-environment/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My beautiful Linux development environment</a> </li><li class="flex items-baseline gap-2"> <span class="w-5 text-right text-xs text-[var(--color-fg-subtle)]">2.</span> <a href="/must-have-gnome-plugins/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Must have GNOME extensions</a> </li><li class="flex items-baseline gap-2"> <span class="w-5 text-right text-xs text-[var(--color-fg-subtle)]">3.</span> <a href="/configure-a-beautiful-terminal-on-unix/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Configure a beautiful terminal on Unix with Zsh</a> </li><li class="flex items-baseline gap-2"> <span class="w-5 text-right text-xs text-[var(--color-fg-subtle)]">4.</span> <a href="/make-the-most-out-of-vscode/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My VS Code setup - Making the most out of VS Code</a> </li><li class="flex items-baseline gap-2"> <span class="w-5 text-right text-xs text-[var(--color-fg-subtle)]">5.</span> <a href="/the-state-of-linux-on-desktops/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">The state of Linux as a daily use OS in 2021</a> </li><li class="flex items-baseline gap-2"> <span class="w-5 text-right text-xs text-[var(--color-fg-subtle)]">6.</span> <a href="/my-beautiful-linux-development-environment-2021/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My sleek and modern Linux development machine in 2021</a> </li><li class="flex items-baseline gap-2"> <span class="w-5 text-right text-xs text-[var(--color-fg-subtle)]">7.</span> <span class="font-semibold text-[var(--color-fg)]">My fully offline AI-assisted Linux development machine</span> </li> </ol> <p class="mt-3 text-xs text-[var(--color-fg-subtle)]">
+Post <strong class="text-[var(--color-fg-muted)]">7</strong> of  <strong class="text-[var(--color-fg-muted)]">7</strong> </p> </aside><p>One of my most popular posts of all time was when I wrote about <a href="https://deepu.tech/my-beautiful-linux-development-environment/">my beautiful Linux development machine in 2019</a>. I followed that up in 2021 with <a href="https://deepu.tech/my-beautiful-linux-development-environment-2021/">my sleek and modern Linux development machine</a>. Since then, a lot has changed in my setup.</p>
+<p>I moved from Fedora and KDE to a mostly vanilla <a href="https://archlinux.org/">Arch Linux</a> setup. I moved from a traditional desktop environment to <a href="https://github.com/YaLTeR/niri">niri</a>, a scrolling Wayland compositor. And of course, like every developer out there, my workflow now has AI in it. But this time, I wanted something a bit different: AI-assisted development that can run fully offline on my own machine.</p>
+<p>Yes, local AI coding on Linux. What is not to love here?</p>
+<p>This is not a tutorial on how to reproduce every single bit of my setup. My full personal configuration is private because it has too much machine-specific and personal stuff. But I’m making a stripped-down public version with the bare minimum needed for Arch, niri, DMS, OpenCode, and llama.cpp at <a href="https://github.com/deepu105/archdots">deepu105/archdots</a>.</p>
+<p>This post is more about the current shape of my Linux development machine and why I ended up with this stack.</p>
+<p>This is my primary machine for all of the below.</p>
+<ul>
+<li>Rust, JavaScript, TypeScript, Java, Go, Python, Linux, and web development</li>
+<li>Running multiple web applications locally</li>
+<li>Running Docker containers and local Kubernetes clusters</li>
+<li>Kubernetes, Terraform, and cloud CLI work</li>
+<li>Writing, blogging, presentations, and demos</li>
+<li>Heavy browser usage</li>
+<li>E-mail, chat, and video conferencing</li>
+<li>Screen recording, screenshots, video editing, and light media work</li>
+<li>Running local LLMs for coding, refactoring, and code review</li>
+<li>Testing AI tools without sending every prompt to a cloud provider</li>
+</ul>
+<h2 id="machine-configuration">Machine configuration</h2>
+<p>The configuration of the machine is quite crucial for this setup. Running a browser, a few IDEs, Docker, terminals, and local LLMs is not exactly a light workload.</p>
+<p>My current machine is an <a href="https://rog.asus.com/laptops/rog-flow/rog-flow-z13-2025/">ASUS ROG Flow Z13</a> 2025 model. It is a weird little beast. It is technically a tablet, but it has enough CPU, GPU, and memory to behave like a mobile workstation.</p>
+<p>Here is the current setup.</p>
+<ul>
+<li><strong>Model</strong>: ASUS ROG Flow Z13 GZ302EA</li>
+<li><strong>Processor</strong>: AMD Ryzen AI Max+ 395, 16 cores and 32 threads</li>
+<li><strong>Graphics</strong>: AMD Radeon 8060S integrated GPU with 40 compute units</li>
+<li><strong>Memory</strong>: 128GB unified memory. I have assigned 64GB to the GPU and 64GB to the CPU. This is configurable in the BIOS.</li>
+<li><strong>Storage</strong>: 2TB NVMe SSD</li>
+<li><strong>Built-in display</strong>: 13-inch, 2560x1600, 180Hz</li>
+<li><strong>External displays</strong>: 34-inch 3440x1440 monitor and 27-inch 2560x1440 monitor</li>
+<li><strong>Camera</strong>: Razer Kiyo Pro</li>
+<li><strong>Keyboard and mouse</strong>: Keychron K2 and Logitech MX Vertical</li>
+</ul>
+<p>The memory is the most interesting part here. For normal development work, 32GB is still fine and 64GB is great. But for local AI work, memory changes everything. A 27B quantized model, a large context window, Docker, Chrome, and an editor can happily eat memory like there is no tomorrow.</p>
+<p>Having that much unified memory means the machine can run a useful local coding model without feeling like a science experiment. That is a big deal.</p>
+<h2 id="operating-system">Operating system</h2>
+<p>I praised Fedora in the previous posts, and I still think Fedora is one of the best Linux distributions for most developers. Updates are smooth, new packages land often, and it mostly stays out of the way.</p>
+<p>But this time I went with vanilla <a href="https://archlinux.org/">Arch Linux</a>. I know, rolling release and all that. I have been using Linux long enough to know what I was signing up for.</p>
+<p>The main reason was simple: I wanted the latest kernel, <a href="https://www.mesa3d.org/">Mesa</a>, <a href="https://rocm.docs.amd.com/">ROCm</a>-adjacent bits, Wayland tools, and desktop packages without waiting for the next distro release. New hardware like the Flow Z13 usually benefits from being closer to the bleeding edge. Arch gives me that. Well, OK, I also fell in love with the sexy new compositors like niri and Hyprland, and Arch is a great way to run those without waiting for backports. I started with Hyprland, but I ended up liking niri better for my workflow, and Arch made it easy to switch and experiment.</p>
+<p>My installation is still fairly boring, and I mean that as a compliment.</p>
+<ul>
+<li><a href="https://btrfs.readthedocs.io/">Btrfs</a> for root, home, cache, and log subvolumes</li>
+<li><a href="https://www.gnu.org/software/grub/">GRUB</a> for boot</li>
+<li><a href="https://github.com/Morganamilo/paru">paru</a> for pacman and AUR packages</li>
+<li><a href="https://github.com/linuxmint/timeshift">Timeshift</a> and <code>grub-btrfs</code> for snapshots</li>
+<li><a href="https://pipewire.org/">PipeWire</a> for audio</li>
+<li><a href="https://networkmanager.dev/">NetworkManager</a> for networking</li>
+<li><a href="https://www.docker.com/">Docker</a>, <a href="https://distrobox.it/">Distrobox</a>, <a href="https://flatpak.org/">Flatpak</a>, and a bit of <a href="https://brew.sh/">Homebrew</a> where it makes sense</li>
+</ul>
+<p>I also use <a href="https://github.com/topgrade-rs/topgrade">Topgrade</a> to keep the system updated. My private config even wires it into <a href="https://github.com/AvengeMedia/DankMaterialShell">DankMaterialShell</a>, so I can see available updates from the bar and trigger an update for everything on the system from pacman/AUR, brew, cargo, npm, VS Code plugins, Docker images, and so on in Kitty.</p>
+<p>Again, quite simple, at least in my eyes.</p>
+<h2 id="desktop-environment-or-lack-of-one">Desktop environment, or lack of one</h2>
+<p>This is probably the biggest change from my previous setup. I no longer run GNOME or KDE as my main desktop. I use <a href="https://github.com/YaLTeR/niri">niri</a>, which is a scrollable tiling Wayland compositor.</p>
+<p>If you have not used niri, the workflow is quite different from a regular tiling window manager. Instead of forcing everything into a fixed grid, windows live in columns and you scroll horizontally across them. It sounds odd until it clicks. Once it clicks, it feels very natural on ultrawide monitors and laptop displays. I especially love the touchpad gestures for switching workspaces and moving windows around. It is a very fluid way to manage windows.</p>
+<p><img src="/assets/images/linux-2026/inline-2.png" alt="Scrolling workspaces in niri"/></p>
+<p>My current session looks like this.</p>
+<ul>
+<li><strong>Login manager</strong>: <a href="https://github.com/sddm/sddm">SDDM</a> on Wayland</li>
+<li><strong>Window manager</strong>: niri 26.04 on Wayland</li>
+<li><strong>Shell</strong>: <a href="https://github.com/AvengeMedia/DankMaterialShell">DankMaterialShell</a>, usually called DMS</li>
+<li><strong>Terminal</strong>: <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a></li>
+<li><strong>Theme</strong>: <a href="https://catppuccin.com/">Catppuccin</a> Macchiato everywhere. I just love this color theme.</li>
+<li><strong>Fonts</strong>: Inter Variable and JetBrainsMono Nerd Font</li>
+</ul>
+<h2 id="niri-and-dms">Niri and DMS</h2>
+<p>Niri gives me the compositor. DMS gives me the desktop shell pieces that I would otherwise have to stitch together myself.</p>
+<p>DMS replaces a lot of the usual Wayland desktop plumbing:</p>
+<ul>
+<li>Top bar</li>
+<li>Application launcher, Control center, Media controls</li>
+<li>Clipboard manager, Notification center</li>
+<li>Process and system monitoring</li>
+<li>Power menu, Lock screen</li>
+<li>Screenshot and screen recording plugins</li>
+<li>Wallpaper and theme switching</li>
+</ul>
+<p>This is the kind of stuff where I do not want to maintain five different tools and a bunch of scripts if one project does the job well enough. DMS is still young, but it is already quite useful, especially with niri. It’s also quite extensible, and I have already started adding tools that I want. For example, a locally saved <a href="https://github.com/deepu105/dms-dank-todo">TODO widget</a>.</p>
+<p>The Flow Z13 also needs some special handling. I have fixes for ASUS hotkeys, touchpad behavior, keyboard backlight, Thunderbolt rescans, and Wi-Fi quirks in my private config. The public archdots repo will only carry the reusable bits. This is Linux on new hardware, so of course there are quirks. What is a Linux experience without glitches, right?</p>
+<h2 id="development-tools">Development tools</h2>
+<p>My development tools are still mostly boring, in a good way. These are subjective choices, and they do not matter as long as you are comfortable with your tools.</p>
+<p><img src="/assets/images/linux-2026/inline-1.png" alt="My development tools"/></p>
+<p><strong>Shell</strong>: I use <a href="https://www.zsh.org/">Zsh</a> with <a href="https://github.com/zdharma-continuum/zinit">zinit</a>, <a href="https://github.com/romkatv/powerlevel10k">Powerlevel10k</a>, <a href="https://github.com/ajeetdsouza/zoxide">zoxide</a>, and <a href="https://github.com/junegunn/fzf">fzf</a>. I still use a bunch of aliases for Git, Docker, package management, Jekyll, and local AI tools.</p>
+<p><strong>Terminal</strong>: I use <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>. I have tabs, splits, clipboard bindings, quick access terminal, and a few custom keybindings. It is fast, it works well on Wayland, and it does not get in my way.</p>
+<p><strong>Editors</strong>: I use <a href="https://neovim.io/">Neovim</a> with <a href="https://www.lazyvim.org/">LazyVim</a> as my default editor. I still use <a href="https://code.visualstudio.com/">Visual Studio Code</a> depending on the project and what I am testing.</p>
+<p><strong>Toolchains</strong>: I use <a href="https://sdkman.io/">SDKMAN!</a> for JDKs, <a href="https://github.com/nvm-sh/nvm">NVM</a> for Node.js, <a href="https://rustup.rs/">rustup</a> for Rust, <a href="https://bun.sh/">Bun</a>, Go, Python, Deno, and the usual Linux build tools.</p>
+<p><strong>DevOps</strong>: Docker, Docker Compose, kubectl, kdash, Terraform, Distrobox, and so on. Some come from pacman or AUR, some from Homebrew, and some from language-specific installers.</p>
+<h2 id="offline-ai-assisted-development">Offline AI-assisted development</h2>
+<p>Now to the fun part.</p>
+<p>I use cloud AI tools as well, and they are useful. But I also wanted a setup where I can code with an AI assistant without sending code, prompts, logs, or half-written ideas to a remote API. Not because every project is secret, but because local-first tooling is a good capability to have especially in a world that’s heading towards techno oligarchy.</p>
+<p>My current stack is:</p>
+<ul>
+<li><a href="https://opencode.ai/">OpenCode</a> as the coding agent</li>
+<li>A custom <a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a> build with HIP support. This is much more performant than Ollama or LM Studio.</li>
+<li>A local <code>llama-server</code> exposing an OpenAI-compatible API on <code>127.0.0.1:18080/v1</code></li>
+<li>Qwen3.6 27B and Gemma 4 31B for local models, depending on the task. I use different quantization levels based on need, from 4-bit to 8-bit.</li>
+<li><a href="https://lmstudio.ai/">LM Studio</a> for managing models and for offline chat.</li>
+<li>ROCm/HIP acceleration on the Radeon 8060S</li>
+<li><a href="https://github.com/grinev/opencode-telegram-bot">opencode-telegram-bot</a> for managing OpenCode sessions remotely from Telegram</li>
+</ul>
+<p>Here is my OpenCode provider config:</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.6rxel.css"/><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="json"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">$schema</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;https://opencode.ai/config.json&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">  </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">provider</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">    </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">llama.cpp</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">npm</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;@ai-sdk/openai-compatible&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;llama.cpp ROCm (local)&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">options</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">baseURL</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;http://127.0.0.1:18080/v1&quot;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">models</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">qwen3-6-27b-q8-0</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.6 27B Q8_0 (local ROCm)&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">limit</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span class="indent">            </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">context</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">262144</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent">            </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">output</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">16384</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">qwen3-6-27b-q6-k</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> ...</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">qwen3-6-27b-q4-k-m</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> ...</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">gemma-4-31b-it-q4-k-m</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> ...</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">gemma-4-31b-it-q8-0</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> ...</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent">    </span><span style="--0:#979EBA">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code"><span class="indent">    </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">openrouter</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">models</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">moonshotai/kimi-k2.6</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Kimi K2.6 (OpenRouter backup)&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">limit</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">29</div></div><div class="code"><span class="indent">            </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">context</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">262144</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">30</div></div><div class="code"><span class="indent">            </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">output</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">16384</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">31</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">32</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">33</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">deepseek/deepseek-v4-pro</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">34</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;DeepSeek V4 Pro (OpenRouter backup)&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">35</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">limit</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">36</div></div><div class="code"><span class="indent">            </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">context</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">1048576</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">37</div></div><div class="code"><span class="indent">            </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">output</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">384000</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">38</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">39</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">40</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">41</div></div><div class="code"><span class="indent">    </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">42</div></div><div class="code"><span class="indent">  </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">43</div></div><div class="code"><span style="--0:#979EBA">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="{  &#34;$schema&#34;: &#34;https://opencode.ai/config.json&#34;,  &#34;provider&#34;: {    &#34;llama.cpp&#34;: {      &#34;npm&#34;: &#34;@ai-sdk/openai-compatible&#34;,      &#34;name&#34;: &#34;llama.cpp ROCm (local)&#34;,      &#34;options&#34;: {        &#34;baseURL&#34;: &#34;http://127.0.0.1:18080/v1&#34;      },      &#34;models&#34;: {        &#34;qwen3-6-27b-q8-0&#34;: {          &#34;name&#34;: &#34;Qwen3.6 27B Q8_0 (local ROCm)&#34;,          &#34;limit&#34;: {            &#34;context&#34;: 262144,            &#34;output&#34;: 16384          }        },        &#34;qwen3-6-27b-q6-k&#34;: ...,        &#34;qwen3-6-27b-q4-k-m&#34;: ...,        &#34;gemma-4-31b-it-q4-k-m&#34;: ...,        &#34;gemma-4-31b-it-q8-0&#34;: ...      }    },    &#34;openrouter&#34;: {      &#34;models&#34;: {        &#34;moonshotai/kimi-k2.6&#34;: {          &#34;name&#34;: &#34;Kimi K2.6 (OpenRouter backup)&#34;,          &#34;limit&#34;: {            &#34;context&#34;: 262144,            &#34;output&#34;: 16384          }        },        &#34;deepseek/deepseek-v4-pro&#34;: {          &#34;name&#34;: &#34;DeepSeek V4 Pro (OpenRouter backup)&#34;,          &#34;limit&#34;: {            &#34;context&#34;: 1048576,            &#34;output&#34;: 384000          }        }      }    }  }}"><div></div></button></div></figure></div>
+<p>I start the local model server with an alias.</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamaServer</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="llamaServer"><div></div></button></div></figure></div>
+<p>That points to a small script. It lets me pick a GGUF model, context size, and reasoning mode. It remembers the last choice, so most of the time I just start it and get going.</p>
+<p>The default model and context right now are:</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#cad3f5">Qwen3.6-27B-Q8_0.gguf - 256k context</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="Qwen3.6-27B-Q8_0.gguf - 256k context"><div></div></button></div></figure></div>
+<p>Here is a quick <code>llama-bench</code> comparison of the local models on my machine. The numbers are tokens per second with ROCm, full GPU offload, flash attention, f16 KV cache, a 4096-token prompt, a 256-token generation, and 3 repetitions.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model</th><th style="text-align:right">Quantization</th><th style="text-align:right">Size</th><th style="text-align:right">Prompt tokens/s</th><th style="text-align:right">Generation tokens/s</th></tr></thead><tbody><tr><td>Qwen3.6 27B</td><td style="text-align:right">Q4_K_M</td><td style="text-align:right">15.40 GiB</td><td style="text-align:right">260.06</td><td style="text-align:right">10.41</td></tr><tr><td>Qwen3.6 27B</td><td style="text-align:right">Q6_K</td><td style="text-align:right">20.56 GiB</td><td style="text-align:right">279.37</td><td style="text-align:right">8.70</td></tr><tr><td>Qwen3.6 27B</td><td style="text-align:right">Q8_0</td><td style="text-align:right">26.62 GiB</td><td style="text-align:right">260.12</td><td style="text-align:right">7.18</td></tr><tr><td>Gemma 4 31B IT</td><td style="text-align:right">Q4_K_M</td><td style="text-align:right">17.39 GiB</td><td style="text-align:right">209.57</td><td style="text-align:right">9.12</td></tr><tr><td>Gemma 4 31B IT</td><td style="text-align:right">Q8_0</td><td style="text-align:right">30.38 GiB</td><td style="text-align:right">202.31</td><td style="text-align:right">6.19</td></tr></tbody></table>
+<p>The full context is 256k tokens. Here is a benchmark with full context for the Qwen variants.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model</th><th style="text-align:right">Quantization</th><th style="text-align:right">Size</th><th style="text-align:right">Prompt+Generation tokens/s</th></tr></thead><tbody><tr><td>Qwen3.6 27B</td><td style="text-align:right">Q4_K_M</td><td style="text-align:right">15.40 GiB</td><td style="text-align:right">67.15</td></tr><tr><td>Qwen3.6 27B</td><td style="text-align:right">Q6_K</td><td style="text-align:right">20.56 GiB</td><td style="text-align:right">65.77</td></tr><tr><td>Qwen3.6 27B</td><td style="text-align:right">Q8_0</td><td style="text-align:right">26.62 GiB</td><td style="text-align:right">64.34</td></tr></tbody></table>
+<p>Running Qwen3.6 27B Q8_0 with 256k context in reasoning mode loads around 70% of the GPU memory in my setup and gives around 64 tokens/s for prompt+generation. That is quite good for a local model with that much context.</p>
+<p>The llama.cpp build is also automated with a small script.</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">cmake</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">-S</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/mnt/work/Workspace/llms/llama.cpp</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">-B</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/mnt/work/Workspace/llms/llama.cpp/build-hip</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">-G</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">Ninja</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">-DGGML_HIP=ON</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">-DAMDGPU_TARGETS=gfx1151</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">-DCMAKE_BUILD_TYPE=Release</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">cmake</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--build</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/mnt/work/Workspace/llms/llama.cpp/build-hip</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--config</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">Release</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">-j</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;</span><span style="--0:#979EBA">$(</span><span style="--0:#8AADF4;--0fs:italic">nproc</span><span style="--0:#979EBA">)</span><span style="--0:#A6DA95">&quot;</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--target</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llama-server</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llama-bench</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="cmake -S /mnt/work/Workspace/llms/llama.cpp \  -B /mnt/work/Workspace/llms/llama.cpp/build-hip \  -G Ninja \  -DGGML_HIP=ON \  -DAMDGPU_TARGETS=gfx1151 \  -DCMAKE_BUILD_TYPE=Releasecmake --build /mnt/work/Workspace/llms/llama.cpp/build-hip \  --config Release \  -j &#34;$(nproc)&#34; \  --target llama-server llama-bench"><div></div></button></div></figure></div>
+<p>The server runs like this under the hood.</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#CAD3F5">ROCBLAS_USE_HIPBLASLT</span><span style="--0:#8BD5CA">=</span><span style="--0:#A6DA95">1</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4;--0fs:italic">llama-server</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--model</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;</span><span style="--0:#CAD3F5">$model</span><span style="--0:#A6DA95">&quot;</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--alias</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;</span><span style="--0:#CAD3F5">$alias_name</span><span style="--0:#A6DA95">&quot;</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--host</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">127.0.0.1</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--port</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">18080</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--ctx-size</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;</span><span style="--0:#CAD3F5">$ctx</span><span style="--0:#A6DA95">&quot;</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--n-gpu-layers</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">999</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--flash-attn</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">on</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--no-mmap</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--cache-type-k</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">f16</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--cache-type-v</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">f16</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--batch-size</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">4096</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--ubatch-size</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">512</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">--reasoning</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;</span><span style="--0:#CAD3F5">$reasoning</span><span style="--0:#A6DA95">&quot;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="ROCBLAS_USE_HIPBLASLT=1 llama-server \  --model &#34;$model&#34; \  --alias &#34;$alias_name&#34; \  --host 127.0.0.1 \  --port 18080 \  --ctx-size &#34;$ctx&#34; \  --n-gpu-layers 999 \  --flash-attn on \  --no-mmap \  --cache-type-k f16 \  --cache-type-v f16 \  --batch-size 4096 \  --ubatch-size 512 \  --reasoning &#34;$reasoning&#34;"><div></div></button></div></figure></div>
+<p>Once the server is running, OpenCode talks to it like it would talk to any OpenAI-compatible provider. The difference is that the whole loop stays on my machine.</p>
+<p>It’s very elegant IMO!</p>
+<p>I do not only use local models, though. For complex tasks, I also use frontier models through <a href="https://openrouter.ai/">OpenRouter</a>, mostly <a href="https://openrouter.ai/moonshotai/kimi-k2.6">Kimi K2.6</a> and <a href="https://openrouter.ai/deepseek/deepseek-v4">DeepSeek V4</a>. Occasionally I use Copilot CLI and at work, I use Claude Code as well.</p>
+<p>For the harness, I prefer OpenCode. I do not see any noticeable performance difference between Claude Code and OpenCode with Kimi or DeepSeek for the kind of coding tasks I do, which is mostly open source projects in Rust and TypeScript. That might vary for other people, of course, but for me OpenCode has been quite good and I especially prefer its UX over others. I’m trying <a href="https://github.com/earendil-works/pi">Pi</a> on the side as well to see if I keep it in the mix.</p>
+<h2 id="why-local-ai-coding-matters-to-me">Why local AI coding matters to me</h2>
+<p>Local AI is not a replacement for everything. The best hosted models are still better for many tasks, especially when you need maximum reasoning quality or very fast responses. But local models have their own sweet spot.</p>
+<p>For me, the advantages are clear.</p>
+<ul>
+<li><strong>Education/Fun</strong>: Running a local model is a great way to learn about how these models work, what kind of hardware they need, and how to optimize them. It is a fun hobby in itself. This has already paid off in terms of understanding the AI landscape better and being able to troubleshoot issues that come up in my work.</li>
+<li><strong>Privacy</strong>: I can use it on private code, half-baked ideas, local logs, and experiments without thinking about what leaves the machine.</li>
+<li><strong>Offline use</strong>: It works without internet. That is great while travelling or when the network is flaky.</li>
+<li><strong>Cost control</strong>: No token anxiety for long coding sessions and experiments. I can run it as long as I want without worrying about bills.</li>
+<li><strong>Hackability</strong>: I can change model, context, cache type, build flags, server parameters, and client config whenever I want.</li>
+</ul>
+<p>But there are tradeoffs.</p>
+<ul>
+<li>The model quality depends heavily on the model and quantization. Qwen3.6 27B, for example, has been good in most tasks I threw at it so far, but once context keeps growing the model compacts and starts hallucinating. So for long context tasks, I use Kimi or DeepSeek. I did some non-scientific benchmarks by giving Claude Opus 4.7, Qwen3.6 27B, and Kimi K2.6 the same set of prompts, and the difference in quality was noticeable but not too dramatic. The local model at times even did better than others, like catching stuff in review that Claude Opus missed.</li>
+<li>Large context is useful, but it is not free since it affects tokens/second. Qwen3.6 27B at 256k context is noticeably slow compared to a hosted frontier model. Like maybe twice or three times slower.</li>
+<li>ROCm on fresh AMD hardware can be a bit of a moving target but thanks to current models, a fix for any issue has been a prompt away.</li>
+<li>Some agent workflows are slower locally than with hosted models.</li>
+<li>You have to care about model storage, updates, server flags, GPU memory, and cooling.</li>
+</ul>
+<p>So no, I do not think everyone should run a local coding model. But if you enjoy owning your stack and you have the hardware for it, it is a very satisfying setup.</p>
+<h2 id="the-ai-workflow">The AI workflow</h2>
+<p>My usual workflow is quite simple.</p>
+<ol>
+<li>Start the local model server with <code>llamaServer</code>.</li>
+<li>Pick the model and context preset if I want to change it.</li>
+<li>Start <code>opencode</code> in the repository and pick a model if I want to change it.</li>
+<li>Ask it to inspect the codebase before making changes.</li>
+<li>Let it edit, test, and iterate, while I review the changes using the <a href="https://github.com/grinev/opencode-telegram-bot">opencode-telegram-bot</a> remotely from Telegram.</li>
+</ol>
+<p>For small tasks, I turn reasoning off because it makes tool-heavy work faster. For design questions, debugging, or code review, I turn reasoning on. The script makes that a prompt instead of forcing me to remember a long command.</p>
+<p>This is the kind of boring automation I like. It removes friction without hiding what is actually happening.</p>
+<h2 id="productivity-and-media-tools">Productivity and media tools</h2>
+<p>Most of my productivity stack did not change much.</p>
+<p><strong>Browser</strong>: Google Chrome is still my primary browser. I also keep Firefox around.</p>
+<p><strong>Password management</strong>: I use Bitwarden and a YubiKey.</p>
+<p><strong>Communication</strong>: Zoom, Signal, Telegram, and the usual suspects.</p>
+<p><strong>Screen capture</strong>: DMS screenshot plugin, screen recorder plugin, and OBS Studio when I need more control.</p>
+<p><strong>Images and video</strong>: Gimp, Inkscape, Kdenlive, and a few Flatpak utilities like Upscayl and Buzz.</p>
+<p><strong>File manager</strong>: Dolphin, because KDE apps are still excellent even when KDE is not my main desktop.</p>
+<h2 id="what-is-still-not-perfect">What is still not perfect</h2>
+<p>Of course, not everything is perfect. This is bleeding-edge Linux, on a new ASUS convertible, with a new AMD chip, a Wayland compositor, and a local AI stack. If everything worked perfectly on day one, I would be suspicious.</p>
+<p>Some current rough edges are below.</p>
+<ul>
+<li>Suspend and wake-up glitches at times when I have my dock connected. Usually, the monitors refuse to wake up and I have to reboot or rescan Thunderbolt devices. I have a workaround for this, but it is still a bit annoying.</li>
+<li>Hibernate is not practical because of the large memory.</li>
+<li>Screen recording with OBS can be a bit tricky to set up and get right on Wayland, especially with niri. The built-in DMS screen recorder is good for quick captures but not for longer sessions or when I need more control. I’m still tweaking my OBS setup for this.</li>
+<li>The Flow Z13 has a cool transparent window on the back with RGB lights. It doesn’t work under Linux. I’m planning to try and fix that with Qwen3.6 27B and OpenCode. It would be a complex hardware project that could test the model’s ability.</li>
+<li>ROCm/HIP support on new integrated GPUs needs patience. I haven’t had any issues lately, so maybe it has stabilized.</li>
+</ul>
+<p>None of these are deal breakers for me. Most are either already fixed in my private config or on my TODO list.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This is easily the most interesting Linux machine I have used so far. My 2019 setup was beautiful, my 2021 setup was sleek, and this one feels like a proper local-first AI development workstation.</p>
+<p>Vanilla Arch gives me the latest bits. Niri gives me a workflow that fits both the tiny built-in screen and my ultrawide monitor. DMS gives me the desktop polish without a full desktop environment. And OpenCode plus llama.cpp gives me an AI coding assistant that can run without the cloud.</p>
+<p>It is not the right setup for everyone. If you want a machine that never asks you to think about kernels, ROCm, compositor configs, or model files, this is probably not it. But for me, this is exactly the kind of developer machine that sparks joy.</p>
+<p>The right tool for the right job.</p>
+<p>If you like this article, please leave a like or a comment.</p>
+<p>You can follow me on <a href="https://bsky.app/profile/deepu105.bsky.social">Bluesky</a> and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p> <hr class="my-12 border-[var(--color-border)]"> <div class="not-prose mb-8 flex flex-wrap gap-2"> <a href="/tags/#linux" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#linux </a><a href="/tags/#archlinux" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#archlinux </a><a href="/tags/#development" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#development </a><a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#ai </a><a href="/tags/#niri" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#niri </a> </div><nav class="not-prose mt-10 grid gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 sm:grid-cols-2"> <p class="sm:col-span-2 text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+More in <a href="/series/gnu-linux-environment-for-developers/" class="hover:underline">GNU/Linux Environment for Developers</a> </p> <a rel="prev" href="/my-beautiful-linux-development-environment-2021/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4 transition hover:border-[var(--color-accent)]"> <span class="text-xs text-[var(--color-fg-subtle)]">← Previous in series</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> My sleek and modern Linux development machine in 2021 </span> </a> <span></span> </nav><nav class="not-prose mt-10 grid gap-4 border-t border-[var(--color-border)] pt-8 sm:grid-cols-2"> <span></span> <a href="/webauthn-and-passkeys-for-java-developers/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 text-right transition hover:border-[var(--color-border-strong)]"> <span class="text-xs text-[var(--color-fg-subtle)]">Older →</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> A Passwordless Future: Passkeys for Java Developers </span> </a> </nav>  </div> <section class="not-prose mt-12 border-t border-[var(--color-border)] pt-8"> <h2 class="font-display mb-4 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Comments</h2> <div id="giscus-mount"></div> </section> <script src="https://giscus.app/client.js" data-repo="deeputech/deeputech.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk" data-category="Comments" data-category-id="DIC_kwDODBl9a84C8yBt" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async>(function(){const config = {"repo":"deeputech/deeputech.github.io","repoId":"MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk","category":"Comments","categoryId":"DIC_kwDODBl9a84C8yBt","mapping":"pathname","strict":"0","reactionsEnabled":"1","emitMetadata":"0","inputPosition":"top","lang":"en"};
+})();</script> <script>
+  // Re-theme Giscus iframe when the site theme toggles.
+  (function () {
+    function send(theme) {
+      var iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme === "dark" ? "dark" : "light" } } }, "https://giscus.app");
+    }
+    var html = document.documentElement;
+    var observer = new MutationObserver(function () {
+      send(html.getAttribute("data-theme") || "light");
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["data-theme"] });
+  })();
+</script> </article> <aside class="hidden lg:block"> <div class="sticky top-24"> <nav class="toc text-sm" aria-label="Table of contents" data-astro-cid-obewoz47><p class="font-display mb-3 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase" data-astro-cid-obewoz47>
+On this page
+</p><ul class="space-y-1.5" data-astro-cid-obewoz47><li class data-astro-cid-obewoz47><a href="#machine-configuration" data-toc-target="machine-configuration" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Machine configuration</a></li><li class data-astro-cid-obewoz47><a href="#operating-system" data-toc-target="operating-system" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Operating system</a></li><li class data-astro-cid-obewoz47><a href="#desktop-environment-or-lack-of-one" data-toc-target="desktop-environment-or-lack-of-one" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Desktop environment, or lack of one</a></li><li class data-astro-cid-obewoz47><a href="#niri-and-dms" data-toc-target="niri-and-dms" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Niri and DMS</a></li><li class data-astro-cid-obewoz47><a href="#development-tools" data-toc-target="development-tools" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Development tools</a></li><li class data-astro-cid-obewoz47><a href="#offline-ai-assisted-development" data-toc-target="offline-ai-assisted-development" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Offline AI-assisted development</a></li><li class data-astro-cid-obewoz47><a href="#why-local-ai-coding-matters-to-me" data-toc-target="why-local-ai-coding-matters-to-me" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Why local AI coding matters to me</a></li><li class data-astro-cid-obewoz47><a href="#the-ai-workflow" data-toc-target="the-ai-workflow" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>The AI workflow</a></li><li class data-astro-cid-obewoz47><a href="#productivity-and-media-tools" data-toc-target="productivity-and-media-tools" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Productivity and media tools</a></li><li class data-astro-cid-obewoz47><a href="#what-is-still-not-perfect" data-toc-target="what-is-still-not-perfect" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>What is still not perfect</a></li><li class data-astro-cid-obewoz47><a href="#conclusion" data-toc-target="conclusion" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Conclusion</a></li></ul></nav><script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".toc-link"));
+    if (!links.length) return;
+    var bySlug = {};
+    links.forEach(function (l) {
+      bySlug[l.getAttribute("data-toc-target")] = l;
+    });
+    var headings = Object.keys(bySlug)
+      .map(function (slug) {
+        return document.getElementById(slug);
+      })
+      .filter(Boolean);
+    if (!headings.length) return;
+
+    var current = null;
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // Find the topmost intersecting heading.
+        var visible = entries
+          .filter(function (e) {
+            return e.isIntersecting;
+          })
+          .sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+        if (visible.length) {
+          var newCurrent = visible[0].target.id;
+          if (newCurrent !== current) {
+            if (current && bySlug[current]) bySlug[current].removeAttribute("data-active");
+            current = newCurrent;
+            if (bySlug[current]) bySlug[current].setAttribute("data-active", "true");
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -70% 0px" },
+    );
+    headings.forEach(function (h) {
+      observer.observe(h);
+    });
+  })();
+</script> </div> </aside> </div> </div>  </main> <aside class="alert-bar mt-16"> <div class="mx-auto max-w-3xl px-4 py-6 text-center text-sm text-[var(--color-fg-muted)] sm:px-6"> <p>
+Never miss a story from Technorage — follow me on
+<a rel="me" target="_blank" href="https://mastodon.social/@deepu105" class="text-[var(--color-accent)] hover:underline">Mastodon</a>,
+<a rel="me" target="_blank" href="https://www.linkedin.com/in/deepu05" class="text-[var(--color-accent)] hover:underline">LinkedIn</a>,
+      or
+<a rel="me" target="_blank" href="https://twitter.com/deepu105" class="text-[var(--color-accent)] hover:underline">Twitter</a>.
+      Or
+<a href="/feed.xml" class="text-[var(--color-accent)] hover:underline">subscribe via RSS</a>.
+</p> <p class="mt-2 text-xs text-[var(--color-fg-subtle)]">
+This site uses Google Analytics which places
+<a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage#gtagjs_google_analytics_4_-_cookie_usage" target="_blank" rel="noopener noreferrer" class="underline-offset-2 hover:underline">a few cookies</a>. By using the site, you agree to their use.
+</p> </div> </aside> <footer class="border-t border-[var(--color-border)] py-10 text-sm text-[var(--color-fg-muted)]"> <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 sm:px-6 md:flex-row md:items-center md:justify-between"> <div class="flex flex-col gap-1"> <span>
+© 2026 Deepu K Sasidharan ·
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" class="underline-offset-2 hover:underline">
+CC BY 4.0
+</a> </span> <span class="text-xs text-[var(--color-fg-subtle)]">
+Built with <a href="https://astro.build" class="hover:underline">Astro</a> ·
+        Hosted on <a href="https://pages.github.com/" class="hover:underline">GitHub Pages</a> </span> </div> <nav class="flex flex-wrap gap-x-4 gap-y-2 text-xs"> <a href="/blogs/" class="hover:text-[var(--color-fg)]">Blog</a> <a href="/series/" class="hover:text-[var(--color-fg)]">Series</a> <a href="/tags/" class="hover:text-[var(--color-fg)]">Tags</a> <a href="/feed.xml" class="hover:text-[var(--color-fg)]">RSS</a> <a href="/comment-policy/" class="hover:text-[var(--color-fg)]">Comments</a> </nav> </div> </footer> <dialog id="search-dialog" class="m-auto w-full max-w-xl rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-0 text-[var(--color-fg)] shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm"> <div class="flex items-center gap-3 border-b border-[var(--color-border)] px-4 py-3"> <svg class="h-4 w-4 text-[var(--color-fg-subtle)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <input id="search-input" type="search" placeholder="Search posts…" autocomplete="off" class="w-full bg-transparent text-base text-[var(--color-fg)] outline-none placeholder:text-[var(--color-fg-subtle)]"> <kbd class="rounded border border-[var(--color-border)] px-1.5 py-0.5 font-mono text-xs text-[var(--color-fg-subtle)]">esc</kbd> </div> <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2 text-sm"> <p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">
+Type to search the blog.
+</p> </div> </dialog> <script>
+  (function () {
+    var dialog = document.getElementById("search-dialog");
+    var input = document.getElementById("search-input");
+    var results = document.getElementById("search-results");
+    var trigger = document.getElementById("search-trigger");
+    if (!dialog || !input || !results) return;
+
+    var pagefind = null;
+    var loading = false;
+
+    async function loadPagefind() {
+      if (pagefind || loading) return;
+      loading = true;
+      try {
+        // Pagefind is generated at /pagefind/pagefind.js after `pagefind --site dist`
+        pagefind = await import(/* @vite-ignore */ "/pagefind/pagefind.js");
+        await pagefind.options({ excerptLength: 30 });
+      } catch (e) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Search index unavailable in dev. Run <code>npm run build</code> then <code>npm run preview</code>.</p>';
+      } finally {
+        loading = false;
+      }
+    }
+
+    function open() {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+      loadPagefind();
+      setTimeout(function () {
+        input.focus();
+      }, 0);
+    }
+    function close() {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+      input.value = "";
+      results.innerHTML =
+        '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+    }
+
+    if (trigger) trigger.addEventListener("click", open);
+    document.addEventListener("keydown", function (e) {
+      var isMac = /Mac|iPad|iPhone/.test(navigator.platform);
+      var isCmdK = (isMac ? e.metaKey : e.ctrlKey) && e.key === "k";
+      if (isCmdK) {
+        e.preventDefault();
+        open();
+      } else if (e.key === "Escape" && dialog.open) {
+        e.preventDefault();
+        close();
+      }
+    });
+    dialog.addEventListener("click", function (e) {
+      // close on backdrop click
+      if (e.target === dialog) close();
+    });
+
+    var lastQuery = "";
+    var debounceTimer = null;
+    input.addEventListener("input", function () {
+      var q = input.value.trim();
+      if (q === lastQuery) return;
+      lastQuery = q;
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () {
+        runSearch(q);
+      }, 80);
+    });
+
+    async function runSearch(q) {
+      if (!q) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+        return;
+      }
+      if (!pagefind) {
+        await loadPagefind();
+        if (!pagefind) return;
+      }
+      var search = await pagefind.search(q);
+      if (!search || !search.results.length) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">No results for &ldquo;' +
+          escapeHtml(q) +
+          '&rdquo;</p>';
+        return;
+      }
+      var top = await Promise.all(search.results.slice(0, 8).map(function (r) { return r.data(); }));
+      results.innerHTML = top
+        .map(function (d) {
+          return (
+            '<a href="' +
+            d.url +
+            '" class="block rounded-lg px-3 py-2.5 hover:bg-[var(--color-bg-subtle)]">' +
+            '<span class="font-display block text-sm font-semibold text-[var(--color-fg)]">' +
+            escapeHtml(d.meta && d.meta.title ? d.meta.title : d.url) +
+            "</span>" +
+            '<span class="mt-0.5 block text-xs text-[var(--color-fg-muted)]">' +
+            d.excerpt +
+            "</span>" +
+            "</a>"
+          );
+        })
+        .join("");
+    }
+
+    function escapeHtml(s) {
+      return s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  })();
+</script> </body></html>
