@@ -72,6 +72,11 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Belt-and-braces: stop wide children (long pre, embedded iframes,
+     oversized images) from making the document scroll sideways. Code
+     blocks already have their own overflow-x:auto so they remain
+     individually scrollable. */
+  overflow-x: clip;
 }
 
 body {
@@ -80,6 +85,37 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: clip;
+}
+
+/* Safety nets — keep media + tables + code blocks from forcing the
+   page wider than the viewport. Code blocks remain horizontally
+   scrollable inside their own frame. */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+table {
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+pre,
+.expressive-code,
+.expressive-code .frame,
+figure {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+/* Prevent long unbreakable strings (URLs, identifiers) from blowing out the
+   layout. Affects prose only; doesn't touch code blocks. */
+.prose-blog :where(p, li, h1, h2, h3, h4, h5, h6, blockquote, a) {
+  overflow-wrap: anywhere;
+  word-break: normal;
 }
 
 a {

@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
+import icon from "astro-icon";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
@@ -45,6 +46,34 @@ export default defineConfig({
           terminalTitlebarBackground: "#1e2030",
           terminalTitlebarBorderBottomColor: "#363a4f",
         },
+      },
+    }),
+    icon({
+      // Only bundle the iconify packs we explicitly use.
+      include: {
+        "simple-icons": [
+          "bluesky",
+          "mastodon",
+          "github",
+          "linkedin",
+          "x",
+          "devdotto",
+          "speakerdeck",
+          "ycombinator",
+          "reddit",
+        ],
+        lucide: [
+          "user",
+          "rss",
+          "book-open",
+          "calendar",
+          "search",
+          "sun",
+          "moon",
+          "link-2",
+          "copy",
+          "chevron-right",
+        ],
       },
     }),
     mdx(),
