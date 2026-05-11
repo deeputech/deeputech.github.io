@@ -235,12 +235,9 @@ async function publish() {
     } catch (err) {
       const detail = err.response?.data?.error ?? err.response?.data ?? err.message;
       plan.failed.push({ filename, error: String(detail) });
-      if (!dryRun) {
-        console.error(`✗ ${filename}: ${detail}`);
-        process.exit(1);
-      } else {
-        console.error(`✗ ${filename}: ${detail}`);
-      }
+      console.error(`✗ ${filename}: ${detail}`);
+      // Carry on instead of aborting the whole run. The summary at the
+      // bottom lists every failure so you can fix them and re-run.
     }
   }
 
@@ -269,6 +266,12 @@ async function publish() {
     }
   }
   console.log("");
+
+  // Surface non-zero exit if anything failed in a real run, so CI/publish.sh
+  // notices. Dry-run never fails the process.
+  if (!dryRun && plan.failed.length > 0) {
+    process.exit(2);
+  }
 }
 
 publish();
