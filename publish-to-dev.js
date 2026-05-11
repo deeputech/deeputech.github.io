@@ -21,7 +21,9 @@ const DEV_TO_API = "https://dev.to/api/articles";
 
 const http = axios.create({
   baseURL: DEV_TO_API,
-  timeout: 10000,
+  // Dev.to's article PUT/POST endpoints occasionally take 10+ seconds for
+  // longer posts. 30s leaves plenty of headroom without hanging the script.
+  timeout: 30000,
   headers: {
     "Content-Type": "application/json",
     "api-key": process.env.DEV_API_KEY,
@@ -90,7 +92,11 @@ function mdxToDevtoMarkdown(body) {
   out = out.replace(/\\\{/g, "{").replace(/\\\}/g, "}");
   // 4. Unescape pseudo-tag entities the migration emitted (&lt;...&gt;)
   out = out.replace(/&lt;/g, "<").replace(/&gt;/g, ">");
-  // 5. Trim leading whitespace left by stripped imports
+  // 5. Expand site-relative image URLs in markdown image syntax. Dev.to
+  //    hosts the post on its own domain, so /assets/images/... 404s; needs
+  //    https://deepu.tech/assets/images/... .
+  out = out.replace(/(!\[[^\]]*\]\()\/([^)]+)\)/g, `$1${SITE_URL}/$2)`);
+  // 6. Trim leading whitespace left by stripped imports
   out = out.replace(/^\s+/, "");
   return out;
 }
