@@ -18,3 +18,6 @@ _site
 .sass-cache
 *~
 _drafts
+AGENTS.md
+WRITING-STYLE.md
+.claude/
