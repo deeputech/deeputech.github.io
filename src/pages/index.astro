@@ -21,8 +21,26 @@ const projects = [
   { name: "KDash", href: "https://github.com/kdash-rs/kdash", note: "A Kubernetes dashboard, in Rust." },
   { name: "JWT UI", href: "https://github.com/jwt-rs/jwt-ui", note: "Terminal UI for decoding JWTs." },
   { name: "JDL Studio", href: "https://start.jhipster.tech/jdl-studio/", note: "Online editor for the JHipster Domain Language." },
-  { name: "JHipster React", href: "https://github.com/jhipster/jhipster-react-native", note: "React Native + JHipster." },
-  { name: "Entity Audit Generator", href: "https://github.com/hipster-labs/generator-jhipster-entity-audit", note: "Yeoman generator to enable entity audit in JHipster apps." },
+  {
+    name: "auth0-token-vault-cli",
+    href: "https://github.com/deepu105/auth0-token-vault-cli",
+    note: "CLI tool for using Auth0 Token Vault from AI Agents.",
+  },
+  {
+    name: "Auth0 Assistant0",
+    href: "https://github.com/auth0-samples/auth0-assistant0",
+    note: "An AI personal assistant that consolidates your digital life by dynamically accessing multiple tools to help you stay organized and efficient.",
+  },
+  {
+    name: "Dank Todo",
+    href: "https://github.com/deepu105/dms-dank-todo",
+    note: "A todo widget for the Dank Material Shell.",
+  },
+  {
+    name: "JHipster Registry",
+    href: "https://github.com/jhipster/jhipster-registry",
+    note: "Service Registry, based on Spring Cloud Netflix Eureka and Spring Cloud Config",
+  },
 ];
 
 const sections = [
@@ -44,16 +62,13 @@ const sections = [
       <div>
         <!-- Hero -->
         <section id="about" class="scroll-mt-24">
-          <p class="mb-3 text-sm font-medium tracking-wider text-[var(--color-accent)] uppercase">
-            Hi, I'm Deepu 👋
-          </p>
+          <p class="mb-3 text-sm font-medium tracking-wider text-[var(--color-accent)] uppercase">Hi, I'm Deepu 👋</p>
           <h1 class="font-display text-4xl leading-tight font-bold tracking-tight text-[var(--color-fg)] sm:text-6xl">
             I build, I write, I rant about technology.
           </h1>
           <p class="mt-6 text-lg text-[var(--color-fg-muted)]">
             <strong>Staff Developer Advocate at Auth0 by Okta.</strong> Java Champion · Co-chair of
-            <a href="https://jhipster.tech">JHipster</a> · open-source aficionado and a polyglot
-            developer.
+            <a href="https://jhipster.tech">JHipster</a> · open-source aficionado and a polyglot developer.
           </p>
 
           <div class="mt-6">
@@ -61,13 +76,20 @@ const sections = [
           </div>
 
           <ul class="prose-blog mt-8 space-y-2 text-[var(--color-fg-muted)]">
-            <li>Co-chair of <a href="https://jhipster.tech">JHipster</a>, the rapid application development platform for modern Java + JS.</li>
+            <li>
+              Co-chair of <a href="https://jhipster.tech">JHipster</a>, the rapid application development platform for modern Java + JS.
+            </li>
             <li>Creator of <a href="https://github.com/kdash-rs/kdash">KDash</a>, a terminal dashboard for Kubernetes written in Rust.</li>
             <li>Creator of <a href="https://github.com/jwt-rs/jwt-ui">JWT UI</a>, a terminal UI for decoding/encoding JSON Web Tokens.</li>
-            <li>Creator of <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a>, JHipster React, JHipster Blueprints, and the JHipster Entity Audit Generator.</li>
+            <li>
+              Creator of <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a>, JHipster React, JHipster Blueprints, and the
+              JHipster Entity Audit Generator.
+            </li>
             <li>Alumni of Adyen, TCS, and XebiaLabs.</li>
             <li><a href="https://dev.java/community/jcs/">Java Champion</a> ☕</li>
-            <li>Polyglot developer working with Java, Rust, JavaScript, TypeScript, Go, and Kotlin. Dabbling with a few others occasionally.</li>
+            <li>
+              Polyglot developer working with Java, Rust, JavaScript, TypeScript, Go, and Kotlin. Dabbling with a few others occasionally.
+            </li>
             <li>Cloud and container technology enthusiast and advocate.</li>
             <li>Published author, international conference speaker, and avid blogger.</li>
             <li>Passionate about developer experience and user experience.</li>
@@ -132,7 +154,9 @@ const sections = [
             <section id="series" class="mt-20 scroll-mt-24">
               <header class="mb-6 flex items-baseline justify-between">
                 <h2 class="font-display text-2xl font-bold tracking-tight">Deep-dive series</h2>
-                <a href="/series/" class="text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-accent)]">All series →</a>
+                <a href="/series/" class="text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-accent)]">
+                  All series →
+                </a>
               </header>
               <ul class="grid gap-3 sm:grid-cols-2">
                 {topSeries.map((s) => (
@@ -166,9 +190,7 @@ const sections = [
       <!-- Sticky sidemenu -->
       <aside class="hidden lg:block">
         <nav class="sticky top-24 text-sm" aria-label="Page sections">
-          <p class="font-display mb-3 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">
-            On this page
-          </p>
+          <p class="font-display mb-3 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">On this page</p>
           <ul class="space-y-1">
             {
               sections.map((s) => (
@@ -203,22 +225,38 @@ const sections = [
     var links = Array.prototype.slice.call(document.querySelectorAll(".page-nav-link"));
     if (!links.length) return;
     var bySlug = {};
-    links.forEach(function (l) { bySlug[l.getAttribute("data-section-target")] = l; });
-    var sections = Object.keys(bySlug).map(function (s) { return document.getElementById(s); }).filter(Boolean);
+    links.forEach(function (l) {
+      bySlug[l.getAttribute("data-section-target")] = l;
+    });
+    var sections = Object.keys(bySlug)
+      .map(function (s) {
+        return document.getElementById(s);
+      })
+      .filter(Boolean);
     if (!sections.length) return;
     var current = null;
-    var observer = new IntersectionObserver(function (entries) {
-      var visible = entries.filter(function (e) { return e.isIntersecting; })
-        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; });
-      if (visible.length) {
-        var n = visible[0].target.id;
-        if (n !== current) {
-          if (current && bySlug[current]) bySlug[current].removeAttribute("data-active");
-          current = n;
-          if (bySlug[current]) bySlug[current].setAttribute("data-active", "true");
+    var observer = new IntersectionObserver(
+      function (entries) {
+        var visible = entries
+          .filter(function (e) {
+            return e.isIntersecting;
+          })
+          .sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+        if (visible.length) {
+          var n = visible[0].target.id;
+          if (n !== current) {
+            if (current && bySlug[current]) bySlug[current].removeAttribute("data-active");
+            current = n;
+            if (bySlug[current]) bySlug[current].setAttribute("data-active", "true");
+          }
         }
-      }
-    }, { rootMargin: "-100px 0px -60% 0px" });
-    sections.forEach(function (s) { observer.observe(s); });
+      },
+      { rootMargin: "-100px 0px -60% 0px" },
+    );
+    sections.forEach(function (s) {
+      observer.observe(s);
+    });
   })();
 </script>

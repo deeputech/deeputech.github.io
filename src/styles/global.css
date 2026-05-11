@@ -15,7 +15,7 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-display: "Lexend", "Inter", ui-sans-serif, system-ui, sans-serif;
 
-  /* Latte (light, default) */
+  /* Latte (light, default) — primary = mauve, the signature Catppuccin accent */
   --color-bg: #eff1f5;          /* base */
   --color-bg-subtle: #e6e9ef;   /* mantle */
   --color-bg-muted: #dce0e8;    /* crust */
@@ -25,16 +25,19 @@
   --color-fg-subtle: #6c6f85;   /* subtext0 */
   --color-border: #ccd0da;      /* surface0 */
   --color-border-strong: #bcc0cc; /* surface1 */
-  --color-accent: #40a02b;      /* green */
-  --color-accent-hover: #179299;/* teal — hover shifts hue */
+  --color-accent: #8839ef;      /* mauve */
+  --color-accent-hover: #7287fd;/* lavender — hover shifts toward blue */
   --color-mauve: #8839ef;
+  --color-lavender: #7287fd;
   --color-blue: #1e66f5;
+  --color-pink: #ea76cb;
+  --color-green: #40a02b;
   --color-peach: #fe640b;
   --color-red: #d20f39;
 }
 
 [data-theme="dark"] {
-  /* Macchiato */
+  /* Macchiato — primary = mauve */
   --color-bg: #24273a;          /* base */
   --color-bg-subtle: #1e2030;   /* mantle */
   --color-bg-muted: #181926;    /* crust */
@@ -44,10 +47,13 @@
   --color-fg-subtle: #a5adcb;   /* subtext0 */
   --color-border: #363a4f;      /* surface0 */
   --color-border-strong: #494d64; /* surface1 */
-  --color-accent: #a6da95;      /* green */
-  --color-accent-hover: #8bd5ca;/* teal — hover shifts hue */
+  --color-accent: #c6a0f6;      /* mauve */
+  --color-accent-hover: #b7bdf8;/* lavender */
   --color-mauve: #c6a0f6;
+  --color-lavender: #b7bdf8;
   --color-blue: #8aadf4;
+  --color-pink: #f5bde6;
+  --color-green: #a6da95;
   --color-peach: #f5a97f;
   --color-red: #ed8796;
 }
@@ -232,13 +238,15 @@ a:hover {
   margin: 2em 0;
 }
 
-/* Code blocks (Expressive Code) — always dark, generous bottom margin */
+/* Expressive Code spacing — leave colours alone, EC's Macchiato theme owns those. */
 .prose-blog :where(.expressive-code) {
   margin: 1.5em 0 2.25em;
 }
-.prose-blog :where(pre) {
-  background: var(--color-code-bg) !important;
-  color: var(--color-code-fg) !important;
+
+/* Plain (non-EC) <pre> — only kicks in for raw HTML pre blocks in MDX. */
+.prose-blog :where(pre):not(.expressive-code pre) {
+  background: var(--color-code-bg);
+  color: var(--color-code-fg);
   border: 1px solid var(--color-code-border);
   border-radius: 0.75rem;
   padding: 1em 1.25em;
@@ -247,15 +255,6 @@ a:hover {
   font-family: var(--font-mono);
   font-size: 0.9em;
   line-height: 1.6;
-}
-
-/* Force expressive-code frames into the dark Catppuccin Macchiato look
-   regardless of the page theme. */
-.expressive-code .frame {
-  --ec-brdRad: 0.75rem;
-  --ec-brdCol: var(--color-code-border) !important;
-  --ec-codeBg: var(--color-code-bg) !important;
-  --ec-codeFg: var(--color-code-fg) !important;
 }
 
 .font-display {
