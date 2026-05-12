@@ -43,27 +43,45 @@ const readingTime = readingTimeMinutes(post.body ?? "");
 >
   {
     post.data.series && seriesPosts.length > 1 && (
-      <aside class="not-prose my-8 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5">
-        <p class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
-          Series · <a href={`/series/${slugifySeries(post.data.series)}/`} class="hover:underline">{post.data.series}</a>
-        </p>
-        <ol class="mt-3 space-y-1.5 text-sm">
-          {seriesPosts.map((sp, i) => (
-            <li class="flex items-baseline gap-2">
-              <span class="w-5 text-right text-xs text-[var(--color-fg-subtle)]">{i + 1}.</span>
+      <details class="not-prose group my-8 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
+        <summary class="flex cursor-pointer list-none items-center gap-4 px-6 py-5 group-open:pb-3 [&::-webkit-details-marker]:hidden">
+          <div class="min-w-0 flex-1">
+            <p class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+              Series · <a
+                href={`/series/${slugifySeries(post.data.series)}/`}
+                class="hover:underline"
+                onclick="event.stopPropagation()"
+              >{post.data.series}</a>
+            </p>
+            <p class="mt-1 text-xs text-[var(--color-fg-subtle)]">
+              Post <strong class="text-[var(--color-fg-muted)]">{seriesIndex + 1}</strong> of{" "}
+              <strong class="text-[var(--color-fg-muted)]">{seriesPosts.length}</strong>
+            </p>
+          </div>
+          <svg
+            class="size-4 shrink-0 text-[var(--color-fg-subtle)] transition-transform group-open:rotate-90"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M7 5l6 5-6 5V5z" />
+          </svg>
+        </summary>
+        <ol class="list-decimal space-y-1.5 pr-6 pb-5 pl-10 text-sm marker:tabular-nums marker:text-[var(--color-fg-subtle)]">
+          {seriesPosts.map((sp) => (
+            <li>
               {sp.id === post.id ? (
                 <span class="font-semibold text-[var(--color-fg)]">{sp.data.title}</span>
               ) : (
-                <a href={`/${sp.id}/`} class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">{sp.data.title}</a>
+                <a
+                  href={`/${sp.id}/`}
+                  class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"
+                >{sp.data.title}</a>
               )}
             </li>
           ))}
         </ol>
-        <p class="mt-3 text-xs text-[var(--color-fg-subtle)]">
-          Post <strong class="text-[var(--color-fg-muted)]">{seriesIndex + 1}</strong> of{" "}
-          <strong class="text-[var(--color-fg-muted)]">{seriesPosts.length}</strong>
-        </p>
-      </aside>
+      </details>
     )
   }
 
