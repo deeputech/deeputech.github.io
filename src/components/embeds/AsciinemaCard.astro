@@ -1,0 +1,158 @@
+---
+// Renders an asciinema cast inside a terminal-styled card. The player
+// (asciinema-player) is the heaviest single JS payload we ship, so it is
+// lazy-loaded only when the card scrolls into view and only when the visitor
+// hasn't asked for reduced motion.
+//
+// Fallbacks (no player): `alt-gif` shows an animated GIF poster, `alt-img` a
+// static screenshot. Both are plain <img> that render without JS; the client
+// script hides them once the live player mounts. Under prefers-reduced-motion
+// the static `alt-img` wins over the animated gif (see global.css).
+//
+// On Dev.to syndication this component is swapped for `alt-img` (or dropped if
+// unset) by publish-to-dev.js — Dev.to can't run the player.
+export interface Props {
+  /** Path/URL to the .cast file (e.g. "/casts/demo.cast"). */
+  cast: string;
+  /** Animated GIF poster + no-JS fallback. */
+  "alt-gif"?: string;
+  /** Static image fallback; also the Dev.to replacement. */
+  "alt-img"?: string;
+  /** Alt text for the fallback images / Dev.to image. */
+  alt?: string;
+  /** Label shown in the terminal title bar. */
+  title?: string;
+  /** Caption rendered under the card. */
+  caption?: string;
+  /** Override the cast's recorded terminal width. */
+  cols?: number;
+  /** Override the cast's recorded terminal height. */
+  rows?: number;
+  /** Playback speed multiplier (default 1). */
+  speed?: number;
+  /** Pause loop after this many idle seconds (default 1.5). */
+  idle?: number;
+  /** Show playback controls (default false — decorative loop). */
+  controls?: boolean;
+}
+
+const {
+  cast,
+  alt = "Terminal session recording",
+  title,
+  caption,
+  cols,
+  rows,
+  speed,
+  idle,
+  controls = false,
+} = Astro.props;
+
+const altGif = Astro.props["alt-gif"];
+const altImg = Astro.props["alt-img"];
+---
+
+<figure class="not-prose my-8">
+  <div
+    class="overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] shadow-lg shadow-black/20"
+  >
+    <div
+      class="flex items-center gap-1.5 border-b border-[var(--color-border)] bg-[var(--color-bg-muted)] px-3 py-2"
+    >
+      <span class="inline-block h-2.5 w-2.5 rounded-full bg-[var(--color-red)]"></span>
+      <span class="inline-block h-2.5 w-2.5 rounded-full bg-[var(--color-peach)]"></span>
+      <span class="inline-block h-2.5 w-2.5 rounded-full bg-[var(--color-green)]"></span>
+      {title && <span class="ml-2 font-mono text-xs text-[var(--color-fg-subtle)]">{title}</span>}
+    </div>
+
+    <div
+      class="asciinema-body relative bg-[var(--color-code-bg)]"
+      data-asciinema-cast={cast}
+      data-cols={cols}
+      data-rows={rows}
+      data-speed={speed}
+      data-idle={idle}
+      data-controls={controls ? "true" : undefined}
+    >
+      <div class="asciinema-cast"></div>
+      {
+        altGif && (
+          <img
+            src={altGif}
+            alt={alt}
+            class="asciinema-fallback asciinema-fallback--gif block w-full"
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      }
+      {
+        altImg && (
+          <img
+            src={altImg}
+            alt={alt}
+            class="asciinema-fallback asciinema-fallback--img block w-full"
+            loading="lazy"
+            decoding="async"
+          />
+        )
+      }
+    </div>
+  </div>
+  {
+    caption && (
+      <figcaption class="mt-3 text-center text-xs text-[var(--color-fg-subtle)]">{caption}</figcaption>
+    )
+  }
+</figure>
+
+<script>
+  // One handler for every <AsciinemaCard> on the page. Astro bundles this
+  // script once regardless of how many cards are rendered.
+  const cards = document.querySelectorAll<HTMLElement>("[data-asciinema-cast]");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  cards.forEach((body) => {
+    const cast = body.dataset.asciinemaCast;
+    const mount = body.querySelector<HTMLElement>(".asciinema-cast");
+    const hasFallback = body.querySelector(".asciinema-fallback") !== null;
+    if (!cast || !mount) return;
+
+    // Reduced motion + a fallback image present → keep the static fallback,
+    // never spin up an autoplaying player.
+    if (reduceMotion && hasFallback) return;
+
+    const load = async () => {
+      const player = await import("asciinema-player");
+      await import("asciinema-player/dist/bundle/asciinema-player.css");
+      player.create(cast, mount, {
+        loop: true,
+        // No fallback under reduced motion: mount paused with controls so the
+        // visitor can opt into playback instead of getting motion unbidden.
+        autoPlay: !reduceMotion,
+        controls: reduceMotion || body.dataset.controls === "true",
+        speed: Number(body.dataset.speed) || 1,
+        idleTimeLimit: Number(body.dataset.idle) || 1.5,
+        fit: "width",
+        theme: "catppuccin-macchiato",
+        poster: "npt:0:00",
+        ...(body.dataset.cols ? { cols: Number(body.dataset.cols) } : {}),
+        ...(body.dataset.rows ? { rows: Number(body.dataset.rows) } : {}),
+      });
+      // Live player is up — drop the poster/fallback images.
+      body.classList.add("asciinema-body--playing");
+    };
+
+    const io = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          load().catch(() => {
+            // Lazy import or player init failed — leave the fallback in place.
+          });
+        }
+      });
+    });
+    io.observe(mount);
+  });
+</script>

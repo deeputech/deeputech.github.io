@@ -78,6 +78,20 @@ const COMPONENT_TO_LIQUID = [
     re: /<LinkCard\s+href="([^"]+)"(?:\s+[^/]*)?\s*\/>/g,
     to: (_m, href) => `{% link ${href} %}`,
   },
+  {
+    // <AsciinemaCard cast="..." alt-img="..." alt="..." ... /> (possibly
+    // multi-line). Dev.to can't run asciinema-player, so swap in the static
+    // alt-img as a markdown image — relative paths get absolutised by the
+    // image-URL pass below. If alt-img is missing/empty, drop the embed.
+    tag: "AsciinemaCard",
+    re: /<AsciinemaCard\b[^>]*\/>/g,
+    to: (m) => {
+      const altImg = /\balt-img\s*=\s*"([^"]*)"/.exec(m)?.[1]?.trim();
+      if (!altImg) return "";
+      const alt = /\balt\s*=\s*"([^"]*)"/.exec(m)?.[1] ?? "Terminal session recording";
+      return `![${alt}](${altImg})`;
+    },
+  },
 ];
 
 function mdxToDevtoMarkdown(body) {

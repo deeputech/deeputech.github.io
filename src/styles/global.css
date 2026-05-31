@@ -297,6 +297,58 @@ a:hover {
   font-family: var(--font-display);
 }
 
+/* -------------------------------------------------------------------------- */
+/* AsciinemaCard — terminal cast embeds.                                       */
+/* -------------------------------------------------------------------------- */
+
+/* asciinema-player ships no catppuccin theme, so define one. The player adds
+   the class `.asciinema-player-theme-<name>` when passed theme:"<name>", and
+   reads the ANSI palette from these --term-color-* variables. Values are the
+   official Catppuccin Macchiato terminal mapping — always dark, matching our
+   code blocks regardless of light/dark site theme. */
+.asciinema-player-theme-catppuccin-macchiato {
+  --term-color-foreground: #cad3f5; /* text */
+  --term-color-background: #24273a; /* base */
+  --term-color-0: #494d64; /* surface1 */
+  --term-color-1: #ed8796; /* red */
+  --term-color-2: #a6da95; /* green */
+  --term-color-3: #eed49f; /* yellow */
+  --term-color-4: #8aadf4; /* blue */
+  --term-color-5: #c6a0f6; /* mauve */
+  --term-color-6: #8bd5ca; /* teal */
+  --term-color-7: #b8c0e0; /* subtext1 */
+  --term-color-8: #5b6078; /* surface2 */
+  --term-color-9: #ed8796;
+  --term-color-10: #a6da95;
+  --term-color-11: #eed49f;
+  --term-color-12: #8aadf4;
+  --term-color-13: #c6a0f6;
+  --term-color-14: #8bd5ca;
+  --term-color-15: #a5adcb; /* subtext0 */
+}
+
+/* Once the live player mounts, the script adds this class — hide the
+   poster/fallback images so they don't stack under the player. */
+.asciinema-body--playing .asciinema-fallback {
+  display: none !important;
+}
+
+/* Fallback selection when no player runs (no-JS, lazy-load failure, reduced
+   motion). With both provided, the animated gif is the default poster and the
+   static image is hidden — except under reduced motion, where the static
+   image wins. With only one provided, it shows in every case. */
+.asciinema-body:has(.asciinema-fallback--gif) .asciinema-fallback--img {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .asciinema-body:has(.asciinema-fallback--img) .asciinema-fallback--gif {
+    display: none;
+  }
+  .asciinema-body:has(.asciinema-fallback--img) .asciinema-fallback--img {
+    display: block;
+  }
+}
+
 /* Terminal-style bullet list — port of the original `.special li` rule.
    Uses FontAwesome's "arrow-right-to-line"-ish glyph as a list-style-image,
    coloured in the active palette's mauve. Two URIs because data URIs can't
