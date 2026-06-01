@@ -1,0 +1,334 @@
+---
+title: How fast is local AI on AMD Strix Halo? Benchmarking Qwen and Gemma with llama.cpp
+description: A quality-first benchmark of Qwen3.6 and Gemma 4 on the AMD Ryzen AI Max+ 395 Strix Halo iGPU, what actually helped, what did not, and the practical recipe
+published: false
+featured: false
+tags:
+  - "ai"
+  - "llamacpp"
+  - "amd"
+  - "rocm"
+  - "linux"
+  - "benchmark"
+canonical_url: "https://deepu.tech/benchmarking-qwen-gemma-amd-strix-halo"
+date: 2026-05-16
+---
+
+In my [previous post](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine), I dropped a small `llama-bench` table at the bottom of a writeup about my fully offline AI-assisted Linux development setup. The numbers were nice. But I had not actually tuned anything. I just ran the production server flags and copied the result.
+
+So I went back and did it properly. Same hardware, same models, same [llama.cpp](https://github.com/ggml-org/llama.cpp) build. One knob at a time. Three repetitions per data point. Quality-first defaults, not raw tokens-per-second hero numbers. I wanted to know which of the usual llama.cpp tuning levers actually matter on AMD [Strix Halo](https://www.amd.com/en/processors/ryzen-ai-max.html), and which are just folk wisdom.
+
+This post is the writeup. If you are running a local coding model on a Ryzen AI Max+ 395 or a similar `gfx1151` iGPU, this should save you a couple of evenings.
+
+The short version, if you are skimming. Three things actually moved the needle on this hardware: setting `--ubatch-size 1024`, making `--threads` explicit, and locking the laptop's power profile at 70W or 90W. Everything else I tried either landed in the noise or made things worse, including the full HIP environment block the AMD community has been recommending for years.
+
+## The machine and the runtime
+
+The machine is the same one from the previous post.
+
+- ASUS [ROG Flow Z13](https://rog.asus.com/laptops/rog-flow/rog-flow-z13-2025/) 2025, AMD Ryzen AI Max+ 395
+- AMD Radeon 8060S iGPU, `gfx1151`, 64 GiB allocated to the GPU in BIOS
+- [Arch Linux](https://archlinux.org/), kernel `7.0.7-arch2-1`, bleeding-edge Mesa
+- ROCm `7.2.3`
+- A custom llama.cpp build with HIP support, commit `769cc93a4` (release tag `b9165`)
+- Benchmark tool: `llama-bench` from the same build
+
+The build is the usual HIP shape.
+
+```bash
+HIPCXX="$(hipconfig -l)/clang" HIP_PATH="$(hipconfig -R)" \
+cmake -S /path/to/llama.cpp \
+  -B /path/to/llama.cpp/build-hip \
+  -G Ninja \
+  -DGGML_HIP=ON \
+  -DAMDGPU_TARGETS=gfx1151 \
+  -DCMAKE_BUILD_TYPE=Release
+```
+
+Build state: `GGML_HIP_ROCWMMA_FATTN=OFF`. I tested `ON` in a parallel build directory and reverted it. More on that below.
+
+The wrapper I used to run every sweep is in my dotfiles at [`scripts/llama_bench_sweep.sh`](https://github.com/deepu105/dotfiles/blob/master/scripts/llama_bench_sweep.sh). Each invocation takes a tag and a list of explicit `llama-bench` flags, runs the same six-model matrix, and writes one Markdown table per model plus a combined file. It bakes in only invariants (prompt sizes, generation length, repetitions, output format), so every tunable has to be passed in. That stops `llama-bench` from silently running a cross-product when defaults and overrides for the same flag get mixed, which is exactly the bug that bit my first run.
+
+## The models
+
+Six GGUFs from my local model store. The split is intentional: three Qwen dense quants, one Qwen mixture-of-experts, two Gemma quants. Embedding and multimodal projector files are excluded since this is a text-generation benchmark.
+
+| ID              | Model                                                | Size      | Params |
+| --------------- | ---------------------------------------------------- | --------: | -----: |
+| qwen-27b-q4     | [Qwen3.6](https://huggingface.co/Qwen) 27B Q4_K_M    | 15.40 GiB | 26.90B |
+| qwen-27b-q6     | Qwen3.6 27B Q6_K                                     | 20.56 GiB | 26.90B |
+| qwen-27b-q8     | Qwen3.6 27B Q8_0                                     | 26.62 GiB | 26.90B |
+| qwen-35b-a3b-q8 | Qwen3.6 35B-A3B MoE Q8_0                             | 34.36 GiB | 34.66B |
+| gemma-31b-q4    | [Gemma 4](https://huggingface.co/google) 31B Q4_K_M  | 17.39 GiB | 30.70B |
+| gemma-31b-q8    | Gemma 4 31B Q8_0                                     | 30.38 GiB | 30.70B |
+
+The 35B-A3B is the Qwen MoE variant. Only about 3B params are active per token, so it should be a lot faster than the dense 27B at generation. We will see.
+
+## The method
+
+I want to optimize a coding-agent workflow, not chat. Two prompt sizes matter for that.
+
+- `pp512`: short interactive prompts.
+- `pp4096`: long prompts that look like real code-agent requests with file context and tool output.
+
+Generation length is fixed at 256 tokens. Three repetitions per data point. All experiments use the same shape unless the experiment itself changes one of the flags.
+
+The actual protocol is cumulative with rollback. I start from a clean baseline, add one knob, measure, and either keep the knob if every model improves or holds within noise, or revert it before adding the next one. The per-knob tables compare each test against the immediately prior best configuration, not against the original baseline. That matches how a sane reader would tune their own setup, and it avoids the trap of measuring a knob in a state that is already half-broken by an earlier bad knob.
+
+Baseline command.
+
+```bash
+ROCBLAS_USE_HIPBLASLT=1 llama-bench \
+  --model <model-file> \
+  --n-prompt 512,4096 \
+  --n-gen 256 \
+  --repetitions 3 \
+  --n-gpu-layers 999 \
+  --flash-attn 1 \
+  --mmap 0 \
+  --cache-type-k f16 \
+  --cache-type-v f16 \
+  --batch-size 4096 \
+  --ubatch-size 512 \
+  --output md
+```
+
+Two metrics per run.
+
+- **Prompt processing throughput** (`pp512`, `pp4096`): tokens per second while ingesting the prompt.
+- **Token generation throughput** (`tg256`): tokens per second while decoding the response.
+
+I care most about `pp4096` and `tg256`. A coding agent spends most of its wall clock on long prompt prefill and the model reply, not on tiny prompts.
+
+## Baseline: full model sweep
+
+The starting point. f16 KV cache, batch 4096, ubatch 512, FlashAttention on, mmap off, default thread count.
+
+| ID              | pp512 t/s         | pp4096 t/s       | tg256 t/s      |
+| --------------- | ----------------: | ---------------: | -------------: |
+| qwen-27b-q4     | 315.33 ± 7.23     | 305.22 ± 3.46    | 11.38 ± 0.01   |
+| qwen-27b-q6     | 319.72 ± 3.70     | 306.15 ± 0.20    | 8.93 ± 0.01    |
+| qwen-27b-q8     | 321.09 ± 14.13    | 306.01 ± 1.43    | 7.38 ± 0.01    |
+| qwen-35b-a3b-q8 | 941.98 ± 109.53   | 928.87 ± 15.09   | 40.90 ± 0.12   |
+| gemma-31b-q4    | 277.87 ± 8.74     | 248.90 ± 0.50    | 9.87 ± 0.00    |
+| gemma-31b-q8    | 279.12 ± 4.70     | 247.90 ± 0.44    | 6.35 ± 0.00    |
+
+A few observations.
+
+- Qwen 35B-A3B is in a different league. About `41 tg256 t/s` against `6 to 11` for the dense models. That is MoE doing its job. The MoE pp512 standard deviation is also wide, so do not read too much into single-digit percent moves on that metric.
+- Among dense Qwen, Q4 is fastest at generation, Q8 is slowest, Q6 is the middle. Prompt processing is almost flat across Qwen quants, which suggests compute is the bottleneck, not memory bandwidth.
+- Gemma is consistently a bit slower than the same-class Qwen on this hardware. Not by much, but it is there.
+
+Now to the actual point of this post.
+
+## What worked
+
+Three changes survived the cumulative-with-rollback protocol, in the order I tested them. These are the wins.
+
+### `--ubatch-size 1024`
+
+This is the headline result of the whole experiment.
+
+| ID              | pp4096 baseline -> ubatch1024 | tg256 baseline -> ubatch1024 |
+| --------------- | ----------------------------: | ---------------------------: |
+| qwen-27b-q4     | 305.22 -> 287.22 (-5.9%)      | 11.38 -> 11.35 (-0.3%)       |
+| qwen-27b-q6     | 306.15 -> 334.56 (+9.3%)      | 8.93  -> 8.90  (-0.3%)       |
+| qwen-27b-q8     | 306.01 -> 305.32 (-0.2%)      | 7.38  -> 7.32  (-0.8%)       |
+| qwen-35b-a3b-q8 | 928.87 -> 1164.98 (+25.4%)    | 40.90 -> 40.34 (-1.4%)       |
+| gemma-31b-q4    | 248.90 -> 256.78 (+3.2%)      | 9.87  -> 9.88  (+0.1%)       |
+| gemma-31b-q8    | 247.90 -> 254.42 (+2.6%)      | 6.35  -> 6.35  ( 0.0%)       |
+
+The MoE jumps 25%. Qwen Q6 jumps 9%. Both Gemma quants pick up a small but real 2 to 3% on `pp4096`. Generation is unchanged across the board. The only outlier is Qwen Q4 dense, which regresses 5.9% on `pp4096` with a wide standard deviation of `±16.93` on the new measurement, so most of that drop sits inside the noise band.
+
+The physical story is consistent. A larger micro-batch keeps the GPU pipeline fuller during prefill. Models with bigger weight matrices and MoE routing benefit the most. Verdict: keep.
+
+### Explicit `--threads 4`
+
+`llama-bench` defaults to 16 threads on this 16-core/32-thread CPU. I set it explicitly to 4 to avoid CPU oversubscription competing with the GPU driver.
+
+| ID              | pp4096 ubatch1024 -> threads4 | tg256 ubatch1024 -> threads4 |
+| --------------- | ----------------------------: | ---------------------------: |
+| qwen-27b-q4     | 287.22 -> 303.05 (+5.5%)      | 11.35 -> 11.37 (+0.2%)       |
+| qwen-27b-q6     | 334.56 -> 338.39 (+1.1%)      | 8.90  -> 8.83  (-0.8%)       |
+| qwen-27b-q8     | 305.32 -> 304.24 (-0.4%)      | 7.32  -> 7.29  (-0.4%)       |
+| qwen-35b-a3b-q8 | 1164.98 -> 1162.12 (-0.2%)    | 40.34 -> 42.27 (+4.8%)       |
+| gemma-31b-q4    | 256.78 -> 255.64 (-0.4%)      | 9.88  -> 9.73  (-1.5%)       |
+| gemma-31b-q8    | 254.42 -> 249.84 (-1.8%)      | 6.35  -> 6.17  (-2.8%)       |
+
+Mostly within noise, with two interesting points. Qwen Q4 dense recovers 5.5% on `pp4096`, which strongly suggests the earlier ubatch-only regression for that model was thread-related, not ubatch-related. The MoE picks up nearly 5% on token generation. Verdict: keep, for two reasons. The Q4 recovery is real, and explicit threading is more predictable on a machine that runs alongside Chrome, Docker, and an editor.
+
+### Power profile
+
+This one was an accident. The laptop has an Armoury Crate / `power_profile.sh` cycler with three usable TDP caps for AI work: 55W, 70W, and 90W. There is also an 18W battery-saver profile that does not have enough budget for the iGPU to hold a 27B model usefully, so I did not bench it.
+
+Q6 baseline at each profile.
+
+| Profile | pp512 t/s     | pp4096 t/s    | tg256 t/s   |
+| ------- | ------------: | ------------: | ----------: |
+| 55W     | 292.00 ± 6.28 | 284.39 ± 0.47 | 8.78 ± 0.02 |
+| 70W     | 319.68 ± 6.97 | 307.60 ± 1.27 | 8.89 ± 0.04 |
+| 90W     | 330.49 ± 7.38 | 320.55 ± 1.29 | 9.15 ± 0.01 |
+
+The big step is 55W to 70W, which is +8.2% on `pp4096`. The 70W to 90W bump is another +4.2%, smaller. So returns flatten above 70W, and 55W is a clear regression you should not pay for.
+
+The 70W numbers match the rest of this post's baseline measurements almost exactly, so all the per-knob deltas earlier in the post were measured at 70W without me knowing it at the time. The 90W run is real, but with all fans audible from the next room and hot air coming out of the vents within a minute. Not a profile to run a long agent session on, even when it is the fastest.
+
+Verdict: 70W is the right default for AI on this laptop. Plug it in and switch to 90W for one-off heavy prefill if you want the extra 4%. 55W is not worth the battery savings for AI work.
+
+## What I tried that did not help
+
+Each of these landed in the noise band, regressed for at least one model, or actively destabilized the system. None of them survive into the recipe. One-line summaries.
+
+- **`q8_0` KV cache.** Halves KV-cache bandwidth, which is supposed to be a free win. On Qwen dense it was flat, on the MoE the prompt-processing side regressed about 1%, and on Gemma it dropped 6 to 7% on `pp4096`. Keep `f16/f16`.
+- **`--batch-size 8192`.** Every metric within `±1%` of baseline. No win, no regression, just more memory.
+- **`--ubatch-size 2048`.** Repeated the ubatch test one step further on Q6. Pp4096 picked up another `+1.4%`, well inside the noise band. Returns flatten quickly past 1024.
+- **`GGML_HIP_ROCWMMA_FATTN=ON`.** A community-recommended build flag that uses AMD's wave matrix library for the FlashAttention path. Gemma's prompt processing dropped 42%. Qwen dense and MoE took 20 to 32% hits. This is a cliff, not a regression. Skip on `gfx1151` until a future llama.cpp build proves it.
+- **The full HIP env block** (`ROCBLAS_USE_HIPBLASLT=1`, `HIP_VISIBLE_DEVICES=0`, `GPU_MAX_HW_QUEUES=8`, `AMD_SERIALIZE_KERNEL=0`, `AMD_SERIALIZE_COPY=0`). The classic AMD inference recipe. Adding the block on top of the tuned config was a -1% to -3% regression across the matrix. A full six-model re-bench with all five vars unset matched the with-block run within `±1.3%`, confirming the block is a no-op on this toolchain. Why is worth its own section below.
+- **`HSA_NO_SCRATCH_RECLAIM=1`.** Single-model Q6 follow-up. Pp512 destabilized to `±25.72` standard deviation, every other metric unchanged. Nothing useful.
+- **`HIPBLASLT_TENSILE_LIBPATH=/opt/rocm/lib/hipblaslt/library`.** Only useful if hipBLASLt is emitting "no solution found" warnings, which it is not on this install.
+- **`GGML_HIP_NO_VMM=ON` plus `GGML_HIP_MMQ_MFMA=ON` build flags.** Documented as a stability hedge against silent loading hangs on `gfx1151`. They might still be worth keeping for that reason, but they did not move throughput.
+- **LLVM unroll-threshold workaround** (`-mllvm --amdgpu-unroll-threshold-local=600`). Targets a 3x regression in AMD's pre-built ROCm 7.x binaries, not in a from-source build. My custom build already lands above the regression, so the flag is a no-op for me.
+- **Vulkan backend (RADV via Mesa).** Lost about 32% on `pp4096`, won about 5% on `tg256`. A reasonable secondary backend for decode-bound chat, but ROCm stays the default for a coding agent that prefills long prompts.
+- **Manual GPU clock pinning** (`echo high | sudo tee /sys/class/drm/card1/device/power_dpm_force_performance_level`). The Strix Halo wiki suggests this. On my machine it silent hard-hung the GPU within 25 seconds and forced a power-cycle. Do not write to `power_dpm_*` on this hardware. The `auto` DPM state already reaches 1900 to 2500 MHz under bench load. There is nothing to pin.
+
+## Why the HIP env block stopped mattering
+
+This was the headline of an earlier draft of this post. It is not anymore, and the story is worth telling.
+
+On older ROCm, the env block was a real win. Hands-on benchmarks at [llm-tracker.info](https://llm-tracker.info/_TOORG/Strix-Halo) show prompt processing going from 348.96 to 765.54 t/s on `gfx1151` just by setting `ROCBLAS_USE_HIPBLASLT=1` on ROCm 6.3 to 6.5 nightlies. That is more than 2x. So the community recommendation was correct at the time.
+
+The mechanism is documented. Per [rocBLAS](https://github.com/ROCm/rocBLAS/releases), `ROCBLAS_USE_HIPBLASLT=1` "makes hipBLASLt preferred as the GEMM backend, but falls back to Tensile for problems where hipBLASLt does not provide a solution." There is a [tracking issue](https://github.com/ROCm/ROCm/issues/5643) describing hipBLASLt falling back to hipBLAS on `gfx1151` in ROCm 7.1 as an unsupported architecture. The fix landed in newer rocBLAS and hipBLASLt builds. On ROCm 7.2.3 with `gfx1151` natively supported, hipBLASLt is already serving the GEMM kernels regardless of the env var. Setting the override does nothing because the default path is the fast path.
+
+The other four vars share the same fate. With current HIP runtime defaults plus the kernels llama.cpp uses on `gfx1151`, none of them change behaviour in a way that lands above the noise floor.
+
+Practical takeaway. On the current Arch ROCm stack you do not need to set the HIP env block. If you have it in `/etc/profile.d/` or in your `llama-server` wrapper, leave it. It does not hurt. Just do not credit it for your throughput. The win it used to give has been folded into the default code path.
+
+## Quality-first picks
+
+Throughput is one thing. Coding quality is another. With 64 GiB on the GPU and a single user, I optimized for the latter. Here is how I mapped the matrix to roles.
+
+- **Quality default**: `qwen-27b-q8`. Highest fidelity dense Qwen on disk. About 7.3 `tg256` t/s is not fast, but for hard debugging, careful instruction-following, and long-context synthesis it is the safest pick.
+- **Balanced default**: `qwen-27b-q6`. Near-Q8 quality in practice, but `pp4096` is meaningfully better and `tg256` is about 20% faster. This is my everyday model.
+- **Fast fallback**: `qwen-27b-q4`. Real quantization loss, but a useful gear when I need a fast tool-heavy run and the task is forgiving.
+- **Fast experimental**: `qwen-35b-a3b-q8`. The MoE is dramatically faster, both on prefill and generation. But MoE models can drift over long multi-step agent tasks. I would not make this my default coder until it passes real [OpenCode](https://opencode.ai/) sessions, not just synthetic benchmarks.
+- **Second-opinion model**: `gemma-31b-q8` or `gemma-31b-q4`. Different instruction style than Qwen. Useful for code review and "tell me what I missed" passes, not as a primary coder.
+
+These picks are biased toward how I actually use OpenCode. Different workflows might rank them differently.
+
+## The final tuned recipe
+
+Two knob changes from the baseline, plus a power profile choice. No env vars. Standard build, no rocWMMA.
+
+```bash
+llama-bench \
+  --model <model-file> \
+  --n-prompt 512,4096 \
+  --n-gen 256 \
+  --repetitions 3 \
+  --n-gpu-layers 999 \
+  --flash-attn 1 \
+  --mmap 0 \
+  --cache-type-k f16 \
+  --cache-type-v f16 \
+  --batch-size 4096 \
+  --ubatch-size 1024 \
+  --threads 4 \
+  --output md
+```
+
+Build state: `GGML_HIP_ROCWMMA_FATTN=OFF`. Power profile: 70W in normal use, 90W when plugged in and you want the extra 4%.
+
+What changed from the original baseline.
+
+| Setting        | Original baseline               | Final tuned                          |
+| -------------- | ------------------------------- | ------------------------------------ |
+| KV cache       | f16/f16                         | f16/f16                              |
+| Batch          | 4096                            | 4096                                 |
+| UBatch         | 512                             | **1024**                             |
+| Threads        | default (16)                    | **explicit 4**                       |
+| HIP env vars   | `ROCBLAS_USE_HIPBLASLT=1`       | none required                        |
+| FlashAttention | on                              | on                                   |
+| mmap           | off                             | off                                  |
+| rocWMMA        | off                             | off                                  |
+| Power profile  | (unrecorded, was 70W)           | 70W default, 90W when AC + heavy     |
+
+Final per-model matrix at 70W.
+
+| ID              | Model                  | Size      | pp512 t/s         | pp4096 t/s        | tg256 t/s    |
+| --------------- | ---------------------- | --------: | ----------------: | ----------------: | -----------: |
+| qwen-27b-q4     | Qwen3.6 27B Q4_K_M     | 15.40 GiB | 310.20 ± 7.34     | 303.05 ± 2.81     | 11.37 ± 0.03 |
+| qwen-27b-q6     | Qwen3.6 27B Q6_K       | 20.56 GiB | 314.39 ± 3.06     | 338.39 ± 4.03     | 8.83 ± 0.01  |
+| qwen-27b-q8     | Qwen3.6 27B Q8_0       | 26.62 GiB | 320.18 ± 2.86     | 304.24 ± 1.00     | 7.29 ± 0.11  |
+| qwen-35b-a3b-q8 | Qwen3.6 35B-A3B Q8_0   | 34.36 GiB | 971.22 ± 38.63    | 1162.12 ± 14.60   | 42.27 ± 0.48 |
+| gemma-31b-q4    | Gemma 4 31B Q4_K_M     | 17.39 GiB | 279.59 ± 2.21     | 255.64 ± 0.23     | 9.73 ± 0.01  |
+| gemma-31b-q8    | Gemma 4 31B Q8_0       | 30.38 GiB | 272.35 ± 4.08     | 249.84 ± 2.23     | 6.17 ± 0.06  |
+
+And the baseline-to-final delta.
+
+| Model           | Baseline pp4096 | Final pp4096 | Δ pp4096 | Baseline tg256 | Final tg256 | Δ tg256 |
+| --------------- | --------------: | -----------: | -------: | -------------: | ----------: | ------: |
+| Qwen 27B Q4     | 305.22          | 303.05       | -0.7%    | 11.38          | 11.37       | -0.1%   |
+| Qwen 27B Q6     | 306.15          | 338.39       | **+10.5%** | 8.93         | 8.83        | -1.1%   |
+| Qwen 27B Q8     | 306.01          | 304.24       | -0.6%    | 7.38           | 7.29        | -1.2%   |
+| Qwen 35B-A3B Q8 | 928.87          | 1162.12      | **+25.1%** | 40.90        | 42.27       | **+3.3%** |
+| Gemma 31B Q4    | 248.90          | 255.64       | +2.7%    | 9.87           | 9.73        | -1.4%   |
+| Gemma 31B Q8    | 247.90          | 249.84       | +0.8%    | 6.35           | 6.17        | -2.8%   |
+
+So the big real-world gains are on Qwen Q6 and the MoE, exactly the two models you would want speed on. The Q8 dense and Q4 dense are essentially unchanged. Gemma picks up a few percent on `pp4096` and loses a few on `tg256`. No quality cost from any of the kept knobs since they are runtime-only flags that do not change model output.
+
+## Learnings
+
+A few things worth pulling out from this exercise, because they reflect on more than just the numbers.
+
+- **Power profile is bigger than any flag.** I did not even think to control for it until I had finished every other experiment. It is worth 8% on prompt processing between 55W and 70W. Bigger than ubatch was. The lesson is that the easiest variable to overlook is the one nobody is talking about in the llama.cpp issue tracker, because they assume a desktop.
+- **Community recipes age out.** The HIP env block was a real, 2x win on ROCm 6.x because hipBLASLt was the fast path and rocBLAS was not routing to it by default for `gfx1151`. ROCm 7.2 added native `gfx1151` support to the fast path. The override is now redundant. The community recipe is correct for a version of the world that has moved on, and the only way to find out is to re-measure.
+- **Honest methodology matters.** My first version of this post described the protocol as "isolated against baseline" but the actual per-knob tables were built cumulatively, with one regressed knob still in place when the next was tested. That made `batch 8192` look worse than it is and made `ubatch 1024` look better than it is in isolation. The rerun used honest cumulative-with-rollback throughout, and the numbers say `ubatch 1024` is still the win, just with a smaller and more specific story.
+- **`llama-bench` accumulates repeated flags into cross-products.** If your wrapper bakes in defaults and the caller also passes overrides for the same flag, `llama-bench` will run every combination silently. The first version of my sweep wrapper did exactly that, which is why one run took four times as long and produced four times as many rows as expected. The fixed wrapper bakes in only invariants and requires every tunable to be passed explicitly.
+- **`/etc/profile.d/*.sh` does not propagate to non-login shells.** Worth knowing if you are about to claim something about your "default" environment. The Bash and zsh subshells that most benchmark wrappers run in do not inherit `/etc/profile.d/`. Your `llama-bench` run is not seeing the env vars you set in a system profile. Run benchmarks under the same shell type you serve under, or set the vars explicitly in the wrapper.
+- **Do not write to `/sys/class/drm/card*/device/power_dpm_*` on Strix Halo.** I tried, the GPU silently hard-hung within 25 seconds, and the machine had to be power-cycled. The kernel did not write a single oops. Auto DPM works correctly on this hardware. There is nothing to pin.
+- **Background load you forgot about still costs you.** I had a `llama-server` instance loaded with `gemma-3-12b` taking 18 GiB of VRAM during the first half of the main sweep. It was idle on GPU but holding memory. The clean re-baseline showed it cost essentially nothing on this hardware, but the lesson stands: check `rocm-smi --showpids` before benchmarks, and stop anything else that might wake up to compute.
+- **A flag that helps one model can hurt another.** Gemma loses 6% on `pp4096` with `q8_0` KV. Gemma loses 42% with rocWMMA. Qwen dense and MoE are unaffected by both. Single-model benchmarks miss this. The same knob can be a free win for one workload and a hard regression for another.
+
+## Suggestions for your own Strix Halo setup
+
+The practical recipe, if you are reading this with a Ryzen AI Max+ 395 or another `gfx1151` part and just want to be done.
+
+1. **Build llama.cpp from source.** AMD's pre-built ROCm 7.x binaries are hit by an LLVM regression that costs roughly 3x on prompt processing. A from-source build with the recipe above lands on the right side of that regression with no flags. If you want to be extra safe against silent loading issues, also add `-DGGML_HIP_NO_VMM=ON -DGGML_HIP_MMQ_MFMA=ON`. They do not improve throughput on this hardware, but they are a documented stability hedge.
+2. **Use ROCm 7.2 or newer.** Anything older means hipBLASLt is not natively supporting `gfx1151`, and you will need the HIP env block to get the fast path. On ROCm 7.2 the fast path is the default.
+3. **Set `--ubatch-size 1024` and `--threads 4`.** Both of these go into your `llama-server` flags. They are the two real wins. Leave KV at `f16/f16`, batch at `4096`, flash-attention on, mmap off.
+4. **Do not set `--cache-type-k q8_0` or `--cache-type-v q8_0` if you use Gemma.** It is a clear 6% regression on prompt processing on this hardware. If you only use Qwen, you can experiment with it, but the gain is marginal.
+5. **Do not build with `GGML_HIP_ROCWMMA_FATTN=ON` on `gfx1151`.** Gemma drops 42% on `pp4096`. Wait for a future llama.cpp build to fix it before trying again.
+6. **Skip the HIP environment block.** On ROCm 7.2 it is a no-op. Setting it is harmless but misleading.
+7. **Pin a power profile.** 70W is the right default for AI work on this laptop. 90W is faster by 4% on prompt processing but the fans are loud and the hot-air vent is real, so it is not a profile to leave on for long sessions. 55W is not worth the battery savings for AI work. 18W cannot keep up at all.
+8. **Don't manually pin GPU clocks.** Auto DPM reaches 1900 to 2500 MHz under bench load on this hardware, which is plenty. Writing to `power_dpm_force_performance_level` on Strix Halo is a known way to hard-hang the GPU. I learned this the bad way.
+9. **For server flags worth adding:** `--cache-reuse 256` enables prefix-cache KV reuse across requests, which is a real win if you use a coding agent that re-sends the same system prompt. `--cont-batching` is a modern scheduler default. `--jinja` is required for proper tool-use templates if your agent does function calls. None of these are testable with `llama-bench`, but they go into a real server config.
+10. **Pick Qwen Q8 for quality, Q6 for balance, the MoE for speed once you trust it on real tasks.** Keep a Gemma quant around for code review, since the instruction style is different enough to catch things Qwen misses.
+
+## What is still open
+
+A few things I did not isolate, with notes on which would be cheap to do as a follow-up.
+
+- **MTP speculative decoding.** Recent llama.cpp supports it, and the Qwen-MTP GGUFs are out. Reported 1.7x on `tg`. This is the single most likely thing to give a "feels different" experience while coding. Needs a model download.
+- **Same-vocab external draft model** (`Qwen3.5-4B Q4_K_M` as draft for `Qwen3.6-27B-Q8_0`). Mainline supports it, the GGUFs are available. Reported 43 mean and 67 peak `tg t/s` at full quality.
+- **PR #21284 prefill kernel tuning** for `gfx1151`. Open patch in the llama.cpp tree with reported `~60%` prefill uplift on the 35B class. Worth applying locally and re-benching the MoE.
+- **MoE-only `--ubatch-size 2048` sweep.** The MoE was the biggest beneficiary of `ubatch 1024`. The Q6 test of `ubatch 2048` showed clear diminishing returns on dense models, but the MoE might keep scaling.
+- **IQ4_XS / IQ4_NL Qwen 27B.** Often a quality improvement over `Q4_K_M` at similar size on RDNA 3.5. Worth adding one row to the matrix.
+- **`gfx1151` is new.** A future llama.cpp or ROCm release could flip any of these conclusions. Re-run before drawing long-term ones.
+
+## Wrap-up
+
+So here is the short version, with the wins and losses both on the table.
+
+Three things actually moved the needle on this hardware: `--ubatch-size 1024`, explicit `--threads 4`, and choosing the right power profile. Of those, ubatch is the single most useful knob in `llama-bench`. The biggest single variable nobody talks about is the laptop's power profile, which is worth more than any flag I tested.
+
+Everything else I tried did not survive. The `q8_0` KV trick regresses Gemma. `rocWMMA` is a cliff. `batch 8192` is noise. The full HIP env block that has been the headline of every Strix Halo tuning guide for two years has been quietly absorbed into the ROCm 7.2 default kernel routing for `gfx1151`. Vulkan is a faster decoder but a much slower prefiller. The LLVM unroll workaround is for AMD's pre-built binaries, not a from-source build. Manual GPU clock pinning on this hardware will hard-hang your system within thirty seconds.
+
+That tracks with the rest of my Linux life. Recommendations that were correct yesterday are not always correct today. The only way to find out is to measure under your current stack. The big wins are rarely the popular ones. They are the small, boring, reproducible ones you only find by measuring one knob at a time, on the build you are actually running, on the power profile you actually use.
+
+The right tool for the right job.
+
+---
+
+If you like this article, please leave a like or a comment.
+
+You can follow me on [Bluesky](https://bsky.app/profile/deepu105.bsky.social) and [LinkedIn](https://www.linkedin.com/in/deepu05/).
