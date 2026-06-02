@@ -162,7 +162,7 @@ A few details worth knowing:
 
 ## Zero overhead means zero overhead
 
-The benchmark detail lives in [its own post](https://deepu.tech/benchmarking-llamastash) (**coming soon**) and [`docs/benchmarks.md`](https://github.com/llamastash/llamastash/blob/main/docs/benchmarks.md), but here is the one-line version.
+The benchmark detail lives in [its own post](https://deepu.tech/benchmarking-llamastash) and [docs/benchmarks.md](https://github.com/llamastash/llamastash/blob/main/docs/benchmarks.md), but here is the one-line version.
 
 LlamaStash spawns the unmodified upstream `llama-server`. So the wrapper better not add measurable overhead vs running `llama-server` directly. We measure it. It does not. LlamaStash matches raw `llama-server` within `≤1%` on every cell, across AMD APU, Apple Silicon, and NVIDIA. The proxy hop is `+0.45 ms` median TTFT and zero impact on decode.
 
