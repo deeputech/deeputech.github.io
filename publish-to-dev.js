@@ -41,6 +41,30 @@ const slugFromFilename = (filename) =>
 // MDX → Dev.to-flavoured markdown
 // --------------------------------------------------------------------------
 
+// Lookup of every local post, populated once at the start of publish(). Used to
+// resolve a LinkCard's href to its Dev.to equivalent (see devtoLinkFor).
+let LINK_INDEX = [];
+
+// Resolve a LinkCard href to its best Dev.to representation. Dev.to's {% link %}
+// embed ONLY works for Dev.to article URLs — pointing it at a deepu.tech URL
+// 404s ("The article you're looking for does not exist"). So:
+//   - a dev.to URL                              -> {% link <url> %}
+//   - an internal post that's also on Dev.to    -> {% link <its devto_url> %}
+//   - anything else (external, or internal post -> a plain markdown link
+//     not yet syndicated)
+function devtoLinkFor(href) {
+  const norm = href.replace(/\/+$/, "").trim();
+  if (/^https?:\/\/dev\.to\//i.test(norm)) return `{% link ${href} %}`;
+  const path = /^https?:\/\/(?:www\.)?deepu\.tech\//i.test(norm)
+    ? norm.replace(/^https?:\/\/(?:www\.)?deepu\.tech\//i, "")
+    : null;
+  const post =
+    LINK_INDEX.find((p) => p.canonical === norm) ||
+    (path ? LINK_INDEX.find((p) => p.slug === path) : null);
+  if (post?.devto_url) return `{% link ${post.devto_url} %}`;
+  return `[${post?.title ?? href}](${href})`;
+}
+
 const COMPONENT_TO_LIQUID = [
   // <Gist id="user/id" file="x" /> | <Gist id="..." />
   // Dev.to's Liquid {% gist %} requires the full gist URL (not bare id or
@@ -81,7 +105,7 @@ const COMPONENT_TO_LIQUID = [
     re: /<LinkCard\b[^>]*\/>/g,
     to: (m) => {
       const href = /\bhref\s*=\s*"([^"]+)"/.exec(m)?.[1];
-      return href ? `{% link ${href} %}` : "";
+      return href ? devtoLinkFor(href) : "";
     },
   },
   {
@@ -213,6 +237,18 @@ async function publish() {
     console.error(`No posts found in ${POSTS_DIR}`);
     process.exit(1);
   }
+
+  // Index every post so LinkCard hrefs pointing at this blog can be resolved to
+  // the target post's Dev.to URL during syndication (see devtoLinkFor).
+  LINK_INDEX = filenames.map((fn) => {
+    const fm = matter(fs.readFileSync(path.join(POSTS_DIR, fn), "utf8")).data;
+    return {
+      slug: fn.replace(/\.mdx?$/, "").replace(/^\d{4}-\d{2}-\d{2}-/, ""),
+      canonical: fm.canonical_url ? fm.canonical_url.replace(/\/+$/, "").trim() : null,
+      devto_url: fm.devto_url ?? null,
+      title: fm.title ?? null,
+    };
+  });
 
   console.log("");
   console.log("Dev.to sync " + (dryRun ? "(DRY RUN — no API writes)" : ""));
