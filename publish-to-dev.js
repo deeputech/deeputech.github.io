@@ -74,9 +74,15 @@ const COMPONENT_TO_LIQUID = [
     to: (_m, id) => `{% twitter ${id} %}`,
   },
   {
+    // <LinkCard href="..." title="..." image="..." /> — often multi-line, and
+    // attributes other than href can contain "/" (image paths, URLs). Match the
+    // whole tag, then pull href out. Dev.to's {% link %} only needs the URL.
     tag: "LinkCard",
-    re: /<LinkCard\s+href="([^"]+)"(?:\s+[^/]*)?\s*\/>/g,
-    to: (_m, href) => `{% link ${href} %}`,
+    re: /<LinkCard\b[^>]*\/>/g,
+    to: (m) => {
+      const href = /\bhref\s*=\s*"([^"]+)"/.exec(m)?.[1];
+      return href ? `{% link ${href} %}` : "";
+    },
   },
   {
     // <AsciinemaCard cast="..." alt-img="..." alt="..." ... /> (possibly
