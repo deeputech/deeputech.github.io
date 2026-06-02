@@ -1,0 +1,411 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.18.1"><link rel="icon" type="image/png" href="/assets/images/logo.png"><link rel="canonical" href="https://deepu.tech/introducing-llamastash"><title>Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher | Technorage</title><meta name="description" content="A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary"><meta property="og:type" content="article"><meta property="og:title" content="Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher | Technorage"><meta property="og:description" content="A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary"><meta property="og:url" content="https://deepu.tech/introducing-llamastash"><meta property="og:image" content="https://deepu.tech/assets/images/llamastash/cover.png"><meta property="og:site_name" content="Technorage"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2026-06-02T00:00:00.000Z"><meta name="author" content="Deepu K Sasidharan"><meta property="article:author" content="https://deepu.tech"><meta property="article:tag" content="ai"><meta property="article:tag" content="llamacpp"><meta property="article:tag" content="localllm"><meta property="article:tag" content="rust"><meta property="article:tag" content="opensource"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@deepu105"><meta name="twitter:creator" content="@deepu105"><meta name="twitter:title" content="Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher | Technorage"><meta name="twitter:description" content="A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary"><meta name="twitter:image" content="https://deepu.tech/assets/images/llamastash/cover.png"><link rel="alternate" type="application/rss+xml" title="Technorage RSS feed" href="/feed.xml"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher","description":"A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary","image":"https://deepu.tech/assets/images/llamastash/cover.png","url":"https://deepu.tech/introducing-llamastash","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/introducing-llamastash"},"datePublished":"2026-06-02T00:00:00.000Z","dateModified":"2026-06-02T00:00:00.000Z","author":{"@type":"Person","name":"Deepu K Sasidharan","url":"https://deepu.tech"},"publisher":{"@type":"Organization","name":"Technorage","logo":{"@type":"ImageObject","url":"https://deepu.tech/assets/images/logo.png"}},"keywords":"ai, llamacpp, localllm, rust, opensource"}</script><meta name="monetization" content="$ilp.uphold.com/Aw7eGpxKNyK7"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@500;600;700&display=swap"><script>
+  (function () {
+    try {
+      var stored = localStorage.getItem("theme");
+      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme = stored || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.style.colorScheme = theme;
+    } catch (_) {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-1SDSM5NX07"></script><script>(function(){const GA_ID = "G-1SDSM5NX07";
+
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  ad_storage: 'denied',
+  analytics_storage: 'granted'
+});
+gtag('js', new Date());
+gtag('config', GA_ID);`}
+          })();</script><link rel="stylesheet" href="/_astro/asciinema-player.mT6buTGj.css">
+<link rel="stylesheet" href="/_astro/comment-policy.Ba7knKAK.css">
+<style>.toc-link[data-astro-cid-obewoz47][data-active=true]{color:var(--color-accent);border-color:var(--color-accent);font-weight:500}
+</style></head> <body> <header class="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] backdrop-blur"> <div class="mx-auto flex max-w-5xl items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6"> <a href="/" class="flex min-w-0 shrink items-center gap-1.5 text-[var(--color-fg)]"> <svg class="h-5 w-5 shrink-0 text-[var(--color-accent)] sm:h-6 sm:w-6" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true"> <path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path> </svg> <span class="font-display truncate text-xl font-bold tracking-tight sm:text-3xl">technorage</span> </a> <nav class="ml-auto flex shrink-0 items-center gap-0 sm:gap-1"> <a href="/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path> <circle cx="12" cy="7" r="4"></circle>     </svg> <span class="hidden sm:inline">About</span> </a><a href="/blogs/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="8" y1="13" x2="16" y2="13"></line> <line x1="8" y1="17" x2="16" y2="17"></line>    </svg> <span class="hidden sm:inline">Blog</span> </a><a href="/books/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path> <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>   </svg> <span class="hidden sm:inline">Books</span> </a><a href="/appearances/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect> <line x1="16" y1="2" x2="16" y2="6"></line> <line x1="8" y1="2" x2="8" y2="6"></line> <line x1="3" y1="10" x2="21" y2="10"></line>  </svg> <span class="hidden sm:inline">Events</span> </a> <button type="button" id="search-trigger" aria-label="Search" title="Search (⌘K)" class="ml-0.5 inline-flex h-9 w-9 items-center justify-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-sm text-[var(--color-fg-subtle)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)] sm:ml-1 sm:w-auto sm:px-2"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <kbd class="hidden rounded border border-[var(--color-border-strong)] px-1 font-mono text-[10px] sm:inline">⌘K</kbd> </button> <button type="button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg> <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      var next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      document.documentElement.style.colorScheme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch (_) {}
+    });
+  })();
+</script> </nav> </div> </header> <main class="flex-1">  <div id="reading-progress" class="pointer-events-none fixed inset-x-0 top-0 z-50 h-0.5 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-75" aria-hidden="true"></div> <script>
+  (function () {
+    var bar = document.getElementById("reading-progress");
+    if (!bar) return;
+    var article = document.querySelector("article");
+    if (!article) return;
+    var ticking = false;
+    function update() {
+      var rect = article.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var scrolled = -rect.top;
+      var pct = total > 0 ? Math.min(1, Math.max(0, scrolled / total)) : 0;
+      bar.style.transform = "scaleX(" + pct + ")";
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  })();
+</script> <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14"> <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px]"> <article data-pagefind-body class="mx-auto w-full min-w-0 max-w-3xl lg:mx-0"> <header class="mb-8"> <div class="mb-4 flex flex-wrap gap-2 text-xs text-[var(--color-fg-subtle)]"> <a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> ai </a><a href="/tags/#llamacpp" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> llamacpp </a><a href="/tags/#localllm" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> localllm </a><a href="/tags/#rust" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> rust </a> </div> <h1 class="font-display text-4xl font-bold tracking-tight text-[var(--color-fg)] sm:text-5xl"> Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher </h1> <p class="mt-4 text-lg text-[var(--color-fg-muted)]">A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary</p> <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[var(--color-fg-subtle)]"> <img src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=64&d=mm" alt="Deepu K Sasidharan" width="32" height="32" class="h-8 w-8 rounded-full"> <a href="https://deepu.tech" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> Deepu K Sasidharan </a> <span class="text-[var(--color-border-strong)]">·</span> <time datetime="2026-06-02T00:00:00.000Z">June 2, 2026</time>   <span class="text-[var(--color-border-strong)]">·</span> <span>13 min read</span>  <span class="ml-auto"> <div class="not-prose flex items-center gap-1 text-[var(--color-fg-subtle)]"> <span class="mr-2 hidden text-xs uppercase tracking-wider sm:inline">Share</span> <a href="https://twitter.com/intent/tweet?text=Introducing%20LlamaStash%3A%20a%20zero-overhead%2C%20terminal-native%20llama.cpp%20launcher%0A%0A&url=https%3A%2F%2Fdeepu.tech%2Fintroducing-llamastash%2F&via=deepu105" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter" title="Share on Twitter" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:x">   <symbol id="ai:simple-icons:x" viewBox="0 0 24 24"><path fill="currentColor" d="M14.234 10.162L22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299l-.929-1.329L3.076 1.56h3.182l5.965 8.532l.929 1.329l7.754 11.09h-3.182z"/></symbol><use href="#ai:simple-icons:x"></use>  </svg> </a><a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fdeepu.tech%2Fintroducing-llamastash%2F&title=Introducing%20LlamaStash%3A%20a%20zero-overhead%2C%20terminal-native%20llama.cpp%20launcher&summary=Introducing%20LlamaStash%3A%20a%20zero-overhead%2C%20terminal-native%20llama.cpp%20launcher&source=Technorage" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" title="Share on LinkedIn" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:linkedin">   <symbol id="ai:simple-icons:linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037c-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.06 2.06 0 0 1-2.063-2.065a2.064 2.064 0 1 1 2.063 2.065m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></symbol><use href="#ai:simple-icons:linkedin"></use>  </svg> </a><a href="https://bsky.app/intent/compose?text=Introducing%20LlamaStash%3A%20a%20zero-overhead%2C%20terminal-native%20llama.cpp%20launcher%0A%0Ahttps%3A%2F%2Fdeepu.tech%2Fintroducing-llamastash%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on BlueSky" title="Share on BlueSky" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:bluesky">   <symbol id="ai:simple-icons:bluesky" viewBox="0 0 24 24"><path fill="currentColor" d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037c-.856 3.061-3.978 3.842-6.755 3.37c4.854.826 6.089 3.562 3.422 6.299c-5.065 5.196-7.28-1.304-7.847-2.97c-.104-.305-.152-.448-.153-.327c0-.121-.05.022-.153.327c-.568 1.666-2.782 8.166-7.847 2.97c-2.667-2.737-1.432-5.473 3.422-6.3c-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></symbol><use href="#ai:simple-icons:bluesky"></use>  </svg> </a><a href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdeepu.tech%2Fintroducing-llamastash%2F&t=Introducing%20LlamaStash%3A%20a%20zero-overhead%2C%20terminal-native%20llama.cpp%20launcher" target="_blank" rel="noopener noreferrer" aria-label="Share on Hacker News" title="Share on Hacker News" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:ycombinator">   <symbol id="ai:simple-icons:ycombinator" viewBox="0 0 24 24"><path fill="currentColor" d="M0 24V0h24v24zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896z"/></symbol><use href="#ai:simple-icons:ycombinator"></use>  </svg> </a><a href="https://www.reddit.com/submit?url=https%3A%2F%2Fdeepu.tech%2Fintroducing-llamastash%2F&title=Introducing%20LlamaStash%3A%20a%20zero-overhead%2C%20terminal-native%20llama.cpp%20launcher" target="_blank" rel="noopener noreferrer" aria-label="Share on Reddit" title="Share on Reddit" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:reddit">   <symbol id="ai:simple-icons:reddit" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286A.72.72 0 0 0 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0m4.388 3.199a1.999 1.999 0 1 1-1.947 2.46v.002a2.37 2.37 0 0 0-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363a2.802 2.802 0 1 1 2.908 4.753c-.088 3.256-3.637 5.876-7.997 5.876c-4.361 0-7.905-2.617-7.998-5.87a2.8 2.8 0 0 1 1.189-5.34c.645 0 1.239.218 1.712.585c1.275-.79 2.881-1.291 4.64-1.365v-.01a3.23 3.23 0 0 1 2.88-3.207a2 2 0 0 1 1.959-1.595m-8.085 8.376c-.784 0-1.459.78-1.506 1.797s.64 1.429 1.426 1.429s1.371-.369 1.418-1.385s-.553-1.841-1.338-1.841m7.406 0c-.786 0-1.385.824-1.338 1.841s.634 1.385 1.418 1.385c.785 0 1.473-.413 1.426-1.429c-.046-1.017-.721-1.797-1.506-1.797m-3.703 4.013c-.974 0-1.907.048-2.77.135a.222.222 0 0 0-.183.305a3.2 3.2 0 0 0 2.953 1.964a3.2 3.2 0 0 0 2.953-1.964a.222.222 0 0 0-.184-.305a28 28 0 0 0-2.769-.135"/></symbol><use href="#ai:simple-icons:reddit"></use>  </svg> </a> <button type="button" data-copy-link="https://deepu.tech/introducing-llamastash/" aria-label="Copy link" title="Copy link" class="copy-link inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="lucide:link-2">   <symbol id="ai:lucide:link-2" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></symbol><use href="#ai:lucide:link-2"></use>  </svg> </button> </div> <script>
+  document.querySelectorAll(".copy-link").forEach(function (btn) {
+    btn.addEventListener("click", async function () {
+      var url = btn.getAttribute("data-copy-link");
+      try {
+        await navigator.clipboard.writeText(url);
+        var prev = btn.title;
+        btn.title = "Copied!";
+        btn.style.color = "var(--color-accent)";
+        setTimeout(function () {
+          btn.title = prev;
+          btn.style.color = "";
+        }, 1500);
+      } catch (_) {}
+    });
+  });
+</script> </span> </div> </header> <img src="/assets/images/llamastash/cover.png" alt="Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher" class="mb-10 aspect-[16/9] w-full rounded-xl object-cover"> <div class="prose-blog"> <details class="not-prose group my-8 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]"> <summary class="flex cursor-pointer list-none items-center gap-4 px-6 py-5 group-open:pb-3 [&::-webkit-details-marker]:hidden"> <div class="min-w-0 flex-1"> <p class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+Series · <a href="/series/gnu-linux-environment-for-developers/" class="hover:underline" onclick="event.stopPropagation()">GNU/Linux Environment for Developers</a> </p> <p class="mt-1 text-xs text-[var(--color-fg-subtle)]">
+Post <strong class="text-[var(--color-fg-muted)]">8</strong> of  <strong class="text-[var(--color-fg-muted)]">8</strong> </p> </div> <svg class="size-4 shrink-0 text-[var(--color-fg-subtle)] transition-transform group-open:rotate-90" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"> <path d="M7 5l6 5-6 5V5z"></path> </svg> </summary> <ol class="list-decimal space-y-1.5 pr-6 pb-5 pl-10 text-sm marker:tabular-nums marker:text-[var(--color-fg-subtle)]"> <li> <a href="/my-beautiful-linux-development-environment/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My beautiful Linux development environment</a> </li><li> <a href="/must-have-gnome-plugins/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Must have GNOME extensions</a> </li><li> <a href="/configure-a-beautiful-terminal-on-unix/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Configure a beautiful terminal on Unix with Zsh</a> </li><li> <a href="/make-the-most-out-of-vscode/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My VS Code setup - Making the most out of VS Code</a> </li><li> <a href="/the-state-of-linux-on-desktops/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">The state of Linux as a daily use OS in 2021</a> </li><li> <a href="/my-beautiful-linux-development-environment-2021/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My sleek and modern Linux development machine in 2021</a> </li><li> <a href="/my-fully-offline-ai-assisted-linux-development-machine/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My fully offline AI-assisted Linux development machine</a> </li><li> <span class="font-semibold text-[var(--color-fg)]">Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher</span> </li> </ol> </details><p>In my <a href="https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine">recent post about my fully offline AI-assisted Linux development machine</a>, I dropped a small detail near the bottom. I run my local model with an alias.</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.6rxel.css"/><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamaServer</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="llamaServer"><div></div></button></div></figure></div>
+<p>I described it as “a small script. It lets me pick a GGUF model, context size, and reasoning mode. It remembers the last choice, so most of the time I just start it and get going.”</p>
+<p>That script grew up. Today I’m releasing <a href="https://github.com/llamastash/llamastash"><strong>LlamaStash</strong></a>, the first public release of a fast, cross-platform, terminal-native launcher for <a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a> with zero overhead.</p>
+<p>It is a TUI. It is also a CLI. It is also a background daemon. It is also an OpenAI-compatible proxy. One small Rust binary (~5 MB download), three personas, same primitives everywhere.</p>
+<figure class="not-prose my-8"> <div class="overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] shadow-lg shadow-black/20"> <div class="flex items-center gap-1.5 border-b border-[var(--color-border)] bg-[var(--color-bg-muted)] px-3 py-2"> <span class="inline-block h-2.5 w-2.5 rounded-full bg-[var(--color-red)]"></span> <span class="inline-block h-2.5 w-2.5 rounded-full bg-[var(--color-peach)]"></span> <span class="inline-block h-2.5 w-2.5 rounded-full bg-[var(--color-green)]"></span>  </div> <div class="asciinema-body relative bg-[var(--color-code-bg)]" data-asciinema-cast="/assets/casts/llamastash.cast"> <div class="asciinema-cast"></div> <img src="/assets/images/llamastash/tui.gif" alt="Terminal session recording" class="asciinema-fallback asciinema-fallback--gif block w-full" loading="lazy" decoding="async"> <img src="/assets/images/llamastash/tui.png" alt="Terminal session recording" class="asciinema-fallback asciinema-fallback--img block w-full" loading="lazy" decoding="async"> </div> </div>  </figure> <script type="module" src="/_astro/AsciinemaCard.astro_astro_type_script_index_0_lang.Du4Poo5U.js"></script>
+<h2 id="why-does-this-exist">Why does this exist?</h2>
+<p>Well: ADHD, insomnia and the below 😆</p>
+<p>Local LLMs sit in an awkward gap.</p>
+<p>On one side, raw <a href="https://github.com/ggml-org/llama.cpp/tree/master/tools/server"><code>llama-server</code></a> is fast and honest. It is also tedious. You memorize flags. You write wrapper scripts. You remember which port a model is on. You guess context sizes that may or may not fit your VRAM. After a while you have a <code>~/scripts/</code> folder full of shell aliases that nobody else can read.</p>
+<p>On the other side, <a href="https://ollama.com/">Ollama</a> and <a href="https://lmstudio.ai/">LM Studio</a> wrap llama.cpp in friendlier shells. Ollama is opinionated about model storage, format, and config. LM Studio is GUI-first and not terminal native. Both pay a real performance cost compared to raw llama-server, and both hide the underlying primitives that I actually like working with.</p>
+<p>I wanted something in the middle. A launcher that:</p>
+<ul>
+<li>Stays out of llama.cpp’s way (no fork, no patched copy, no opinions about its flags).</li>
+<li>Is fast to invoke from a terminal and fast to drive from a script.</li>
+<li>Is also good as a TUI, because I genuinely like terminal interfaces.</li>
+<li>Treats agents and humans as equals. Anything a person can do in the TUI, an agent can do via <code>--json</code>.</li>
+<li>Has a daemon underneath so models survive the TUI closing, and so multiple clients can hit the same model concurrently.</li>
+<li>Exposes an OpenAI/Ollama-compatible proxy on loopback so any existing OpenAI client (your editor, your agent, your scripts) just works without per-model setup.</li>
+</ul>
+<p>LlamaStash is that.</p>
+<h2 id="why-a-tui">Why a TUI?</h2>
+<p>I love terminal UIs (see <a href="https://github.com/kdash-rs/kdash">KDash</a>, <a href="https://github.com/jwt-rs/jwt-ui">JWT-UI</a>, and <a href="https://github.com/deepu105/battleship-rs">battleship-rs</a>). I wrote KDash, a Kubernetes dashboard TUI in Rust. That was 2020. The Rust TUI ecosystem at the time was tui-rs and a lot of patience. Threading was DIY. Layouts were arithmetic. State management was you-figure-it-out.</p>
+<p>Building LlamaStash brought me back to a lot of that, but the ground has shifted. <a href="https://ratatui.rs/">ratatui</a> (the maintained fork of tui-rs) is a real, polished framework now. <a href="https://tokio.rs/">tokio</a> makes async daemons boring in a good way. <a href="https://hyper.rs/">hyper</a> gives you a respectable HTTP server in a few hundred lines. <a href="https://github.com/crossterm-rs/crossterm">crossterm</a> handles the cross-platform terminal mess. <a href="https://github.com/GuillaumeGomez/sysinfo">sysinfo</a> covers host metrics. The pieces are all there and you have LLMs to help you speed up everything to 10x.</p>
+<p>I still believe what <a href="https://deepu.tech/my-second-impression-of-rust/">I wrote then</a>. Rust gives you safety, speed, and a great UX without picking just one. LlamaStash is ~180 Rust files and not one production panic. It feels solid in a way that the JavaScript and Java tooling I shipped earlier in my career never quite did.</p>
+<p>OK, enough nostalgia. Let me show you what the tool actually does.</p>
+<h2 id="zero-to-chat-in-one-command">Zero to chat in one command</h2>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">init</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="llamastash init"><div></div></button></div></figure></div>
+<p>This is the first-run wizard. It detects your hardware, installs <code>llama-server</code> for your OS/GPU combo, looks at your available VRAM, recommends a GGUF model that fits, downloads it, writes a tuned config, updates configs for your AI tools (OpenCode, Zed, etc.), and smoke-launches it to make sure the whole pipeline works end-to-end.</p>
+<p><img src="/assets/images/llamastash/init.gif" alt="Init wizard"/></p>
+<p>On my Strix Halo machine that means an automatic ROCm/HIP path with sensible defaults. On a MacBook it picks up Metal. On an NVIDIA Linux box it picks up Vulkan (CUDA coming soon). On a Windows 11 machine it picks the matching <code>win-cpu</code> / <code>win-cuda</code> / <code>win-vulkan</code> llama.cpp asset. On an old laptop with no GPU it picks up CPU and quietly recommends a smaller model.</p>
+<p>If you already have a llama.cpp build you like, point at it with <code>--llama-server</code>. If you already have GGUFs in <code>~/.cache/huggingface/</code>, <code>~/.ollama/models</code>, or <code>~/.lmstudio/models</code>, LlamaStash discovers them. It also watches your model paths live, so a new download shows up without a restart.</p>
+<p>Already have a coding model on disk? Skip the wizard.</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">start</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">qwen-coder</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--ctx</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">16384</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--reasoning</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">on</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="llamastash start qwen-coder --ctx 16384 --reasoning on"><div></div></button></div></figure></div>
+<p>That’s the whole command. Or use the TUI and pick from a list.</p>
+<h2 id="the-tui">The TUI</h2>
+<p>This is what, I hope, most users will spend time in.</p>
+<p><img src="/assets/images/llamastash/tui_5.png" alt="TUI screenshot"/></p>
+<p>A few things worth knowing:</p>
+<ul>
+<li><strong>Vim-style navigation everywhere.</strong> <code>hjkl</code>, <code>Ctrl+F</code>/<code>Ctrl+B</code>, <code>0</code>/<code>$</code>, <code>gt</code>/<code>gT</code> for tab cycling, <code>/</code> to filter, <code>?</code> for help. The keybindings are not modal voodoo, they are real, documented, and rebindable.</li>
+<li><strong>The right pane is a smoke test.</strong> Logs, Chat, Embed, Rerank tabs that hit the same OpenAI-compatible endpoint external clients use. So when something works in the TUI, it works in your editor, your agent, your script.</li>
+<li><strong>In-TUI HuggingFace browser.</strong> Search, sort, paginate, see per-file hardware fit, download with cancel. No tab-switching to a website.</li>
+<li><strong>Five themes plus custom.</strong> <a href="https://catppuccin.com/">Catppuccin Macchiato</a> is the default because of course it is.</li>
+<li><strong>Adaptive layout.</strong> Works from 60 cells up. Tiny terminal? List columns and hint chips drop by priority rank so the model name stays readable.</li>
+<li><strong>Accessibility.</strong> Status is dual-encoded with both color and a glyph, so it reads on mono terminals too.</li>
+</ul>
+<p>The mouse is off by default (except scrolling) so your terminal keeps native click-and-drag text selection. Opt in with <code>--mouse-focus</code> or a single line in <code>config.yaml</code> if you want it.</p>
+<p><img src="/assets/images/llamastash/tui_1.png" alt="TUI second view"/></p>
+<h2 id="the-cli">The CLI</h2>
+<p>Everything the TUI can do, the CLI can do. The CLI is a first-class surface, not an afterthought.</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># List models, human-friendly</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">list</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># List models, machine-friendly</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">list</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--json</span><span style="--0:#CAD3F5"> </span><span style="--0:#8BD5CA">|</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4;--0fs:italic">jq</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Show, start, stop, status</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">show</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">qwen-coder</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">start</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">qwen-coder</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">stop</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">qwen-coder</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">status</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--json</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Pull a model from HuggingFace</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">pull</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">bartowski/Qwen3.6-27B-Instruct-GGUF</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Recommend something based on my hardware</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">recommend</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="llamastash listllamastash list --json | jqllamastash show qwen-coderllamastash start qwen-coderllamastash stop qwen-coderllamastash status --jsonllamastash pull bartowski/Qwen3.6-27B-Instruct-GGUFllamastash recommend"><div></div></button></div></figure></div>
+<p>A few things that matter for scripting:</p>
+<ul>
+<li><code>--json</code> is the stable agent contract. If we change the human-readable output, scripts using <code>--json</code> keep working.</li>
+<li>Documented <a href="https://github.com/llamastash/llamastash/blob/main/FEATURES.md#documented-exit-codes-per-failure-class">exit codes per failure class</a>. Branch on numbers, not on message text.</li>
+<li>TTY output is colored and padded. Piped output is byte-stable TSV, so your <code>awk</code> and <code>column</code> pipelines keep working.</li>
+</ul>
+<p>There is also an <a href="https://agentskills.io/">Agent Skills</a> bundle in the repo that teaches your coding agent to use the CLI properly. Drop it into your OpenCode, OpenClaw, or Claude Code skills directory and the agent learns to prefer <code>--json</code>, branch on exit codes, and read <code>status --json</code> before configuring an OpenAI-compatible client.</p>
+<h2 id="the-proxy">The proxy</h2>
+<p>Once a model is running, LlamaStash exposes an OpenAI-compatible endpoint on <code>http://127.0.0.1:11435/v1</code> by default.</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">curl</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">-s</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">http://127.0.0.1:11435/v1/chat/completions</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">-H</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&#39;Content-Type: application/json&#39;</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5BDE6">\</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">  </span><span style="--0:#A6DA95">-d</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&#39;{&quot;model&quot;: &quot;qwen-coder&quot;, &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;hi&quot;}]}&#39;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="curl -s http://127.0.0.1:11435/v1/chat/completions \  -H 'Content-Type: application/json' \  -d '{&#34;model&#34;: &#34;qwen-coder&#34;, &#34;messages&#34;: [{&#34;role&#34;: &#34;user&#34;, &#34;content&#34;: &#34;hi&#34;}]}'"><div></div></button></div></figure></div>
+<p>OpenCode, <a href="https://pi.dev">Pi</a>, Cline, the OpenAI SDKs, <code>llm-cli</code>, anything that speaks OpenAI works as-is.</p>
+<p>A few details worth knowing:</p>
+<ul>
+<li><strong>Auto-start on first request.</strong> If the requested model is not running yet, the proxy starts it and serves the request.</li>
+<li><strong>Fallback with audit headers.</strong> If launch fails for any reason, the proxy falls back to a Ready peer model and adds <code>x-llamastash-served-by</code> and <code>x-llamastash-fallback-reason</code> headers so the client can react. You can turn off this behavior via the <code>fallback_enabled</code> config option if you prefer a hard failure.</li>
+<li><strong>Ollama discovery surface.</strong> <code>GET /api/tags</code>, <code>/api/version</code>, <code>/api/ps</code>, <code>POST /api/show</code>. Tools that auto-detect Ollama via <code>OLLAMA_HOST</code> will recognize LlamaStash and fall through to the OpenAI-compat endpoints for actual inference.</li>
+<li><strong>Opt-in Ollama drop-in mode.</strong> With <code>--ollama-compat</code> (or <code>LLAMASTASH_OLLAMA_COMPAT=1</code>) the proxy claims port <code>11434</code> and answers the byte-exact “Ollama is running” handshake. The official <code>ollama</code> CLI talks to it. Most Ollama-Go-based clients talk to it. Useful when you want to replace Ollama in a workflow you didn’t write.</li>
+<li><strong>Loopback only, no auth.</strong> Single-user local threat model. The proxy refuses LAN binds. LAN exposure plus auth plus TLS is on the roadmap, not in 0.0.2.</li>
+</ul>
+<h2 id="zero-overhead-means-zero-overhead">Zero overhead means zero overhead</h2>
+<p>The benchmark detail lives in <a href="https://deepu.tech/benchmarking-llamastash">its own post</a> and <a href="https://github.com/llamastash/llamastash/blob/main/docs/benchmarks.md">docs/benchmarks.md</a>, but here is the one-line version.</p>
+<p>LlamaStash spawns the unmodified upstream <code>llama-server</code>. So the wrapper better not add measurable overhead vs running <code>llama-server</code> directly. We measure it. It does not. LlamaStash matches raw <code>llama-server</code> within <code>≤1%</code> on every cell, across AMD APU, Apple Silicon, and NVIDIA. The proxy hop is <code>+0.45 ms</code> median TTFT and zero impact on decode.</p>
+<p>The comparison against Ollama is more interesting, but I’ll let the benchmark post do that talking. The methodology is published. The harness is reproducible. Run <code>make bench-end-to-end</code> and check for yourself.</p>
+<p><img src="/assets/images/llamastash/00-hero-all-hardware.png" alt="LlamaStash vs raw llama-server vs LM Studio vs Ollama — decode tok/s across AMD APU, Apple M1, NVIDIA RTX 3050 Ti (defaults mode, log scale)"/></p>
+<h2 id="architecture-in-one-paragraph">Architecture, in one paragraph</h2>
+<p>One Rust binary. Invoking it with no arguments is the TUI. Invoking it with a subcommand is the CLI. Invoking it as <code>llamastash daemon</code> is the supervisor. The TUI and the CLI both talk to the daemon over a 127.0.0.1 HTTP control plane that’s bearer-token-authed. The URL and per-restart token live in a <code>runtime.json</code> handshake file under the state dir, locked down to the file owner (mode <code>0600</code> on Unix, Protected DACL on Windows). Same trust model on every supported OS: same-machine, same-UID. The daemon spawns <code>llama-server</code> instances on demand, tracks them with a state machine, picks ports from a configurable range, and exposes the OpenAI-compatible proxy on loopback as a separate listener. State persists to atomic, mode-checked files. If your daemon crashes, the next invocation reads the state and re-adopts the running <code>llama-server</code> instances. Models survive a TUI close. They do not survive a reboot, by design.</p>
+<p>For the deeper version, see <a href="https://github.com/llamastash/llamastash/blob/main/docs/architecture.md">docs/architecture.md</a>. I had so much fun designing the architecture and a lot of it came from <a href="https://github.com/kdash-rs/kdash">KDash</a> obviously.</p>
+<h2 id="how-carefully-tested">How carefully tested?</h2>
+<p>What <a href="https://github.com/llamastash/llamastash/blob/main/.github/workflows/ci.yml">CI</a> gates before anything reaches crates.io, the Homebrew tap, or the AUR:</p>
+<ul>
+<li>~2,000 test attributes across the workspace (1,700+ in Rust, the rest in <code>pytest</code> and <code>bats</code>). 86.5% line coverage tracked via grcov + <a href="https://coveralls.io/github/llamastash/llamastash?branch=main">Coveralls</a>.</li>
+<li><code>cargo audit --deny warnings</code> for dependency vulnerabilities. Any new advisory fails CI.</li>
+<li><code>bats</code> integration tests for <code>install.sh</code> on Linux and macOS, plus <code>shellcheck -s sh</code> on the script itself.</li>
+<li><code>pytest</code> for the Python packager scripts that drive the Homebrew formula and the AUR <code>PKGBUILD</code>s.</li>
+<li>MSRV pinned to Rust 1.95, verified with <code>cargo check --locked</code> against the pinned toolchain. Cross-compile check for <code>aarch64-unknown-linux-gnu</code> on every push.</li>
+<li>A “release readiness” job runs <code>cargo publish --dry-run --locked</code> plus packager unit tests for both the Homebrew formula and the AUR <code>PKGBUILD</code>s, so the publish steps are green before the tag ever moves.</li>
+</ul>
+<p>LlamaStash is a single-author project. Bugs will find me. The hygiene above is there to make that less painful when they do. The Windows and macOS builds are not as vigorously tested since I develop on Linux so there are gonna be rough edges there. If you have a Windows 11 machine or a Mac and want to help with testing, please do.</p>
+<h2 id="install">Install</h2>
+<p>Pick a channel. They all install the same binary. The download is <code>~5 MB</code> across every supported target.</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># macOS + Linux, one-shot installer</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">curl</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">-fsSL</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">https://llamastash.dev/install.sh</span><span style="--0:#CAD3F5"> </span><span style="--0:#8BD5CA">|</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4;--0fs:italic">sh</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Homebrew (macOS + Linuxbrew)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">brew</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">install</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llamastash/llamastash/llamastash</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Arch Linux (AUR)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">yay</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">-S</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llamastash</span><span style="--0:#CAD3F5">         </span><span style="--0:#979EBA;--0fs:italic"># source build from the tagged GitHub release</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">yay</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">-S</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llamastash-bin</span><span style="--0:#CAD3F5">     </span><span style="--0:#979EBA;--0fs:italic"># prebuilt x86_64 / aarch64 tarball</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">yay</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">-S</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llamastash-git</span><span style="--0:#CAD3F5">     </span><span style="--0:#979EBA;--0fs:italic"># main-branch checkout, rebuilds on every -Syu</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Windows 11 (PowerShell, no admin elevation)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">irm</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">https://llamastash.dev/install.ps1</span><span style="--0:#CAD3F5"> </span><span style="--0:#8BD5CA">|</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4;--0fs:italic">iex</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Windows via Scoop bucket</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">scoop</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">bucket</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">add</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">https://github.com/llamastash/scoop-llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">&amp;&amp;</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4;--0fs:italic">scoop</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">install</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llamastash</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># crates.io (any platform with a Rust toolchain)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">cargo</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">install</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llamastash</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="curl -fsSL https://llamastash.dev/install.sh | shbrew install llamastash/llamastash/llamastashyay -S llamastash         # source build from the tagged GitHub releaseyay -S llamastash-bin     # prebuilt x86_64 / aarch64 tarballyay -S llamastash-git     # main-branch checkout, rebuilds on every -Syuirm https://llamastash.dev/install.ps1 | iexscoop bucket add llamastash https://github.com/llamastash/scoop-llamastash &#38;&#38; scoop install llamastashcargo install llamastash"><div></div></button></div></figure></div>
+<p>Then <code>llamastash init</code> and you are off.</p>
+<p>Full install notes, including the non-interactive agent-friendly path, in <a href="https://github.com/llamastash/llamastash/blob/main/INSTALL.md">INSTALL.md</a>.</p>
+<h2 id="whats-not-in-002">What’s not in 0.0.2</h2>
+<p>A few things are explicitly on the next-release roadmap.</p>
+<ul>
+<li><strong>LAN exposure + auth + TLS.</strong> Today: loopback-only by design. If there’s enough interest in safe LAN sharing, that needs auth and TLS done properly. Soon.</li>
+<li><strong>Anthropic <code>/v1/messages</code> compatibility shim.</strong> OpenAI-compatible is good enough for most agents, but a few prefer the Anthropic shape.</li>
+<li><strong>MCP server surface.</strong> The CLI is already agent-friendly, so I’m double minded about whether a <a href="https://modelcontextprotocol.io/">Model Context Protocol</a> server would make integration smoother. I’m personally <a href="https://mariozechner.at/posts/2025-11-02-what-if-you-dont-need-mcp/">not a fan of MCP</a> and prefer skills and CLIs.</li>
+<li><strong>MLX and vLLM backends.</strong> llama.cpp is the right default, but I’d like LlamaStash to be backend-pluggable if possible.</li>
+<li><strong>NPU support.</strong> It would be nice if the same tool could run models on both GPUs and NPUs, so modern Copilot+ PCs and M-series Macs put their Neural Engines to work too.</li>
+<li><strong>Per-PID VRAM attribution.</strong> Today the supervisor reports host-level GPU memory. A per-process number is more useful.</li>
+<li><strong>CUDA on Linux.</strong> Vulkan is a fine GPU backend, but CUDA is the most popular GPU compute API on NVIDIA hardware. Today the Linux+NVIDIA route ships the Vulkan binary. CUDA on Linux is a bit sketchy to support (driver version matching, ABI stability), but I want to do it cleanly.</li>
+<li><strong><code>aarch64-pc-windows-msvc</code>.</strong> 0.0.2 ships x86_64 Windows only. Snapdragon X / Surface Pro coverage on the roadmap.</li>
+</ul>
+<p>Track or shape the roadmap on the <a href="https://github.com/llamastash/llamastash/blob/main/TODO.md">TODO.md</a> file in the repo.</p>
+<h2 id="why-local-ai-tooling-matters">Why local AI tooling matters</h2>
+<p>I wrote about this in the <a href="https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine">Linux machine post</a>, and I’m not going to repeat it all here. The short version.</p>
+<p>I use hosted models too. The best ones are still better at some things. But local-first tooling is a capability I want to have, not just for the privacy or the cost or the offline use, but for the ownership. It lets me change models, contexts, build flags, server parameters, and client config whenever I want. It lets me run experiments that I wouldn’t think to run on a paid API. And in a world that is sliding fast toward a few companies owning the infrastructure that developers depend on, having my own stack feels less like a hobby and more like a small act of preservation.</p>
+<p>LlamaStash is one piece of that. There will be others.</p>
+<h2 id="try-it-break-it-tell-me">Try it, break it, tell me</h2>
+<p>If you have a Linux box, a Mac, or a Windows 11 machine sitting around with a half-decent GPU (or an Apple Silicon machine with enough unified memory), <code>llamastash init</code> should get you to a working local model in a few minutes. Bug reports, feature ideas, and “this didn’t work for me” stories are all welcome at <a href="https://github.com/llamastash/llamastash/issues">github.com/llamastash/llamastash/issues</a>.</p>
+<p>A star on the repo helps the project show up for other people looking for the same itch. It also makes me feel good about the effort that went into this 🤓. Not going to lie about that.</p>
+<p>And finally, thanks to all the AI coding harnesses (OpenCode, Claude Code, Copilot) and LLMs (Claude, DeepSeek, Kimi, Qwen, Gemini, etc.) that turned what would have been a six-month, multi-person project into a one-person, couple-of-weeks project. I’m planning a deeper dive into the development process in a future post, especially the AI harness engineering around it and the vibe coding discipline that made it possible to keep the scope tight and the quality high. Stay tuned.</p>
+<hr/>
+<p>If you like this article, please leave a like or a comment.</p>
+<p>You can follow me on <a href="https://bsky.app/profile/deepu105.bsky.social">Bluesky</a>, <a href="https://mastodon.social/@deepu105">Mastodon</a>, and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p> <hr class="my-12 border-[var(--color-border)]"> <div class="not-prose mb-8 flex flex-wrap gap-2"> <a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#ai </a><a href="/tags/#llamacpp" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#llamacpp </a><a href="/tags/#localllm" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#localllm </a><a href="/tags/#rust" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#rust </a><a href="/tags/#opensource" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#opensource </a> </div><nav class="not-prose mt-10 grid gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 sm:grid-cols-2"> <p class="sm:col-span-2 text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+More in <a href="/series/gnu-linux-environment-for-developers/" class="hover:underline">GNU/Linux Environment for Developers</a> </p> <a rel="prev" href="/my-fully-offline-ai-assisted-linux-development-machine/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4 transition hover:border-[var(--color-accent)]"> <span class="text-xs text-[var(--color-fg-subtle)]">← Previous in series</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> My fully offline AI-assisted Linux development machine </span> </a> <span></span> </nav><nav class="not-prose mt-10 grid gap-4 border-t border-[var(--color-border)] pt-8 sm:grid-cols-2"> <span></span> <a href="/benchmarking-llamastash/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 text-right transition hover:border-[var(--color-border-strong)]"> <span class="text-xs text-[var(--color-fg-subtle)]">Older →</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio </span> </a> </nav>  </div> <section class="not-prose mt-12 border-t border-[var(--color-border)] pt-8"> <h2 class="font-display mb-4 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Comments</h2> <div id="giscus-mount"></div> </section> <script src="https://giscus.app/client.js" data-repo="deeputech/deeputech.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk" data-category="Comments" data-category-id="DIC_kwDODBl9a84C8yBt" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async>(function(){const config = {"repo":"deeputech/deeputech.github.io","repoId":"MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk","category":"Comments","categoryId":"DIC_kwDODBl9a84C8yBt","mapping":"pathname","strict":"0","reactionsEnabled":"1","emitMetadata":"0","inputPosition":"top","lang":"en"};
+})();</script> <script>
+  // Re-theme Giscus iframe when the site theme toggles.
+  (function () {
+    function send(theme) {
+      var iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme === "dark" ? "dark" : "light" } } }, "https://giscus.app");
+    }
+    var html = document.documentElement;
+    var observer = new MutationObserver(function () {
+      send(html.getAttribute("data-theme") || "light");
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["data-theme"] });
+  })();
+</script> </article> <aside class="hidden lg:block"> <div class="sticky top-24"> <nav class="toc text-sm" aria-label="Table of contents" data-astro-cid-obewoz47><p class="font-display mb-3 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase" data-astro-cid-obewoz47>
+On this page
+</p><ul class="space-y-1.5" data-astro-cid-obewoz47><li class data-astro-cid-obewoz47><a href="#why-does-this-exist" data-toc-target="why-does-this-exist" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Why does this exist?</a></li><li class data-astro-cid-obewoz47><a href="#why-a-tui" data-toc-target="why-a-tui" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Why a TUI?</a></li><li class data-astro-cid-obewoz47><a href="#zero-to-chat-in-one-command" data-toc-target="zero-to-chat-in-one-command" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Zero to chat in one command</a></li><li class data-astro-cid-obewoz47><a href="#the-tui" data-toc-target="the-tui" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>The TUI</a></li><li class data-astro-cid-obewoz47><a href="#the-cli" data-toc-target="the-cli" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>The CLI</a></li><li class data-astro-cid-obewoz47><a href="#the-proxy" data-toc-target="the-proxy" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>The proxy</a></li><li class data-astro-cid-obewoz47><a href="#zero-overhead-means-zero-overhead" data-toc-target="zero-overhead-means-zero-overhead" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Zero overhead means zero overhead</a></li><li class data-astro-cid-obewoz47><a href="#architecture-in-one-paragraph" data-toc-target="architecture-in-one-paragraph" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Architecture, in one paragraph</a></li><li class data-astro-cid-obewoz47><a href="#how-carefully-tested" data-toc-target="how-carefully-tested" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>How carefully tested?</a></li><li class data-astro-cid-obewoz47><a href="#install" data-toc-target="install" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Install</a></li><li class data-astro-cid-obewoz47><a href="#whats-not-in-002" data-toc-target="whats-not-in-002" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>What’s not in 0.0.2</a></li><li class data-astro-cid-obewoz47><a href="#why-local-ai-tooling-matters" data-toc-target="why-local-ai-tooling-matters" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Why local AI tooling matters</a></li><li class data-astro-cid-obewoz47><a href="#try-it-break-it-tell-me" data-toc-target="try-it-break-it-tell-me" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Try it, break it, tell me</a></li></ul></nav><script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".toc-link"));
+    if (!links.length) return;
+    var bySlug = {};
+    links.forEach(function (l) {
+      bySlug[l.getAttribute("data-toc-target")] = l;
+    });
+    var headings = Object.keys(bySlug)
+      .map(function (slug) {
+        return document.getElementById(slug);
+      })
+      .filter(Boolean);
+    if (!headings.length) return;
+
+    var current = null;
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // Find the topmost intersecting heading.
+        var visible = entries
+          .filter(function (e) {
+            return e.isIntersecting;
+          })
+          .sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+        if (visible.length) {
+          var newCurrent = visible[0].target.id;
+          if (newCurrent !== current) {
+            if (current && bySlug[current]) bySlug[current].removeAttribute("data-active");
+            current = newCurrent;
+            if (bySlug[current]) bySlug[current].setAttribute("data-active", "true");
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -70% 0px" },
+    );
+    headings.forEach(function (h) {
+      observer.observe(h);
+    });
+  })();
+</script> </div> </aside> </div> </div>  </main> <aside class="alert-bar mt-16"> <div class="mx-auto max-w-3xl px-4 py-6 text-center text-sm text-[var(--color-fg-muted)] sm:px-6"> <p>
+Never miss a story from Technorage — follow me on
+<a rel="me" target="_blank" href="https://mastodon.social/@deepu105" class="text-[var(--color-accent)] hover:underline">Mastodon</a>,
+<a rel="me" target="_blank" href="https://www.linkedin.com/in/deepu05" class="text-[var(--color-accent)] hover:underline">LinkedIn</a>,
+      or
+<a rel="me" target="_blank" href="https://twitter.com/deepu105" class="text-[var(--color-accent)] hover:underline">Twitter</a>.
+      Or
+<a href="/feed.xml" class="text-[var(--color-accent)] hover:underline">subscribe via RSS</a>.
+</p> <p class="mt-2 text-xs text-[var(--color-fg-subtle)]">
+This site uses Google Analytics which places
+<a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage#gtagjs_google_analytics_4_-_cookie_usage" target="_blank" rel="noopener noreferrer" class="underline-offset-2 hover:underline">a few cookies</a>. By using the site, you agree to their use.
+</p> </div> </aside> <footer class="border-t border-[var(--color-border)] py-10 text-sm text-[var(--color-fg-muted)]"> <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 sm:px-6 md:flex-row md:items-center md:justify-between"> <div class="flex flex-col gap-1"> <span>
+© 2026 Deepu K Sasidharan ·
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" class="underline-offset-2 hover:underline">
+CC BY 4.0
+</a> </span> <span class="text-xs text-[var(--color-fg-subtle)]">
+Built with <a href="https://astro.build" class="hover:underline">Astro</a> ·
+        Hosted on <a href="https://pages.github.com/" class="hover:underline">GitHub Pages</a> </span> </div> <nav class="flex flex-wrap gap-x-4 gap-y-2 text-xs"> <a href="/blogs/" class="hover:text-[var(--color-fg)]">Blog</a> <a href="/series/" class="hover:text-[var(--color-fg)]">Series</a> <a href="/tags/" class="hover:text-[var(--color-fg)]">Tags</a> <a href="/feed.xml" class="hover:text-[var(--color-fg)]">RSS</a> <a href="/comment-policy/" class="hover:text-[var(--color-fg)]">Comments</a> </nav> </div> </footer> <dialog id="search-dialog" class="m-auto w-full max-w-xl rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-0 text-[var(--color-fg)] shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm"> <div class="flex items-center gap-3 border-b border-[var(--color-border)] px-4 py-3"> <svg class="h-4 w-4 text-[var(--color-fg-subtle)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <input id="search-input" type="search" placeholder="Search posts…" autocomplete="off" class="w-full bg-transparent text-base text-[var(--color-fg)] outline-none placeholder:text-[var(--color-fg-subtle)]"> <kbd class="rounded border border-[var(--color-border)] px-1.5 py-0.5 font-mono text-xs text-[var(--color-fg-subtle)]">esc</kbd> </div> <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2 text-sm"> <p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">
+Type to search the blog.
+</p> </div> </dialog> <script>
+  (function () {
+    var dialog = document.getElementById("search-dialog");
+    var input = document.getElementById("search-input");
+    var results = document.getElementById("search-results");
+    var trigger = document.getElementById("search-trigger");
+    if (!dialog || !input || !results) return;
+
+    var pagefind = null;
+    var loading = false;
+
+    async function loadPagefind() {
+      if (pagefind || loading) return;
+      loading = true;
+      try {
+        // Pagefind is generated at /pagefind/pagefind.js after `pagefind --site dist`
+        pagefind = await import(/* @vite-ignore */ "/pagefind/pagefind.js");
+        await pagefind.options({ excerptLength: 30 });
+      } catch (e) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Search index unavailable in dev. Run <code>npm run build</code> then <code>npm run preview</code>.</p>';
+      } finally {
+        loading = false;
+      }
+    }
+
+    function open() {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+      loadPagefind();
+      setTimeout(function () {
+        input.focus();
+      }, 0);
+    }
+    function close() {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+      input.value = "";
+      results.innerHTML =
+        '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+    }
+
+    if (trigger) trigger.addEventListener("click", open);
+    document.addEventListener("keydown", function (e) {
+      var isMac = /Mac|iPad|iPhone/.test(navigator.platform);
+      var isCmdK = (isMac ? e.metaKey : e.ctrlKey) && e.key === "k";
+      if (isCmdK) {
+        e.preventDefault();
+        open();
+      } else if (e.key === "Escape" && dialog.open) {
+        e.preventDefault();
+        close();
+      }
+    });
+    dialog.addEventListener("click", function (e) {
+      // close on backdrop click
+      if (e.target === dialog) close();
+    });
+
+    var lastQuery = "";
+    var debounceTimer = null;
+    input.addEventListener("input", function () {
+      var q = input.value.trim();
+      if (q === lastQuery) return;
+      lastQuery = q;
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () {
+        runSearch(q);
+      }, 80);
+    });
+
+    async function runSearch(q) {
+      if (!q) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+        return;
+      }
+      if (!pagefind) {
+        await loadPagefind();
+        if (!pagefind) return;
+      }
+      var search = await pagefind.search(q);
+      if (!search || !search.results.length) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">No results for &ldquo;' +
+          escapeHtml(q) +
+          '&rdquo;</p>';
+        return;
+      }
+      var top = await Promise.all(search.results.slice(0, 8).map(function (r) { return r.data(); }));
+      results.innerHTML = top
+        .map(function (d) {
+          return (
+            '<a href="' +
+            d.url +
+            '" class="block rounded-lg px-3 py-2.5 hover:bg-[var(--color-bg-subtle)]">' +
+            '<span class="font-display block text-sm font-semibold text-[var(--color-fg)]">' +
+            escapeHtml(d.meta && d.meta.title ? d.meta.title : d.url) +
+            "</span>" +
+            '<span class="mt-0.5 block text-xs text-[var(--color-fg-muted)]">' +
+            d.excerpt +
+            "</span>" +
+            "</a>"
+          );
+        })
+        .join("");
+    }
+
+    function escapeHtml(s) {
+      return s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  })();
+</script> </body></html>

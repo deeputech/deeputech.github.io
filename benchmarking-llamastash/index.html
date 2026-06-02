@@ -1,0 +1,922 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.18.1"><link rel="icon" type="image/png" href="/assets/images/logo.png"><link rel="canonical" href="https://deepu.tech/benchmarking-llamastash"><title>How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio | Technorage</title><meta name="description" content="A reproducible benchmark of LlamaStash against raw llama-server, Ollama, and LM Studio on AMD APU, Apple Silicon, and NVIDIA"><meta property="og:type" content="article"><meta property="og:title" content="How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio | Technorage"><meta property="og:description" content="A reproducible benchmark of LlamaStash against raw llama-server, Ollama, and LM Studio on AMD APU, Apple Silicon, and NVIDIA"><meta property="og:url" content="https://deepu.tech/benchmarking-llamastash"><meta property="og:image" content="https://deepu.tech/assets/images/llamastash/cover.png"><meta property="og:site_name" content="Technorage"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2026-06-02T00:00:00.000Z"><meta name="author" content="Deepu K Sasidharan"><meta property="article:author" content="https://deepu.tech"><meta property="article:tag" content="ai"><meta property="article:tag" content="llamacpp"><meta property="article:tag" content="benchmark"><meta property="article:tag" content="llm"><meta property="article:tag" content="rust"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@deepu105"><meta name="twitter:creator" content="@deepu105"><meta name="twitter:title" content="How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio | Technorage"><meta name="twitter:description" content="A reproducible benchmark of LlamaStash against raw llama-server, Ollama, and LM Studio on AMD APU, Apple Silicon, and NVIDIA"><meta name="twitter:image" content="https://deepu.tech/assets/images/llamastash/cover.png"><link rel="alternate" type="application/rss+xml" title="Technorage RSS feed" href="/feed.xml"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio","description":"A reproducible benchmark of LlamaStash against raw llama-server, Ollama, and LM Studio on AMD APU, Apple Silicon, and NVIDIA","image":"https://deepu.tech/assets/images/llamastash/cover.png","url":"https://deepu.tech/benchmarking-llamastash","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/benchmarking-llamastash"},"datePublished":"2026-06-02T00:00:00.000Z","dateModified":"2026-06-02T00:00:00.000Z","author":{"@type":"Person","name":"Deepu K Sasidharan","url":"https://deepu.tech"},"publisher":{"@type":"Organization","name":"Technorage","logo":{"@type":"ImageObject","url":"https://deepu.tech/assets/images/logo.png"}},"keywords":"ai, llamacpp, benchmark, llm, rust"}</script><meta name="monetization" content="$ilp.uphold.com/Aw7eGpxKNyK7"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@500;600;700&display=swap"><script>
+  (function () {
+    try {
+      var stored = localStorage.getItem("theme");
+      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme = stored || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.style.colorScheme = theme;
+    } catch (_) {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-1SDSM5NX07"></script><script>(function(){const GA_ID = "G-1SDSM5NX07";
+
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  ad_storage: 'denied',
+  analytics_storage: 'granted'
+});
+gtag('js', new Date());
+gtag('config', GA_ID);`}
+          })();</script><link rel="stylesheet" href="/_astro/asciinema-player.mT6buTGj.css">
+<link rel="stylesheet" href="/_astro/comment-policy.Ba7knKAK.css">
+<style>.toc-link[data-astro-cid-obewoz47][data-active=true]{color:var(--color-accent);border-color:var(--color-accent);font-weight:500}
+</style></head> <body> <header class="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] backdrop-blur"> <div class="mx-auto flex max-w-5xl items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6"> <a href="/" class="flex min-w-0 shrink items-center gap-1.5 text-[var(--color-fg)]"> <svg class="h-5 w-5 shrink-0 text-[var(--color-accent)] sm:h-6 sm:w-6" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true"> <path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path> </svg> <span class="font-display truncate text-xl font-bold tracking-tight sm:text-3xl">technorage</span> </a> <nav class="ml-auto flex shrink-0 items-center gap-0 sm:gap-1"> <a href="/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path> <circle cx="12" cy="7" r="4"></circle>     </svg> <span class="hidden sm:inline">About</span> </a><a href="/blogs/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="8" y1="13" x2="16" y2="13"></line> <line x1="8" y1="17" x2="16" y2="17"></line>    </svg> <span class="hidden sm:inline">Blog</span> </a><a href="/books/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path> <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>   </svg> <span class="hidden sm:inline">Books</span> </a><a href="/appearances/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect> <line x1="16" y1="2" x2="16" y2="6"></line> <line x1="8" y1="2" x2="8" y2="6"></line> <line x1="3" y1="10" x2="21" y2="10"></line>  </svg> <span class="hidden sm:inline">Events</span> </a> <button type="button" id="search-trigger" aria-label="Search" title="Search (⌘K)" class="ml-0.5 inline-flex h-9 w-9 items-center justify-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-sm text-[var(--color-fg-subtle)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)] sm:ml-1 sm:w-auto sm:px-2"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <kbd class="hidden rounded border border-[var(--color-border-strong)] px-1 font-mono text-[10px] sm:inline">⌘K</kbd> </button> <button type="button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg> <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      var next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      document.documentElement.style.colorScheme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch (_) {}
+    });
+  })();
+</script> </nav> </div> </header> <main class="flex-1">  <div id="reading-progress" class="pointer-events-none fixed inset-x-0 top-0 z-50 h-0.5 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-75" aria-hidden="true"></div> <script>
+  (function () {
+    var bar = document.getElementById("reading-progress");
+    if (!bar) return;
+    var article = document.querySelector("article");
+    if (!article) return;
+    var ticking = false;
+    function update() {
+      var rect = article.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var scrolled = -rect.top;
+      var pct = total > 0 ? Math.min(1, Math.max(0, scrolled / total)) : 0;
+      bar.style.transform = "scaleX(" + pct + ")";
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  })();
+</script> <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14"> <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px]"> <article data-pagefind-body class="mx-auto w-full min-w-0 max-w-3xl lg:mx-0"> <header class="mb-8"> <div class="mb-4 flex flex-wrap gap-2 text-xs text-[var(--color-fg-subtle)]"> <a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> ai </a><a href="/tags/#llamacpp" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> llamacpp </a><a href="/tags/#benchmark" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> benchmark </a><a href="/tags/#llm" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> llm </a> </div> <h1 class="font-display text-4xl font-bold tracking-tight text-[var(--color-fg)] sm:text-5xl"> How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio </h1> <p class="mt-4 text-lg text-[var(--color-fg-muted)]">A reproducible benchmark of LlamaStash against raw llama-server, Ollama, and LM Studio on AMD APU, Apple Silicon, and NVIDIA</p> <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[var(--color-fg-subtle)]"> <img src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=64&d=mm" alt="Deepu K Sasidharan" width="32" height="32" class="h-8 w-8 rounded-full"> <a href="https://deepu.tech" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> Deepu K Sasidharan </a> <span class="text-[var(--color-border-strong)]">·</span> <time datetime="2026-06-02T00:00:00.000Z">June 2, 2026</time>   <span class="text-[var(--color-border-strong)]">·</span> <span>30 min read</span>  <span class="ml-auto"> <div class="not-prose flex items-center gap-1 text-[var(--color-fg-subtle)]"> <span class="mr-2 hidden text-xs uppercase tracking-wider sm:inline">Share</span> <a href="https://twitter.com/intent/tweet?text=How%20fast%20is%20LlamaStash%3F%20Overhead%2C%20throughput%2C%20and%20a%20fair%20comparison%20with%20Ollama%20and%20LM%20Studio%0A%0A&url=https%3A%2F%2Fdeepu.tech%2Fbenchmarking-llamastash%2F&via=deepu105" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter" title="Share on Twitter" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:x">   <symbol id="ai:simple-icons:x" viewBox="0 0 24 24"><path fill="currentColor" d="M14.234 10.162L22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299l-.929-1.329L3.076 1.56h3.182l5.965 8.532l.929 1.329l7.754 11.09h-3.182z"/></symbol><use href="#ai:simple-icons:x"></use>  </svg> </a><a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fdeepu.tech%2Fbenchmarking-llamastash%2F&title=How%20fast%20is%20LlamaStash%3F%20Overhead%2C%20throughput%2C%20and%20a%20fair%20comparison%20with%20Ollama%20and%20LM%20Studio&summary=How%20fast%20is%20LlamaStash%3F%20Overhead%2C%20throughput%2C%20and%20a%20fair%20comparison%20with%20Ollama%20and%20LM%20Studio&source=Technorage" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" title="Share on LinkedIn" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:linkedin">   <symbol id="ai:simple-icons:linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037c-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.06 2.06 0 0 1-2.063-2.065a2.064 2.064 0 1 1 2.063 2.065m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></symbol><use href="#ai:simple-icons:linkedin"></use>  </svg> </a><a href="https://bsky.app/intent/compose?text=How%20fast%20is%20LlamaStash%3F%20Overhead%2C%20throughput%2C%20and%20a%20fair%20comparison%20with%20Ollama%20and%20LM%20Studio%0A%0Ahttps%3A%2F%2Fdeepu.tech%2Fbenchmarking-llamastash%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on BlueSky" title="Share on BlueSky" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:bluesky">   <symbol id="ai:simple-icons:bluesky" viewBox="0 0 24 24"><path fill="currentColor" d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037c-.856 3.061-3.978 3.842-6.755 3.37c4.854.826 6.089 3.562 3.422 6.299c-5.065 5.196-7.28-1.304-7.847-2.97c-.104-.305-.152-.448-.153-.327c0-.121-.05.022-.153.327c-.568 1.666-2.782 8.166-7.847 2.97c-2.667-2.737-1.432-5.473 3.422-6.3c-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></symbol><use href="#ai:simple-icons:bluesky"></use>  </svg> </a><a href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdeepu.tech%2Fbenchmarking-llamastash%2F&t=How%20fast%20is%20LlamaStash%3F%20Overhead%2C%20throughput%2C%20and%20a%20fair%20comparison%20with%20Ollama%20and%20LM%20Studio" target="_blank" rel="noopener noreferrer" aria-label="Share on Hacker News" title="Share on Hacker News" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:ycombinator">   <symbol id="ai:simple-icons:ycombinator" viewBox="0 0 24 24"><path fill="currentColor" d="M0 24V0h24v24zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896z"/></symbol><use href="#ai:simple-icons:ycombinator"></use>  </svg> </a><a href="https://www.reddit.com/submit?url=https%3A%2F%2Fdeepu.tech%2Fbenchmarking-llamastash%2F&title=How%20fast%20is%20LlamaStash%3F%20Overhead%2C%20throughput%2C%20and%20a%20fair%20comparison%20with%20Ollama%20and%20LM%20Studio" target="_blank" rel="noopener noreferrer" aria-label="Share on Reddit" title="Share on Reddit" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:reddit">   <symbol id="ai:simple-icons:reddit" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286A.72.72 0 0 0 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0m4.388 3.199a1.999 1.999 0 1 1-1.947 2.46v.002a2.37 2.37 0 0 0-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363a2.802 2.802 0 1 1 2.908 4.753c-.088 3.256-3.637 5.876-7.997 5.876c-4.361 0-7.905-2.617-7.998-5.87a2.8 2.8 0 0 1 1.189-5.34c.645 0 1.239.218 1.712.585c1.275-.79 2.881-1.291 4.64-1.365v-.01a3.23 3.23 0 0 1 2.88-3.207a2 2 0 0 1 1.959-1.595m-8.085 8.376c-.784 0-1.459.78-1.506 1.797s.64 1.429 1.426 1.429s1.371-.369 1.418-1.385s-.553-1.841-1.338-1.841m7.406 0c-.786 0-1.385.824-1.338 1.841s.634 1.385 1.418 1.385c.785 0 1.473-.413 1.426-1.429c-.046-1.017-.721-1.797-1.506-1.797m-3.703 4.013c-.974 0-1.907.048-2.77.135a.222.222 0 0 0-.183.305a3.2 3.2 0 0 0 2.953 1.964a3.2 3.2 0 0 0 2.953-1.964a.222.222 0 0 0-.184-.305a28 28 0 0 0-2.769-.135"/></symbol><use href="#ai:simple-icons:reddit"></use>  </svg> </a> <button type="button" data-copy-link="https://deepu.tech/benchmarking-llamastash/" aria-label="Copy link" title="Copy link" class="copy-link inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="lucide:link-2">   <symbol id="ai:lucide:link-2" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></symbol><use href="#ai:lucide:link-2"></use>  </svg> </button> </div> <script>
+  document.querySelectorAll(".copy-link").forEach(function (btn) {
+    btn.addEventListener("click", async function () {
+      var url = btn.getAttribute("data-copy-link");
+      try {
+        await navigator.clipboard.writeText(url);
+        var prev = btn.title;
+        btn.title = "Copied!";
+        btn.style.color = "var(--color-accent)";
+        setTimeout(function () {
+          btn.title = prev;
+          btn.style.color = "";
+        }, 1500);
+      } catch (_) {}
+    });
+  });
+</script> </span> </div> </header> <img src="/assets/images/llamastash/cover.png" alt="How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio" class="mb-10 aspect-[16/9] w-full rounded-xl object-cover"> <div class="prose-blog"> <p>In my <a href="https://deepu.tech/introducing-llamastash">release post for LlamaStash</a> I made a claim I need to back up. The wrapper adds zero overhead vs running <code>llama-server</code> directly. That is the kind of claim that should not exist in a blog post without numbers behind it. So here are the numbers.</p>
+<p>LlamaStash spawns the unmodified upstream <a href="https://github.com/ggml-org/llama.cpp"><code>llama-server</code></a>. So three different questions follow from that, and there is a benchmark suite for each.</p>
+<ul>
+<li><strong>Suite A: overhead regression.</strong> Does <code>llamastash start &lt;model&gt;</code> add any measurable overhead on top of raw <code>llama-server</code> when both run the same command line? This is the question the whole architecture depends on.</li>
+<li><strong>Suite B: cross-tool comparison.</strong> How does LlamaStash-as-shipped compare to <a href="https://ollama.com/">Ollama</a> and <a href="https://lmstudio.ai/">LM Studio</a> on the same model, same hardware, through their OpenAI-compatible HTTP endpoints? This is the question users care about.</li>
+<li><strong>Suite C: proxy overhead.</strong> Does going through the LlamaStash OpenAI-compat proxy cost anything vs hitting <code>llama-server</code> directly? This is the smallest question, but it has to be asked because the proxy is the default surface.</li>
+</ul>
+<p>All three suites live in <a href="https://github.com/llamastash/llamastash/blob/main/docs/benchmarks/">docs/benchmarks/</a> in the repo. The harness is in <a href="https://github.com/llamastash/llamastash/blob/main/scripts/bench/">scripts/bench/</a>. The <a href="https://github.com/llamastash/llamastash/blob/main/docs/benchmarks/methodology.md">methodology page</a> covers fairness, how I throw out noisy runs, and why outputs differ across backends. Read it before pulling any single number out of context. On its own, one cell can mislead.</p>
+<p>The short version, if you are skimming. Two terms first: <strong>decode</strong> is tokens per second while the model generates, and <strong>TTFT</strong> is time to first token, the delay before anything comes back. And there are two ways to read every comparison below: <strong>matched-flags</strong> (called <code>normalized</code> in the harness, every tool runs the same knobs) and <strong>out-of-the-box</strong> (called <code>defaults</code>, what you get when you just run the tool). They tell different stories.</p>
+<ul>
+<li><strong>The wrapper adds no measurable overhead.</strong> With matched flags, LlamaStash runs the same speed as raw <code>llama-server</code>: within 1% on Apple Silicon and on three of four sizes on the AMD APU. The one exception is the 35B-A3B MoE on AMD, at -1.8% decode. That same cell flips to +1.1% the other way out of the box, so it is run-to-run timing noise on a fork-and-spawn, not real overhead. NVIDIA decode is -0.57%, a hair past my 0.5% warning line. Everything stays well inside my 2% hard-fail line.</li>
+<li><strong>Out of the box, LlamaStash is a touch faster than raw <code>llama-server</code>,</strong> because it sets good defaults for you: all GPU layers on every GPU backend, and flash-attention for Qwen and Llama models on Apple Metal and CUDA. On the Mac Qwen run that is +7.3% decode over raw llama-server’s stock defaults. On the AMD APU the upstream defaults are already good, so the two match. On NVIDIA the gap is wider than those flags explain, which I leave as an open question below.</li>
+<li><strong>Ollama is slower, sometimes a lot slower.</strong> It is 38-72% behind raw llama-server on decode on the AMD APU. On the Mac its RAG prefill is 52× slower than the direct path, because it re-reads the whole document on every request instead of caching it. On NVIDIA Vulkan, the RAG prefill runs never finished.</li>
+<li><strong>LM Studio is a mixed bag.</strong> Its bundled ROCm runtime crashes on Strix Halo (<code>gfx1151</code>) for every model except the small one, so I could only compare it on Vulkan. There it loses decode to LlamaStash on three of four sizes (+8% small, +52% mid, +32% large MoE) and wins large_dense by 7%. And everywhere, it pays a 170-2300 ms first-token tax from its OpenAI shim and just-in-time model loading.</li>
+<li><strong>The proxy is free.</strong> Talking to LlamaStash’s proxy instead of llama-server directly costs +0.45 ms to first token on AMD, -0.6 ms on the Mac, +0.57 ms on NVIDIA. Zero on decode. Sub-millisecond, which is nothing.</li>
+</ul>
+<p>Now to the actual point of this post.</p>
+<h2 id="the-setup">The setup</h2>
+<p>Same model bytes, same workloads, same hardware. Three platforms.</p>
+<h3 id="platforms">Platforms</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Platform</th><th>CPU / SoC</th><th>GPU</th><th>RAM / VRAM</th><th>OS</th><th>llama.cpp build</th><th>Date</th></tr></thead><tbody><tr><td><strong>AMD APU</strong></td><td>Ryzen AI Max+ 395 (Strix Halo)</td><td>Radeon 8060S iGPU (RDNA 3.5, <code>gfx1151</code>)</td><td>128 GiB unified, 70 W TDP</td><td>Arch Linux, ROCm 7.2.3</td><td>b9245 (<code>b39a7bf1b</code>)</td><td>2026-05-24</td></tr><tr><td><strong>Apple Silicon</strong></td><td>Apple M1</td><td>Integrated, Metal</td><td>16 GiB unified</td><td>macOS 26 (Darwin 25.4.0)</td><td>b9330 (<code>328874d05</code>, Homebrew Metal)</td><td>2026-05-27</td></tr><tr><td><strong>NVIDIA</strong></td><td>Intel i9-11900H laptop</td><td>RTX 3050 Ti Laptop (Ampere, <code>sm_86</code>)</td><td>4 GiB VRAM, 63 GiB host</td><td>Manjaro 6.6.141, driver 595.71.05, CUDA 13.2</td><td>b9360 (<code>6b4e4bd5</code>, CUDA + Vulkan lanes)</td><td>2026-05-28</td></tr></tbody></table>
+<p>This is just the hardware I had on hand, but the three machines sit in usefully different places. Strix Halo is high-end consumer with a unified-memory iGPU. The M1 with 16 GiB is the entry-level Apple Silicon most laptops actually have. The RTX 3050 Ti Laptop is a discrete NVIDIA card starved for VRAM. Not a full sweep of the hardware space, but three points different enough to stress different assumptions.</p>
+<h3 id="models">Models</h3>
+<p>The AMD APU run covered four points on the size and architecture axes.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>ID</th><th>Model</th><th>Quant</th><th>Size</th><th>Why it’s here</th></tr></thead><tbody><tr><td><code>small</code></td><td>Gemma 4 E2B</td><td>Q4_K_M</td><td>1.6 GiB</td><td>Fast iteration, tests TTFT and per-request overhead</td></tr><tr><td><code>mid</code></td><td>Gemma 4 31B</td><td>Q4_K_M</td><td>17.4 GiB</td><td>The everyday workhorse size</td></tr><tr><td><code>large_dense</code></td><td>Qwen3.6 27B</td><td>Q8_0</td><td>26.6 GiB</td><td>High-fidelity dense, exposes memory bandwidth limits</td></tr><tr><td><code>large_moe</code></td><td>Qwen3.6 35B-A3B</td><td>Q8_0</td><td>34.4 GiB</td><td>Mixture of experts, ~3B active per token</td></tr></tbody></table>
+<p>The Mac and NVIDIA runs were constrained to a single model each: different models, different sizes, both intentional.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Platform</th><th>Model</th><th>Quant</th><th>Size</th><th>Why this one</th></tr></thead><tbody><tr><td>Apple M1 16 GiB</td><td>Qwen2.5-0.5B-Instruct</td><td>Q4_K_M</td><td>~397 MB</td><td>The M1 16 GiB tier is the entry-level Apple Silicon class. It can load larger models, but the primary target for this hardware is fast, responsive edge inference of small models. M2 Pro / M3 Max runs at the mid/large tier are deferred.</td></tr><tr><td>RTX 3050 Ti Laptop 4 GiB</td><td>gemma-3-4b-it</td><td>Q3_K_M</td><td>2.1 GiB</td><td>The 4 GiB VRAM ceiling forces every dense model larger than <code>small</code> into a partial-offload regime that is not interesting for cross-tool comparison. Larger-VRAM NVIDIA hosts should re-run the full matrix.</td></tr></tbody></table>
+<p>Same GGUF bytes across tools. Where a tool needs its own pulled copy (Ollama has its own blob store), bit-identical content was verified via SHA-256 before benchmarking.</p>
+<blockquote>
+<p>If you are interested in running this benchmarks yourself on your hardware, checkout <a href="https://github.com/llamastash/llamastash/blob/main/scripts/run-uat-and-bench.md">scripts/run-uat-and-bench.md</a>. Please consider sending a PR with the results if you do.</p>
+</blockquote>
+<h3 id="workloads">Workloads</h3>
+<p>Four. They model what a real coding session looks like.</p>
+<ul>
+<li><code>chat_turn</code>: 50-token prompt, 64-token decode. The conversational baseline.</li>
+<li><code>agent_decode</code>: short prompt, 1024-token decode. Measures sustained generation throughput.</li>
+<li><code>rag_prefill</code>: 4096-token prompt, 256-token decode. Measures prompt processing at realistic agent context sizes.</li>
+<li><code>parallel_4</code>: four <code>chat_turn</code> requests concurrently. Measures the supervisor’s ability to interleave.</li>
+</ul>
+<p>One warmup run, then three measured repetitions per cell. If those three spread by more than 10%, the cell is re-run; if it is still noisy on the second try, it gets flagged in the per-cell JSON.</p>
+<h3 id="methodology-rules">Methodology rules</h3>
+<p>A few rules the harness enforces, because they are what make the result honest.</p>
+<ul>
+<li><strong>Suite A runs an identical command line.</strong> The harness drops <code>--port</code>, then checks that the rest of the <code>llama-server</code> command LlamaStash spawns is character-for-character identical to the one the raw run uses. There is nowhere for a hidden tweak to hide.</li>
+<li><strong>Suite B talks to every tool the same way.</strong> Every tool is driven through its OpenAI-compatible HTTP endpoint, not its CLI. Same client, same payloads.</li>
+<li><strong>Each platform runs in one sitting.</strong> All of a platform’s rows (LlamaStash, raw, Ollama, LM Studio) run in the same session, no reboots in between.</li>
+<li><strong>Engine fallbacks are labelled.</strong> When a tool falls back to a different engine (for example LM Studio’s ROCm runtime crashing on <code>gfx1151</code>, so the row uses its Vulkan runtime instead), the cell is annotated and the reason explained.</li>
+</ul>
+<p>The full methodology is in <a href="https://github.com/llamastash/llamastash/blob/main/docs/benchmarks/methodology.md">docs/benchmarks/methodology.md</a>. If you intend to argue with a number, read that page first.</p>
+<h2 id="suite-a-overhead-regression">Suite A: overhead regression</h2>
+<p>The headline question. If LlamaStash spawns the unmodified <code>llama-server</code>, the only way it can be slower is by adding overhead in the wrapper. We measure that overhead directly.</p>
+<p>Each metric has two thresholds: a <strong>warning line</strong> (the harness calls it <em>advisory</em>, where the run passes but prints a banner) and a <strong>hard-fail line</strong> (<em>catastrophic</em>, where the run exits non-zero). That is the “warning line” and “hard-fail line” I refer to throughout.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th>Catastrophic (exits non-zero)</th><th>Advisory (exits zero with banner)</th></tr></thead><tbody><tr><td><code>ttft_ms</code> delta</td><td>≥ 200 ms</td><td>≥ 30 ms</td></tr><tr><td><code>decode_tps</code> delta percentage</td><td>≥ 2.0% slower</td><td>≥ 0.5% slower</td></tr><tr><td>Daemon idle RSS</td><td>≥ 64 MiB extra</td><td>≥ 48 MiB extra</td></tr></tbody></table>
+<p>Results.</p>
+<p><img src="/assets/images/llamastash/08-suite-a-overhead.png" alt="Suite A overhead: LlamaStash vs raw llama-server, six matched-flags cells, with advisory and hard-fail lines"/></p>
+<p>Top panel: decode delta % per cell, positive = LlamaStash faster. Bottom panel: TTFT delta ms, negative = LlamaStash faster. Yellow dashed lines are the harness advisory thresholds (±0.5% decode, ±30 ms TTFT); red dashed lines are the hard-fail thresholds (±2% decode; the ±200 ms TTFT hard-fail line is off-chart). Every cell sits inside the hard-fail box.</p>
+<h3 id="amd-apu">AMD APU</h3>
+<p>Suite A on Strix Halo used <code>normalized</code> mode against the matching self-built HIP <code>llama-server</code> (<code>b9440</code>).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Workload</th><th style="text-align:right">LlamaStash decode tok/s</th><th style="text-align:right">raw decode tok/s</th><th style="text-align:right">Δ decode</th><th style="text-align:right">LlamaStash TTFT ms</th><th style="text-align:right">raw TTFT ms</th><th style="text-align:right">Δ TTFT</th></tr></thead><tbody><tr><td><code>chat_turn</code> (small)</td><td style="text-align:right">82.1</td><td style="text-align:right">81.0</td><td style="text-align:right">+1.3%</td><td style="text-align:right">51</td><td style="text-align:right">51</td><td style="text-align:right">0</td></tr><tr><td><code>chat_turn</code> (mid)</td><td style="text-align:right">9.9</td><td style="text-align:right">9.9</td><td style="text-align:right">-0.0%</td><td style="text-align:right">468</td><td style="text-align:right">466</td><td style="text-align:right">+3</td></tr><tr><td><code>chat_turn</code> (large_dense)</td><td style="text-align:right">7.5</td><td style="text-align:right">7.5</td><td style="text-align:right">+0.1%</td><td style="text-align:right">406</td><td style="text-align:right">406</td><td style="text-align:right">0</td></tr><tr><td><code>chat_turn</code> (large_moe)</td><td style="text-align:right">42.3</td><td style="text-align:right">43.1</td><td style="text-align:right">-1.8%</td><td style="text-align:right">178</td><td style="text-align:right">185</td><td style="text-align:right">-7</td></tr></tbody></table>
+<p>Three of the four sizes land within 0.3% on decode. The 35B-A3B MoE is the exception at -1.8%, the only AMD cell past my 1% warning line. The run-to-run spread was tiny on both sides (0.06% to 0.17%), so the gap is real measurement, not jitter. But out of the box, the same cell flips the other way, to +1.1% in LlamaStash’s favor, and a real overhead would not change sign like that. So this is fork-and-spawn timing noise on a big MoE, not the wrapper costing you throughput. It is well inside my 2% hard-fail line, and the daemon’s idle memory is well under budget too.</p>
+<h3 id="apple-silicon">Apple Silicon</h3>
+<p>Suite A on M1 used <code>normalized</code> mode against the matching Homebrew Metal <code>llama-server</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th style="text-align:right">Delta</th><th>Tier</th></tr></thead><tbody><tr><td>TTFT (mean)</td><td style="text-align:right"><code>+2.3 ms</code></td><td><strong>OK</strong> (advisory 30 ms)</td></tr><tr><td>Decode</td><td style="text-align:right"><code>+0.8%</code> LlamaStash faster (92.2 vs 91.5 tok/s)</td><td><strong>OK</strong> (advisory 0.5%)</td></tr></tbody></table>
+<p>An earlier overhead pass showed LlamaStash -5.33% on decode, but that number mixed in the out-of-the-box defaults and was noisy on top of a real defaults difference. The matched-flags chat_turn cell is the clean Suite A comparison: +0.8% for LlamaStash, comfortably inside 1%. What the defaults add is broken out under Suite B below.</p>
+<h3 id="nvidia">NVIDIA</h3>
+<p>Suite A on RTX 3050 Ti Laptop used <code>normalized</code> mode against the b9360 Vulkan <code>llama-server</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metric</th><th style="text-align:right">Delta</th><th>Tier</th></tr></thead><tbody><tr><td>TTFT (mean)</td><td style="text-align:right"><code>+1.7 ms</code> (114.9 vs 113.2 ms)</td><td><strong>OK</strong> (advisory 30 ms; well inside catastrophic 200 ms)</td></tr><tr><td>Decode</td><td style="text-align:right"><code>−0.57%</code> (41.80 vs 42.04 tok/s)</td><td><strong>ADVISORY</strong> (marginal miss on the 0.5% advisory floor)</td></tr></tbody></table>
+<p>Decode misses the 0.5% warning line by 0.07 of a point. A marginal miss, nowhere near the 2% hard-fail line.</p>
+<h3 id="verdict-suite-a">Verdict: Suite A</h3>
+<p>Across four model sizes on the AMD APU and one model each on the Mac and the RTX 3050 Ti Laptop, LlamaStash matches raw <code>llama-server</code> within 1% on five of six matched-flags cells. Two cells miss that line: NVIDIA chat_turn at -0.57% decode (0.07 of a point past 0.5%), and the AMD MoE at -1.8% (which flips to +1.1% out of the box, so it reads as noise, not overhead). Both are well inside the 2% hard-fail line. The architecture (one binary, daemon on demand, a supervisor state machine, an HTTP control plane on loopback) does not cost throughput.</p>
+<p>The zero-overhead claim holds.</p>
+<h2 id="suite-b-cross-tool-comparison">Suite B: cross-tool comparison</h2>
+<p>Now the more interesting question. How does LlamaStash compare to Ollama and LM Studio in practice?</p>
+<p>Same model bytes, same workload, OpenAI-compatible endpoint on every tool. Variance-gated runs. Decode tok/s and TTFT in milliseconds per cell.</p>
+<h3 id="amd-apu-1">AMD APU</h3>
+<p>Hardware: Ryzen AI Max+ 395, Radeon 8060S, 70 W. HIP/ROCm via system ROCm 7.2.3 + self-built <code>llama-server</code> (b9440). Dates: 2026-05-23 (small) and 2026-05-24 (mid, large_dense, large_moe).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th style="text-align:right">small (E2B Q4)</th><th style="text-align:right">mid (31B Q4)</th><th style="text-align:right">large_dense (27B Q8)</th><th style="text-align:right">large_moe (35B-A3B Q8)</th><th>Engine notes</th></tr></thead><tbody><tr><td><strong>LlamaStash</strong></td><td style="text-align:right"><strong>82.1 / 51</strong></td><td style="text-align:right"><strong>9.9 / 468</strong></td><td style="text-align:right"><strong>7.5 / 406</strong></td><td style="text-align:right"><strong>42.3 / 178</strong></td><td>local HIP/ROCm</td></tr><tr><td>raw <code>llama-server</code></td><td style="text-align:right">81.0 / 51</td><td style="text-align:right">9.9 / 466</td><td style="text-align:right">7.5 / 406</td><td style="text-align:right">43.1 / 185</td><td>local HIP/ROCm</td></tr><tr><td>LM Studio 2.18.0</td><td style="text-align:right">91.1 / 187</td><td style="text-align:right">— (crash¹)</td><td style="text-align:right">— (crash¹)</td><td style="text-align:right">— (crash¹)</td><td>bundled ROCm 6.4 vendor (see footnote)</td></tr><tr><td>Ollama 0.24.0</td><td style="text-align:right">50.8 / 224</td><td style="text-align:right">4.8 / 1096</td><td style="text-align:right">2.6 / 1750</td><td style="text-align:right">12.2 / 484</td><td>bundled</td></tr></tbody></table>
+<p>Each cell is decode tok/s / TTFT ms on <code>chat_turn</code> in <code>normalized</code> mode (<code>ctx=4096</code>, <code>n_gpu_layers=999</code>, <code>flash_attn=on</code>, <code>batch=512</code>, <code>ubatch=512</code>). Sourced from one bench run per row, no averaging across runs or modes. See <a href="#source-map-amd-apu-hip-cells">source map</a> at the bottom of this section. Defaults-mode numbers, agent-decode workload, and the wrapper-vs-raw delta are broken out in the charts.</p>
+<p><img src="/assets/images/llamastash/01-amd-apu-decode.png" alt="AMD APU decode (HIP/ROCm, chat_turn defaults)"/></p>
+<p><img src="/assets/images/llamastash/02-amd-apu-ttft.png" alt="AMD APU TTFT (HIP/ROCm, chat_turn defaults, log scale)"/></p>
+<p>Headline numbers from this matrix.</p>
+<ul>
+<li><strong>LlamaStash is the same speed as raw <code>llama-server</code></strong> within 1% on three of four sizes (small +1.3%, mid -0.0%, large_dense +0.1%). The 35B-A3B MoE shows -1.8%, the same noise-not-overhead cell explained in Suite A above.</li>
+<li><strong>Ollama is 38-72% slower on decode</strong> than raw llama-server across all four sizes. Worst on large_dense (-65%), least bad on small (-38%).</li>
+<li><strong>LM Studio only loads the small model on ROCm</strong> on this hardware (<code>gfx1151</code>); mid, large_dense, and large_moe all crash at startup. Its full per-size view is in the Vulkan addendum below.</li>
+</ul>
+<p>The first-token gap is the one to watch. Ollama and LM Studio both pay at least 200 ms, and over a second on the larger models, mostly in their HTTP shim layers. LlamaStash and raw llama-server stay under 200 ms even on the MoE. For an agent that fires a lot of short requests, that delay is most of the wall-clock you feel.</p>
+<p>¹ LM Studio’s bundled ROCm vendor libraries (v6.4 in <code>linux-llama-rocm-vendor-v3</code>) abort in <code>ggml_cuda_error</code> during backend initialization on <code>gfx1151</code> (Strix Halo), across all three LMS-shipped runtime versions (<code>amd-rocm-avx2@1.33.0</code>, <code>@2.16.0</code>, <code>@2.18.0</code>). The system ROCm 7.2.3 loads the same models without issue via raw <code>llama-server</code>, so this is an LM Studio vendor-bundle limitation, not a hardware limitation. LM Studio numbers on AMD APU therefore use its Vulkan runtime exclusively, shown as a separate engine addendum below.</p>
+<h4 id="vulkan-addendum-lm-studios-only-working-amd-path">Vulkan addendum (LM Studio’s only working AMD path)</h4>
+<p>Same-day side-by-side of LlamaStash and LM Studio on the Vulkan backend, since that is the only engine where LMS can load every model on this hardware. The other two cross-tool comparators are explicitly out of scope:</p>
+<ul>
+<li><strong>raw <code>llama-server</code></strong> is omitted because the wrapper-overhead claim is already covered by the HIP/ROCm table above (and it repeats on Vulkan: LlamaStash matches raw within 1% across the measured cells).</li>
+<li><strong>Ollama</strong> is omitted because mainline Ollama does not support Vulkan. (Community forks exist; benchmarking a fork is not a fair representation of Ollama-as-shipped.)</li>
+</ul>
+<p>Date: 2026-06-01. Backend: Vulkan (LlamaStash via self-built <code>llama-server</code> b9440 Vulkan; LM Studio via bundled <code>vulkan-avx2@2.18.0</code> runtime). Same GGUF bytes across tools.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th style="text-align:right">small (E2B Q4)</th><th style="text-align:right">mid (31B Q4)</th><th style="text-align:right">large_dense (27B Q8)</th><th style="text-align:right">large_moe (35B-A3B Q8)</th></tr></thead><tbody><tr><td><strong>LlamaStash</strong></td><td style="text-align:right"><strong>101.2 / 55</strong></td><td style="text-align:right"><strong>10.8 / 671</strong></td><td style="text-align:right">7.5 / 196</td><td style="text-align:right"><strong>50.7 / 72</strong></td></tr><tr><td>LM Studio 2.18.0</td><td style="text-align:right">93.6 / 191</td><td style="text-align:right">7.1 / 2307</td><td style="text-align:right"><strong>8.0 / 801</strong></td><td style="text-align:right">38.4 / 227</td></tr></tbody></table>
+<p>Each cell is decode tok/s / TTFT ms on <code>chat_turn</code> in <code>normalized</code> mode. Same-day rerun on a clean memory baseline.</p>
+<p><img src="/assets/images/llamastash/05-amd-apu-vulkan-addendum.png" alt="AMD APU Vulkan addendum (LlamaStash vs LM Studio, chat_turn defaults)"/></p>
+<p><strong>Vulkan addendum read-out</strong>:</p>
+<ul>
+<li><strong>LlamaStash wins decode on three of four sizes</strong>: small (101.2 vs 93.6, +8%), mid (10.8 vs 7.1, +52%), large_moe (50.7 vs 38.4, +32%). LM Studio takes large_dense by 7% (8.0 vs 7.5); its defaults pick something better than LlamaStash’s stock defaults for that one model. The harness logs every effective flag if you want to dig into why.</li>
+<li><strong>LM Studio’s Vulkan mid number got worse since May.</strong> It used to be 11.6 tok/s decode and 1463 ms to first token; today’s LM Studio with its bundled vulkan-avx2 2.18.0 runtime lands 7.1 and 2307. That is just what LM Studio ships now on this hardware, and it reproduced across two runs (33 GiB and 105 GiB free RAM). Worth flagging, because anyone on an older LM Studio version will see different numbers than this table.</li>
+<li><strong>First token is the wider gap.</strong> LlamaStash stays under 200 ms on small, large_dense, and large_moe. LM Studio sits at 191-2307 ms across the board, from its OpenAI shim and just-in-time model loading. On short-request agent work, that adds up fast.</li>
+</ul>
+<h4 id="combined-view-all-tools--backends--modes">Combined view (all tools × backends × modes)</h4>
+<p>For readers who want the whole comparison in one place, the next two charts overlay HIP/ROCm and Vulkan side by side, in both <code>defaults</code> and <code>normalized</code> mode, across all four model sizes and all four tools.</p>
+<p><img src="/assets/images/llamastash/06-amd-apu-combined.png" alt="AMD APU combined: chat_turn"/></p>
+<p><img src="/assets/images/llamastash/07-amd-apu-combined-agent-decode.png" alt="AMD APU combined: agent_decode"/></p>
+<p>Light mauve / dark mauve = HIP/ROCm defaults / normalized. Light teal / dark teal = Vulkan defaults / normalized. Em-dashes mark cells not run (raw and Ollama on Vulkan) or backend-init crashes (LM Studio on HIP for <code>mid</code>, <code>large_dense</code>, <code>large_moe</code>). <code>agent_decode</code> is the longer-context workload (256-token target vs 64 for <code>chat_turn</code>); the relative ordering across tools holds.</p>
+<h4 id="source-map-amd-apu-hip-cells">Source map (AMD APU HIP cells)</h4>
+<p>Per-cell provenance, since this is the table the audience will pick apart first.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th>Size</th><th>Source JSON</th></tr></thead><tbody><tr><td>LS / raw / Ollama</td><td>small</td><td><code>runs/deepu-flowz13-arch/2026-05-23-335deaf47ccf.json</code></td></tr><tr><td>LS / raw / Ollama</td><td>mid</td><td><code>runs/deepu-flowz13-arch/2026-05-24-135416-0f23808f9b5f.json</code></td></tr><tr><td>LS / raw / Ollama</td><td>large_dense</td><td><code>runs/deepu-flowz13-arch-clean70w/2026-05-24-191126-0f23808f9b5f.json</code></td></tr><tr><td>LS / raw / Ollama</td><td>large_moe</td><td><code>runs/deepu-flowz13-arch/2026-05-24-150131-0f23808f9b5f.json</code></td></tr><tr><td>LM Studio</td><td>small</td><td><code>runs/deepu-flowz13-arch/2026-05-23-335deaf47ccf.json</code></td></tr><tr><td>LM Studio</td><td>mid / large_dense / large_moe</td><td>crash: no HIP data</td></tr><tr><td>LS / LMS Vulkan addendum</td><td>all sizes</td><td><code>runs/deepu-flowz13-arch-vulkan-clean-2026-06-01/</code></td></tr></tbody></table>
+<h3 id="apple-silicon-1">Apple Silicon</h3>
+<p>Hardware: Apple M1, 16 GiB unified, Metal. Model: Qwen2.5-0.5B-Instruct Q4_K_M. Date: 2026-05-27.</p>
+<p><code>chat_turn</code> decode tok/s / TTFT ms, both modes shown side-by-side because the defaults-vs-normalized story matters here.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th style="text-align:right">defaults</th><th style="text-align:right">normalized</th><th>Engine notes</th></tr></thead><tbody><tr><td><strong>LlamaStash</strong></td><td style="text-align:right"><strong>99.0 / 15</strong></td><td style="text-align:right">92.2 / 21</td><td>local Metal (Homebrew b9330)</td></tr><tr><td>raw <code>llama-server</code></td><td style="text-align:right">92.3 / 19</td><td style="text-align:right">91.5 / 21</td><td>local Metal (Homebrew b9330)</td></tr><tr><td>LM Studio</td><td style="text-align:right">88.0 / 68</td><td style="text-align:right">88.7 / 67</td><td>bundled Metal</td></tr><tr><td>Ollama 0.24.0</td><td style="text-align:right">79.1 / 101</td><td style="text-align:right">80.1 / 102</td><td>bundled</td></tr></tbody></table>
+<p><img src="/assets/images/llamastash/03-m1-decode-defaults-vs-normalized.png" alt="Apple M1 decode tok/s by tool, defaults vs normalized"/></p>
+<p>Here is the whole story in one paragraph. With matched flags (ctx 4096, all GPU layers, flash-attention on, batch and ubatch 512), LlamaStash and raw <code>llama-server</code> are within 1% of each other. The wrapper has nothing to add when both sides start from the same flags. Out of the box they pull apart, because LlamaStash’s <a href="https://github.com/llamastash/llamastash/blob/main/src/launch/defaults_table.rs">defaults table</a> turns on all GPU layers and flash-attention for Qwen on Metal, two things upstream leaves off. That puts the chat_turn cell +7.3% ahead on decode (99.0 vs 92.3) and 4 ms faster to first token. You get that without knowing which flags matter on your hardware.</p>
+<p>Ollama lands at 79.1 tok/s and 101 ms out of the box, about 14% slower decode than raw llama-server, and 5.3× the time to first token. The first-token gap is the one you actually feel in interactive use, and it compounds for an agent making many short requests.</p>
+<p>The other workloads (<code>agent_decode</code>, <code>rag_prefill</code>, <code>parallel_4</code>) track the same shape. Two cells worth pulling out before they get buried.</p>
+<ul>
+<li><strong>Ollama’s RAG prefill takes 2,849 ms to first token</strong>, against 40-86 ms for LlamaStash, raw llama-server, and LM Studio. That is 52× the direct path on the same hardware, for the same 8K-token document. The other three cache the document after the first request; Ollama re-reads it every time by default.</li>
+<li><strong>Ollama’s four-way parallel run: 314.6 tok/s total, but 1,352 ms to first token per stream.</strong> Ollama posts the highest total throughput by queueing the four requests, but each user waits 35× longer for their first token than on LlamaStash (38 ms). Total throughput is the wrong thing to optimize for here.</li>
+</ul>
+<p>Full per-workload tables and the LM Studio reasoning-parser caveat: <a href="https://github.com/llamastash/llamastash/blob/main/docs/benchmarks/macos-m1-final-report.md">Apple M1 final report</a>.</p>
+<h3 id="nvidia-1">NVIDIA</h3>
+<p>Hardware: NVIDIA RTX 3050 Ti Laptop (Ampere, 4 GiB VRAM), Intel i9-11900H, 63 GiB RAM. Model: gemma-3-4b-it Q3_K_M. Date: 2026-05-28.</p>
+<p>The NVIDIA platform has two backends worth measuring side-by-side: CUDA (driver-provided) and Vulkan (vendor-neutral). Both come from the same upstream llama.cpp commit (<code>b9360</code>); the comparison is across engines, not across builds. <code>chat_turn</code> decode tok/s / TTFT ms, <code>defaults</code> mode.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Tool</th><th style="text-align:right">CUDA</th><th style="text-align:right">Vulkan</th><th>Engine notes</th></tr></thead><tbody><tr><td><strong>LlamaStash</strong></td><td style="text-align:right"><strong>41.1 / 74</strong></td><td style="text-align:right"><strong>42.0 / 113</strong></td><td>b9360 CUDA self-built (<code>sm_86</code>) and b9360 Vulkan prebuilt</td></tr><tr><td>raw <code>llama-server</code></td><td style="text-align:right">36.6 / 110</td><td style="text-align:right">37.5 / 148</td><td>same b9360 binaries, invoked directly</td></tr><tr><td>LM Studio 2.16.0</td><td style="text-align:right">48.7 / 318</td><td style="text-align:right">48.3 / 308</td><td>LMS-bundled CUDA / Vulkan runtimes</td></tr><tr><td>Ollama 0.24.0</td><td style="text-align:right">40.7 / 120</td><td style="text-align:right">42.0 / 115</td><td>bundled</td></tr></tbody></table>
+<p><img src="/assets/images/llamastash/04-nvidia-decode-cuda-vs-vulkan.png" alt="NVIDIA RTX 3050 Ti decode tok/s by tool, CUDA vs Vulkan, defaults"/></p>
+<p>Three findings from this matrix.</p>
+<p><strong>Out of the box, LlamaStash leads raw <code>llama-server</code> by 12-16% on decode</strong>, on both CUDA and Vulkan, same b9360 binary, same model, same hardware. But the visible defaults for gemma3 on NVIDIA only turn on all GPU layers (gemma is not on the flash-attention list, so the overlay does not enable it here). A 12-16% gap is wider than all-GPU-layers alone should buy. Maybe raw llama-server’s CUDA build defaults to fewer GPU layers; maybe the auto-fit context picks a different size than raw’s default; maybe there is another knob outside the visible command line. <strong>The gap is real in the data, but I have not pinned down the cause.</strong> With matched flags, LlamaStash and raw collapse to within 0.5 tok/s of each other, which confirms the wrapper itself adds nothing.</p>
+<p><strong>Vulkan decode beats CUDA decode in 26 of 28 comparable cells</strong>, median +5%, range -7% to +27%. This is a 4 GiB Ampere card running a Q3 4B model, a memory-bandwidth-bound job where Vulkan’s kernels have caught up. The old “CUDA always wins on NVIDIA” rule is not universal. Suite A and Suite C here were Vulkan-only; a CUDA run of Suite A is a follow-up.</p>
+<p><strong>Two cross-tool data points from the broader matrix worth pulling forward.</strong></p>
+<ul>
+<li><strong>Ollama’s Vulkan RAG prefill never finished.</strong> Both runs together burned about 1.5 hours before I gave up. Ollama on Vulkan is simply not usable for document-RAG on this hardware. The CUDA rows at least finish, but slowly: 3,422 ms and 3,712 ms to first token, against 52-61 ms for LlamaStash and raw on the same document. That is an order-of-magnitude gap you cannot buy your way out of with faster hardware.</li>
+<li><strong>LM Studio wins on decode, loses on first token.</strong> It posts the highest decode in six of eight out-of-the-box cells. With matched flags everyone converges to the same engine baseline, so that lead is smarter defaults, not a faster engine. But its first token sits at 300-830 ms across every workload, an order of magnitude worse than the direct llama-server path (74-189 ms). On NVIDIA that first-token tax is even worse than on AMD.</li>
+</ul>
+<p>Reproducing this on NVIDIA needs two local bench-harness patches that are not yet upstream (forwarding <code>LLAMASTASH_LLAMA_SERVER</code> to <code>llamastash start</code> and using <code>Path.absolute()</code> instead of <code>Path.resolve()</code> for the proxy model-id fallback). Both are documented in the <a href="https://github.com/llamastash/llamastash/blob/main/docs/benchmarks/linux-nvidia-final.md">NVIDIA report</a>, which also carries the open question about the 12-16% out-of-the-box gap above.</p>
+<h3 id="verdict-suite-b">Verdict: Suite B</h3>
+<p>Three findings pull through every platform.</p>
+<ol>
+<li><strong>With matched flags, LlamaStash and raw <code>llama-server</code> are indistinguishable.</strong> The wrapper is honest.</li>
+<li><strong>Out of the box, LlamaStash’s defaults make it a little faster</strong> by turning on all GPU layers plus flash-attention where the model supports it (Qwen, Llama on Metal and CUDA). On the AMD APU the upstream ROCm defaults are already good, so the two match. On the Mac Qwen run the defaults buy +7.3% decode over raw, about what you would expect from turning on flash-attention. On NVIDIA the gap is wider than the visible flags explain, an open question, covered above.</li>
+<li><strong>Ollama and LM Studio each have a structural weakness that follows them across hardware.</strong> Ollama’s problem is RAG prefill: fine on tiny inputs, catastrophic when it has to re-read a document (52× on the Mac, 60×+ on NVIDIA CUDA, never finishing on NVIDIA Vulkan). LM Studio pays a steady 300 ms to 1.5 s first-token tax from its OpenAI shim everywhere, with smart defaults that win some decode cells on small models and lose on bigger ones.</li>
+</ol>
+<p>The picture is clearest if you want a simple takeaway. If you care about throughput, run raw <code>llama-server</code> or LlamaStash; they are the same engine. If you want raw <code>llama-server</code> plus a TUI, plus a CLI, plus a daemon, plus an OpenAI-compatible proxy, plus a script-friendly agent surface, run LlamaStash. There is no measurable cost to that bundle.</p>
+<h2 id="suite-c-proxy-overhead">Suite C: proxy overhead</h2>
+<p>Last question. If you talk to the LlamaStash proxy at <code>http://127.0.0.1:11435/v1</code> instead of <code>llama-server</code> directly, does it cost you anything?</p>
+<p>The harness brings up one model, then sends the same chat request to both URLs, alternating one-for-one. Same <code>llama-server</code> behind both.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Platform</th><th style="text-align:right">Direct TTFT</th><th style="text-align:right">Proxy TTFT</th><th style="text-align:right">Delta TTFT</th><th style="text-align:right">Decode delta</th></tr></thead><tbody><tr><td>AMD APU (<code>chat_turn</code>, small, 15 reps)</td><td style="text-align:right">52.37 ms</td><td style="text-align:right">52.82 ms</td><td style="text-align:right"><strong>+0.45 ms</strong></td><td style="text-align:right">0%</td></tr><tr><td>Apple M1 (Qwen2.5-0.5B Q4, 5 reps)</td><td style="text-align:right">31.4 ms</td><td style="text-align:right">30.8 ms</td><td style="text-align:right"><strong>−0.6 ms</strong></td><td style="text-align:right">+1.4%</td></tr><tr><td>NVIDIA RTX 3050 Ti Laptop (Vulkan, 4 reps)</td><td style="text-align:right">111.0 ms</td><td style="text-align:right">111.6 ms</td><td style="text-align:right"><strong>+0.57 ms</strong></td><td style="text-align:right">−0.20%</td></tr></tbody></table>
+<p><img src="/assets/images/llamastash/09-suite-c-proxy.png" alt="Suite C proxy overhead: decode delta % (top) and TTFT delta ms (bottom) across AMD APU, Apple M1, RTX 3050 Ti"/></p>
+<p>Top: decode delta % (proxy − direct). Bottom: TTFT delta ms (proxy − direct). The advisory thresholds from Suite A (±0.5% decode, ±30 ms TTFT) are drawn for context; the TTFT panel is zoomed in to ±1.6 ms because the actual deltas are sub-millisecond.</p>
+<p>The first-token difference is under a millisecond on every platform, inside run-to-run noise. The Mac row even shows the proxy 0.6 ms <em>faster</em> than direct, which is just noise. The loopback round-trip is sub-millisecond and disappears in the overall number. Decode is unchanged, because the proxy is not in the streaming path after the first byte.</p>
+<p>Full numbers and method: <a href="https://github.com/llamastash/llamastash/tree/main/docs/benchmarks/proxy">docs/benchmarks/proxy/</a>.</p>
+<h2 id="what-this-means-in-practice">What this means in practice</h2>
+<p>Pulling the three suites together.</p>
+<ul>
+<li><strong>The wrapper is honest.</strong> LlamaStash spawns the same binary you would run by hand, with the same flags. With matched flags there is no measurable throughput cost on AMD APU, Apple Silicon, or NVIDIA, on every metric.</li>
+<li><strong>Out of the box you get good defaults for free.</strong> The defaults turn on all GPU layers plus flash-attention where the model supports it. On the Mac Qwen run that is +7.3% decode over raw llama-server’s stock defaults. On AMD the upstream defaults are already good and the two match. On NVIDIA the gap is wider than the visible flags explain (open question above). The right way to read this is not “LlamaStash is faster than llama.cpp.” It is “LlamaStash gives most people the tuned defaults they would otherwise have to discover themselves.”</li>
+<li><strong>The proxy is free.</strong> Sub-millisecond on every platform. Nothing on the timescale an LLM works at.</li>
+<li><strong>Ollama is slower</strong> than raw llama.cpp on decode, and structurally worse on repeated-document RAG everywhere I measured. The gap is biggest on the AMD APU and the RTX 3050 Ti Laptop, smaller on the Mac.</li>
+<li><strong>LM Studio is fast where its bundled engine is well-tuned, slow where it falls back,</strong> and always pays a first-token tax that hurts short-request agent work more than long-form generation.</li>
+<li><strong>You can measure your own setup.</strong> Do not take my hardware as yours.</li>
+</ul>
+<p>If you want a single sentence: LlamaStash gives you the speed of raw <code>llama-server</code>, plus defaults that pick the right GPU-layer and flash-attention settings for you, with a real tool wrapped around it.</p>
+<h2 id="caveats-and-limits">Caveats and limits</h2>
+<p>This benchmark intentionally does not cover a few things. Calling them out so I’m not pretending they are settled.</p>
+<ul>
+<li><strong>Quality is not measured here.</strong> Decode throughput and TTFT are speed numbers, not quality numbers. Two tools can be at the same throughput and produce different outputs, especially on reasoning-mode prompts. A separate quality-first benchmark is in scope for a follow-up post.</li>
+<li><strong>Cross-backend determinism varies.</strong> Different llama.cpp builds on different platforms produce different outputs for the same input, even at temperature 0. The methodology page explains why and what we control. Don’t quote a single number; quote the full row.</li>
+<li><strong>Mac and NVIDIA cover one model each.</strong> The M1 16 GiB run used a 0.5 B small model, sized for the entry-level Apple Silicon target. The RTX 3050 Ti Laptop run used a 4 B Q3 model, sized for the 4 GiB VRAM ceiling. Larger Apple Silicon (M2 Pro, M3 Max, M4) and larger-VRAM NVIDIA hardware should re-run the full matrix; the harness is published.</li>
+<li><strong>The NVIDIA 12-16% out-of-the-box gap is not fully explained.</strong> The visible defaults for gemma3 on NVIDIA only turn on all GPU layers (gemma is not flash-attention-eligible). The measured gap is bigger than that one flag should buy. A follow-up should log and compare the full effective command line on both sides before anyone quotes the number as marketing. The Suite A (overhead) and Suite C (proxy) results on NVIDIA do not depend on this.</li>
+<li><strong>NVIDIA CUDA Suite A and Suite C used Vulkan only.</strong> The overhead and proxy measurements on the RTX 3050 Ti Laptop used the Vulkan binary. The proxy is engine-agnostic and expected to give the same result on CUDA, but a CUDA-lane Suite A certification has not been run.</li>
+<li><strong>NVIDIA reproduction requires two local bench-harness patches</strong> that are not yet upstream. Both are documented at the bottom of the <a href="https://github.com/llamastash/llamastash/blob/main/docs/benchmarks/linux-nvidia-final.md">NVIDIA report</a>.</li>
+<li><strong>CUDA vs Vulkan binaries were built differently</strong> on NVIDIA. CUDA was a self-built <code>cmake -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=86</code> against b9360; Vulkan was the prebuilt b9360 release asset. Same upstream commit, but compiler flags and link-time options can differ. Interpret the CUDA vs Vulkan comparison as “these two specific builds on this hardware” rather than “CUDA vs Vulkan in general.”</li>
+<li><strong>Ollama and LM Studio versions move.</strong> Ollama 0.24.0 and LM Studio 2.16.0 were the latest stable releases at run time. Newer versions will move the numbers. Rerun against current versions.</li>
+<li><strong>LM Studio version not captured on M1.</strong> The <code>lms version</code> CLI returned an ANSI banner instead of a semver string; the desktop app was current as of 2026-05-27.</li>
+<li><strong>The prompt-processing rate on rag_prefill is inflated</strong> when the cache hits, because it divides the prompt tokens by the cached ~50 ms instead of the real cold-prefill time. On rag_prefill, trust decode and first-token, not the prompt rate.</li>
+<li><strong>LM Studio’s rag_prefill decode is blank</strong> on the small models. Its reasoning-mode parser eats the token count, and the benchmark’s output cap leaves at most one real token to measure. First-token is still valid there; decode is dropped from those cells.</li>
+<li><strong>Single hardware points are not the population.</strong> Strix Halo, M1 16 GiB, and the RTX 3050 Ti Laptop are specific machines on specific power budgets. A different SoC, a different TDP, a different driver will move numbers. The publishable claim is “this is what these three machines do today.” The harness lets you produce the same claim for your own machine.</li>
+</ul>
+<h2 id="reproducing-this">Reproducing this</h2>
+<p>Both suites are maintainer-run. Nothing in CI fires them. To run them yourself:</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.6rxel.css"/><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">git</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">clone</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">https://github.com/llamastash/llamastash</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#ED8796;--0fs:italic">cd</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llamastash</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Suite B (cross-tool)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">make</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">bench-end-to-end</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--dry-run</span><span style="--0:#CAD3F5">    </span><span style="--0:#979EBA;--0fs:italic"># print the planned matrix first</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">make</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">bench-end-to-end</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Suite A (overhead)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">make</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">bench-overhead</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Suite C (proxy)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">make</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">bench-proxy</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--model</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&lt;path/to/model.gguf&gt;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code">
+</div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span style="--0:#979EBA;--0fs:italic"># Pivot existing JSONs into the headline summary</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">make</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">bench-table</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="git clone https://github.com/llamastash/llamastashcd llamastashmake bench-end-to-end -- --dry-run    # print the planned matrix firstmake bench-end-to-endmake bench-overheadmake bench-proxy -- --model <path/to/model.gguf>make bench-table"><div></div></button></div></figure></div>
+<p>Prerequisites, per-backend gotchas, and honored environment variables: <a href="https://github.com/llamastash/llamastash/blob/main/docs/benchmarks/methodology.md">docs/benchmarks/methodology.md</a>.</p>
+<p>Drop new host directories into <a href="https://github.com/llamastash/llamastash/blob/main/docs/benchmarks/runs/">docs/benchmarks/runs/</a> and re-render. No central database, no schema migration dance.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The release post made a claim. This post backs it up, with one addition I did not see coming.</p>
+<p>LlamaStash is a wrapper around <code>llama-server</code>, and the only honest kind of wrapper is one that adds no measurable overhead. I measured it. It does not. The whole architecture is built around staying out of llama-server’s way, and the numbers say it works: with matched flags, the two are the same speed on every platform.</p>
+<p>The defaults are a side note worth keeping. Turning on all GPU layers and flash-attention (where the model supports it) at startup is there to save you from discovering which flags matter on your hardware. The Mac Qwen run shows that buys +7.3% decode over raw llama-server’s stock defaults, same hardware and same binary, about what flash-attention on Qwen Metal should give. NVIDIA shows an even wider gap that the visible flags do not fully explain; the NVIDIA section above is honest about it, and a follow-up will dig into the cause.</p>
+<p>The cross-tool comparison turned out more interesting than the overhead claim. Ollama is consistently behind raw llama.cpp on decode, and its repeated-document RAG first-token is a structural problem across hardware. LM Studio’s Vulkan path is well-tuned on some hardware and worth respecting, but its first-token tax is consistent and real for agent work. LlamaStash gives you raw-llama.cpp speed with matched flags, a little better out of the box, and a real tool around it that does not cost you throughput.</p>
+<p>If you want to run this yourself on your own hardware, the harness is published, the methodology is published, the per-cell JSONs are checked in. The whole thing is reproducible.</p>
+<p>The right tool for the right job. The right tool is whichever one you measured.</p>
+<hr/>
+<p>If you like this article, please leave a like or a comment.</p>
+<p>You can follow me on <a href="https://bsky.app/profile/deepu105.bsky.social">Bluesky</a>, <a href="https://mastodon.social/@deepu105">Mastodon</a>, and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p> <hr class="my-12 border-[var(--color-border)]"> <div class="not-prose mb-8 flex flex-wrap gap-2"> <a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#ai </a><a href="/tags/#llamacpp" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#llamacpp </a><a href="/tags/#benchmark" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#benchmark </a><a href="/tags/#llm" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#llm </a><a href="/tags/#rust" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#rust </a> </div><nav class="not-prose mt-10 grid gap-4 border-t border-[var(--color-border)] pt-8 sm:grid-cols-2"> <a href="/introducing-llamastash/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 transition hover:border-[var(--color-border-strong)]"> <span class="text-xs text-[var(--color-fg-subtle)]">← Newer</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher </span> </a> <a href="/my-fully-offline-ai-assisted-linux-development-machine/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 text-right transition hover:border-[var(--color-border-strong)]"> <span class="text-xs text-[var(--color-fg-subtle)]">Older →</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> My fully offline AI-assisted Linux development machine </span> </a> </nav>  </div> <section class="not-prose mt-12 border-t border-[var(--color-border)] pt-8"> <h2 class="font-display mb-4 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Comments</h2> <div id="giscus-mount"></div> </section> <script src="https://giscus.app/client.js" data-repo="deeputech/deeputech.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk" data-category="Comments" data-category-id="DIC_kwDODBl9a84C8yBt" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async>(function(){const config = {"repo":"deeputech/deeputech.github.io","repoId":"MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk","category":"Comments","categoryId":"DIC_kwDODBl9a84C8yBt","mapping":"pathname","strict":"0","reactionsEnabled":"1","emitMetadata":"0","inputPosition":"top","lang":"en"};
+})();</script> <script>
+  // Re-theme Giscus iframe when the site theme toggles.
+  (function () {
+    function send(theme) {
+      var iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme === "dark" ? "dark" : "light" } } }, "https://giscus.app");
+    }
+    var html = document.documentElement;
+    var observer = new MutationObserver(function () {
+      send(html.getAttribute("data-theme") || "light");
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["data-theme"] });
+  })();
+</script> </article> <aside class="hidden lg:block"> <div class="sticky top-24"> <nav class="toc text-sm" aria-label="Table of contents" data-astro-cid-obewoz47><p class="font-display mb-3 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase" data-astro-cid-obewoz47>
+On this page
+</p><ul class="space-y-1.5" data-astro-cid-obewoz47><li class data-astro-cid-obewoz47><a href="#the-setup" data-toc-target="the-setup" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>The setup</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#platforms" data-toc-target="platforms" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Platforms</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#models" data-toc-target="models" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Models</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#workloads" data-toc-target="workloads" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Workloads</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#methodology-rules" data-toc-target="methodology-rules" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Methodology rules</a></li><li class data-astro-cid-obewoz47><a href="#suite-a-overhead-regression" data-toc-target="suite-a-overhead-regression" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Suite A: overhead regression</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#amd-apu" data-toc-target="amd-apu" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>AMD APU</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#apple-silicon" data-toc-target="apple-silicon" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Apple Silicon</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#nvidia" data-toc-target="nvidia" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>NVIDIA</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#verdict-suite-a" data-toc-target="verdict-suite-a" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Verdict: Suite A</a></li><li class data-astro-cid-obewoz47><a href="#suite-b-cross-tool-comparison" data-toc-target="suite-b-cross-tool-comparison" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Suite B: cross-tool comparison</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#amd-apu-1" data-toc-target="amd-apu-1" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>AMD APU</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#apple-silicon-1" data-toc-target="apple-silicon-1" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Apple Silicon</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#nvidia-1" data-toc-target="nvidia-1" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>NVIDIA</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#verdict-suite-b" data-toc-target="verdict-suite-b" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Verdict: Suite B</a></li><li class data-astro-cid-obewoz47><a href="#suite-c-proxy-overhead" data-toc-target="suite-c-proxy-overhead" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Suite C: proxy overhead</a></li><li class data-astro-cid-obewoz47><a href="#what-this-means-in-practice" data-toc-target="what-this-means-in-practice" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>What this means in practice</a></li><li class data-astro-cid-obewoz47><a href="#caveats-and-limits" data-toc-target="caveats-and-limits" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Caveats and limits</a></li><li class data-astro-cid-obewoz47><a href="#reproducing-this" data-toc-target="reproducing-this" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Reproducing this</a></li><li class data-astro-cid-obewoz47><a href="#conclusion" data-toc-target="conclusion" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Conclusion</a></li></ul></nav><script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".toc-link"));
+    if (!links.length) return;
+    var bySlug = {};
+    links.forEach(function (l) {
+      bySlug[l.getAttribute("data-toc-target")] = l;
+    });
+    var headings = Object.keys(bySlug)
+      .map(function (slug) {
+        return document.getElementById(slug);
+      })
+      .filter(Boolean);
+    if (!headings.length) return;
+
+    var current = null;
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // Find the topmost intersecting heading.
+        var visible = entries
+          .filter(function (e) {
+            return e.isIntersecting;
+          })
+          .sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+        if (visible.length) {
+          var newCurrent = visible[0].target.id;
+          if (newCurrent !== current) {
+            if (current && bySlug[current]) bySlug[current].removeAttribute("data-active");
+            current = newCurrent;
+            if (bySlug[current]) bySlug[current].setAttribute("data-active", "true");
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -70% 0px" },
+    );
+    headings.forEach(function (h) {
+      observer.observe(h);
+    });
+  })();
+</script> </div> </aside> </div> </div>  </main> <aside class="alert-bar mt-16"> <div class="mx-auto max-w-3xl px-4 py-6 text-center text-sm text-[var(--color-fg-muted)] sm:px-6"> <p>
+Never miss a story from Technorage — follow me on
+<a rel="me" target="_blank" href="https://mastodon.social/@deepu105" class="text-[var(--color-accent)] hover:underline">Mastodon</a>,
+<a rel="me" target="_blank" href="https://www.linkedin.com/in/deepu05" class="text-[var(--color-accent)] hover:underline">LinkedIn</a>,
+      or
+<a rel="me" target="_blank" href="https://twitter.com/deepu105" class="text-[var(--color-accent)] hover:underline">Twitter</a>.
+      Or
+<a href="/feed.xml" class="text-[var(--color-accent)] hover:underline">subscribe via RSS</a>.
+</p> <p class="mt-2 text-xs text-[var(--color-fg-subtle)]">
+This site uses Google Analytics which places
+<a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage#gtagjs_google_analytics_4_-_cookie_usage" target="_blank" rel="noopener noreferrer" class="underline-offset-2 hover:underline">a few cookies</a>. By using the site, you agree to their use.
+</p> </div> </aside> <footer class="border-t border-[var(--color-border)] py-10 text-sm text-[var(--color-fg-muted)]"> <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 sm:px-6 md:flex-row md:items-center md:justify-between"> <div class="flex flex-col gap-1"> <span>
+© 2026 Deepu K Sasidharan ·
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" class="underline-offset-2 hover:underline">
+CC BY 4.0
+</a> </span> <span class="text-xs text-[var(--color-fg-subtle)]">
+Built with <a href="https://astro.build" class="hover:underline">Astro</a> ·
+        Hosted on <a href="https://pages.github.com/" class="hover:underline">GitHub Pages</a> </span> </div> <nav class="flex flex-wrap gap-x-4 gap-y-2 text-xs"> <a href="/blogs/" class="hover:text-[var(--color-fg)]">Blog</a> <a href="/series/" class="hover:text-[var(--color-fg)]">Series</a> <a href="/tags/" class="hover:text-[var(--color-fg)]">Tags</a> <a href="/feed.xml" class="hover:text-[var(--color-fg)]">RSS</a> <a href="/comment-policy/" class="hover:text-[var(--color-fg)]">Comments</a> </nav> </div> </footer> <dialog id="search-dialog" class="m-auto w-full max-w-xl rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-0 text-[var(--color-fg)] shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm"> <div class="flex items-center gap-3 border-b border-[var(--color-border)] px-4 py-3"> <svg class="h-4 w-4 text-[var(--color-fg-subtle)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <input id="search-input" type="search" placeholder="Search posts…" autocomplete="off" class="w-full bg-transparent text-base text-[var(--color-fg)] outline-none placeholder:text-[var(--color-fg-subtle)]"> <kbd class="rounded border border-[var(--color-border)] px-1.5 py-0.5 font-mono text-xs text-[var(--color-fg-subtle)]">esc</kbd> </div> <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2 text-sm"> <p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">
+Type to search the blog.
+</p> </div> </dialog> <script>
+  (function () {
+    var dialog = document.getElementById("search-dialog");
+    var input = document.getElementById("search-input");
+    var results = document.getElementById("search-results");
+    var trigger = document.getElementById("search-trigger");
+    if (!dialog || !input || !results) return;
+
+    var pagefind = null;
+    var loading = false;
+
+    async function loadPagefind() {
+      if (pagefind || loading) return;
+      loading = true;
+      try {
+        // Pagefind is generated at /pagefind/pagefind.js after `pagefind --site dist`
+        pagefind = await import(/* @vite-ignore */ "/pagefind/pagefind.js");
+        await pagefind.options({ excerptLength: 30 });
+      } catch (e) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Search index unavailable in dev. Run <code>npm run build</code> then <code>npm run preview</code>.</p>';
+      } finally {
+        loading = false;
+      }
+    }
+
+    function open() {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+      loadPagefind();
+      setTimeout(function () {
+        input.focus();
+      }, 0);
+    }
+    function close() {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+      input.value = "";
+      results.innerHTML =
+        '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+    }
+
+    if (trigger) trigger.addEventListener("click", open);
+    document.addEventListener("keydown", function (e) {
+      var isMac = /Mac|iPad|iPhone/.test(navigator.platform);
+      var isCmdK = (isMac ? e.metaKey : e.ctrlKey) && e.key === "k";
+      if (isCmdK) {
+        e.preventDefault();
+        open();
+      } else if (e.key === "Escape" && dialog.open) {
+        e.preventDefault();
+        close();
+      }
+    });
+    dialog.addEventListener("click", function (e) {
+      // close on backdrop click
+      if (e.target === dialog) close();
+    });
+
+    var lastQuery = "";
+    var debounceTimer = null;
+    input.addEventListener("input", function () {
+      var q = input.value.trim();
+      if (q === lastQuery) return;
+      lastQuery = q;
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () {
+        runSearch(q);
+      }, 80);
+    });
+
+    async function runSearch(q) {
+      if (!q) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+        return;
+      }
+      if (!pagefind) {
+        await loadPagefind();
+        if (!pagefind) return;
+      }
+      var search = await pagefind.search(q);
+      if (!search || !search.results.length) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">No results for &ldquo;' +
+          escapeHtml(q) +
+          '&rdquo;</p>';
+        return;
+      }
+      var top = await Promise.all(search.results.slice(0, 8).map(function (r) { return r.data(); }));
+      results.innerHTML = top
+        .map(function (d) {
+          return (
+            '<a href="' +
+            d.url +
+            '" class="block rounded-lg px-3 py-2.5 hover:bg-[var(--color-bg-subtle)]">' +
+            '<span class="font-display block text-sm font-semibold text-[var(--color-fg)]">' +
+            escapeHtml(d.meta && d.meta.title ? d.meta.title : d.url) +
+            "</span>" +
+            '<span class="mt-0.5 block text-xs text-[var(--color-fg-muted)]">' +
+            d.excerpt +
+            "</span>" +
+            "</a>"
+          );
+        })
+        .join("");
+    }
+
+    function escapeHtml(s) {
+      return s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  })();
+</script> </body></html>
