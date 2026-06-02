@@ -44,11 +44,16 @@ if "$publishDev"; then
     if "$dryRun"; then
         DRY_RUN=1 npm run publish-to-dev
     else
-        npm run publish-to-dev
+        # Capture the exit code instead of letting `set -e` abort here. Even on a
+        # partial failure, posts created earlier in the run have already had their
+        # devto_id/url written to disk, and those write-backs MUST be committed —
+        # otherwise the next run re-CREATEs them and collides on canonical_url.
+        set +e; npm run publish-to-dev; rc=$?; set -e
         if [ -n "$(git status --porcelain)" ]; then
             git add --all
             git commit --allow-empty -am "Updated posts with Dev.to slug"
         fi
+        if [ "$rc" -ne 0 ]; then exit "$rc"; fi
     fi
 fi
 
