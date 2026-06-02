@@ -199,7 +199,7 @@ func main() {
 
 I ran some benchmarks with all 3 approaches and here is the result, as you can see looping is still the most performing followed by the tail recursion.
 
-```
+```console
 goos: linux
 goarch: amd64
 BenchmarkFactorialLoop-12       	100000000	        11.7 ns/op	       0 B/op	       0 allocs/op
@@ -244,7 +244,7 @@ func addOrMultiply(add bool, onAdd, onMultiply int) int {
 
 This will produce the below output and we can see that both functions are executed always
 
-```
+```plaintext
 executing add
 executing multiply
 8
@@ -282,7 +282,7 @@ func addOrMultiply(add bool, onAdd, onMultiply func(t int) int, t int) int {
 
 This outputs the below and we can see that only required functions were executed
 
-```
+```plaintext
 executing add
 8
 executing multiply

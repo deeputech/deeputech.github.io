@@ -117,7 +117,7 @@ func main() {
 One major difference Go has compared to many garbage collected languages is that many objects are allocated directly on the program stack. The Go compiler uses a process called [escape analysis](https://www.ardanlabs.com/blog/2017/05/language-mechanics-on-escape-analysis.html) to find objects whose lifetime is known at compile-time and allocates them on the stack rather than in garbage-collected heap memory.
 During compilation, Go does the escape analysis to determine what can go into Stack(static data) and what needs to go into Heap(dynamic data). We can see these details during compilation by running `go build` with `-gcflags '-m'` flag. For the above code, it will output something like the below:
 
-```
+```console
 ❯ go build -gcflags '-m' gc.go
 # command-line-arguments
 temp/gc.go:14:6: can inline getBonusPercentage

@@ -39,7 +39,7 @@ Create a JDL file, let’s say app.jdl, and copy the below content into it.
 
 Now create a directory called **ecommerce** and navigate into it. Run the JHipster import-jdl command. It could take a few minutes, especially the NPM install step.
 
-```
+```console
 $ mkdir ecommerce && cd ecommerce
 $ jhipster import-jdl app.jdl
 ```
@@ -50,7 +50,7 @@ Once the JHipster process is complete, you will see that we have our store gatew
 
 Now that our application is ready, let us create the required configurations for Kubernetes using JHipster. This can also be done using JDL by adding below snippet to the JDL file we used earlier.
 
-```
+```hcl
 deployment {
   deploymentType kubernetes
   appsFolders [store, invoice, notification]
@@ -64,7 +64,7 @@ deployment {
 
 For now, let us use the JHipster CLI to do this. In the ecommerce folder, we created earlier, create a new directory, let's call in k8s so that we get the below structure.
 
-```
+```plaintext
 ├── app.jdl
 ├── invoice
 ├── kubernetes
@@ -74,14 +74,14 @@ For now, let us use the JHipster CLI to do this. In the ecommerce folder, we cre
 
 Create the kubernetes directory and navigate to it. Now run the JHipster Kubernetes command there.
 
-```
+```console
 $ mkdir kubernetes && cd kubernetes
 $ jhipster kubernetes
 ```
 
 The generator will ask you a few questions and choose the answers as highlighted below, as you can see the questions are very similar to the ones asked by jhipster docker-compose command. For the “base Docker repository name” provide your own docker hub account id(For example, my Docker Hub id is [deepu105](https://hub.docker.com/u/deepu105/)). For real-world use cases, you could also use a private image repository like the [Azure Container Registry](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-acr) and in that case, you would have to provide the ACR login server name here. For now, let us keep it simple.
 
-```
+```plaintext
 ⎈ Welcome to the JHipster Kubernetes Generator ⎈
 Files will be generated in folder: /home/deepu/workspace/temp/ecommerce/kubernetes
 ✔ Docker is installed
@@ -114,7 +114,7 @@ JHipster registry detected as the service discovery and configuration provider u
 
 The generator will go to work with this and will create the following files and output.
 
-```
+```plaintext
    create invoice/invoice-deployment.yml
    create invoice/invoice-service.yml
    create invoice/invoice-mysql.yml
@@ -177,13 +177,13 @@ Once the tools are ready let us prepare our Kubernetes cluster.
 
 First, let us create a resource group. Run the below command. This will create a resource group named **eCommerceCluster** in US east location(You can use other [Azure regions](https://azure.microsoft.com/en-us/global-infrastructure/regions/) as well).
 
-```
+```console
 $ az group create --name eCommerceCluster --location eastus
 ```
 
 Now let us create an AKS cluster on the resource group we just created. Run the below command to create a cluster named eCommerceCluster with two nodes(We would need some room to run all those containers). It also enables the Azure monitor on the cluster through the add-on specified.
 
-```
+```console
 $ az aks create --resource-group eCommerceCluster \
 --name eCommerceCluster --node-count 2 \
 --enable-addons monitoring --generate-ssh-keys
@@ -199,13 +199,13 @@ Now, let us configure **kubectl** to connect to the AKS cluster we just created.
 
 Note: Some Azure CLI commands might take a while to execute, especially if you are on a slow network, sometimes if the below commands seem stalled or if it is timed out, kill it and retry again.
 
-```
+```console
 $ az aks get-credentials --resource-group eCommerceCluster --name eCommerceCluster
 ```
 
 Verify that we are able to connect to the cluster by running kubectl get nodes
 
-```
+```console
 $ kubectl get nodes
 NAME                       STATUS    ROLES     AGE       VERSION
 aks-nodepool1-34429729-0   Ready     agent     22m       v1.9.9
@@ -218,7 +218,7 @@ Now that our cluster is ready, let us deploy our microservice stack to this clus
 
 We can deploy our application using the kubectl apply command for this we have to navigate to the k8s folder we created earlier and run the below commands in the same order
 
-```
+```console
 $ kubectl apply -f registry
 
 $ kubectl apply -f invoice
@@ -238,7 +238,7 @@ Though the services get created fast, the actual applications might not be up an
 
 Now run kubectl get pods to see the status of our containers.
 
-```
+```console
 $ kubectl get pods -w
 
 NAME                                    READY  STATUS 
@@ -256,7 +256,7 @@ Note: I have removed some info for brevity in the above output.
 
 Wait until all the containers are in **Running** status. Once the containers are running we can run the kubectl get service command to get the external IP for the application.
 
-```
+```console
 $ kubectl get service store
 
 NAME   TYPE         CLUSTER-IP    EXTERNAL-IP    PORT(S)         AGE
@@ -269,13 +269,13 @@ In this case, the external IP for our gateway application is **40.117.140.228** 
 
 The JHipster registry is deployed as a headless service by default. If we need to access the registry we need to create a secondary service with a Load Balancer. Run the below command to expose the second service.
 
-```
+```console
 $ kubectl expose service jhipster-registry --type=LoadBalancer --name=exposed-registry
 ```
 
 Now run the kubectl get service command to get the IP.
 
-```
+```console
 $ kubectl get service exposed-registry
 
 NAME             TYPE         CLUSTER-IP   EXTERNAL-IP    PORT(S)
@@ -288,7 +288,7 @@ Visit the URL in a browser to see the registry in action
 
 We can now scale any of our services by simply running kubectl scale command. For example, let us scale our Invoice service.
 
-```
+```console
 $ kubectl scale --replicas=2 deployment/invoice
 ```
 
@@ -298,7 +298,7 @@ Now we can visit the **Eureka -> Instances** on our Registry and see that the In
 
 Running kubectl get pods will also show you the new instance.
 
-```
+```console
 $ kubectl get pods
  
 NAME                                  READY  STATUS   AGE
@@ -321,7 +321,7 @@ Once you are done its always a good idea to clean up especially since we don't w
 
 Let us delete the cluster from AKS and related resources created by deleting the entire resource group.
 
-```
+```console
 $ az group delete --name eCommerceCluster --yes --no-wait
 ```
 
