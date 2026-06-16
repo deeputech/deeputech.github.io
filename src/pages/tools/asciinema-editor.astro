@@ -1,0 +1,1169 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
+// Asciinema Editor — a self-contained, client-side asciicast (.cast) editor.
+// Ported from a standalone index.html. Key Astro adaptations:
+//   * asciinema-player is loaded from the npm package (already a site dep)
+//     instead of CDN script/link tags.
+//   * All tool CSS lives in an `is:global` block prefixed with `.ascii-editor`,
+//     because the event-list rows are injected via innerHTML at runtime and so
+//     never receive Astro's scoped-style attribute.
+//   * Colours map to the site's Catppuccin Macchiato palette so the tool and
+//     the embedded player share one look.
+//   * The sample cast is served from /assets/casts/.
+---
+
+<BaseLayout
+  title="Asciinema Editor"
+  description="Browser-based editor for asciicast (.cast) recordings — trim, speed up, quantize idle gaps, drop events, and add markers. Nothing is uploaded."
+>
+  <div class="ascii-editor-shell">
+    <div class="ascii-editor">
+      <div class="app-bar">
+        <span class="app-title">Asciinema <span>Editor</span></span>
+        <span id="status" class="status">No file loaded</span>
+        <div class="spacer"></div>
+        <label class="file-btn" for="file-input">Open .cast…</label>
+        <input id="file-input" type="file" accept=".cast,.json,application/json,text/plain" hidden />
+        <button id="load-sample" class="subtle">Load sample</button>
+        <button id="undo-btn" disabled title="Undo (Ctrl+Z)">Undo</button>
+        <label class="save-as">
+          Save as
+          <select id="save-version">
+            <option value="2">v2</option>
+            <option value="3">v3</option>
+          </select>
+        </label>
+        <button id="download-btn" class="primary" disabled>Download .cast</button>
+      </div>
+
+      <div id="empty" class="layout">
+        <div class="panel" style="grid-column: 1 / -1;">
+          <div class="empty-state">
+            <div style="font-size: 18px; color: var(--text);">
+              Drop an asciicast (<code>.cast</code>) file anywhere
+            </div>
+            <div>or click <b>Open .cast…</b> in the toolbar, or try the built-in sample.</div>
+            <button id="load-sample-2" class="primary">Load sample recording</button>
+            <div style="margin-top: 18px; font-size: 11px; max-width: 520px;">
+              Edit operations: <b>Cut range</b>, <b>Speed up / slow down</b> (whole cast or selected
+              range), <b>Quantize idle</b> (cap long pauses), <b>Delete</b> individual events, and edit
+              terminal size / metadata. All client-side.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="app" class="layout" style="display:none">
+        <div class="col">
+          <div class="panel preview-panel">
+            <div class="panel-h">Preview</div>
+            <div class="player-wrap">
+              <div id="player"></div>
+            </div>
+            <div class="brush-wrap">
+              <div id="brush" class="brush" title="Click to seek. Drag to select a range.">
+                <div id="brush-sel" class="sel" style="display:none"></div>
+                <div id="brush-cursor" class="cursor" style="left:0"></div>
+              </div>
+              <div class="brush-meta">
+                <span>Duration <span id="cast-duration" class="pill">0:00.00</span></span>
+                <span>Events <span id="cast-count" class="pill">0</span></span>
+                <span class="spacer" style="flex:1"></span>
+                <span class="sel-group" title="Selection range — used by Cut and Speed, and highlighted in the timeline.">
+                  <span class="sel-label">Selection</span>
+                  <label>Start <input id="range-start" type="text" inputmode="decimal" placeholder="0:00" /></label>
+                  <span class="sel-arrow">→</span>
+                  <label>End <input id="range-end" type="text" inputmode="decimal" placeholder="0:00" /></label>
+                  <span id="range-readout" class="pill">none</span>
+                  <button id="clear-range" class="subtle">Clear</button>
+                </span>
+              </div>
+            </div>
+            <div class="meta-strip">
+              <label>Title <input id="meta-title" type="text" placeholder="(none)" /></label>
+              <label>Width <input id="meta-width" type="number" min="1" /></label>
+              <label>Height <input id="meta-height" type="number" min="1" /></label>
+              <label>Idle limit (s) <input id="meta-idle" type="number" step="0.1" min="0" placeholder="(none)" /></label>
+            </div>
+          </div>
+
+          <div class="panel ops-panel">
+            <div class="panel-h">Operations</div>
+            <div class="panel-b">
+              <div class="ops">
+                <div class="op-card">
+                  <h4>Cut range</h4>
+                  <div class="hint">Removes the selected range. Set <b>Selection</b> Start/End under the player, or drag on the brush bar.</div>
+                  <div class="row">
+                    <button id="op-cut" class="danger" style="flex:1">Cut range</button>
+                  </div>
+                </div>
+                <div class="op-card">
+                  <h4>Speed</h4>
+                  <div class="hint">Factor &gt; 1 speeds up, &lt; 1 slows down. Applied to the selected range, or the whole cast if no range.</div>
+                  <div class="row">
+                    <input id="op-speed-factor" type="number" step="0.1" min="0.05" value="1.5" />
+                    <button id="op-speed">Apply speed</button>
+                  </div>
+                </div>
+                <div class="op-card">
+                  <h4>Quantize idle</h4>
+                  <div class="hint">Cap any gap between events to at most this many seconds.</div>
+                  <div class="row">
+                    <input id="op-quant" type="number" step="0.1" min="0.05" value="0.5" />
+                    <button id="op-quant-btn">Quantize</button>
+                  </div>
+                </div>
+                <div class="op-card">
+                  <h4>Marker</h4>
+                  <div class="hint">Drops a chapter marker at the playhead (click the bar to move it). Shows as an amber flag on the bar and as a chapter in players that support markers.</div>
+                  <div class="row">
+                    <input id="op-marker-label" type="text" placeholder="label (optional)" />
+                    <button id="op-marker">Add marker</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="panel timeline-panel">
+            <div class="panel-h">
+              <span>Timeline</span>
+              <span class="spacer" style="flex:1"></span>
+              <span class="kbd">click</span><span class="kbd-note">seek</span>
+              <span class="kbd">shift+click</span><span class="kbd-note">range end</span>
+            </div>
+            <div class="event-list-meta">
+              <span id="visible-count">0 events</span>
+              <span class="spacer" style="flex:1"></span>
+              <span id="sel-count"></span>
+            </div>
+            <div class="panel-b no-pad scroll" style="flex:1;">
+              <div id="event-list" class="event-list"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drop-overlay"><div>Drop .cast file to load</div></div>
+      <div id="toast" class="toast"></div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  /* ---- Asciinema Editor — namespaced under .ascii-editor ----------------- */
+
+  /* The editor fills at least the viewport gap between the site header and
+     footer (~13rem of chrome), but is content-driven: the player renders at
+     its natural fit-to-width height so the whole cast is visible, and the page
+     scrolls if the editor needs more room than the viewport. */
+  .ascii-editor-shell {
+    padding: 0.75rem;
+    display: flex;
+  }
+
+  .ascii-editor {
+    /* Catppuccin Macchiato (always dark — matches the embedded player theme) */
+    --bg: #181926;        /* crust */
+    --bg-input: #11131c;
+    --panel: #1e2030;     /* mantle */
+    --panel-2: #24273a;   /* base */
+    --border: #363a4f;    /* surface0 */
+    --border-strong: #494d64; /* surface1 */
+    --muted: #a5adcb;     /* subtext0 */
+    --text: #cad3f5;      /* text */
+    --accent: #c6a0f6;    /* mauve */
+    --accent-2: #f5bde6;  /* pink */
+    --danger: #ed8796;    /* red */
+    --ok: #a6da95;        /* green */
+    --warn: #eed49f;      /* yellow */
+    --selection: rgba(198, 160, 246, 0.22);
+    --selection-bd: #c6a0f6;
+
+    font: 13px/1.45 var(--font-sans, ui-sans-serif, system-ui, sans-serif);
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    flex: 1;
+    min-width: 0;
+    min-height: calc(100dvh - 13rem);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ascii-editor .app-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 10px 14px;
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border-bottom: 1px solid var(--border);
+  }
+  .ascii-editor .app-bar .spacer { flex: 1; }
+  .ascii-editor .app-title { font-size: 14px; font-weight: 600; letter-spacing: 0.2px; color: var(--text); }
+  .ascii-editor .app-title span { color: var(--accent); }
+  .ascii-editor .status { color: var(--muted); font-size: 12px; }
+  .ascii-editor .save-as {
+    font-size: 11px; color: var(--muted);
+    display: flex; align-items: center; gap: 4px;
+  }
+  .ascii-editor #save-version {
+    background: var(--bg-input); border: 1px solid var(--border);
+    color: var(--text); border-radius: 5px; padding: 5px 6px; font: inherit;
+  }
+
+  .ascii-editor button,
+  .ascii-editor .file-btn {
+    appearance: none; border: 1px solid var(--border); background: var(--panel-2);
+    color: var(--text); padding: 6px 10px; border-radius: 6px;
+    font: inherit; cursor: pointer;
+  }
+  .ascii-editor button:hover:not(:disabled),
+  .ascii-editor .file-btn:hover { border-color: var(--border-strong); background: var(--bg-elevated, #363a4f); }
+  .ascii-editor button:disabled { opacity: 0.45; cursor: not-allowed; }
+  .ascii-editor button.primary {
+    background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600;
+  }
+  .ascii-editor button.danger {
+    background: var(--danger); border-color: var(--danger); color: var(--bg); font-weight: 600;
+  }
+  .ascii-editor button.primary:hover:not(:disabled),
+  .ascii-editor button.danger:hover:not(:disabled) { filter: brightness(1.08); }
+  .ascii-editor button.subtle { background: transparent; border-color: transparent; color: var(--muted); }
+  .ascii-editor button.subtle:hover { color: var(--text); background: var(--panel-2); }
+
+  .ascii-editor .layout {
+    display: grid;
+    grid-template-columns: minmax(420px, 1.4fr) minmax(360px, 1fr);
+    align-items: start;
+    gap: 8px;
+    padding: 8px;
+    flex: 1;
+    min-height: 0;
+  }
+  /* The empty state should still fill the editor before a cast is loaded. */
+  .ascii-editor #empty.layout { align-items: stretch; }
+  /* Stack to one column and let the page scroll on narrow viewports. */
+  @media (max-width: 900px) {
+    .ascii-editor { min-height: 0; }
+    .ascii-editor .layout { grid-template-columns: 1fr; }
+    .ascii-editor .timeline-panel { max-height: 70vh; }
+    .ascii-editor #empty .empty-state { min-height: 50vh; }
+  }
+
+  .ascii-editor .col { display: flex; flex-direction: column; gap: 8px; min-height: 0; min-width: 0; }
+  .ascii-editor .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; flex-direction: column;
+    min-height: 0; min-width: 0;
+  }
+  /* Preview sizes to the player (fit:width sets its own height), so the whole
+     cast is visible rather than squeezed into leftover flex space. */
+  .ascii-editor .panel.preview-panel { flex: 0 0 auto; }
+  .ascii-editor .panel.preview-panel .player-wrap > #player { width: 100%; }
+  .ascii-editor .panel.ops-panel { flex: 0 0 auto; }
+  /* Timeline matches the editor height and scrolls its event list internally
+     so 8000+ events don't stretch the page to tens of thousands of pixels. */
+  .ascii-editor .timeline-panel { max-height: calc(100dvh - 13rem); }
+  .ascii-editor .panel-h {
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.3px; color: var(--muted);
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .ascii-editor .panel-b { padding: 8px 10px; min-height: 0; overflow: hidden; }
+  .ascii-editor .panel-b.scroll { overflow: auto; }
+  .ascii-editor .panel-b.no-pad { padding: 0; }
+
+  .ascii-editor .meta-strip {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 8px;
+    padding: 6px 10px 8px;
+    border-top: 1px solid var(--border);
+  }
+  .ascii-editor .meta-strip label {
+    display: flex; flex-direction: column; gap: 2px;
+    font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px;
+  }
+  .ascii-editor .meta-strip input { padding: 4px 6px; font-size: 12px; }
+  .ascii-editor input[type="text"],
+  .ascii-editor input[type="number"] {
+    background: var(--bg-input); border: 1px solid var(--border); border-radius: 5px;
+    color: var(--text); padding: 6px 8px; font: inherit;
+  }
+  .ascii-editor input:focus { outline: none; border-color: var(--accent); }
+
+  .ascii-editor #player { background: #000; border-radius: 4px; }
+  .ascii-editor .player-wrap { padding: 8px 10px; }
+
+  .ascii-editor .brush-wrap { padding: 6px 10px 8px; border-top: 1px solid var(--border); }
+  .ascii-editor .brush {
+    position: relative; height: 28px;
+    background: var(--bg-input); border: 1px solid var(--border); border-radius: 5px;
+    cursor: crosshair; user-select: none; overflow: hidden;
+  }
+  .ascii-editor .brush .tick {
+    position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.06);
+  }
+  .ascii-editor .brush .event-dot {
+    position: absolute; top: 50%; width: 2px; height: 10px; transform: translateY(-50%);
+    background: rgba(160, 180, 220, 0.45);
+  }
+  .ascii-editor .brush .sel {
+    position: absolute; top: 0; bottom: 0;
+    background: var(--selection); border-left: 1px solid var(--selection-bd); border-right: 1px solid var(--selection-bd);
+  }
+  .ascii-editor .brush .cursor {
+    position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--accent-2); pointer-events: none;
+  }
+  /* Chapter markers ("m" events) — distinct amber full-height tick with a flag. */
+  .ascii-editor .brush .marker-tick {
+    position: absolute; top: 0; bottom: 0; width: 2px; background: var(--warn);
+  }
+  .ascii-editor .brush .marker-tick::before {
+    content: ""; position: absolute; top: 0; left: -2px;
+    border-top: 5px solid var(--warn); border-left: 3px solid transparent; border-right: 3px solid transparent;
+  }
+  .ascii-editor .brush-meta { display: flex; gap: 12px; align-items: center; padding-top: 8px; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
+  .ascii-editor .brush-meta input[type=number] { width: 80px; }
+  .ascii-editor .brush-meta .pill { background: var(--panel-2); border: 1px solid var(--border); border-radius: 999px; padding: 2px 8px; color: var(--text); }
+  /* Selection range editor — lives in the duration row, drives Cut/Speed/timeline. */
+  .ascii-editor .brush-meta .sel-group { display: flex; align-items: center; gap: 6px; }
+  .ascii-editor .brush-meta .sel-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .ascii-editor .brush-meta .sel-group label { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
+  .ascii-editor .brush-meta .sel-group input { width: 76px; padding: 3px 6px; font-size: 12px; }
+  .ascii-editor .brush-meta .sel-arrow { color: var(--muted); }
+  .ascii-editor .brush-meta .sel-group button { padding: 3px 8px; font-size: 11px; }
+
+  .ascii-editor .ops { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  @media (max-width: 520px) { .ascii-editor .ops { grid-template-columns: 1fr; } }
+  .ascii-editor .op-card {
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 8px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .ascii-editor .op-card h4 { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.3px; color: var(--text); text-transform: uppercase; }
+  .ascii-editor .op-card .hint { color: var(--muted); font-size: 10.5px; line-height: 1.3; }
+  .ascii-editor .op-card .row { display: flex; gap: 6px; align-items: center; }
+  .ascii-editor .op-card .row input { flex: 1; min-width: 0; padding: 4px 6px; font-size: 12px; }
+  .ascii-editor .op-card .row button { padding: 4px 8px; font-size: 12px; }
+  .ascii-editor .op-card .field {
+    flex: 1; display: flex; flex-direction: column; gap: 3px;
+    font-size: 11px; color: var(--muted);
+  }
+
+  .ascii-editor .event-list { font-family: var(--font-mono, ui-monospace, monospace); font-size: 12px; }
+  .ascii-editor .event-row {
+    display: grid; grid-template-columns: 70px 24px 1fr 28px;
+    gap: 8px; padding: 4px 10px; align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    cursor: pointer;
+  }
+  .ascii-editor .event-row:hover { background: rgba(255,255,255,0.03); }
+  .ascii-editor .event-row.in-sel { background: var(--selection); }
+  .ascii-editor .event-row .t { color: var(--muted); }
+  .ascii-editor .event-row .type { color: var(--accent-2); }
+  .ascii-editor .event-row .data {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--text);
+  }
+  .ascii-editor .event-row .del { color: var(--danger); border: none; background: transparent; padding: 0; opacity: 0.6; }
+  .ascii-editor .event-row .del:hover { opacity: 1; }
+  .ascii-editor .event-list-meta {
+    padding: 6px 10px; color: var(--muted); font-size: 11px;
+    border-bottom: 1px solid var(--border); display: flex; gap: 12px;
+  }
+
+  .ascii-editor .kbd {
+    font-family: var(--font-mono, ui-monospace, monospace); background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 1px 5px; font-size: 11px; color: var(--muted);
+  }
+  .ascii-editor .kbd-note { font-size: 11px; color: var(--muted); }
+
+  .ascii-editor .empty-state {
+    display: flex; align-items: center; justify-content: center;
+    height: 100%; color: var(--muted); flex-direction: column; gap: 10px;
+    text-align: center; padding: 20px;
+  }
+  .ascii-editor .empty-state button { margin-top: 6px; }
+
+  .ascii-editor .drop-overlay {
+    position: fixed; inset: 0; pointer-events: none;
+    background: rgba(198,160,246,0.08);
+    border: 2px dashed var(--accent); display: none;
+    align-items: center; justify-content: center; z-index: 50;
+    color: var(--accent); font-size: 18px; font-weight: 600;
+  }
+  .ascii-editor.dragging .drop-overlay { display: flex; }
+
+  .ascii-editor .toast {
+    position: fixed; bottom: 16px; right: 16px; padding: 8px 12px;
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text); font-size: 12px; opacity: 0; transition: opacity 0.2s;
+    z-index: 100; pointer-events: none;
+  }
+  .ascii-editor .toast.show { opacity: 1; }
+</style>
+
+<script>
+  import * as AsciinemaPlayer from "asciinema-player";
+  import "asciinema-player/dist/bundle/asciinema-player.css";
+
+  const SAMPLE_URL = "/assets/casts/asciinema-editor-sample.cast";
+  const root = document.querySelector(".ascii-editor") as HTMLElement;
+
+  // ----- Cast model ---------------------------------------------------------
+
+  function parseCast(text: string) {
+    const lines = text.split(/\r?\n/).filter((l) => l.trim().length > 0);
+    if (lines.length === 0) throw new Error("Empty file");
+    let header: any;
+    try {
+      header = JSON.parse(lines[0]);
+    } catch (e: any) {
+      throw new Error("First line is not valid JSON header: " + e.message);
+    }
+    if (header.version !== 2 && header.version !== 3) {
+      throw new Error("Only asciicast v2 and v3 are supported (got version " + header.version + ")");
+    }
+    const isV3 = header.version === 3;
+    if (isV3) {
+      if (!header.term || !header.term.cols || !header.term.rows) {
+        throw new Error("v3 header missing term.cols/term.rows");
+      }
+    } else if (!header.width || !header.height) {
+      throw new Error("v2 header missing width/height");
+    }
+    const rawEvents: any[] = [];
+    for (let i = 1; i < lines.length; i++) {
+      let ev: any;
+      try {
+        ev = JSON.parse(lines[i]);
+      } catch (e: any) {
+        throw new Error("Line " + (i + 1) + " is not valid JSON: " + e.message);
+      }
+      if (!Array.isArray(ev) || ev.length < 3) throw new Error("Line " + (i + 1) + " is not a [time, type, data] tuple");
+      ev[0] = Number(ev[0]);
+      rawEvents.push(ev);
+    }
+
+    // Normalize to a v2-shaped internal model (absolute times, top-level width/height).
+    // We preserve v3-only header fields so they survive round-trips when saving as v3.
+    let events: any[];
+    if (isV3) {
+      // v3 event time is an interval since the previous event. Convert to absolute.
+      let t = 0;
+      events = rawEvents.map(([dt, type, data]) => {
+        t = +(t + dt).toFixed(6);
+        return [t, type, data];
+      });
+    } else {
+      events = rawEvents;
+      events.sort((a, b) => a[0] - b[0]);
+    }
+
+    // Build a normalized header keeping original-version intent for save.
+    const norm: any = {
+      version: 2,
+      width: isV3 ? header.term.cols : header.width,
+      height: isV3 ? header.term.rows : header.height,
+    };
+    if (isV3) {
+      if (header.term.theme) norm.theme = header.term.theme;
+      // Stash original v3 header so we can save back as v3 if user wants.
+      norm.__v3 = {
+        term: header.term,
+        tags: header.tags,
+      };
+    } else if (header.theme) norm.theme = header.theme;
+
+    for (const k of ["title", "timestamp", "env", "idle_time_limit", "command"]) {
+      if (header[k] != null) norm[k] = header[k];
+    }
+    return { header: norm, events, sourceVersion: isV3 ? 3 : 2 };
+  }
+
+  function serializeCast(cast: any, version?: number) {
+    const v = version || cast.sourceVersion || 2;
+    if (v === 3) {
+      const v3hdr: any = { version: 3 };
+      const orig = cast.header.__v3 || {};
+      v3hdr.term = orig.term
+        ? { ...orig.term, cols: cast.header.width, rows: cast.header.height }
+        : { cols: cast.header.width, rows: cast.header.height };
+      if (cast.header.theme && !v3hdr.term.theme) v3hdr.term.theme = cast.header.theme;
+      for (const k of ["timestamp", "env", "idle_time_limit", "command", "title"]) {
+        if (cast.header[k] != null) v3hdr[k] = cast.header[k];
+      }
+      if (orig.tags) v3hdr.tags = orig.tags;
+      const lines = [JSON.stringify(v3hdr)];
+      let prev = 0;
+      for (const [t, type, data] of cast.events) {
+        const dt = +(t - prev).toFixed(3);
+        lines.push(JSON.stringify([dt, type, data]));
+        prev = t;
+      }
+      return lines.join("\n") + "\n";
+    }
+    // v2
+    const v2hdr = { ...cast.header };
+    delete v2hdr.__v3;
+    v2hdr.version = 2;
+    const lines = [JSON.stringify(v2hdr)];
+    for (const e of cast.events) lines.push(JSON.stringify(e));
+    return lines.join("\n") + "\n";
+  }
+
+  function castDuration(cast: any) {
+    if (cast.events.length === 0) return 0;
+    return cast.events[cast.events.length - 1][0];
+  }
+
+  function clone(cast: any) {
+    return {
+      header: { ...cast.header },
+      events: cast.events.map((e: any[]) => e.slice()),
+      sourceVersion: cast.sourceVersion,
+    };
+  }
+
+  // ----- Operations ---------------------------------------------------------
+
+  function opCut(cast: any, start: number, end: number) {
+    if (!(end > start)) return cast;
+    const dur = end - start;
+    const events: any[] = [];
+    for (const [t, type, data] of cast.events) {
+      if (t < start) events.push([t, type, data]);
+      else if (t > end) events.push([+(t - dur).toFixed(6), type, data]);
+    }
+    const header = { ...cast.header };
+    if (typeof header.duration === "number") header.duration = Math.max(0, header.duration - dur);
+    return { header, events, sourceVersion: cast.sourceVersion };
+  }
+
+  function opSpeed(cast: any, factor: number, range: any) {
+    if (!(factor > 0)) return cast;
+    const out: any[] = [];
+    let prevOrig = 0;
+    let runningNew = 0;
+    for (const [t, type, data] of cast.events) {
+      const delay = t - prevOrig;
+      let scaled = delay;
+      const inRange = !range || (t > range.start && t <= range.end + 1e-9);
+      // Scale delays whose "duration" was traversed inside the range.
+      // For simplicity scale delays whose ending event lies in range.
+      if (inRange) scaled = delay / factor;
+      runningNew += scaled;
+      out.push([+runningNew.toFixed(6), type, data]);
+      prevOrig = t;
+    }
+    const header = { ...cast.header };
+    if (out.length) header.duration = out[out.length - 1][0];
+    return { header, events: out, sourceVersion: cast.sourceVersion };
+  }
+
+  function opQuantize(cast: any, maxGap: number) {
+    if (!(maxGap > 0)) return cast;
+    const out: any[] = [];
+    let prevOrig = 0;
+    let runningNew = 0;
+    for (const [t, type, data] of cast.events) {
+      const delay = t - prevOrig;
+      const newDelay = Math.min(delay, maxGap);
+      runningNew += newDelay;
+      out.push([+runningNew.toFixed(6), type, data]);
+      prevOrig = t;
+    }
+    const header = { ...cast.header };
+    if (out.length) header.duration = out[out.length - 1][0];
+    return { header, events: out, sourceVersion: cast.sourceVersion };
+  }
+
+  function opDeleteEvent(cast: any, index: number) {
+    const events = cast.events.slice();
+    events.splice(index, 1);
+    return { header: { ...cast.header }, events, sourceVersion: cast.sourceVersion };
+  }
+
+  function opInsertMarker(cast: any, time: number, label: string) {
+    // Find insertion index that keeps event list sorted by time.
+    let i = 0;
+    while (i < cast.events.length && cast.events[i][0] <= time) i++;
+    const events = cast.events.slice();
+    events.splice(i, 0, [+time.toFixed(6), "m", label || ""]);
+    return { header: { ...cast.header }, events, sourceVersion: cast.sourceVersion };
+  }
+
+  // ----- App state ----------------------------------------------------------
+
+  const state: any = {
+    cast: null,
+    fileName: "edited.cast",
+    range: null, // { start, end } or null
+    selectingFrom: null, // for shift-click range
+    undoStack: [],
+    player: null,
+    cursorTime: 0,
+  };
+
+  const $ = (id: string) => document.getElementById(id) as HTMLElement;
+  const $i = (id: string) => document.getElementById(id) as HTMLInputElement;
+
+  // ----- Player -------------------------------------------------------------
+
+  function rebuildPlayer(seekTo?: number) {
+    const container = $("player");
+    if (state.player) {
+      try {
+        state.player.dispose();
+      } catch (_) {}
+      state.player = null;
+    }
+    container.innerHTML = "";
+    if (!state.cast) return;
+    const data = serializeCast(state.cast, 2);
+    // v3's create() accepts an in-memory source object ({ data }) at runtime —
+    // doFetch wraps a string in a Response. The shipped types only declare a
+    // URL string, so cast to satisfy the checker.
+    state.player = AsciinemaPlayer.create({ data } as unknown as string, container, {
+      fit: "width",
+      autoPlay: false,
+      controls: true,
+      terminalFontSize: "small",
+      theme: "catppuccin-macchiato",
+    });
+    state.player.addEventListener("playing", () => startCursorTracker());
+    state.player.addEventListener("pause", () => stopCursorTracker());
+    state.player.addEventListener("ended", () => stopCursorTracker());
+    if (typeof seekTo === "number" && seekTo >= 0) {
+      try {
+        state.player.seek(seekTo);
+      } catch (_) {}
+    }
+  }
+
+  let cursorTimer: any = null;
+  function startCursorTracker() {
+    stopCursorTracker();
+    cursorTimer = setInterval(() => {
+      if (!state.player) return;
+      const t = state.player.getCurrentTime();
+      if (typeof t === "number") {
+        state.cursorTime = t;
+        drawCursor();
+      }
+    }, 80);
+  }
+  function stopCursorTracker() {
+    if (cursorTimer) {
+      clearInterval(cursorTimer);
+      cursorTimer = null;
+    }
+  }
+
+  function seekPlayerTo(t: number) {
+    state.cursorTime = Math.max(0, t);
+    drawCursor();
+    if (state.player) {
+      try {
+        state.player.seek(state.cursorTime);
+      } catch (_) {}
+    }
+  }
+
+  // ----- Undo ---------------------------------------------------------------
+
+  function pushUndo() {
+    state.undoStack.push(clone(state.cast));
+    if (state.undoStack.length > 50) state.undoStack.shift();
+    ($i("undo-btn") as HTMLButtonElement).disabled = false;
+  }
+  function undo() {
+    if (!state.undoStack.length) return;
+    state.cast = state.undoStack.pop();
+    ($i("undo-btn") as HTMLButtonElement).disabled = state.undoStack.length === 0;
+    refresh({ rebuild: true });
+  }
+
+  // ----- File I/O -----------------------------------------------------------
+
+  async function loadFromFile(file: File) {
+    state.fileName = file.name.replace(/\.cast$/i, "") + ".edited.cast";
+    const text = await file.text();
+    loadFromText(text);
+  }
+  function loadFromText(text: string) {
+    try {
+      const cast = parseCast(text);
+      state.cast = cast;
+      state.undoStack = [];
+      state.range = null;
+      state.cursorTime = 0;
+      $("empty").style.display = "none";
+      $("app").style.display = "grid";
+      ($i("download-btn") as HTMLButtonElement).disabled = false;
+      ($i("undo-btn") as HTMLButtonElement).disabled = true;
+      $i("save-version").value = String(cast.sourceVersion || 2);
+      refresh({ rebuild: true });
+      const v3note = cast.sourceVersion === 3 ? " · v3 → v2 normalized for editing" : "";
+      setStatus(`Loaded — ${cast.events.length} events, ${castDuration(cast).toFixed(2)}s${v3note}`);
+    } catch (e: any) {
+      toast("Failed to load: " + e.message, true);
+      console.error(e);
+    }
+  }
+
+  function downloadCast() {
+    if (!state.cast) return;
+    const v = parseInt($i("save-version").value, 10) || 2;
+    const blob = new Blob([serializeCast(state.cast, v)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = state.fileName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  // ----- UI: header / meta --------------------------------------------------
+
+  function bindMetaInputs() {
+    const fields: [string, string, (v: string) => any][] = [
+      ["meta-title", "title", (v) => (v.length ? v : undefined)],
+      ["meta-width", "width", (v) => Math.max(1, parseInt(v, 10) || 80)],
+      ["meta-height", "height", (v) => Math.max(1, parseInt(v, 10) || 24)],
+      ["meta-idle", "idle_time_limit", (v) => (v === "" ? undefined : Math.max(0, parseFloat(v)))],
+    ];
+    for (const [id, key, parse] of fields) {
+      const el = $i(id);
+      el.addEventListener("change", () => {
+        if (!state.cast) return;
+        pushUndo();
+        const nv = parse(el.value);
+        if (nv === undefined) delete state.cast.header[key];
+        else state.cast.header[key] = nv;
+        refresh({ rebuild: true });
+      });
+    }
+  }
+
+  function syncMetaInputs() {
+    const h = state.cast.header;
+    $i("meta-title").value = h.title || "";
+    $i("meta-width").value = h.width;
+    $i("meta-height").value = h.height;
+    $i("meta-idle").value = h.idle_time_limit != null ? h.idle_time_limit : "";
+  }
+
+  // ----- UI: brush ----------------------------------------------------------
+
+  const brush = $("brush");
+  const brushSel = $("brush-sel");
+  const brushCursor = $("brush-cursor");
+
+  function brushRect() {
+    return brush.getBoundingClientRect();
+  }
+  function brushTimeAt(clientX: number) {
+    const r = brushRect();
+    const dur = castDuration(state.cast) || 1;
+    const x = Math.max(0, Math.min(r.width, clientX - r.left));
+    return (x / r.width) * dur;
+  }
+  function drawBrushDots() {
+    // Clear old dots/ticks/markers
+    brush.querySelectorAll(".event-dot, .tick, .marker-tick").forEach((n) => n.remove());
+    const dur = castDuration(state.cast);
+    if (dur <= 0) return;
+    const w = brush.clientWidth;
+    // Event density dots — markers ("m") get a distinct full-height tick so
+    // they stand out from ordinary output events.
+    for (const [t, type, data] of state.cast.events) {
+      const x = (t / dur) * w;
+      if (type === "m") {
+        const m = document.createElement("div");
+        m.className = "marker-tick";
+        m.style.left = x + "px";
+        if (data) m.title = "Marker: " + data;
+        brush.appendChild(m);
+        continue;
+      }
+      const d = document.createElement("div");
+      d.className = "event-dot";
+      d.style.left = x + "px";
+      brush.appendChild(d);
+    }
+    // Second ticks
+    const stride = dur > 60 ? 10 : dur > 10 ? 1 : 0.5;
+    for (let t = stride; t < dur; t += stride) {
+      const x = (t / dur) * w;
+      const tk = document.createElement("div");
+      tk.className = "tick";
+      tk.style.left = x + "px";
+      brush.appendChild(tk);
+    }
+  }
+  function drawSelection() {
+    const dur = castDuration(state.cast) || 1;
+    if (!state.range) {
+      brushSel.style.display = "none";
+      return;
+    }
+    const w = brush.clientWidth;
+    const a = (state.range.start / dur) * w;
+    const b = (state.range.end / dur) * w;
+    brushSel.style.display = "block";
+    brushSel.style.left = a + "px";
+    brushSel.style.width = Math.max(2, b - a) + "px";
+  }
+  function drawCursor() {
+    const dur = castDuration(state.cast) || 1;
+    const w = brush.clientWidth;
+    brushCursor.style.left = (state.cursorTime / dur) * w + "px";
+  }
+
+  let dragging: any = null;
+  brush.addEventListener("mousedown", (e) => {
+    if (!state.cast) return;
+    const t = brushTimeAt(e.clientX);
+    if (e.shiftKey && state.range) {
+      const a = Math.min(state.range.start, t);
+      const b = Math.max(state.range.start, t);
+      state.range = { start: a, end: b };
+      syncRangeInputs();
+      drawSelection();
+      refreshEventList();
+      return;
+    }
+    dragging = { startX: e.clientX, startT: t };
+    state.range = { start: t, end: t };
+    syncRangeInputs();
+    drawSelection();
+  });
+  window.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+    const t = brushTimeAt(e.clientX);
+    const a = Math.min(dragging.startT, t);
+    const b = Math.max(dragging.startT, t);
+    state.range = { start: a, end: b };
+    syncRangeInputs();
+    drawSelection();
+  });
+  window.addEventListener("mouseup", (e) => {
+    if (!dragging) return;
+    const moved = Math.abs(e.clientX - dragging.startX) > 3;
+    if (!moved) {
+      // Treat as click-to-seek; clear range
+      state.range = null;
+      syncRangeInputs();
+      drawSelection();
+      seekPlayerTo(dragging.startT);
+    } else {
+      refreshEventList();
+    }
+    dragging = null;
+  });
+
+  // Accepts: "12", "12.34", "1:23", "1:23.4", "1:23:45", "1:23:45.6"
+  function parseTimeInput(str: string) {
+    if (str == null) return NaN;
+    const s = String(str).trim();
+    if (s === "") return NaN;
+    const parts = s.split(":");
+    if (parts.length === 1) return parseFloat(parts[0]);
+    if (parts.length > 3) return NaN;
+    let total = 0;
+    for (let i = 0; i < parts.length; i++) {
+      const p = parts[i];
+      if (!/^\d+(?:\.\d+)?$/.test(p)) return NaN;
+      const n = parseFloat(p);
+      total = total * 60 + n;
+    }
+    return total;
+  }
+  function formatTime(sec: number) {
+    if (!isFinite(sec) || sec < 0) sec = 0;
+    const totalHundredths = Math.round(sec * 100);
+    const hundredths = totalHundredths % 100;
+    const totalSeconds = Math.floor(totalHundredths / 100);
+    const s = totalSeconds % 60;
+    const m = Math.floor(totalSeconds / 60) % 60;
+    const h = Math.floor(totalSeconds / 3600);
+    const pad = (n: number) => String(n).padStart(2, "0");
+    const ss = `${pad(s)}.${pad(hundredths)}`;
+    return h > 0 ? `${h}:${pad(m)}:${ss}` : `${m}:${ss}`;
+  }
+
+  function syncRangeInputs() {
+    const rs = $i("range-start");
+    const re = $i("range-end");
+    const readout = $("range-readout");
+    if (state.range) {
+      rs.value = formatTime(state.range.start);
+      re.value = formatTime(state.range.end);
+      // Endpoints live in the Start/End inputs now; the pill shows the length.
+      if (readout) readout.textContent = formatTime(state.range.end - state.range.start);
+    } else {
+      rs.value = "";
+      re.value = "";
+      if (readout) readout.textContent = "none";
+    }
+  }
+  $i("range-start").addEventListener("change", (e) => {
+    if (!state.cast) return;
+    const v = parseTimeInput((e.target as HTMLInputElement).value);
+    if (isNaN(v)) {
+      state.range = null;
+    } else {
+      const end = state.range ? Math.max(v, state.range.end) : Math.min(castDuration(state.cast), v + 1);
+      state.range = { start: Math.max(0, v), end };
+    }
+    syncRangeInputs();
+    drawSelection();
+    refreshEventList();
+  });
+  $i("range-end").addEventListener("change", (e) => {
+    if (!state.cast) return;
+    const v = parseTimeInput((e.target as HTMLInputElement).value);
+    if (isNaN(v)) {
+      state.range = null;
+    } else {
+      const start = state.range ? Math.min(v, state.range.start) : Math.max(0, v - 1);
+      state.range = { start, end: Math.min(castDuration(state.cast), v) };
+    }
+    syncRangeInputs();
+    drawSelection();
+    refreshEventList();
+  });
+  $("clear-range").addEventListener("click", () => {
+    state.range = null;
+    syncRangeInputs();
+    drawSelection();
+    refreshEventList();
+  });
+
+  // ----- UI: event list -----------------------------------------------------
+
+  const eventListEl = $("event-list");
+  function renderEventData(s: any) {
+    // Show escapes visibly
+    return String(s)
+      .replace(/\\/g, "\\\\")
+      .replace(/\x1b/g, "\\e")
+      .replace(/\r/g, "\\r")
+      .replace(/\n/g, "\\n")
+      .replace(/\t/g, "\\t");
+  }
+  function refreshEventList() {
+    if (!state.cast) return;
+    const ev = state.cast.events;
+    const total = ev.length;
+    const range = state.range;
+    // Soft cap on rendered rows for perf
+    const CAP = 4000;
+    const head = ev.slice(0, CAP);
+
+    let inSelCount = 0;
+    if (range) for (const [t] of ev) if (t >= range.start && t <= range.end) inSelCount++;
+
+    const rows = head.map((e: any[], i: number) => {
+      const [t, type, data] = e;
+      const inSel = range && t >= range.start && t <= range.end;
+      return (
+        `<div class="event-row${inSel ? " in-sel" : ""}" data-i="${i}">` +
+        `<span class="t">${t.toFixed(3)}s</span>` +
+        `<span class="type">${type}</span>` +
+        `<span class="data" title="${escapeAttr(renderEventData(data))}">${escapeHtml(renderEventData(data))}</span>` +
+        `<button class="del" data-del="${i}" title="Delete event">×</button>` +
+        `</div>`
+      );
+    });
+
+    if (total > CAP) {
+      rows.push(
+        `<div class="event-row" style="cursor:default;color:var(--muted);grid-template-columns:1fr">… ${total - CAP} more events not shown</div>`,
+      );
+    }
+    eventListEl.innerHTML = rows.join("");
+
+    $("visible-count").textContent = `${total} events`;
+    $("sel-count").textContent = range ? `${inSelCount} in selection` : "";
+  }
+  function escapeHtml(s: string) {
+    return s.replace(/[&<>]/g, (c) => (({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }) as any)[c]);
+  }
+  function escapeAttr(s: string) {
+    return s.replace(/["&<>]/g, (c) => (({ '"': "&quot;", "&": "&amp;", "<": "&lt;", ">": "&gt;" }) as any)[c]);
+  }
+
+  eventListEl.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const delBtn = target.closest("[data-del]");
+    if (delBtn) {
+      const i = parseInt(delBtn.getAttribute("data-del")!, 10);
+      pushUndo();
+      state.cast = opDeleteEvent(state.cast, i);
+      refresh({ rebuild: true });
+      return;
+    }
+    const row = target.closest(".event-row");
+    if (!row) return;
+    const i = parseInt(row.getAttribute("data-i")!, 10);
+    if (isNaN(i)) return;
+    const t = state.cast.events[i][0];
+    if ((e as MouseEvent).shiftKey && state.range) {
+      state.range = { start: Math.min(state.range.start, t), end: Math.max(state.range.start, t) };
+      syncRangeInputs();
+      drawSelection();
+      refreshEventList();
+    } else {
+      seekPlayerTo(t);
+    }
+  });
+
+  // ----- UI: operations -----------------------------------------------------
+
+  $("op-cut").addEventListener("click", () => {
+    if (!state.cast || !state.range) {
+      toast("Select a range first (drag on the brush bar)");
+      return;
+    }
+    pushUndo();
+    state.cast = opCut(state.cast, state.range.start, state.range.end);
+    state.range = null;
+    refresh({ rebuild: true });
+    toast("Cut applied");
+  });
+  $("op-speed").addEventListener("click", () => {
+    if (!state.cast) return;
+    const f = parseFloat($i("op-speed-factor").value);
+    if (!(f > 0)) {
+      toast("Enter a positive speed factor");
+      return;
+    }
+    pushUndo();
+    state.cast = opSpeed(state.cast, f, state.range);
+    refresh({ rebuild: true });
+    toast(state.range ? `Speed ×${f} applied to range` : `Speed ×${f} applied`);
+  });
+  $("op-quant-btn").addEventListener("click", () => {
+    if (!state.cast) return;
+    const q = parseFloat($i("op-quant").value);
+    if (!(q > 0)) {
+      toast("Enter a positive threshold");
+      return;
+    }
+    pushUndo();
+    state.cast = opQuantize(state.cast, q);
+    refresh({ rebuild: true });
+    toast(`Quantized: gaps capped at ${q}s`);
+  });
+  $("op-marker").addEventListener("click", () => {
+    if (!state.cast) return;
+    const label = $i("op-marker-label").value || "";
+    pushUndo();
+    state.cast = opInsertMarker(state.cast, state.cursorTime, label);
+    refresh({ rebuild: true });
+    toast(`Marker added at ${state.cursorTime.toFixed(2)}s`);
+  });
+
+  // ----- File loading + drag-drop ------------------------------------------
+
+  $i("file-input").addEventListener("change", (e) => {
+    const f = (e.target as HTMLInputElement).files?.[0];
+    if (f) loadFromFile(f);
+    (e.target as HTMLInputElement).value = "";
+  });
+  function bindSample(id: string) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener("click", async () => {
+      try {
+        const res = await fetch(SAMPLE_URL);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const text = await res.text();
+        state.fileName = "sample.edited.cast";
+        loadFromText(text);
+      } catch (e: any) {
+        toast("Couldn't load the sample cast.", true);
+        console.error(e);
+      }
+    });
+  }
+  bindSample("load-sample");
+  bindSample("load-sample-2");
+
+  window.addEventListener("dragenter", (e) => {
+    e.preventDefault();
+    root.classList.add("dragging");
+  });
+  window.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    root.classList.add("dragging");
+  });
+  window.addEventListener("dragleave", (e) => {
+    if (e.target === document || e.clientX === 0) root.classList.remove("dragging");
+  });
+  window.addEventListener("drop", (e) => {
+    e.preventDefault();
+    root.classList.remove("dragging");
+    const f = e.dataTransfer?.files && e.dataTransfer.files[0];
+    if (f) loadFromFile(f);
+  });
+
+  $("download-btn").addEventListener("click", downloadCast);
+  $("undo-btn").addEventListener("click", undo);
+
+  window.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
+      e.preventDefault();
+      undo();
+    }
+  });
+
+  // ----- Refresh orchestration ---------------------------------------------
+
+  function refresh({ rebuild = false }: { rebuild?: boolean } = {}) {
+    if (!state.cast) return;
+    syncMetaInputs();
+    $("cast-duration").textContent = formatTime(castDuration(state.cast));
+    $("cast-count").textContent = String(state.cast.events.length);
+    drawBrushDots();
+    drawSelection();
+    drawCursor();
+    refreshEventList();
+    if (rebuild) rebuildPlayer(state.cursorTime);
+  }
+
+  window.addEventListener("resize", () => {
+    if (!state.cast) return;
+    drawBrushDots();
+    drawSelection();
+    drawCursor();
+  });
+
+  function setStatus(s: string) {
+    $("status").textContent = s;
+  }
+  let toastTimer: any = null;
+  function toast(msg: string, isErr?: boolean) {
+    const t = $("toast");
+    t.textContent = msg;
+    t.style.borderColor = isErr ? "var(--danger)" : "var(--border)";
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("show"), 2200);
+  }
+
+  bindMetaInputs();
+</script>
