@@ -1,0 +1,429 @@
+---
+import BaseLayout from "~/layouts/BaseLayout.astro";
+
+const contact = [
+  { label: "Utrecht, Netherlands", href: null },
+  { label: "deepu.k.sasidharan@gmail.com", href: "mailto:deepu.k.sasidharan@gmail.com" },
+  { label: "deepu.tech", href: "https://deepu.tech" },
+];
+
+const socials = [
+  { label: "GitHub", href: "https://github.com/deepu105" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/deepu05" },
+  { label: "Dev.to", href: "https://dev.to/deepu105" },
+  { label: "X", href: "https://twitter.com/deepu105" },
+  { label: "Speaker Deck", href: "https://speakerdeck.com/deepu105" },
+];
+
+const experience = [
+  {
+    role: "Principal Developer Advocate",
+    company: "Okta (Auth0)",
+    href: "https://auth0.com",
+    location: "Netherlands",
+    dates: "Oct 2021 – Present",
+    points: [
+      "Developer advocate for Okta and Auth0, now leading developer relations for Auth0's identity products for AI agents: docs, quickstarts, samples, events, and content.",
+      "Progressed from Senior to Staff to Principal Developer Advocate, focusing on identity, AI agents, DevOps, Java, and Rust.",
+    ],
+  },
+  {
+    role: "Co-chair & Vice-President",
+    company: "JHipster",
+    href: "https://www.jhipster.tech",
+    location: "Open source",
+    dates: "Apr 2015 – Present",
+    points: [
+      "Co-chair, vice-president, co-lead, and core maintainer of JHipster. Creator of JDL Studio and several plug-in modules; co-creator of JHipster Online and JHipster Registry.",
+      "Led the Angular and React implementations and built the blueprint/plug-in mechanism and Node.js CLI among others. Owned roadmap, releases, triage, and contributor mentoring as co-lead. Currently co-chair and vice-president, focusing on community, governance, and strategy.",
+    ],
+  },
+  {
+    role: "Senior Developer Advocate",
+    company: "Adyen",
+    href: "https://www.adyen.com",
+    location: "Amsterdam",
+    dates: "Mar 2020 – Sep 2021",
+    points: [
+      "Improved the experience of developers using Adyen's payments APIs through content, SDKs, examples, developer events, documentation, and product evangelism.",
+    ],
+  },
+  {
+    role: "Principal Developer",
+    company: "XebiaLabs",
+    href: "https://digital.ai",
+    location: "Hilversum",
+    dates: "Nov 2016 – Feb 2020",
+    points: [
+      "Built a SaaS DevOps intelligence product: microservice backend and API gateway with Spring, gRPC, and JHipster, plus rich React/TypeScript/D3 visualizations.",
+      "Built cloud-native solutions and blueprints for AWS, GCP, and Azure using Kubernetes, Terraform, and Go, along with product advocacy and CI/CD pipelines.",
+    ],
+  },
+  {
+    role: "Software Solution Designer",
+    company: "Tata Consultancy Services",
+    href: "https://www.tcs.com",
+    location: "Singapore & Chennai",
+    dates: "Mar 2010 – Sep 2016",
+    points: [
+      "Solution designer and airline consultant on an enterprise solutions and pre-sales team, owning winning proposals (RFP/RFQ/RFI) and solution and technical architecture for enterprise applications.",
+      "Technical lead and architect for a multi-tier Java airline web app (Spring, Angular, Oracle); built a patent-pending real-time flight-monitoring solution on AWS and led a team of 8+.",
+      "Earlier roles as business analyst, project manager, and J2EE developer: PSS migration from TPF to Amadeus, EMD migration, and full-lifecycle web application development.",
+    ],
+  },
+];
+
+const projects = [
+  { name: "LlamaStash", href: "https://github.com/llamastash/llamastash", note: "TUI + CLI for running local LLMs via llama.cpp." },
+  { name: "KDash", href: "https://github.com/kdash-rs/kdash", note: "A Kubernetes terminal dashboard, in Rust." },
+  {
+    name: "JHipster",
+    href: "https://github.com/jhipster/generator-jhipster",
+    note: "Full-stack application generator for modern web apps.",
+  },
+  { name: "JDL Studio", href: "https://start.jhipster.tech/jdl-studio/", note: "Visual editor for the JHipster Domain Language." },
+  {
+    name: "Assistant0",
+    href: "https://github.com/auth0-samples/auth0-assistant0",
+    note: "AI assistant that calls OAuth2 services via Auth0.",
+  },
+  { name: "Token Vault CLI", href: "https://github.com/deepu105/auth0-token-vault-cli", note: "Use Auth0 Token Vault from AI agents." },
+];
+
+const skills = [
+  { group: "Languages", items: ["Rust", "Java", "TypeScript", "JavaScript", "Go", "Python", "Kotlin", "Groovy", "csharp", "Bash"] },
+  {
+    group: "AI / LLM",
+    items: ["Local LLMs", "LLMOps", "llama.cpp", "RAG", "AI agents", "MCP", "LangChain", "LlamaIndex", "Harness engineering"],
+  },
+  {
+    group: "DevOps & Cloud",
+    items: ["Docker", "Kubernetes", "Terraform", "Helm", "GitHub Actions", "Jenkins", "AWS", "GCP", "Azure", "Istio"],
+  },
+  { group: "Security & Identity", items: ["OAuth2", "OIDC", "JWT", "Auth0 / Okta", "Keycloak", "Zero Trust", "API security"] },
+  { group: "Backend", items: ["Spring Boot", "Spring", "JHipster", "Microservices", "gRPC", "GraalVM", "OpenAPI", "JUnit"] },
+  { group: "Frontend & Web", items: ["React", "Angular", "Vue.js", "Svelte", "Node.js", "Astro"] },
+  { group: "Data & Tools", items: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Git", "Linux", "IntelliJ IDEA", "Neovim", "Agile"] },
+];
+---
+
+<BaseLayout
+  title="CV"
+  description="Curriculum vitae of Deepu K Sasidharan: polyglot engineer, Java Champion, JHipster co-chair, and Principal Developer Advocate at Okta."
+>
+  <div class="cv-root mx-auto max-w-4xl px-4 pt-12 pb-16 sm:px-6">
+    <!-- Header -->
+    <header class="cv-header mb-10 border-b border-[var(--color-border)] pb-8">
+      <div class="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Deepu K Sasidharan</h1>
+          <p class="mt-2 text-lg text-[var(--color-fg-muted)]">
+            Developer Advocate · Polyglot engineer · Open source enthusiast · Java Champion
+          </p>
+        </div>
+        <button
+          type="button"
+          id="cv-print"
+          class="cv-no-print inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1.5 text-sm text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"
+        >
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+            <rect x="6" y="14" width="12" height="8"></rect>
+          </svg>
+          Print / PDF
+        </button>
+      </div>
+
+      <div class="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--color-fg-muted)]">
+        {
+          contact.map((c) =>
+            c.href ? (
+              <a href={c.href} class="hover:text-[var(--color-accent)]">
+                {c.label}
+              </a>
+            ) : (
+              <span>{c.label}</span>
+            ),
+          )
+        }
+      </div>
+
+      <div class="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm">
+        {
+          socials.map((s) => (
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[var(--color-fg-subtle)] underline-offset-2 hover:text-[var(--color-accent)] hover:underline"
+            >
+              {s.label}
+            </a>
+          ))
+        }
+      </div>
+    </header>
+
+    <!-- Summary + Skills sidebar -->
+    <div class="cv-top grid gap-x-10 gap-y-8 lg:grid-cols-[minmax(0,1fr)_264px]">
+      <section class="cv-section">
+        <h2 class="cv-section-title">Summary</h2>
+        <p class="prose-blog text-[var(--color-fg-muted)]">
+          Tinkerer and builder. Polyglot software engineer with 16+ years across engineering, developer advocacy, solution architecture, and
+          enterprise consulting. Open-source aficionado and community leader focused on AI, DevOps, DevSecOps, Java, and Rust.
+        </p>
+        <ul class="prose-blog terminal-list mt-4 space-y-1.5 text-[var(--color-fg-muted)]">
+          <li>
+            Principal Developer Advocate at <a href="https://auth0.com">Okta (Auth0)</a>, leading developer relations for Auth0's identity
+            products for AI agents.
+          </li>
+          <li>
+            Co-chair and vice-president of <a href="https://www.jhipster.tech">JHipster</a>, an award-winning open-source app development
+            platform for modern Java and JavaScript; co-lead since 2015.
+          </li>
+          <li>
+            Creator of <a href="https://github.com/llamastash/llamastash">LlamaStash</a> (local LLM orchestrator),
+            <a href="https://github.com/kdash-rs/kdash">KDash</a> (a Kubernetes dashboard in Rust), and
+            <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a>.
+          </li>
+          <li>
+            <a href="https://dev.java/community/jcs/">Java Champion</a> (2022) and author of
+            <em>Full Stack Development with JHipster</em> (two editions, Packt).
+          </li>
+          <li>Deep expertise in Java/Spring, Rust, and TypeScript, with a focus on cloud-native, DevOps, DevSecOps, and identity.</li>
+          <li>Building and writing about AI agents, local LLMs, and secure agent authorization (OAuth2/OIDC, Zero Trust).</li>
+          <li>
+            Founder of the <a href="https://deepu.tech">Technorage</a> blog (20k+ monthly views) and an international conference speaker (Devoxx,
+            Spring I/O, and more).
+          </li>
+        </ul>
+      </section>
+
+      <!-- Skills sidebar -->
+      <aside class="cv-sidebar">
+        <section class="cv-section">
+          <h2 class="cv-section-title">Skills</h2>
+          <div class="space-y-3.5">
+            {
+              skills.map((s) => (
+                <div class="cv-entry">
+                  <h3 class="font-display text-xs font-semibold text-[var(--color-fg)]">{s.group}</h3>
+                  <div class="mt-1.5 flex flex-wrap gap-1.5">
+                    {s.items.map((i) => (
+                      <span class="cv-pill rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-2 py-0.5 text-xs text-[var(--color-fg-muted)]">
+                        {i}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </section>
+      </aside>
+    </div>
+
+    <!-- Experience (full width) -->
+    <section class="cv-section mt-12">
+      <h2 class="cv-section-title">Experience</h2>
+      <div class="space-y-7">
+        {
+          experience.map((job) => (
+            <article class="cv-entry">
+              <div class="flex flex-col gap-0.5 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 class="font-display text-lg font-semibold text-[var(--color-fg)]">
+                  {job.role} <span class="text-[var(--color-fg-muted)]">· </span>
+                  {job.href ? (
+                    <a
+                      href={job.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-[var(--color-fg-muted)] underline-offset-2 hover:text-[var(--color-accent)] hover:underline"
+                    >
+                      {job.company}
+                    </a>
+                  ) : (
+                    <span class="text-[var(--color-fg-muted)]">{job.company}</span>
+                  )}
+                </h3>
+                <span class="font-mono text-xs whitespace-nowrap text-[var(--color-fg-subtle)]">
+                  {job.dates} · {job.location}
+                </span>
+              </div>
+
+              {job.points && (
+                <ul class="prose-blog terminal-list mt-2 space-y-1.5 text-[var(--color-fg-muted)]">
+                  {job.points.map((p) => (
+                    <li>{p}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Projects (full width) -->
+    <section class="cv-section mt-12">
+      <h2 class="cv-section-title">Selected open-source projects</h2>
+      <div class="grid gap-x-10 gap-y-3 sm:grid-cols-2">
+        {
+          projects.map((p) => (
+            <div class="cv-entry">
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-display text-sm font-semibold text-[var(--color-fg)] underline-offset-2 hover:text-[var(--color-accent)] hover:underline"
+              >
+                {p.name}
+              </a>
+              <span class="text-sm text-[var(--color-fg-muted)]"> — {p.note}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Education + Languages -->
+    <div class="mt-12 grid gap-12 sm:grid-cols-2">
+      <section>
+        <h2 class="cv-section-title">Education</h2>
+        <div class="cv-entry">
+          <h3 class="font-display text-base font-semibold text-[var(--color-fg)]">B.E. in Electrical &amp; Electronics Engineering</h3>
+          <p class="mt-1 text-sm text-[var(--color-fg-muted)]">Anna University, Chennai, India</p>
+          <p class="font-mono mt-0.5 text-xs text-[var(--color-fg-subtle)]">Completed Jun 2009</p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="cv-section-title">Languages</h2>
+        <ul class="flex flex-wrap gap-1.5">
+          {
+            ["English", "Hindi", "Malayalam", "Tamil"].map((l) => (
+              <li class="cv-pill rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-2.5 py-0.5 text-xs text-[var(--color-fg-muted)]">
+                {l}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .cv-section-title {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-fg-subtle);
+    margin-bottom: 1rem;
+  }
+  /* Keep the skills sidebar aligned to the top of its grid cell */
+  .cv-sidebar {
+    align-self: start;
+  }
+</style>
+
+<!-- Print styles: strip site chrome and compact the layout to ~2 pages -->
+<style is:global>
+  @media print {
+    @page {
+      margin: 1cm 1.2cm;
+    }
+    body > header,
+    .alert-bar,
+    body > footer,
+    .cv-no-print {
+      display: none !important;
+    }
+    main {
+      margin: 0 !important;
+    }
+    /* Force a clean white page with dark text regardless of the active theme */
+    html,
+    body {
+      background: #fff !important;
+    }
+    .cv-root,
+    .cv-root * {
+      color: #111 !important;
+      background: transparent !important;
+    }
+
+    html {
+      font-size: 9pt;
+    }
+    .cv-root {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+    .cv-header {
+      margin-bottom: 0.6rem !important;
+      padding-bottom: 0.5rem !important;
+      border-bottom-color: #bbb !important;
+    }
+    /* The on-screen split only kicks in at lg (1024px); the print viewport is
+       narrower, so force the summary + skills grid here */
+    .cv-top {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) 220px !important;
+      gap: 0.5rem 1.3rem !important;
+    }
+    .cv-section {
+      margin-top: 0.7rem !important;
+      margin-bottom: 0 !important;
+    }
+    .cv-top {
+      margin-top: 0 !important;
+    }
+    .cv-section-title {
+      margin-bottom: 0.3rem !important;
+    }
+    .cv-section .space-y-7 > * + * {
+      margin-top: 0.55rem !important;
+    }
+    .cv-entry {
+      break-inside: avoid;
+    }
+    .prose-blog li {
+      margin-top: 0.1rem !important;
+      margin-bottom: 0.1rem !important;
+    }
+    /* Render skill/language pills as compact comma-separated text */
+    .cv-pill {
+      border: none !important;
+      background: transparent !important;
+      padding: 0 !important;
+      font-size: inherit !important;
+    }
+    .cv-pill::after {
+      content: ", ";
+    }
+    .cv-sidebar .cv-entry .flex .cv-pill:last-child::after,
+    ul .cv-pill:last-child::after {
+      content: "";
+    }
+    a {
+      text-decoration: none !important;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById("cv-print")?.addEventListener("click", () => window.print());
+</script>
