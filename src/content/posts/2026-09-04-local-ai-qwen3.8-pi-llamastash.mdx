@@ -1,0 +1,153 @@
+---
+title: "Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?"
+description:
+published: true
+featured: true
+tags:
+  - "ai"
+  - "llamacpp"
+  - "localllm"
+  - "qwen3.8"
+  - "claudeopus"
+series: GNU/Linux Environment for Developers
+canonical_url: "https://deepu.tech/local-ai-qwen3.8-pi-llamastash"
+date:
+image: "/assets/images/llamastash/"
+cover_image: "/assets/images/llamastash/"
+---
+
+import AsciinemaCard from "~/components/embeds/AsciinemaCard.astro";
+
+When the whole AI coding frenzy started, I was still skeptical. Like most tech enthusiasts, I tried it but wasnt that impressed by the models coding capabilities back then. I still used them but mostly as an autocomplete tool on vscode. This all changed for me with Opus 4.6 on Claude Code. That was the first time I felt like the model was actually more efficient and smarter than me at coding most of the times. Ofcousre it still needed some hand holding and made silly mistakes at times but overall I felt the speed of implementing features and fixing bugs was much faster than me doing it alone. I was hooked. I started using it for all my coding tasks and even started to use it for some of my personal projects. I was amazed at how much faster I could get things done with the help of the model.
+
+This was around February or March of 2026. Around six months have passed since and right now there is a local model running on the laptop implementing a huge feature on [LlamaStash](https://github.com/llamastash/llamastash)(A complex and huge Rust project) as I write this blog post. Now I'm exclusively using local models for most of the coding I do. It's crazy to think that the Open source LLMs from Chinese labs that can fit on consumer GPUs have caught up to state of the art (SOTA) models from American companies that need Data centers to run :lol:. And even more impressive is that I can run these powerful models on my laptop without any cloud dependency. A huge thanks to the Chinese labs for making this possible and for making them open source.
+
+In this post, I will show you how I run Qwen 3.8 on my laptop and how it compares to Claude Opus for agentic coding.
+
+## Qwen 3.8 27b
+
+When Qwen 3.6 27b was released, I was excited and impressed by its capabilities. I tried some light coding with it. While it was good, it never felt like replacement for a SOTA model like Claude Opus as it lacked the quality and was slow on top. I was still using Claude/Kimi/GLM etc for most of my coding tasks with Qwen 3.6 for small offline tasks, housekeeping etc.
+
+But when Qwen 3.8 27b was released, I was blown away by its quality. It was able to understand complex coding tasks and provide accurate solutions. It was also able to understand the context of the code and provide suggestions accordingly. I started using it for some of my main coding tasks and the results were phonomenal. Ofcourse it was still very slow with long prefill times and 10-15 tokens/sec average decode, but personally that wasnt a problem for me since I could give it a task and let it run for few hours or even overnight and it finished the tasks at quality on par with Opus 4.6 or even 4.7.
+
+Most of the coding I do is open source so the models taking more time than a SOTA cloud model wasnt an issue for me. It did take some tuning and setup (more on that below) and it did go on a loop few times, crashed mid session few times and would need some hand holding o resume but overall it was able to complete most of the tasks with minimal intervention. I was impressed by its capabilities and started using it for more complex tasks with a SOTA model like Opus 5 reviewing its output.
+
+[Here](https://github.com/llamastash/llamastash/pull/71) is the first serious task I gave it and the results I got. It created a plan and one shotted the implementation. See the review comments from Opus 5, they were just nits and Qwen 3.8 27b fixed those in the next commit. I was extremely impressed because the project, [LlamaStash](https://github.com/llamastash/llamastash), was a complex one and had a huge Rust codebase but Qwen 3.8 27b was able to understand the codebase and implement the feature with minimal intervention. I started using it for [more work](https://github.com/llamastash/llamastash/pulls?q=is%3Apr+is%3Aclosed+label%3A%22By+Qwen3.8-27B%22) and it kept on delivering and I thought finally the time has come where I no longer need a Cloud AI subscription.
+
+## Qwen 3.8 Flash Next
+
+Then came Qwen 3.8 Flash Next and oh boy my mind was blown again. It was a bit better than 27b in terms of quality but the biggest improvement was overall speed. It was still slow on prefill and had more or less similar decode tok/sec but it took less time overall to finish tasks as it didnt spend as much time as 27b thinking. Here is a [real world sample](https://github.com/llamastash/llamastash/pull/75). I would say Flash Next is on par with Opus 4.8 in terms of quality. So thanks again Alibaba and Qwen team. It did need more memory to run on my [128GB Strix Halo](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine) so isn't the only choice yet but I will be using it for some of the more complex tasks and tasks that needs to get done faster for everything else 27b will still be my go to since I can run atleast 3 instances in parellel with same hardware and according to public benchmark they arent too far away in quality.
+
+## My current setup
+
+### Hardware: Strix Halo
+
+I wrote a detailed post about [my fully offline AI assisted Linux development machine](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine). TL;DR; Its an ASUS ROG Flow Z13 with Ryzen AI Max+ 395, 16 cores and 32 threads, AMD Radeon 8060S integrated GPU with 40 compute units and 128GB unified memory. I run Arch Linux on it with Niri + DMS as my desktop.
+
+### Orchestrator: LlamaStash
+
+I use my tool LlamaStash to orchestrate the model and manage the sessions. It is a fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via backend like llama.cpp and vLLM. It has a lot of features that makes it easy to run local models and manage them like multiple backends, preset files, named launches, auto start etc.
+
+I mainly run llama.cpp as backend with different builds for different models. Here is my LlamaStash config for it.
+
+```yaml
+backend:
+  llamacpp:
+    # llama-server build variants; first entry is the default binary.
+    servers:
+      - binary: /mnt/work/Workspace/llms/llama.cpp/build-hip/bin/llama-server # ROCm0
+      - binary: /mnt/work/Workspace/llms/llama.cpp/build-vulkan/bin/llama-server # Vulkan0
+      # Shim, not raw binary: sources q38rocm's setup_env.sh (RADV_PERFTEST,
+      # unified memory, ICD pin) that llamastash has no env hook for.
+      - binary: /home/deepu/.local/bin/q38rocm-llama-server
+        name: ROCmFP4 # ROCm0 + Vulkan0
+      # unslothai fork: only needed to load qwen4exp MTP draft heads, which stock
+      # rejects (~1.3x speedup). Drop when MTP support lands upstream.
+      - binary: /mnt/work/Workspace/llms/llamacpp-unsloth-b10715/llama-server
+        name: UnslothMTP # ROCm0
+      # Fork build for the DFlash2 sidecar drafter; --spec-draft-adaptive was
+      # never upstreamed.
+      - binary: /home/deepu/.local/bin/dflash-llama-server
+        name: DFlash2 # Vulkan0
+  ds4:
+    enabled: true
+    servers:
+      - binary: /mnt/work/Workspace/llms/ds4/ds4-server
+  vllm:
+    enabled: true
+    servers:
+      - binary: /home/deepu/.venvs/vllm/bin/vllm
+  lemonade:
+    enabled: true
+```
+
+### Harness: Pi
+
+For coding I mostly use Pi as harness these days. It pairs well with Qwen models and I have it setup to follow same rules and memories as Claude Code. Below is the LlamaStash models config for Pi.
+
+```json
+
+```
+
+### Model Quants
+
+I did some research and benchmarks to settle on the below quants for Qwen 3.8 27b and Flash Next. I found that these quants give the best balance between speed and quality for my use case.
+
+- **Qwen3.8-Flash-Next-UD-Q4_K_XL**: For best quality and faster execution but single agent.
+- **Qwen3.8-27B-UD-Q6_K**: Default model for multi agent work
+- **Qwen3.8-27B-Q8_0**: For tasks that needs more quality and can take longer to finish
+- **Qwen3.8-27B-ROCmFP4-FAST**: For tasks that needs to finish faster and can compromise a little on quality
+
+## Optimizing Qwen 3.8 for speed and efficiency
+
+### Config tuning with presets
+
+For all the models, I use 128k context rather than full 256k to avoid very long prefills and slow downs at long context. I also use the following settings for all the models to get best performance and quality. The settings are applied using LlamaStash presets so that I can easily switch between different models and settings via TUI or CLI and can reproduce the settings easily.
+
+```yaml
+
+```
+
+### Reasoning effort switch with presets
+
+I have presets duplicated with both `xhigh` and `medium` reasoning effort so that I can switch them via Pi's model selector using LlamaStash named launches.
+
+For example I can run
+
+```bash
+llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-xhigh --name xhigh
+```
+
+the model will be available as `Qwen3.8-27B-UD-Q6_K@xhigh` in Pi.
+
+### Multiple parallel agents with named launches
+
+I have multiple named launches for the same model with different reasoning effort and context so that I can run multiple agents in parallel. For example I can run
+
+```bash
+
+```
+
+And use the orchestrator agent to spawn multiple coder agents with different reasoning effort and context. This is very useful when I want to run multiple agents in parallel for a complex task.
+
+Or I can run two parellel Pi session both using the same model.
+
+```bash
+
+```
+
+TODO: see if the same can be achieved by just running one model with more parellism. so that the sme model can server two pi sessions.
+
+## Some Benchmarks
+
+<derive from benchmarks done in LS and dotfiles>
+
+## Is it viable
+
+So can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? It 100% can if you are patient. If you want results fast its probably not for you but if you dont mind it taking 2 or 3 times longer than a SOTA cloud model to finish a task and you are willing to spend some time setting it up, then yes it can replace Claude Opus 4.6 ~ 4.8 for Agentic coding and to use with tools like Hermes. I will be using these as my primary coding models until the next best local model comes out. Cant wait for Qwen 4 to drop, I have a gut feelong that we will have an Opus 5 class model that can run comformtably on consumer GPUs (I mean you can alreday run Kimi K3 but but isnt practical for most people). I will be testing it as soon as it comes out and will share my findings here.
+
+---
+
+If you like this article, please leave a like or a comment.
+
+You can follow me on [Bluesky](https://bsky.app/profile/deepu105.bsky.social), [Mastodon](https://mastodon.social/@deepu105), and [LinkedIn](https://www.linkedin.com/in/deepu05/).
