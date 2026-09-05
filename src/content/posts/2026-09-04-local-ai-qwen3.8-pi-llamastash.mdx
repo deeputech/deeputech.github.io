@@ -1,6 +1,6 @@
 ---
 title: "Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?"
-description:
+description: Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning
 published: true
 featured: true
 tags:
@@ -11,32 +11,36 @@ tags:
   - "claudeopus"
 series: GNU/Linux Environment for Developers
 canonical_url: "https://deepu.tech/local-ai-qwen3.8-pi-llamastash"
-date:
-image: "/assets/images/llamastash/"
-cover_image: "/assets/images/llamastash/"
+date: 2026-09-04
+image: "/assets/images/llamastash/qwen38-cover.png"
+cover_image: "/assets/images/llamastash/qwen38-cover.png"
 ---
 
-import AsciinemaCard from "~/components/embeds/AsciinemaCard.astro";
+When the whole AI coding frenzy started, I was still skeptical. Like most tech enthusiasts, I tried it but wasn't that impressed by the models' coding capabilities back then. I still used them, but mostly as an autocomplete tool in VS Code. This all changed for me with Opus 4.6 on Claude Code. That was the first time I felt like the model was actually more efficient and smarter than me at coding most of the time. Of course it still needed some hand holding and made silly mistakes at times, but overall I felt the speed of implementing features and fixing bugs was much faster than me doing it alone. I was hooked. I started using it for all my coding tasks and even started to use it for some of my personal projects. I was amazed at how much faster I could get things done with the help of the model.
 
-When the whole AI coding frenzy started, I was still skeptical. Like most tech enthusiasts, I tried it but wasnt that impressed by the models coding capabilities back then. I still used them but mostly as an autocomplete tool on vscode. This all changed for me with Opus 4.6 on Claude Code. That was the first time I felt like the model was actually more efficient and smarter than me at coding most of the times. Ofcousre it still needed some hand holding and made silly mistakes at times but overall I felt the speed of implementing features and fixing bugs was much faster than me doing it alone. I was hooked. I started using it for all my coding tasks and even started to use it for some of my personal projects. I was amazed at how much faster I could get things done with the help of the model.
+This was around February or March of 2026. Around six months have passed since, and right now there is a local model running on the laptop implementing a huge feature on [LlamaStash](https://github.com/llamastash/llamastash) (a complex and huge Rust project) as I write this blog post. Now I'm exclusively using local models for most of the coding I do. It's crazy to think that the open source LLMs from Chinese labs that can fit on consumer GPUs have caught up to the frontier models from American companies that need massive data centers to run 😉. And even more impressive is that I can run these powerful models on my laptop without any cloud dependency and is way more greener and wastes less energy. A huge thanks to the Chinese labs for making this possible and for making them open source.
 
-This was around February or March of 2026. Around six months have passed since and right now there is a local model running on the laptop implementing a huge feature on [LlamaStash](https://github.com/llamastash/llamastash)(A complex and huge Rust project) as I write this blog post. Now I'm exclusively using local models for most of the coding I do. It's crazy to think that the Open source LLMs from Chinese labs that can fit on consumer GPUs have caught up to state of the art (SOTA) models from American companies that need Data centers to run :lol:. And even more impressive is that I can run these powerful models on my laptop without any cloud dependency. A huge thanks to the Chinese labs for making this possible and for making them open source.
-
-In this post, I will show you how I run Qwen 3.8 on my laptop and how it compares to Claude Opus for agentic coding.
+In this post, I will show you how I run Qwen 3.8 on my laptop and how it compares to frontier models like Claude Opus for agentic coding.
 
 ## Qwen 3.8 27b
 
-When Qwen 3.6 27b was released, I was excited and impressed by its capabilities. I tried some light coding with it. While it was good, it never felt like replacement for a SOTA model like Claude Opus as it lacked the quality and was slow on top. I was still using Claude/Kimi/GLM etc for most of my coding tasks with Qwen 3.6 for small offline tasks, housekeeping etc.
+When Qwen 3.6 27b was released, I was excited and impressed by its capabilities. I tried some light coding with it. While it was good, it never felt like a replacement for a frontier model like Claude Opus, as it lacked the quality and was slow on top. I was still using Claude/Kimi/GLM etc for most of my coding tasks, with Qwen 3.6 for small offline tasks, housekeeping etc.
 
-But when Qwen 3.8 27b was released, I was blown away by its quality. It was able to understand complex coding tasks and provide accurate solutions. It was also able to understand the context of the code and provide suggestions accordingly. I started using it for some of my main coding tasks and the results were phonomenal. Ofcourse it was still very slow with long prefill times and 10-15 tokens/sec average decode, but personally that wasnt a problem for me since I could give it a task and let it run for few hours or even overnight and it finished the tasks at quality on par with Opus 4.6 or even 4.7.
+But when Qwen 3.8 27b was released, I was blown away by its quality. It was able to understand complex coding tasks and provide accurate solutions. It was also able to understand the context of the code and provide suggestions accordingly. I started using it for some of my main coding tasks and the results were phenomenal. Of course it was still very slow with long prefill times and 10-15 tokens/sec average decode, but personally that wasn't a problem for me since I could give it a task and let it run for a few hours or even overnight, and it finished the tasks at quality on par with Opus 4.6 or even 4.7 (that seems to be the community conclusion as well see [AA scores](https://artificialanalysis.ai/?models=glm-5-3-flash%2Cgpt-6-astra%2Cclaude-fable-5-1%2Cgpt-5-6-luna%2Cdeepseek-v4-pro%2Cqwen3-8-2-4t-a95b%2Cqwen3-8-27b%2Cclaude-opus-5%2Cgpt-5-6-terra%2Cglm-5-3%2Cgpt-5-6-sol%2Ckimi-k3%2Cminimax-m3%2Cqwen3-8-flash-next%2Cclaude-opus-4-8%2Cclaude-opus-4-6-adaptive%2Cclaude-opus-4-7) below).
 
-Most of the coding I do is open source so the models taking more time than a SOTA cloud model wasnt an issue for me. It did take some tuning and setup (more on that below) and it did go on a loop few times, crashed mid session few times and would need some hand holding o resume but overall it was able to complete most of the tasks with minimal intervention. I was impressed by its capabilities and started using it for more complex tasks with a SOTA model like Opus 5 reviewing its output.
+Most of the coding I do is open source, so the model taking more time than a SOTA cloud model wasn't an issue for me. It did take some tuning and setup (more on that below), and it did go on a loop a few times, crashed mid session a few times and would need some hand holding to resume, but overall it was able to complete most of the tasks with minimal intervention. I was impressed by its capabilities and started using it for more complex tasks, with a SOTA model like Opus 5 reviewing its output.
 
-[Here](https://github.com/llamastash/llamastash/pull/71) is the first serious task I gave it and the results I got. It created a plan and one shotted the implementation. See the review comments from Opus 5, they were just nits and Qwen 3.8 27b fixed those in the next commit. I was extremely impressed because the project, [LlamaStash](https://github.com/llamastash/llamastash), was a complex one and had a huge Rust codebase but Qwen 3.8 27b was able to understand the codebase and implement the feature with minimal intervention. I started using it for [more work](https://github.com/llamastash/llamastash/pulls?q=is%3Apr+is%3Aclosed+label%3A%22By+Qwen3.8-27B%22) and it kept on delivering and I thought finally the time has come where I no longer need a Cloud AI subscription.
+[Here](https://github.com/llamastash/llamastash/pull/71) is the first serious task I gave it and the results I got. It created a plan and one shotted the implementation. See the review comments from Opus 5, they were mostly nits, and Qwen 3.8 27b fixed those in the next commit. I was extremely impressed because the project, [LlamaStash](https://github.com/llamastash/llamastash), was a complex one and had a huge Rust codebase, but Qwen 3.8 27b was able to understand the codebase and implement the feature with minimal intervention. I started using it for [more work](https://github.com/llamastash/llamastash/pulls?q=is%3Apr+is%3Aclosed+label%3A%22By+Qwen3.8-27B%22) and it kept on delivering, and I thought finally the time has come where I no longer need a cloud AI subscription.
 
 ## Qwen 3.8 Flash Next
 
-Then came Qwen 3.8 Flash Next and oh boy my mind was blown again. It was a bit better than 27b in terms of quality but the biggest improvement was overall speed. It was still slow on prefill and had more or less similar decode tok/sec but it took less time overall to finish tasks as it didnt spend as much time as 27b thinking. Here is a [real world sample](https://github.com/llamastash/llamastash/pull/75). I would say Flash Next is on par with Opus 4.8 in terms of quality. So thanks again Alibaba and Qwen team. It did need more memory to run on my [128GB Strix Halo](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine) so isn't the only choice yet but I will be using it for some of the more complex tasks and tasks that needs to get done faster for everything else 27b will still be my go to since I can run atleast 3 instances in parellel with same hardware and according to public benchmark they arent too far away in quality.
+Then came Qwen 3.8 Flash Next and oh boy, my mind was blown again. It was a bit better than 27b in terms of quality, but the biggest improvement was overall speed. It was still slow on prefill and had more or less similar decode tok/sec, but it took less time overall to finish tasks as it didn't spend as much time as 27b thinking. Here is a [real world sample](https://github.com/llamastash/llamastash/pull/75).
+
+The numbers make the point better than the feeling does. On the same short Rust prompt, greedy, the two tie on raw decode: Flash Next at 23.7 tok/s against the 27b ROCmFP4 build at 24.5, and the 27b is actually ahead on prefill, 150 against 96 tok/s. But on five real coding tasks, with the generated code executed against hidden tests, both scored 5/5 and Flash Next got there in 2,320 tokens and 76.5 seconds against 4,223 tokens and 289.8 seconds. Same answers, 45% fewer tokens, 3.8x faster to done. <for claude: convert this para to a smaller line with atable for numbers. convey the same meaning.>
+
+public/assets/images/llamastash/AA-score.qwen3.8.png
+
+I would say Flash Next is on par with Opus 4.8 in terms of quality just from expereince so far (both has AA score of 46). So thanks again Alibaba and Qwen team. It did need a lot more memory to run on my [128GB Strix Halo](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine), around 86 GiB resident against 31 GiB for the 27b, so it isn't the only choice yet. I use it for some of the more complex tasks and tasks that need to get done faster. For everything else 27b will still be my go to, since I can run at least 3 instances in parallel with the same hardware, and according to public benchmarks they aren't too far away in quality.
 
 ## My current setup
 
@@ -46,7 +50,7 @@ I wrote a detailed post about [my fully offline AI assisted Linux development ma
 
 ### Orchestrator: LlamaStash
 
-I use my tool LlamaStash to orchestrate the model and manage the sessions. It is a fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via backend like llama.cpp and vLLM. It has a lot of features that makes it easy to run local models and manage them like multiple backends, preset files, named launches, auto start etc.
+I use my tool [LlamaStash](https://github.com/llamastash/llamastash) to orchestrate the model and manage the sessions. It is a fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via backends like [llama.cpp](https://github.com/ggml-org/llama.cpp) and [vLLM](https://github.com/vllm-project/vllm). It has a lot of features that make it easy to run local models and manage them, like multiple backends, preset files, named launches, auto start etc.
 
 I mainly run llama.cpp as backend with different builds for different models. Here is my LlamaStash config for it.
 
@@ -81,22 +85,62 @@ backend:
     enabled: true
 ```
 
+Four llama.cpp builds for one machine looks silly until you need them. Stock ROCm is the default, Vulkan wins decode on the ROCmFP4 fork, and the two named forks exist only because their speculative decoding paths were never upstreamed. A LlamaStash preset can pin which build it wants, so I never have to remember which is which.
+
 ### Harness: Pi
 
-For coding I mostly use Pi as harness these days. It pairs well with Qwen models and I have it setup to follow same rules and memories as Claude Code. Below is the LlamaStash models config for Pi.
+For coding I mostly use [Pi](https://pi.dev) as harness these days. It pairs well with Qwen models and I have it setup to follow the same rules and memories as my, hopefully getting closer to retire, Claude Code setup. Below is the LlamaStash provider block in `~/.pi/agent/models.json`, which `llamastash integrations` writes for you.
 
+<for claude: Needs the @named launch concept shown here>
 ```json
-
+{
+  "providers": {
+    "llamastash": {
+      "api": "openai-completions",
+      "apiKey": "!llamastash api-key",
+      "baseUrl": "http://127.0.0.1:11435/v1",
+      "name": "LlamaStash",
+      "models": [
+        {
+          "id": "Qwen3.8-Flash-Next-UD-Q4_K_XL",
+          "name": "Qwen3.8-Flash-Next",
+          "contextWindow": 131072,
+          "maxTokens": 8192
+        },
+        {
+          "id": "Qwen3.8-27B-UD-Q6_K",
+          "name": "Qwen3.8-27B-UD-Q6_K",
+          "contextWindow": 131072,
+          "maxTokens": 8192
+        },
+        {
+          "id": "Qwen3.8-27B-Q8_0",
+          "name": "Qwen3.8-27B-Q8_0",
+          "contextWindow": 131072,
+          "maxTokens": 8192
+        },
+        {
+          "id": "Qwen3.8-27B-ROCmFP4-FAST",
+          "name": "Qwen3.8-27B-ROCmFP4-FAST",
+          "contextWindow": 131072,
+          "maxTokens": 8192
+        }
+      ]
+    }
+  }
+}
 ```
 
 ### Model Quants
 
 I did some research and benchmarks to settle on the below quants for Qwen 3.8 27b and Flash Next. I found that these quants give the best balance between speed and quality for my use case.
 
-- **Qwen3.8-Flash-Next-UD-Q4_K_XL**: For best quality and faster execution but single agent.
-- **Qwen3.8-27B-UD-Q6_K**: Default model for multi agent work
-- **Qwen3.8-27B-Q8_0**: For tasks that needs more quality and can take longer to finish
-- **Qwen3.8-27B-ROCmFP4-FAST**: For tasks that needs to finish faster and can compromise a little on quality
+- **Qwen3.8-Flash-Next-UD-Q4_K_XL** (104 GB): For best quality and faster execution but single agent. Needs the [unslothai](for claude: add repo) fork.
+- **Qwen3.8-27B-UD-Q6_K** (20 GB): Default model for multi agent work
+- **Qwen3.8-27B-Q8_0** (27 GB): For tasks that needs more quality and can take longer to finish
+- **Qwen3.8-27B-ROCmFP4-FAST** (14 GB): For one-shot tasks that needs to finish faster and can compromise a little on quality. This one needs the [julianmb/q38rocm](https://github.com/julianmb/q38rocm) fork, it will not load on stock llama.cpp.
+
+Decode on this hardware is memory bandwidth bound, not compute bound. At 7.27 tok/s on a 27.1 GiB file the GPU is pulling about 212 GB/s against the roughly 256 GB/s the LPDDR5X tops out at, so it is running at 83% of theoretical peak. That is why the sizes above track the speed ordering almost exactly. Smaller file, fewer bytes per token, faster decode.
 
 ## Optimizing Qwen 3.8 for speed and efficiency
 
@@ -105,46 +149,206 @@ I did some research and benchmarks to settle on the below quants for Qwen 3.8 27
 For all the models, I use 128k context rather than full 256k to avoid very long prefills and slow downs at long context. I also use the following settings for all the models to get best performance and quality. The settings are applied using LlamaStash presets so that I can easily switch between different models and settings via TUI or CLI and can reproduce the settings easily.
 
 ```yaml
-
+presets:
+  # qwen35 arch: hybrid SSM, full attention every 4th layer, one embedded MTP
+  # layer at blk.64, native ctx 262144. Draft n=5 measured best, see below.
+  Qwen3.8-27B-*:
+    default: coding-xhigh
+    entries:
+      coding-xhigh:
+        knobs:
+          mtp: true
+          mtp-draft-n: 5
+          ctx-size: 131072
+          n-gpu-layers: 99
+          flash-attn: true
+          no-mmap: true
+          parallel: 1
+        extras:
+          - --reasoning-format
+          - deepseek
+          - --reasoning-preserve
+          - --reasoning-effort
+          - xhigh
+          - --cont-batching
+          - --spec-draft-p-min
+          - "0.0"
+          - --temperature
+          - "0.0"
+          - --presence-penalty
+          - "0.0"
+          - --repeat-penalty
+          - "1.0"
 ```
+
+A wildcard key like `Qwen3.8-27B-*` covers every quant of the model, so Q6_K, Q8_0 and the rest all inherit one config. `coding-medium` is the same block with `--reasoning-effort medium`, and I will come back to that below.
+
+Two of those values are important.
+
+`mtp: true` turns on Multi Token Prediction for the model giving a x.x spped boost. Nothing else in the whole config comes close. The model verifies every drafted token, so on stock llama.cpp the output does not change, but speed increases.
+
+`--temperature 0.0` is deliberate, and it goes against Qwen's own guidance, which asks for temp 1.0 / top-p 0.95 / top-k 20 in thinking mode. I measured the official sampling and it cost **2.8x wall time**, 772 seconds against 273 on the same two questions, because MTP draft acceptance collapses from 59.6% to 45.7% when the sampler stops agreeing with the drafter. The vendor spec assumes you are not running speculative decoding. Greedy also makes generation byte reproducible, which is what let me tell a real difference between two configs from a lucky roll.
+
+Flash Next gets its own preset, mostly because it has to be pinned to the fork build that can load its draft heads.
+
+```yaml
+Qwen3.8-Flash-Next-*:
+  default: coding-xhigh
+  entries:
+    coding-xhigh:
+      server: llamacpp-UnslothMTP
+      knobs:
+        ctx-size: 131072
+        flash-attn: true
+        mode: chat
+        mtp: true
+        mtp-draft-n: 4
+        n-gpu-layers: 99
+        parallel: 1
+      extras:
+        - --reasoning-format
+        - deepseek
+        - --reasoning-preserve
+        - --reasoning-effort
+        - xhigh
+        - --cont-batching
+        - --spec-draft-p-min
+        - "0.0"
+        - --temperature
+        - "0.0"
+        - --presence-penalty
+        - "0.0"
+        - --repeat-penalty
+        - "1.0"
+```
+
+> ⚠️ **Never set `no-mmap` on Flash Next.** The model has a 26.8 GiB per-layer token embedding table that llama.cpp streams lazily from the file mapping, and it is read on every single token. Turning mmap off makes the loader pull the whole thing into anonymous memory instead, which is the wrong direction on a box with about 20 GiB of headroom. On the 27b, which has no lazy tensor, `no-mmap` is harmless.
 
 ### Reasoning effort switch with presets
 
 I have presets duplicated with both `xhigh` and `medium` reasoning effort so that I can switch them via Pi's model selector using LlamaStash named launches.
+The setting steers the models at the chat template level. `mediumn` has no steering. `xhigh` injects a "think carefully" instruction. `low` injects a "x" instrcutcion. The model truly obliges these short instructions and the difference is very obvious in its output.
 
 For example I can run
 
 ```bash
-llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-xhigh --name xhigh
+llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-xhigh --name coder-high
 ```
 
-the model will be available as `Qwen3.8-27B-UD-Q6_K@xhigh` in Pi.
+the model will be available as `Qwen3.8-27B-UD-Q6_K@coder-high` in Pi.
 
 ### Multiple parallel agents with named launches
 
-I have multiple named launches for the same model with different reasoning effort and context so that I can run multiple agents in parallel. For example I can run
+I have multiple named launches for the same model with different reasoning effort and context so that I can run multiple agents in parallel. Each `--name` is its own `llama-server` process with its own KV cache, so one agent cannot evict another or queue behind its long request. For example I can run
 
 ```bash
-
+llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-xhigh --name planner
+llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-medium --name coder-one
+llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-medium --name coder-two
 ```
 
-And use the orchestrator agent to spawn multiple coder agents with different reasoning effort and context. This is very useful when I want to run multiple agents in parallel for a complex task.
+And use the planner agent to spawn multiple coder agents with different reasoning effort and context, addressing them as `Qwen3.8-27B-UD-Q6_K@planner`, `@coder-one` and `@coder-two`. This is very useful when I want to run multiple agents in parallel for a complex task. Three Q6_K launches at 128k is roughly 93 GiB of the 125.5 GiB available, so that is the practical comfortable ceiling on this machine.
 
-Or I can run two parellel Pi session both using the same model.
+Or I can run two parallel Pi sessions both using the same model.
 
 ```bash
-
+llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-xhigh --name a
+llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-medium --name b
 ```
 
-TODO: see if the same can be achieved by just running one model with more parellism. so that the sme model can server two pi sessions.
+Then `/model llamastash/Qwen3.8-27B-UD-Q6_K@a` in one session and `@b` in the other. From the TUI, `Alt+Enter` lets you make named launches.
 
-## Some Benchmarks
+> 💡 Named launches landed in LlamaStash 0.3. Before that, a second launch of the same model would start fine but was unaddressable, because the proxy handed every request to the first Ready launch it walked past.
 
-<derive from benchmarks done in LS and dotfiles>
+#### Why not one server with more slots?
+
+An obvious question is whether I could skip all that and run one launch with `--parallel 2`, letting llama.cpp's continuous batching serve both sessions off one copy of the weights. So I checked.
+
+It does work. It just costs you things that are not obvious from the flag name.
+
+- **The context gets divided, not shared.** With unified KV off, which is what my launches actually report at startup, `n_ctx_seq = n_ctx / n_parallel`. So `-c 131072 --parallel 2` gives each session 64k, not 128k. Keeping 128k each means `-c 262144`, and at that point you are paying the same KV memory as two launches. All you saved is one copy of the weights.
+- **With unified KV on, they share one pool.** Each sequence may address the whole window, but two sessions sitting at 100k each still will not both fit. Unified is also the only mode where the server purges idle slots under memory pressure, so the session you are not currently typing in is the first cache to get thrown away.
+- **Slot affinity is a heuristic, not a binding.** The server picks a slot by longest common prefix against the incoming prompt, with `--slot-prompt-similarity` defaulting to 0.10, and it skips any slot that is busy. Two sessions do settle onto their own slots in the steady state. But a request that arrives while its own slot is busy lands on the other session's slot and evicts its cache. On a 30k token transcript that causes a three minute re-prefill time waste.
+- **MTP survives it.** Speculative decoding is initialized with `n_parallel`, and the draft budget works out to `n_parallel * (1 + n_draft)` capped at the batch size. Two slots at draft 5 needs 12 tokens of my 2048 batch, so nothing gets clipped.
+- **You lose per session tuning.** Reasoning effort is a server level flag in my setup, so one server cannot hand session A `xhigh` and session B `medium`. Two named launches can.
+
+The one thing I have not measured is whether two batched sequences on a single server decode faster in aggregate than two separate servers do. Decode here is bandwidth bound and batching amortizes the weight read across sequences, so in theory it should win. I will update this post once I have run it properly. For now the isolation is worth more to me than a throughput number I have not seen.
+
+<for claude: make a quick measurement of this and add it here>
+
+## Some benchmarks
+
+A caveat before the tables. These come from three separate measurement sessions on different builds over about three weeks, so read each table on its own and do not cross reference cells between them. Everything is on the same Strix Halo laptop, on AC, with the power profile pinned to `performance`, greedy sampling, and decode and prefill taken from llama.cpp's own `timings` block rather than from wall clock.
+
+First, the 27b on a short prompt with an empty window. This is the best case number, it makes MTP look like magic.
+
+| Build and quant            | Decode, MTP off |     Decode, MTP on | Prefill (4k prompt) | Draft acceptance |
+| -------------------------- | --------------: | -----------------: | ------------------: | ---------------: |
+| Stock ROCm, Q8_0 (27 GB)   |         7.3 t/s | **22.4 t/s** (n=5) |             270 t/s |              73% |
+| Stock Vulkan, Q8_0 (27 GB) |         7.4 t/s |     22.6 t/s (n=5) |             201 t/s |              73% |
+| ROCmFP4 fork, FAST (14 GB) |        13.0 t/s | **29.9 t/s** (n=6) |             259 t/s |              84% |
+
+MTP is a 3.1x win on Q8_0 and 2.3x on the ROCmFP4 build. A draft length of 5 beat the backend default of 3 at every context length I tested, with no crossover.
+
+Now the same thing with the window actually full, which is the number that matters for agentic coding. Every row here has MTP on.
+
+| Context | Q8_0 prefill | Q8_0 decode | ROCmFP4 prefill | ROCmFP4 decode |
+| ------- | -----------: | ----------: | --------------: | -------------: |
+| empty   |      270 t/s |    22.4 t/s |         259 t/s |       29.9 t/s |
+| 32k     |      210 t/s |    15.6 t/s |         193 t/s |       19.6 t/s |
+| 64k     |      164 t/s |    14.2 t/s |         124 t/s |       16.6 t/s |
+| 128k    |      115 t/s |    11.3 t/s |          66 t/s |       13.2 t/s |
+| 256k    |       71 t/s |     5.4 t/s |          failed |         failed |
+
+MTP's payoff shrinks as the window fills, from 3.1x on an empty window down to 1.15x at a full 256k, because the verify pass gets more expensive as the KV cache grows even though acceptance holds up fine. And the ROCmFP4 fork's advantage is decode, not prefill. It falls behind stock Q8_0 on prompt processing by 128k. That, plus the prefill times, is the real reason I cap the window at 128k instead of running the native 256k.
+
+Here is what one actual Pi turn looks like on the Q6_K I use day to day, pulled straight from the server log.
+
+```text
+prompt eval: 181633 ms / 31410 tokens  (172.9 t/s)
+eval:          6231 ms /    89 tokens  ( 14.1 t/s)
+draft acceptance = 0.835 (71 accepted / 85 generated), mean len = 5.18
+```
+
+Three minutes of prefill on a 31k token transcript, then 14 tok/s of decode. The follow up turn only had to prefill the 4,770 new tokens and came back in 45 seconds. That gap between a cold session and a warm one is the single biggest thing that shapes how these models feels to work with.
+
+And the 27b against Flash Next on five real coding tasks, with the generated code executed against hidden tests.
+
+| Model                    | Correctness | Tokens | Wall clock |
+| ------------------------ | ----------: | -----: | ---------: |
+| Qwen3.8-Flash-Next       |         5/5 |  2,320 | **76.5 s** |
+| Qwen3.8-27B ROCmFP4 FAST |         5/5 |  4,223 |    289.8 s |
+
+Both got everything right. Flash Next just used 45% fewer tokens to say the same thing. On one task the 27b spent 1,784 tokens where Flash Next spent 424. Five tasks is not a correctness ceiling though, it measures verbosity, and a harder suite would be needed to separate them on capability.
+
+### What did not help
+
+About as useful as the wins, and it saved me from baking a few of these into my config:
+
+- **Qwen's official sampling.** 2.8x slower, covered above.
+- **`turbo4` for the V cache on ROCmFP4.** 49% slower at 10k context, and it changed what the model generated: more thinking, shorter answers.
+- **`--reasoning-budget`.** Completely inert. Dropping it from 8192 to 2000 produced byte identical output, because the model stops well under the budget anyway. The client's `maxTokens` is the cap that actually binds.
+- **`repeat-penalty 1.05`.** The one config arm that got facts wrong in its answers. Since greedy output is deterministic, that is a reproducible property of the setting rather than a bad roll. Upstream warns that penalties "can force rare-token gibberish in long generations", so I left it at 1.0.
+- **GPU clock pinning.** Writing `high` to `power_dpm_force_performance_level` silently hard hung the machine about 25 seconds later and needed a power cycle. Do not try this on Strix Halo. Auto mode already boosts to 1900-2500 MHz under load anyway.
+
+The two knobs that did earn their place: `--ubatch-size 512` over 1024, worth about 4% on cold prefill and reproduced across rounds, and running the ROCmFP4 fork on `Vulkan0` instead of `ROCm0`, worth 24% on decode.
+
+## Caveats
+
+These are the issues and learnings so far from using these models.
+
+**Disclaimer**: A lot of my coding sessions were not even the ideal it could have been. I'm currently on vacation and I didnt bring the laptops dedicated power brick that suplies 180W peak power. Instead I have a 100W PD GaN charger that is not enough to sustain the full GPU load, so I had issues like GPU resets and battery drain shutdowns causing model restarts etc. So I'm confident that the overall experience will be better than what I had.I will be testing this setup with the proper power brick when I get back from vacation and will update this post with my findings.
+
+- The most annoying issue, IMO, is the prefill times. The first prompt on cold start (session start, model restart, after compaction etc.) takes a long time to process. On my setup a 31k token transcript takes about 3 minutes, and a genuinely full 128k window is closer to 18 minutes at the 115 tok/s that table above shows. Subsequent prompts are processed almost immediately due to cache and decode is 10 to 15 tok/s, which is not bad at all, since you see stuff happening and it doesn't feel that slow.
+- Define the same context length in the Pi model definition as the launch, to avoid abrupt compaction. With the proper context length Pi will compact more efficiently and you lose less context.
+- **Set the client's `maxTokens` to at least 8192.** This is the single most impactful setting and it lives in the client, not in the server preset. Below that, the model burns the whole budget thinking, returns `finish_reason: length`, and you get an empty string after eight minutes of waiting. I lost a whole evening to this before I worked out where it was coming from.
+- **Thinking is 90 to 95% of the generated tokens.** One 40k context question produced 29,006 characters of thinking and 1,426 characters of answer. That ratio, not the decode rate, is what actually sets how long a task takes. Thats why medium is faster than xhigh and my default for most tasks.
+- **The ROCmFP4 FAST build has no prompt caching.** Every request reports `cache_n: 0`, so repeated prompts pay a full prefill each time. Stock llama.cpp caches the prefix. In an agent loop that mostly appends to a transcript, that turns the fastest-decoding build into the slowest one to actually finish. It is why the FAST build is a special-case tool for one-shots and not the default.
+- **The fork's speculative path is not strictly greedy by default.** It logs `Qwen MTP strict verification is disabled; greedy output may diverge`, and completion lengths drift for an identical prompt (152, 158 and 160 tokens across three runs). Turning `--spec-mtp-strict-qwen` on costs nothing measurable, 1135 seconds against 1136, so there is no reason to leave it off.
 
 ## Is it viable
 
-So can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? It 100% can if you are patient. If you want results fast its probably not for you but if you dont mind it taking 2 or 3 times longer than a SOTA cloud model to finish a task and you are willing to spend some time setting it up, then yes it can replace Claude Opus 4.6 ~ 4.8 for Agentic coding and to use with tools like Hermes. I will be using these as my primary coding models until the next best local model comes out. Cant wait for Qwen 4 to drop, I have a gut feelong that we will have an Opus 5 class model that can run comformtably on consumer GPUs (I mean you can alreday run Kimi K3 but but isnt practical for most people). I will be testing it as soon as it comes out and will share my findings here.
+So can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? It 100% can if you are patient. If you want results fast its probably not for you, but if you dont mind it taking 2 or 3 times longer than a SOTA cloud model to finish a task and you are willing to spend some time setting it up, then yes it can replace Claude Opus 4.6 ~ 4.8 for Agentic coding and to use with tools like [Hermes](https://hermes-agent.nousresearch.com/), which I plan to run alongside Pi. I will be using these as my primary coding models until the next best local model comes out. Cant wait for Qwen 4 to drop, I have a gut feeling that we will have an Opus 5 class model that can run comfortably on consumer GPUs (I mean you can already run Kimi K3 but it isn't practical for most people). I will be testing it as soon as it comes out and will share my findings here.
 
 ---
 

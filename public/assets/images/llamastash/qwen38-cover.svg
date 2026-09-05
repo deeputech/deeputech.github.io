@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" version="1.1">
+  <rect x="0" y="0" width="1600" height="900" fill="#24273a"/>
+
+  <!-- top rule -->
+  <rect x="120" y="150" width="1360" height="2" fill="#494d64"/>
+
+  <!-- kicker -->
+  <text x="120" y="130" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-size="26" letter-spacing="4" fill="#a6da95">LOCAL AI &#183; STRIX HALO &#183; 128 GB UNIFIED</text>
+
+  <!-- title -->
+  <text x="120" y="290" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="86" fill="#cad3f5">Can Qwen 3.8 on your laptop</text>
+  <text x="120" y="386" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="86" fill="#cad3f5">replace Claude Opus for</text>
+  <text x="120" y="482" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="86" fill="#c6a0f6">agentic coding?</text>
+
+  <!-- subtitle -->
+  <text x="120" y="566" font-family="Inter, DejaVu Sans, sans-serif" font-weight="400" font-size="34" fill="#a5adcb">Qwen3.8-27B and Flash-Next, run offline through LlamaStash and Pi</text>
+
+  <!-- stat strip -->
+  <rect x="120" y="646" width="1360" height="2" fill="#494d64"/>
+
+  <text x="120" y="736" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-weight="700" font-size="64" fill="#8bd5ca">22.4 t/s</text>
+  <text x="120" y="782" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-size="24" letter-spacing="2" fill="#939ab7">DECODE WITH MTP</text>
+
+  <text x="560" y="736" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-weight="700" font-size="64" fill="#eed49f">128k</text>
+  <text x="560" y="782" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-size="24" letter-spacing="2" fill="#939ab7">CONTEXT WINDOW</text>
+
+  <text x="1000" y="736" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-weight="700" font-size="64" fill="#f5a97f">$0</text>
+  <text x="1000" y="782" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-size="24" letter-spacing="2" fill="#939ab7">COST</text>
+
+  <!-- byline -->
+  <text x="1480" y="782" text-anchor="end" font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-size="26" fill="#6e738d">deepu.tech</text>
+</svg>
