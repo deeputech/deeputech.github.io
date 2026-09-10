@@ -20,7 +20,7 @@ import LinkCard from "~/components/embeds/LinkCard.astro";
 
 When the whole AI coding frenzy started, I was still skeptical. Like most tech enthusiasts, I tried it but wasn't that impressed by the models' coding capabilities back then. I still used them, but mostly as an autocomplete tool in VS Code. This all changed for me with Opus 4.6 on Claude Code. That was the first time I felt like the model was actually more efficient and smarter than me at coding most of the time. Of course it still needed some hand holding and made silly mistakes at times, but overall I felt the speed of implementing features and fixing bugs was much faster than me doing it alone. I was hooked. I started using it for all my coding tasks and even started to use it for some of my personal projects. I was amazed at how much faster I could get things done with the help of the model.
 
-This was around February or March of 2026. Around six months have passed since, and right now there is a local model running on the laptop implementing a huge feature on [LlamaStash](https://github.com/llamastash/llamastash) (a complex and huge Rust project) as I write this blog post. Now I'm exclusively using local models for most of the coding I do. It's crazy to think that the open source LLMs from Chinese labs that can fit on consumer GPUs have caught up to the frontier models from American companies that need massive data centers to run 😉. And even more impressive is that I can run these powerful models on my laptop without any cloud dependency and is way more greener and wastes less energy. A huge thanks to the Chinese labs for making this possible and for making them open source.
+This was around February or March of 2026. Around six months have passed since, and right now there is a local model running on the laptop implementing a huge feature on [LlamaStash](https://github.com/llamastash/llamastash) (a complex and huge Rust project) as I write this blog post. Now I'm exclusively using local models for most of the coding I do. It's crazy to think that the open source LLMs from Chinese labs that can fit on consumer GPUs have caught up to the frontier models from American companies that need massive data centers to run 😉. And even more impressive is that I can run these powerful models on my laptop without any cloud dependency, which is way greener and wastes less energy. A huge thanks to the Chinese labs for making this possible and for making them open source.
 
 In this post, I will show you how I run Qwen 3.8 on my laptop and how it compares to frontier models like Claude Opus for agentic coding.
 
@@ -58,7 +58,7 @@ I would say Flash Next is on par with Opus 4.8 in terms of quality, just from ex
 
 ### Hardware: Strix Halo
 
-I wrote a detailed post about [my fully offline AI assisted Linux development machine](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine). TL;DR; Its an ASUS ROG Flow Z13 with Ryzen AI Max+ 395, 16 cores and 32 threads, AMD Radeon 8060S integrated GPU with 40 compute units and 128GB unified memory. I run Arch Linux on it with Niri + DMS as my desktop.
+I wrote a detailed post about [my fully offline AI assisted Linux development machine](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine). TL;DR; It's an ASUS ROG Flow Z13 with Ryzen AI Max+ 395, 16 cores and 32 threads, AMD Radeon 8060S integrated GPU with 40 compute units and 128GB unified memory. I run Arch Linux on it with Niri + DMS as my desktop.
 
 <LinkCard href="https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine" />
 
@@ -162,8 +162,8 @@ I did some research and benchmarks to settle on the below quants for Qwen 3.8 27
 
 - **Qwen3.8-Flash-Next-UD-Q4_K_XL** (104 GB): For best quality and faster execution but single agent. Needs the [unslothai/llama.cpp](https://github.com/unslothai/llama.cpp) fork to load its MTP draft heads, stock llama.cpp rejects them (at the time of writing).
 - **Qwen3.8-27B-UD-Q6_K** (20 GB): Default model for multi agent work
-- **Qwen3.8-27B-Q8_0** (27 GB): For tasks that needs more quality and can take longer to finish
-- **Qwen3.8-27B-ROCmFP4-FAST** (14 GB): For one-shot tasks that needs to finish faster and can compromise a little on quality. This one needs the [julianmb/q38rocm](https://github.com/julianmb/q38rocm) fork, it will not load on stock llama.cpp.
+- **Qwen3.8-27B-Q8_0** (27 GB): For tasks that need more quality and can take longer to finish
+- **Qwen3.8-27B-ROCmFP4-FAST** (14 GB): For one-shot tasks that need to finish faster and can compromise a little on quality. This one needs the [julianmb/q38rocm](https://github.com/julianmb/q38rocm) fork, it will not load on stock llama.cpp.
 
 Decode on this hardware is memory bandwidth bound, not compute bound. At 7.27 tok/s on a 27.1 GiB file the GPU is pulling about 212 GB/s against the roughly 256 GB/s the LPDDR5X tops out at, so it is running at 83% of theoretical peak. That is why the sizes above track the speed ordering almost exactly. Smaller file, fewer bytes per token, faster decode.
 
@@ -249,19 +249,19 @@ Qwen3.8-Flash-Next-*:
 
 > ⚠️ **Never set `no-mmap` on Flash Next.** The model has a 26.8 GiB per-layer token embedding table that llama.cpp streams lazily from the file mapping, and it is read on every single token. Turning mmap off makes the loader pull the whole thing into anonymous memory instead, which is the wrong direction on a box with about 20 GiB of headroom. On the 27b, which has no lazy tensor, `no-mmap` is harmless.
 
-### Multiple parallel agents with named launches
+### Named launches
 
 LlamaStash has a `--name` option that lets you run multiple launches of the same model at the same time. Each `--name` is its own process with its own KV cache and presets. This is useful for running multiple agents in parallel, each with its own context and reasoning mode for example. From the TUI, `Alt+Enter` prompts for the name instead.
 
-> 💡 Named launches landed in LlamaStash 0.3. Before that, a second launch of the same model would start fine but was unaddressable, because the proxy handed every request to the first Ready launch it walked past.
+> 💡 Named launches landed in LlamaStash 0.3.0. Before that, a second launch of the same model would start fine but was unaddressable, because the proxy handed every request to the first Ready launch it walked past.
 
 #### Reasoning effort switch with presets
 
 I have presets duplicated with both `xhigh` and `medium` reasoning effort so that I can switch them via Pi's model selector using LlamaStash named launches. The reasoning effort setting steers the models at the chat template level. `medium` has no steering. `xhigh` injects a "think carefully" instruction. `low` injects a "keep your thinking brief" instruction.
 
-> **`xhigh`** (the template default): "Reasoning effort is set to xhigh. Please think carefully through the task, validate key assumptions, consider plausible alternatives, and prioritize correctness, consistency, and clarity in the final answer."
-> **`low`**: "Reasoning effort is set to low. Keep your thinking brief and focused, moving directly to the conclusion without unnecessary elaboration."
-> **`medium`**: nothing at all. There is no branch for it in the template, so the instruction string stays empty.
+> - **`xhigh`** (the template default): "Reasoning effort is set to xhigh. Please think carefully through the task, validate key assumptions, consider plausible alternatives, and prioritize correctness, consistency, and clarity in the final answer."
+> - **`low`**: "Reasoning effort is set to low. Keep your thinking brief and focused, moving directly to the conclusion without unnecessary elaboration."
+> - **`medium`**: nothing at all. There is no branch for it in the template, so the instruction string stays empty.
 
 The model truly obliges these short instructions and the difference is very obvious in its output.
 
@@ -276,7 +276,7 @@ Now `Qwen3.8-27B-UD-Q6_K@xhigh` and `@medium` both show up in Pi. `@medium` for 
 
 #### Parallel coding agents
 
-I can also use a planner agent to spawn multiple coder agents with different reasoning effort and context, addressing them as `Qwen3.8-27B-UD-Q6_K@planner`, `@coder-one` and `@coder-two`. This is very useful when I want to run multiple agents in parallel for a complex task. Three Q6_K launches at 128k is roughly 93 GiB of the 125.5 GiB available, so three is the comfortable ceiling on this machine.
+I can also use a planner agent to spawn multiple coder agents with different reasoning effort and context, addressing them as `Qwen3.8-27B-UD-Q6_K@planner`, `@coder-one` and `@coder-two`. This is very useful when I want to run multiple agents in parallel for a complex task.
 
 ```bash
 llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-xhigh --name planner
@@ -284,25 +284,27 @@ llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-medium --name coder-one
 llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-low --name coder-two
 ```
 
+Three Q6_K launches at 128k is roughly 93 GiB of the 125.5 GiB available, so three is the comfortable ceiling on this machine.
+
 #### What about `--parallel` instead?
 
 One server with `--parallel N` also serves N sessions off a single copy of the weights, and it looks like the cheaper option. It is cheaper, and on a current llama.cpp it is also the faster one. It is a good option when you want to run multiple sessions using the same model preset. It still does not replace the setup above, but the reason is narrower than I first thought.
 
 Three sessions, 30k of context each, 1024 tokens out, Q6_K with MTP, per-session window pinned to 40960 in both arms. Wall clock is the cold turn, the one that starts a session:
 
-| Three sessions at 30k       |        `--parallel 3` |   3 named launches |
-| --------------------------- | --------------------: | -----------------: |
-| Prefill, aggregate          |         **453 tok/s** |          146 tok/s |
-| Decode, average per session |             5.7 tok/s |          5.3 tok/s |
-| Effective decode            |        **4.95 tok/s** |         3.24 tok/s |
-| Cold turn, wall clock       |             **557 s** |              815 s |
-| Tokens generated            |                 2,755 |              2,640 |
-| Draft acceptance            |    0.59 / 0.62 / 0.59 | 0.55 / 0.53 / 0.59 |
-| Memory                      |          **30.8 GiB** |           70.6 GiB |
-| Context each at `-c 131072` |                 43.8k |           **128k** |
-| Thinking modes available    |      one, server wide |       **one each** |
+| Three sessions at 30k       |     `--parallel 3` |   3 named launches |
+| --------------------------- | -----------------: | -----------------: |
+| Prefill, aggregate          |      **453 tok/s** |          146 tok/s |
+| Decode, average per session |          5.7 tok/s |          5.3 tok/s |
+| Effective decode            |     **4.95 tok/s** |         3.24 tok/s |
+| Cold turn, wall clock       |          **557 s** |              815 s |
+| Tokens generated            |              2,755 |              2,640 |
+| Draft acceptance            | 0.59 / 0.62 / 0.59 | 0.55 / 0.53 / 0.59 |
+| Memory                      |       **30.8 GiB** |           70.6 GiB |
+| Context each at `-c 131072` |              43.8k |           **128k** |
+| Thinking modes available    |   one, server wide |       **one each** |
 
-The gap is prefill, not decode. Continuous batching interleaves three prompts on one server at 453 tok/s aggregate, while three separate processes thrash each other down to 46-53 tok/s each, so the same 30k window takes 164-326 s batched against 569-645 s split. Decode itself is near enough a tie, 5.7 against 5.3 tok/s per session. It is the prefill that puts `--parallel 3` at two thirds the wall clock on less than half the memory, for 4% more tokens generated. Effective decode in the table is tokens generated divided by wall clock, which is the number you actually sit through. Follow-up turns favour it too, by roughly 1.7x.
+The gap is prefill, not decode. Continuous batching interleaves three prompts on one server at 453 tok/s aggregate, while three separate processes thrash each other down to 46-53 tok/s each, so the same 30k window takes 164-326 s batched against 569-645 s split. Decode itself is near enough a tie, 5.7 against 5.3 tok/s per session. It is the prefill that puts `--parallel 3` at two thirds the wall clock on less than half the memory, for 4% more tokens generated. Effective decode in the table is tokens generated divided by wall clock, which is the number you actually sit through. Follow-up turns favour it too, by roughly 1.7x, though I measured those on the previous llama.cpp build.
 
 So the case against it is just the last two rows. The context divides rather than shares: with unified KV off, `n_ctx_seq = n_ctx / n_parallel`, so `-c 131072 --parallel 3` leaves each session 43,776 tokens instead of 128k. Turning `--kv-unified` on gives every session the whole window back for no extra memory, but it cost 66% more cold-turn time at three slots when I measured it, so I leave it off. And reasoning effort is a server flag, so one `--parallel 3` launch gives every session the same thinking mode, which is the whole point of the setup above. Named launches are what I use to keep `xhigh` and `medium` both addressable, and `--parallel` is what I would reach for to run several sessions on one preset.
 
