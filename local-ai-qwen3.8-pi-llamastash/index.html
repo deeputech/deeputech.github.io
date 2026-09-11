@@ -1,0 +1,642 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.18.1"><link rel="icon" type="image/png" href="/assets/images/logo.png"><link rel="canonical" href="https://deepu.tech/local-ai-qwen3.8-pi-llamastash"><title>Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? | Technorage</title><meta name="description" content="Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning"><meta property="og:type" content="article"><meta property="og:title" content="Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? | Technorage"><meta property="og:description" content="Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning"><meta property="og:url" content="https://deepu.tech/local-ai-qwen3.8-pi-llamastash"><meta property="og:image" content="https://deepu.tech/assets/images/llamastash/qwen38-cover.png"><meta property="og:site_name" content="Technorage"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2026-09-04T00:00:00.000Z"><meta name="author" content="Deepu K Sasidharan"><meta property="article:author" content="https://deepu.tech"><meta property="article:tag" content="ai"><meta property="article:tag" content="llamacpp"><meta property="article:tag" content="localllm"><meta property="article:tag" content="qwen38"><meta property="article:tag" content="claudeopus"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@deepu105"><meta name="twitter:creator" content="@deepu105"><meta name="twitter:title" content="Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? | Technorage"><meta name="twitter:description" content="Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning"><meta name="twitter:image" content="https://deepu.tech/assets/images/llamastash/qwen38-cover.png"><link rel="alternate" type="application/rss+xml" title="Technorage RSS feed" href="/feed.xml"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?","description":"Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning","image":"https://deepu.tech/assets/images/llamastash/qwen38-cover.png","url":"https://deepu.tech/local-ai-qwen3.8-pi-llamastash","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/local-ai-qwen3.8-pi-llamastash"},"datePublished":"2026-09-04T00:00:00.000Z","dateModified":"2026-09-04T00:00:00.000Z","author":{"@type":"Person","name":"Deepu K Sasidharan","url":"https://deepu.tech"},"publisher":{"@type":"Organization","name":"Technorage","logo":{"@type":"ImageObject","url":"https://deepu.tech/assets/images/logo.png"}},"keywords":"ai, llamacpp, localllm, qwen38, claudeopus"}</script><meta name="monetization" content="$ilp.uphold.com/Aw7eGpxKNyK7"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@500;600;700&display=swap"><script>
+  (function () {
+    try {
+      var stored = localStorage.getItem("theme");
+      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme = stored || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.style.colorScheme = theme;
+    } catch (_) {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-1SDSM5NX07"></script><script>(function(){const GA_ID = "G-1SDSM5NX07";
+
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  ad_storage: 'denied',
+  analytics_storage: 'granted'
+});
+gtag('js', new Date());
+gtag('config', GA_ID);`}
+          })();</script><link rel="stylesheet" href="/_astro/asciinema-player.mT6buTGj.css">
+<link rel="stylesheet" href="/_astro/comment-policy.3a-8Quv1.css">
+<style>.toc-link[data-astro-cid-obewoz47][data-active=true]{color:var(--color-accent);border-color:var(--color-accent);font-weight:500}
+</style></head> <body> <header class="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] backdrop-blur"> <div class="mx-auto flex max-w-5xl items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6"> <a href="/" class="flex min-w-0 shrink items-center gap-1.5 text-[var(--color-fg)]"> <svg class="h-5 w-5 shrink-0 text-[var(--color-accent)] sm:h-6 sm:w-6" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true"> <path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path> </svg> <span class="font-display truncate text-xl font-bold tracking-tight sm:text-3xl">technorage</span> </a> <nav class="ml-auto flex shrink-0 items-center gap-0 sm:gap-1"> <a href="/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path> <circle cx="12" cy="7" r="4"></circle>      </svg> <span class="hidden sm:inline">About</span> </a><a href="/blogs/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="8" y1="13" x2="16" y2="13"></line> <line x1="8" y1="17" x2="16" y2="17"></line>     </svg> <span class="hidden sm:inline">Blog</span> </a><a href="/books/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path> <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>    </svg> <span class="hidden sm:inline">Books</span> </a><a href="/appearances/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect> <line x1="16" y1="2" x2="16" y2="6"></line> <line x1="8" y1="2" x2="8" y2="6"></line> <line x1="3" y1="10" x2="21" y2="10"></line>   </svg> <span class="hidden sm:inline">Events</span> </a><a href="/tools/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">     <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path> </svg> <span class="hidden sm:inline">Tools</span> </a> <button type="button" id="search-trigger" aria-label="Search" title="Search (⌘K)" class="ml-0.5 inline-flex h-9 w-9 items-center justify-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-sm text-[var(--color-fg-subtle)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)] sm:ml-1 sm:w-auto sm:px-2"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <kbd class="hidden rounded border border-[var(--color-border-strong)] px-1 font-mono text-[10px] sm:inline">⌘K</kbd> </button> <button type="button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg> <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      var next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      document.documentElement.style.colorScheme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch (_) {}
+    });
+  })();
+</script> </nav> </div> </header> <main class="flex-1">  <div id="reading-progress" class="pointer-events-none fixed inset-x-0 top-0 z-50 h-0.5 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-75" aria-hidden="true"></div> <script>
+  (function () {
+    var bar = document.getElementById("reading-progress");
+    if (!bar) return;
+    var article = document.querySelector("article");
+    if (!article) return;
+    var ticking = false;
+    function update() {
+      var rect = article.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var scrolled = -rect.top;
+      var pct = total > 0 ? Math.min(1, Math.max(0, scrolled / total)) : 0;
+      bar.style.transform = "scaleX(" + pct + ")";
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  })();
+</script> <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14"> <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px]"> <article data-pagefind-body class="mx-auto w-full min-w-0 max-w-3xl lg:mx-0"> <header class="mb-8"> <div class="mb-4 flex flex-wrap gap-2 text-xs text-[var(--color-fg-subtle)]"> <a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> ai </a><a href="/tags/#llamacpp" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> llamacpp </a><a href="/tags/#localllm" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> localllm </a><a href="/tags/#qwen38" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> qwen38 </a> </div> <h1 class="font-display text-4xl font-bold tracking-tight text-[var(--color-fg)] sm:text-5xl"> Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? </h1> <p class="mt-4 text-lg text-[var(--color-fg-muted)]">Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning</p> <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[var(--color-fg-subtle)]"> <img src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=64&d=mm" alt="Deepu K Sasidharan" width="32" height="32" class="h-8 w-8 rounded-full"> <a href="https://deepu.tech" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> Deepu K Sasidharan </a> <span class="text-[var(--color-border-strong)]">·</span> <time datetime="2026-09-04T00:00:00.000Z">September 4, 2026</time>   <span class="text-[var(--color-border-strong)]">·</span> <span>25 min read</span>  <span class="ml-auto"> <div class="not-prose flex items-center gap-1 text-[var(--color-fg-subtle)]"> <span class="mr-2 hidden text-xs uppercase tracking-wider sm:inline">Share</span> <a href="https://twitter.com/intent/tweet?text=Can%20Qwen%203.8%20running%20on%20your%20laptop%20really%20replace%20Claude%20Opus%20for%20Agentic%20coding%3F%0A%0A&url=https%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-pi-llamastash%2F&via=deepu105" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter" title="Share on Twitter" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:x">   <symbol id="ai:simple-icons:x" viewBox="0 0 24 24"><path fill="currentColor" d="M14.234 10.162L22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299l-.929-1.329L3.076 1.56h3.182l5.965 8.532l.929 1.329l7.754 11.09h-3.182z"/></symbol><use href="#ai:simple-icons:x"></use>  </svg> </a><a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-pi-llamastash%2F&title=Can%20Qwen%203.8%20running%20on%20your%20laptop%20really%20replace%20Claude%20Opus%20for%20Agentic%20coding%3F&summary=Can%20Qwen%203.8%20running%20on%20your%20laptop%20really%20replace%20Claude%20Opus%20for%20Agentic%20coding%3F&source=Technorage" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" title="Share on LinkedIn" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:linkedin">   <symbol id="ai:simple-icons:linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037c-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.06 2.06 0 0 1-2.063-2.065a2.064 2.064 0 1 1 2.063 2.065m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></symbol><use href="#ai:simple-icons:linkedin"></use>  </svg> </a><a href="https://bsky.app/intent/compose?text=Can%20Qwen%203.8%20running%20on%20your%20laptop%20really%20replace%20Claude%20Opus%20for%20Agentic%20coding%3F%0A%0Ahttps%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-pi-llamastash%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on BlueSky" title="Share on BlueSky" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:bluesky">   <symbol id="ai:simple-icons:bluesky" viewBox="0 0 24 24"><path fill="currentColor" d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037c-.856 3.061-3.978 3.842-6.755 3.37c4.854.826 6.089 3.562 3.422 6.299c-5.065 5.196-7.28-1.304-7.847-2.97c-.104-.305-.152-.448-.153-.327c0-.121-.05.022-.153.327c-.568 1.666-2.782 8.166-7.847 2.97c-2.667-2.737-1.432-5.473 3.422-6.3c-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></symbol><use href="#ai:simple-icons:bluesky"></use>  </svg> </a><a href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-pi-llamastash%2F&t=Can%20Qwen%203.8%20running%20on%20your%20laptop%20really%20replace%20Claude%20Opus%20for%20Agentic%20coding%3F" target="_blank" rel="noopener noreferrer" aria-label="Share on Hacker News" title="Share on Hacker News" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:ycombinator">   <symbol id="ai:simple-icons:ycombinator" viewBox="0 0 24 24"><path fill="currentColor" d="M0 24V0h24v24zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896z"/></symbol><use href="#ai:simple-icons:ycombinator"></use>  </svg> </a><a href="https://www.reddit.com/submit?url=https%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-pi-llamastash%2F&title=Can%20Qwen%203.8%20running%20on%20your%20laptop%20really%20replace%20Claude%20Opus%20for%20Agentic%20coding%3F" target="_blank" rel="noopener noreferrer" aria-label="Share on Reddit" title="Share on Reddit" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:reddit">   <symbol id="ai:simple-icons:reddit" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286A.72.72 0 0 0 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0m4.388 3.199a1.999 1.999 0 1 1-1.947 2.46v.002a2.37 2.37 0 0 0-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363a2.802 2.802 0 1 1 2.908 4.753c-.088 3.256-3.637 5.876-7.997 5.876c-4.361 0-7.905-2.617-7.998-5.87a2.8 2.8 0 0 1 1.189-5.34c.645 0 1.239.218 1.712.585c1.275-.79 2.881-1.291 4.64-1.365v-.01a3.23 3.23 0 0 1 2.88-3.207a2 2 0 0 1 1.959-1.595m-8.085 8.376c-.784 0-1.459.78-1.506 1.797s.64 1.429 1.426 1.429s1.371-.369 1.418-1.385s-.553-1.841-1.338-1.841m7.406 0c-.786 0-1.385.824-1.338 1.841s.634 1.385 1.418 1.385c.785 0 1.473-.413 1.426-1.429c-.046-1.017-.721-1.797-1.506-1.797m-3.703 4.013c-.974 0-1.907.048-2.77.135a.222.222 0 0 0-.183.305a3.2 3.2 0 0 0 2.953 1.964a3.2 3.2 0 0 0 2.953-1.964a.222.222 0 0 0-.184-.305a28 28 0 0 0-2.769-.135"/></symbol><use href="#ai:simple-icons:reddit"></use>  </svg> </a> <button type="button" data-copy-link="https://deepu.tech/local-ai-qwen3.8-pi-llamastash/" aria-label="Copy link" title="Copy link" class="copy-link inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="lucide:link-2">   <symbol id="ai:lucide:link-2" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></symbol><use href="#ai:lucide:link-2"></use>  </svg> </button> </div> <script>
+  document.querySelectorAll(".copy-link").forEach(function (btn) {
+    btn.addEventListener("click", async function () {
+      var url = btn.getAttribute("data-copy-link");
+      try {
+        await navigator.clipboard.writeText(url);
+        var prev = btn.title;
+        btn.title = "Copied!";
+        btn.style.color = "var(--color-accent)";
+        setTimeout(function () {
+          btn.title = prev;
+          btn.style.color = "";
+        }, 1500);
+      } catch (_) {}
+    });
+  });
+</script> </span> </div> </header> <img src="/assets/images/llamastash/qwen38-cover.png" alt="Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?" class="mb-10 aspect-[16/9] w-full rounded-xl object-cover"> <div class="prose-blog"> <details class="not-prose group my-8 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]"> <summary class="flex cursor-pointer list-none items-center gap-4 px-6 py-5 group-open:pb-3 [&::-webkit-details-marker]:hidden"> <div class="min-w-0 flex-1"> <p class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+Series · <a href="/series/gnu-linux-environment-for-developers/" class="hover:underline" onclick="event.stopPropagation()">GNU/Linux Environment for Developers</a> </p> <p class="mt-1 text-xs text-[var(--color-fg-subtle)]">
+Post <strong class="text-[var(--color-fg-muted)]">9</strong> of  <strong class="text-[var(--color-fg-muted)]">9</strong> </p> </div> <svg class="size-4 shrink-0 text-[var(--color-fg-subtle)] transition-transform group-open:rotate-90" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"> <path d="M7 5l6 5-6 5V5z"></path> </svg> </summary> <ol class="list-decimal space-y-1.5 pr-6 pb-5 pl-10 text-sm marker:tabular-nums marker:text-[var(--color-fg-subtle)]"> <li> <a href="/my-beautiful-linux-development-environment/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My beautiful Linux development environment</a> </li><li> <a href="/must-have-gnome-plugins/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Must have GNOME extensions</a> </li><li> <a href="/configure-a-beautiful-terminal-on-unix/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Configure a beautiful terminal on Unix with Zsh</a> </li><li> <a href="/make-the-most-out-of-vscode/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My VS Code setup - Making the most out of VS Code</a> </li><li> <a href="/the-state-of-linux-on-desktops/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">The state of Linux as a daily use OS in 2021</a> </li><li> <a href="/my-beautiful-linux-development-environment-2021/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My sleek and modern Linux development machine in 2021</a> </li><li> <a href="/my-fully-offline-ai-assisted-linux-development-machine/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My fully offline AI-assisted Linux development machine</a> </li><li> <a href="/introducing-llamastash/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher</a> </li><li> <span class="font-semibold text-[var(--color-fg)]">Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?</span> </li> </ol> </details><p>When the whole AI coding frenzy started, I was still skeptical. Like most tech enthusiasts, I tried it but wasn’t that impressed by the models’ coding capabilities back then. I still used them, but mostly as an autocomplete tool in VS Code. This all changed for me with Opus 4.6 on Claude Code. That was the first time I felt like the model was actually more efficient and smarter than me at coding most of the time. Of course it still needed some hand holding and made silly mistakes at times, but overall I felt the speed of implementing features and fixing bugs was much faster than me doing it alone. I was hooked. I started using it for all my coding tasks and even started to use it for some of my personal projects. I was amazed at how much faster I could get things done with the help of the model.</p>
+<p>This was around February or March of 2026. Around six months have passed since, and right now there is a local model running on the laptop implementing a huge feature on <a href="https://github.com/llamastash/llamastash">LlamaStash</a> (a complex and huge Rust project) as I write this blog post. Now I’m exclusively using local models for most of the coding I do. It’s crazy to think that the open source LLMs from Chinese labs that can fit on consumer GPUs have caught up to the frontier models from American companies that need massive data centers to run 😉. And even more impressive is that I can run these powerful models on my laptop without any cloud dependency, which is way greener and wastes less energy. A huge thanks to the Chinese labs for making this possible and for making them open source.</p>
+<p>In this post, I will show you how I run Qwen 3.8 on my laptop and how it compares to frontier models like Claude Opus for agentic coding.</p>
+<h2 id="qwen-38-27b">Qwen 3.8 27b</h2>
+<p>When Qwen 3.6 27b was released, I was excited and impressed by its capabilities. I tried some light coding with it. While it was good, it never felt like a replacement for a frontier model like Claude Opus, as it lacked the quality and was slow on top. I was still using Claude/Kimi/GLM etc for most of my coding tasks, with Qwen 3.6 for small offline tasks, housekeeping etc.</p>
+<p>But when Qwen 3.8 27b was released, I was blown away by its quality. It was able to understand complex coding tasks and provide accurate solutions. It was also able to understand the context of the code and provide suggestions accordingly. I started using it for some of my main coding tasks and the results were phenomenal. Of course it was still very slow with long prefill times and 10-15 tokens/sec average decode, but personally that wasn’t a problem for me since I could give it a task and let it run for a few hours or even overnight, and it finished the tasks at quality on par with Opus 4.6. That seems to be the community conclusion as well: on the <a href="https://artificialanalysis.ai/?models=glm-5-3-flash%2Cgpt-6-astra%2Cclaude-fable-5-1%2Cgpt-5-6-luna%2Cclaude-opus-4-6-adaptive%2Cdeepseek-v4-pro%2Cqwen3-8-2-4t-a95b%2Cclaude-opus-4-8%2Cqwen3-8-flash-next%2Cqwen3-8-27b%2Cclaude-opus-5%2Cgpt-5-6-terra%2Cglm-5-3%2Cgpt-5-6-sol%2Cclaude-opus-4-7%2Ckimi-k3">Artificial Analysis index</a> charted below, the 27b at <code>xhigh</code> scores 34 against 32 for Opus 4.6.</p>
+<p><img src="/assets/images/llamastash/AA-score.qwen3.8.png" alt="Artificial Analysis Intelligence Index, Qwen 3.8 models against the frontier models"/></p>
+<p>Most of the coding I do is open source, so the model taking more time than a frontier cloud model wasn’t an issue for me. It did take some tuning and setup (more on that below), and it did go on a loop a few times, crashed mid session a few times (probably an issue with my power supply) and would need some hand holding to resume, but overall it was able to complete most of the tasks with minimal intervention. I was impressed by its capabilities and started using it for more complex tasks, with a frontier model like Opus 5 reviewing its output.</p>
+<p><a href="https://github.com/llamastash/llamastash/pull/71">Here</a> is the first serious task I gave it and the results I got. It created a plan and one shotted the implementation. See the review comments from Opus 5, they were mostly nits, and Qwen 3.8 27b fixed those in the next commit. I was extremely impressed because the project, <a href="https://github.com/llamastash/llamastash">LlamaStash</a>, was a complex one and had a huge Rust codebase, but Qwen 3.8 27b was able to understand the codebase and implement the feature with minimal intervention. I started using it for <a href="https://github.com/llamastash/llamastash/pulls?q=is%3Apr+is%3Aclosed+label%3A%22By+Qwen3.8-27B%22">more work</a> and it kept on delivering, and I thought finally the time has come where I no longer need a cloud AI subscription.</p>
+<h2 id="qwen-38-flash-next">Qwen 3.8 Flash Next</h2>
+<p>Then came Qwen 3.8 Flash Next and oh boy, my mind was blown again. It was a bit better than 27b in terms of quality, but the biggest improvement was overall speed. It was still slow on prefill and had more or less similar decode tok/sec, but it took less time overall to finish tasks as it didn’t spend as much time as 27b thinking. Here is a <a href="https://github.com/llamastash/llamastash/pull/75">real world sample</a>.</p>
+<p>The numbers make the point better than the feeling does. Flash Next does not decode faster, it just doesn’t overthink as much as 27b. The top two rows are a short greedy prompt, the rest are five coding tasks with the generated code executed against hidden tests.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th style="text-align:right">Flash Next</th><th style="text-align:right">27b ROCmFP4</th></tr></thead><tbody><tr><td>Decode</td><td style="text-align:right">23.7 tok/s</td><td style="text-align:right">24.5 tok/s</td></tr><tr><td>Prefill</td><td style="text-align:right">96 tok/s</td><td style="text-align:right">150 tok/s</td></tr><tr><td>Correctness, 5 tasks</td><td style="text-align:right">5/5</td><td style="text-align:right">5/5</td></tr><tr><td>Tokens spent</td><td style="text-align:right">2,320</td><td style="text-align:right">4,223</td></tr><tr><td>Wall clock</td><td style="text-align:right"><strong>76.5 s</strong></td><td style="text-align:right">289.8 s</td></tr></tbody></table>
+<p>Same answers, 45% fewer tokens, 3.8x faster to done, but 27b is the one that is ahead on both raw speed numbers.</p>
+<p>I would say Flash Next is on par with Opus 4.8 in terms of quality, just from experience so far (They have an AA score of 40 and 42 respectively). So thanks again Alibaba and Qwen team. It did need a lot more memory to run on my <a href="https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine">128GB Strix Halo</a>, around 86 GiB resident against 31 GiB for the 27b, so it isn’t the only choice yet. I use it for the more complex tasks and the ones that need to get done faster. For everything else 27b is still my go to, because at 31 GiB I can keep two of them loaded at once and switch thinking modes without a restart, and as the chart shows they aren’t far apart in quality.</p>
+<h2 id="my-current-setup">My current setup</h2>
+<h3 id="hardware-strix-halo">Hardware: Strix Halo</h3>
+<p>I wrote a detailed post about <a href="https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine">my fully offline AI assisted Linux development machine</a>. TL;DR; It’s an ASUS ROG Flow Z13 with Ryzen AI Max+ 395, 16 cores and 32 threads, AMD Radeon 8060S integrated GPU with 40 compute units and 128GB unified memory. I run Arch Linux on it with Niri + DMS as my desktop.</p>
+<a href="/my-fully-offline-ai-assisted-linux-development-machine/" class="not-prose group my-6 block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 transition hover:border-[var(--color-accent)]"><div class="flex items-center gap-2 text-xs text-[var(--color-fg-subtle)]"><svg class="h-3.5 w-3.5 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg><span>From the blog · May 7, 2026</span></div><h3 class="font-display mt-2 text-lg leading-snug font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">My fully offline AI-assisted Linux development machine</h3><p class="mt-1 line-clamp-2 text-sm text-[var(--color-fg-muted)]">My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13</p><div class="mt-3 flex flex-wrap gap-1.5 text-xs text-[var(--color-fg-subtle)]"><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#linux</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#archlinux</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#development</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#ai</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#niri</span></div></a>
+<h3 id="orchestrator-llamastash">Orchestrator: LlamaStash</h3>
+<p>I use my tool <a href="https://github.com/llamastash/llamastash">LlamaStash</a> to orchestrate the model and manage the sessions. It is a fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via backends like <a href="https://github.com/ggml-org/llama.cpp">llama.cpp</a> and <a href="https://github.com/vllm-project/vllm">vLLM</a>. It has a lot of features that make it easy to run local models and manage them, like multiple backends, preset files, named launches, auto start etc.</p>
+<a href="/introducing-llamastash/" class="not-prose group my-6 block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 transition hover:border-[var(--color-accent)]"><div class="flex items-center gap-2 text-xs text-[var(--color-fg-subtle)]"><svg class="h-3.5 w-3.5 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg><span>From the blog · Jun 2, 2026</span></div><h3 class="font-display mt-2 text-lg leading-snug font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher</h3><p class="mt-1 line-clamp-2 text-sm text-[var(--color-fg-muted)]">A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary</p><div class="mt-3 flex flex-wrap gap-1.5 text-xs text-[var(--color-fg-subtle)]"><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#ai</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#llamacpp</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#localllm</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#rust</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#opensource</span></div></a>
+<p>I mainly run llama.cpp as backend with different builds for different models. Here is my LlamaStash config for it.</p>
+<div class="expressive-code"><link rel="stylesheet" href="/_astro/ec.6rxel.css"/><script type="module" src="/_astro/ec.0vx5m.js"></script><figure class="frame"><figcaption class="header"></figcaption><pre data-language="yaml"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4">backend</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#8AADF4">llamacpp</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">    </span><span style="--0:#979EBA;--0fs:italic"># llama-server build variants; first entry is the default binary.</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">    </span><span style="--0:#8AADF4">servers</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4">binary</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/mnt/work/Workspace/llms/llama.cpp/build-hip/bin/llama-server</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA;--0fs:italic"># ROCm0</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4">binary</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/mnt/work/Workspace/llms/llama.cpp/build-vulkan/bin/llama-server</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA;--0fs:italic"># Vulkan0</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA;--0fs:italic"># Shim, not raw binary: sources q38rocm&#39;s setup_env.sh (RADV_PERFTEST,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA;--0fs:italic"># unified memory, ICD pin) that llamastash has no env hook for.</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4">binary</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/home/deepu/.local/bin/q38rocm-llama-server</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">name</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">ROCmFP4</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA;--0fs:italic"># ROCm0 + Vulkan0</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA;--0fs:italic"># unslothai fork: only needed to load qwen4exp MTP draft heads, which stock</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA;--0fs:italic"># rejects (~1.3x speedup). Drop when MTP support lands upstream.</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4">binary</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/mnt/work/Workspace/llms/llamacpp-unsloth/llama-server</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">name</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">UnslothMTP</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA;--0fs:italic"># ROCm0</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA;--0fs:italic"># Fork build for the DFlash2 sidecar drafter; --spec-draft-adaptive was</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA;--0fs:italic"># never upstreamed.</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4">binary</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/home/deepu/.local/bin/dflash-llama-server</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">name</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">DFlash2</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA;--0fs:italic"># Vulkan0</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent">  </span><span style="--0:#8AADF4">ds4</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code"><span class="indent">    </span><span style="--0:#8AADF4">enabled</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">true</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent">    </span><span style="--0:#8AADF4">servers</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4">binary</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/mnt/work/Workspace/llms/ds4/ds4-server</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent">  </span><span style="--0:#8AADF4">vllm</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code"><span class="indent">    </span><span style="--0:#8AADF4">enabled</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">true</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent">    </span><span style="--0:#8AADF4">servers</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#8AADF4">binary</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">/home/deepu/.venvs/vllm/bin/vllm</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent">  </span><span style="--0:#8AADF4">lemonade</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code"><span class="indent">    </span><span style="--0:#8AADF4">enabled</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">true</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="backend:  llamacpp:    # llama-server build variants; first entry is the default binary.    servers:      - binary: /mnt/work/Workspace/llms/llama.cpp/build-hip/bin/llama-server # ROCm0      - binary: /mnt/work/Workspace/llms/llama.cpp/build-vulkan/bin/llama-server # Vulkan0      # Shim, not raw binary: sources q38rocm's setup_env.sh (RADV_PERFTEST,      # unified memory, ICD pin) that llamastash has no env hook for.      - binary: /home/deepu/.local/bin/q38rocm-llama-server        name: ROCmFP4 # ROCm0 + Vulkan0      # unslothai fork: only needed to load qwen4exp MTP draft heads, which stock      # rejects (~1.3x speedup). Drop when MTP support lands upstream.      - binary: /mnt/work/Workspace/llms/llamacpp-unsloth/llama-server        name: UnslothMTP # ROCm0      # Fork build for the DFlash2 sidecar drafter; --spec-draft-adaptive was      # never upstreamed.      - binary: /home/deepu/.local/bin/dflash-llama-server        name: DFlash2 # Vulkan0  ds4:    enabled: true    servers:      - binary: /mnt/work/Workspace/llms/ds4/ds4-server  vllm:    enabled: true    servers:      - binary: /home/deepu/.venvs/vllm/bin/vllm  lemonade:    enabled: true"><div></div></button></div></figure></div>
+<p>Four llama.cpp builds for one machine looks silly until you need them. Stock ROCm is the default, Vulkan wins decode on the ROCmFP4 fork, and the two named forks exist only because their speculative decoding paths were never upstreamed (at the time of writing). A LlamaStash preset can pin which build it wants, so I never have to remember which is which.</p>
+<h3 id="harness-pi">Harness: Pi</h3>
+<p>For coding I mostly use <a href="https://pi.dev">Pi</a> as harness these days. It pairs well with Qwen models and I have it setup to follow the same rules and memories as my, hopefully getting closer to retire, Claude Code setup. Below is the LlamaStash provider block in <code>~/.pi/agent/models.json</code>, which <code>llamastash integrations</code> writes for you.</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="json"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">providers</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">    </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">llamastash</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">api</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;openai-completions&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">apiKey</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;!llamastash api-key&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">baseUrl</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;http://127.0.0.1:11435/v1&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;LlamaStash&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">models</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#979EBA">[</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">id</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-Flash-Next-UD-Q4_K_XL&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-Flash-Next&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">contextWindow</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">131072</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">maxTokens</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">8192</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">id</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-27B-Q8_0&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-27B-Q8_0&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">contextWindow</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">131072</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">maxTokens</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">8192</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">id</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-27B-ROCmFP4-FAST&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-27B-ROCmFP4-FAST&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">contextWindow</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">131072</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">maxTokens</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">8192</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">id</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-27B-UD-Q6_K@xhigh&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">29</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-27B (xhigh)&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">30</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">contextWindow</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">131072</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">31</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">maxTokens</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">8192</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">32</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">},</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">33</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">{</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">34</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">id</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-27B-UD-Q6_K@medium&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">35</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">name</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;Qwen3.8-27B (medium)&quot;</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">36</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">contextWindow</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">131072</span><span style="--0:#979EBA">,</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">37</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">&quot;</span><span style="--0:#8AADF4">maxTokens</span><span style="--0:#979EBA">&quot;</span><span style="--0:#979EBA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">8192</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">38</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">39</div></div><div class="code"><span class="indent">      </span><span style="--0:#979EBA">]</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">40</div></div><div class="code"><span class="indent">    </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">41</div></div><div class="code"><span class="indent">  </span><span style="--0:#979EBA">}</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">42</div></div><div class="code"><span style="--0:#979EBA">}</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="{  &#34;providers&#34;: {    &#34;llamastash&#34;: {      &#34;api&#34;: &#34;openai-completions&#34;,      &#34;apiKey&#34;: &#34;!llamastash api-key&#34;,      &#34;baseUrl&#34;: &#34;http://127.0.0.1:11435/v1&#34;,      &#34;name&#34;: &#34;LlamaStash&#34;,      &#34;models&#34;: [        {          &#34;id&#34;: &#34;Qwen3.8-Flash-Next-UD-Q4_K_XL&#34;,          &#34;name&#34;: &#34;Qwen3.8-Flash-Next&#34;,          &#34;contextWindow&#34;: 131072,          &#34;maxTokens&#34;: 8192        },        {          &#34;id&#34;: &#34;Qwen3.8-27B-Q8_0&#34;,          &#34;name&#34;: &#34;Qwen3.8-27B-Q8_0&#34;,          &#34;contextWindow&#34;: 131072,          &#34;maxTokens&#34;: 8192        },        {          &#34;id&#34;: &#34;Qwen3.8-27B-ROCmFP4-FAST&#34;,          &#34;name&#34;: &#34;Qwen3.8-27B-ROCmFP4-FAST&#34;,          &#34;contextWindow&#34;: 131072,          &#34;maxTokens&#34;: 8192        },        {          &#34;id&#34;: &#34;Qwen3.8-27B-UD-Q6_K@xhigh&#34;,          &#34;name&#34;: &#34;Qwen3.8-27B (xhigh)&#34;,          &#34;contextWindow&#34;: 131072,          &#34;maxTokens&#34;: 8192        },        {          &#34;id&#34;: &#34;Qwen3.8-27B-UD-Q6_K@medium&#34;,          &#34;name&#34;: &#34;Qwen3.8-27B (medium)&#34;,          &#34;contextWindow&#34;: 131072,          &#34;maxTokens&#34;: 8192        }      ]    }  }}"><div></div></button></div></figure></div>
+<p>The last two entries are the interesting ones. A <code>&lt;model-id&gt;@&lt;name&gt;</code> id pins the request to one specific running launch instead of letting the proxy pick, which is what puts both thinking modes in the model picker at the same time. Pi passes custom provider ids through to the API unchanged, so the <code>@name</code> arrives at LlamaStash verbatim.</p>
+<p>Those two I add by hand. <code>llamastash integrations</code> only writes a row per model on disk, it does not know what you are going to name your launches. There is an open issue to teach the patcher about named launches.</p>
+<h3 id="model-quants">Model Quants</h3>
+<p>I did some research and benchmarks to settle on the below quants for Qwen 3.8 27b and Flash Next. I found that these quants give the best balance between speed and quality for my use case.</p>
+<ul>
+<li><strong>Qwen3.8-Flash-Next-UD-Q4_K_XL</strong> (104 GB): For best quality and faster execution but single agent. Needs the <a href="https://github.com/unslothai/llama.cpp">unslothai/llama.cpp</a> fork to load its MTP draft heads, stock llama.cpp rejects them (at the time of writing).</li>
+<li><strong>Qwen3.8-27B-UD-Q6_K</strong> (20 GB): Default model for multi agent work</li>
+<li><strong>Qwen3.8-27B-Q8_0</strong> (27 GB): For tasks that need more quality and can take longer to finish</li>
+<li><strong>Qwen3.8-27B-ROCmFP4-FAST</strong> (14 GB): For one-shot tasks that need to finish faster and can compromise a little on quality. This one needs the <a href="https://github.com/julianmb/q38rocm">julianmb/q38rocm</a> fork, it will not load on stock llama.cpp.</li>
+</ul>
+<p>Decode on this hardware is memory bandwidth bound, not compute bound. At 7.27 tok/s on a 27.1 GiB file the GPU is pulling about 212 GB/s against the roughly 256 GB/s the LPDDR5X tops out at, so it is running at 83% of theoretical peak. That is why the sizes above track the speed ordering almost exactly. Smaller file, fewer bytes per token, faster decode.</p>
+<h2 id="optimizing-qwen-38-for-speed-and-efficiency">Optimizing Qwen 3.8 for speed and efficiency</h2>
+<h3 id="config-tuning-with-presets">Config tuning with presets</h3>
+<p>For all the models, I use 128k context rather than full 256k to avoid very long prefills and slow downs at long context. I also use the following settings for all the models to get best performance and quality. The settings are applied using LlamaStash presets so that I can easily switch between different models and settings via TUI or CLI and can reproduce the settings easily.</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="yaml"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4">presets</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#979EBA;--0fs:italic"># qwen35 arch: hybrid SSM, full attention every 4th layer, one embedded MTP</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">  </span><span style="--0:#979EBA;--0fs:italic"># layer at blk.64, native ctx 262144. Draft n=5 measured best, see below.</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">  </span><span style="--0:#8AADF4">Qwen3.8-27B-*</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">    </span><span style="--0:#8AADF4">default</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">coding-xhigh</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">    </span><span style="--0:#8AADF4">entries</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent">      </span><span style="--0:#8AADF4">coding-xhigh</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">knobs</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent">          </span><span style="--0:#8AADF4">mtp</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">true</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent">          </span><span style="--0:#8AADF4">mtp-draft-n</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">5</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent">          </span><span style="--0:#8AADF4">ctx-size</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">131072</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span class="indent">          </span><span style="--0:#8AADF4">n-gpu-layers</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">99</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent">          </span><span style="--0:#8AADF4">flash-attn</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">true</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span class="indent">          </span><span style="--0:#8AADF4">no-mmap</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">true</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent">          </span><span style="--0:#8AADF4">parallel</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">1</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">extras</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--reasoning-format</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">deepseek</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--reasoning-preserve</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--reasoning-effort</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">xhigh</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--cont-batching</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--spec-draft-p-min</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;0.0&quot;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--temperature</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;0.0&quot;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--presence-penalty</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;0.0&quot;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">29</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--repeat-penalty</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">30</div></div><div class="code"><span class="indent">          </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;1.0&quot;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="presets:  # qwen35 arch: hybrid SSM, full attention every 4th layer, one embedded MTP  # layer at blk.64, native ctx 262144. Draft n=5 measured best, see below.  Qwen3.8-27B-*:    default: coding-xhigh    entries:      coding-xhigh:        knobs:          mtp: true          mtp-draft-n: 5          ctx-size: 131072          n-gpu-layers: 99          flash-attn: true          no-mmap: true          parallel: 1        extras:          - --reasoning-format          - deepseek          - --reasoning-preserve          - --reasoning-effort          - xhigh          - --cont-batching          - --spec-draft-p-min          - &#34;0.0&#34;          - --temperature          - &#34;0.0&#34;          - --presence-penalty          - &#34;0.0&#34;          - --repeat-penalty          - &#34;1.0&#34;"><div></div></button></div></figure></div>
+<p>A wildcard key like <code>Qwen3.8-27B-*</code> covers every quant of the model, so Q6_K, Q8_0 and the rest all inherit one config. <code>coding-medium</code> is the same block with <code>--reasoning-effort medium</code>, and I will come back to that below.</p>
+<p>Two of those values are important.</p>
+<p><code>mtp: true</code> turns on Multi Token Prediction, the speculative decoding head that ships inside the GGUF itself. It is worth 2.3x to 3.1x on decode depending on the build, and nothing else in the whole config comes close. The model verifies every drafted token, so on stock llama.cpp the output does not change, only the speed.</p>
+<p><code>--temperature 0.0</code> is deliberate, and it goes against Qwen’s own guidance, which asks for temp 1.0 / top-p 0.95 / top-k 20 in thinking mode. I measured the official sampling and it cost <strong>2.8x wall time</strong>, 772 seconds against 273 on the same two questions, because MTP draft acceptance collapses from 59.6% to 45.7% when the sampler stops agreeing with the drafter. The vendor spec assumes you are not running speculative decoding. Greedy also makes generation byte reproducible, which is what let me tell a real difference between two configs from a lucky roll.</p>
+<p>Flash Next gets its own preset, mostly because it has to be pinned to the fork build that can load its draft heads.</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="yaml"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4">Qwen3.8-Flash-Next-*</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span class="indent">  </span><span style="--0:#8AADF4">default</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">coding-xhigh</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span class="indent">  </span><span style="--0:#8AADF4">entries</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">4</div></div><div class="code"><span class="indent">    </span><span style="--0:#8AADF4">coding-xhigh</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">5</div></div><div class="code"><span class="indent">      </span><span style="--0:#8AADF4">server</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">llamacpp-UnslothMTP</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">6</div></div><div class="code"><span class="indent">      </span><span style="--0:#8AADF4">knobs</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">7</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">ctx-size</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">131072</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">8</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">flash-attn</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">true</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">9</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">mode</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">chat</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">10</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">mtp</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">true</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">11</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">mtp-draft-n</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">4</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">12</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">n-gpu-layers</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">99</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">13</div></div><div class="code"><span class="indent">        </span><span style="--0:#8AADF4">parallel</span><span style="--0:#8BD5CA">:</span><span style="--0:#CAD3F5"> </span><span style="--0:#F5A97F">1</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">14</div></div><div class="code"><span class="indent">      </span><span style="--0:#8AADF4">extras</span><span style="--0:#8BD5CA">:</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">15</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--reasoning-format</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">16</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">deepseek</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">17</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--reasoning-preserve</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">18</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--reasoning-effort</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">19</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">xhigh</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">20</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--cont-batching</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">21</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--spec-draft-p-min</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">22</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;0.0&quot;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">23</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--temperature</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">24</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;0.0&quot;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">25</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--presence-penalty</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">26</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;0.0&quot;</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">27</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--repeat-penalty</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">28</div></div><div class="code"><span class="indent">        </span><span style="--0:#979EBA">-</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">&quot;1.0&quot;</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="Qwen3.8-Flash-Next-*:  default: coding-xhigh  entries:    coding-xhigh:      server: llamacpp-UnslothMTP      knobs:        ctx-size: 131072        flash-attn: true        mode: chat        mtp: true        mtp-draft-n: 4        n-gpu-layers: 99        parallel: 1      extras:        - --reasoning-format        - deepseek        - --reasoning-preserve        - --reasoning-effort        - xhigh        - --cont-batching        - --spec-draft-p-min        - &#34;0.0&#34;        - --temperature        - &#34;0.0&#34;        - --presence-penalty        - &#34;0.0&#34;        - --repeat-penalty        - &#34;1.0&#34;"><div></div></button></div></figure></div>
+<blockquote>
+<p>⚠️ <strong>Never set <code>no-mmap</code> on Flash Next.</strong> The model has a 26.8 GiB per-layer token embedding table that llama.cpp streams lazily from the file mapping, and it is read on every single token. Turning mmap off makes the loader pull the whole thing into anonymous memory instead, which is the wrong direction on a box with about 20 GiB of headroom. On the 27b, which has no lazy tensor, <code>no-mmap</code> is harmless.</p>
+</blockquote>
+<h3 id="named-launches">Named launches</h3>
+<p>LlamaStash has a <code>--name</code> option that lets you run multiple launches of the same model at the same time. Each <code>--name</code> is its own process with its own KV cache and presets. This is useful for running multiple agents in parallel, each with its own context and reasoning mode for example. From the TUI, <code>Alt+Enter</code> prompts for the name instead.</p>
+<blockquote>
+<p>💡 Named launches landed in LlamaStash 0.3.0. Before that, a second launch of the same model would start fine but was unaddressable, because the proxy handed every request to the first Ready launch it walked past.</p>
+</blockquote>
+<h4 id="reasoning-effort-switch-with-presets">Reasoning effort switch with presets</h4>
+<p>I have presets duplicated with both <code>xhigh</code> and <code>medium</code> reasoning effort so that I can switch them via Pi’s model selector using LlamaStash named launches. The reasoning effort setting steers the models at the chat template level. <code>medium</code> has no steering. <code>xhigh</code> injects a “think carefully” instruction. <code>low</code> injects a “keep your thinking brief” instruction.</p>
+<blockquote>
+<ul>
+<li><strong><code>xhigh</code></strong> (the template default): “Reasoning effort is set to xhigh. Please think carefully through the task, validate key assumptions, consider plausible alternatives, and prioritize correctness, consistency, and clarity in the final answer.”</li>
+<li><strong><code>low</code></strong>: “Reasoning effort is set to low. Keep your thinking brief and focused, moving directly to the conclusion without unnecessary elaboration.”</li>
+<li><strong><code>medium</code></strong>: nothing at all. There is no branch for it in the template, so the instruction string stays empty.</li>
+</ul>
+</blockquote>
+<p>The model truly obliges these short instructions and the difference is very obvious in its output.</p>
+<p>Reasoning effort is a server flag, not a per-request one. One <code>llama-server</code> process serves exactly one mode, so switching between <code>xhigh</code> and <code>medium</code> used to mean restarting the model and waiting out a cold load. Named launches fix that: run the same model twice under different presets, and pick the mode from Pi’s <code>/model</code> picker.</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">run</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">Qwen3.8-27B-UD-Q6_K</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--preset</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">coding-xhigh</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--name</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">xhigh</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">run</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">Qwen3.8-27B-UD-Q6_K</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--preset</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">coding-medium</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--name</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">medium</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-xhigh --name xhighllamastash run Qwen3.8-27B-UD-Q6_K --preset coding-medium --name medium"><div></div></button></div></figure></div>
+<p>Now <code>Qwen3.8-27B-UD-Q6_K@xhigh</code> and <code>@medium</code> both show up in Pi. <code>@medium</code> for the bulk of the work, <code>@xhigh</code> when a task needs the model to actually stop and think, switched mid-session without a restart.</p>
+<h4 id="parallel-coding-agents">Parallel coding agents</h4>
+<p>I can also use a planner agent to spawn multiple coder agents with different reasoning effort and context, addressing them as <code>Qwen3.8-27B-UD-Q6_K@planner</code>, <code>@coder-one</code> and <code>@coder-two</code>. This is very useful when I want to run multiple agents in parallel for a complex task.</p>
+<div class="expressive-code"><figure class="frame is-terminal"><figcaption class="header"><span class="title"></span><span class="sr-only">Terminal window</span></figcaption><pre data-language="bash"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">run</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">Qwen3.8-27B-UD-Q6_K</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--preset</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">coding-xhigh</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--name</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">planner</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">run</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">Qwen3.8-27B-UD-Q6_K</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--preset</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">coding-medium</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--name</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">coder-one</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#8AADF4;--0fs:italic">llamastash</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">run</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">Qwen3.8-27B-UD-Q6_K</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--preset</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">coding-low</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">--name</span><span style="--0:#CAD3F5"> </span><span style="--0:#A6DA95">coder-two</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-xhigh --name plannerllamastash run Qwen3.8-27B-UD-Q6_K --preset coding-medium --name coder-onellamastash run Qwen3.8-27B-UD-Q6_K --preset coding-low --name coder-two"><div></div></button></div></figure></div>
+<p>Three Q6_K launches at 128k is roughly 93 GiB of the 125.5 GiB available, so three is the comfortable ceiling on this machine.</p>
+<h4 id="what-about---parallel-instead">What about <code>--parallel</code> instead?</h4>
+<p>One server with <code>--parallel N</code> also serves N sessions off a single copy of the weights, and it looks like the cheaper option. It is cheaper, and on a current llama.cpp it is also the faster one. It is a good option when you want to run multiple sessions using the same model preset. It still does not replace the setup above, but the reason is narrower than I first thought.</p>
+<p>Three sessions, 30k of context each, 1024 tokens out, Q6_K with MTP, per-session window pinned to 40960 in both arms. Wall clock is the cold turn, the one that starts a session:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Three sessions at 30k</th><th style="text-align:right"><code>--parallel 3</code></th><th style="text-align:right">3 named launches</th></tr></thead><tbody><tr><td>Prefill, aggregate</td><td style="text-align:right"><strong>453 tok/s</strong></td><td style="text-align:right">146 tok/s</td></tr><tr><td>Decode, average per session</td><td style="text-align:right">5.7 tok/s</td><td style="text-align:right">5.3 tok/s</td></tr><tr><td>Effective decode</td><td style="text-align:right"><strong>4.95 tok/s</strong></td><td style="text-align:right">3.24 tok/s</td></tr><tr><td>Cold turn, wall clock</td><td style="text-align:right"><strong>557 s</strong></td><td style="text-align:right">815 s</td></tr><tr><td>Tokens generated</td><td style="text-align:right">2,755</td><td style="text-align:right">2,640</td></tr><tr><td>Draft acceptance</td><td style="text-align:right">0.59 / 0.62 / 0.59</td><td style="text-align:right">0.55 / 0.53 / 0.59</td></tr><tr><td>Memory</td><td style="text-align:right"><strong>30.8 GiB</strong></td><td style="text-align:right">70.6 GiB</td></tr><tr><td>Context each at <code>-c 131072</code></td><td style="text-align:right">43.8k</td><td style="text-align:right"><strong>128k</strong></td></tr><tr><td>Thinking modes available</td><td style="text-align:right">one, server wide</td><td style="text-align:right"><strong>one each</strong></td></tr></tbody></table>
+<p>The gap is prefill, not decode. Continuous batching interleaves three prompts on one server at 453 tok/s aggregate, while three separate processes thrash each other down to 46-53 tok/s each, so the same 30k window takes 164-326 s batched against 569-645 s split. Decode itself is near enough a tie, 5.7 against 5.3 tok/s per session. It is the prefill that puts <code>--parallel 3</code> at two thirds the wall clock on less than half the memory, for 4% more tokens generated. Effective decode in the table is tokens generated divided by wall clock, which is the number you actually sit through. Follow-up turns favour it too, by roughly 1.7x, though I measured those on the previous llama.cpp build.</p>
+<p>So the case against it is just the last two rows. The context divides rather than shares: with unified KV off, <code>n_ctx_seq = n_ctx / n_parallel</code>, so <code>-c 131072 --parallel 3</code> leaves each session 43,776 tokens instead of 128k. Turning <code>--kv-unified</code> on gives every session the whole window back for no extra memory, but it cost 66% more cold-turn time at three slots when I measured it, so I leave it off. And reasoning effort is a server flag, so one <code>--parallel 3</code> launch gives every session the same thinking mode, which is the whole point of the setup above. Named launches are what I use to keep <code>xhigh</code> and <code>medium</code> both addressable, and <code>--parallel</code> is what I would reach for to run several sessions on one preset.</p>
+<p>One more thing worth knowing: slot affinity is a heuristic, not a binding, so a request arriving while its own slot is busy lands on another session’s slot and evicts its cache.</p>
+<blockquote>
+<p>⚠️ Update your llama.cpp before trusting any of this. On b10803 the <code>--parallel</code> arms were not merely slower, they were broken: three sessions cold-prefilling 30k at once came back after generating 2, 586 and 36 tokens with draft acceptance at 0.000, against a clean 1024 each from separate launches. That is wrong output, not slow output. On b10888 the same test gives healthy acceptance on every stream and the table above. The separate-launch arms barely moved between the two builds (815 s against 797 s).</p>
+</blockquote>
+<p>Caveats: one run per cell, one machine, one model, llama.cpp b10888. Upstream is actively changing this area, so re-measure after a bump rather than trusting the table.</p>
+<h2 id="some-benchmarks">Some benchmarks</h2>
+<p>A caveat before the tables. These come from three separate measurement sessions on different builds over about three weeks, so read each table on its own and do not cross reference cells between them. Everything is on the same Strix Halo laptop, on AC, with the power profile pinned to <code>performance</code>, greedy sampling, and decode and prefill taken from llama.cpp’s own <code>timings</code> block rather than from wall clock.</p>
+<p>First, the 27b on a short prompt with an empty window. This is the best case number, it makes MTP look like magic.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Build and quant</th><th style="text-align:right">Decode, MTP off</th><th style="text-align:right">Decode, MTP on</th><th style="text-align:right">Prefill (4k prompt)</th><th style="text-align:right">Draft acceptance</th></tr></thead><tbody><tr><td>Stock ROCm, Q8_0 (27 GB)</td><td style="text-align:right">7.3 t/s</td><td style="text-align:right"><strong>22.4 t/s</strong> (n=5)</td><td style="text-align:right">270 t/s</td><td style="text-align:right">73%</td></tr><tr><td>Stock Vulkan, Q8_0 (27 GB)</td><td style="text-align:right">7.4 t/s</td><td style="text-align:right">22.6 t/s (n=5)</td><td style="text-align:right">201 t/s</td><td style="text-align:right">73%</td></tr><tr><td>ROCmFP4 fork, FAST (14 GB)</td><td style="text-align:right">13.0 t/s</td><td style="text-align:right"><strong>29.9 t/s</strong> (n=6)</td><td style="text-align:right">259 t/s</td><td style="text-align:right">84%</td></tr></tbody></table>
+<p>MTP is a 3.1x win on Q8_0 and 2.3x on the ROCmFP4 build. A draft length of 5 beat the backend default of 3 at every context length I tested, with no crossover.</p>
+<p>Now the same thing with the window actually full, which is the number that matters for agentic coding. Every row here has MTP on.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Context</th><th style="text-align:right">Q8_0 prefill</th><th style="text-align:right">Q8_0 decode</th><th style="text-align:right">ROCmFP4 prefill</th><th style="text-align:right">ROCmFP4 decode</th></tr></thead><tbody><tr><td>empty</td><td style="text-align:right">270 t/s</td><td style="text-align:right">22.4 t/s</td><td style="text-align:right">259 t/s</td><td style="text-align:right">29.9 t/s</td></tr><tr><td>32k</td><td style="text-align:right">210 t/s</td><td style="text-align:right">15.6 t/s</td><td style="text-align:right">193 t/s</td><td style="text-align:right">19.6 t/s</td></tr><tr><td>64k</td><td style="text-align:right">164 t/s</td><td style="text-align:right">14.2 t/s</td><td style="text-align:right">124 t/s</td><td style="text-align:right">16.6 t/s</td></tr><tr><td>128k</td><td style="text-align:right">115 t/s</td><td style="text-align:right">11.3 t/s</td><td style="text-align:right">66 t/s</td><td style="text-align:right">13.2 t/s</td></tr><tr><td>256k</td><td style="text-align:right">71 t/s</td><td style="text-align:right">5.4 t/s</td><td style="text-align:right">failed</td><td style="text-align:right">failed</td></tr></tbody></table>
+<p>MTP’s payoff shrinks as the window fills, from 3.1x on an empty window down to 1.15x at a full 256k, because the verify pass gets more expensive as the KV cache grows even though acceptance holds up fine. And the ROCmFP4 fork’s advantage is decode, not prefill. It falls behind stock Q8_0 on prompt processing by 128k. That, plus the prefill times, is the real reason I cap the window at 128k instead of running the native 256k.</p>
+<p>Here is what one actual Pi turn looks like on the Q6_K I use day to day, pulled straight from the server log.</p>
+<div class="expressive-code"><figure class="frame"><figcaption class="header"></figcaption><pre data-language="text"><code><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">1</div></div><div class="code"><span style="--0:#cad3f5">prompt eval: 181633 ms / 31410 tokens  (172.9 t/s)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">2</div></div><div class="code"><span style="--0:#cad3f5">eval:          6231 ms /    89 tokens  ( 14.1 t/s)</span></div></div><div class="ec-line"><div class="gutter"><div class="ln" aria-hidden="true">3</div></div><div class="code"><span style="--0:#cad3f5">draft acceptance = 0.835 (71 accepted / 85 generated), mean len = 5.18</span></div></div></code></pre><div class="copy"><div aria-live="polite"></div><button title="Copy to clipboard" data-copied="Copied!" data-code="prompt eval: 181633 ms / 31410 tokens  (172.9 t/s)eval:          6231 ms /    89 tokens  ( 14.1 t/s)draft acceptance = 0.835 (71 accepted / 85 generated), mean len = 5.18"><div></div></button></div></figure></div>
+<p>Three minutes of prefill on a 31k token transcript, then 14 tok/s of decode. The follow up turn only had to prefill the 4,770 new tokens and came back in 45 seconds. That gap between a cold session and a warm one is the single biggest thing that shapes how these models feel to work with.</p>
+<p>And the 27b against Flash Next on five real coding tasks, with the generated code executed against hidden tests.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Model</th><th style="text-align:right">Correctness</th><th style="text-align:right">Tokens</th><th style="text-align:right">Wall clock</th></tr></thead><tbody><tr><td>Qwen3.8-Flash-Next</td><td style="text-align:right">5/5</td><td style="text-align:right">2,320</td><td style="text-align:right"><strong>76.5 s</strong></td></tr><tr><td>Qwen3.8-27B ROCmFP4 FAST</td><td style="text-align:right">5/5</td><td style="text-align:right">4,223</td><td style="text-align:right">289.8 s</td></tr></tbody></table>
+<p>Both got everything right. Flash Next just used 45% fewer tokens to say the same thing. On one task the 27b spent 1,784 tokens where Flash Next spent 424. Five tasks is not a correctness ceiling though, it measures verbosity, and a harder suite would be needed to separate them on capability.</p>
+<h3 id="what-did-not-help">What did not help</h3>
+<p>About as useful as the wins, and it saved me from baking a few of these into my config:</p>
+<ul>
+<li><strong>Qwen’s official sampling.</strong> 2.8x slower, covered above.</li>
+<li><strong><code>turbo4</code> for the V cache on ROCmFP4.</strong> 49% slower at 10k context, and it changed what the model generated: more thinking, shorter answers.</li>
+<li><strong><code>--reasoning-budget</code>.</strong> Completely inert. Dropping it from 8192 to 2000 produced byte identical output, because the model stops well under the budget anyway. The client’s <code>maxTokens</code> is the cap that actually binds.</li>
+<li><strong><code>repeat-penalty 1.05</code>.</strong> The one config arm that got facts wrong in its answers. Since greedy output is deterministic, that is a reproducible property of the setting rather than a bad roll. Upstream warns that penalties “can force rare-token gibberish in long generations”, so I left it at 1.0.</li>
+<li><strong>GPU clock pinning.</strong> Writing <code>high</code> to <code>power_dpm_force_performance_level</code> silently hard hung the machine about 25 seconds later and needed a power cycle. Do not try this on Strix Halo. Auto mode already boosts to 1900-2500 MHz under load anyway.</li>
+</ul>
+<p>The two knobs that did earn their place: <code>--ubatch-size 512</code> over 1024, worth about 4% on cold prefill and reproduced across rounds, and running the ROCmFP4 fork on <code>Vulkan0</code> instead of <code>ROCm0</code>, worth 24% on decode.</p>
+<h2 id="caveats">Caveats</h2>
+<p>These are the issues and learnings so far from using these models.</p>
+<p><strong>Disclaimer</strong>: A lot of my coding sessions were not run under ideal conditions. I’m currently on vacation and I didn’t bring the laptop’s dedicated power brick that supplies 180W peak. Instead I have a 100W PD GaN charger that cannot sustain a full GPU load, so I had GPU resets and battery drain shutdowns causing model restarts. I’m confident the overall experience will be better than what I had. I will test this setup with the proper power brick when I get back and will update this post with the findings.</p>
+<ul>
+<li>
+<p>The most annoying issue, IMO, is the prefill times. The first prompt on cold start (session start, model restart, after compaction etc.) takes a long time to process. On my setup a 31k token transcript takes about 3 minutes, and a genuinely full 128k window is closer to 18 minutes at the 115 tok/s that table above shows. Subsequent prompts are processed almost immediately due to cache and decode is 10 to 15 tok/s, which is not bad at all, since you see stuff happening and it doesn’t feel that slow.</p>
+</li>
+<li>
+<p>Define the same context length in the Pi model definition as the launch, to avoid abrupt compaction. With the proper context length Pi will compact more efficiently and you lose less context.</p>
+</li>
+<li>
+<p><strong>Set the client’s <code>maxTokens</code> to at least 8192.</strong> This is the single most impactful setting and it lives in the client, not in the server preset. Below that, the model burns the whole budget thinking, returns <code>finish_reason: length</code>, and you get an empty string after eight minutes of waiting. I lost a whole evening to this before I worked out where it was coming from.</p>
+</li>
+<li>
+<p><strong>Thinking is 90 to 95% of the generated tokens.</strong> One 40k context question produced 29,006 characters of thinking and 1,426 characters of answer. That ratio, not the decode rate, is what actually sets how long a task takes. That is why <code>medium</code> is so much faster than <code>xhigh</code>, and why it is my default for most tasks.</p>
+</li>
+<li>
+<p><strong>The ROCmFP4 FAST build has no prompt caching.</strong> Every request reports <code>cache_n: 0</code>, so repeated prompts pay a full prefill each time. Stock llama.cpp caches the prefix. In an agent loop that mostly appends to a transcript, that turns the fastest-decoding build into the slowest one to actually finish. It is why the FAST build is a special-case tool for one-shots and not the default.</p>
+</li>
+<li>
+<p><strong>The fork’s speculative path is not strictly greedy by default.</strong> It logs <code>Qwen MTP strict verification is disabled; greedy output may diverge</code>, and completion lengths drift for an identical prompt (152, 158 and 160 tokens across three runs). Turning <code>--spec-mtp-strict-qwen</code> on costs nothing measurable, 1135 seconds against 1136, so there is no reason to leave it off.</p>
+</li>
+<li>
+<p><strong>Not really a caveat: Strix Halo is memory bound, not GPU clock bound, for these models.</strong> This changes which knobs are worth touching. Decode runs at about 83% of the memory bus’s theoretical peak, so it barely responds to power. Prompt processing is the compute bound half and does respond. Sweeping the laptop’s power profile, prefill gained <strong>12.7%</strong> going from 55W to 90W while decode gained only <strong>4.2%</strong>, and most of that came in the first step from 55W to 70W. Past 70W the returns flatten, which is where I leave it. This particular sweep was measured on Qwen3.6-27B-Q6_K, so read the ratio rather than the absolute numbers.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Power profile</th><th style="text-align:right">Prefill (pp4096)</th><th style="text-align:right">Decode (tg256)</th></tr></thead><tbody><tr><td>55W</td><td style="text-align:right">284.4 t/s</td><td style="text-align:right">8.78 t/s</td></tr><tr><td>70W</td><td style="text-align:right">307.6 t/s</td><td style="text-align:right">8.89 t/s</td></tr><tr><td>90W</td><td style="text-align:right">320.6 t/s</td><td style="text-align:right">9.15 t/s</td></tr></tbody></table>
+</li>
+</ul>
+<h2 id="is-it-viable">Is it viable</h2>
+<p>So can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? It 100% can if you are patient. If you want results fast it’s probably not for you, but if you don’t mind it taking 2 or 3 times longer than a frontier cloud model to finish a task, and you are willing to spend some time setting it up, then yes, it can replace Claude Opus 4.6 to 4.8 for agentic coding and for use with tools like <a href="https://hermes-agent.nousresearch.com/">Hermes</a>, which I plan to run alongside Pi. I will be using these as my primary coding models until the next best local model comes out. Can’t wait for Qwen 4 to drop, I have a gut feeling that we will have an Opus 5 class model that can run comfortably on consumer GPUs (I mean you can already run Kimi K3 but it isn’t practical for most people). I will be testing it as soon as it comes out and will share my findings here.</p>
+<hr/>
+<p>If you like this article, please leave a like or a comment.</p>
+<p>You can follow me on <a href="https://bsky.app/profile/deepu105.bsky.social">Bluesky</a>, <a href="https://mastodon.social/@deepu105">Mastodon</a>, and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p> <hr class="my-12 border-[var(--color-border)]"> <div class="not-prose mb-8 flex flex-wrap gap-2"> <a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#ai </a><a href="/tags/#llamacpp" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#llamacpp </a><a href="/tags/#localllm" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#localllm </a><a href="/tags/#qwen38" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#qwen38 </a><a href="/tags/#claudeopus" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#claudeopus </a> </div><nav class="not-prose mt-10 grid gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 sm:grid-cols-2"> <p class="sm:col-span-2 text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+More in <a href="/series/gnu-linux-environment-for-developers/" class="hover:underline">GNU/Linux Environment for Developers</a> </p> <a rel="prev" href="/introducing-llamastash/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4 transition hover:border-[var(--color-accent)]"> <span class="text-xs text-[var(--color-fg-subtle)]">← Previous in series</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher </span> </a> <span></span> </nav><nav class="not-prose mt-10 grid gap-4 border-t border-[var(--color-border)] pt-8 sm:grid-cols-2"> <span></span> <a href="/introducing-llamastash/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 text-right transition hover:border-[var(--color-border-strong)]"> <span class="text-xs text-[var(--color-fg-subtle)]">Older →</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher </span> </a> </nav>  </div> <section class="not-prose mt-12 border-t border-[var(--color-border)] pt-8"> <h2 class="font-display mb-4 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Comments</h2> <div id="giscus-mount"></div> </section> <script src="https://giscus.app/client.js" data-repo="deeputech/deeputech.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk" data-category="Comments" data-category-id="DIC_kwDODBl9a84C8yBt" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async>(function(){const config = {"repo":"deeputech/deeputech.github.io","repoId":"MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk","category":"Comments","categoryId":"DIC_kwDODBl9a84C8yBt","mapping":"pathname","strict":"0","reactionsEnabled":"1","emitMetadata":"0","inputPosition":"top","lang":"en"};
+})();</script> <script>
+  // Re-theme Giscus iframe when the site theme toggles.
+  (function () {
+    function send(theme) {
+      var iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme === "dark" ? "dark" : "light" } } }, "https://giscus.app");
+    }
+    var html = document.documentElement;
+    var observer = new MutationObserver(function () {
+      send(html.getAttribute("data-theme") || "light");
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["data-theme"] });
+  })();
+</script> </article> <aside class="hidden lg:block"> <div class="sticky top-24"> <nav class="toc text-sm" aria-label="Table of contents" data-astro-cid-obewoz47><p class="font-display mb-3 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase" data-astro-cid-obewoz47>
+On this page
+</p><ul class="space-y-1.5" data-astro-cid-obewoz47><li class data-astro-cid-obewoz47><a href="#qwen-38-27b" data-toc-target="qwen-38-27b" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Qwen 3.8 27b</a></li><li class data-astro-cid-obewoz47><a href="#qwen-38-flash-next" data-toc-target="qwen-38-flash-next" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Qwen 3.8 Flash Next</a></li><li class data-astro-cid-obewoz47><a href="#my-current-setup" data-toc-target="my-current-setup" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>My current setup</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#hardware-strix-halo" data-toc-target="hardware-strix-halo" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Hardware: Strix Halo</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#orchestrator-llamastash" data-toc-target="orchestrator-llamastash" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Orchestrator: LlamaStash</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#harness-pi" data-toc-target="harness-pi" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Harness: Pi</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#model-quants" data-toc-target="model-quants" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Model Quants</a></li><li class data-astro-cid-obewoz47><a href="#optimizing-qwen-38-for-speed-and-efficiency" data-toc-target="optimizing-qwen-38-for-speed-and-efficiency" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Optimizing Qwen 3.8 for speed and efficiency</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#config-tuning-with-presets" data-toc-target="config-tuning-with-presets" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Config tuning with presets</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#named-launches" data-toc-target="named-launches" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Named launches</a></li><li class data-astro-cid-obewoz47><a href="#some-benchmarks" data-toc-target="some-benchmarks" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Some benchmarks</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#what-did-not-help" data-toc-target="what-did-not-help" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>What did not help</a></li><li class data-astro-cid-obewoz47><a href="#caveats" data-toc-target="caveats" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Caveats</a></li><li class data-astro-cid-obewoz47><a href="#is-it-viable" data-toc-target="is-it-viable" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Is it viable</a></li></ul></nav><script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".toc-link"));
+    if (!links.length) return;
+    var bySlug = {};
+    links.forEach(function (l) {
+      bySlug[l.getAttribute("data-toc-target")] = l;
+    });
+    var headings = Object.keys(bySlug)
+      .map(function (slug) {
+        return document.getElementById(slug);
+      })
+      .filter(Boolean);
+    if (!headings.length) return;
+
+    var current = null;
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // Find the topmost intersecting heading.
+        var visible = entries
+          .filter(function (e) {
+            return e.isIntersecting;
+          })
+          .sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+        if (visible.length) {
+          var newCurrent = visible[0].target.id;
+          if (newCurrent !== current) {
+            if (current && bySlug[current]) bySlug[current].removeAttribute("data-active");
+            current = newCurrent;
+            if (bySlug[current]) bySlug[current].setAttribute("data-active", "true");
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -70% 0px" },
+    );
+    headings.forEach(function (h) {
+      observer.observe(h);
+    });
+  })();
+</script> </div> </aside> </div> </div>  </main> <aside class="alert-bar mt-16"> <div class="mx-auto max-w-3xl px-4 py-6 text-center text-sm text-[var(--color-fg-muted)] sm:px-6"> <p>
+Never miss a story from Technorage — follow me on
+<a rel="me" target="_blank" href="https://mastodon.social/@deepu105" class="text-[var(--color-accent)] hover:underline">Mastodon</a>,
+<a rel="me" target="_blank" href="https://www.linkedin.com/in/deepu05" class="text-[var(--color-accent)] hover:underline">LinkedIn</a>,
+      or
+<a rel="me" target="_blank" href="https://twitter.com/deepu105" class="text-[var(--color-accent)] hover:underline">Twitter</a>.
+      Or
+<a href="/feed.xml" class="text-[var(--color-accent)] hover:underline">subscribe via RSS</a>.
+</p> <p class="mt-2 text-xs text-[var(--color-fg-subtle)]">
+This site uses Google Analytics which places
+<a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage#gtagjs_google_analytics_4_-_cookie_usage" target="_blank" rel="noopener noreferrer" class="underline-offset-2 hover:underline">a few cookies</a>. By using the site, you agree to their use.
+</p> </div> </aside> <footer class="border-t border-[var(--color-border)] py-10 text-sm text-[var(--color-fg-muted)]"> <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 sm:px-6 md:flex-row md:items-center md:justify-between"> <div class="flex flex-col gap-1"> <span>
+© 2026 Deepu K Sasidharan ·
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" class="underline-offset-2 hover:underline">
+CC BY 4.0
+</a> </span> <span class="text-xs text-[var(--color-fg-subtle)]">
+Built with <a href="https://astro.build" class="hover:underline">Astro</a> ·
+        Hosted on <a href="https://pages.github.com/" class="hover:underline">GitHub Pages</a> </span> </div> <nav class="flex flex-wrap gap-x-4 gap-y-2 text-xs"> <a href="/blogs/" class="hover:text-[var(--color-fg)]">Blog</a> <a href="/series/" class="hover:text-[var(--color-fg)]">Series</a> <a href="/tags/" class="hover:text-[var(--color-fg)]">Tags</a> <a href="/feed.xml" class="hover:text-[var(--color-fg)]">RSS</a> <a href="/comment-policy/" class="hover:text-[var(--color-fg)]">Comments</a> </nav> </div> </footer> <dialog id="search-dialog" class="m-auto w-full max-w-xl rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-0 text-[var(--color-fg)] shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm"> <div class="flex items-center gap-3 border-b border-[var(--color-border)] px-4 py-3"> <svg class="h-4 w-4 text-[var(--color-fg-subtle)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <input id="search-input" type="search" placeholder="Search posts…" autocomplete="off" class="w-full bg-transparent text-base text-[var(--color-fg)] outline-none placeholder:text-[var(--color-fg-subtle)]"> <kbd class="rounded border border-[var(--color-border)] px-1.5 py-0.5 font-mono text-xs text-[var(--color-fg-subtle)]">esc</kbd> </div> <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2 text-sm"> <p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">
+Type to search the blog.
+</p> </div> </dialog> <script>
+  (function () {
+    var dialog = document.getElementById("search-dialog");
+    var input = document.getElementById("search-input");
+    var results = document.getElementById("search-results");
+    var trigger = document.getElementById("search-trigger");
+    if (!dialog || !input || !results) return;
+
+    var pagefind = null;
+    var loading = false;
+
+    async function loadPagefind() {
+      if (pagefind || loading) return;
+      loading = true;
+      try {
+        // Pagefind is generated at /pagefind/pagefind.js after `pagefind --site dist`
+        pagefind = await import(/* @vite-ignore */ "/pagefind/pagefind.js");
+        await pagefind.options({ excerptLength: 30 });
+      } catch (e) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Search index unavailable in dev. Run <code>npm run build</code> then <code>npm run preview</code>.</p>';
+      } finally {
+        loading = false;
+      }
+    }
+
+    function open() {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+      loadPagefind();
+      setTimeout(function () {
+        input.focus();
+      }, 0);
+    }
+    function close() {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+      input.value = "";
+      results.innerHTML =
+        '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+    }
+
+    if (trigger) trigger.addEventListener("click", open);
+    document.addEventListener("keydown", function (e) {
+      var isMac = /Mac|iPad|iPhone/.test(navigator.platform);
+      var isCmdK = (isMac ? e.metaKey : e.ctrlKey) && e.key === "k";
+      if (isCmdK) {
+        e.preventDefault();
+        open();
+      } else if (e.key === "Escape" && dialog.open) {
+        e.preventDefault();
+        close();
+      }
+    });
+    dialog.addEventListener("click", function (e) {
+      // close on backdrop click
+      if (e.target === dialog) close();
+    });
+
+    var lastQuery = "";
+    var debounceTimer = null;
+    input.addEventListener("input", function () {
+      var q = input.value.trim();
+      if (q === lastQuery) return;
+      lastQuery = q;
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () {
+        runSearch(q);
+      }, 80);
+    });
+
+    async function runSearch(q) {
+      if (!q) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+        return;
+      }
+      if (!pagefind) {
+        await loadPagefind();
+        if (!pagefind) return;
+      }
+      var search = await pagefind.search(q);
+      if (!search || !search.results.length) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">No results for &ldquo;' +
+          escapeHtml(q) +
+          '&rdquo;</p>';
+        return;
+      }
+      var top = await Promise.all(search.results.slice(0, 8).map(function (r) { return r.data(); }));
+      results.innerHTML = top
+        .map(function (d) {
+          return (
+            '<a href="' +
+            d.url +
+            '" class="block rounded-lg px-3 py-2.5 hover:bg-[var(--color-bg-subtle)]">' +
+            '<span class="font-display block text-sm font-semibold text-[var(--color-fg)]">' +
+            escapeHtml(d.meta && d.meta.title ? d.meta.title : d.url) +
+            "</span>" +
+            '<span class="mt-0.5 block text-xs text-[var(--color-fg-muted)]">' +
+            d.excerpt +
+            "</span>" +
+            "</a>"
+          );
+        })
+        .join("");
+    }
+
+    function escapeHtml(s) {
+      return s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  })();
+</script> </body></html>
