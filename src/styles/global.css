@@ -91,11 +91,16 @@ body {
 /* Safety nets — keep media + tables + code blocks from forcing the
    page wider than the viewport. Code blocks remain horizontally
    scrollable inside their own frame. */
-img,
-video,
-iframe {
-  max-width: 100%;
-  height: auto;
+/* In @layer base so an explicit size utility (h-full on a thumbnail inside an
+   aspect-ratio box) still wins. Unlayered, this height:auto beats every
+   Tailwind utility regardless of specificity and letterboxes the image. */
+@layer base {
+  img,
+  video,
+  iframe {
+    max-width: 100%;
+    height: auto;
+  }
 }
 table {
   max-width: 100%;
