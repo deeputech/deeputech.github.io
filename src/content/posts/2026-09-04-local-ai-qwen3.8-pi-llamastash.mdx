@@ -153,7 +153,7 @@ For coding I mostly use [Pi](https://pi.dev) as harness these days. It pairs wel
 }
 ```
 
-The last two entries are the interesting ones. A `<model-id>@<name>` id pins the request to one specific running launch instead of letting the proxy pick, which is what puts both thinking modes in the model picker at the same time. Pi passes custom provider ids through to the API unchanged, so the `@name` arrives at LlamaStash verbatim.
+The last two entries are the interesting ones. A `<model-id>@<name>` id pins the request to one specific running launch instead of letting the proxy pick, which is what puts both launches in the model picker at the same time. Pi passes custom provider ids through to the API unchanged, so the `@name` arrives at LlamaStash verbatim.
 
 Those two I add by hand. `llamastash integrations` only writes a row per model on disk, it does not know what you are going to name your launches. There is an open issue to teach the patcher about named launches.
 
@@ -256,9 +256,11 @@ LlamaStash has a `--name` option that lets you run multiple launches of the same
 
 > 💡 Named launches landed in LlamaStash 0.3.0. Before that, a second launch of the same model would start fine but was unaddressable, because the proxy handed every request to the first Ready launch it walked past.
 
-#### Reasoning effort switch with presets
+#### Reasoning effort switch per request
 
-I have presets duplicated with both `xhigh` and `medium` reasoning effort so that I can switch them via Pi's model selector using LlamaStash named launches. The reasoning effort setting steers the models at the chat template level. `medium` has no steering. `xhigh` injects a "think carefully" instruction. `low` injects a "keep your thinking brief" instruction.
+> 💡 **Correction (30 Sep 2026):** The first version of this post said reasoning effort is a server-only flag. That was wrong. llama-server takes `reasoning_effort` per request since [commit 7e4c0a96](https://github.com/ggml-org/llama.cpp/commit/7e4c0a96880dae4fc4268ad441f8a6446bd5460a) (14 Aug 2026), which was already in b10888, the build I tested. I just wasnt caught up with it.
+
+The reasoning effort setting steers the models at the chat template level. `medium` has no steering. `xhigh` injects a "think carefully" instruction. `low` injects a "keep your thinking brief" instruction.
 
 > - **`xhigh`** (the template default): "Reasoning effort is set to xhigh. Please think carefully through the task, validate key assumptions, consider plausible alternatives, and prioritize correctness, consistency, and clarity in the final answer."
 > - **`low`**: "Reasoning effort is set to low. Keep your thinking brief and focused, moving directly to the conclusion without unnecessary elaboration."
@@ -266,14 +268,13 @@ I have presets duplicated with both `xhigh` and `medium` reasoning effort so tha
 
 The model truly obliges these short instructions and the difference is very obvious in its output.
 
-Reasoning effort is a server flag, not a per-request one. One `llama-server` process serves exactly one mode, so switching between `xhigh` and `medium` used to mean restarting the model and waiting out a cold load. Named launches fix that: run the same model twice under different presets, and pick the mode from Pi's `/model` picker.
+The `--reasoning-effort` flag in the presets is only the default. Each `/v1/chat/completions` request can send its own `reasoning_effort`, and llama-server passes it to the chat template, overriding the flag. Sending it as `chat_template_kwargs: {"reasoning_effort": "..."}` works too.
 
-```bash
-llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-xhigh --name xhigh
-llamastash run Qwen3.8-27B-UD-Q6_K --preset coding-medium --name medium
-```
+The template writes the effort text into the system block at the top of the prompt, and adds a system block if the conversation has none. So switching effort mid-session changes the first tokens of the prompt and the whole prompt is processed again. That is the same cost as switching to another launch, but without a second copy of the model in memory.
 
-Now `Qwen3.8-27B-UD-Q6_K@xhigh` and `@medium` both show up in Pi. `@medium` for the bulk of the work, `@xhigh` when a task needs the model to actually stop and think, switched mid-session without a restart.
+Now `/thinking` (or `Shift+Tab`) switches effort on one launch, mid-session, without a restart. `medium` for the bulk of the work, `xhigh` when a task needs the model to actually stop and think.
+
+Named launches are still useful when the launches need different settings, like context size, llama.cpp build or KV cache options, or when you want several KV caches warm at once so sessions do not evict each other. They are not needed for effort alone.
 
 #### Parallel coding agents
 
@@ -289,7 +290,7 @@ Three Q6_K launches at 128k is roughly 93 GiB of the 125.5 GiB available, so thr
 
 #### What about `--parallel` instead?
 
-One server with `--parallel N` also serves N sessions off a single copy of the weights, and it looks like the cheaper option. It is cheaper, and on a current llama.cpp it is also the faster one. It is a good option when you want to run multiple sessions using the same model preset. It still does not replace the setup above, but the reason is narrower than I first thought.
+One server with `--parallel N` also serves N sessions off a single copy of the weights, and it looks like the cheaper option. It is cheaper, and on a current llama.cpp it is also the faster one. It is a good option when you want to run multiple sessions using the same model preset, and each session can still send its own reasoning effort. But it does not give each session the full context window.
 
 Three sessions, 30k of context each, 1024 tokens out, Q6_K with MTP, per-session window pinned to 40960 in both arms. Wall clock is the cold turn, the one that starts a session:
 
@@ -303,11 +304,11 @@ Three sessions, 30k of context each, 1024 tokens out, Q6_K with MTP, per-session
 | Draft acceptance            | 0.59 / 0.62 / 0.59 | 0.55 / 0.53 / 0.59 |
 | Memory                      |       **30.8 GiB** |           70.6 GiB |
 | Context each at `-c 131072` |              43.8k |           **128k** |
-| Thinking modes available    |   one, server wide |       **one each** |
+| Reasoning effort            |        per request |        per request |
 
 The gap is prefill, not decode. Continuous batching interleaves three prompts on one server at 453 tok/s aggregate, while three separate processes thrash each other down to 46-53 tok/s each, so the same 30k window takes 164-326 s batched against 569-645 s split. Decode itself is near enough a tie, 5.7 against 5.3 tok/s per session. It is the prefill that puts `--parallel 3` at two thirds the wall clock on less than half the memory, for 4% more tokens generated. Effective decode in the table is tokens generated divided by wall clock, which is the number you actually sit through. Follow-up turns favour it too, by roughly 1.7x, though I measured those on the previous llama.cpp build.
 
-So the case against it is just the last two rows. The context divides rather than shares: with unified KV off, `n_ctx_seq = n_ctx / n_parallel`, so `-c 131072 --parallel 3` leaves each session 43,776 tokens instead of 128k. Turning `--kv-unified` on gives every session the whole window back for no extra memory, but it cost 66% more cold-turn time at three slots when I measured it, so I leave it off. And reasoning effort is a server flag, so one `--parallel 3` launch gives every session the same thinking mode, which is the whole point of the setup above. Named launches are what I use to keep `xhigh` and `medium` both addressable, and `--parallel` is what I would reach for to run several sessions on one preset.
+So the case against it is just the context row. The context divides rather than shares: with unified KV off, `n_ctx_seq = n_ctx / n_parallel`, so `-c 131072 --parallel 3` leaves each session 43,776 tokens instead of 128k. Turning `--kv-unified` on gives every session the whole window back for no extra memory, but it cost 66% more cold-turn time at three slots when I measured it, so I leave it off. Reasoning effort is not a reason to split, since each session can send its own `reasoning_effort` to the one `--parallel 3` launch. `--parallel` is what I would reach for to run several sessions that fit in 43k each, and named launches when a session needs the full 128k or different launch settings.
 
 One more thing worth knowing: slot affinity is a heuristic, not a binding, so a request arriving while its own slot is busy lands on another session's slot and evicts its cache.
 
