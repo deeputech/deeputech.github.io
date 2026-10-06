@@ -1,0 +1,261 @@
+---
+title: Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding
+description: Agentic coding on a Strix Halo laptop with Qwen3.8-Flash-Next. Going head to head with Opus 5.5
+published: true
+featured: false
+tags:
+  - "ai"
+  - "qwen38flashnext"
+  - "localllm"
+  - "qwen38"
+  - "claudeopus"
+series: GNU/Linux Environment for Developers
+canonical_url: "https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm"
+date: 2026-10-06
+image: /assets/images/llamastash/qwen38-flash-cover.png
+cover_image: /assets/images/llamastash/qwen38-flash-cover.png
+---
+
+import LinkCard from "~/components/embeds/LinkCard.astro";
+
+I recently wrote a post titled ["Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?"](https://deepu.tech/local-ai-qwen3.8-pi-llamastash) and this post is kind of a definitive answer, personally for me, and maybe also for others who are exploring local AI solutions for agentic coding.
+
+<LinkCard
+  title="Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?"
+  href="https://deepu.tech/local-ai-qwen3.8-pi-llamastash"
+/>
+
+So let me jump right into the details without a wall of text. Between the above post and now, a lot has changed, multiple hardware specific fine-tuned engines started appearing, and since I'm on an AMD Strix Halo, I was quite interested in the ones like [Halogen](https://github.com/peonist-ai/halogen-flash-server) and [Gufo](https://github.com/gufo-org/gufo) so I decided to benchmark different engines. See [my Reddit post](https://www.reddit.com/r/StrixHalo/comments/1wu0nvv/) with full benchmark numbers. Halogen and Gufo really stood out.
+
+Halogen gave the best performance but is closed source, and I really wish the developer open sources it at some point. Gufo is open source and came out second. Below are the speed numbers for these from Oct 5, 2026.
+
+| Engine         | Cold prefill (t/s)    | Decode (t/s)       | Draft accept | Retrieval |
+| -------------- | --------------------- | ------------------ | ------------ | --------- |
+| Halogen 0.16.2 | 1,342 / 1,440 / 1,437 | 45.6 / 46.8 / 45.6 | 83 to 90%    | 7/7 each  |
+| Gufo v0.7.1    | 1,090 / 1,059 / 1,060 | 38.9 / 39.9 / 40.7 | 67 to 71%    | 7/7 each  |
+
+3 runs each. Capped at 70 W. Each value is one cold 32k-token prompt (a [Pi](https://pi.dev) coding task), sampled at temperature 1.0 / top_p 0.95 / top_k 20 with MTP on. Halogen uses its v2 checkpoint, Gufo uses Unsloth UD-Q4_K_XL with the shared Q8_0 MTP head. All three Halogen runs are fully cold. Gufo reused 6k and 12.6k cached prompt tokens on its second and third runs, so only its first run is fully cold.
+
+The decode speeds are more than enough. Prefill is what actually makes the most difference and is what gives you the feel of the model being responsive or not. The prefill numbers above are acceptable and don't make you feel like the model is lagging.
+
+## My Setup
+
+At these speeds they are quite capable and very suitable to be used as a daily driver. It still isn't as fast as frontier models but not that slow either, especially if you are running a single session at a time. Here is my quick stack:
+
+- **Laptop**: ASUS ROG Flow Z13 (AMD Strix Halo with 128GB unified memory and Radeon 8060S GPU)
+- **OS**: Arch Linux with [Niri](https://github.com/niri-wm/niri) as compositor and [DMS](https://github.com/AvengeMedia/DankMaterialShell) as shell.
+- **Terminal/Shell**: [Kitty](https://sw.kovidgoyal.net/kitty/)/[Zsh](https://www.zsh.org/)
+- **Harness**: Pi
+- **Orchestrator**: [LlamaStash](https://github.com/llamastash/llamastash) with Halogen and Gufo configured as generic servers.
+- **Engines**: Halogen mostly and Gufo occasionally (especially for the uncensored version of the model)
+- **Quants**: Halogen Native v2, unsloth/Qwen3.8-Flash-Next-UD-Q4_K_XL and vmlinux/Qwen3.8-Flash-Next-Uncensored-Gufo-Q4Mix-GGUF
+- **Code Editor**: VS Code and [Neovim](https://neovim.io/)
+
+<LinkCard href="https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine" />
+
+I have set up Pi and Claude Code to share memories and rules (`CLAUDE.md`/`AGENTS.md`) so that except for the model's and the harness's system prompt, both setups have the same knowledge and context. This makes it easy to interchange them as needed and to compare.
+
+[Here is a prompt](https://gist.github.com/deepu105/d0b321f3256edf67ebd85e747c0010b9) if you have a Strix Halo and you want to try my setup out.
+
+I'm mostly running a single 256k context session at xhigh reasoning effort so that I'm not choking memory for other apps, though I can easily squeeze in two or three sessions concurrently at reduced context size. Sometimes I even start just a TTY session instead of a full blown desktop and let Pi and LlamaStash run there with 2 concurrent full context sessions.
+
+For the last few weeks I have run more Pi sessions using [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) than I have used Claude Code. Most of my coding is for Open Source projects, and these days it's for LlamaStash and [KDash](https://github.com/kdash-rs/kdash), both are complex Rust projects and LlamaStash especially has a lot of complexities with multiple supported inference engines, a terminal UI, a lot of GPU/CPU hardware interactions and intricate state management. These are not simple projects by any means. Here are all the PRs I did so far with Flash-Next on LlamaStash.
+
+| PR                                                      | What it does                                                                                                              | Size                  | Complexity |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------- | ---------- |
+| [#75](https://github.com/llamastash/llamastash/pull/75) | `run` alias for `start`, and YAML launch files that carry the presets for a model                                         | 12 files, +1,846/-132 | Medium     |
+| [#76](https://github.com/llamastash/llamastash/pull/76) | Named launches: `model@name` addressing across the proxy, CLI and TUI (started with Qwen3.8-27B, Flash-Next continued it) | 47 files, +4,038/-345 | High       |
+| [#89](https://github.com/llamastash/llamastash/pull/89) | `daemon restart` command, with one stop path shared by the CLI, the TUI and the `--llama-server` restart                  | 12 files, +852/-415   | High       |
+| [#91](https://github.com/llamastash/llamastash/pull/91) | Fix for a file watcher test that failed on macOS and Windows                                                              | 1 file, +30/-3        | Low        |
+| [#92](https://github.com/llamastash/llamastash/pull/92) | Throwaway probe to time file watcher events on CI for the #91 fix (closed, never meant to merge)                          | 1 file, +100/-0       | Low        |
+| [#94](https://github.com/llamastash/llamastash/pull/94) | Model residency: idle TTL per preset, preload at daemon boot, and unloading idle models to make room                      | 42 files, +3,128/-216 | High       |
+| [#95](https://github.com/llamastash/llamastash/pull/95) | Maps the `/effort` setting from Claude Code to the reasoning effort of a llama.cpp model on `/v1/messages`                | 20 files, +979/-100   | Medium     |
+| [#99](https://github.com/llamastash/llamastash/pull/99) | Proxy aliases for model names that clients hard-code, a shared catalog read and two more proxy fixes (open)               | 22 files, +1,553/-100 | High       |
+
+Flash-Next did my last few releases for LlamaStash as well.
+
+My experience so far has been really really good. With Flash-Next and Halogen, I have not experienced issues like thinking loops or frequent crashes yet. To be fair, there were some dropped connections and a few failed model launches with older Halogen versions. I haven't seen either since. And it definitely feels on par with or better than Claude Opus 4.8 in terms of coding quality and not far behind in speed as well. I even have interesting experiences so far where Flash-Next was better than Opus 5.5 😂
+
+## Flash-Next vs Claude Opus 5.5
+
+So my usual workflow these days is to create a plan using Opus 5.5 and then execute it using Flash-Next. Then review it using both Opus and Flash-Next. Then fix using Flash-Next and iterate this until I'm satisfied. Sometimes I also swap the roles and let Flash-Next review the work from Opus. Here is my honest experience so far.
+
+**Flash-Next implementations and Opus 5.5 reviews:**
+
+- Takes more or less the same number of turns as Opus on similar sized tasks (as in the same amount of interaction needed from me)
+- Total time taken for a task is sometimes twice that of Opus and sometimes 5 to 10 times more depending on context and thinking effort.
+- Code quality is really good and Opus reviews often just find nits and minor issues. Blockers were rare. So far there hasn't been a task that was significantly flawed or required major rework.
+- It really one-shots with high accuracy if given clear instructions or a plan.
+- With a clear plan, it executes extremely well and feels faster (probably less thinking overhead).
+
+**Opus 5.5 implementations and Flash-Next reviews:**
+
+- Takes 2 to 5 times more time
+- Genuinely finds issues and provides improvement suggestions ([see this](https://github.com/llamastash/llamastash/pull/93) for example) and so far Opus has only rejected very few of its findings, mostly as design decisions. Its reviews are on par with probably even Opus 5, IMO. I was surprised it found far more issues than Opus when I asked both of them to review some of the same PRs.
+
+So two interesting examples from my experiments so far are below:
+
+### High Complexity Feature: Opus 5.5 (medium effort) vs Flash-Next (xhigh effort)
+
+I gave the below prompts to both Flash-Next and Opus 5.5 for comparison. I wanted to compare Opus also at xhigh but Claude for some reason changed thinking to medium when I picked the latest mdoel and I dindt notice it until the task was done. I didn't retry with xhigh since I thought Opus at medium is probably a fairer comparison. I kept the prompt vague on purpose and left some details out to see if the model can figure it out on its own. Note that Flash-Next here was run using an older Halogen version (0.14.0) which was slower than what I run now. Halogen dropped the connection during the third prompt, so the rest of that prompt and the PR step ran on Gufo.
+
+**First prompt**: "Add a restart subcommand for the daemon command `llamastash daemon restart`, it should reuse the code from start and stop commands, reuse existing code as much as possible, abstract as needed. Work in a new worktree and branch."
+
+Opus 5.5 finished the first iteration in around **9 minutes**. Flash-Next finished the first iteration in around **38 minutes**. Both completed the task successfully, and both missed reusing code from an existing path, so I gave both the below nudge.
+
+**Second prompt**: "btw the daemon restart keybinding from TUI and the restart CLI command should be reusing code and not do the same thing in 2 places. check that as well"
+
+Opus 5.5 found the second path and reused the code. It took around **6 minutes**. Flash-Next also found the second path and reused the code. It took around **34 minutes**. At this step Opus found a third path with the same flow and reused that code as well. So the third prompt was just for Flash-Next to catch up.
+
+**Third prompt (Flash-Next only)**: "is there any other path doing a restart? keep DRY"
+
+Flash-Next found the path and reused the code. It took around **30 minutes** (it would have been faster without the dropped connection, as the entire context had to be prefilled again, adding a few minutes to the time).
+
+**Final prompt**: "Create a PR"
+
+Opus created the PR in 3 minutes but it did not do a rebase even though my main moved and PR was in conflict. Flash-Next created the PR in around **30 minutes**. Flash-Next rebased first and fixed conflicts in 3 files. Then it ran the tests and E2E checks again, opened the PR at around 18 minutes and waited on CI for the remaining time.
+
+So overall, Opus took around **18 minutes** (7.83M input tokens and 41.5K output tokens) and Flash-Next took around **130 minutes** (20.61M input tokens and 101K output tokens) to complete the task and create a PR. So Flash-Next took **over 7 times longer** and used more than double the tokens compared to Opus. If I redo the test with the latest engines, I think the time will drop a lot.
+
+Cost wise, Claude Code reported $7.53 for the whole Opus session (that includes a later fix to the PR). Flash-Next cost me nothing other than around 0.15 kWh of electricity, if I assume the 70 W cap for the whole 130 minutes.
+
+Now the end result was interesting. Both models were thorough and followed the `AGENTS.md` instructions for the project and did self reviews, end to end testing etc. for each step. Interestingly I found Flash-Next did more thorough E2E testing compared to Opus. Here are the PRs created by both models for reference.
+
+|                   | Opus 5.5 (medium)                                       | Flash-Next (xhigh)                                      |
+| ----------------- | ------------------------------------------------------- | ------------------------------------------------------- |
+| PR                | [#88](https://github.com/llamastash/llamastash/pull/88) | [#89](https://github.com/llamastash/llamastash/pull/89) |
+| Files changed     | 10                                                      | 11                                                      |
+| Lines changed     | +334 / -272                                             | +586 / -404                                             |
+| Tests added       | 1                                                       | 4 (2 of them end to end)                                |
+| Test code added   | 29 lines                                                | 146 lines                                               |
+| Docs added        | 3 lines                                                 | 30 lines                                                |
+| Time to PR        | ~18 minutes                                             | ~130 minutes                                            |
+| Tokens (in / out) | 7.83M / 41.5K                                           | 20.61M / 101K                                           |
+
+The numbers for #89 are from the version that the models reviewed. It has 6 more commits now, so the PR page shows +852/-415.
+
+I asked GPT 5.6, Opus 5.5 and Flash-Next to review and compare the PRs from a new session. Here are their summaries.
+
+GPT 5.6:
+
+> I pick 89. It checks the replacement config before stopping the running daemon, it stops the resolved --state-dir, and it has end-to-end tests for cold and hot restart. 88 calls stop_daemon(false) with the default state dir, so restart --state-dir X can stop the wrong daemon. 89 needs one fix before merge: drop(client) after the shutdown call, as 88 does.
+
+Flash-Next:
+
+> I pick 89. It has real-binary tests for cold and hot restart, a parse test that runs every flag on both start and restart, a NoChannel outcome that handles stale state in one place, and an architecture doc section. 88 has one unit test and one paragraph in usage.md. 89 should take three things from 88: check the new config before stopping, drop the IPC client before the wait (saves 2 s per stop), and honor --state-dir on the stop half.
+
+Opus 5.5:
+
+> I pick 88. It builds the new options before stopping, so a bad flag or config leaves the running daemon up. It drops the IPC client so the stop doesn't wait on the 2 s connection drain, and it stops the daemon in the --state-dir it was given. 89 does none of these, but has better tests, the NoChannel stale-state handling, and the architecture doc. I'd merge 88 and port those three from 89.
+
+So both GPT and Flash-Next picked 89 while Opus picked 88. I also did my own review and found the implementation of Flash-Next to be better as it had better tests, coverage and regression tests. It also was more thorough and handled edge cases better. So #89 is the one I merged, after porting the fixes that the reviews picked from #88.
+
+Keep in mind that Opus was on medium effort here and with xhigh effort it would have used way more tokens, taken a bit more time and probably would have done a better implementation. But to me it is crazy that I can run a local model that can challenge a frontier model like this.
+
+### Medium Complexity Task: Opus 5.5 (xhigh effort) vs Flash-Next (xhigh effort)
+
+I asked both Opus 5.5 (xhigh effort) and Flash-Next (xhigh effort) to suggest some new features for LlamaStash. Below are their answers. Both found some interesting ideas, there were some overlaps but also unique suggestions from each. I personally liked the format in which Qwen gave the results as it was clearer and I didn't have to ask any follow-up clarifications. But for Opus I had to ask for multiple clarifications to get the same level of detail. Which one do you prefer?
+
+**Prompt**: "Suggest some nice features to add to the project. Should be either useful for end user or should improve performance, security or UX"
+
+<details>
+<summary>Answer from Flash-Next (Took ~ 4 minutes and 574K in, 9.2K out tokens)</summary>
+
+Checked the current surface (v0.6.1: CLI subcommands in `src/cli/cli_args.rs`, `src/proxy/*`, TODO.md open items) so these are things that don't exist yet, not TODO duplicates.
+
+**Top picks**
+
+**1. Page-cache pre-warm — `llamastash warm <model>`** (perf, biggest win per line of code)
+
+- Your own docs: cold load 93–105 s vs **~6 s** with weights already in page cache (`docs/usage.md:855`); TODO cites ~130 s for a cold 104 GB GGUF.
+- `posix_fadvise(WILLNEED)` (or a bounded read thread) over a model's shards + mmproj, skipped when free RAM can't hold it or a launch is mid-load. Windows: `PrefetchVirtualMemory`.
+- Wire as `daemon.preload_warm:` (cheap sibling to 0.6.0 `daemon.preload` — warms RAM without allocating a server) + `llamastash warm --json`. No `fadvise`/`readahead` anywhere in `src` today.
+
+**2. Per-model request metrics — `llamastash stats [model]`** (new user-visible data)
+
+- The proxy sees every request but records nothing: no `usage` parsing in `src/proxy/*.rs`, no `/metrics` route, nothing in the TUI beyond live gauges.
+- Rolling per-launch counters: requests, prompt/completion tokens (incl. streamed final usage chunk), TTFT, p50/p95, errors, auto-starts, evictions. Persist a small ring in `state.json`.
+- Feeds real decisions: which model your agents actually use, whether idle TTL / make-room is picking right, and whether a faster quant is worth the disk. Optional `--prometheus` later.
+
+**3. One-shot prompt from the shell — `llamastash ask <model> -p "..."`** (agent + script UX)
+
+- Chat is TUI-only (`src/tui/tabs`, `oai_client.rs`); `start` has no prompt flag, so scripts today hand-roll curl + bearer token.
+- Start-if-dormant → stream to stdout → optionally stop after; `--json`, stdin pipe, `--system`, `--file`. This is the `ollama run <m> "prompt"` muscle memory people already have.
+
+**4. Secrets out of `config.yaml` + key hygiene** (security)
+
+- Generic-backend `env:` values are literal placeholders-only (`src/backend/generic/config.rs:11`), so an engine API key has to be written in plaintext — and on your box `config.yaml` is a symlink into `~/dotfiles`, i.e. a git repo.
+- Add `{env:VAR}` / `{file:path}` resolution, a `doctor` finding for secret-shaped literals (`sk-…`, `hf_…`) and non-`0600` config, `api-key rotate`, and a failed-auth backoff on the LAN-mode key (currently unlimited guesses).
+
+**5. `start --dry-run`** (debuggability, ~a day)
+
+- `show` prints arch defaults that _would_ feed a launch, but not the final argv + env, and it can't take knob overrides. Nothing prints the resolved command without loading a model.
+- Safe path for agents to validate a preset, and the natural home for the `llama-fit-params` preview already sketched at TODO.md:451.
+
+**6. Disk hygiene — `llamastash storage` + CLI `delete`** (end-user pain on big libraries)
+
+- `show` gives one model's size; there's no aggregate view and no orphan sweep. HF blobs are hardlinked across snapshots, so naive per-file deletes don't free what users expect — refcount accounting is the actual value.
+- Fold in the `delete` subcommand + IPC that TODO.md:430 flags as "the one CRUD verb off the agent contract".
+
+**7. `daemon install-service`** (ops)
+
+- Only `--foreground` is documented for supervisors (`docs/usage.md:581`); nothing generates a unit, so after a reboot nothing comes back and `daemon.preload` pays off only after a manual start.
+- systemd user unit + `loginctl enable-linger`, launchd plist, Task Scheduler. Emit + enable, don't daemonize yourself.
+
+**8. Cheap polish**
+
+- Shell completions: no `clap_complete` dependency, so no `llamastash completions bash|zsh|fish`. ~30 lines, immediately noticeable.
+- `doctor --fix`: documented read-only today (`cli_args.rs:233`); fix perms, stale `runtime.json`/`daemon.pid`, dead integration ports, missing llama.cpp install.
+- `llamastash update` + a "vX.Y.Z available" line in `status`/TUI footer. No self-update path or version check exists; release channel (brew/scoop/gh) is already known to `init`.
+
+**Already tracked in TODO.md — not re-suggesting**
+
+LAN TLS, MCP surface, proxy concurrency caps, SSE log tail, `llama-fit-params` preview, hybrid-arch KV estimate (over-counts Qwen3.8-Flash-Next 24 GiB vs ~6 GiB real), vLLM `cors: true` default, TUI residency editor.
+
+</details>
+
+<details>
+<summary>Answer from Opus 5.5 (Took ~ 2 minutes and 690K in, 9.3K out tokens)</summary>
+
+Ideas checked against `TODO.md` and `src/` so none are already built or tracked. My top three are 1, 6 and 8.
+
+**End user**
+
+1. **Live speed stats per model**: tok/s, time to first token, and prompt/generated tokens, in the TUI running view and `status --json`. No throughput code exists in `src/` outside `init`'s estimates.
+2. **`llamastash bench <model> [--preset a,b]`**: a quick tok/s and first-token number per preset, so users can compare knob changes. Today this only exists as maintainer scripts in `scripts/bench/`.
+3. **Model aliases on the proxy**: a `proxy.aliases: {gpt-4o-mini: <model>}` map for tools with hard-coded model names. The resolver accepts many spellings of real ids but no arbitrary names.
+4. **Model update notice**: `list` flags a cached HF repo whose upstream revision is newer, and `pull --update` fetches it. No update check exists in `src/`.
+5. **`daemon install`**: writes a systemd user unit or launchd agent so the daemon and preloaded models start at login. `docs/usage.md` only documents `daemon start`.
+
+**Performance**
+
+6. **Save and restore the prompt cache across eviction**: when make-room unloads a model mid-conversation, the next request reprocesses the whole prompt. llama-server has slot save/restore (`--slot-save-path`); I'm going from memory there, not a check against the current build. Nothing in `src/` uses it.
+7. **Already in TODO and small**: the per-request catalog clone in `route::decide` (`TODO.md:565`) and the blocking GGUF header read on the async path (`TODO.md:566`).
+
+**Security**
+
+8. **Sandbox spawned servers** (Linux Landlock plus `no_new_privs`): read-only model dirs, writes limited to the state/log dir. The supervisor only does `setsid` and env stripping today. This helps most for the generic backend, which runs any server the user declares, and for untrusted GGUF downloads.
+9. **Verify pulled files against the HF `lfs.sha256`**: `src/init/download.rs` has no hash check, though the HF tree API returns the hash. Add a `doctor --verify-models` for existing files. I did not check whether the `hf-hub` crate verifies on its own.
+10. **Per-client API keys for LAN mode**: today there is one `proxy.api_key`. Named keys could be revoked one at a time and would give per-client usage counts. Pairs with TLS (`TODO.md:493`).
+
+**UX**
+
+11. **Multi-turn chat and a system prompt in the Chat tab**: `src/tui/tabs/chat.rs:7` says it is single-shot.
+12. **Proxy request log panel**: recent requests with model, status, latency and tokens, plus a CLI equivalent. It answers "why did my agent get a 503". No request log exists; it would share plumbing with 1.
+13. **Desktop notification when a pull or a long model load finishes or fails**: no notification code exists.
+
+Already tracked and worth moving up: CLI `delete` (`TODO.md:430`), proxy concurrency caps (`TODO.md:502`), and richer `/v1/models` rows (`TODO.md:503`).
+
+</details>
+
+## Final Thoughts
+
+The title says forget Claude Code, but that depends on your use case and time sensitivity. Opus is still 2 to 10 times faster. I still use Opus ($20 plan) for planning and reviews but the usage is dropping and I'm not even hitting its usage limits anymore. The actual coding now happens on my laptop with Flash-Next unless I want to do something really quick, and I'm quite happy with the results.
+
+If you have a unified memory machine like the Strix Halo, DGX Spark or a Mac, try Flash-Next out. Look for the fastest engine for your GPU. IMO using cloud frontier models as orchestrator/planner and using Flash-Next for execution locally gives the best balance of performance and efficiency. If you are using it for anything that's not very time sensitive, like OSS, testing, benchmarking, research or experimentation, the local setup might suffice. Eagerly waiting for Qwen 4.
+
+---
+
+If you like this article, please leave a like or a comment.
+
+You can follow me on [Bluesky](https://bsky.app/profile/deepu105.bsky.social), [Mastodon](https://mastodon.social/@deepu105), and [LinkedIn](https://www.linkedin.com/in/deepu05/).

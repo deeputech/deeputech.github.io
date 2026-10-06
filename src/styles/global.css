@@ -279,6 +279,83 @@ a:hover {
   margin: 2em 0;
 }
 
+/* Collapsible sections: <details> written in post content. The series box in
+   [slug].astro is .not-prose and keeps its own styling. */
+.prose-blog :where(details):not(:where(.not-prose, .not-prose *)) {
+  margin: 1.5em 0;
+  padding: 0 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-bg-subtle);
+}
+.prose-blog :where(details[open]):not(:where(.not-prose, .not-prose *)) {
+  padding-bottom: 0.25rem;
+}
+.prose-blog :where(details > summary):not(:where(.not-prose, .not-prose *)) {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  /* Negative margin lets the summary span the box while the content stays inset. */
+  margin: 0 -1.25rem;
+  padding: 0.75em 1.25rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  color: var(--color-fg);
+  user-select: none;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.prose-blog :where(details > summary):not(:where(.not-prose, .not-prose *))::-webkit-details-marker {
+  display: none;
+}
+.prose-blog :where(details > summary):not(:where(.not-prose, .not-prose *))::before {
+  content: "";
+  flex: none;
+  width: 0.5em;
+  height: 0.5em;
+  margin-left: 0.15em;
+  border-right: 2px solid var(--color-fg-subtle);
+  border-bottom: 2px solid var(--color-fg-subtle);
+  transform: rotate(-45deg);
+  transition: transform 0.2s ease;
+}
+.prose-blog :where(details[open] > summary):not(:where(.not-prose, .not-prose *))::before {
+  transform: rotate(45deg);
+}
+.prose-blog :where(details > summary):not(:where(.not-prose, .not-prose *)):hover {
+  background: var(--color-bg-muted);
+  color: var(--color-accent);
+}
+.prose-blog :where(details > summary):not(:where(.not-prose, .not-prose *)):focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+.prose-blog :where(details[open] > summary):not(:where(.not-prose, .not-prose *)) {
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0.75rem 0.75rem 0 0;
+}
+/* Animated open/close where the browser can interpolate to auto height. */
+@supports (interpolate-size: allow-keywords) {
+  @media (prefers-reduced-motion: no-preference) {
+    .prose-blog :where(details):not(:where(.not-prose, .not-prose *)) {
+      interpolate-size: allow-keywords;
+    }
+    .prose-blog :where(details):not(:where(.not-prose, .not-prose *))::details-content {
+      block-size: 0;
+      overflow-y: clip;
+      transition:
+        block-size 0.25s ease,
+        content-visibility 0.25s allow-discrete;
+    }
+    .prose-blog :where(details[open]):not(:where(.not-prose, .not-prose *))::details-content {
+      block-size: auto;
+    }
+  }
+}
+
 /* Expressive Code spacing — leave colours alone, EC's Macchiato theme owns those. */
 .prose-blog :where(.expressive-code) {
   margin: 1.5em 0 2.25em;

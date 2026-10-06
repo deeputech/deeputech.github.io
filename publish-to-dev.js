@@ -109,6 +109,13 @@ const COMPONENT_TO_LIQUID = [
     },
   },
   {
+    // Dev.to's sanitizer drops raw <details>/<summary>; its Liquid block
+    // {% details summary %} ... {% enddetails %} renders the same thing.
+    tag: "details",
+    re: /<details>\s*<summary>([\s\S]*?)<\/summary>([\s\S]*?)<\/details>/g,
+    to: (_m, summary, body) => `{% details ${summary.trim()} %}${body}{% enddetails %}`,
+  },
+  {
     // <AsciinemaCard cast="..." alt-img="..." alt="..." ... /> (possibly
     // multi-line). Dev.to can't run asciinema-player, so swap in the static
     // alt-img as a markdown image — relative paths get absolutised by the

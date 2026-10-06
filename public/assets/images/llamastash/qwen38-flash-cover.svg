@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" version="1.1">
+<defs>
+<radialGradient id="lg" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#5EEAD4" stop-opacity="0.55"/><stop offset="0.6" stop-color="#99F6E4" stop-opacity="0.22"/><stop offset="1" stop-color="#99F6E4" stop-opacity="0"/></radialGradient>
+<linearGradient id="lid" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#EEF1F4"/><stop offset="1" stop-color="#C9D1DA"/></linearGradient>
+<linearGradient id="basel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DDE2E8"/><stop offset="1" stop-color="#AEB8C4"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#059669"/><stop offset="1" stop-color="#0891B2"/></linearGradient>
+</defs>
+<rect width="1600" height="900" fill="#F6F4EE"/>
+<ellipse cx="430" cy="400" rx="560" ry="420" fill="url(#lg)"/>
+<rect x="810" y="96" width="196" height="48" rx="24" fill="none" stroke="#0F766E" stroke-width="2"/>
+<text x="834" y="128" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="23" letter-spacing="4" fill="#0F766E">LOCAL AI</text>
+<text x="810" y="252" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="800" font-size="70" fill="#0F172A">Qwen3.8-Flash-Next</text>
+<text x="810" y="332" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="800" font-size="70" fill="url(#accent)">vs Claude Opus 5.5</text>
+<text x="812" y="390" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="500" font-size="30" fill="#475569">Agentic coding on a Strix Halo laptop</text>
+<text x="1260" y="474" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="800" font-size="27" fill="#047857">Flash-Next <tspan font-weight="600" font-size="19" fill-opacity="0.8">(xhigh)</tspan></text>
+<text x="1510" y="474" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="800" font-size="27" fill="#B45309">Opus 5.5 <tspan font-weight="600" font-size="19" fill-opacity="0.8">(medium)</tspan></text>
+<line x1="812" y1="488" x2="1510" y2="488" stroke="#D3D8D2" stroke-width="1.5"/>
+<text x="812" y="534" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="23" letter-spacing="2" fill="#64748B">TIME TO PR</text>
+<text x="1260" y="537" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="36" fill="#047857">~130 min</text>
+<text x="1510" y="537" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="36" fill="#B45309">~18 min</text>
+<line x1="812" y1="560" x2="1510" y2="560" stroke="#D3D8D2" stroke-width="1.5"/>
+<text x="812" y="606" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="23" letter-spacing="2" fill="#64748B">TOTAL TOKENS</text>
+<text x="1260" y="609" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="36" fill="#047857">20.71M</text>
+<text x="1510" y="609" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="36" fill="#B45309">7.87M</text>
+<line x1="812" y1="632" x2="1510" y2="632" stroke="#D3D8D2" stroke-width="1.5"/>
+<text x="812" y="678" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="23" letter-spacing="2" fill="#64748B">SESSION COST</text>
+<text x="1260" y="681" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="36" fill="#047857">$0</text>
+<text x="1510" y="681" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="36" fill="#B45309">$7.53</text>
+<line x1="812" y1="704" x2="1510" y2="704" stroke="#D3D8D2" stroke-width="1.5"/>
+<text x="812" y="750" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="23" letter-spacing="2" fill="#64748B">REVIEW PICKS</text>
+<text x="1260" y="753" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="36" fill="#047857">3 of 4</text>
+<text x="1510" y="753" text-anchor="end" font-family="Inter Display, Inter, DejaVu Sans, sans-serif" font-weight="700" font-size="36" fill="#B45309">1 of 4</text>
+<text x="1260" y="779" text-anchor="end" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="16" letter-spacing="2" fill="#047857" fill-opacity="0.75">MERGED</text>
+<text x="1510" y="779" text-anchor="end" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="16" letter-spacing="2" fill="#B45309" fill-opacity="0.75">UNMERGED</text>
+<line x1="812" y1="802" x2="1510" y2="802" stroke="#D3D8D2" stroke-width="1.5"/>
+<rect x="174" y="212" width="500" height="336" rx="16" fill="url(#lid)" stroke="#AEB8C4" stroke-width="3"/>
+<rect x="192" y="230" width="464" height="284" rx="7" fill="#0B1220"/>
+<rect x="192" y="230" width="464" height="30" rx="7" fill="#162033"/>
+<circle cx="210" cy="245" r="5" fill="#F87171"/><circle cx="228" cy="245" r="5" fill="#FBBF24"/><circle cx="246" cy="245" r="5" fill="#4ADE80"/>
+<text x="204.0" y="292" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="14" fill="#A7F3D0">$ llamastash start flash-next-halogen</text>
+<text x="220.8" y="320" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="14" fill="#7C8AA0">Halogen 0.16.2 &#183; 256k ctx &#183; MTP</text>
+<text x="204.0" y="348" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="14" fill="#A7F3D0">$ pi</text>
+<text x="204.0" y="376" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="14" fill="#E2E8F0">&gt; add a daemon restart command</text>
+<text x="220.8" y="404" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="14" fill="#67E8F9">thinking ...</text>
+<text x="220.8" y="432" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="14" fill="#7C8AA0">4 tests added, PR #89 merged</text>
+<rect x="204" y="452" width="10" height="19" fill="#2DD4BF"/>
+<polygon points="126,562 722,562 768,602 80,602" fill="url(#basel)"/>
+<rect x="80" y="596" width="688" height="10" rx="5" fill="#8E9AA8"/>
+<rect x="367" y="568" width="114" height="7" rx="3.5" fill="#9AA5B2"/>
+<text x="424" y="654" text-anchor="middle" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="22" fill="#64748B">82 GiB resident on 128 GB unified memory</text>
+<text x="92" y="856" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="19" fill="#8A94A3">One feature, same prompts &#183; picks by GPT 5.6, Opus 5.5, Flash-Next and me</text>
+<text x="1510" y="856" text-anchor="end" font-family="JetBrainsMono NF, JetBrains Mono, DejaVu Sans Mono, monospace" font-size="24" fill="#64748B">deepu.tech</text>
+</svg>
