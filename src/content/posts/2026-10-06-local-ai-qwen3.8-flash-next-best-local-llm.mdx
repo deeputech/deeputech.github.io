@@ -149,7 +149,7 @@ Opus 5.5:
 
 > I pick 88. It builds the new options before stopping, so a bad flag or config leaves the running daemon up. It drops the IPC client so the stop doesn't wait on the 2 s connection drain, and it stops the daemon in the --state-dir it was given. 89 does none of these, but has better tests, the NoChannel stale-state handling, and the architecture doc. I'd merge 88 and port those three from 89.
 
-So both GPT and Flash-Next picked 89 while Opus picked 88. I also did my own review and found the implementation of Flash-Next to be better as it had better tests, coverage and regression tests. It also was more thorough and handled edge cases better. So #89 is the one I merged, after porting the fixes that the reviews picked from #88.
+So both GPT and Flash-Next picked 89 while Opus picked 88. I also did my own review and found the implementation of Flash-Next to be better as it had better tests, coverage and regression tests. It also was more thorough and handled edge cases better. I ended up merging #89, after porting the fixes that the reviews picked from #88.
 
 Keep in mind that Opus was on medium effort here and with xhigh effort it would have used way more tokens, taken a bit more time and probably would have done a better implementation. But to me it is crazy that I can run a local model that can challenge a frontier model like this.
 
