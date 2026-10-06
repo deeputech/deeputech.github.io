@@ -97,7 +97,7 @@ So two interesting examples from my experiments so far are below:
 
 ### High Complexity Feature: Opus 5.5 (medium effort) vs Flash-Next (xhigh effort)
 
-I gave the below prompts to both Flash-Next and Opus 5.5 for comparison. I wanted to compare Opus also at xhigh but Claude for some reason changed thinking to medium when I picked the latest mdoel and I dindt notice it until the task was done. I didn't retry with xhigh since I thought Opus at medium is probably a fairer comparison. I kept the prompt vague on purpose and left some details out to see if the model can figure it out on its own. Note that Flash-Next here was run using an older Halogen version (0.14.0) which was slower than what I run now. Halogen dropped the connection during the third prompt, so the rest of that prompt and the PR step ran on Gufo.
+I gave the below prompts to both Flash-Next and Opus 5.5 for comparison. I wanted to compare Opus also at xhigh but Claude for some reason changed thinking to medium when I picked the latest model and I didn't notice it until the task was done. I didn't retry with xhigh since I thought Opus at medium is probably a fairer comparison. I kept the prompt vague on purpose and left some details out to see if the model can figure it out on its own. Note that Flash-Next here was run using an older Halogen version (0.14.0) which was slower than what I run now. Halogen dropped the connection during the third prompt, so the rest of that prompt and the PR step ran on Gufo.
 
 **First prompt**: "Add a restart subcommand for the daemon command `llamastash daemon restart`, it should reuse the code from start and stop commands, reuse existing code as much as possible, abstract as needed. Work in a new worktree and branch."
 
