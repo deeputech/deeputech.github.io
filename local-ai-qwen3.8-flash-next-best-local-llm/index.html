@@ -1,0 +1,546 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="generator" content="Astro v5.18.1"><link rel="icon" type="image/png" href="/assets/images/logo.png"><link rel="canonical" href="https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm"><title>Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding | Technorage</title><meta name="description" content="Agentic coding on a Strix Halo laptop with Qwen3.8-Flash-Next. Going head to head with Opus 5.5"><meta property="og:type" content="article"><meta property="og:title" content="Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding | Technorage"><meta property="og:description" content="Agentic coding on a Strix Halo laptop with Qwen3.8-Flash-Next. Going head to head with Opus 5.5"><meta property="og:url" content="https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm"><meta property="og:image" content="https://deepu.tech/assets/images/llamastash/qwen38-flash-cover.png"><meta property="og:site_name" content="Technorage"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2026-10-06T00:00:00.000Z"><meta name="author" content="Deepu K Sasidharan"><meta property="article:author" content="https://deepu.tech"><meta property="article:tag" content="ai"><meta property="article:tag" content="qwen38flashnext"><meta property="article:tag" content="localllm"><meta property="article:tag" content="qwen38"><meta property="article:tag" content="claudeopus"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@deepu105"><meta name="twitter:creator" content="@deepu105"><meta name="twitter:title" content="Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding | Technorage"><meta name="twitter:description" content="Agentic coding on a Strix Halo laptop with Qwen3.8-Flash-Next. Going head to head with Opus 5.5"><meta name="twitter:image" content="https://deepu.tech/assets/images/llamastash/qwen38-flash-cover.png"><link rel="alternate" type="application/rss+xml" title="Technorage RSS feed" href="/feed.xml"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding","description":"Agentic coding on a Strix Halo laptop with Qwen3.8-Flash-Next. Going head to head with Opus 5.5","image":"https://deepu.tech/assets/images/llamastash/qwen38-flash-cover.png","url":"https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm","mainEntityOfPage":{"@type":"WebPage","@id":"https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm"},"datePublished":"2026-10-06T00:00:00.000Z","dateModified":"2026-10-06T00:00:00.000Z","author":{"@type":"Person","name":"Deepu K Sasidharan","url":"https://deepu.tech"},"publisher":{"@type":"Organization","name":"Technorage","logo":{"@type":"ImageObject","url":"https://deepu.tech/assets/images/logo.png"}},"keywords":"ai, qwen38flashnext, localllm, qwen38, claudeopus"}</script><meta name="monetization" content="$ilp.uphold.com/Aw7eGpxKNyK7"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lexend:wght@500;600;700&display=swap"><script>
+  (function () {
+    try {
+      var stored = localStorage.getItem("theme");
+      var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var theme = stored || (prefersDark ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+      document.documentElement.style.colorScheme = theme;
+    } catch (_) {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  })();
+</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-1SDSM5NX07"></script><script>(function(){const GA_ID = "G-1SDSM5NX07";
+
+            {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('consent', 'default', {
+  ad_user_data: 'denied',
+  ad_personalization: 'denied',
+  ad_storage: 'denied',
+  analytics_storage: 'granted'
+});
+gtag('js', new Date());
+gtag('config', GA_ID);`}
+          })();</script><link rel="stylesheet" href="/_astro/asciinema-player.mT6buTGj.css">
+<link rel="stylesheet" href="/_astro/comment-policy.CdC5kMWp.css">
+<style>.toc-link[data-astro-cid-obewoz47][data-active=true]{color:var(--color-accent);border-color:var(--color-accent);font-weight:500}
+</style></head> <body> <header class="sticky top-0 z-40 w-full border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] backdrop-blur"> <div class="mx-auto flex max-w-5xl items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6"> <a href="/" class="flex min-w-0 shrink items-center gap-1.5 text-[var(--color-fg)]"> <svg class="h-5 w-5 shrink-0 text-[var(--color-accent)] sm:h-6 sm:w-6" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-hidden="true"> <path d="M9.4 86.6C-3.1 74.1-3.1 53.9 9.4 41.4s32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L178.7 256 9.4 86.6zM256 416H544c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path> </svg> <span class="font-display truncate text-xl font-bold tracking-tight sm:text-3xl">technorage</span> </a> <nav class="ml-auto flex shrink-0 items-center gap-0 sm:gap-1"> <a href="/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path> <circle cx="12" cy="7" r="4"></circle>      </svg> <span class="hidden sm:inline">About</span> </a><a href="/blogs/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path> <polyline points="14 2 14 8 20 8"></polyline> <line x1="8" y1="13" x2="16" y2="13"></line> <line x1="8" y1="17" x2="16" y2="17"></line>     </svg> <span class="hidden sm:inline">Blog</span> </a><a href="/books/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path> <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>    </svg> <span class="hidden sm:inline">Books</span> </a><a href="/appearances/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect> <line x1="16" y1="2" x2="16" y2="6"></line> <line x1="8" y1="2" x2="8" y2="6"></line> <line x1="3" y1="10" x2="21" y2="10"></line>   </svg> <span class="hidden sm:inline">Events</span> </a><a href="/tools/" class="inline-flex items-center justify-center gap-1.5 rounded-md px-1.5 py-1.5 text-sm transition sm:px-3 text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">     <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path> </svg> <span class="hidden sm:inline">Tools</span> </a> <button type="button" id="search-trigger" aria-label="Search" title="Search (⌘K)" class="ml-0.5 inline-flex h-9 w-9 items-center justify-center gap-2 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-sm text-[var(--color-fg-subtle)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)] sm:ml-1 sm:w-auto sm:px-2"> <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <kbd class="hidden rounded border border-[var(--color-border-strong)] px-1 font-mono text-[10px] sm:inline">⌘K</kbd> </button> <button type="button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle color theme" class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]"> <svg class="h-4 w-4 dark:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path> </svg> <svg class="hidden h-4 w-4 dark:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path> </svg> </button> <script>
+  (function () {
+    var btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      var next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      document.documentElement.style.colorScheme = next;
+      try {
+        localStorage.setItem("theme", next);
+      } catch (_) {}
+    });
+  })();
+</script> </nav> </div> </header> <main class="flex-1">  <div id="reading-progress" class="pointer-events-none fixed inset-x-0 top-0 z-50 h-0.5 origin-left scale-x-0 bg-[var(--color-accent)] transition-transform duration-75" aria-hidden="true"></div> <script>
+  (function () {
+    var bar = document.getElementById("reading-progress");
+    if (!bar) return;
+    var article = document.querySelector("article");
+    if (!article) return;
+    var ticking = false;
+    function update() {
+      var rect = article.getBoundingClientRect();
+      var total = rect.height - window.innerHeight;
+      var scrolled = -rect.top;
+      var pct = total > 0 ? Math.min(1, Math.max(0, scrolled / total)) : 0;
+      bar.style.transform = "scaleX(" + pct + ")";
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  })();
+</script> <div class="mx-auto max-w-6xl px-4 pt-10 sm:px-6 sm:pt-14"> <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_220px]"> <article data-pagefind-body class="mx-auto w-full min-w-0 max-w-3xl lg:mx-0"> <header class="mb-8"> <div class="mb-4 flex flex-wrap gap-2 text-xs text-[var(--color-fg-subtle)]"> <a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> ai </a><a href="/tags/#qwen38flashnext" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> qwen38flashnext </a><a href="/tags/#localllm" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> localllm </a><a href="/tags/#qwen38" class="rounded-full border border-[var(--color-border)] px-2 py-0.5 hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg-muted)]"> qwen38 </a> </div> <h1 class="font-display text-4xl font-bold tracking-tight text-[var(--color-fg)] sm:text-5xl"> Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding </h1> <p class="mt-4 text-lg text-[var(--color-fg-muted)]">Agentic coding on a Strix Halo laptop with Qwen3.8-Flash-Next. Going head to head with Opus 5.5</p> <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-[var(--color-fg-subtle)]"> <img src="https://www.gravatar.com/avatar/7f408bc67dc9ae3b288ee92d16d3c4c2?s=64&d=mm" alt="Deepu K Sasidharan" width="32" height="32" class="h-8 w-8 rounded-full"> <a href="https://deepu.tech" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]"> Deepu K Sasidharan </a> <span class="text-[var(--color-border-strong)]">·</span> <time datetime="2026-10-06T00:00:00.000Z">October 6, 2026</time>   <span class="text-[var(--color-border-strong)]">·</span> <span>19 min read</span>  <span class="ml-auto"> <div class="not-prose flex items-center gap-1 text-[var(--color-fg-subtle)]"> <span class="mr-2 hidden text-xs uppercase tracking-wider sm:inline">Share</span> <a href="https://twitter.com/intent/tweet?text=Forget%20Claude%20Code.%20All%20you%20need%20is%20Qwen3.8-Flash-Next%20running%20locally%20for%20agentic%20coding%0A%0A&url=https%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-flash-next-best-local-llm%2F&via=deepu105" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter" title="Share on Twitter" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:x">   <symbol id="ai:simple-icons:x" viewBox="0 0 24 24"><path fill="currentColor" d="M14.234 10.162L22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299l-.929-1.329L3.076 1.56h3.182l5.965 8.532l.929 1.329l7.754 11.09h-3.182z"/></symbol><use href="#ai:simple-icons:x"></use>  </svg> </a><a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-flash-next-best-local-llm%2F&title=Forget%20Claude%20Code.%20All%20you%20need%20is%20Qwen3.8-Flash-Next%20running%20locally%20for%20agentic%20coding&summary=Forget%20Claude%20Code.%20All%20you%20need%20is%20Qwen3.8-Flash-Next%20running%20locally%20for%20agentic%20coding&source=Technorage" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" title="Share on LinkedIn" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:linkedin">   <symbol id="ai:simple-icons:linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037c-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85c3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.06 2.06 0 0 1-2.063-2.065a2.064 2.064 0 1 1 2.063 2.065m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></symbol><use href="#ai:simple-icons:linkedin"></use>  </svg> </a><a href="https://bsky.app/intent/compose?text=Forget%20Claude%20Code.%20All%20you%20need%20is%20Qwen3.8-Flash-Next%20running%20locally%20for%20agentic%20coding%0A%0Ahttps%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-flash-next-best-local-llm%2F" target="_blank" rel="noopener noreferrer" aria-label="Share on BlueSky" title="Share on BlueSky" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:bluesky">   <symbol id="ai:simple-icons:bluesky" viewBox="0 0 24 24"><path fill="currentColor" d="M5.202 2.857C7.954 4.922 10.913 9.11 12 11.358c1.087-2.247 4.046-6.436 6.798-8.501C20.783 1.366 24 .213 24 3.883c0 .732-.42 6.156-.667 7.037c-.856 3.061-3.978 3.842-6.755 3.37c4.854.826 6.089 3.562 3.422 6.299c-5.065 5.196-7.28-1.304-7.847-2.97c-.104-.305-.152-.448-.153-.327c0-.121-.05.022-.153.327c-.568 1.666-2.782 8.166-7.847 2.97c-2.667-2.737-1.432-5.473 3.422-6.3c-2.777.473-5.899-.308-6.755-3.369C.42 10.04 0 4.615 0 3.883c0-3.67 3.217-2.517 5.202-1.026"/></symbol><use href="#ai:simple-icons:bluesky"></use>  </svg> </a><a href="https://news.ycombinator.com/submitlink?u=https%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-flash-next-best-local-llm%2F&t=Forget%20Claude%20Code.%20All%20you%20need%20is%20Qwen3.8-Flash-Next%20running%20locally%20for%20agentic%20coding" target="_blank" rel="noopener noreferrer" aria-label="Share on Hacker News" title="Share on Hacker News" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:ycombinator">   <symbol id="ai:simple-icons:ycombinator" viewBox="0 0 24 24"><path fill="currentColor" d="M0 24V0h24v24zM6.951 5.896l4.112 7.708v5.064h1.583v-4.972l4.148-7.799h-1.749l-2.457 4.875c-.372.745-.688 1.434-.688 1.434s-.297-.708-.651-1.434L8.831 5.896z"/></symbol><use href="#ai:simple-icons:ycombinator"></use>  </svg> </a><a href="https://www.reddit.com/submit?url=https%3A%2F%2Fdeepu.tech%2Flocal-ai-qwen3.8-flash-next-best-local-llm%2F&title=Forget%20Claude%20Code.%20All%20you%20need%20is%20Qwen3.8-Flash-Next%20running%20locally%20for%20agentic%20coding" target="_blank" rel="noopener noreferrer" aria-label="Share on Reddit" title="Share on Reddit" class="inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="simple-icons:reddit">   <symbol id="ai:simple-icons:reddit" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12c0 3.314 1.343 6.314 3.515 8.485l-2.286 2.286A.72.72 0 0 0 1.738 24H12c6.627 0 12-5.373 12-12S18.627 0 12 0m4.388 3.199a1.999 1.999 0 1 1-1.947 2.46v.002a2.37 2.37 0 0 0-2.032 2.341v.007c1.776.067 3.4.567 4.686 1.363a2.802 2.802 0 1 1 2.908 4.753c-.088 3.256-3.637 5.876-7.997 5.876c-4.361 0-7.905-2.617-7.998-5.87a2.8 2.8 0 0 1 1.189-5.34c.645 0 1.239.218 1.712.585c1.275-.79 2.881-1.291 4.64-1.365v-.01a3.23 3.23 0 0 1 2.88-3.207a2 2 0 0 1 1.959-1.595m-8.085 8.376c-.784 0-1.459.78-1.506 1.797s.64 1.429 1.426 1.429s1.371-.369 1.418-1.385s-.553-1.841-1.338-1.841m7.406 0c-.786 0-1.385.824-1.338 1.841s.634 1.385 1.418 1.385c.785 0 1.473-.413 1.426-1.429c-.046-1.017-.721-1.797-1.506-1.797m-3.703 4.013c-.974 0-1.907.048-2.77.135a.222.222 0 0 0-.183.305a3.2 3.2 0 0 0 2.953 1.964a3.2 3.2 0 0 0 2.953-1.964a.222.222 0 0 0-.184-.305a28 28 0 0 0-2.769-.135"/></symbol><use href="#ai:simple-icons:reddit"></use>  </svg> </a> <button type="button" data-copy-link="https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm/" aria-label="Copy link" title="Copy link" class="copy-link inline-flex h-8 w-8 items-center justify-center rounded-md border border-transparent transition hover:border-[var(--color-border-strong)] hover:bg-[var(--color-bg-subtle)] hover:text-[var(--color-fg)]"> <svg width="1em" height="1em" class="h-4 w-4" data-icon="lucide:link-2">   <symbol id="ai:lucide:link-2" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></symbol><use href="#ai:lucide:link-2"></use>  </svg> </button> </div> <script>
+  document.querySelectorAll(".copy-link").forEach(function (btn) {
+    btn.addEventListener("click", async function () {
+      var url = btn.getAttribute("data-copy-link");
+      try {
+        await navigator.clipboard.writeText(url);
+        var prev = btn.title;
+        btn.title = "Copied!";
+        btn.style.color = "var(--color-accent)";
+        setTimeout(function () {
+          btn.title = prev;
+          btn.style.color = "";
+        }, 1500);
+      } catch (_) {}
+    });
+  });
+</script> </span> </div> </header> <img src="/assets/images/llamastash/qwen38-flash-cover.png" alt="Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding" class="mb-10 aspect-[16/9] w-full rounded-xl object-cover"> <div class="prose-blog"> <details class="not-prose group my-8 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]"> <summary class="flex cursor-pointer list-none items-center gap-4 px-6 py-5 group-open:pb-3 [&::-webkit-details-marker]:hidden"> <div class="min-w-0 flex-1"> <p class="text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+Series · <a href="/series/gnu-linux-environment-for-developers/" class="hover:underline" onclick="event.stopPropagation()">GNU/Linux Environment for Developers</a> </p> <p class="mt-1 text-xs text-[var(--color-fg-subtle)]">
+Post <strong class="text-[var(--color-fg-muted)]">10</strong> of  <strong class="text-[var(--color-fg-muted)]">10</strong> </p> </div> <svg class="size-4 shrink-0 text-[var(--color-fg-subtle)] transition-transform group-open:rotate-90" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"> <path d="M7 5l6 5-6 5V5z"></path> </svg> </summary> <ol class="list-decimal space-y-1.5 pr-6 pb-5 pl-10 text-sm marker:tabular-nums marker:text-[var(--color-fg-subtle)]"> <li> <a href="/my-beautiful-linux-development-environment/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My beautiful Linux development environment</a> </li><li> <a href="/must-have-gnome-plugins/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Must have GNOME extensions</a> </li><li> <a href="/configure-a-beautiful-terminal-on-unix/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Configure a beautiful terminal on Unix with Zsh</a> </li><li> <a href="/make-the-most-out-of-vscode/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My VS Code setup - Making the most out of VS Code</a> </li><li> <a href="/the-state-of-linux-on-desktops/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">The state of Linux as a daily use OS in 2021</a> </li><li> <a href="/my-beautiful-linux-development-environment-2021/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My sleek and modern Linux development machine in 2021</a> </li><li> <a href="/my-fully-offline-ai-assisted-linux-development-machine/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">My fully offline AI-assisted Linux development machine</a> </li><li> <a href="/introducing-llamastash/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher</a> </li><li> <a href="/local-ai-qwen3.8-pi-llamastash/" class="text-[var(--color-fg-muted)] hover:text-[var(--color-fg)]">Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?</a> </li><li> <span class="font-semibold text-[var(--color-fg)]">Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding</span> </li> </ol> </details><p>I recently wrote a post titled <a href="https://deepu.tech/local-ai-qwen3.8-pi-llamastash">“Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?”</a> and this post is kind of a definitive answer, personally for me, and maybe also for others who are exploring local AI solutions for agentic coding.</p>
+<a href="/local-ai-qwen3.8-pi-llamastash/" class="not-prose group my-6 block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 transition hover:border-[var(--color-accent)]"><div class="flex items-center gap-2 text-xs text-[var(--color-fg-subtle)]"><svg class="h-3.5 w-3.5 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg><span>From the blog · Sep 4, 2026</span></div><h3 class="font-display mt-2 text-lg leading-snug font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?</h3><p class="mt-1 line-clamp-2 text-sm text-[var(--color-fg-muted)]">Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning</p><div class="mt-3 flex flex-wrap gap-1.5 text-xs text-[var(--color-fg-subtle)]"><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#ai</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#llamacpp</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#localllm</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#qwen38</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#claudeopus</span></div></a>
+<p>So let me jump right into the details without a wall of text. Between the above post and now, a lot has changed, multiple hardware specific fine-tuned engines started appearing, and since I’m on an AMD Strix Halo, I was quite interested in the ones like <a href="https://github.com/peonist-ai/halogen-flash-server">Halogen</a> and <a href="https://github.com/gufo-org/gufo">Gufo</a> so I decided to benchmark different engines. See <a href="https://www.reddit.com/r/StrixHalo/comments/1wu0nvv/">my Reddit post</a> with full benchmark numbers. Halogen and Gufo really stood out.</p>
+<p>Halogen gave the best performance but is closed source, and I really wish the developer open sources it at some point. Gufo is open source and came out second. Below are the speed numbers for these from Oct 5, 2026.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Engine</th><th>Cold prefill (t/s)</th><th>Decode (t/s)</th><th>Draft accept</th><th>Retrieval</th></tr></thead><tbody><tr><td>Halogen 0.16.2</td><td>1,342 / 1,440 / 1,437</td><td>45.6 / 46.8 / 45.6</td><td>83 to 90%</td><td>7/7 each</td></tr><tr><td>Gufo v0.7.1</td><td>1,090 / 1,059 / 1,060</td><td>38.9 / 39.9 / 40.7</td><td>67 to 71%</td><td>7/7 each</td></tr></tbody></table>
+<p>3 runs each. Capped at 70 W. Each value is one cold 32k-token prompt (a <a href="https://pi.dev">Pi</a> coding task), sampled at temperature 1.0 / top_p 0.95 / top_k 20 with MTP on. Halogen uses its v2 checkpoint, Gufo uses Unsloth UD-Q4_K_XL with the shared Q8_0 MTP head. All three Halogen runs are fully cold. Gufo reused 6k and 12.6k cached prompt tokens on its second and third runs, so only its first run is fully cold.</p>
+<p>The decode speeds are more than enough. Prefill is what actually makes the most difference and is what gives you the feel of the model being responsive or not. The prefill numbers above are acceptable and don’t make you feel like the model is lagging.</p>
+<h2 id="my-setup">My Setup</h2>
+<p>At these speeds they are quite capable and very suitable to be used as a daily driver. It still isn’t as fast as frontier models but not that slow either, especially if you are running a single session at a time. Here is my quick stack:</p>
+<ul>
+<li><strong>Laptop</strong>: ASUS ROG Flow Z13 (AMD Strix Halo with 128GB unified memory and Radeon 8060S GPU)</li>
+<li><strong>OS</strong>: Arch Linux with <a href="https://github.com/niri-wm/niri">Niri</a> as compositor and <a href="https://github.com/AvengeMedia/DankMaterialShell">DMS</a> as shell.</li>
+<li><strong>Terminal/Shell</strong>: <a href="https://sw.kovidgoyal.net/kitty/">Kitty</a>/<a href="https://www.zsh.org/">Zsh</a></li>
+<li><strong>Harness</strong>: Pi</li>
+<li><strong>Orchestrator</strong>: <a href="https://github.com/llamastash/llamastash">LlamaStash</a> with Halogen and Gufo configured as generic servers.</li>
+<li><strong>Engines</strong>: Halogen mostly and Gufo occasionally (especially for the uncensored version of the model)</li>
+<li><strong>Quants</strong>: Halogen Native v2, unsloth/Qwen3.8-Flash-Next-UD-Q4_K_XL and vmlinux/Qwen3.8-Flash-Next-Uncensored-Gufo-Q4Mix-GGUF</li>
+<li><strong>Code Editor</strong>: VS Code and <a href="https://neovim.io/">Neovim</a></li>
+</ul>
+<a href="/my-fully-offline-ai-assisted-linux-development-machine/" class="not-prose group my-6 block rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 transition hover:border-[var(--color-accent)]"><div class="flex items-center gap-2 text-xs text-[var(--color-fg-subtle)]"><svg class="h-3.5 w-3.5 text-[var(--color-accent)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg><span>From the blog · May 7, 2026</span></div><h3 class="font-display mt-2 text-lg leading-snug font-semibold text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">My fully offline AI-assisted Linux development machine</h3><p class="mt-1 line-clamp-2 text-sm text-[var(--color-fg-muted)]">My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13</p><div class="mt-3 flex flex-wrap gap-1.5 text-xs text-[var(--color-fg-subtle)]"><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#linux</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#archlinux</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#development</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#ai</span><span class="rounded-full border border-[var(--color-border)] px-2 py-0.5">#niri</span></div></a>
+<p>I have set up Pi and Claude Code to share memories and rules (<code>CLAUDE.md</code>/<code>AGENTS.md</code>) so that except for the model’s and the harness’s system prompt, both setups have the same knowledge and context. This makes it easy to interchange them as needed and to compare.</p>
+<p><a href="https://gist.github.com/deepu105/d0b321f3256edf67ebd85e747c0010b9">Here is a prompt</a> if you have a Strix Halo and you want to try my setup out.</p>
+<p>I’m mostly running a single 256k context session at xhigh reasoning effort so that I’m not choking memory for other apps, though I can easily squeeze in two or three sessions concurrently at reduced context size. Sometimes I even start just a TTY session instead of a full blown desktop and let Pi and LlamaStash run there with 2 concurrent full context sessions.</p>
+<p>For the last few weeks I have run more Pi sessions using <a href="https://huggingface.co/Qwen/Qwen3.8-Flash-Next">Qwen3.8-Flash-Next</a> than I have used Claude Code. Most of my coding is for Open Source projects, and these days it’s for LlamaStash and <a href="https://github.com/kdash-rs/kdash">KDash</a>, both are complex Rust projects and LlamaStash especially has a lot of complexities with multiple supported inference engines, a terminal UI, a lot of GPU/CPU hardware interactions and intricate state management. These are not simple projects by any means. Here are all the PRs I did so far with Flash-Next on LlamaStash.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>PR</th><th>What it does</th><th>Size</th><th>Complexity</th></tr></thead><tbody><tr><td><a href="https://github.com/llamastash/llamastash/pull/75">#75</a></td><td><code>run</code> alias for <code>start</code>, and YAML launch files that carry the presets for a model</td><td>12 files, +1,846/-132</td><td>Medium</td></tr><tr><td><a href="https://github.com/llamastash/llamastash/pull/76">#76</a></td><td>Named launches: <code>model@name</code> addressing across the proxy, CLI and TUI (started with Qwen3.8-27B, Flash-Next continued it)</td><td>47 files, +4,038/-345</td><td>High</td></tr><tr><td><a href="https://github.com/llamastash/llamastash/pull/89">#89</a></td><td><code>daemon restart</code> command, with one stop path shared by the CLI, the TUI and the <code>--llama-server</code> restart</td><td>12 files, +852/-415</td><td>High</td></tr><tr><td><a href="https://github.com/llamastash/llamastash/pull/91">#91</a></td><td>Fix for a file watcher test that failed on macOS and Windows</td><td>1 file, +30/-3</td><td>Low</td></tr><tr><td><a href="https://github.com/llamastash/llamastash/pull/92">#92</a></td><td>Throwaway probe to time file watcher events on CI for the #91 fix (closed, never meant to merge)</td><td>1 file, +100/-0</td><td>Low</td></tr><tr><td><a href="https://github.com/llamastash/llamastash/pull/94">#94</a></td><td>Model residency: idle TTL per preset, preload at daemon boot, and unloading idle models to make room</td><td>42 files, +3,128/-216</td><td>High</td></tr><tr><td><a href="https://github.com/llamastash/llamastash/pull/95">#95</a></td><td>Maps the <code>/effort</code> setting from Claude Code to the reasoning effort of a llama.cpp model on <code>/v1/messages</code></td><td>20 files, +979/-100</td><td>Medium</td></tr><tr><td><a href="https://github.com/llamastash/llamastash/pull/99">#99</a></td><td>Proxy aliases for model names that clients hard-code, a shared catalog read and two more proxy fixes (open)</td><td>22 files, +1,553/-100</td><td>High</td></tr></tbody></table>
+<p>Flash-Next did my last few releases for LlamaStash as well.</p>
+<p>My experience so far has been really really good. With Flash-Next and Halogen, I have not experienced issues like thinking loops or frequent crashes yet. To be fair, there were some dropped connections and a few failed model launches with older Halogen versions. I haven’t seen either since. And it definitely feels on par with or better than Claude Opus 4.8 in terms of coding quality and not far behind in speed as well. I even have interesting experiences so far where Flash-Next was better than Opus 5.5 😂</p>
+<h2 id="flash-next-vs-claude-opus-55">Flash-Next vs Claude Opus 5.5</h2>
+<p>So my usual workflow these days is to create a plan using Opus 5.5 and then execute it using Flash-Next. Then review it using both Opus and Flash-Next. Then fix using Flash-Next and iterate this until I’m satisfied. Sometimes I also swap the roles and let Flash-Next review the work from Opus. Here is my honest experience so far.</p>
+<p><strong>Flash-Next implementations and Opus 5.5 reviews:</strong></p>
+<ul>
+<li>Takes more or less the same number of turns as Opus on similar sized tasks (as in the same amount of interaction needed from me)</li>
+<li>Total time taken for a task is sometimes twice that of Opus and sometimes 5 to 10 times more depending on context and thinking effort.</li>
+<li>Code quality is really good and Opus reviews often just find nits and minor issues. Blockers were rare. So far there hasn’t been a task that was significantly flawed or required major rework.</li>
+<li>It really one-shots with high accuracy if given clear instructions or a plan.</li>
+<li>With a clear plan, it executes extremely well and feels faster (probably less thinking overhead).</li>
+</ul>
+<p><strong>Opus 5.5 implementations and Flash-Next reviews:</strong></p>
+<ul>
+<li>Takes 2 to 5 times more time</li>
+<li>Genuinely finds issues and provides improvement suggestions (<a href="https://github.com/llamastash/llamastash/pull/93">see this</a> for example) and so far Opus has only rejected very few of its findings, mostly as design decisions. Its reviews are on par with probably even Opus 5, IMO. I was surprised it found far more issues than Opus when I asked both of them to review some of the same PRs.</li>
+</ul>
+<p>So two interesting examples from my experiments so far are below:</p>
+<h3 id="high-complexity-feature-opus-55-medium-effort-vs-flash-next-xhigh-effort">High Complexity Feature: Opus 5.5 (medium effort) vs Flash-Next (xhigh effort)</h3>
+<p>I gave the below prompts to both Flash-Next and Opus 5.5 for comparison. I wanted to compare Opus also at xhigh but Claude for some reason changed thinking to medium when I picked the latest model and I didn’t notice it until the task was done. I didn’t retry with xhigh since I thought Opus at medium is probably a fairer comparison. I kept the prompt vague on purpose and left some details out to see if the model can figure it out on its own. Note that Flash-Next here was run using an older Halogen version (0.14.0) which was slower than what I run now. Halogen dropped the connection during the third prompt, so the rest of that prompt and the PR step ran on Gufo.</p>
+<p><strong>First prompt</strong>: “Add a restart subcommand for the daemon command <code>llamastash daemon restart</code>, it should reuse the code from start and stop commands, reuse existing code as much as possible, abstract as needed. Work in a new worktree and branch.”</p>
+<p>Opus 5.5 finished the first iteration in around <strong>9 minutes</strong>. Flash-Next finished the first iteration in around <strong>38 minutes</strong>. Both completed the task successfully, and both missed reusing code from an existing path, so I gave both the below nudge.</p>
+<p><strong>Second prompt</strong>: “btw the daemon restart keybinding from TUI and the restart CLI command should be reusing code and not do the same thing in 2 places. check that as well”</p>
+<p>Opus 5.5 found the second path and reused the code. It took around <strong>6 minutes</strong>. Flash-Next also found the second path and reused the code. It took around <strong>34 minutes</strong>. At this step Opus found a third path with the same flow and reused that code as well. So the third prompt was just for Flash-Next to catch up.</p>
+<p><strong>Third prompt (Flash-Next only)</strong>: “is there any other path doing a restart? keep DRY”</p>
+<p>Flash-Next found the path and reused the code. It took around <strong>30 minutes</strong> (it would have been faster without the dropped connection, as the entire context had to be prefilled again, adding a few minutes to the time).</p>
+<p><strong>Final prompt</strong>: “Create a PR”</p>
+<p>Opus created the PR in 3 minutes but it did not do a rebase even though my main moved and PR was in conflict. Flash-Next created the PR in around <strong>30 minutes</strong>. Flash-Next rebased first and fixed conflicts in 3 files. Then it ran the tests and E2E checks again, opened the PR at around 18 minutes and waited on CI for the remaining time.</p>
+<p>So overall, Opus took around <strong>18 minutes</strong> (7.83M input tokens and 41.5K output tokens) and Flash-Next took around <strong>130 minutes</strong> (20.61M input tokens and 101K output tokens) to complete the task and create a PR. So Flash-Next took <strong>over 7 times longer</strong> and used more than double the tokens compared to Opus. If I redo the test with the latest engines, I think the time will drop a lot.</p>
+<p>Cost wise, Claude Code reported $7.53 for the whole Opus session (that includes a later fix to the PR). Flash-Next cost me nothing other than around 0.15 kWh of electricity, if I assume the 70 W cap for the whole 130 minutes.</p>
+<p>Now the end result was interesting. Both models were thorough and followed the <code>AGENTS.md</code> instructions for the project and did self reviews, end to end testing etc. for each step. Interestingly I found Flash-Next did more thorough E2E testing compared to Opus. Here are the PRs created by both models for reference.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th>Opus 5.5 (medium)</th><th>Flash-Next (xhigh)</th></tr></thead><tbody><tr><td>PR</td><td><a href="https://github.com/llamastash/llamastash/pull/88">#88</a></td><td><a href="https://github.com/llamastash/llamastash/pull/89">#89</a></td></tr><tr><td>Files changed</td><td>10</td><td>11</td></tr><tr><td>Lines changed</td><td>+334 / -272</td><td>+586 / -404</td></tr><tr><td>Tests added</td><td>1</td><td>4 (2 of them end to end)</td></tr><tr><td>Test code added</td><td>29 lines</td><td>146 lines</td></tr><tr><td>Docs added</td><td>3 lines</td><td>30 lines</td></tr><tr><td>Time to PR</td><td>~18 minutes</td><td>~130 minutes</td></tr><tr><td>Tokens (in / out)</td><td>7.83M / 41.5K</td><td>20.61M / 101K</td></tr></tbody></table>
+<p>The numbers for #89 are from the version that the models reviewed. It has 6 more commits now, so the PR page shows +852/-415.</p>
+<p>I asked GPT 5.6, Opus 5.5 and Flash-Next to review and compare the PRs from a new session. Here are their summaries.</p>
+<p>GPT 5.6:</p>
+<blockquote>
+<p>I pick 89. It checks the replacement config before stopping the running daemon, it stops the resolved —state-dir, and it has end-to-end tests for cold and hot restart. 88 calls stop_daemon(false) with the default state dir, so restart —state-dir X can stop the wrong daemon. 89 needs one fix before merge: drop(client) after the shutdown call, as 88 does.</p>
+</blockquote>
+<p>Flash-Next:</p>
+<blockquote>
+<p>I pick 89. It has real-binary tests for cold and hot restart, a parse test that runs every flag on both start and restart, a NoChannel outcome that handles stale state in one place, and an architecture doc section. 88 has one unit test and one paragraph in usage.md. 89 should take three things from 88: check the new config before stopping, drop the IPC client before the wait (saves 2 s per stop), and honor —state-dir on the stop half.</p>
+</blockquote>
+<p>Opus 5.5:</p>
+<blockquote>
+<p>I pick 88. It builds the new options before stopping, so a bad flag or config leaves the running daemon up. It drops the IPC client so the stop doesn’t wait on the 2 s connection drain, and it stops the daemon in the —state-dir it was given. 89 does none of these, but has better tests, the NoChannel stale-state handling, and the architecture doc. I’d merge 88 and port those three from 89.</p>
+</blockquote>
+<p>So both GPT and Flash-Next picked 89 while Opus picked 88. I also did my own review and found the implementation of Flash-Next to be better as it had better tests, coverage and regression tests. It also was more thorough and handled edge cases better. So #89 is the one I merged, after porting the fixes that the reviews picked from #88.</p>
+<p>Keep in mind that Opus was on medium effort here and with xhigh effort it would have used way more tokens, taken a bit more time and probably would have done a better implementation. But to me it is crazy that I can run a local model that can challenge a frontier model like this.</p>
+<h3 id="medium-complexity-task-opus-55-xhigh-effort-vs-flash-next-xhigh-effort">Medium Complexity Task: Opus 5.5 (xhigh effort) vs Flash-Next (xhigh effort)</h3>
+<p>I asked both Opus 5.5 (xhigh effort) and Flash-Next (xhigh effort) to suggest some new features for LlamaStash. Below are their answers. Both found some interesting ideas, there were some overlaps but also unique suggestions from each. I personally liked the format in which Qwen gave the results as it was clearer and I didn’t have to ask any follow-up clarifications. But for Opus I had to ask for multiple clarifications to get the same level of detail. Which one do you prefer?</p>
+<p><strong>Prompt</strong>: “Suggest some nice features to add to the project. Should be either useful for end user or should improve performance, security or UX”</p>
+<details><summary>Answer from Flash-Next (Took ~ 4 minutes and 574K in, 9.2K out tokens)</summary><p>Checked the current surface (v0.6.1: CLI subcommands in <code>src/cli/cli_args.rs</code>, <code>src/proxy/*</code>, TODO.md open items) so these are things that don’t exist yet, not TODO duplicates.</p><p><strong>Top picks</strong></p><p><strong>1. Page-cache pre-warm — <code>llamastash warm &lt;model&gt;</code></strong> (perf, biggest win per line of code)</p><ul>
+<li>Your own docs: cold load 93–105 s vs <strong>~6 s</strong> with weights already in page cache (<code>docs/usage.md:855</code>); TODO cites ~130 s for a cold 104 GB GGUF.</li>
+<li><code>posix_fadvise(WILLNEED)</code> (or a bounded read thread) over a model’s shards + mmproj, skipped when free RAM can’t hold it or a launch is mid-load. Windows: <code>PrefetchVirtualMemory</code>.</li>
+<li>Wire as <code>daemon.preload_warm:</code> (cheap sibling to 0.6.0 <code>daemon.preload</code> — warms RAM without allocating a server) + <code>llamastash warm --json</code>. No <code>fadvise</code>/<code>readahead</code> anywhere in <code>src</code> today.</li>
+</ul><p><strong>2. Per-model request metrics — <code>llamastash stats [model]</code></strong> (new user-visible data)</p><ul>
+<li>The proxy sees every request but records nothing: no <code>usage</code> parsing in <code>src/proxy/*.rs</code>, no <code>/metrics</code> route, nothing in the TUI beyond live gauges.</li>
+<li>Rolling per-launch counters: requests, prompt/completion tokens (incl. streamed final usage chunk), TTFT, p50/p95, errors, auto-starts, evictions. Persist a small ring in <code>state.json</code>.</li>
+<li>Feeds real decisions: which model your agents actually use, whether idle TTL / make-room is picking right, and whether a faster quant is worth the disk. Optional <code>--prometheus</code> later.</li>
+</ul><p><strong>3. One-shot prompt from the shell — <code>llamastash ask &lt;model&gt; -p &quot;...&quot;</code></strong> (agent + script UX)</p><ul>
+<li>Chat is TUI-only (<code>src/tui/tabs</code>, <code>oai_client.rs</code>); <code>start</code> has no prompt flag, so scripts today hand-roll curl + bearer token.</li>
+<li>Start-if-dormant → stream to stdout → optionally stop after; <code>--json</code>, stdin pipe, <code>--system</code>, <code>--file</code>. This is the <code>ollama run &lt;m&gt; &quot;prompt&quot;</code> muscle memory people already have.</li>
+</ul><p><strong>4. Secrets out of <code>config.yaml</code> + key hygiene</strong> (security)</p><ul>
+<li>Generic-backend <code>env:</code> values are literal placeholders-only (<code>src/backend/generic/config.rs:11</code>), so an engine API key has to be written in plaintext — and on your box <code>config.yaml</code> is a symlink into <code>~/dotfiles</code>, i.e. a git repo.</li>
+<li>Add <code>{env:VAR}</code> / <code>{file:path}</code> resolution, a <code>doctor</code> finding for secret-shaped literals (<code>sk-…</code>, <code>hf_…</code>) and non-<code>0600</code> config, <code>api-key rotate</code>, and a failed-auth backoff on the LAN-mode key (currently unlimited guesses).</li>
+</ul><p><strong>5. <code>start --dry-run</code></strong> (debuggability, ~a day)</p><ul>
+<li><code>show</code> prints arch defaults that <em>would</em> feed a launch, but not the final argv + env, and it can’t take knob overrides. Nothing prints the resolved command without loading a model.</li>
+<li>Safe path for agents to validate a preset, and the natural home for the <code>llama-fit-params</code> preview already sketched at TODO.md:451.</li>
+</ul><p><strong>6. Disk hygiene — <code>llamastash storage</code> + CLI <code>delete</code></strong> (end-user pain on big libraries)</p><ul>
+<li><code>show</code> gives one model’s size; there’s no aggregate view and no orphan sweep. HF blobs are hardlinked across snapshots, so naive per-file deletes don’t free what users expect — refcount accounting is the actual value.</li>
+<li>Fold in the <code>delete</code> subcommand + IPC that TODO.md:430 flags as “the one CRUD verb off the agent contract”.</li>
+</ul><p><strong>7. <code>daemon install-service</code></strong> (ops)</p><ul>
+<li>Only <code>--foreground</code> is documented for supervisors (<code>docs/usage.md:581</code>); nothing generates a unit, so after a reboot nothing comes back and <code>daemon.preload</code> pays off only after a manual start.</li>
+<li>systemd user unit + <code>loginctl enable-linger</code>, launchd plist, Task Scheduler. Emit + enable, don’t daemonize yourself.</li>
+</ul><p><strong>8. Cheap polish</strong></p><ul>
+<li>Shell completions: no <code>clap_complete</code> dependency, so no <code>llamastash completions bash|zsh|fish</code>. ~30 lines, immediately noticeable.</li>
+<li><code>doctor --fix</code>: documented read-only today (<code>cli_args.rs:233</code>); fix perms, stale <code>runtime.json</code>/<code>daemon.pid</code>, dead integration ports, missing llama.cpp install.</li>
+<li><code>llamastash update</code> + a “vX.Y.Z available” line in <code>status</code>/TUI footer. No self-update path or version check exists; release channel (brew/scoop/gh) is already known to <code>init</code>.</li>
+</ul><p><strong>Already tracked in TODO.md — not re-suggesting</strong></p><p>LAN TLS, MCP surface, proxy concurrency caps, SSE log tail, <code>llama-fit-params</code> preview, hybrid-arch KV estimate (over-counts Qwen3.8-Flash-Next 24 GiB vs ~6 GiB real), vLLM <code>cors: true</code> default, TUI residency editor.</p></details>
+<details><summary>Answer from Opus 5.5 (Took ~ 2 minutes and 690K in, 9.3K out tokens)</summary><p>Ideas checked against <code>TODO.md</code> and <code>src/</code> so none are already built or tracked. My top three are 1, 6 and 8.</p><p><strong>End user</strong></p><ol>
+<li><strong>Live speed stats per model</strong>: tok/s, time to first token, and prompt/generated tokens, in the TUI running view and <code>status --json</code>. No throughput code exists in <code>src/</code> outside <code>init</code>’s estimates.</li>
+<li><strong><code>llamastash bench &lt;model&gt; [--preset a,b]</code></strong>: a quick tok/s and first-token number per preset, so users can compare knob changes. Today this only exists as maintainer scripts in <code>scripts/bench/</code>.</li>
+<li><strong>Model aliases on the proxy</strong>: a <code>proxy.aliases: {gpt-4o-mini: &lt;model&gt;}</code> map for tools with hard-coded model names. The resolver accepts many spellings of real ids but no arbitrary names.</li>
+<li><strong>Model update notice</strong>: <code>list</code> flags a cached HF repo whose upstream revision is newer, and <code>pull --update</code> fetches it. No update check exists in <code>src/</code>.</li>
+<li><strong><code>daemon install</code></strong>: writes a systemd user unit or launchd agent so the daemon and preloaded models start at login. <code>docs/usage.md</code> only documents <code>daemon start</code>.</li>
+</ol><p><strong>Performance</strong></p><ol start="6">
+<li><strong>Save and restore the prompt cache across eviction</strong>: when make-room unloads a model mid-conversation, the next request reprocesses the whole prompt. llama-server has slot save/restore (<code>--slot-save-path</code>); I’m going from memory there, not a check against the current build. Nothing in <code>src/</code> uses it.</li>
+<li><strong>Already in TODO and small</strong>: the per-request catalog clone in <code>route::decide</code> (<code>TODO.md:565</code>) and the blocking GGUF header read on the async path (<code>TODO.md:566</code>).</li>
+</ol><p><strong>Security</strong></p><ol start="8">
+<li><strong>Sandbox spawned servers</strong> (Linux Landlock plus <code>no_new_privs</code>): read-only model dirs, writes limited to the state/log dir. The supervisor only does <code>setsid</code> and env stripping today. This helps most for the generic backend, which runs any server the user declares, and for untrusted GGUF downloads.</li>
+<li><strong>Verify pulled files against the HF <code>lfs.sha256</code></strong>: <code>src/init/download.rs</code> has no hash check, though the HF tree API returns the hash. Add a <code>doctor --verify-models</code> for existing files. I did not check whether the <code>hf-hub</code> crate verifies on its own.</li>
+<li><strong>Per-client API keys for LAN mode</strong>: today there is one <code>proxy.api_key</code>. Named keys could be revoked one at a time and would give per-client usage counts. Pairs with TLS (<code>TODO.md:493</code>).</li>
+</ol><p><strong>UX</strong></p><ol start="11">
+<li><strong>Multi-turn chat and a system prompt in the Chat tab</strong>: <code>src/tui/tabs/chat.rs:7</code> says it is single-shot.</li>
+<li><strong>Proxy request log panel</strong>: recent requests with model, status, latency and tokens, plus a CLI equivalent. It answers “why did my agent get a 503”. No request log exists; it would share plumbing with 1.</li>
+<li><strong>Desktop notification when a pull or a long model load finishes or fails</strong>: no notification code exists.</li>
+</ol><p>Already tracked and worth moving up: CLI <code>delete</code> (<code>TODO.md:430</code>), proxy concurrency caps (<code>TODO.md:502</code>), and richer <code>/v1/models</code> rows (<code>TODO.md:503</code>).</p></details>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>The title says forget Claude Code, but that depends on your use case and time sensitivity. Opus is still 2 to 10 times faster. I still use Opus ($20 plan) for planning and reviews but the usage is dropping and I’m not even hitting its usage limits anymore. The actual coding now happens on my laptop with Flash-Next unless I want to do something really quick, and I’m quite happy with the results.</p>
+<p>If you have a unified memory machine like the Strix Halo, DGX Spark or a Mac, try Flash-Next out. Look for the fastest engine for your GPU. IMO using cloud frontier models as orchestrator/planner and using Flash-Next for execution locally gives the best balance of performance and efficiency. If you are using it for anything that’s not very time sensitive, like OSS, testing, benchmarking, research or experimentation, the local setup might suffice. Eagerly waiting for Qwen 4.</p>
+<hr/>
+<p>If you like this article, please leave a like or a comment.</p>
+<p>You can follow me on <a href="https://bsky.app/profile/deepu105.bsky.social">Bluesky</a>, <a href="https://mastodon.social/@deepu105">Mastodon</a>, and <a href="https://www.linkedin.com/in/deepu05/">LinkedIn</a>.</p> <hr class="my-12 border-[var(--color-border)]"> <div class="not-prose mb-8 flex flex-wrap gap-2"> <a href="/tags/#ai" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#ai </a><a href="/tags/#qwen38flashnext" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#qwen38flashnext </a><a href="/tags/#localllm" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#localllm </a><a href="/tags/#qwen38" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#qwen38 </a><a href="/tags/#claudeopus" class="rounded-full border border-[var(--color-border)] bg-[var(--color-bg-subtle)] px-3 py-1 text-xs text-[var(--color-fg-muted)] hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]">
+#claudeopus </a> </div><nav class="not-prose mt-10 grid gap-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-5 sm:grid-cols-2"> <p class="sm:col-span-2 text-xs font-semibold tracking-wider text-[var(--color-accent)] uppercase">
+More in <a href="/series/gnu-linux-environment-for-developers/" class="hover:underline">GNU/Linux Environment for Developers</a> </p> <a rel="prev" href="/local-ai-qwen3.8-pi-llamastash/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] p-4 transition hover:border-[var(--color-accent)]"> <span class="text-xs text-[var(--color-fg-subtle)]">← Previous in series</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? </span> </a> <span></span> </nav><nav class="not-prose mt-10 grid gap-4 border-t border-[var(--color-border)] pt-8 sm:grid-cols-2"> <span></span> <a href="/local-ai-qwen3.8-pi-llamastash/" class="group block rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-subtle)] p-4 text-right transition hover:border-[var(--color-border-strong)]"> <span class="text-xs text-[var(--color-fg-subtle)]">Older →</span> <span class="mt-1 block font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)]"> Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding? </span> </a> </nav>  </div> <section class="not-prose mt-12 border-t border-[var(--color-border)] pt-8"> <h2 class="font-display mb-4 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase">Comments</h2> <div id="giscus-mount"></div> </section> <script src="https://giscus.app/client.js" data-repo="deeputech/deeputech.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk" data-category="Comments" data-category-id="DIC_kwDODBl9a84C8yBt" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async>(function(){const config = {"repo":"deeputech/deeputech.github.io","repoId":"MDEwOlJlcG9zaXRvcnkyMDI5OTcwOTk","category":"Comments","categoryId":"DIC_kwDODBl9a84C8yBt","mapping":"pathname","strict":"0","reactionsEnabled":"1","emitMetadata":"0","inputPosition":"top","lang":"en"};
+})();</script> <script>
+  // Re-theme Giscus iframe when the site theme toggles.
+  (function () {
+    function send(theme) {
+      var iframe = document.querySelector("iframe.giscus-frame");
+      if (!iframe) return;
+      iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme === "dark" ? "dark" : "light" } } }, "https://giscus.app");
+    }
+    var html = document.documentElement;
+    var observer = new MutationObserver(function () {
+      send(html.getAttribute("data-theme") || "light");
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["data-theme"] });
+  })();
+</script> </article> <aside class="hidden lg:block"> <div class="sticky top-24"> <nav class="toc text-sm" aria-label="Table of contents" data-astro-cid-obewoz47><p class="font-display mb-3 text-xs font-semibold tracking-wider text-[var(--color-fg-subtle)] uppercase" data-astro-cid-obewoz47>
+On this page
+</p><ul class="space-y-1.5" data-astro-cid-obewoz47><li class data-astro-cid-obewoz47><a href="#my-setup" data-toc-target="my-setup" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>My Setup</a></li><li class data-astro-cid-obewoz47><a href="#flash-next-vs-claude-opus-55" data-toc-target="flash-next-vs-claude-opus-55" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Flash-Next vs Claude Opus 5.5</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#high-complexity-feature-opus-55-medium-effort-vs-flash-next-xhigh-effort" data-toc-target="high-complexity-feature-opus-55-medium-effort-vs-flash-next-xhigh-effort" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>High Complexity Feature: Opus 5.5 (medium effort) vs Flash-Next (xhigh effort)</a></li><li class="pl-4" data-astro-cid-obewoz47><a href="#medium-complexity-task-opus-55-xhigh-effort-vs-flash-next-xhigh-effort" data-toc-target="medium-complexity-task-opus-55-xhigh-effort-vs-flash-next-xhigh-effort" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Medium Complexity Task: Opus 5.5 (xhigh effort) vs Flash-Next (xhigh effort)</a></li><li class data-astro-cid-obewoz47><a href="#final-thoughts" data-toc-target="final-thoughts" class="toc-link block border-l-2 border-transparent py-0.5 pl-3 leading-snug text-[var(--color-fg-muted)] transition hover:border-[var(--color-border-strong)] hover:text-[var(--color-fg)]" data-astro-cid-obewoz47>Final Thoughts</a></li></ul></nav><script>
+  (function () {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".toc-link"));
+    if (!links.length) return;
+    var bySlug = {};
+    links.forEach(function (l) {
+      bySlug[l.getAttribute("data-toc-target")] = l;
+    });
+    var headings = Object.keys(bySlug)
+      .map(function (slug) {
+        return document.getElementById(slug);
+      })
+      .filter(Boolean);
+    if (!headings.length) return;
+
+    var current = null;
+    var observer = new IntersectionObserver(
+      function (entries) {
+        // Find the topmost intersecting heading.
+        var visible = entries
+          .filter(function (e) {
+            return e.isIntersecting;
+          })
+          .sort(function (a, b) {
+            return a.boundingClientRect.top - b.boundingClientRect.top;
+          });
+        if (visible.length) {
+          var newCurrent = visible[0].target.id;
+          if (newCurrent !== current) {
+            if (current && bySlug[current]) bySlug[current].removeAttribute("data-active");
+            current = newCurrent;
+            if (bySlug[current]) bySlug[current].setAttribute("data-active", "true");
+          }
+        }
+      },
+      { rootMargin: "-80px 0px -70% 0px" },
+    );
+    headings.forEach(function (h) {
+      observer.observe(h);
+    });
+  })();
+</script> </div> </aside> </div> </div>  </main> <aside class="alert-bar mt-16"> <div class="mx-auto max-w-3xl px-4 py-6 text-center text-sm text-[var(--color-fg-muted)] sm:px-6"> <p>
+Never miss a story from Technorage — follow me on
+<a rel="me" target="_blank" href="https://mastodon.social/@deepu105" class="text-[var(--color-accent)] hover:underline">Mastodon</a>,
+<a rel="me" target="_blank" href="https://www.linkedin.com/in/deepu05" class="text-[var(--color-accent)] hover:underline">LinkedIn</a>,
+      or
+<a rel="me" target="_blank" href="https://twitter.com/deepu105" class="text-[var(--color-accent)] hover:underline">Twitter</a>.
+      Or
+<a href="/feed.xml" class="text-[var(--color-accent)] hover:underline">subscribe via RSS</a>.
+</p> <p class="mt-2 text-xs text-[var(--color-fg-subtle)]">
+This site uses Google Analytics which places
+<a href="https://developers.google.com/analytics/devguides/collection/analyticsjs/cookie-usage#gtagjs_google_analytics_4_-_cookie_usage" target="_blank" rel="noopener noreferrer" class="underline-offset-2 hover:underline">a few cookies</a>. By using the site, you agree to their use.
+</p> </div> </aside> <footer class="border-t border-[var(--color-border)] py-10 text-sm text-[var(--color-fg-muted)]"> <div class="mx-auto flex max-w-5xl flex-col gap-4 px-4 sm:px-6 md:flex-row md:items-center md:justify-between"> <div class="flex flex-col gap-1"> <span>
+© 2026 Deepu K Sasidharan ·
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/" class="underline-offset-2 hover:underline">
+CC BY 4.0
+</a> </span> <span class="text-xs text-[var(--color-fg-subtle)]">
+Built with <a href="https://astro.build" class="hover:underline">Astro</a> ·
+        Hosted on <a href="https://pages.github.com/" class="hover:underline">GitHub Pages</a> </span> </div> <nav class="flex flex-wrap gap-x-4 gap-y-2 text-xs"> <a href="/blogs/" class="hover:text-[var(--color-fg)]">Blog</a> <a href="/series/" class="hover:text-[var(--color-fg)]">Series</a> <a href="/tags/" class="hover:text-[var(--color-fg)]">Tags</a> <a href="/feed.xml" class="hover:text-[var(--color-fg)]">RSS</a> <a href="/comment-policy/" class="hover:text-[var(--color-fg)]">Comments</a> </nav> </div> </footer> <dialog id="search-dialog" class="m-auto w-full max-w-xl rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] p-0 text-[var(--color-fg)] shadow-2xl backdrop:bg-black/50 backdrop:backdrop-blur-sm"> <div class="flex items-center gap-3 border-b border-[var(--color-border)] px-4 py-3"> <svg class="h-4 w-4 text-[var(--color-fg-subtle)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <circle cx="11" cy="11" r="7"></circle> <path d="m20 20-3-3"></path> </svg> <input id="search-input" type="search" placeholder="Search posts…" autocomplete="off" class="w-full bg-transparent text-base text-[var(--color-fg)] outline-none placeholder:text-[var(--color-fg-subtle)]"> <kbd class="rounded border border-[var(--color-border)] px-1.5 py-0.5 font-mono text-xs text-[var(--color-fg-subtle)]">esc</kbd> </div> <div id="search-results" class="max-h-[60vh] overflow-y-auto p-2 text-sm"> <p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">
+Type to search the blog.
+</p> </div> </dialog> <script>
+  (function () {
+    var dialog = document.getElementById("search-dialog");
+    var input = document.getElementById("search-input");
+    var results = document.getElementById("search-results");
+    var trigger = document.getElementById("search-trigger");
+    if (!dialog || !input || !results) return;
+
+    var pagefind = null;
+    var loading = false;
+
+    async function loadPagefind() {
+      if (pagefind || loading) return;
+      loading = true;
+      try {
+        // Pagefind is generated at /pagefind/pagefind.js after `pagefind --site dist`
+        pagefind = await import(/* @vite-ignore */ "/pagefind/pagefind.js");
+        await pagefind.options({ excerptLength: 30 });
+      } catch (e) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Search index unavailable in dev. Run <code>npm run build</code> then <code>npm run preview</code>.</p>';
+      } finally {
+        loading = false;
+      }
+    }
+
+    function open() {
+      if (typeof dialog.showModal === "function") dialog.showModal();
+      else dialog.setAttribute("open", "");
+      loadPagefind();
+      setTimeout(function () {
+        input.focus();
+      }, 0);
+    }
+    function close() {
+      if (typeof dialog.close === "function") dialog.close();
+      else dialog.removeAttribute("open");
+      input.value = "";
+      results.innerHTML =
+        '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+    }
+
+    if (trigger) trigger.addEventListener("click", open);
+    document.addEventListener("keydown", function (e) {
+      var isMac = /Mac|iPad|iPhone/.test(navigator.platform);
+      var isCmdK = (isMac ? e.metaKey : e.ctrlKey) && e.key === "k";
+      if (isCmdK) {
+        e.preventDefault();
+        open();
+      } else if (e.key === "Escape" && dialog.open) {
+        e.preventDefault();
+        close();
+      }
+    });
+    dialog.addEventListener("click", function (e) {
+      // close on backdrop click
+      if (e.target === dialog) close();
+    });
+
+    var lastQuery = "";
+    var debounceTimer = null;
+    input.addEventListener("input", function () {
+      var q = input.value.trim();
+      if (q === lastQuery) return;
+      lastQuery = q;
+      if (debounceTimer) clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function () {
+        runSearch(q);
+      }, 80);
+    });
+
+    async function runSearch(q) {
+      if (!q) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">Type to search the blog.</p>';
+        return;
+      }
+      if (!pagefind) {
+        await loadPagefind();
+        if (!pagefind) return;
+      }
+      var search = await pagefind.search(q);
+      if (!search || !search.results.length) {
+        results.innerHTML =
+          '<p class="px-3 py-6 text-center text-[var(--color-fg-subtle)]">No results for &ldquo;' +
+          escapeHtml(q) +
+          '&rdquo;</p>';
+        return;
+      }
+      var top = await Promise.all(search.results.slice(0, 8).map(function (r) { return r.data(); }));
+      results.innerHTML = top
+        .map(function (d) {
+          return (
+            '<a href="' +
+            d.url +
+            '" class="block rounded-lg px-3 py-2.5 hover:bg-[var(--color-bg-subtle)]">' +
+            '<span class="font-display block text-sm font-semibold text-[var(--color-fg)]">' +
+            escapeHtml(d.meta && d.meta.title ? d.meta.title : d.url) +
+            "</span>" +
+            '<span class="mt-0.5 block text-xs text-[var(--color-fg-muted)]">' +
+            d.excerpt +
+            "</span>" +
+            "</a>"
+          );
+        })
+        .join("");
+    }
+
+    function escapeHtml(s) {
+      return s
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+  })();
+</script> </body></html>
