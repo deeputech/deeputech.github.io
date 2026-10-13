@@ -25,7 +25,19 @@ const experience = [
     dates: "Oct 2021 – Present",
     points: [
       "Developer advocate for Okta and Auth0, now leading developer relations for Auth0's identity products for AI agents: docs, quickstarts, samples, events, and content.",
+      "Built Assistant0, a sample AI assistant on Auth0, and the Token Vault CLI for AI agents.",
+      "Took developer feedback back to product and engineering and drove UX and DX changes.",
       "Progressed from Senior to Staff to Principal Developer Advocate, focusing on identity, AI agents, DevOps, Java, and Rust.",
+    ],
+  },
+  {
+    role: "Creator & Maintainer",
+    company: "LlamaStash",
+    href: "https://github.com/llamastash/llamastash",
+    location: "Open source",
+    dates: "May 2026 – Present",
+    points: [
+      "Built a TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs on llama.cpp, vLLM, SGLang, and many other backends, in one Rust binary.",
     ],
   },
   {
@@ -76,6 +88,11 @@ const experience = [
 
 const projects = [
   { name: "LlamaStash", href: "https://github.com/llamastash/llamastash", note: "TUI + CLI for running local LLMs via llama.cpp." },
+  {
+    name: "pi-automode-classifier",
+    href: "https://github.com/deepu105/pi-automode-classifier",
+    note: "Auto mode for Pi, with a local decision model.",
+  },
   { name: "KDash", href: "https://github.com/kdash-rs/kdash", note: "A Kubernetes terminal dashboard, in Rust." },
   {
     name: "JHipster",
@@ -92,25 +109,37 @@ const projects = [
 ];
 
 const skills = [
-  { group: "Languages", items: ["Rust", "Java", "TypeScript", "JavaScript", "Go", "Python", "Kotlin", "Groovy", "csharp", "Bash"] },
   {
     group: "AI / LLM",
-    items: ["Local LLMs", "LLMOps", "llama.cpp", "RAG", "AI agents", "MCP", "LangChain", "LlamaIndex", "Harness engineering"],
+    items: [
+      "Local LLMs",
+      "llama.cpp",
+      "LLMOps",
+      "Coding agents (Claude Code, Pi)",
+      "AI agents",
+      "MCP",
+      "RAG",
+      "LangChain",
+      "LlamaIndex",
+      "Harness engineering",
+    ],
   },
+  { group: "Languages", items: ["Rust", "Java", "TypeScript", "JavaScript", "Go", "Python", "Kotlin", "Groovy", "csharp", "Bash"] },
+  { group: "Frontend & Web", items: ["React", "Angular", "Vue.js", "Svelte", "Node.js", "Astro"] },
+  { group: "Security & Identity", items: ["OAuth2", "OIDC", "JWT", "Auth0 / Okta", "Keycloak", "Zero Trust", "API security"] },
+  { group: "Backend", items: ["Spring Boot", "Spring", "JHipster", "Microservices", "gRPC", "GraalVM", "OpenAPI", "JUnit"] },
   {
     group: "DevOps & Cloud",
     items: ["Docker", "Kubernetes", "Terraform", "Helm", "GitHub Actions", "Jenkins", "AWS", "GCP", "Azure", "Istio"],
   },
-  { group: "Security & Identity", items: ["OAuth2", "OIDC", "JWT", "Auth0 / Okta", "Keycloak", "Zero Trust", "API security"] },
-  { group: "Backend", items: ["Spring Boot", "Spring", "JHipster", "Microservices", "gRPC", "GraalVM", "OpenAPI", "JUnit"] },
-  { group: "Frontend & Web", items: ["React", "Angular", "Vue.js", "Svelte", "Node.js", "Astro"] },
+  { group: "Mobile", items: ["Android (Kotlin)", "React Native", "PWA"] },
   { group: "Data & Tools", items: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Git", "Linux", "IntelliJ IDEA", "Neovim", "Agile"] },
 ];
 ---
 
 <BaseLayout
   title="CV"
-  description="Curriculum vitae of Deepu K Sasidharan: polyglot engineer, Java Champion, JHipster co-chair, and Principal Developer Advocate at Okta."
+  description="Curriculum vitae of Deepu K Sasidharan: Principal Developer Advocate at Okta, creator of LlamaStash, JHipster co-chair, polyglot engineer, and Java Champion."
 >
   <div class="cv-root mx-auto max-w-4xl px-4 pt-12 pb-16 sm:px-6">
     <!-- Header -->
@@ -119,7 +148,7 @@ const skills = [
         <div>
           <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Deepu K Sasidharan</h1>
           <p class="mt-2 text-lg text-[var(--color-fg-muted)]">
-            Developer Advocate · Polyglot engineer · Open source enthusiast · Java Champion
+            Developer Advocate · Polyglot engineer · Local AI tinkerer · Open source enthusiast · Java Champion
           </p>
         </div>
         <button
@@ -181,7 +210,8 @@ const skills = [
         <h2 class="cv-section-title">Summary</h2>
         <p class="prose-blog text-[var(--color-fg-muted)]">
           Tinkerer and builder. Polyglot software engineer with 16+ years across engineering, developer advocacy, solution architecture, and
-          enterprise consulting. Open-source aficionado and community leader focused on AI, DevOps, DevSecOps, Java, and Rust.
+          enterprise consulting, the last 6+ in developer relations. Open-source aficionado and community leader focused on local AI, AI
+          agents, DevOps, Rust, and Java.
         </p>
         <ul class="prose-blog terminal-list mt-4 space-y-1.5 text-[var(--color-fg-muted)]">
           <li>
@@ -189,24 +219,28 @@ const skills = [
             products for AI agents.
           </li>
           <li>
-            Co-chair and vice-president of <a href="https://www.jhipster.tech">JHipster</a>, an award-winning open-source app development
-            platform for modern Java and JavaScript; co-lead since 2015.
-          </li>
-          <li>
             Creator of <a href="https://github.com/llamastash/llamastash">LlamaStash</a> (local LLM orchestrator),
             <a href="https://github.com/kdash-rs/kdash">KDash</a> (a Kubernetes dashboard in Rust), and
             <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a>.
+          </li>
+          <li>
+            Running local LLMs as a daily driver for agentic coding, and building and writing about local AI, AI agents, and secure agent
+            authorization (OAuth2/OIDC, Zero Trust).
+          </li>
+          <li>
+            Co-chair and vice-president of <a href="https://www.jhipster.tech">JHipster</a>, an award-winning open-source app development
+            platform for modern Java and JavaScript; co-lead since 2015.
           </li>
           <li>
             <a href="https://dev.java/community/jcs/">Java Champion</a> (2022) and author of
             <em>Full Stack Development with JHipster</em> (two editions, Packt).
           </li>
           <li>Deep expertise in Java/Spring, Rust, and TypeScript, with a focus on cloud-native, DevOps, DevSecOps, and identity.</li>
-          <li>Building and writing about AI agents, local LLMs, and secure agent authorization (OAuth2/OIDC, Zero Trust).</li>
           <li>
-            Founder of the <a href="https://deepu.tech">Technorage</a> blog (20k+ monthly views) and an international conference speaker (Devoxx,
-            Spring I/O, and more).
+            Founder of the <a href="https://deepu.tech">Technorage</a> blog (20k+ monthly views) and an international conference speaker with
+            80+ talks (Devoxx, Spring I/O, and more).
           </li>
+          <li>Mobile development with Android (Kotlin), React Native, and PWAs.</li>
         </ul>
       </section>
 
