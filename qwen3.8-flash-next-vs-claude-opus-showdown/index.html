@@ -90,7 +90,7 @@ Post <strong class="text-[var(--color-fg-muted)]">11</strong> of  <strong class=
 <li>All 12 runs finished the task, and all 12 PRs passed the end-to-end test and here are the best averages for each model. The gap is quite thin IMO.
 <ul>
 <li><strong>Opus 5.5 xhigh</strong>: 87%, $17.78, 43 min</li>
-<li><strong>Qwen3.8-Flash-Next medium</strong>, run locally: 69%, $0.32, 45 min</li>
+<li><strong>Qwen3.8-Flash-Next medium</strong>, run locally: 69%, $0.32 ($0.02), 45 min</li>
 </ul>
 </li>
 <li>Flash-Next took 1.1x to 2.1x as long as Opus 5.5 at the same effort (set 2).</li>
@@ -103,7 +103,7 @@ Post <strong class="text-[var(--color-fg-muted)]">11</strong> of  <strong class=
 </li>
 <li>With Flash-Next, Claude Code and Pi scored the same on the review questions. CI passed on 4 of 4 Claude Code + Flash-Next PRs and 1 of 4 Pi PRs. Claude Code was also faster in the cleaner set, though Flash-Next had to answer its auto mode tool checks too.</li>
 <li>Opus xhigh scored 6.94 against 6.25 for medium, at 2.7x the cost. Flash-Next medium and xhigh scored almost the same.</li>
-<li>At API prices, a set 2 Opus run cost $6.52 (medium) or $17.78 (xhigh), and a Flash-Next run $0.32 to $0.67.</li>
+<li>At API prices, a set 2 Opus run cost $6.52 (medium) or $17.78 (xhigh), and a Flash-Next run $0.32 to $0.67, but since I ran it locally, the actual cost was electricity which at my rates is less than 2 cents.</li>
 </ul>
 <h2 id="combinations-compared">Combinations compared</h2>
 <p>I wanted to compare both harness differences and thinking effort differences so I decided to set up a six-way comparison with the help of Claude Code + Opus 5.5.</p>
