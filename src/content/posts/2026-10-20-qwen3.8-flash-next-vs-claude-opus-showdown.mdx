@@ -33,7 +33,7 @@ You can read the previous comparison in the [blog below](https://deepu.tech/loca
 
 - All 12 runs finished the task, and all 12 PRs passed the end-to-end test and here are the best averages for each model. The gap is quite thin IMO.
   - **Opus 5.5 xhigh**: 87%, $17.78, 43 min
-  - **Qwen3.8-Flash-Next medium**, run locally: 69%, $0.32, 45 min
+  - **Qwen3.8-Flash-Next medium**, run locally: 69%, $0.32 ($0.02), 45 min
 - Flash-Next took 1.1x to 2.1x as long as Opus 5.5 at the same effort (set 2).
 - Average score, out of 8:
   - Claude Code + Opus 5.5 - **6.59 (82%)**
@@ -41,7 +41,7 @@ You can read the previous comparison in the [blog below](https://deepu.tech/loca
   - Pi + Flash-Next - **5.25 (66%)**
 - With Flash-Next, Claude Code and Pi scored the same on the review questions. CI passed on 4 of 4 Claude Code + Flash-Next PRs and 1 of 4 Pi PRs. Claude Code was also faster in the cleaner set, though Flash-Next had to answer its auto mode tool checks too.
 - Opus xhigh scored 6.94 against 6.25 for medium, at 2.7x the cost. Flash-Next medium and xhigh scored almost the same.
-- At API prices, a set 2 Opus run cost $6.52 (medium) or $17.78 (xhigh), and a Flash-Next run $0.32 to $0.67.
+- At API prices, a set 2 Opus run cost $6.52 (medium) or $17.78 (xhigh), and a Flash-Next run $0.32 to $0.67, but since I ran it locally, the actual cost was electricity which at my rates is less than 2 cents.
 
 ## Combinations compared
 
