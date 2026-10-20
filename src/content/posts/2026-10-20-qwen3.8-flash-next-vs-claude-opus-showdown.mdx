@@ -268,11 +268,13 @@ In the previous post, I said Flash-Next's reviews found more issues than Opus's.
 
 ## Caveats
 
+- Biggest caveat is that the models are not on the same league. Opus is a frontier model run at FP16 or atleast FP8. I ran Flash-Next on my laptop at 4.16 bpw (experts and the rest: 4-bit, the mixing layers: 6-bit, draft head: 8-bit, n-gram lookup table: FP8). Flash-Next at FP8 should show a bit more quality.
 - One run per combination per set, so I don't know how much the results vary from run to run.
 - The end-to-end test used a 1B model at 15k tokens.
 - The two save-race problems were found by reading the code, not reproduced.
 - The sets differ in the prompt (do spike vs spike data given) and the llama-server build (CPU against GPU).
 - All the scorers are LLMs, and the session that settled their disagreements ran on Opus.
+- The machine running Flash-Next ran at 70W TDP ceiling for the entire duration. I could have run it at 90W for slightly better speed but the fan noise and thermal stress was not worth it.
 
 ## Final Thoughts
 
