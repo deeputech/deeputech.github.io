@@ -1,0 +1,289 @@
+---
+title: "Qwen3.8-Flash-Next vs Claude Opus 5.5: Six way benchmark on a real Rust feature"
+description: A controlled comparison of Qwen3.8-Flash-Next and Claude Opus 5.5 on one LlamaStash feature, across Claude Code and Pi, at medium and xhigh effort
+published: true
+featured: false
+tags:
+  - "ai"
+  - "qwen38flashnext"
+  - "localllm"
+  - "qwen38"
+  - "claudeopus"
+series: GNU/Linux Environment for Developers
+canonical_url: "https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown"
+date: 2026-10-20
+image: /assets/images/llamastash/qwen38-flash-vs-opus-cover.png
+cover_image: /assets/images/llamastash/qwen38-flash-vs-opus-cover.png
+---
+
+import LinkCard from "~/components/embeds/LinkCard.astro";
+
+I recently posted on my blog and Reddit about my experience pitting Qwen 3.8 Flash-Next against Claude Opus in some tasks and some people on Reddit pointed out that it wasn't a fair comparison since I used different harnesses and thinking effort levels. That got me curious and so I did a more controlled comparison to see how they truly stack up against each other. It's still a non-deterministic comparison, but it provides a clearer picture of how they measure up against each other.
+
+You can read the previous comparison [blog below](https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm) and on [Reddit](https://www.reddit.com/r/LocalLLaMA/comments/1wyzt1d/story_time_qwen38flashnext_on_my_strix_halo/).
+
+<LinkCard
+  title="Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding"
+  href="https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm"
+/>
+
+## TL;DR
+
+- All 12 runs finished the task, and all 12 PRs passed the end-to-end test.
+- Flash-Next took 1.1x to 2.1x as long as Opus 5.5 at the same effort.
+- Average score, out of 8:
+  - Claude Code + Opus 5.5 - **6.59 (82%)**
+  - Claude Code + Flash-Next - **5.44 (68%)**
+  - Pi + Flash-Next - **5.25 (66%)**
+- With Flash-Next, Claude Code and Pi scored the same on the review questions. CI passed on 4 of 4 Claude Code + Flash-Next PRs and 1 of 4 Pi PRs. Claude Code was also faster in the cleaner set, though Flash-Next had to answer its auto mode tool checks too.
+- Opus xhigh scored 6.94 against 6.25 for medium, at 2.7x the cost. Flash-Next medium and xhigh scored almost the same.
+- At API prices, a set 2 Opus run cost $6.52 (medium) or $17.78 (xhigh), and a Flash-Next run $0.32 to $0.67.
+
+## Combinations compared
+
+I wanted to compare both harness differences and thinking effort differences so I decided to set up a six way comparison with the help of Claude Code + Opus 5.5.
+
+| Harness     | Model               | Thinking Effort |
+| ----------- | ------------------- | --------------- |
+| Pi          | Qwen 3.8 Flash Next | xhigh           |
+| Pi          | Qwen 3.8 Flash Next | medium          |
+| Claude Code | Qwen 3.8 Flash Next | xhigh           |
+| Claude Code | Qwen 3.8 Flash Next | medium          |
+| Claude Code | Opus 5.5            | xhigh           |
+| Claude Code | Opus 5.5            | medium          |
+
+> Note: This is Qwen Focused so I'm not gonna burn money testing Pi + Opus combinations.
+
+Each combination ran twice: once where the agent measured save and restore at 100k tokens itself (set 1), and once with those numbers given in the prompt (set 2). Total 12 runs.
+
+Opus 5.5 is a frontier cloud model with more than a trillion parameters, and Anthropic doesn't publish its actual size. [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) is a mixture of experts model with 125B parameters and 6B active per token and a 51B n-gram embedding, and it runs on my laptop at ~Q4 quantization.
+
+## The Task
+
+I picked a real feature from the [LlamaStash](https://github.com/llamastash/llamastash) roadmap. LlamaStash unloads a model when it needs room for another one or when it has been idle too long, and the next request then has to reprocess the whole prompt. [llama-server](https://github.com/ggml-org/llama.cpp/tree/master/tools/server) can save a slot's KV cache to disk and load it back, so the task was to save the cache before an unload and restore it when the model comes back.
+
+The agent had to measure save and restore at 100k tokens first (a spike), design the caps, cleanup and cache matching, prove it works end to end, add tests and docs, and open a PR.
+
+<details>
+<summary>The full prompt for the first set</summary>
+
+```text
+You are in a fresh clone of llamastash at commit <SHA>, on branch <BRANCH>. Do all the work here.
+
+Task (TODO.md, R14 batch 4):
+"Keep a model's prompt cache across an unload. When make-room or the idle sweep stops a llama.cpp launch mid-conversation, the next request reprocesses the whole prompt. llama-server can write a slot's KV cache to disk and read it back: --slot-save-path PATH plus POST /slots/{id_slot}?action=save|restore (present on local build 11390 and in upstream tools/server/README.md, checked 2026-10-05). Nothing in src/ uses it. Spike first: measure save time, restore time and file size at a large context (100k tokens) against plain reprocessing. Then decide when to save (before an eviction only), where the files live, how they are capped and cleaned up, and how a restored slot is matched to the returning conversation."
+
+Rules
+- Work from scratch. Do not look at any other branch, pull request, clone or worktree.
+- Do not ask me anything and do not stop to check in. If something is unclear, pick the reasonable option, note it for the PR, and continue until done.
+- Do not use child agents. Do all the work in the main session.
+
+Environment
+- llama-server: <LLAMA_SERVER>
+- Test model: <TEST_MODEL>
+- Run llama-server on CPU only, with 8 threads, and one server at a time.
+- Do not use /tmp for anything: it is a RAM disk. Put temporary files, slot save files and daemon directories under <SCRATCH>.
+- Any llamastash daemon you start gets its own LLAMASTASH_STATE_DIR, LLAMASTASH_CONFIG_DIR and LLAMASTASH_CACHE_DIR and non-default ports. Do not send test requests to the model endpoint you are running on.
+- While coding, run narrow tests only: cargo nextest run --features test-fixtures --lib <filter>, or --test <file>. The full suite runs once, at the end, in the pre-push hook.
+
+Done means
+1. Spike numbers at 100k tokens are in a doc under docs/spikes/: reprocess time, save time, restore time, file size.
+2. End-to-end proof on an isolated daemon with the test model: send a prompt, let the idle sweep or make-room stop the launch, send the follow-up, and show that the prompt came from the restored cache (cached token count and time, before and after).
+3. Unit tests cover the new code. Docs, config example, CHANGELOG and TODO.md are updated as AGENTS.md requires.
+4. The pre-push hook passes. If it fails on tests your change does not touch, run it once more; if it then passes, note the flake. Do not use --no-verify.
+5. A PR against main is open, titled <BRANCH>, with these sections: Spike numbers, Design decisions (when to save, where files live, cap and cleanup, slot matching), End-to-end proof, Tests, Known limits.
+
+Then stop. Do not wait for CI or poll it; I check CI myself. End with a summary of at most 10 lines.
+```
+
+</details>
+
+## How I Ran It
+
+An orchestrator session (Claude Code + Opus 5.5) started each run and collected the numbers. Every run got a fresh clone of LlamaStash at the same commit, the same prompt, a 3 hour limit and one "continue" if it stopped early. Claude Code ran in auto mode, which sends its tool checks to the same model, and Pi ran with its guard off. The PRs are in a public scratch repo, [deepu105/llamastash-b4r2](https://github.com/deepu105/llamastash-b4r2).
+
+The agents, builds and tests ran on my Dell XPS 15. Flash-Next was served from my ASUS ROG Flow Z13 (Strix Halo, 128GB) by LlamaStash via [Halogen](https://github.com/peonist-ai/halogen-flash-server), over the LAN.
+
+In the first set, each agent ran the 100k-token spike itself on the XPS CPU, which took 48 to 53 minutes per run. This was a mistake, it should have used the GPU, and by the time I noticed all six runs finished and since quality won't depend on the spike I decided not to redo them. In the second set, the spike numbers were in the prompt and llama-server ran on the GPU.
+
+<details>
+<summary>Versions</summary>
+
+| Tool                        | Version                                                                                                                                                                                   |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Claude Code                 | 2.1.296                                                                                                                                                                                   |
+| Pi                          | 1.1.0                                                                                                                                                                                     |
+| LlamaStash (on the Z13)     | 0.6.1                                                                                                                                                                                     |
+| Halogen                     | 0.17.4                                                                                                                                                                                    |
+| Flash-Next                  | Halogen checkpoint `qwen38-flash-next-v2.hgn` from [peonist-ai/halogen-qwen3.8-flash-next](https://huggingface.co/peonist-ai/halogen-qwen3.8-flash-next), 4.16 bits per weight on average |
+| llama-server for the agents | build 11525, CPU build (first set), CUDA build (second set)                                                                                                                               |
+| Test model                  | `Llama-3.2-1B-Instruct-Q4_K_M.gguf`                                                                                                                                                       |
+
+</details>
+
+### Scoring
+
+Each PR got seven review questions and a CI check, for a maximum score of 8:
+
+- **Q1**: Is a restore into a different model or launch config refused?
+- **Q2**: Are the save files capped and cleaned up?
+- **Q3**: Is the eviction code still backend neutral? LlamaStash's `AGENTS.md` doesn't allow llama.cpp names in generic code.
+- **Q4**: Do the tests run the new code?
+- **Q5**: Are the docs, config example and CHANGELOG updated and correct?
+- **Q6**: Does the PR avoid changes the task didn't ask for?
+- **Q7**: Is the eviction safe? It should check for new requests after the save, and block a second eviction of the same model during the save.
+- **CI**: Do the PR's tests pass on all platforms?
+
+Each answer gets the grade of its worst problem:
+
+| Grade | Problem | Examples                                                                                                                                |
+| ----: | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+|     1 | none    |                                                                                                                                         |
+|  0.75 | low     | a comment naming llama.cpp in generic code, a missing README row, an untested edge case                                                 |
+|   0.5 | medium  | a wrong cache restored in a rare setup, a request cut off in a rare race, a doc that describes the wrong behaviour, untested core paths |
+|  0.25 | high    | a wrong answer or a cut-off request in normal use                                                                                       |
+
+For CI, a failing test that the PR added for working code gets 0.75. That includes two tests that hang on Windows, since the hang could be in the test rather than the code.
+
+Four scorings went into this. Pi + Flash-Next and Claude Code + Opus 5.5 scored the PRs first, with an older version of these questions. A second Claude Code + Opus 5.5 session checked every place they disagreed in the code and graded each problem by severity. Then Kimi K3 (in GitHub Copilot CLI) scored all 12 PRs on its own, without knowing which run made which PR. The final score is the average of these last two, except where Kimi missed something that was checked in the code. There the Opus grade is used.
+
+## Results
+
+### Did They Finish?
+
+Yes. All 12 runs opened a PR, and all 12 PRs pass the end-to-end test. After LlamaStash unloads the model, the follow-up prompt gets 15,000 tokens from the restored cache and takes about 1.4 s, against 5.2 to 6.1 s without the feature. One Flash-Next run needed the "continue".
+
+### Speed
+
+Set 2 times, where no run had to measure the spike:
+
+| Effort | Opus 5.5 | Claude Code + Flash-Next | Pi + Flash-Next |
+| ------ | -------: | -----------------------: | --------------: |
+| medium | 23.4 min |          45.3 min (1.9x) | 48.1 min (2.1x) |
+| xhigh  | 43.5 min |          49.5 min (1.1x) | 63.8 min (1.5x) |
+
+In set 1 the gap was 1.9x to 3.5x, even after taking out the time spent waiting for the spike, because some Flash-Next runs built and tested on the same CPU the spike was using. Halogen served Flash-Next at 51 to 56 tokens/s in every run.
+
+### Code Quality
+
+Opus wrote better code but not by a huge margin and every PR works.
+
+| Arm (PRs)                                                                                                                                                | Score (of 8) |   % |     Time |   Cost | Tokens                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------: | --: | -------: | -----: | --------------------------------- |
+| Claude Code + Opus 5.5 [xhigh] ([#4](https://github.com/deepu105/llamastash-b4r2/pull/4), [#11](https://github.com/deepu105/llamastash-b4r2/pull/11))    |         6.94 | 87% | 43.5 min | $17.78 | 507k in / 48.3M cached / 203k out |
+| Claude Code + Opus 5.5 [medium] ([#2](https://github.com/deepu105/llamastash-b4r2/pull/2), [#8](https://github.com/deepu105/llamastash-b4r2/pull/8))     |         6.25 | 78% | 23.4 min |  $6.52 | 242k in / 13.4M cached / 95k out  |
+| Claude Code + Flash-Next [medium] ([#5](https://github.com/deepu105/llamastash-b4r2/pull/5), [#10](https://github.com/deepu105/llamastash-b4r2/pull/10)) |          5.5 | 69% | 45.3 min |  $0.32 | 445k in / 13.5M cached / 82k out  |
+| Pi + Flash-Next [xhigh] ([#6](https://github.com/deepu105/llamastash-b4r2/pull/6), [#12](https://github.com/deepu105/llamastash-b4r2/pull/12))           |         5.44 | 68% | 63.8 min |  $0.67 | 316k in / 35.0M cached / 134k out |
+| Claude Code + Flash-Next [xhigh] ([#7](https://github.com/deepu105/llamastash-b4r2/pull/7), [#13](https://github.com/deepu105/llamastash-b4r2/pull/13))  |         5.38 | 67% | 49.5 min |  $0.39 | 269k in / 18.9M cached / 99k out  |
+| Pi + Flash-Next [medium] ([#3](https://github.com/deepu105/llamastash-b4r2/pull/3), [#9](https://github.com/deepu105/llamastash-b4r2/pull/9))            |         5.06 | 63% | 48.1 min |  $0.56 | 242k in / 29.1M cached / 117k out |
+
+- **Scores** are the average of both sets.
+- **Time, cost and tokens**: from the set 2 runs since set 1 data except scores got skewed by the spike.
+- **Cost**: at API prices. Opus 5.5 at [Anthropic's list price](https://platform.claude.com/docs/en/about-claude/pricing). Flash-Next at the price of [Qwen3.8-Flash](https://www.qwencloud.com/models/qwen3.8-flash), its hosted version on QwenCloud. I ran Flash-Next locally, so it cost me only electricity and Claude was using a 20€ subscription.
+- **Tokens**: from the session logs, without counting tokens used for Claude Code's auto mode tool checks. "in" is input that was not read from the cache.
+- **CI**: 4 PRs fail the Windows test jobs on a test they added: Opus medium [#2](https://github.com/deepu105/llamastash-b4r2/pull/2), and Pi + Flash-Next [#3](https://github.com/deepu105/llamastash-b4r2/pull/3), [#9](https://github.com/deepu105/llamastash-b4r2/pull/9) and [#12](https://github.com/deepu105/llamastash-b4r2/pull/12). The tests in #2 and #9 are wrong (one expects `/` as the path separator, one uses a helper that does nothing outside Unix). The tests in #3 and #12 hang until nextest kills them after 180 s. Each of these PRs gets 0.75 for CI.
+- **Acceptance**: not scored, since all 12 PRs passed it.
+- **Diff size**: not scored either. The Opus PRs added 1,373 to 2,729 lines, Claude Code + Flash-Next 867 to 1,223 and Pi + Flash-Next 1,439 to 1,962.
+
+<details>
+<summary>All 12 PRs, by set</summary>
+
+**Set 1** (the agent ran the spike itself)
+
+| Arm (PR)                                                                                     | Score (of 8) |            Time |   Cost | Tokens                            |
+| -------------------------------------------------------------------------------------------- | -----------: | --------------: | -----: | --------------------------------- |
+| Claude Code + Opus 5.5 [xhigh] ([#4](https://github.com/deepu105/llamastash-b4r2/pull/4))    |         6.63 | 51.2 min (17.2) | $15.43 | 393k in / 42.0M cached / 195k out |
+| Claude Code + Opus 5.5 [medium] ([#2](https://github.com/deepu105/llamastash-b4r2/pull/2))   |          6.0 | 25.6 min (44.4) |  $6.01 | 204k in / 13.1M cached / 88k out  |
+| Claude Code + Flash-Next [medium] ([#5](https://github.com/deepu105/llamastash-b4r2/pull/5)) |          5.5 | 90.2 min (22.4) |  $0.66 | 729k in / 30.1M cached / 141k out |
+| Pi + Flash-Next [xhigh] ([#6](https://github.com/deepu105/llamastash-b4r2/pull/6))           |         5.38 | 95.0 min (20.2) |  $0.85 | 381k in / 44.0M cached / 182k out |
+| Claude Code + Flash-Next [xhigh] ([#7](https://github.com/deepu105/llamastash-b4r2/pull/7))  |         5.25 | 98.4 min (60.5) |  $0.67 | 348k in / 33.3M cached / 175k out |
+| Pi + Flash-Next [medium] ([#3](https://github.com/deepu105/llamastash-b4r2/pull/3))          |         5.25 | 73.7 min (63.5) |  $0.65 | 322k in / 33.4M cached / 140k out |
+
+Set 1 times have the time spent only waiting for the spike taken out. The minutes taken out are in brackets.
+
+**Set 2** (spike numbers given)
+
+| Arm (PR)                                                                                       | Score (of 8) |     Time |   Cost | Tokens                            |
+| ---------------------------------------------------------------------------------------------- | -----------: | -------: | -----: | --------------------------------- |
+| Claude Code + Opus 5.5 [xhigh] ([#11](https://github.com/deepu105/llamastash-b4r2/pull/11))    |         7.25 | 43.5 min | $17.78 | 507k in / 48.3M cached / 203k out |
+| Claude Code + Opus 5.5 [medium] ([#8](https://github.com/deepu105/llamastash-b4r2/pull/8))     |          6.5 | 23.4 min |  $6.52 | 242k in / 13.4M cached / 95k out  |
+| Claude Code + Flash-Next [medium] ([#10](https://github.com/deepu105/llamastash-b4r2/pull/10)) |          5.5 | 45.3 min |  $0.32 | 445k in / 13.5M cached / 82k out  |
+| Claude Code + Flash-Next [xhigh] ([#13](https://github.com/deepu105/llamastash-b4r2/pull/13))  |          5.5 | 49.5 min |  $0.39 | 269k in / 18.9M cached / 99k out  |
+| Pi + Flash-Next [xhigh] ([#12](https://github.com/deepu105/llamastash-b4r2/pull/12))           |          5.5 | 63.8 min |  $0.67 | 316k in / 35.0M cached / 134k out |
+| Pi + Flash-Next [medium] ([#9](https://github.com/deepu105/llamastash-b4r2/pull/9))            |         4.88 | 48.1 min |  $0.56 | 242k in / 29.1M cached / 117k out |
+
+</details>
+
+#### What Opus did and Flash-Next didn't
+
+- **A request during the save**: The Opus PRs check for new requests after the save. The Flash-Next PRs don't, so a request that arrives during the save (under a second) gets cut off.
+- **Two evictions at once**: Only the Opus xhigh PRs block a second eviction while the first one is still saving.
+- **Cache matching**: The Opus PRs key the cache on the full launch command and the model file. The Flash-Next PRs key on less, 3 of them on the model path only, so a relaunch with different flags can restore an old cache.
+- **Tests**: The Opus PRs and 2 Pi + Flash-Next PRs test save and restore through the eviction code. The other 6 Flash-Next PRs have unit tests only.
+- **Docs**: 4 Flash-Next PRs have a doc that describes something the code doesn't do.
+
+#### What Flash-Next did and Opus didn't
+
+- **CI**: All 4 Claude Code + Flash-Next PRs passed on every platform. Opus medium [#2](https://github.com/deepu105/llamastash-b4r2/pull/2) failed on Windows.
+- **SECURITY.md**: Pi + Flash-Next xhigh [#6](https://github.com/deepu105/llamastash-b4r2/pull/6) added a SECURITY.md note, since the feature writes conversation tokens to disk and turns on llama-server's slot endpoints. Opus #2 and #11 didn't.
+- **Tests**: Pi + Flash-Next #3 and #12 scored a bit higher on tests than the Opus medium PRs #2 and #8, which don't test their own check for requests that arrive during the save.
+- **Scope**: Claude Code + Flash-Next #5, #10 and #13 made no unrelated changes. Opus xhigh #4 left an unused function behind.
+- **Smaller PRs**: The Claude Code + Flash-Next PRs added 867 to 1,223 lines, against 1,373 to 2,729 for Opus. Not scored.
+- **On by default**: 7 of 8 Flash-Next PRs turn the feature on by default, against 2 of 4 Opus PRs. That saves a config step, but I didn't score it either way.
+
+So Opus was ahead on the parts that change what a user gets: cache matching and eviction safety. Flash-Next did better only in some PRs, on CI, docs, tests and scope.
+
+### Claude Code vs Pi for Flash-Next
+
+This was surprising for me, since Pi is my daily driver. Both scored the same on the review questions, and Claude Code was ahead on CI.
+
+|                                 | Claude Code + Flash-Next | Pi + Flash-Next |
+| ------------------------------- | -----------------------: | --------------: |
+| Score (avg of 8)                |                     5.44 |            5.25 |
+| CI green                        |                   4 of 4 |          1 of 4 |
+| PRs with integration tests (Q4) |                   0 of 4 |          2 of 4 |
+| Time, set 2 (medium / xhigh)    |          45.3 / 49.5 min | 48.1 / 63.8 min |
+
+Claude Code also sent its auto mode tool checks to the same Flash-Next server, 22 to 79 per run, which took 10 to 14% of the run time. Pi sent none. Claude Code + Flash-Next was still faster than Pi in both set 2 pairs (by 6% and 22%). In set 1, Pi was faster in both (by 18% and 3%).
+
+Three of the 4 Pi PRs fail the Windows test jobs, and no pre-push hook covers Windows. With one run per combination per set, I wouldn't read too much into it.
+
+### Medium vs xhigh
+
+For Opus, xhigh scored higher in both sets (6.63 against 6.0, and 7.25 against 6.5), and only the xhigh PRs block two evictions at once. But it cost 2.6x to 2.7x as much and took 43.5 minutes against 23.4 in set 2.
+
+For Flash-Next, medium and xhigh scored almost the same (5.28 and 5.41), and xhigh was slower in all 4 pairs. I have been running Flash-Next at xhigh, and on this task it didn't help.
+
+### The Reviewers
+
+Flash-Next, Opus and Kimi K3 all scored these PRs, so they can be compared as reviewers too:
+
+- **Flash-Next** found the "request during the save" problem in 2 of the 8 Flash-Next PRs and no llama.cpp names in generic code. Opus found the first in all 8 and the second in 6.
+- **Opus** missed that 3 PRs left their new config key out of the README.
+- **Kimi K3** gave the same grade as Opus on 63 of 84 answers and was never stricter. It missed the four docs that describe the wrong behaviour.
+
+In the previous post, I said Flash-Next's reviews found more issues than Opus's. On this task it was the other way around.
+
+## Caveats
+
+- One run per combination per set, so I don't know how much the results vary from run to run.
+- The end-to-end test used a 1B model at 15k tokens.
+- The two save-race problems were found by reading the code, not reproduced.
+- The sets differ in the prompt (do spike vs spike data given) and the llama-server build (CPU against GPU).
+- All the scorers are LLMs, and the session that settled their disagreements ran on Opus.
+
+## Final Thoughts
+
+With the harness and effort kept the same, Opus 5.5 wrote better code than Flash-Next on this task and finished sooner. This was expected of course from a frontier model. That's different from my previous post, where I liked Flash-Next's PR better than the one from Opus at medium effort.
+
+But the real takeaway here is that Flash-Next was right behind in scores and time and the gap wasn't that wide. Opus is a frontier model on Anthropic's servers, and Flash-Next has 6B active parameters and runs on my laptop. It finished every run, every PR works, it took 1.1x to 2.1x as long, and it cost me only electricity. What it missed (the save race, cache matching, integration tests, docs) is what a review catches, and that is how I already use it: an orchestrator plans and reviews, and Flash-Next does the implementation.
+
+Two things I'll try in my work. I'll run Flash-Next at medium instead of xhigh and see how it goes, and I'll give Claude Code + Flash-Next a proper try instead of using only Pi and see how it goes.
+
+All 12 PRs are in [deepu105/llamastash-b4r2](https://github.com/deepu105/llamastash-b4r2/pulls) if you want to read the code yourself.
+
+---
+
+If you like this article, please leave a like or a comment.
+
+You can follow me on [Bluesky](https://bsky.app/profile/deepu105.bsky.social), [Mastodon](https://mastodon.social/@deepu105), and [LinkedIn](https://www.linkedin.com/in/deepu05/).
