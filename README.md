@@ -45,11 +45,21 @@ the search index at `dist/pagefind/`.
 ## Publish to deepu.tech
 
 ```sh
-./publish.sh         # syndicates new/changed posts to Dev.to,
-                     # builds the site and force-pushes dist/ to master
+./publish.sh         # builds the site, force-pushes dist/ to master, then
+                     # syndicates new/changed posts to Dev.to
 ./publish.sh -s      # skip Dev.to syndication
 ./publish.sh -c      # CI mode (used by .github/workflows/ci.yml)
+./publish.sh -d      # dry run: local build + Dev.to plan, no push, no API writes
 ```
+
+The Dev.to sync runs last on purpose: Dev.to fetches `cover_image` from
+deepu.tech when it creates an article and caches a failed fetch for months, so
+the script waits (up to `PAGES_WAIT` seconds, default 300) for the pushed build
+to go live before syndicating.
+
+A post that already has `devto_url` must also carry a numeric `devto_id`, or the
+script tries to create it again and Dev.to rejects the duplicate `canonical_url`
+(a blank `devto_id:` also fails the Astro content schema).
 
 GitHub Actions runs `./publish.sh -c` automatically on every push to
 `site_src`. The site is served from the `master` branch via GitHub
