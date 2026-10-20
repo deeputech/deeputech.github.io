@@ -1,5 +1,5 @@
 ---
-title: "Qwen3.8-Flash-Next vs Claude Opus 5.5: Six way benchmark on a real Rust feature"
+title: "Qwen3.8-Flash-Next vs Claude Opus 5.5: Six-way benchmark on a real Rust feature"
 description: A controlled comparison of Qwen3.8-Flash-Next and Claude Opus 5.5 on one LlamaStash feature, across Claude Code and Pi, at medium and xhigh effort
 published: true
 featured: false
@@ -18,9 +18,9 @@ cover_image: /assets/images/llamastash/qwen38-flash-vs-opus-cover.png
 
 import LinkCard from "~/components/embeds/LinkCard.astro";
 
-I recently posted on my blog and Reddit about my experience pitting Qwen 3.8 Flash-Next against Claude Opus in some tasks and some people on Reddit pointed out that it wasn't a fair comparison since I used different harnesses and thinking effort levels. That got me curious and so I did a more controlled comparison to see how they truly stack up against each other. It's still a non-deterministic comparison, but it provides a clearer picture of how they measure up against each other.
+I recently posted on my blog and Reddit about my experience pitting Qwen 3.8 Flash-Next against Claude Opus in some tasks and some people on Reddit pointed out that it wasn't a fair comparison since I used different harnesses and thinking effort levels. So I did a more controlled comparison to see how they truly stack up against each other. It's still a non-deterministic comparison, but it provides a clearer picture of how they measure up against each other.
 
-You can read the previous comparison [blog below](https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm) and on [Reddit](https://www.reddit.com/r/LocalLLaMA/comments/1wyzt1d/story_time_qwen38flashnext_on_my_strix_halo/).
+You can read the previous comparison in the [blog below](https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm) and on [Reddit](https://www.reddit.com/r/LocalLLaMA/comments/1wyzt1d/story_time_qwen38flashnext_on_my_strix_halo/).
 
 <LinkCard
   title="Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding"
@@ -30,7 +30,7 @@ You can read the previous comparison [blog below](https://deepu.tech/local-ai-qw
 ## TL;DR
 
 - All 12 runs finished the task, and all 12 PRs passed the end-to-end test.
-- Flash-Next took 1.1x to 2.1x as long as Opus 5.5 at the same effort.
+- Flash-Next took 1.1x to 2.1x as long as Opus 5.5 at the same effort (set 2).
 - Average score, out of 8:
   - Claude Code + Opus 5.5 - **6.59 (82%)**
   - Claude Code + Flash-Next - **5.44 (68%)**
@@ -41,7 +41,7 @@ You can read the previous comparison [blog below](https://deepu.tech/local-ai-qw
 
 ## Combinations compared
 
-I wanted to compare both harness differences and thinking effort differences so I decided to set up a six way comparison with the help of Claude Code + Opus 5.5.
+I wanted to compare both harness differences and thinking effort differences so I decided to set up a six-way comparison with the help of Claude Code + Opus 5.5.
 
 | Harness     | Model               | Thinking Effort |
 | ----------- | ------------------- | --------------- |
@@ -56,7 +56,7 @@ I wanted to compare both harness differences and thinking effort differences so 
 
 Each combination ran twice: once where the agent measured save and restore at 100k tokens itself (set 1), and once with those numbers given in the prompt (set 2). Total 12 runs.
 
-Opus 5.5 is a frontier cloud model with more than a trillion parameters, and Anthropic doesn't publish its actual size. [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) is a mixture of experts model with 125B parameters and 6B active per token and a 51B n-gram embedding, and it runs on my laptop at ~Q4 quantization.
+Opus 5.5 is a frontier cloud model with more than a trillion parameters, and Anthropic doesn't publish its actual size. [Qwen3.8-Flash-Next](https://huggingface.co/Qwen/Qwen3.8-Flash-Next) is a mixture of experts model with 125B parameters, 6B active per token and a 51B n-gram embedding, and it runs on my laptop at ~Q4 quantization.
 
 ## The Task
 
@@ -145,7 +145,7 @@ Each answer gets the grade of its worst problem:
 
 For CI, a failing test that the PR added for working code gets 0.75. That includes two tests that hang on Windows, since the hang could be in the test rather than the code.
 
-Four scorings went into this. Pi + Flash-Next and Claude Code + Opus 5.5 scored the PRs first, with an older version of these questions. A second Claude Code + Opus 5.5 session checked every place they disagreed in the code and graded each problem by severity. Then Kimi K3 (in GitHub Copilot CLI) scored all 12 PRs on its own, without knowing which run made which PR. The final score is the average of these last two, except where Kimi missed something that was checked in the code. There the Opus grade is used.
+Four scorings went into the final score. Pi + Flash-Next and Claude Code + Opus 5.5 scored the PRs first. A second Claude Code + Opus 5.5 session checked every place they disagreed in the code and graded each problem by severity. Then Kimi K3 (in GitHub Copilot CLI) scored all 12 PRs on its own, without knowing which run made which PR. The final score is the average of these last two, except where Kimi missed something that was checked in the code. There the Opus grade is used.
 
 ## Results
 
@@ -276,9 +276,9 @@ In the previous post, I said Flash-Next's reviews found more issues than Opus's.
 
 With the harness and effort kept the same, Opus 5.5 wrote better code than Flash-Next on this task and finished sooner. This was expected of course from a frontier model. That's different from my previous post, where I liked Flash-Next's PR better than the one from Opus at medium effort.
 
-But the real takeaway here is that Flash-Next was right behind in scores and time and the gap wasn't that wide. Opus is a frontier model on Anthropic's servers, and Flash-Next has 6B active parameters and runs on my laptop. It finished every run, every PR works, it took 1.1x to 2.1x as long, and it cost me only electricity. What it missed (the save race, cache matching, integration tests, docs) is what a review catches, and that is how I already use it: an orchestrator plans and reviews, and Flash-Next does the implementation.
+But Flash-Next was right behind in scores and time, and the gap wasn't that wide. Opus is a frontier model on Anthropic's servers, and Flash-Next has 6B active parameters and runs on my laptop. It finished every run, every PR works, it took 1.1x to 2.1x as long, and it cost me only electricity. What it missed (the save race, cache matching, integration tests, docs) is what a review catches, and that is how I already use it: an orchestrator plans and reviews, and Flash-Next does the implementation.
 
-Two things I'll try in my work. I'll run Flash-Next at medium instead of xhigh and see how it goes, and I'll give Claude Code + Flash-Next a proper try instead of using only Pi and see how it goes.
+Two things I'll try in my work. I'll run Flash-Next at medium instead of xhigh, and I'll give Claude Code + Flash-Next a proper try instead of using only Pi, and see how both go.
 
 All 12 PRs are in [deepu105/llamastash-b4r2](https://github.com/deepu105/llamastash-b4r2/pulls) if you want to read the code yourself.
 
