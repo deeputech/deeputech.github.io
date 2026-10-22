@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "~/layouts/BaseLayout.astro";
+import { bookNode } from "~/lib/schema";
 
 const stores = [
   { href: "https://smile.amazon.com/Full-Stack-Development-JHipster-microservices/dp/1838824987", label: "Amazon" },
@@ -9,9 +10,37 @@ const storesV1 = [
   { href: "https://www.amazon.com/Stack-Development-JHipster-Deepu-Sasidharan/dp/178847631X", label: "Amazon" },
   { href: "https://www.safaribooksonline.com/library/view/full-stack-development/9781788476317/", label: "O'Reilly" },
 ];
+const books = [
+  {
+    name: "Full Stack Development with JHipster",
+    edition: "Second Edition",
+    isbn: "9781838824983",
+    pages: 428,
+    datePublished: "2020-01-23",
+    storeUrl: "https://www.oreilly.com/library/view/full-stack-development/9781838824983/",
+    summary:
+      "Build full-stack applications and Spring microservices with JHipster 6, Java 11, Spring Boot 2.1, Vue.js, and Istio.",
+    coAuthors: ["Sendil Kumar Nellaiyapen"],
+  },
+  {
+    name: "Full Stack Development with JHipster",
+    edition: "First Edition",
+    isbn: "9781788476317",
+    pages: 380,
+    datePublished: "2018-03-23",
+    storeUrl: "https://www.oreilly.com/library/view/full-stack-development/9781788476317/",
+    summary:
+      "Generate, develop, and deploy Spring Boot applications with Angular and Spring microservices using JHipster.",
+    coAuthors: ["Sendil Kumar Nellaiyapen"],
+  },
+];
 ---
 
-<BaseLayout title="Books" description="Books authored by Deepu K Sasidharan.">
+<BaseLayout
+  title="Books"
+  description="Full Stack Development with JHipster, first and second edition, by Deepu K Sasidharan and Sendil Kumar Nellaiyapen (Packt)."
+  schema={books.map(bookNode)}
+>
   <div class="mx-auto max-w-3xl px-4 pt-12 pb-16 sm:px-6">
     <header class="mb-10">
       <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Books</h1>
@@ -22,7 +51,7 @@ const storesV1 = [
     </header>
 
     <article class="mb-16">
-      <h2 class="font-display text-2xl font-semibold tracking-tight">Full Stack Development with JHipster — second edition</h2>
+      <h2 class="font-display text-2xl font-semibold tracking-tight">Full Stack Development with JHipster (second edition)</h2>
       <div class="mt-3 flex flex-wrap gap-2 text-sm">
         {
           stores.map((s) => (
@@ -39,8 +68,8 @@ const storesV1 = [
       </div>
       <p class="prose-blog mt-6 text-[var(--color-fg-muted)]">
         JHipster is an open-source development platform that lets you create web applications and microservices from scratch without
-        spending time wiring different technologies together. Updated for JHipster 6, Java 11, Spring Boot 2.1, Vue.js, and Istio, this
-        second edition will help you build full-stack applications and microservices seamlessly.
+        spending time wiring different technologies together. Updated for JHipster 6, Java 11, Spring Boot 2.1, Vue.js, and Istio, the
+        second edition takes you from an empty directory to a running full-stack app and a set of Spring microservices.
       </p>
       <img
         src="/assets/images/jhbook-banner-v2.png"
@@ -51,7 +80,7 @@ const storesV1 = [
     </article>
 
     <article>
-      <h2 class="font-display text-2xl font-semibold tracking-tight">Full Stack Development with JHipster — first edition</h2>
+      <h2 class="font-display text-2xl font-semibold tracking-tight">Full Stack Development with JHipster (first edition)</h2>
       <div class="mt-3 flex flex-wrap gap-2 text-sm">
         {
           storesV1.map((s) => (
@@ -67,7 +96,7 @@ const storesV1 = [
         }
       </div>
       <p class="prose-blog mt-6 text-[var(--color-fg-muted)]">
-        The original guide to JHipster — generate, develop, and deploy Spring Boot and Angular/React applications and Spring microservices.
+        The original guide to JHipster: generate, develop, and deploy Spring Boot and Angular/React applications and Spring microservices.
       </p>
       <img
         src="/assets/images/jhbook-banner.png"

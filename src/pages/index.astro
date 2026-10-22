@@ -3,11 +3,10 @@ import BaseLayout from "~/layouts/BaseLayout.astro";
 import PostCard from "~/components/PostCard.astro";
 import IconLinkCard from "~/components/IconLinkCard.astro";
 import SocialIcons from "~/components/SocialIcons.astro";
-import { defaultAuthor } from "~/data/authors";
+import { appNode, itemListNode } from "~/lib/schema";
 import { getPublishedPosts, getFeaturedPosts, getAllSeries, slugifySeries } from "~/lib/posts";
 import { Content as Talks } from "~/data/talks.mdx";
 
-const author = defaultAuthor;
 const all = await getPublishedPosts();
 const latest = all.slice(0, 4);
 const featured = (await getFeaturedPosts()).slice(0, 6);
@@ -21,50 +20,67 @@ const projects = [
   {
     name: "LlamaStash",
     href: "https://github.com/llamastash/llamastash",
-    note: "A fast TUI and CLI with init wizard for launching local LLMs via llama.cpp. Zero overhead vs raw `llama-server`",
+    note: "Terminal-native local-LLM orchestrator. Run any engine, any model.",
     tags: ["rust", "llamacpp", "localllm", "tui"],
+    os: "Any",
+    languages: ["Rust"],
   },
   {
     name: "KDash",
     href: "https://github.com/kdash-rs/kdash",
-    note: "A Kubernetes dashboard, in Rust.",
+    note: "A Kubernetes dashboard that runs in the terminal.",
     tags: ["rust", "kubernetes", "tui", "monitoring"],
+    os: "Any",
+    languages: ["Rust"],
+  },
+  {
+    name: "Pi Automode Classifier",
+    href: "https://github.com/deepu105/pi-automode-classifier",
+    note: "Claude Code like auto mode for Pi, that works with any LLM or classifier including local models.",
+    tags: ["ai", "pi", "classifier", "llm"],
+    languages: ["TypeScript"],
+    os: "Any",
   },
   {
     name: "JHipster",
     href: "https://jhipster.tech/",
-    note: "Rapid app development for modern Java + JS.",
+    note: "Rapid application development platform for modern Java fullstack applications.",
     tags: ["java", "spring-boot", "angular", "react"],
+    languages: ["Java", "TypeScript"],
+    os: "Any",
+    role: "co-chair" as const,
   },
   {
     name: "JDL Studio",
     href: "https://start.jhipster.tech/jdl-studio/",
-    note: "Online editor for the JHipster Domain Language.",
+    note: "The editor for JDL, the schema language JHipster generates applications from.",
     tags: ["javascript", "react", "jhipster", "dsl"],
+    languages: ["TypeScript"],
+    os: "Any",
   },
   {
     name: "JWT UI",
     href: "https://github.com/jwt-rs/jwt-ui",
-    note: "Terminal UI for decoding JWTs.",
+    note: "Decodes and encodes JSON Web Tokens in the terminal",
     tags: ["rust", "jwt", "tui", "cli"],
+    languages: ["Rust"],
+    os: "Any",
   },
   {
     name: "auth0-token-vault-cli",
     href: "https://github.com/deepu105/auth0-token-vault-cli",
-    note: "CLI tool for using Auth0 Token Vault from AI Agents.",
+    note: "Lets an agent call Google, GitHub, or Slack through Auth0 Token Vault.",
     tags: ["typescript", "auth0", "oauth", "ai-agents"],
+    languages: ["TypeScript"],
+    os: "Any",
   },
   {
     name: "Auth0 Assistant0",
     href: "https://github.com/auth0-samples/auth0-assistant0",
-    note: "An AI assistant that can talk to external OAuth2 services like Gmail and Slack using Auth0",
+    note: "Sample AI assistant that reaches Gmail and Slack over OAuth 2.0 with Auth0.",
     tags: ["typescript", "ai", "auth0", "langchain"],
-  },
-  {
-    name: "Dank Todo",
-    href: "https://github.com/deepu105/dms-dank-todo",
-    note: "A todo widget for the Dank Material Shell.",
-    tags: ["qml", "quickshell", "wayland", "linux"],
+    languages: ["TypeScript"],
+    os: "Any",
   },
 ];
 
@@ -81,25 +97,22 @@ const sections = [
 
 <BaseLayout
   title="Deepu K Sasidharan"
-  description="Java Champion, Co-chair of JHipster, polyglot developer. I write about Rust, Go, Java, developer experience and cloud-native."
+  description="Rust terminal tools (LlamaStash, KDash, JWT UI), JHipster co-chair, and posts on local LLMs, Java, Kubernetes, Linux, and OAuth. By Deepu K Sasidharan."
+  pageType="ProfilePage"
+  schema={[itemListNode(projects.map((p) => appNode({ name: p.name, url: p.href, description: p.note, languages: p.languages, os: p.os, role: p.role })), "Open-source projects by Deepu K Sasidharan")]}
 >
   <div class="mx-auto max-w-6xl px-4 pt-16 pb-12 sm:px-6 sm:pt-20">
     <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_180px]">
       <div>
         <!-- Hero -->
         <section id="about" class="scroll-mt-24">
-          <p class="font-display mb-4 text-2xl font-semibold text-[var(--color-accent)] sm:text-3xl">Hi, I'm Deepu 👋</p>
-          <h1
-            class="font-display text-4xl leading-tight font-bold tracking-tight text-balance text-[var(--color-fg)] sm:text-5xl lg:text-6xl"
-          >
-            I build, I write, I rant about technology.
-          </h1>
+          <p class="font-display mb-4 text-2xl font-semibold text-[var(--color-accent)] sm:text-3xl">Hi, I'm Deepu K Sasidharan 👋</p>
           <p class="mt-6 text-lg text-[var(--color-fg-muted)]">
-            <strong>Polyglot developer</strong> · Open-source aficionado · Java Champion · Creator of
+            <strong>Polyglot developer</strong> · Local AI tinkerer · Creator of
             <a href="https://github.com/llamastash/llamastash">LlamaStash</a>,
             <a href="https://github.com/kdash-rs/kdash">KDash</a> and
             <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a> · Co-chair of
-            <a href="https://jhipster.tech">JHipster</a>· Linux enthusiast · Published author · International speaker
+            <a href="https://jhipster.tech">JHipster</a> · Linux enthusiast · Java Champion · Published author · International speaker
           </p>
 
           <div class="mt-6">
@@ -130,7 +143,7 @@ const sections = [
             <IconLinkCard
               href="https://auth0.com/blog/authors/deepu-sasidharan/"
               title="Also on the Auth0 blog"
-              subtitle="I publish professional content on the Auth0 / Okta blog as a Staff Developer Advocate."
+              subtitle="My professional articles on identity, AI agents, and developer experience at Auth0 / Okta."
               external
             />
           </div>
@@ -186,26 +199,28 @@ const sections = [
             <a href="/cv/" class="text-sm text-[var(--color-fg-muted)] hover:text-[var(--color-accent)]">Full CV →</a>
           </header>
           <ul class="prose-blog terminal-list space-y-2 text-[var(--color-fg-muted)]">
-            <li>Polyglot developer working with Rust, JavaScript, TypeScript, Go, and Java. Dabbling with a few others occasionally.</li>
             <li>
-              Creator of <a href="https://github.com/llamastash/llamastash">LlamaStash</a>, a terminal-native launcher TUI for llama.cpp
-              written in Rust.
+              Principal Developer Advocate at <a href="https://auth0.com">Auth0 (Okta)</a>, covering identity for AI agents. 16+ years in the industry, before that at Adyen, XebiaLabs, and TCS.
             </li>
-            <li>Creator of <a href="https://github.com/kdash-rs/kdash">KDash</a>, a terminal dashboard for Kubernetes written in Rust.</li>
             <li>
-              Co-chair of <a href="https://jhipster.tech">JHipster</a>, the rapid application development platform for modern Java + JS.
+              Creator of <a href="https://github.com/llamastash/llamastash">LlamaStash</a>,
+              <a href="https://github.com/kdash-rs/kdash">KDash</a>,
+              <a href="https://github.com/jwt-rs/jwt-ui">JWT UI</a>, and
+              <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a>. Most of it is Rust, most of it runs in a terminal.
             </li>
-            <li>Creator of <a href="https://github.com/jwt-rs/jwt-ui">JWT UI</a>, a terminal UI for decoding/encoding JSON Web Tokens.</li>
             <li>
-              Creator of <a href="https://start.jhipster.tech/jdl-studio/">JDL Studio</a>, JHipster React, JHipster Blueprints, and the
-              JHipster Entity Audit Generator.
+              Co-chair and vice-president of <a href="https://jhipster.tech">JHipster</a>, a core maintainer since 2015.
             </li>
-            <li>Principal Developer Advocate at <a href="https://auth0.com">Auth0</a>. Alumni of Adyen, TCS, and XebiaLabs.</li>
-            <li><a href="https://dev.java/community/jcs/">Java Champion</a> ☕</li>
-            <li>Cloud and container technology enthusiast.</li>
-            <li>Published author, international conference speaker, and avid blogger.</li>
-            <li>Passionate about developer experience and user experience.</li>
-            <li>Loves astronomy, motorbikes, coding, and robotics.</li>
+            <li>
+              <a href="https://dev.java/community/jcs/">Java Champion</a> and author of
+              <em>Full Stack Development with JHipster</em> (Packt, two editions).
+            </li>
+            <li>
+              I run local models for my daily coding setup and write up the benchmarks and the tuning
+              that made it usable. See <a href="/tags/#ai">the local AI posts</a>.
+            </li>
+            <li>80+ conference talks. <a href="/appearances/">Event list</a>.</li>
+            <li>Long-time Linux user, currently on Arch with <a href="https://github.com/niri-wm/niri">Niri</a>.</li>
           </ul>
         </section>
 

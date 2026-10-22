@@ -6,6 +6,8 @@ import TOC from "~/components/TOC.astro";
 import Giscus from "~/components/Giscus.astro";
 import ShareButtons from "~/components/ShareButtons.astro";
 import { defaultAuthor } from "~/data/authors";
+import { SITE } from "~/data/site";
+import { articleNode } from "~/lib/schema";
 
 export type Props = {
   title: string;
@@ -17,6 +19,7 @@ export type Props = {
   series?: string;
   canonical?: string;
   readingTimeMinutes?: number;
+  wordCount?: number;
   headings?: MarkdownHeading[];
   showComments?: boolean;
   showToc?: boolean;
@@ -33,13 +36,18 @@ const {
   series,
   canonical,
   readingTimeMinutes,
+  wordCount,
   headings = [],
   showComments = true,
   showToc = true,
   shareUrl,
 } = Astro.props;
 
-const fullShareUrl = shareUrl ?? new URL(Astro.url.pathname, "https://deepu.tech").toString();
+const fullShareUrl = shareUrl ?? new URL(Astro.url.pathname, SITE.url).toString();
+// Older frontmatter has same-site canonicals without the trailing slash, which
+// GitHub Pages answers with a 301.
+const canonicalUrl =
+  canonical?.startsWith(`${SITE.url}/`) && !canonical.endsWith("/") ? `${canonical}/` : canonical;
 
 const author = defaultAuthor;
 const dateStr = date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
@@ -54,12 +62,26 @@ const coverSrc = cover_image
   : null;
 
 const hasToc = showToc && headings.filter((h) => h.depth === 2 || h.depth === 3).length > 1;
+
+const article = articleNode({
+  url: fullShareUrl,
+  title,
+  description,
+  image: coverSrc ?? undefined,
+  date,
+  lastModified: last_modified_at,
+  tags,
+  series,
+  wordCount,
+  readingMinutes: readingTimeMinutes,
+  canonical: canonicalUrl && canonicalUrl !== fullShareUrl ? canonicalUrl : undefined,
+});
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  canonical={canonical}
+  canonical={canonicalUrl}
   type="article"
   ogImage={coverSrc ?? undefined}
   publishedTime={date}
@@ -67,6 +89,9 @@ const hasToc = showToc && headings.filter((h) => h.depth === 2 || h.depth === 3)
   authorName={author.display_name}
   authorUrl={author.web}
   tags={tags}
+  pageType="WebPage"
+  breadcrumbs={[{ name: "Blog", url: "/blogs/" }]}
+  mainEntity={article}
   monetization
 >
   <ReadingProgress />

@@ -1,6 +1,6 @@
 ---
 import { render } from "astro:content";
-import { getPublishedPosts, getPostsBySeries, readingTimeMinutes, slugifySeries } from "~/lib/posts";
+import { getPublishedPosts, getPostsBySeries, readingTimeMinutes, slugifySeries, wordCount } from "~/lib/posts";
 import PostLayout from "~/layouts/PostLayout.astro";
 
 export async function getStaticPaths() {
@@ -25,6 +25,7 @@ const seriesNext =
   seriesIndex >= 0 && seriesIndex < seriesPosts.length - 1 ? seriesPosts[seriesIndex + 1] : null;
 
 const readingTime = readingTimeMinutes(post.body ?? "");
+const words = wordCount(post.body ?? "");
 ---
 
 <PostLayout
@@ -36,6 +37,7 @@ const readingTime = readingTimeMinutes(post.body ?? "");
   tags={post.data.tags}
   series={post.data.series}
   readingTimeMinutes={readingTime}
+  wordCount={words}
   canonical={post.data.canonical_url}
   headings={headings}
   showComments={post.data.comments !== false}

@@ -9,44 +9,50 @@ export const seriesMeta: SeriesMeta[] = [
     id: "Languages",
     title: "Languages",
     description:
-      "Posts about different languages, my impression of languages and polyglot development.",
+      "Impressions and comparisons of programming languages, and why I stay polyglot instead of picking a favorite.",
   },
   {
     id: "Memory Management",
     title: "Memory Management",
     description:
-      "In this multi-part series, I aim to demystify the concepts behind memory management and take a deeper look at memory management in some of the modern programming languages.",
+      "How memory management works, from the fundamentals up through the JVM, V8, Go, and Rust.",
   },
   {
     id: "Concurrency in Modern Programming Languages",
     title: "Concurrency in Modern Programming Languages",
     description:
-      "A multi-part series talking about concurrency in modern programming languages — building and benchmarking a concurrent web server inspired by the Rust book example in Rust, Go, JavaScript (NodeJS), TypeScript (Deno), Kotlin and Java to compare concurrency performance across platforms.",
+      "Building and benchmarking the same concurrent web server in Rust, Go, Node.js, Deno, Java, and Kotlin to compare concurrency.",
   },
   {
     id: "Functional Programming",
     title: "Functional Programming",
-    description: "Learn functional programming in different languages.",
+    description: "Functional programming applied in Java, Go, TypeScript, and Rust, with real examples.",
   },
   {
     id: "Golang for JavaScript Developers",
     title: "Golang for JavaScript Developers",
-    description: "Learn Golang from a JavaScript developer's perspective.",
+    description: "Learning Go from a JavaScript developer's point of view, one concept at a time.",
   },
   {
     id: "Microservices with JHipster",
     title: "Microservices with JHipster",
     description:
-      "Learn about building microservice architectures with JHipster, Kubernetes and Istio.",
+      "Building microservice architectures with JHipster, Kubernetes, and Istio, end to end.",
   },
   {
     id: "GNU/Linux Environment for Developers",
     title: "GNU/Linux Environment for Developers",
-    description: "Posts covering GNU/Linux setup and tools for developers.",
+    description: "My GNU/Linux setup for development: Arch, windowing, terminals, and the tools I use.",
   },
   {
     id: "Passkeys",
     title: "Passkeys",
-    description: "Posts about WebAuthn and Passkeys.",
+    description: "How WebAuthn and passkeys work for developers, and how to add them to Java apps.",
+  },
+  {
+    id: "Local AI",
+    title: "Local AI",
+    description:
+      "Running LLMs on my own laptop for day-to-day coding: the setup, LlamaStash, benchmarks, and how local models compare with frontier cloud models.",
   },
 ];

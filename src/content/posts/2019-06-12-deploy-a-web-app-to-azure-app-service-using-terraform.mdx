@@ -26,7 +26,7 @@ Let's build a very simple web application using JHipster. We will use the [JDL](
 
 We will use the below JDL for our application. Save it to a file named `app.jdl` in a directory where you want to create the application.
 
-```jdl
+```text
 application {
     config {
         baseName helloJHipster,
@@ -41,7 +41,7 @@ application {
     }
 }
 
-``` 
+```
 
 Now let us scaffold this using JHipster. Open your favorite console/terminal and run the below command in the directory where you saved the above JDL file, make sure it's an empty directory.
 
@@ -114,7 +114,7 @@ variable "docker_image_tag" {
 
 Now let us define our `main.tf`
 
-First, let us add a configuration for Azure resource manager and create an Azure resource group to hold our resources. 
+First, let us add a configuration for Azure resource manager and create an Azure resource group to hold our resources.
 
 ```hcl
 provider "azurerm" {

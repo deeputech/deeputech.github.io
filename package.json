@@ -10,6 +10,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
+    "check:seo": "node scripts/check-seo.mjs",
+    "og-image": "node scripts/make-og-image.mjs",
     "publish-to-dev": "node publish-to-dev.js",
     "jekyll-start": "bundle exec jekyll serve --incremental --watch --drafts --unpublished --livereload",
     "jekyll-optimize": "gulp",

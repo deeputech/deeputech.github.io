@@ -4,6 +4,14 @@ import Header from "~/components/Header.astro";
 import Footer from "~/components/Footer.astro";
 import ThemeScript from "~/components/ThemeScript.astro";
 import SearchDialog from "~/components/SearchDialog.astro";
+import { SITE } from "~/data/site";
+import {
+  breadcrumbNode,
+  identityNodes,
+  pageNode,
+  type Crumb,
+  type JsonLd,
+} from "~/lib/schema";
 
 export type Props = {
   title?: string;
@@ -13,6 +21,12 @@ export type Props = {
   type?: "website" | "article";
   monetization?: boolean;
   noindex?: boolean;
+  // Page-level typing for the WebPage node in the JSON-LD graph.
+  pageType?: "WebPage" | "ProfilePage" | "AboutPage" | "CollectionPage";
+  breadcrumbs?: Crumb[];
+  // Extra nodes: the main entity of the page, and any sibling nodes to emit.
+  mainEntity?: JsonLd;
+  schema?: JsonLd[];
   // Article-specific (filled in by PostLayout)
   publishedTime?: Date;
   modifiedTime?: Date;
@@ -21,11 +35,10 @@ export type Props = {
   tags?: string[];
 };
 
-const SITE_NAME = "Technorage";
-const SITE_TAGLINE = "Where I rant about technology and stuff!";
-const SITE_URL = "https://deepu.tech";
-const SITE_LOGO = "/assets/images/logo.png";
-const SITE_LOCALE = "en_US";
+const SITE_NAME = SITE.name;
+const SITE_URL = SITE.url;
+const SITE_LOGO = SITE.logo;
+const SITE_LOCALE = SITE.locale;
 const GA_ID = "G-1SDSM5NX07";
 
 // Only emit GA in production builds — keeps dev/preview free of analytics.
@@ -33,8 +46,8 @@ const isProd = import.meta.env.PROD;
 
 const {
   title,
-  description = SITE_TAGLINE,
-  ogImage = SITE_LOGO,
+  description = SITE.description,
+  ogImage = SITE.ogImage,
   canonical,
   type = "website",
   monetization = false,
@@ -44,46 +57,49 @@ const {
   authorName,
   authorUrl,
   tags = [],
+  pageType = "WebPage",
+  breadcrumbs = [],
+  mainEntity,
+  schema = [],
 } = Astro.props;
 
 const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
-const canonicalUrl = canonical ?? new URL(Astro.url.pathname, SITE_URL).toString();
+const pageUrl = new URL(Astro.url.pathname, SITE_URL).toString();
+const canonicalUrl = canonical ?? pageUrl;
 const ogImageUrl = ogImage.startsWith("http") ? ogImage : new URL(ogImage, SITE_URL).toString();
-// Use the small "summary" twitter card when no cover image is provided
-// (i.e. the default site logo is being used). Posts with a real cover_image
-// get the large card.
+// Posts with a real cover image get the large twitter card, everything else
+// falls back to the branded 1200x630 default.
 const isLargeCard = ogImage !== SITE_LOGO;
 
-// Structured data: BlogPosting for posts, WebSite for everything else.
-const ldJson =
-  type === "article"
-    ? {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        headline: title ?? SITE_NAME,
-        description,
-        image: ogImageUrl,
-        url: canonicalUrl,
-        mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
-        datePublished: publishedTime ? publishedTime.toISOString() : undefined,
-        dateModified: (modifiedTime ?? publishedTime)?.toISOString(),
-        author: authorName
-          ? { "@type": "Person", name: authorName, ...(authorUrl ? { url: authorUrl } : {}) }
-          : undefined,
-        publisher: {
-          "@type": "Organization",
-          name: SITE_NAME,
-          logo: { "@type": "ImageObject", url: new URL(SITE_LOGO, SITE_URL).toString() },
-        },
-        keywords: tags.length > 0 ? tags.join(", ") : undefined,
-      }
-    : {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: SITE_NAME,
-        url: SITE_URL,
-        description: SITE_TAGLINE,
-      };
+// One graph on every page: site + publisher + author identity, the page itself,
+// the article or collection it documents, and breadcrumbs. Entities with an
+// @id are emitted as top-level nodes and referenced from the page, which naive
+// extractors handle better than deep nesting.
+const extras: JsonLd[] = [...schema];
+let pageMainEntity = mainEntity;
+if (mainEntity && typeof mainEntity["@id"] === "string") {
+  pageMainEntity = { "@id": mainEntity["@id"] };
+  extras.unshift(mainEntity);
+}
+
+const graph: JsonLd[] = [
+  ...identityNodes(),
+  // The WebPage node describes this copy of the page, even when a cross-posted
+  // article's canonical points at another site.
+  pageNode({
+    url: pageUrl,
+    name: title ?? SITE_NAME,
+    description,
+    image: isLargeCard ? ogImageUrl : undefined,
+    pageType,
+    mainEntity: pageMainEntity,
+    dateModified: modifiedTime,
+  }),
+];
+if (breadcrumbs.length > 0) graph.push(breadcrumbNode(breadcrumbs));
+graph.push(...extras);
+
+const ldJson = { "@context": "https://schema.org", "@graph": graph };
 ---
 
 <!doctype html>
@@ -94,6 +110,8 @@ const ldJson =
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/png" href="/assets/images/logo.png" />
     <link rel="canonical" href={canonicalUrl} />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eff1f5" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#24273a" />
 
     <title>{fullTitle}</title>
     <meta name="description" content={description} />

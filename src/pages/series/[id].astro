@@ -20,7 +20,12 @@ export async function getStaticPaths() {
 const { series, posts, description } = Astro.props;
 ---
 
-<BaseLayout title={`Series · ${series}`} description={description}>
+<BaseLayout
+  title={`Series · ${series}`}
+  description={description}
+  pageType="CollectionPage"
+  breadcrumbs={[{ name: "Blog", url: "/blogs/" }, { name: "Series", url: "/series/" }]}
+>
   <div class="mx-auto max-w-4xl px-4 pt-12 pb-16 sm:px-6">
     <header class="mb-12">
       <p class="text-sm text-[var(--color-fg-subtle)]">

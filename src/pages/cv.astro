@@ -139,7 +139,8 @@ const skills = [
 
 <BaseLayout
   title="CV"
-  description="Curriculum vitae of Deepu K Sasidharan: Principal Developer Advocate at Okta, creator of LlamaStash, JHipster co-chair, polyglot engineer, and Java Champion."
+  description="CV of Deepu K Sasidharan: Principal Developer Advocate at Auth0 (Okta), creator of LlamaStash, JHipster co-chair, Java Champion."
+  pageType="ProfilePage"
 >
   <div class="cv-root mx-auto max-w-4xl px-4 pt-12 pb-16 sm:px-6">
     <!-- Header -->
@@ -215,7 +216,7 @@ const skills = [
         </p>
         <ul class="prose-blog terminal-list mt-4 space-y-1.5 text-[var(--color-fg-muted)]">
           <li>
-            Principal Developer Advocate at <a href="https://auth0.com">Okta (Auth0)</a>, leading developer relations for Auth0's identity
+            Principal Developer Advocate at <a href="https://auth0.com">Auth0 (Okta)</a>, leading developer relations for Auth0's identity
             products for AI agents.
           </li>
           <li>
@@ -324,7 +325,7 @@ const skills = [
               >
                 {p.name}
               </a>
-              <span class="text-sm text-[var(--color-fg-muted)]"> — {p.note}</span>
+              <span class="text-sm text-[var(--color-fg-muted)]"> · {p.note}</span>
             </div>
           ))
         }

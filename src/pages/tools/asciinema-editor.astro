@@ -15,9 +15,11 @@ import BaseLayout from "~/layouts/BaseLayout.astro";
 
 <BaseLayout
   title="Asciinema Editor"
-  description="Browser-based editor for asciicast (.cast) recordings — trim, speed up, quantize idle gaps, drop events, and add markers. Nothing is uploaded."
+  description="Browser-based editor for asciicast (.cast) recordings: trim, speed up, quantize idle gaps, drop events, and add markers. Nothing is uploaded."
+  breadcrumbs={[{ name: "Tools", url: "/tools/" }]}
 >
   <div class="ascii-editor-shell">
+    <h1 class="sr-only">Asciinema Editor</h1>
     <div class="ascii-editor">
       <div class="app-bar">
         <span class="app-title">Asciinema <span>Editor</span></span>

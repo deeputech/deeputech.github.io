@@ -12,7 +12,12 @@ const tagsWithPosts = await Promise.all(
 );
 ---
 
-<BaseLayout title="Tags" description={`All ${tags.length} tags across the blog.`}>
+<BaseLayout
+  title="Tags"
+  description={`Every tag on the Technorage blog, ${tags.length} in total, from Rust and Kubernetes to passkeys and Linux.`}
+  pageType="CollectionPage"
+  breadcrumbs={[{ name: "Blog", url: "/blogs/" }]}
+>
   <div class="mx-auto max-w-4xl px-4 pt-12 pb-16 sm:px-6">
     <header class="mb-10">
       <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">Tags</h1>

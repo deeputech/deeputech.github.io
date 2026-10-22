@@ -1,10 +1,15 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
+import BaseLayout from "~/layouts/BaseLayout.astro";
+import type { Crumb, JsonLd } from "~/lib/schema";
 
 export type Props = {
   title: string;
   description?: string;
   frontmatter?: { title?: string; description?: string };
+  pageType?: "WebPage" | "ProfilePage" | "AboutPage" | "CollectionPage";
+  breadcrumbs?: Crumb[];
+  mainEntity?: JsonLd;
+  schema?: JsonLd[];
 };
 
 // MDX pages pass frontmatter via the `frontmatter` prop; .astro callers pass title directly.
@@ -13,7 +18,14 @@ const title = Astro.props.title ?? fm.title ?? "";
 const description = Astro.props.description ?? fm.description;
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  pageType={Astro.props.pageType}
+  breadcrumbs={Astro.props.breadcrumbs}
+  mainEntity={Astro.props.mainEntity}
+  schema={Astro.props.schema}
+>
   <article class="mx-auto max-w-3xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16">
     <header class="mb-10">
       <h1 class="font-display text-4xl font-bold tracking-tight text-[var(--color-fg)] sm:text-5xl">
