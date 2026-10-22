@@ -1,0 +1,51 @@
+# deepu.tech — Technorage, the personal site and blog of Deepu K Sasidharan.
+# Everything here is public on purpose: allow search engines and AI crawlers.
+
+User-agent: *
+Allow: /
+
+# Search surfaces that answer questions with content from this site.
+User-agent: Googlebot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: DuckAssistBot
+Allow: /
+
+# OpenAI
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: GPTBot
+Allow: /
+
+# Anthropic
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Common Crawl (feeds many assistants) and other AI crawlers.
+User-agent: CCBot
+Allow: /
+User-agent: Amazonbot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+User-agent: meta-externalagent
+Allow: /
+User-agent: MistralAI-User
+Allow: /
+
+Sitemap: https://deepu.tech/sitemap-index.xml

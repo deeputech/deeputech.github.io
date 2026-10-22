@@ -1,0 +1,196 @@
+# Technorage: complete post index
+
+> The personal site of Deepu K Sasidharan: posts on local LLMs, Rust, Java, Kubernetes, Linux, and OAuth, plus the terminal tools he maintains.
+
+Every published article, newest first. 65 posts in total. Each entry: title and link, date, one-line summary.
+
+## 2026
+
+- [Qwen3.8-Flash-Next vs Claude Opus 5.5: Six-way benchmark on a real Rust feature](https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown/) (2026-10-20): A controlled comparison of Qwen3.8-Flash-Next and Claude Opus 5.5 on one LlamaStash feature, across Claude Code and Pi, at medium and xhigh effort
+  series: Local AI
+  tags: ai, qwen38flashnext, localllm, qwen38, claudeopus
+- [Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding](https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm/) (2026-10-06): Agentic coding on a Strix Halo laptop with Qwen3.8-Flash-Next. Going head to head with Opus 5.5
+  series: Local AI
+  tags: ai, qwen38flashnext, localllm, qwen38, claudeopus
+- [Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?](https://deepu.tech/local-ai-qwen3.8-pi-llamastash/) (2026-09-04): Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning
+  series: Local AI
+  tags: ai, llamacpp, localllm, qwen38, claudeopus
+- [How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio](https://deepu.tech/benchmarking-llamastash/) (2026-06-02): A reproducible benchmark of LlamaStash against raw llama-server, Ollama, and LM Studio on AMD APU, Apple Silicon, and NVIDIA
+  series: Local AI
+  tags: ai, llamacpp, benchmark, llm, rust
+- [Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher](https://deepu.tech/introducing-llamastash/) (2026-06-02): A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary
+  series: Local AI
+  tags: ai, llamacpp, localllm, rust, opensource
+- [My fully offline AI-assisted Linux development machine](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine/) (2026-05-07): My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13
+  series: Local AI
+  tags: linux, archlinux, development, ai, niri
+## 2024
+
+- [A Passwordless Future: Passkeys for Java Developers](https://deepu.tech/webauthn-and-passkeys-for-java-developers/) (2024-02-15): Learn how to get started with passkeys for your Java and Spring Boot applications.
+  series: Passkeys
+  tags: java, spring, passkeys, webauthn
+- [A Passwordless Future: Passkeys for Developers](https://deepu.tech/webauthn-and-passkeys-for-developers/) (2024-01-02): Passkeys and WebAuthn for developers. Learn how passkeys work and the benefits they provide.
+  series: Passkeys
+  tags: security, passkeys, webauthn
+## 2023
+
+- [Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes](https://deepu.tech/terraform-eks-java-microservices-jhipster/) (2023-11-23): Deploy a cloud-native Java Spring Boot microservice stack secured with Auth0 on Amazon EKS using Terraform and Kubernetes.
+  tags: java, terraform, kubernetes, aws
+- [Mastodon for Developers: Everything You Need to Know](https://deepu.tech/mastodon-for-devs/) (2023-02-06): Learn how to use Mastodon effectively as a developer.
+  tags: social, mastodon
+## 2022
+
+- [Shhhh... Kubernetes Secrets Are Not Really Secret!](https://deepu.tech/kubernetes-secrets-management/) (2022-12-15): Learn how to setup secure secrets on Kubernetes using Sealed Secrets, External Secrets Operator, and Secrets Store CSI driver.
+  tags: devops, kubernetes, devsecops
+- [Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal](https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/) (2022-11-07): Rust tooling is taking over the terminal. Use these awesome tools to supercharge your Linux/macOS/Windows terminal.
+  tags: rust, terminal, linux, macos
+- [What the Heck Is Project Loom for Java?](https://deepu.tech/state-of-java-project-loom/) (2022-08-27): What the heck is Java's Project Loom and what does it mean for regular Java developers?
+  tags: java, concurrency, loom, openjdk
+- [Golang Finally Gets Generics! Does It Make Go a Better Language?](https://deepu.tech/go-impressions-part-2/) (2022-04-04): Let's see if Golang became better with the addition of generics.
+  series: Languages
+  tags: go, programming, languages, thepragmaticprogrammer
+- [Concurrency in modern programming languages: Rust vs Go vs Java vs Node.js vs Deno vs .NET 6](https://deepu.tech/concurrency-in-modern-languages-final/) (2022-02-04): Building a concurrent web server in Rust, Go, JS, TS, .NET, and Java to compare concurrency performance
+  series: Concurrency in Modern Programming Languages
+  tags: rust, js, go, java
+## 2021
+
+- [The state of pattern matching in Java 17](https://deepu.tech/state-of-pattern-matching-java/) (2021-12-23): Let us see how pattern matching is evolving in Java
+  tags: java, patternmatching, jdk, openjdk
+- [My sleek and modern Linux development machine in 2021](https://deepu.tech/my-beautiful-linux-development-environment-2021/) (2021-11-01): The 2021 refresh of my GNU/Linux development machine: hardware, distribution and desktop, development tools, and productivity tools.
+  series: GNU/Linux Environment for Developers
+  tags: linux, fedora, development, kde
+- [What is Developer Experience and why should we care?](https://deepu.tech/what-is-developer-experience-and-why-care/) (2021-07-16): Let's bust some myths around developer experience and see why it's important.
+  tags: devrel, developerexperience, engineering, discuss
+- [The programming languages I like and why I like them](https://deepu.tech/languages-i-like-and-why/) (2021-07-09): Being a polyglot developer, there would be some language you like over others and here are mine.
+  series: Languages
+  tags: java, rust, golang, javascript
+- [My second impression of Rust and why I think it's a great general-purpose language!](https://deepu.tech/my-second-impression-of-rust/) (2021-05-07): My second impression of Rust, after building a real-life use case with it and my thoughts on why it is a great general-purpose language for the future.
+  series: Languages
+  tags: rust, programming, languages, webassembly
+- [Concurrency in modern programming languages: Java](https://deepu.tech/concurrency-in-modern-languages-java/) (2021-04-30): Building a concurrent web server in Java to compare concurrency performance with Rust, Go, JS, TS, and Kotlin
+  series: Concurrency in Modern Programming Languages
+  tags: concurrency, java, jvm, languages
+- [The state of Linux as a daily use OS in 2021](https://deepu.tech/the-state-of-linux-on-desktops/) (2021-03-24): Let's see what is the state of GNU/Linux, for daily use, in 2021 is and if its a viable alternative to Windows and macOS
+  series: GNU/Linux Environment for Developers
+  tags: linux, ubuntu, fedora, kde
+- [What about Svelte? Should you care!](https://deepu.tech/what-about-svelte/) (2021-03-18): Learn why Svelte matters and if you should you care about it
+  tags: svelte, javascript, web, react
+- [Concurrency in modern programming languages: TypeScript on Deno](https://deepu.tech/concurrency-in-modern-languages-ts/) (2021-02-19): Building a concurrent web server in TypeScript on Deno to compare concurrency performance with Rust, Go, JS, Kotlin, and Java
+  series: Concurrency in Modern Programming Languages
+  tags: concurrency, deno, javascript, typescript
+- [Concurrency in modern programming languages: JavaScript on NodeJS](https://deepu.tech/concurrency-in-modern-languages-js/) (2021-02-05): Building a concurrent web server in JavaScript on NodeJS to compare concurrency performance with Rust, Go, TS, Kotlin, and Java
+  series: Concurrency in Modern Programming Languages
+  tags: languages, concurrency, nodejs, javascript
+- [Concurrency in modern programming languages: Golang](https://deepu.tech/concurrency-in-modern-languages-go/) (2021-01-21): Building a concurrent web server in Golang to compare concurrency performance with Rust, JS, TS, Kotlin, and Java
+  series: Concurrency in Modern Programming Languages
+  tags: languages, concurrency, async, golang
+## 2020
+
+- [Concurrency in modern programming languages: Rust](https://deepu.tech/concurrency-in-modern-languages-rust/) (2020-12-24): Building a concurrent web server in Rust to compare concurrency performance with Go, JS, TS, Kotlin, and Java
+  series: Concurrency in Modern Programming Languages
+  tags: languages, concurrency, async, rust
+- [Concurrency in modern programming languages: Introduction](https://deepu.tech/concurrency-in-modern-languages/) (2020-11-27): Building a concurrent web server in Rust, Go, JS, TS, Kotlin, and Java to compare concurrency performance
+  series: Concurrency in Modern Programming Languages
+  tags: languages, concurrency, async, multithreading
+- [8 important things I learned as a software developer over a decade.](https://deepu.tech/most-important-things-i-learned-in-a-decade/) (2020-09-01): Advice for beginners from my decade long development career
+  tags: beginners, pragmatic, codequality, programming
+- [Let's face it, we have a broken technical interview process in our industry](https://deepu.tech/the-problem-with-hiring-in-it/) (2020-08-12): How the current technical interview process followed by the majority of the companies favor only a small subset of developers.
+  tags: interview, career, womenintech, discuss
+- [How to become an effective Polyglot Developer](https://deepu.tech/how-to-be-an-effective-polyglot-developer/) (2020-06-29): What are the advantages and disadvantages of being a polyglot developer and how to be an effective polyglot developer
+  series: Languages
+  tags: programming, computerscience, languages, polyglot
+- [My PC build for VR gaming](https://deepu.tech/my-vr-gaming-pc-build/) (2020-06-12): The parts list, build notes, and benchmarks for a Windows PC I built for VR gaming and Half-Life: Alyx.
+  tags: windows, vr, gaming
+- [Avoiding Memory Leaks in NodeJS: Best Practices for Performance](https://deepu.tech/avoiding-memory-leaks-in-nodejs/) (2020-05-06): Discover what memory leaks are and how to avoid them in your NodeJS application.
+  series: Memory Management
+  tags: javascript, node, v8, memory-management
+- [🚀 Visualizing memory management in Rust](https://deepu.tech/memory-management-in-rust/) (2020-03-31): Let us take a closer look at how Rust manages memory.
+  series: Memory Management
+  tags: rust, garbagecollection, programming, computerscience
+- [Forget NodeJS! Build native TypeScript applications with Deno 🦖](https://deepu.tech/deno-runtime-for-typescript/) (2020-02-18): Deno is a modern JavaScript/TypeScript runtime & scripting environment. It is what NodeJS should have been according to Ryan Dahl who created both tools
+  tags: typescript, javascript, nodejs, deno
+- [🚀 Visualizing memory management in Golang](https://deepu.tech/memory-management-in-golang/) (2020-02-17): Let us take a closer look at how Golang manages memory.
+  series: Memory Management
+  tags: go, garbagecollection, programming, computerscience
+- [Polyglot inception with GraalVM. Why? Because it's fun 🏄](https://deepu.tech/polyglot-showdown-with-graalvm/) (2020-02-06): Let's test drive GraalVM with a program that uses many languages together. Why? Because it's fun!
+  tags: java, python, javascript, rust
+- [🚀 Visualizing memory management in V8 Engine (JavaScript, NodeJS, Deno, WebAssembly)](https://deepu.tech/memory-management-in-v8/) (2020-01-27): Let us take a look at how the V8 engine for JavaScript & WebAssembly manages memory for Browsers and NodeJS.
+  series: Memory Management
+  tags: javascript, typescript, webassembly, node
+- [🚀 Visualizing memory management in JVM(Java, Kotlin, Scala, Groovy, Clojure)](https://deepu.tech/memory-management-in-jvm/) (2020-01-23): How the JVM manages memory: heap generations, thread stacks, meta space, the code cache, and how mark and sweep GC works.
+  series: Memory Management
+  tags: java, kotlin, scala, clojure
+- [Life of a Full-stack developer 😱 🤯 😱](https://deepu.tech/life-of-a-full-stack-developer/) (2020-01-19): What modern full-stack web development really looks like day to day, from the front end and back end to the plumbing in between.
+  tags: webdev, showdev, motivation, books
+- [🚀 Demystifying memory management in modern programming languages](https://deepu.tech/memory-management-in-programming/) (2020-01-08): Let us take a look at how modern programming languages manage memory.
+  series: Memory Management
+  tags: languages, programming, computerscience
+- [7 Languages to learn in 2020 with free resources to get started](https://deepu.tech/languages-to-learn-in-2020/) (2020-01-01): Languages to learn in 2020 depending on your experience & domain and resources to get started.
+  series: Languages
+  tags: languages, career, programming
+## 2019
+
+- [3 tips for clean & efficient code](https://deepu.tech/three-tips-for-clean-code/) (2019-12-16): 3 tips that can make your code cleaner, more efficient and easy to read
+  tags: beginners, codenewbie, codequality, programming
+- [Golang for JavaScript developers - Part 2](https://deepu.tech/golang-for-javascript-developers-part-2/) (2019-12-12): Introduction to Golang concepts for JavaScript developers - Part 2
+  series: Golang for JavaScript Developers
+  tags: go, javascript, beginners, languages
+- [How to clean up your Docker environment](https://deepu.tech/docker-env-cleanup/) (2019-12-06): See how you can clean up your local Docker environment.
+  tags: docker, microservices, kubernetes, bash
+- [Golang for JavaScript developers - Part 1](https://deepu.tech/golang-for-javascript-developers-part-1/) (2019-12-04): Introduction to Golang concepts for JavaScript developers - Part 1
+  series: Golang for JavaScript Developers
+  tags: go, javascript, beginners, languages
+- [My love-hate relationship with JavaScript](https://deepu.tech/reflections-on-javascript/) (2019-11-21): After using JavaScript for more than 10 years, here is what I think of it
+  series: Languages
+  tags: javascript, programming, languages, thepragmaticprogrammer
+- [Easy functional programming techniques in Rust for everyone](https://deepu.tech/functional-programming-in-rust/) (2019-11-14): Functional programming concepts in Rust for beginners.
+  series: Functional Programming
+  tags: rust, functional, beginners, programming
+- [My first impressions of Rust](https://deepu.tech/first-impression-of-rust/) (2019-11-07): This is what I thought about Rust while learning it. From a pragmatic perspective.
+  series: Languages
+  tags: rust, programming, languages, thepragmaticprogrammer
+- [Microservices - the good, bad, and the ugly](https://deepu.tech/microservices-the-good-bad-and-the-ugly/) (2019-10-29): When to use microservices, the pros, the cons and issues you might face
+  tags: microservices, architecture, devops, distributedsystems
+- [7 Easy functional programming techniques in Go](https://deepu.tech/functional-programming-in-go/) (2019-08-14): Functional programming concepts in Go for beginners.
+  series: Functional Programming
+  tags: go, functional, beginners, programming
+- [Easy functional programming techniques in TypeScript for everyone](https://deepu.tech/functional-programming-in-typescript/) (2019-08-14): Functional programming concepts in TypeScript for everyone.
+  series: Functional Programming
+  tags: typescript, functional, beginners, javascript
+- [Static Site Generators rundown - How I set up my own blog with Jekyll](https://deepu.tech/static-site-generators-rundown-how-i-set-up-my-own-blog-with-jekyll/) (2019-08-01): Static Site Generators comparison - How I set up my own blog with Jekyll & custom Tags to cross-post with Dev.to
+  tags: showdev, ruby, Jekyll, blogging
+- [7 Functional programming techniques in Java - A primer](https://deepu.tech/functional-programming-in-java-for-beginners/) (2019-07-30): Functional programming concepts in Java for beginners.
+  series: Functional Programming
+  tags: java, functional, beginners, programming
+- [How to set up Java microservices with Istio service mesh on Kubernetes](https://deepu.tech/jhipster-microservices-with-istio-service-mesh-on-kubernetes/) (2019-07-23): How to set up JHipster microservices with Istio service mesh on Kubernetes and deploy to AKS or GKE
+  series: Microservices with JHipster
+  tags: microservices, java, kubernetes, istio
+- [My VS Code setup - Making the most out of VS Code](https://deepu.tech/make-the-most-out-of-vscode/) (2019-07-17): How I have configured VS Code to make the most out of it for development.
+  series: GNU/Linux Environment for Developers
+  tags: vscode, development, ide, opensource
+- [My reflections on Golang](https://deepu.tech/reflection-on-golang/) (2019-07-12): After using Go for more than 9 months, here is what I think of it
+  series: Languages
+  tags: go, programming, languages, thepragmaticprogrammer
+- [Configure a beautiful terminal on Unix with Zsh](https://deepu.tech/configure-a-beautiful-terminal-on-unix/) (2019-07-01): See how you can configure a beautiful terminal on Unix with Zsh and Oh-My-Zsh
+  series: GNU/Linux Environment for Developers
+  tags: linux, terminal, ohmyzsh, zsh
+- [Must have GNOME extensions](https://deepu.tech/must-have-gnome-plugins/) (2019-06-24): A list of awesome extensions you must have on GNOME Desktop
+  series: GNU/Linux Environment for Developers
+  tags: linux, gnome, fedora, desktop
+- [My beautiful Linux development environment](https://deepu.tech/my-beautiful-linux-development-environment/) (2019-06-16): My GNU/Linux development machine in 2019: hardware, distribution and desktop, development tools, and the productivity tools I use.
+  series: GNU/Linux Environment for Developers
+  tags: linux, fedora, development, gnome
+- [Why I’m moving away from Medium](https://deepu.tech/why-im-moving-away-from-medium/) (2019-06-13): I moved to Dev from Medium and here are the reasons.
+  tags: writing, medium, development, tech
+- [Deploy a web app to Azure App Service using Terraform](https://deepu.tech/deploy-a-web-app-to-azure-app-service-using-terraform/) (2019-06-12): Deploy a web app to Azure App Service using Terraform
+  tags: java, jhipster, azure, terraform
+## 2018
+
+- [React components done right with TypeScript mapped and conditional types](https://deepu.tech/react-done-right-with-typescript/) (2018-11-19): Learn how to write efficient and concise react components using TypeScript.
+  tags: typescript, react, javascript, webdev
+- [Deploying JHipster Microservices on Azure Kubernetes Service (AKS)](https://deepu.tech/deploying-jhipster-microservices-on-azure-kubernetes-service-aks/) (2018-10-01): Deploying JHipster Microservices on Azure Kubernetes Service (AKS)
+  series: Microservices with JHipster
+  tags: azure, kubernetes, jhipster, microservices
+- [Create full Microservice stack using JHipster Domain Language under 30 minutes](https://deepu.tech/create-full-microservice-stack-using-j-hipster-domain-language-under-30-minutes/) (2018-09-22): Create full Microservice stack using JHipster Domain Language under 30 minutes
+  series: Microservices with JHipster
+  tags: jhipster, java, microservices, docker

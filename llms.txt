@@ -1,0 +1,74 @@
+# Technorage
+
+> The personal site of Deepu K Sasidharan: posts on local LLMs, Rust, Java, Kubernetes, Linux, and OAuth, plus the terminal tools he maintains.
+
+This site is written and maintained by Deepu K Sasidharan (deepu105), a Principal Developer Advocate at Auth0 (Okta) in Utrecht, Netherlands. He is creator of LlamaStash, KDash, and JWT UI, co-chair of JHipster, a Java Champion (2022), and author of Full Stack Development with JHipster (Packt). Everything here is his own opinion, not his employer's.
+
+Contact: deepu.k.sasidharan@gmail.com
+Profiles: https://github.com/deepu105, https://www.linkedin.com/in/deepu05, https://bsky.app/profile/deepu105.bsky.social, https://mastodon.social/@deepu105, https://x.com/deepu105, https://dev.to/deepu105, https://speakerdeck.com/deepu105, https://auth0.com/blog/authors/deepu-sasidharan/
+RSS: https://deepu.tech/feed.xml
+Sitemap: https://deepu.tech/sitemap-index.xml
+Full post index: https://deepu.tech/llms-full.txt
+
+## Key pages
+
+- [Home / about](https://deepu.tech/): Who he is, what he builds, and what the blog covers.
+- [Blog index](https://deepu.tech/blogs/): Every article, newest first.
+- [Series](https://deepu.tech/series/): Multi-part deep dives, listed in reading order.
+- [Tags](https://deepu.tech/tags/): All topics with post counts.
+- [Tools](https://deepu.tech/tools/): Terminal and browser tools he builds and maintains.
+- [CV](https://deepu.tech/cv/): Full CV: roles, projects, skills, education.
+- [Books](https://deepu.tech/books/): Full Stack Development with JHipster, first and second edition.
+- [Events](https://deepu.tech/appearances/): Conference talks with slides and recordings.
+- [Comment policy](https://deepu.tech/comment-policy/): Rules for discussions in the comments.
+
+## Projects
+
+- [LlamaStash](https://github.com/llamastash/llamastash): Rust TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs on llama.cpp and friends.
+- [KDash](https://github.com/kdash-rs/kdash): Kubernetes dashboard in the terminal, written in Rust.
+- [JWT UI](https://github.com/jwt-rs/jwt-ui): terminal UI for decoding and encoding JSON Web Tokens.
+- [JHipster](https://www.jhipster.tech): application generator for Spring Boot plus React, Angular, or Vue. He is co-chair and vice-president.
+- [JDL Studio](https://start.jhipster.tech/jdl-studio/): online editor for the JHipster Domain Language.
+- [auth0-token-vault-cli](https://github.com/deepu105/auth0-token-vault-cli): use Auth0 Token Vault from AI agents without the agent holding user tokens.
+- [Assistant0](https://github.com/auth0-samples/auth0-assistant0): sample AI assistant that reaches Gmail and Slack through Auth0.
+
+## Series
+
+- [Languages](https://deepu.tech/series/languages/): Impressions and comparisons of programming languages, and why I stay polyglot instead of picking a favorite.
+- [Memory Management](https://deepu.tech/series/memory-management/): How memory management works, from the fundamentals up through the JVM, V8, Go, and Rust.
+- [Concurrency in Modern Programming Languages](https://deepu.tech/series/concurrency-in-modern-programming-languages/): Building and benchmarking the same concurrent web server in Rust, Go, Node.js, Deno, Java, and Kotlin to compare concurrency.
+- [Functional Programming](https://deepu.tech/series/functional-programming/): Functional programming applied in Java, Go, TypeScript, and Rust, with real examples.
+- [Golang for JavaScript Developers](https://deepu.tech/series/golang-for-javascript-developers/): Learning Go from a JavaScript developer's point of view, one concept at a time.
+- [Microservices with JHipster](https://deepu.tech/series/microservices-with-jhipster/): Building microservice architectures with JHipster, Kubernetes, and Istio, end to end.
+- [GNU/Linux Environment for Developers](https://deepu.tech/series/gnu-linux-environment-for-developers/): My GNU/Linux setup for development: Arch, windowing, terminals, and the tools I use.
+- [Passkeys](https://deepu.tech/series/passkeys/): How WebAuthn and passkeys work for developers, and how to add them to Java apps.
+- [Local AI](https://deepu.tech/series/local-ai/): Running LLMs on my own laptop for day-to-day coding: the setup, LlamaStash, benchmarks, and how local models compare with frontier cloud models.
+
+## Latest posts
+
+- [Qwen3.8-Flash-Next vs Claude Opus 5.5: Six-way benchmark on a real Rust feature](https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown/): A controlled comparison of Qwen3.8-Flash-Next and Claude Opus 5.5 on one LlamaStash feature, across Claude Code and Pi, at medium and xhigh effort
+- [Forget Claude Code. All you need is Qwen3.8-Flash-Next running locally for agentic coding](https://deepu.tech/local-ai-qwen3.8-flash-next-best-local-llm/): Agentic coding on a Strix Halo laptop with Qwen3.8-Flash-Next. Going head to head with Opus 5.5
+- [Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?](https://deepu.tech/local-ai-qwen3.8-pi-llamastash/): Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning
+- [How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio](https://deepu.tech/benchmarking-llamastash/): A reproducible benchmark of LlamaStash against raw llama-server, Ollama, and LM Studio on AMD APU, Apple Silicon, and NVIDIA
+- [Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher](https://deepu.tech/introducing-llamastash/): A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary
+- [My fully offline AI-assisted Linux development machine](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine/): My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13
+- [A Passwordless Future: Passkeys for Java Developers](https://deepu.tech/webauthn-and-passkeys-for-java-developers/): Learn how to get started with passkeys for your Java and Spring Boot applications.
+- [A Passwordless Future: Passkeys for Developers](https://deepu.tech/webauthn-and-passkeys-for-developers/): Passkeys and WebAuthn for developers. Learn how passkeys work and the benefits they provide.
+- [Deploy Secure Spring Boot Microservices on Amazon EKS Using Terraform and Kubernetes](https://deepu.tech/terraform-eks-java-microservices-jhipster/): Deploy a cloud-native Java Spring Boot microservice stack secured with Auth0 on Amazon EKS using Terraform and Kubernetes.
+- [Mastodon for Developers: Everything You Need to Know](https://deepu.tech/mastodon-for-devs/): Learn how to use Mastodon effectively as a developer.
+- [Shhhh... Kubernetes Secrets Are Not Really Secret!](https://deepu.tech/kubernetes-secrets-management/): Learn how to setup secure secrets on Kubernetes using Sealed Secrets, External Secrets Operator, and Secrets Store CSI driver.
+- [Rust Easy! Modern Cross-platform Command Line Tools to Supercharge Your Terminal](https://deepu.tech/rust-terminal-tools-linux-mac-windows-fish-zsh/): Rust tooling is taking over the terminal. Use these awesome tools to supercharge your Linux/macOS/Windows terminal.
+- [What the Heck Is Project Loom for Java?](https://deepu.tech/state-of-java-project-loom/): What the heck is Java's Project Loom and what does it mean for regular Java developers?
+- [Golang Finally Gets Generics! Does It Make Go a Better Language?](https://deepu.tech/go-impressions-part-2/): Let's see if Golang became better with the addition of generics.
+- [Concurrency in modern programming languages: Rust vs Go vs Java vs Node.js vs Deno vs .NET 6](https://deepu.tech/concurrency-in-modern-languages-final/): Building a concurrent web server in Rust, Go, JS, TS, .NET, and Java to compare concurrency performance
+
+## Featured posts
+
+- [Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher](https://deepu.tech/introducing-llamastash/): A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary
+- [My fully offline AI-assisted Linux development machine](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine/): My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13
+- [My sleek and modern Linux development machine in 2021](https://deepu.tech/my-beautiful-linux-development-environment-2021/): The 2021 refresh of my GNU/Linux development machine: hardware, distribution and desktop, development tools, and productivity tools.
+- [My second impression of Rust and why I think it's a great general-purpose language!](https://deepu.tech/my-second-impression-of-rust/): My second impression of Rust, after building a real-life use case with it and my thoughts on why it is a great general-purpose language for the future.
+- [The state of Linux as a daily use OS in 2021](https://deepu.tech/the-state-of-linux-on-desktops/): Let's see what is the state of GNU/Linux, for daily use, in 2021 is and if its a viable alternative to  Windows and macOS
+- [Concurrency in modern programming languages: Introduction](https://deepu.tech/concurrency-in-modern-languages/): Building a concurrent web server in Rust, Go, JS, TS, Kotlin, and Java to compare concurrency performance
+- [🚀 Demystifying memory management in modern programming languages](https://deepu.tech/memory-management-in-programming/): Let us take a look at how modern programming languages manage memory.
+- [My reflections on Golang](https://deepu.tech/reflection-on-golang/): After using Go for more than 9 months, here is what I think of it
