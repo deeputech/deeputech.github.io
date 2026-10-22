@@ -15,12 +15,12 @@ Every published article, newest first. 65 posts in total. Each entry: title and 
 - [Can Qwen 3.8 running on your laptop really replace Claude Opus for Agentic coding?](https://deepu.tech/local-ai-qwen3.8-pi-llamastash/) (2026-09-04): Agentic coding on a Strix Halo laptop with Qwen3.8-27B and Flash-Next, the LlamaStash and Pi setup behind it, and the tuning
   series: Local AI
   tags: ai, llamacpp, localllm, qwen38, claudeopus
-- [How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio](https://deepu.tech/benchmarking-llamastash/) (2026-06-02): A reproducible benchmark of LlamaStash against raw llama-server, Ollama, and LM Studio on AMD APU, Apple Silicon, and NVIDIA
-  series: Local AI
-  tags: ai, llamacpp, benchmark, llm, rust
 - [Introducing LlamaStash: a zero-overhead, terminal-native llama.cpp launcher](https://deepu.tech/introducing-llamastash/) (2026-06-02): A fast TUI, CLI, daemon, and OpenAI-compatible proxy for running local LLMs via llama.cpp, in one Rust binary
   series: Local AI
   tags: ai, llamacpp, localllm, rust, opensource
+- [How fast is LlamaStash? Overhead, throughput, and a fair comparison with Ollama and LM Studio](https://deepu.tech/benchmarking-llamastash/) (2026-06-02): A reproducible benchmark of LlamaStash against raw llama-server, Ollama, and LM Studio on AMD APU, Apple Silicon, and NVIDIA
+  series: Local AI
+  tags: ai, llamacpp, benchmark, llm, rust
 - [My fully offline AI-assisted Linux development machine](https://deepu.tech/my-fully-offline-ai-assisted-linux-development-machine/) (2026-05-07): My Arch Linux, Niri, and local AI coding setup on the ASUS ROG Flow Z13
   series: Local AI
   tags: linux, archlinux, development, ai, niri
